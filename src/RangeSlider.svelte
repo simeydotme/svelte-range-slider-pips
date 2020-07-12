@@ -18,6 +18,7 @@
   export let rest;
 
   // formatting props
+  export let id;
   export let prefix = "";
   export let suffix = "";
   export let formatter = v => v;
@@ -391,93 +392,25 @@
   }
 </script>
 
-
-
-
-<div class="rangeSlider" 
-  bind:this="{slider}"
-  on:touchstart|preventDefault="{sliderInteractStart}"
-  on:mousedown="{sliderInteractStart}"
-  class:focus
-  class:range
-  class:min={range === 'min'}
-  class:max={range === 'max'}
->
-  {#each values as value, index}
-    <span 
-      role="slider"
-      tabindex="0"
-      class="rangeSlider__handle"
-      class:active="{ focus && activeHandle === index }"
-      on:blur={sliderBlurHandle}
-      on:focus={sliderFocusHandle}
-      on:keydown={sliderKeydown}
-      style="left: { $springPositions[index] }%; z-index: { activeHandle === index ? 3 : 2 };"
-      aria-valuemin="{ range===true && index === 1 ? values[0] : min }"
-      aria-valuemax="{ range===true && index === 0 ? values[1] : max }"
-      aria-valuenow="{value}"
-      aria-valuetext="{ prefix }{ handleFormatter(value) }{ suffix }"
-      aria-orientation="horizontal"
-    >
-      <span class="rangeSlider__nub">
-      </span>
-      {#if float}
-        <span class="rangeSlider__value">
-          { prefix }{ handleFormatter(value) }{ suffix }
-        </span>
-      {/if}
-    </span>
-  {/each}
-  {#if range}
-    <span class="rangeSlider__range"
-      style="left: { rangeStart( $springPositions ) }%; 
-        right: {  rangeEnd( $springPositions ) }%;">
-    </span>
-  {/if}
-  {#if pips}
-    <RangePips 
-      {values} 
-      {min} 
-      {max} 
-      {step} 
-      {range} 
-      {first} 
-      {last} 
-      {rest} 
-      {pipstep} 
-      {prefix} 
-      {suffix}
-      {formatter}
-      {focus}
-      {percentOf}  
-    />
-  {/if}
-</div>
-
-<svelte:window 
-  on:mousedown={bodyInteractStart}
-  on:touchstart={bodyInteractStart}
-  on:mousemove={bodyInteract}
-  on:touchmove={bodyInteract}
-  on:mouseup={bodyMouseUp}
-  on:touchend={bodyTouchEnd}
-  on:keydown={bodyKeyDown} />
-
-
-
-
-
-
-
 <style>
-  :global(.rangeSlider *) {
-    user-select: none;
+  :global(.rangeSlider) {
+    --slider: var(--range-slider, #d7dada);
+    --handle-inactive: var(--range-handle-inactive, #99a2a2);
+    --handle: var(--range-handle, #838de7);
+    --handle-focus: var(--range-handle-focus, #4a40d4);
+    --range-inactive: var(--range-range-inactive, var(--handle-inactive));
+    --range: var(--range-range, var(--handle-focus));
+    --float: var(--range-float, var(--handle-focus));
+    --float-text: var(--range-float-text, white);
   }
   :global(.rangeSlider) {
     position: relative;
     border-radius: 100px;
     height: 0.5em;
     margin: 1em;
+  }
+  :global(.rangeSlider, .rangeSlider *) {
+    user-select: none;
   }
   :global(.rangeSlider__handle) {
     position: absolute;
@@ -493,13 +426,13 @@
     left: 0;
     top: 0;
     display: block;
-    border-radius: 100px;
+    border-radius: 10em;
     height: 100%;
     width: 100%;
     transition: all 0.2s ease;
   }
   :global(.range:not(.min):not(.max) .rangeSlider__nub) {
-    border-radius: 100px 100px 100px 20px;
+    border-radius: 10em 10em 10em 1.6em;
   }
   :global(.range .rangeSlider__handle:nth-of-type(1) .rangeSlider__nub) {
     transform: rotate(-135deg);
@@ -540,22 +473,100 @@
   }
   :global(.rangeSlider) {
     background-color: #d7dada;
+    background-color: var(--slider);
+  }
+  :global(.rangeSlider__range) {
+    background-color: #99a2a2;
     background-color: var(--range-inactive);
   }
-  :global(.rangeSlider__nub, .rangeSlider__range) {
-    background-color: #99a2a2;
-    background-color: var(--range-inactive-focus);
-  }
-  :global(.rangeSlider.focus .rangeSlider__nub),
   :global(.rangeSlider.focus .rangeSlider__range) {
     background-color: #838de7;
-    background-color: var(--range-active);
+    background-color: var(--range);
   }
-  :global(.rangeSlider.focus .rangeSlider__value),
+  :global(.rangeSlider__nub) {
+    background-color: #99a2a2;
+    background-color: var(--handle-inactive);
+  }
+  :global(.rangeSlider.focus .rangeSlider__nub) {
+    background-color: #838de7;
+    background-color: var(--handle);
+  }
   :global(.rangeSlider .rangeSlider__handle.active .rangeSlider__nub) {
+    background-color: #4a40d4;
+    background-color: var(--handle-focus);
+  }
+  :global(.rangeSlider__value) {
     color: white;
-    color: var(--range-active-color);
-    background-color: #584fd6;
-    background-color: var(--range-active-focus);
+    color: var(--float-text);
+  }
+  :global(.rangeSlider.focus .rangeSlider__value) {
+    background-color: #4a40d4;
+    background-color: var(--float);
   }
 </style>
+
+<div
+  {id}
+  bind:this={slider}
+  class="rangeSlider"
+  class:focus
+  class:range
+  class:min={range === 'min'}
+  class:max={range === 'max'}
+  on:touchstart|preventDefault={sliderInteractStart}
+  on:mousedown={sliderInteractStart}>
+  {#each values as value, index}
+    <span
+      role="slider"
+      tabindex="0"
+      class="rangeSlider__handle"
+      class:active={focus && activeHandle === index}
+      on:blur={sliderBlurHandle}
+      on:focus={sliderFocusHandle}
+      on:keydown={sliderKeydown}
+      style="left: {$springPositions[index]}%; z-index: {activeHandle === index ? 3 : 2};"
+      aria-valuemin={range === true && index === 1 ? values[0] : min}
+      aria-valuemax={range === true && index === 0 ? values[1] : max}
+      aria-valuenow={value}
+      aria-valuetext="{prefix}{handleFormatter(value)}{suffix}"
+      aria-orientation="horizontal">
+      <span class="rangeSlider__nub" />
+      {#if float}
+        <span class="rangeSlider__value">
+          {prefix}{handleFormatter(value)}{suffix}
+        </span>
+      {/if}
+    </span>
+  {/each}
+  {#if range}
+    <span
+      class="rangeSlider__range"
+      style="left: {rangeStart($springPositions)}%; right: {rangeEnd($springPositions)}%;" />
+  {/if}
+  {#if pips}
+    <RangePips
+      {values}
+      {min}
+      {max}
+      {step}
+      {range}
+      {first}
+      {last}
+      {rest}
+      {pipstep}
+      {prefix}
+      {suffix}
+      {formatter}
+      {focus}
+      {percentOf} />
+  {/if}
+</div>
+
+<svelte:window
+  on:mousedown={bodyInteractStart}
+  on:touchstart={bodyInteractStart}
+  on:mousemove={bodyInteract}
+  on:touchmove={bodyInteract}
+  on:mouseup={bodyMouseUp}
+  on:touchend={bodyTouchEnd}
+  on:keydown={bodyKeyDown} />
