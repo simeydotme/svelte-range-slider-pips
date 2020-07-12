@@ -542,7 +542,7 @@ supports-color@^6.1.0:
 
 "svelte-range-slider-pips@https://github.com/simeydotme/svelte-range-slider-pips":
   version "0.9.0"
-  resolved "https://github.com/simeydotme/svelte-range-slider-pips#cd796aad867db3b6e9ffad5e4c2571dd2868bcda"
+  resolved "https://github.com/simeydotme/svelte-range-slider-pips#3893dc64c1274eeec06b0d8b15ccda997a874592"
 
 svelte@^3.0.0:
   version "3.24.0"
