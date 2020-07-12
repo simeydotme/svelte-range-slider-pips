@@ -1,5 +1,4 @@
 /node_modules/
-/public/build/
 /test/
 
 yarn-error.log
