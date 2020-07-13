@@ -11,6 +11,14 @@ A reactive, accessible, multi-thumb, range slider for use in a svelte applicatio
 
 ---
 
+## install
+
+Open your project and use the command line to install the package;
+```bash
+yarn add --dev svelte-range-slider-pips         # or
+npm install --save-dev svelte-range-slider-pips # if you prefer npm
+```
+
 ## usage
 
 Assuming you have a Svelte app up and running;
