@@ -20,7 +20,7 @@
     "src",
     "dist"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Multi-Thumb, Accessible, Beautiful Range Slider with Pips",
   "repository": "x",
   "author": "Simon Goellner <simey.me@gmail.com>",

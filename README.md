@@ -1,35 +1,48 @@
-*Psst — looking for an app template? Go here --> [sveltejs/template](https://github.com/sveltejs/template)*
+
+# Svelte Range Slider (with pips)
+## [`svelte-range-slider-pips`]() @ **npm**
+
+A reactive, accessible, multi-thumb, range slider for use in a svelte application; with the ability to display "pips" or "notches" along the range.
+
+![Image of the Svelte Range Slider, set as focussed, including some pips](test/public/slider.png)
+
+### [🔗 _For full documentation and examples, see the Github Pages_](https://simeydotme.github.io/svelte-range-slider-pips/)
+
 
 ---
 
-# component-template
+## usage
 
-A base for building shareable Svelte components. Clone it with [degit](https://github.com/Rich-Harris/degit):
+Assuming you have a Svelte app up and running;
 
-```bash
-npx degit sveltejs/component-template my-new-component
-cd my-new-component
-npm install # or yarn
+```html
+<script>
+  import RangeSlider from "svelte-range-slider-pips";
+</script>
+
+<RangeSlider />
 ```
 
-Your component's source code lives in `src/Component.svelte`.
+## props (options)
+### slider props
+prop | type | default | description
+-----|------|---------|-------------
+**values** | `Array` | `[50]` | Array of values to apply on the slider. Multiple values creates multiple handles. (_**note:** A slider with `range` property set can only have two values max_)
+**min** | `Number` | `0` | Minimum value for the slider
+**max** | `Number` | `100` | Maximum value for the slider
+**step** | `Number` | `1` | Every `nth` value to allow handle to stop at
+**range** | `Boolean`/`String` | `false` | Whether to style as a range picker. Use `range='min'` or `range='max'` for min/max variants
+**float** | `Boolean` | `false` | Set true to add a floating label above focussed handles
+**vertical** | `Boolean` | `false` | Make the slider render vertically
+**pips** | `Boolean` | `false` | Whether to show pips/notches on the slider
+**pipStep** | `Number` | `1`/`10`/`20` | Every `nth` step to show a pip for. This has multiple defaults depending on `values` property
+**first** | `Boolean`/`String` | `false` | Whether to show a pip or label for the first value on slider. Use `first='label'` to show a label value
+**last** | `Boolean`/`String` | `false` | Whether to show a pip or label for the last value on slider. Use `last='label'` to show a label value
+**rest** | `Boolean`/`String` | `false` | Whether to show a pip or label for the all other values. Use `rest='label'` to show a label value
+**prefix** | `String` | `""` | A string to prefix to all displayed values
+**suffix** | `String` | `""` | A string to suffix to all displayed values
+**formatter** | `Function` | `(v) => v` | A function to re-format values before they are displayed
+**handleFormatter** | `Function` | `formatter` | A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property
+**springValues** | `Object` | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving
 
-You can create a package that exports multiple components by adding them to the `src` directory and editing `src/index.js` to reexport them as named exports.
-
-TODO
-
-* [ ] some firm opinions about the best way to test components
-* [ ] update `degit` so that it automates some of the setup work
-
-
-## Setting up
-
-* Run `npm init` (or `yarn init`)
-* Replace this README with your own
-
-
-## Consuming components
-
-Your package.json has a `"svelte"` field pointing to `src/index.js`, which allows Svelte apps to import the source code directly, if they are using a bundler plugin like [rollup-plugin-svelte](https://github.com/sveltejs/rollup-plugin-svelte) or [svelte-loader](https://github.com/sveltejs/svelte-loader) (where [`resolve.mainFields`](https://webpack.js.org/configuration/resolve/#resolve-mainfields) in your webpack config includes `"svelte"`). **This is recommended.**
-
-For everyone else, `npm run build` will bundle your component's source code into a plain JavaScript module (`dist/index.mjs`) and a UMD script (`dist/index.js`). This will happen automatically when you publish your component to npm, courtesy of the `prepublishOnly` hook in package.json.
+### [🔗 _For full documentation and examples, see the Github Pages_](https://simeydotme.github.io/svelte-range-slider-pips/)
