@@ -14,13 +14,30 @@
     "svelte": "^3.0.0"
   },
   "keywords": [
-    "svelte"
+    "svelte",
+    "component",
+    "ui",
+    "input",
+    "range",
+    "slider",
+    "thumb",
+    "handle",
+    "min",
+    "max",
+    "accessible",
+    "pretty",
+    "pip",
+    "pips",
+    "notch",
+    "notches",
+    "simey",
+    "simon"
   ],
   "files": [
     "src",
     "dist"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Multi-Thumb, Accessible, Beautiful Range Slider with Pips",
   "repository": "x",
   "author": "Simon Goellner <simey.me@gmail.com>",
