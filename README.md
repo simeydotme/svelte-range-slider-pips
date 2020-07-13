@@ -1,12 +1,12 @@
 
 # Svelte Range Slider (with pips)
-## [`svelte-range-slider-pips`]() @ **npm**
+## [`svelte-range-slider-pips`](https://www.npmjs.com/package/svelte-range-slider-pips) @ **npm**
 
 A reactive, accessible, multi-thumb, range slider for use in a svelte application; with the ability to display "pips" or "notches" along the range.
 
 ![Image of the Svelte Range Slider, set as focussed, including some pips](test/public/slider.png)
 
-### [🔗 _For full documentation and examples, see the Github Pages_](https://simeydotme.github.io/svelte-range-slider-pips/)
+**[🔗 _For full documentation and examples, see the Github Pages_](https://simeydotme.github.io/svelte-range-slider-pips/)**
 
 
 ---
@@ -45,4 +45,4 @@ prop | type | default | description
 **handleFormatter** | `Function` | `formatter` | A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property
 **springValues** | `Object` | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving
 
-### [🔗 _For full documentation and examples, see the Github Pages_](https://simeydotme.github.io/svelte-range-slider-pips/)
+**[🔗 _For full documentation and examples, see the Github Pages_](https://simeydotme.github.io/svelte-range-slider-pips/)**
