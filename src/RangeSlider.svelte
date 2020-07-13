@@ -8,6 +8,8 @@
   export let max = 100;
   export let step = 1;
   export let values = [(max + min) / 2];
+  export let vertical = false;
+  export let float = false;
 
   // range pips / values props
   export let pips = false;
@@ -24,8 +26,6 @@
   export let handleFormatter = formatter;
 
   // stylistic props
-  export let float = false;
-  export let vertical = false;
   export let precision = 2;
   export let springValues = { stiffness: 0.15, damping: 0.4 };
 

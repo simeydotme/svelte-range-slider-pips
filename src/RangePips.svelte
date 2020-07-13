@@ -6,6 +6,7 @@
   export let max = 100;
   export let step = 1;
   export let values = [(max + min) / 2];
+  export let vertical = false;
 
   // range pips / values props
   export let pipstep = ((max - min) / step >= ( vertical ? 50 : 100 ) ? (max - min) / ( vertical ? 10 : 20 ) : 1);
@@ -19,7 +20,6 @@
   export let formatter = v => v;
 
   // stylistic props
-  export let vertical = false;
   export let focus;
   export let percentOf;
 
