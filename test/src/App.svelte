@@ -5,6 +5,7 @@
   let values = [20, 40, 60, 80];
   let day = [3];
   let hue = [244];
+  let dynamic = [0,50];
   const formatter = v => {
     return num.format(v);
   };
@@ -49,6 +50,9 @@
   <div class="content" style="--range-handle-focus: {color}; --range-handle: {lightColor}">
 
     <RangeSlider vertical range values={[10,30]} pips rest="label" />
+    <RangeSlider vertical range="min" values={[10]} pips rest="label" />
+    <RangeSlider vertical range="max" values={[30]} pips rest="label" />
+    <br>
     <RangeSlider />
     <RangeSlider bind:values />{values}
     <RangeSlider float />
@@ -56,16 +60,15 @@
     <RangeSlider float pips first="label" last="label" />
     <RangeSlider float pips first="label" last="label" rest="label" />
     <br>
-    <br>
     <RangeSlider range values={[35,65]} float pips />
     <RangeSlider range="min" values={[65]} float />
     <RangeSlider range="max" values={[35]} pips />
     <br>
     <RangeSlider float pips step={10} pipstep={1} />
     <RangeSlider float pips step={10} pipstep={2} />
-    <RangeSlider float pips step={0.1} pipstep={2} max={10} />
+    <RangeSlider float pips step={0.1} min={dynamic[0]} max={dynamic[1]} />
     <br>
-    <RangeSlider float pips first="label" last="label" rest pipstep={1} />
+    <RangeSlider float pips first="label" last="label" rest pipstep={1} bind:values={dynamic} range />
     <RangeSlider prefix="$" range values={[20,80]} float pips first="label" last="label" />
     <RangeSlider prefix="~" suffix="m²" {formatter} range values={[100,3000]} min={100} max={3000} step={50} float pips first="label" last="label" id="clr-test" />
     <RangeSlider handleFormatter={()=>"O²"} formatter={(v)=>`${v}% O²`} step={1} float pips first="label" last="label" />
@@ -97,6 +100,6 @@
     }
   }
   :global(.rangeSlider.rangeSlider) {
-    margin-top: 3em;
+    /* margin-bottom: 3em; */
   }
 </style>

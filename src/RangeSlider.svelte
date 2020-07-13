@@ -22,7 +22,7 @@
   export let id;
   export let prefix = "";
   export let suffix = "";
-  export let formatter = v => v;
+  export let formatter = (v) => v;
   export let handleFormatter = formatter;
 
   // stylistic props
@@ -40,16 +40,78 @@
 
   // save spring-tweened copies of the values for use
   // when changing values and animating the handle/range nicely
-  let springPositions = spring(values.map(v => 50), springValues);
+  let springPositions = spring(
+    values.map((v) => 50),
+    springValues
+  );
 
   // watch the values array, and trim / clamp the values to the steps
   // and boundaries set up in the slider on change
-  $: values = trimRange(values).map(v => alignValueToStep(v));
+  $: values = trimRange(values).map((v) => alignValueToStep(v));
 
   // update the spring function so that movement can happen in the UI
   $: {
-    springPositions.set(values.map(v => percentOf(v)));
+    springPositions.set(values.map((v) => percentOf(v)));
   }
+
+  /**
+   * take in a value, and then calculate that value's percentage
+   * of the overall range (min-max);
+   * @param {number} val the value we're getting percent for
+   * @return {number} the percentage value
+   **/
+  $: percentOf = function (val) {
+    let perc = ((val - min) / (max - min)) * 100;
+    if (perc >= 100) {
+      return 100;
+    } else if (perc <= 0) {
+      return 0;
+    } else {
+      return parseFloat(perc.toFixed(precision));
+    }
+  };
+
+  /**
+   * clamp a value from the range so that it always
+   * falls within the min/max values
+   * @param {number} val the value to clamp
+   * @return {number} the value after it's been clamped
+   **/
+  $: clampValue = function (val) {
+    // return the min/max if outside of that range
+    return val <= min ? min : val >= max ? max : val;
+  };
+
+  /**
+   * align the value with the steps so that it
+   * always sits on the closest (above/below) step
+   * @param {number} val the value to align
+   * @return {number} the value after it's been aligned
+   **/
+  $: alignValueToStep = function (val) {
+    // sanity check for performance
+    if (val <= min) {
+      return min;
+    } else if (val >= max) {
+      return max;
+    }
+
+    // find the middle-point between steps
+    // and see if the value is closer to the
+    // next step, or previous step
+    let remainder = (val - min) % step;
+    let aligned = val - remainder;
+    if (Math.abs(remainder) * 2 >= step) {
+      aligned += remainder > 0 ? step : -step;
+    }
+    // make sure the value is within acceptable limits
+    aligned = clampValue(aligned);
+    // make sure the returned value is set to the precision desired
+    // this is also because javascript often returns weird floats
+    // when dealing with odd numbers and percentages
+
+    return parseFloat(aligned.toFixed(precision));
+  };
 
   /**
    * helper func to get the index of an element in it's DOM container
@@ -96,7 +158,7 @@
   function targetIsHandle(el) {
     const handles = slider.querySelectorAll(".handle");
     const isHandle = Array.prototype.includes.call(handles, el);
-    const isChild = Array.prototype.some.call(handles, e => e.contains(el));
+    const isChild = Array.prototype.some.call(handles, (e) => e.contains(el));
     return isHandle || isChild;
   }
 
@@ -113,65 +175,6 @@
       return values.slice(0, 2);
     } else {
       return values;
-    }
-  }
-
-  /**
-   * clamp a value from the range so that it always
-   * falls within the min/max values
-   * @param {number} val the value to clamp
-   * @return {number} the value after it's been clamped
-   **/
-  function clampValue(val) {
-    // return the min/max if outside of that range
-    return val <= min ? min : val >= max ? max : val;
-  }
-
-  /**
-   * align the value with the steps so that it
-   * always sits on the closest (above/below) step
-   * @param {number} val the value to align
-   * @return {number} the value after it's been aligned
-   **/
-  function alignValueToStep(val) {
-    // sanity check for performance
-    if (val <= min) {
-      return min;
-    } else if (val >= max) {
-      return max;
-    }
-
-    // find the middle-point between steps
-    // and see if the value is closer to the
-    // next step, or previous step
-    let remainder = (val - min) % step;
-    let aligned = val - remainder;
-    if (Math.abs(remainder) * 2 >= step) {
-      aligned += remainder > 0 ? step : -step;
-    }
-    // make sure the value is within acceptable limits
-    aligned = clampValue(aligned);
-    // make sure the returned value is set to the precision desired
-    // this is also because javascript often returns weird floats
-    // when dealing with odd numbers and percentages
-
-    return parseFloat(aligned.toFixed(precision));
-  }
-
-  /**
-   * take in a value, and then calculate that value's percentage
-   * of the overall range (min-max);
-   * @param {number} val the value we're getting percent for
-   * @return {number} the percentage value
-   **/
-  function percentOf(val) {
-    let perc = ((val - min) / (max - min)) * 100;
-    if (perc >= 100) {
-      return 100;
-    } else if (perc <= 0) {
-      return 0;
-    } else {
-      return parseFloat(perc.toFixed(precision));
     }
   }
 
@@ -197,7 +200,7 @@
     let iPos = 0;
     let iPercent = 0;
     let iVal = 0;
-    if ( vertical ) {
+    if (vertical) {
       iPos = clientPos - dims.y;
       iPercent = (iPos / dims.height) * 100;
       iVal = ((max - min) / 100) * iPercent + min;
@@ -208,7 +211,7 @@
     }
 
     let closest;
-    
+
     // if we have a range, and the handles are at the same
     // position, we want a simple check if the interaction
     // value is greater than return the second handle
@@ -244,7 +247,7 @@
     let iPos = 0;
     let iPercent = 0;
     let iVal = 0;
-    if ( vertical ) {
+    if (vertical) {
       iPos = clientPos - dims.y;
       iPercent = (iPos / dims.height) * 100;
       iVal = ((max - min) / 100) * iPercent + min;
@@ -459,13 +462,28 @@
     height: 0.5em;
     margin: 1em;
   }
+  :global(.rangeSlider, .rangeSlider *) {
+    user-select: none;
+  }
+  :global(.rangeSlider.pips) {
+    margin-bottom: 1.8em;
+  }
+  :global(.rangeSlider.pip-labels) {
+    margin-bottom: 2.8em;
+  }
   :global(.rangeSlider.vertical) {
+    display: inline-block;
     border-radius: 100px;
     width: 0.5em;
     min-height: 200px;
   }
-  :global(.rangeSlider, .rangeSlider *) {
-    user-select: none;
+  :global(.rangeSlider.vertical.pips) {
+    margin-right: 1.8em;
+    margin-bottom: 1em;
+  }
+  :global(.rangeSlider.vertical.pip-labels) {
+    margin-right: 2.8em;
+    margin-bottom: 1em;
   }
   :global(.rangeSlider .rangeHandle) {
     position: absolute;
@@ -580,6 +598,8 @@
   class:focus
   class:min={range === 'min'}
   class:max={range === 'max'}
+  class:pips
+  class:pip-labels={first === 'label' || last === 'label' || rest === 'label'}
   on:touchstart|preventDefault={sliderInteractStart}
   on:mousedown={sliderInteractStart}>
   {#each values as value, index}
@@ -596,19 +616,18 @@
       aria-valuemax={range === true && index === 0 ? values[1] : max}
       aria-valuenow={value}
       aria-valuetext="{prefix}{handleFormatter(value)}{suffix}"
-      aria-orientation="{vertical ? 'vertical' : 'horizontal'}">
+      aria-orientation={vertical ? 'vertical' : 'horizontal'}>
       <span class="rangeNub" />
       {#if float}
-        <span class="rangeFloat">
-          {prefix}{handleFormatter(value)}{suffix}
-        </span>
+        <span class="rangeFloat">{prefix}{handleFormatter(value)}{suffix}</span>
       {/if}
     </span>
   {/each}
   {#if range}
     <span
       class="rangeBar"
-      style="{vertical ? 'top' : 'left'}: {rangeStart($springPositions)}%; {vertical ? 'bottom' : 'right'}: {rangeEnd($springPositions)}%;" />
+      style="{vertical ? 'top' : 'left'}: {rangeStart($springPositions)}%; {vertical ? 'bottom' : 'right'}:
+      {rangeEnd($springPositions)}%;" />
   {/if}
   {#if pips}
     <RangePips

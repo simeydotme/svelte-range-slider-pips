@@ -25,21 +25,21 @@
 
   $: pipCount = parseInt((max - min) / (step * pipstep), 10);
 
-  $: pipVal = function(i) {
-    return min + i * step * pipstep;
+  $: pipVal = function(val) {
+    return min + val * step * pipstep;
   };
 
-  $: isSelected = function(i) {
-    return values.some(v => v === i);
+  $: isSelected = function(val) {
+    return values.some(v => v === val);
   };
 
-  $: inRange = function(i) {
+  $: inRange = function(val) {
     if (range === "min") {
-      return values[0] < i;
+      return values[0] < val;
     } else if (range === "max") {
-      return values[0] > i;
+      return values[0] > val;
     } else if (range) {
-      return values[0] < i && values[1] > i;
+      return values[0] < val && values[1] > val;
     }
   };
 </script>
@@ -54,8 +54,8 @@
     --pip-in-range-text: var(--range-pip-in-range-text, var(--pip-active-text));
   }
   :global(.rangeSlider__pips) {
-    height: 1em;
     position: absolute;
+    height: 1em;
     left: 0;
     right: 0;
     bottom: -1em;
@@ -63,7 +63,6 @@
   :global(.rangeSlider__pips.vertical) {
     height: auto;
     width: 1em;
-    position: absolute;
     left: 100%;
     right: auto;
     top: 0;
