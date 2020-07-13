@@ -36,6 +36,10 @@
     --range-handle: rgb(81, 185, 180);
     --range-handle-focus: rgb(35, 241, 214);
     --range-float-text: darkcyan;
+    --pip: #eee;
+    --pip-text: #aaa;
+    --pip-active: black;
+    --pip-active-text: darkcyan;
   }
 </style>
 </svelte:head>
@@ -44,6 +48,7 @@
 	
   <div class="content" style="--range-handle-focus: {color}; --range-handle: {lightColor}">
 
+    <RangeSlider vertical range values={[10,30]} pips rest="label" />
     <RangeSlider />
     <RangeSlider bind:values />{values}
     <RangeSlider float />

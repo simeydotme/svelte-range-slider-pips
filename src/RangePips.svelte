@@ -1,18 +1,25 @@
 <script>
-  export let values;
-  export let min;
-  export let max;
-  export let step;
-  export let range;
+
+  // range slider props
+  export let range = false;
+  export let min = 0;
+  export let max = 100;
+  export let step = 1;
+  export let values = [(max + min) / 2];
+  export let vertical = false;
+
+  // range pips / values props
+  export let pipstep = ((max - min) / step >= ( vertical ? 50 : 100 ) ? (max - min) / ( vertical ? 10 : 20 ) : 1);
   export let first = true;
   export let last = true;
   export let rest = true;
-  export let pipstep = (max - min) / step >= 100 ? (max - min) / 20 : 1;
 
+  // formatting props
   export let prefix = "";
   export let suffix = "";
   export let formatter = v => v;
 
+  // stylistic props
   export let focus;
   export let percentOf;
 
@@ -46,49 +53,77 @@
     --pip-in-range: var(--range-pip-in-range, var(--pip-active));
     --pip-in-range-text: var(--range-pip-in-range-text, var(--pip-active-text));
   }
-  .rangeSlider__pips {
+  :global(.rangeSlider__pips) {
     height: 1em;
     position: absolute;
     left: 0;
     right: 0;
     bottom: -1em;
   }
-  .rangeSlider__pip {
+  :global(.rangeSlider__pips.vertical) {
+    height: auto;
+    width: 1em;
+    position: absolute;
+    left: 100%;
+    right: auto;
+    top: 0;
+    bottom: 0;
+  }
+  :global(.rangeSlider__pips .pip) {
     height: 0.4em;
     position: absolute;
     top: 0.25em;
     width: 1px;
     white-space: nowrap;
   }
-  .rangeSlider__pip.selected {
+  :global(.rangeSlider__pips.vertical .pip) {
+    height: 1px;
+    width: 0.4em;
+    top: 0;
+    left: 0.25em;
+  }
+  :global(.rangeSlider__pips .pip.selected) {
     height: 0.75em;
   }
-  .rangeSlider__pipval {
+  :global(.rangeSlider__pips.vertical .pip.selected) {
+    height: 1px;
+    width: 0.75em;
+  }
+  :global(.rangeSlider__pips .pipVal) {
     position: absolute;
     top: 0.4em;
     transform: translate(-50%, 25%);
   }
-  .rangeSlider__pip.selected .rangeSlider__pipval {
+  :global(.rangeSlider__pips.vertical .pipVal) {
+    position: absolute;
+    top: 0;
+    left: 0.4em;
+    transform: translate(25%, -50%);
+  }
+  :global(.rangeSlider__pips .pip.selected .pipVal) {
     font-weight: bold;
     top: 0.75em;
   }
-  .rangeSlider__pip,
-  .rangeSlider__pipval {
+  :global(.rangeSlider__pips.vertical .pip.selected .pipVal) {
+    top: 0;
+    left: 0.75em;
+  }
+  :global(.rangeSlider__pips .pip, .rangeSlider__pips .pipVal) {
     transition: all 0.15s ease;
   }
-  .rangeSlider__pip {
+  :global(.rangeSlider__pips .pip) {
     color: lightslategray;
     color: var(--pip-text);
     background-color: lightslategray;
     background-color: var(--pip);
   }
-  .rangeSlider__pip.selected {
+  :global(.rangeSlider__pips .pip.selected) {
     color: darkslategrey;
     color: var(--pip-active-text);
     background-color: darkslategrey;
     background-color: var(--pip-active);
   }
-  .rangeSlider__pip.in-range {
+  :global(.rangeSlider__pips .pip.in-range) {
     color: darkslategrey;
     color: var(--pip-in-range-text);
     background-color: darkslategrey;
@@ -96,15 +131,15 @@
   }
 </style>
 
-<div class="rangeSlider__pips" class:focus>
+<div class="rangeSlider__pips" class:focus class:vertical>
   {#if first}
     <span
-      class="rangeSlider__pip is-first"
+      class="pip first"
       class:selected={isSelected(min)}
       class:in-range={inRange(min)}
-      style="left: 0%;">
+      style="{vertical ? 'top' : 'left'}: 0%;">
       {#if first === 'label'}
-        <span class="rangeSlider__pipval">
+        <span class="pipVal">
           {prefix}{formatter(min)}{suffix}
         </span>
       {/if}
@@ -114,12 +149,12 @@
     {#each Array(pipCount + 1) as _, i}
       {#if pipVal(i) !== min && pipVal(i) !== max}
         <span
-          class="rangeSlider__pip"
+          class="pip"
           class:selected={isSelected(pipVal(i))}
           class:in-range={inRange(pipVal(i))}
-          style="left: {percentOf(pipVal(i))}%;">
+          style="{vertical ? 'top' : 'left'}: {percentOf(pipVal(i))}%;">
           {#if rest === 'label'}
-            <span class="rangeSlider__pipval">
+            <span class="pipVal">
               {prefix}{formatter(pipVal(i))}{suffix}
             </span>
           {/if}
@@ -129,12 +164,12 @@
   {/if}
   {#if last}
     <span
-      class="rangeSlider__pip is-last"
+      class="pip last"
       class:selected={isSelected(max)}
       class:in-range={inRange(max)}
-      style="left: 100%;">
+      style="{vertical ? 'top' : 'left'}: 100%;">
       {#if last === 'label'}
-        <span class="rangeSlider__pipval">
+        <span class="pipVal">
           {prefix}{formatter(max)}{suffix}
         </span>
       {/if}

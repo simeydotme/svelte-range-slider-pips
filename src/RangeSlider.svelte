@@ -9,6 +9,7 @@
   export let max = 100;
   export let step = 1;
   export let values = [(max + min) / 2];
+  export let vertical = false;
 
   // range pips / values props
   export let pips = false;
@@ -50,6 +51,11 @@
     springPositions.set(values.map(v => percentOf(v)));
   }
 
+  /**
+   * helper func to get the index of an element in it's DOM container
+   * @param {object} el dom object reference we want the index of
+   * @returns {number} the index of the input element
+   **/
   function index(el) {
     if (!el) return -1;
     var i = 0;
@@ -73,8 +79,22 @@
     }
   }
 
+  /**
+   * get the position (x/y) of a mouse/touch event on the screen
+   * @param {event} e a mouse/touch event
+   * @returns {object} position on screen (x,y)
+   **/
+  function eventPosition(e) {
+    return vertical ? normalisedClient(e).clientY : normalisedClient(e).clientX;
+  }
+
+  /**
+   * check if an element is a handle on the slider
+   * @param {object} el dom object reference we want to check
+   * @returns {boolean}
+   **/
   function targetIsHandle(el) {
-    const handles = slider.querySelectorAll(".rangeSlider__handle");
+    const handles = slider.querySelectorAll(".handle");
     const isHandle = Array.prototype.includes.call(handles, el);
     const isChild = Array.prototype.some.call(handles, e => e.contains(el));
     return isHandle || isChild;
@@ -166,19 +186,29 @@
 
   /**
    * helper to return closest handle to user interaction
-   * @param {number} interactionX the pixel (clientX) to check against
-   * @return {number} the index of the closest handle to interactionX
+   * @param {number} clientPos the pixel (clientX/Y) to check against
+   * @return {number} the index of the closest handle to clientPos
    **/
-  function getClosestHandle(interactionX) {
-    let closest;
+  function getClosestHandle(clientPos) {
     // first make sure we have the latest dimensions
     // of the slider, as it may have changed size
-    const sliderDimensions = getSliderDimensions();
+    const dims = getSliderDimensions();
     // calculate the interaction position, percent and value
-    const iPos = interactionX - sliderDimensions.x;
-    const iPercent = (iPos / sliderDimensions.width) * 100;
-    const iVal = ((max - min) / 100) * iPercent + min;
+    let iPos = 0;
+    let iPercent = 0;
+    let iVal = 0;
+    if ( vertical ) {
+      iPos = clientPos - dims.y;
+      iPercent = (iPos / dims.height) * 100;
+      iVal = ((max - min) / 100) * iPercent + min;
+    } else {
+      iPos = clientPos - dims.x;
+      iPercent = (iPos / dims.width) * 100;
+      iVal = ((max - min) / 100) * iPercent + min;
+    }
 
+    let closest;
+    
     // if we have a range, and the handles are at the same
     // position, we want a simple check if the interaction
     // value is greater than return the second handle
@@ -204,16 +234,25 @@
    * it to a value on the range, and then send that value
    * through to the moveHandle() method to set the active
    * handle's position
-   * @param {number} interactionX the clientX of the interaction
+   * @param {number} clientPos the clientX/Y of the interaction
    **/
-  function handleInteract(interactionX) {
+  function handleInteract(clientPos) {
     // first make sure we have the latest dimensions
     // of the slider, as it may have changed size
-    const sliderDimensions = getSliderDimensions();
+    const dims = getSliderDimensions();
     // calculate the interaction position, percent and value
-    const iPos = interactionX - sliderDimensions.x;
-    const iPercent = (iPos / sliderDimensions.width) * 100;
-    const iVal = ((max - min) / 100) * iPercent + min;
+    let iPos = 0;
+    let iPercent = 0;
+    let iVal = 0;
+    if ( vertical ) {
+      iPos = clientPos - dims.y;
+      iPercent = (iPos / dims.height) * 100;
+      iVal = ((max - min) / 100) * iPercent + min;
+    } else {
+      iPos = clientPos - dims.x;
+      iPercent = (iPos / dims.width) * 100;
+      iVal = ((max - min) / 100) * iPercent + min;
+    }
     // move handle to the value
     moveHandle(activeHandle, iVal);
   }
@@ -265,22 +304,10 @@
   }
 
   /**
-   * function to run when the user touches
-   * down on the slider element anywhere
+   * when the user has unfocussed (blurred) from the
+   * slider, deactivated all handles
    * @param {event} e the event from browser
    **/
-  function sliderInteractStart(e) {
-    // set the closest handle as active
-    activeHandle = getClosestHandle(normalisedClient(e).clientX);
-    focus = true;
-    handleActivated = true;
-    // for touch devices we want the handle to instantly
-    // move to the position touched for more responsive feeling
-    if (e.type === "touchstart") {
-      handleInteract(normalisedClient(e).clientX);
-    }
-  }
-
   function sliderBlurHandle(e) {
     if (keyboardActive) {
       focus = false;
@@ -288,6 +315,11 @@
     }
   }
 
+  /**
+   * when the user focusses the handle of a slider
+   * set it to be active
+   * @param {event} e the event from browser
+   **/
   function sliderFocusHandle(e) {
     activeHandle = index(e.target);
     focus = true;
@@ -334,6 +366,24 @@
   }
 
   /**
+   * function to run when the user touches
+   * down on the slider element anywhere
+   * @param {event} e the event from browser
+   **/
+  function sliderInteractStart(e) {
+    const p = eventPosition(e);
+    // set the closest handle as active
+    focus = true;
+    handleActivated = true;
+    activeHandle = getClosestHandle(p);
+    // for touch devices we want the handle to instantly
+    // move to the position touched for more responsive feeling
+    if (e.type === "touchstart") {
+      handleInteract(p);
+    }
+  }
+
+  /**
    * unfocus the slider if the user clicked off of
    * it, somewhere else on the screen
    * @param {event} e the event from browser
@@ -352,7 +402,7 @@
    **/
   function bodyInteract(e) {
     if (handleActivated) {
-      handleInteract(normalisedClient(e).clientX);
+      handleInteract(eventPosition(e));
     }
   }
 
@@ -370,7 +420,7 @@
     if (handleActivated && (el === slider || slider.contains(el))) {
       focus = true;
       if (!targetIsHandle(el)) {
-        handleInteract(normalisedClient(e).clientX);
+        handleInteract(eventPosition(e));
       }
     }
     handleActivated = false;
@@ -409,19 +459,25 @@
     height: 0.5em;
     margin: 1em;
   }
+  :global(.rangeSlider.vertical) {
+    border-radius: 100px;
+    width: 0.5em;
+    min-height: 200px;
+  }
   :global(.rangeSlider, .rangeSlider *) {
     user-select: none;
   }
-  :global(.rangeSlider__handle) {
+  :global(.rangeSlider .rangeHandle) {
     position: absolute;
     display: block;
     height: 1.4em;
     width: 1.4em;
     top: 0.25em;
+    left: 0.25em;
     transform: translateY(-50%) translateX(-50%);
     z-index: 2;
   }
-  :global(.rangeSlider__nub) {
+  :global(.rangeSlider .rangeNub) {
     position: absolute;
     left: 0;
     top: 0;
@@ -431,16 +487,22 @@
     width: 100%;
     transition: all 0.2s ease;
   }
-  :global(.range:not(.min):not(.max) .rangeSlider__nub) {
+  :global(.rangeSlider.range:not(.min):not(.max) .rangeNub) {
     border-radius: 10em 10em 10em 1.6em;
   }
-  :global(.range .rangeSlider__handle:nth-of-type(1) .rangeSlider__nub) {
+  :global(.rangeSlider.range .rangeHandle:nth-of-type(1) .rangeNub) {
     transform: rotate(-135deg);
   }
-  :global(.range .rangeSlider__handle:nth-of-type(2) .rangeSlider__nub) {
+  :global(.rangeSlider.range .rangeHandle:nth-of-type(2) .rangeNub) {
     transform: rotate(45deg);
   }
-  :global(.rangeSlider__value) {
+  :global(.rangeSlider.range.vertical .rangeHandle:nth-of-type(1) .rangeNub) {
+    transform: rotate(-45deg);
+  }
+  :global(.rangeSlider.range.vertical .rangeHandle:nth-of-type(2) .rangeNub) {
+    transform: rotate(135deg);
+  }
+  :global(.rangeSlider .rangeFloat) {
     display: block;
     position: absolute;
     left: 50%;
@@ -456,12 +518,12 @@
     padding: 0.2em 0.4em;
     border-radius: 0.2em;
   }
-  :global(.rangeSlider__handle.active .rangeSlider__value) {
+  :global(.rangeSlider .rangeHandle.active .rangeFloat) {
     opacity: 1;
     top: -0.2em;
     transform: translate(-50%, -100%);
   }
-  :global(.rangeSlider__range) {
+  :global(.rangeSlider .rangeBar) {
     position: absolute;
     display: block;
     transition: background 0.2s ease;
@@ -471,35 +533,39 @@
     user-select: none;
     z-index: 1;
   }
+  :global(.rangeSlider.vertical .rangeBar) {
+    width: 0.5em;
+    height: auto;
+  }
   :global(.rangeSlider) {
     background-color: #d7dada;
     background-color: var(--slider);
   }
-  :global(.rangeSlider__range) {
+  :global(.rangeSlider .rangeBar) {
     background-color: #99a2a2;
     background-color: var(--range-inactive);
   }
-  :global(.rangeSlider.focus .rangeSlider__range) {
+  :global(.rangeSlider.focus .rangeBar) {
     background-color: #838de7;
     background-color: var(--range);
   }
-  :global(.rangeSlider__nub) {
+  :global(.rangeSlider .rangeNub) {
     background-color: #99a2a2;
     background-color: var(--handle-inactive);
   }
-  :global(.rangeSlider.focus .rangeSlider__nub) {
+  :global(.rangeSlider.focus .rangeNub) {
     background-color: #838de7;
     background-color: var(--handle);
   }
-  :global(.rangeSlider .rangeSlider__handle.active .rangeSlider__nub) {
+  :global(.rangeSlider .rangeHandle.active .rangeNub) {
     background-color: #4a40d4;
     background-color: var(--handle-focus);
   }
-  :global(.rangeSlider__value) {
+  :global(.rangeSlider .rangeFloat) {
     color: white;
     color: var(--float-text);
   }
-  :global(.rangeSlider.focus .rangeSlider__value) {
+  :global(.rangeSlider.focus .rangeFloat) {
     background-color: #4a40d4;
     background-color: var(--float);
   }
@@ -509,8 +575,9 @@
   {id}
   bind:this={slider}
   class="rangeSlider"
-  class:focus
   class:range
+  class:vertical
+  class:focus
   class:min={range === 'min'}
   class:max={range === 'max'}
   on:touchstart|preventDefault={sliderInteractStart}
@@ -519,20 +586,20 @@
     <span
       role="slider"
       tabindex="0"
-      class="rangeSlider__handle"
+      class="rangeHandle"
       class:active={focus && activeHandle === index}
       on:blur={sliderBlurHandle}
       on:focus={sliderFocusHandle}
       on:keydown={sliderKeydown}
-      style="left: {$springPositions[index]}%; z-index: {activeHandle === index ? 3 : 2};"
+      style="{vertical ? 'top' : 'left'}: {$springPositions[index]}%; z-index: {activeHandle === index ? 3 : 2};"
       aria-valuemin={range === true && index === 1 ? values[0] : min}
       aria-valuemax={range === true && index === 0 ? values[1] : max}
       aria-valuenow={value}
       aria-valuetext="{prefix}{handleFormatter(value)}{suffix}"
-      aria-orientation="horizontal">
-      <span class="rangeSlider__nub" />
+      aria-orientation="{vertical ? 'vertical' : 'horizontal'}">
+      <span class="rangeNub" />
       {#if float}
-        <span class="rangeSlider__value">
+        <span class="rangeFloat">
           {prefix}{handleFormatter(value)}{suffix}
         </span>
       {/if}
@@ -540,8 +607,8 @@
   {/each}
   {#if range}
     <span
-      class="rangeSlider__range"
-      style="left: {rangeStart($springPositions)}%; right: {rangeEnd($springPositions)}%;" />
+      class="rangeBar"
+      style="{vertical ? 'top' : 'left'}: {rangeStart($springPositions)}%; {vertical ? 'bottom' : 'right'}: {rangeEnd($springPositions)}%;" />
   {/if}
   {#if pips}
     <RangePips
@@ -550,6 +617,7 @@
       {max}
       {step}
       {range}
+      {vertical}
       {first}
       {last}
       {rest}
