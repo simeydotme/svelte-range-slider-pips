@@ -1,0 +1,111 @@
+pre,
+code {
+  font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco,
+    Consolas, monospace;
+  font-weight: 400;
+}
+pre[class*="language-"] {
+  background: #434d5a;
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 1.2em 2em;
+  margin: 0;
+  border: 0;
+  white-space: pre;
+  overflow-x: auto;
+  border-radius: 5px;
+}
+code {
+  color: #d8007b;
+  background-color: #f5f9ff;
+  border: 1px solid #ebf3ff;
+  border-radius: 2px;
+  padding: 0.03em 0.3em 0.1em;
+}
+pre > code {
+  background-color: inherit;
+  border: none;
+}
+pre[class*="language-"] ol {
+  padding-left: 30px;
+  list-style-type: decimal;
+}
+ol.linenums {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #fff;
+}
+
+
+
+a,
+code a > .com,
+pre a > .com {
+  color: #de6262;
+  transition: color 0.2s ease;
+}
+a:hover,
+code a > .com:hover,
+pre a > .com:hover {
+  color: #00c7d7;
+}
+a > .com {
+  border-bottom: 1px dotted;
+}
+small {
+  font-size: 0.8em;
+}
+pre .pln {
+  color: #eee;
+}
+@media screen {
+  pre .str {
+    color: #81e77e;
+  }
+  pre .kwd {
+    color: #c9c;
+  }
+  pre .com {
+    color: #999;
+  }
+  pre .typ {
+    color: #69c;
+  }
+  pre .lit {
+    color: #f99157;
+  }
+  pre .clo,
+  pre .opn,
+  pre .pun {
+    color: #dedede;
+  }
+  pre .tag {
+    color: #f2777a;
+  }
+  pre .atn {
+    color: #f99157;
+  }
+  pre .atv {
+    color: #5cd;
+  }
+  pre .dec {
+    color: #f99157;
+  }
+  pre .var {
+    color: #f2777a;
+  }
+  pre .fun {
+    color: #69c;
+  }
+}
+@media screen {
+  pre.lang-css .pln {
+    color: #81e77e;
+  }
+  pre.lang-css .kwd {
+    color: #dedede;
+  }
+  pre.lang-css .lit {
+    color: #f2777a;
+  }
+}
