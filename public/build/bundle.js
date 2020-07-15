@@ -238,6 +238,9 @@ var app = (function () {
     function add_render_callback(fn) {
         render_callbacks.push(fn);
     }
+    function add_flush_callback(fn) {
+        flush_callbacks.push(fn);
+    }
     let flushing = false;
     const seen_callbacks = new Set();
     function flush() {
@@ -320,6 +323,14 @@ var app = (function () {
                 }
             });
             block.o(local);
+        }
+    }
+
+    function bind(component, name, callback) {
+        const index = component.$$.props[name];
+        if (index !== undefined) {
+            component.$$.bound[index] = callback;
+            callback(component.$$.ctx[index]);
         }
     }
     function create_component(block) {
@@ -697,9 +708,9 @@ var app = (function () {
     			span = element("span");
     			if (if_block) if_block.c();
     			attr_dev(span, "class", "pip first");
-    			attr_dev(span, "style", span_style_value = "" + ((/*vertical*/ ctx[0] ? "top" : "left") + ": 0%;"));
-    			toggle_class(span, "selected", /*isSelected*/ ctx[13](/*min*/ ctx[1]));
-    			toggle_class(span, "in-range", /*inRange*/ ctx[14](/*min*/ ctx[1]));
+    			attr_dev(span, "style", span_style_value = "" + ((/*vertical*/ ctx[2] ? "top" : "left") + ": 0%;"));
+    			toggle_class(span, "selected", /*isSelected*/ ctx[13](/*min*/ ctx[0]));
+    			toggle_class(span, "in-range", /*inRange*/ ctx[14](/*min*/ ctx[0]));
     			add_location(span, file, 134, 4, 3360);
     		},
     		m: function mount(target, anchor) {
@@ -720,16 +731,16 @@ var app = (function () {
     				if_block = null;
     			}
 
-    			if (dirty & /*vertical*/ 1 && span_style_value !== (span_style_value = "" + ((/*vertical*/ ctx[0] ? "top" : "left") + ": 0%;"))) {
+    			if (dirty & /*vertical*/ 4 && span_style_value !== (span_style_value = "" + ((/*vertical*/ ctx[2] ? "top" : "left") + ": 0%;"))) {
     				attr_dev(span, "style", span_style_value);
     			}
 
-    			if (dirty & /*isSelected, min*/ 8194) {
-    				toggle_class(span, "selected", /*isSelected*/ ctx[13](/*min*/ ctx[1]));
+    			if (dirty & /*isSelected, min*/ 8193) {
+    				toggle_class(span, "selected", /*isSelected*/ ctx[13](/*min*/ ctx[0]));
     			}
 
-    			if (dirty & /*inRange, min*/ 16386) {
-    				toggle_class(span, "in-range", /*inRange*/ ctx[14](/*min*/ ctx[1]));
+    			if (dirty & /*inRange, min*/ 16385) {
+    				toggle_class(span, "in-range", /*inRange*/ ctx[14](/*min*/ ctx[0]));
     			}
     		},
     		d: function destroy(detaching) {
@@ -753,7 +764,7 @@ var app = (function () {
     function create_if_block_6(ctx) {
     	let span;
     	let t0;
-    	let t1_value = /*formatter*/ ctx[8](/*min*/ ctx[1]) + "";
+    	let t1_value = /*formatter*/ ctx[8](/*min*/ ctx[0]) + "";
     	let t1;
     	let t2;
 
@@ -774,7 +785,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			if (dirty & /*prefix*/ 64) set_data_dev(t0, /*prefix*/ ctx[6]);
-    			if (dirty & /*formatter, min*/ 258 && t1_value !== (t1_value = /*formatter*/ ctx[8](/*min*/ ctx[1]) + "")) set_data_dev(t1, t1_value);
+    			if (dirty & /*formatter, min*/ 257 && t1_value !== (t1_value = /*formatter*/ ctx[8](/*min*/ ctx[0]) + "")) set_data_dev(t1, t1_value);
     			if (dirty & /*suffix*/ 128) set_data_dev(t2, /*suffix*/ ctx[7]);
     		},
     		d: function destroy(detaching) {
@@ -874,7 +885,7 @@ var app = (function () {
     			if (if_block) if_block.c();
     			t = space();
     			attr_dev(span, "class", "pip");
-    			attr_dev(span, "style", span_style_value = "" + ((/*vertical*/ ctx[0] ? "top" : "left") + ": " + /*percentOf*/ ctx[10](/*pipVal*/ ctx[12](/*i*/ ctx[21])) + "%;"));
+    			attr_dev(span, "style", span_style_value = "" + ((/*vertical*/ ctx[2] ? "top" : "left") + ": " + /*percentOf*/ ctx[10](/*pipVal*/ ctx[12](/*i*/ ctx[21])) + "%;"));
     			toggle_class(span, "selected", /*isSelected*/ ctx[13](/*pipVal*/ ctx[12](/*i*/ ctx[21])));
     			toggle_class(span, "in-range", /*inRange*/ ctx[14](/*pipVal*/ ctx[12](/*i*/ ctx[21])));
     			add_location(span, file, 149, 8, 3776);
@@ -898,7 +909,7 @@ var app = (function () {
     				if_block = null;
     			}
 
-    			if (dirty & /*vertical, percentOf, pipVal*/ 5121 && span_style_value !== (span_style_value = "" + ((/*vertical*/ ctx[0] ? "top" : "left") + ": " + /*percentOf*/ ctx[10](/*pipVal*/ ctx[12](/*i*/ ctx[21])) + "%;"))) {
+    			if (dirty & /*vertical, percentOf, pipVal*/ 5124 && span_style_value !== (span_style_value = "" + ((/*vertical*/ ctx[2] ? "top" : "left") + ": " + /*percentOf*/ ctx[10](/*pipVal*/ ctx[12](/*i*/ ctx[21])) + "%;"))) {
     				attr_dev(span, "style", span_style_value);
     			}
 
@@ -973,7 +984,7 @@ var app = (function () {
 
     // (148:4) {#each Array(pipCount + 1) as _, i}
     function create_each_block(ctx) {
-    	let show_if = /*pipVal*/ ctx[12](/*i*/ ctx[21]) !== /*min*/ ctx[1] && /*pipVal*/ ctx[12](/*i*/ ctx[21]) !== /*max*/ ctx[2];
+    	let show_if = /*pipVal*/ ctx[12](/*i*/ ctx[21]) !== /*min*/ ctx[0] && /*pipVal*/ ctx[12](/*i*/ ctx[21]) !== /*max*/ ctx[1];
     	let if_block_anchor;
     	let if_block = show_if && create_if_block_3(ctx);
 
@@ -987,7 +998,7 @@ var app = (function () {
     			insert_dev(target, if_block_anchor, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*pipVal, min, max*/ 4102) show_if = /*pipVal*/ ctx[12](/*i*/ ctx[21]) !== /*min*/ ctx[1] && /*pipVal*/ ctx[12](/*i*/ ctx[21]) !== /*max*/ ctx[2];
+    			if (dirty & /*pipVal, min, max*/ 4099) show_if = /*pipVal*/ ctx[12](/*i*/ ctx[21]) !== /*min*/ ctx[0] && /*pipVal*/ ctx[12](/*i*/ ctx[21]) !== /*max*/ ctx[1];
 
     			if (show_if) {
     				if (if_block) {
@@ -1030,9 +1041,9 @@ var app = (function () {
     			span = element("span");
     			if (if_block) if_block.c();
     			attr_dev(span, "class", "pip last");
-    			attr_dev(span, "style", span_style_value = "" + ((/*vertical*/ ctx[0] ? "top" : "left") + ": 100%;"));
-    			toggle_class(span, "selected", /*isSelected*/ ctx[13](/*max*/ ctx[2]));
-    			toggle_class(span, "in-range", /*inRange*/ ctx[14](/*max*/ ctx[2]));
+    			attr_dev(span, "style", span_style_value = "" + ((/*vertical*/ ctx[2] ? "top" : "left") + ": 100%;"));
+    			toggle_class(span, "selected", /*isSelected*/ ctx[13](/*max*/ ctx[1]));
+    			toggle_class(span, "in-range", /*inRange*/ ctx[14](/*max*/ ctx[1]));
     			add_location(span, file, 164, 4, 4193);
     		},
     		m: function mount(target, anchor) {
@@ -1053,16 +1064,16 @@ var app = (function () {
     				if_block = null;
     			}
 
-    			if (dirty & /*vertical*/ 1 && span_style_value !== (span_style_value = "" + ((/*vertical*/ ctx[0] ? "top" : "left") + ": 100%;"))) {
+    			if (dirty & /*vertical*/ 4 && span_style_value !== (span_style_value = "" + ((/*vertical*/ ctx[2] ? "top" : "left") + ": 100%;"))) {
     				attr_dev(span, "style", span_style_value);
     			}
 
-    			if (dirty & /*isSelected, max*/ 8196) {
-    				toggle_class(span, "selected", /*isSelected*/ ctx[13](/*max*/ ctx[2]));
+    			if (dirty & /*isSelected, max*/ 8194) {
+    				toggle_class(span, "selected", /*isSelected*/ ctx[13](/*max*/ ctx[1]));
     			}
 
-    			if (dirty & /*inRange, max*/ 16388) {
-    				toggle_class(span, "in-range", /*inRange*/ ctx[14](/*max*/ ctx[2]));
+    			if (dirty & /*inRange, max*/ 16386) {
+    				toggle_class(span, "in-range", /*inRange*/ ctx[14](/*max*/ ctx[1]));
     			}
     		},
     		d: function destroy(detaching) {
@@ -1086,7 +1097,7 @@ var app = (function () {
     function create_if_block_1(ctx) {
     	let span;
     	let t0;
-    	let t1_value = /*formatter*/ ctx[8](/*max*/ ctx[2]) + "";
+    	let t1_value = /*formatter*/ ctx[8](/*max*/ ctx[1]) + "";
     	let t1;
     	let t2;
 
@@ -1107,7 +1118,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			if (dirty & /*prefix*/ 64) set_data_dev(t0, /*prefix*/ ctx[6]);
-    			if (dirty & /*formatter, max*/ 260 && t1_value !== (t1_value = /*formatter*/ ctx[8](/*max*/ ctx[2]) + "")) set_data_dev(t1, t1_value);
+    			if (dirty & /*formatter, max*/ 258 && t1_value !== (t1_value = /*formatter*/ ctx[8](/*max*/ ctx[1]) + "")) set_data_dev(t1, t1_value);
     			if (dirty & /*suffix*/ 128) set_data_dev(t2, /*suffix*/ ctx[7]);
     		},
     		d: function destroy(detaching) {
@@ -1144,7 +1155,7 @@ var app = (function () {
     			if (if_block2) if_block2.c();
     			attr_dev(div, "class", "rangeSlider__pips");
     			toggle_class(div, "focus", /*focus*/ ctx[9]);
-    			toggle_class(div, "vertical", /*vertical*/ ctx[0]);
+    			toggle_class(div, "vertical", /*vertical*/ ctx[2]);
     			add_location(div, file, 132, 0, 3283);
     		},
     		l: function claim(nodes) {
@@ -1202,8 +1213,8 @@ var app = (function () {
     				toggle_class(div, "focus", /*focus*/ ctx[9]);
     			}
 
-    			if (dirty & /*vertical*/ 1) {
-    				toggle_class(div, "vertical", /*vertical*/ ctx[0]);
+    			if (dirty & /*vertical*/ 4) {
+    				toggle_class(div, "vertical", /*vertical*/ ctx[2]);
     			}
     		},
     		i: noop,
@@ -1228,12 +1239,12 @@ var app = (function () {
     }
 
     function instance($$self, $$props, $$invalidate) {
-    	let { vertical = false } = $$props;
     	let { range = false } = $$props;
     	let { min = 0 } = $$props;
     	let { max = 100 } = $$props;
     	let { step = 1 } = $$props;
     	let { values = [(max + min) / 2] } = $$props;
+    	let { vertical = false } = $$props;
 
     	let { pipstep = (max - min) / step >= (vertical ? 50 : 100)
     	? (max - min) / (vertical ? 10 : 20)
@@ -1249,12 +1260,12 @@ var app = (function () {
     	let { percentOf } = $$props;
 
     	const writable_props = [
-    		"vertical",
     		"range",
     		"min",
     		"max",
     		"step",
     		"values",
+    		"vertical",
     		"pipstep",
     		"first",
     		"last",
@@ -1274,12 +1285,12 @@ var app = (function () {
     	validate_slots("RangePips", $$slots, []);
 
     	$$self.$set = $$props => {
-    		if ("vertical" in $$props) $$invalidate(0, vertical = $$props.vertical);
     		if ("range" in $$props) $$invalidate(15, range = $$props.range);
-    		if ("min" in $$props) $$invalidate(1, min = $$props.min);
-    		if ("max" in $$props) $$invalidate(2, max = $$props.max);
+    		if ("min" in $$props) $$invalidate(0, min = $$props.min);
+    		if ("max" in $$props) $$invalidate(1, max = $$props.max);
     		if ("step" in $$props) $$invalidate(16, step = $$props.step);
     		if ("values" in $$props) $$invalidate(17, values = $$props.values);
+    		if ("vertical" in $$props) $$invalidate(2, vertical = $$props.vertical);
     		if ("pipstep" in $$props) $$invalidate(18, pipstep = $$props.pipstep);
     		if ("first" in $$props) $$invalidate(3, first = $$props.first);
     		if ("last" in $$props) $$invalidate(4, last = $$props.last);
@@ -1292,12 +1303,12 @@ var app = (function () {
     	};
 
     	$$self.$capture_state = () => ({
-    		vertical,
     		range,
     		min,
     		max,
     		step,
     		values,
+    		vertical,
     		pipstep,
     		first,
     		last,
@@ -1314,12 +1325,12 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("vertical" in $$props) $$invalidate(0, vertical = $$props.vertical);
     		if ("range" in $$props) $$invalidate(15, range = $$props.range);
-    		if ("min" in $$props) $$invalidate(1, min = $$props.min);
-    		if ("max" in $$props) $$invalidate(2, max = $$props.max);
+    		if ("min" in $$props) $$invalidate(0, min = $$props.min);
+    		if ("max" in $$props) $$invalidate(1, max = $$props.max);
     		if ("step" in $$props) $$invalidate(16, step = $$props.step);
     		if ("values" in $$props) $$invalidate(17, values = $$props.values);
+    		if ("vertical" in $$props) $$invalidate(2, vertical = $$props.vertical);
     		if ("pipstep" in $$props) $$invalidate(18, pipstep = $$props.pipstep);
     		if ("first" in $$props) $$invalidate(3, first = $$props.first);
     		if ("last" in $$props) $$invalidate(4, last = $$props.last);
@@ -1345,11 +1356,11 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*max, min, step, pipstep*/ 327686) {
+    		if ($$self.$$.dirty & /*max, min, step, pipstep*/ 327683) {
     			 $$invalidate(11, pipCount = parseInt((max - min) / (step * pipstep), 10));
     		}
 
-    		if ($$self.$$.dirty & /*min, step, pipstep*/ 327682) {
+    		if ($$self.$$.dirty & /*min, step, pipstep*/ 327681) {
     			 $$invalidate(12, pipVal = function (val) {
     				return min + val * step * pipstep;
     			});
@@ -1375,9 +1386,9 @@ var app = (function () {
     	};
 
     	return [
-    		vertical,
     		min,
     		max,
+    		vertical,
     		first,
     		last,
     		rest,
@@ -1402,12 +1413,12 @@ var app = (function () {
     		super(options);
 
     		init(this, options, instance, create_fragment, safe_not_equal, {
-    			vertical: 0,
     			range: 15,
-    			min: 1,
-    			max: 2,
+    			min: 0,
+    			max: 1,
     			step: 16,
     			values: 17,
+    			vertical: 2,
     			pipstep: 18,
     			first: 3,
     			last: 4,
@@ -1436,14 +1447,6 @@ var app = (function () {
     		if (/*percentOf*/ ctx[10] === undefined && !("percentOf" in props)) {
     			console.warn("<RangePips> was created without expected prop 'percentOf'");
     		}
-    	}
-
-    	get vertical() {
-    		throw new Error("<RangePips>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set vertical(value) {
-    		throw new Error("<RangePips>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
     	get range() {
@@ -1483,6 +1486,14 @@ var app = (function () {
     	}
 
     	set values(value) {
+    		throw new Error("<RangePips>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get vertical() {
+    		throw new Error("<RangePips>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set vertical(value) {
     		throw new Error("<RangePips>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
@@ -1573,16 +1584,16 @@ var app = (function () {
     function create_if_block_2$1(ctx) {
     	let span;
     	let t0;
-    	let t1_value = /*handleFormatter*/ ctx[14](/*value*/ ctx[48]) + "";
+    	let t1_value = /*handleFormatter*/ ctx[16](/*value*/ ctx[48]) + "";
     	let t1;
     	let t2;
 
     	const block = {
     		c: function create() {
     			span = element("span");
-    			t0 = text(/*prefix*/ ctx[11]);
+    			t0 = text(/*prefix*/ ctx[13]);
     			t1 = text(t1_value);
-    			t2 = text(/*suffix*/ ctx[12]);
+    			t2 = text(/*suffix*/ ctx[14]);
     			attr_dev(span, "class", "rangeFloat");
     			add_location(span, file$1, 621, 8, 17600);
     		},
@@ -1593,9 +1604,9 @@ var app = (function () {
     			append_dev(span, t2);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*prefix*/ 2048) set_data_dev(t0, /*prefix*/ ctx[11]);
-    			if (dirty[0] & /*handleFormatter, values*/ 16385 && t1_value !== (t1_value = /*handleFormatter*/ ctx[14](/*value*/ ctx[48]) + "")) set_data_dev(t1, t1_value);
-    			if (dirty[0] & /*suffix*/ 4096) set_data_dev(t2, /*suffix*/ ctx[12]);
+    			if (dirty[0] & /*prefix*/ 8192) set_data_dev(t0, /*prefix*/ ctx[13]);
+    			if (dirty[0] & /*handleFormatter, values*/ 65537 && t1_value !== (t1_value = /*handleFormatter*/ ctx[16](/*value*/ ctx[48]) + "")) set_data_dev(t1, t1_value);
+    			if (dirty[0] & /*suffix*/ 16384) set_data_dev(t2, /*suffix*/ ctx[14]);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(span);
@@ -1626,7 +1637,7 @@ var app = (function () {
     	let span1_aria_orientation_value;
     	let mounted;
     	let dispose;
-    	let if_block = /*float*/ ctx[15] && create_if_block_2$1(ctx);
+    	let if_block = /*float*/ ctx[6] && create_if_block_2$1(ctx);
 
     	const block = {
     		c: function create() {
@@ -1639,7 +1650,7 @@ var app = (function () {
     			attr_dev(span1, "role", "slider");
     			attr_dev(span1, "class", "rangeHandle");
     			attr_dev(span1, "tabindex", "0");
-    			attr_dev(span1, "style", span1_style_value = "" + ((/*vertical*/ ctx[16] ? "top" : "left") + ": " + /*$springPositions*/ ctx[21][/*index*/ ctx[50]] + "%; z-index: " + (/*activeHandle*/ ctx[19] === /*index*/ ctx[50] ? 3 : 2) + ";"));
+    			attr_dev(span1, "style", span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[21][/*index*/ ctx[50]] + "%; z-index: " + (/*activeHandle*/ ctx[19] === /*index*/ ctx[50] ? 3 : 2) + ";"));
 
     			attr_dev(span1, "aria-valuemin", span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[50] === 1
     			? /*values*/ ctx[0][0]
@@ -1650,8 +1661,8 @@ var app = (function () {
     			: /*max*/ ctx[3]);
 
     			attr_dev(span1, "aria-valuenow", span1_aria_valuenow_value = /*value*/ ctx[48]);
-    			attr_dev(span1, "aria-valuetext", span1_aria_valuetext_value = "" + (/*prefix*/ ctx[11] + /*handleFormatter*/ ctx[14](/*value*/ ctx[48]) + /*suffix*/ ctx[12]));
-    			attr_dev(span1, "aria-orientation", span1_aria_orientation_value = /*vertical*/ ctx[16] ? "vertical" : "horizontal");
+    			attr_dev(span1, "aria-valuetext", span1_aria_valuetext_value = "" + (/*prefix*/ ctx[13] + /*handleFormatter*/ ctx[16](/*value*/ ctx[48]) + /*suffix*/ ctx[14]));
+    			attr_dev(span1, "aria-orientation", span1_aria_orientation_value = /*vertical*/ ctx[5] ? "vertical" : "horizontal");
     			toggle_class(span1, "active", /*focus*/ ctx[18] && /*activeHandle*/ ctx[19] === /*index*/ ctx[50]);
     			add_location(span1, file$1, 605, 4, 16908);
     		},
@@ -1672,7 +1683,7 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (/*float*/ ctx[15]) {
+    			if (/*float*/ ctx[6]) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
@@ -1685,7 +1696,7 @@ var app = (function () {
     				if_block = null;
     			}
 
-    			if (dirty[0] & /*vertical, $springPositions, activeHandle*/ 2686976 && span1_style_value !== (span1_style_value = "" + ((/*vertical*/ ctx[16] ? "top" : "left") + ": " + /*$springPositions*/ ctx[21][/*index*/ ctx[50]] + "%; z-index: " + (/*activeHandle*/ ctx[19] === /*index*/ ctx[50] ? 3 : 2) + ";"))) {
+    			if (dirty[0] & /*vertical, $springPositions, activeHandle*/ 2621472 && span1_style_value !== (span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[21][/*index*/ ctx[50]] + "%; z-index: " + (/*activeHandle*/ ctx[19] === /*index*/ ctx[50] ? 3 : 2) + ";"))) {
     				attr_dev(span1, "style", span1_style_value);
     			}
 
@@ -1705,11 +1716,11 @@ var app = (function () {
     				attr_dev(span1, "aria-valuenow", span1_aria_valuenow_value);
     			}
 
-    			if (dirty[0] & /*prefix, handleFormatter, values, suffix*/ 22529 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = "" + (/*prefix*/ ctx[11] + /*handleFormatter*/ ctx[14](/*value*/ ctx[48]) + /*suffix*/ ctx[12]))) {
+    			if (dirty[0] & /*prefix, handleFormatter, values, suffix*/ 90113 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = "" + (/*prefix*/ ctx[13] + /*handleFormatter*/ ctx[16](/*value*/ ctx[48]) + /*suffix*/ ctx[14]))) {
     				attr_dev(span1, "aria-valuetext", span1_aria_valuetext_value);
     			}
 
-    			if (dirty[0] & /*vertical*/ 65536 && span1_aria_orientation_value !== (span1_aria_orientation_value = /*vertical*/ ctx[16] ? "vertical" : "horizontal")) {
+    			if (dirty[0] & /*vertical*/ 32 && span1_aria_orientation_value !== (span1_aria_orientation_value = /*vertical*/ ctx[5] ? "vertical" : "horizontal")) {
     				attr_dev(span1, "aria-orientation", span1_aria_orientation_value);
     			}
 
@@ -1745,14 +1756,14 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			attr_dev(span, "class", "rangeBar");
-    			attr_dev(span, "style", span_style_value = "" + ((/*vertical*/ ctx[16] ? "top" : "left") + ": " + /*rangeStart*/ ctx[23](/*$springPositions*/ ctx[21]) + "%; " + (/*vertical*/ ctx[16] ? "bottom" : "right") + ":\n      " + /*rangeEnd*/ ctx[24](/*$springPositions*/ ctx[21]) + "%;"));
+    			attr_dev(span, "style", span_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*rangeStart*/ ctx[23](/*$springPositions*/ ctx[21]) + "%; " + (/*vertical*/ ctx[5] ? "bottom" : "right") + ":\n      " + /*rangeEnd*/ ctx[24](/*$springPositions*/ ctx[21]) + "%;"));
     			add_location(span, file$1, 626, 4, 17725);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*vertical, $springPositions*/ 2162688 && span_style_value !== (span_style_value = "" + ((/*vertical*/ ctx[16] ? "top" : "left") + ": " + /*rangeStart*/ ctx[23](/*$springPositions*/ ctx[21]) + "%; " + (/*vertical*/ ctx[16] ? "bottom" : "right") + ":\n      " + /*rangeEnd*/ ctx[24](/*$springPositions*/ ctx[21]) + "%;"))) {
+    			if (dirty[0] & /*vertical, $springPositions*/ 2097184 && span_style_value !== (span_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*rangeStart*/ ctx[23](/*$springPositions*/ ctx[21]) + "%; " + (/*vertical*/ ctx[5] ? "bottom" : "right") + ":\n      " + /*rangeEnd*/ ctx[24](/*$springPositions*/ ctx[21]) + "%;"))) {
     				attr_dev(span, "style", span_style_value);
     			}
     		},
@@ -1784,14 +1795,14 @@ var app = (function () {
     				max: /*max*/ ctx[3],
     				step: /*step*/ ctx[4],
     				range: /*range*/ ctx[1],
-    				vertical: /*vertical*/ ctx[16],
-    				first: /*first*/ ctx[7],
-    				last: /*last*/ ctx[8],
-    				rest: /*rest*/ ctx[9],
-    				pipstep: /*pipstep*/ ctx[6],
-    				prefix: /*prefix*/ ctx[11],
-    				suffix: /*suffix*/ ctx[12],
-    				formatter: /*formatter*/ ctx[13],
+    				vertical: /*vertical*/ ctx[5],
+    				first: /*first*/ ctx[9],
+    				last: /*last*/ ctx[10],
+    				rest: /*rest*/ ctx[11],
+    				pipstep: /*pipstep*/ ctx[8],
+    				prefix: /*prefix*/ ctx[13],
+    				suffix: /*suffix*/ ctx[14],
+    				formatter: /*formatter*/ ctx[15],
     				focus: /*focus*/ ctx[18],
     				percentOf: /*percentOf*/ ctx[20]
     			},
@@ -1813,14 +1824,14 @@ var app = (function () {
     			if (dirty[0] & /*max*/ 8) rangepips_changes.max = /*max*/ ctx[3];
     			if (dirty[0] & /*step*/ 16) rangepips_changes.step = /*step*/ ctx[4];
     			if (dirty[0] & /*range*/ 2) rangepips_changes.range = /*range*/ ctx[1];
-    			if (dirty[0] & /*vertical*/ 65536) rangepips_changes.vertical = /*vertical*/ ctx[16];
-    			if (dirty[0] & /*first*/ 128) rangepips_changes.first = /*first*/ ctx[7];
-    			if (dirty[0] & /*last*/ 256) rangepips_changes.last = /*last*/ ctx[8];
-    			if (dirty[0] & /*rest*/ 512) rangepips_changes.rest = /*rest*/ ctx[9];
-    			if (dirty[0] & /*pipstep*/ 64) rangepips_changes.pipstep = /*pipstep*/ ctx[6];
-    			if (dirty[0] & /*prefix*/ 2048) rangepips_changes.prefix = /*prefix*/ ctx[11];
-    			if (dirty[0] & /*suffix*/ 4096) rangepips_changes.suffix = /*suffix*/ ctx[12];
-    			if (dirty[0] & /*formatter*/ 8192) rangepips_changes.formatter = /*formatter*/ ctx[13];
+    			if (dirty[0] & /*vertical*/ 32) rangepips_changes.vertical = /*vertical*/ ctx[5];
+    			if (dirty[0] & /*first*/ 512) rangepips_changes.first = /*first*/ ctx[9];
+    			if (dirty[0] & /*last*/ 1024) rangepips_changes.last = /*last*/ ctx[10];
+    			if (dirty[0] & /*rest*/ 2048) rangepips_changes.rest = /*rest*/ ctx[11];
+    			if (dirty[0] & /*pipstep*/ 256) rangepips_changes.pipstep = /*pipstep*/ ctx[8];
+    			if (dirty[0] & /*prefix*/ 8192) rangepips_changes.prefix = /*prefix*/ ctx[13];
+    			if (dirty[0] & /*suffix*/ 16384) rangepips_changes.suffix = /*suffix*/ ctx[14];
+    			if (dirty[0] & /*formatter*/ 32768) rangepips_changes.formatter = /*formatter*/ ctx[15];
     			if (dirty[0] & /*focus*/ 262144) rangepips_changes.focus = /*focus*/ ctx[18];
     			if (dirty[0] & /*percentOf*/ 1048576) rangepips_changes.percentOf = /*percentOf*/ ctx[20];
     			rangepips.$set(rangepips_changes);
@@ -1866,7 +1877,7 @@ var app = (function () {
     	}
 
     	let if_block0 = /*range*/ ctx[1] && create_if_block_1$1(ctx);
-    	let if_block1 = /*pips*/ ctx[5] && create_if_block$1(ctx);
+    	let if_block1 = /*pips*/ ctx[7] && create_if_block$1(ctx);
 
     	const block = {
     		c: function create() {
@@ -1880,15 +1891,15 @@ var app = (function () {
     			if (if_block0) if_block0.c();
     			t1 = space();
     			if (if_block1) if_block1.c();
-    			attr_dev(div, "id", /*id*/ ctx[10]);
+    			attr_dev(div, "id", /*id*/ ctx[12]);
     			attr_dev(div, "class", "rangeSlider");
     			toggle_class(div, "min", /*range*/ ctx[1] === "min");
     			toggle_class(div, "range", /*range*/ ctx[1]);
-    			toggle_class(div, "vertical", /*vertical*/ ctx[16]);
+    			toggle_class(div, "vertical", /*vertical*/ ctx[5]);
     			toggle_class(div, "focus", /*focus*/ ctx[18]);
     			toggle_class(div, "max", /*range*/ ctx[1] === "max");
-    			toggle_class(div, "pips", /*pips*/ ctx[5]);
-    			toggle_class(div, "pip-labels", /*first*/ ctx[7] === "label" || /*last*/ ctx[8] === "label" || /*rest*/ ctx[9] === "label");
+    			toggle_class(div, "pips", /*pips*/ ctx[7]);
+    			toggle_class(div, "pip-labels", /*first*/ ctx[9] === "label" || /*last*/ ctx[10] === "label" || /*rest*/ ctx[11] === "label");
     			add_location(div, file$1, 591, 0, 16528);
     		},
     		l: function claim(nodes) {
@@ -1925,7 +1936,7 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*vertical, $springPositions, activeHandle, range, values, min, max, prefix, handleFormatter, suffix, focus, sliderKeydown, sliderBlurHandle, sliderFocusHandle, float*/ 237885455) {
+    			if (dirty[0] & /*vertical, $springPositions, activeHandle, range, values, min, max, prefix, handleFormatter, suffix, focus, sliderKeydown, sliderBlurHandle, sliderFocusHandle, float*/ 237854831) {
     				each_value = /*values*/ ctx[0];
     				validate_each_argument(each_value);
     				let i;
@@ -1962,11 +1973,11 @@ var app = (function () {
     				if_block0 = null;
     			}
 
-    			if (/*pips*/ ctx[5]) {
+    			if (/*pips*/ ctx[7]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
 
-    					if (dirty[0] & /*pips*/ 32) {
+    					if (dirty[0] & /*pips*/ 128) {
     						transition_in(if_block1, 1);
     					}
     				} else {
@@ -1985,8 +1996,8 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (!current || dirty[0] & /*id*/ 1024) {
-    				attr_dev(div, "id", /*id*/ ctx[10]);
+    			if (!current || dirty[0] & /*id*/ 4096) {
+    				attr_dev(div, "id", /*id*/ ctx[12]);
     			}
 
     			if (dirty[0] & /*range*/ 2) {
@@ -1997,8 +2008,8 @@ var app = (function () {
     				toggle_class(div, "range", /*range*/ ctx[1]);
     			}
 
-    			if (dirty[0] & /*vertical*/ 65536) {
-    				toggle_class(div, "vertical", /*vertical*/ ctx[16]);
+    			if (dirty[0] & /*vertical*/ 32) {
+    				toggle_class(div, "vertical", /*vertical*/ ctx[5]);
     			}
 
     			if (dirty[0] & /*focus*/ 262144) {
@@ -2009,12 +2020,12 @@ var app = (function () {
     				toggle_class(div, "max", /*range*/ ctx[1] === "max");
     			}
 
-    			if (dirty[0] & /*pips*/ 32) {
-    				toggle_class(div, "pips", /*pips*/ ctx[5]);
+    			if (dirty[0] & /*pips*/ 128) {
+    				toggle_class(div, "pips", /*pips*/ ctx[7]);
     			}
 
-    			if (dirty[0] & /*first, last, rest*/ 896) {
-    				toggle_class(div, "pip-labels", /*first*/ ctx[7] === "label" || /*last*/ ctx[8] === "label" || /*rest*/ ctx[9] === "label");
+    			if (dirty[0] & /*first, last, rest*/ 3584) {
+    				toggle_class(div, "pip-labels", /*first*/ ctx[9] === "label" || /*last*/ ctx[10] === "label" || /*rest*/ ctx[11] === "label");
     			}
     		},
     		i: function intro(local) {
@@ -2080,6 +2091,8 @@ var app = (function () {
     	let { max = 100 } = $$props;
     	let { step = 1 } = $$props;
     	let { values = [(max + min) / 2] } = $$props;
+    	let { vertical = false } = $$props;
+    	let { float = false } = $$props;
     	let { pips = false } = $$props;
     	let { pipstep } = $$props;
     	let { first } = $$props;
@@ -2090,8 +2103,6 @@ var app = (function () {
     	let { suffix = "" } = $$props;
     	let { formatter = v => v } = $$props;
     	let { handleFormatter = formatter } = $$props;
-    	let { float = false } = $$props;
-    	let { vertical = false } = $$props;
     	let { precision = 2 } = $$props;
     	let { springValues = { stiffness: 0.15, damping: 0.4 } } = $$props;
 
@@ -2437,6 +2448,8 @@ var app = (function () {
     		"max",
     		"step",
     		"values",
+    		"vertical",
+    		"float",
     		"pips",
     		"pipstep",
     		"first",
@@ -2447,8 +2460,6 @@ var app = (function () {
     		"suffix",
     		"formatter",
     		"handleFormatter",
-    		"float",
-    		"vertical",
     		"precision",
     		"springValues"
     	];
@@ -2473,18 +2484,18 @@ var app = (function () {
     		if ("max" in $$props) $$invalidate(3, max = $$props.max);
     		if ("step" in $$props) $$invalidate(4, step = $$props.step);
     		if ("values" in $$props) $$invalidate(0, values = $$props.values);
-    		if ("pips" in $$props) $$invalidate(5, pips = $$props.pips);
-    		if ("pipstep" in $$props) $$invalidate(6, pipstep = $$props.pipstep);
-    		if ("first" in $$props) $$invalidate(7, first = $$props.first);
-    		if ("last" in $$props) $$invalidate(8, last = $$props.last);
-    		if ("rest" in $$props) $$invalidate(9, rest = $$props.rest);
-    		if ("id" in $$props) $$invalidate(10, id = $$props.id);
-    		if ("prefix" in $$props) $$invalidate(11, prefix = $$props.prefix);
-    		if ("suffix" in $$props) $$invalidate(12, suffix = $$props.suffix);
-    		if ("formatter" in $$props) $$invalidate(13, formatter = $$props.formatter);
-    		if ("handleFormatter" in $$props) $$invalidate(14, handleFormatter = $$props.handleFormatter);
-    		if ("float" in $$props) $$invalidate(15, float = $$props.float);
-    		if ("vertical" in $$props) $$invalidate(16, vertical = $$props.vertical);
+    		if ("vertical" in $$props) $$invalidate(5, vertical = $$props.vertical);
+    		if ("float" in $$props) $$invalidate(6, float = $$props.float);
+    		if ("pips" in $$props) $$invalidate(7, pips = $$props.pips);
+    		if ("pipstep" in $$props) $$invalidate(8, pipstep = $$props.pipstep);
+    		if ("first" in $$props) $$invalidate(9, first = $$props.first);
+    		if ("last" in $$props) $$invalidate(10, last = $$props.last);
+    		if ("rest" in $$props) $$invalidate(11, rest = $$props.rest);
+    		if ("id" in $$props) $$invalidate(12, id = $$props.id);
+    		if ("prefix" in $$props) $$invalidate(13, prefix = $$props.prefix);
+    		if ("suffix" in $$props) $$invalidate(14, suffix = $$props.suffix);
+    		if ("formatter" in $$props) $$invalidate(15, formatter = $$props.formatter);
+    		if ("handleFormatter" in $$props) $$invalidate(16, handleFormatter = $$props.handleFormatter);
     		if ("precision" in $$props) $$invalidate(34, precision = $$props.precision);
     		if ("springValues" in $$props) $$invalidate(35, springValues = $$props.springValues);
     	};
@@ -2497,6 +2508,8 @@ var app = (function () {
     		max,
     		step,
     		values,
+    		vertical,
+    		float,
     		pips,
     		pipstep,
     		first,
@@ -2507,8 +2520,6 @@ var app = (function () {
     		suffix,
     		formatter,
     		handleFormatter,
-    		float,
-    		vertical,
     		precision,
     		springValues,
     		slider,
@@ -2549,18 +2560,18 @@ var app = (function () {
     		if ("max" in $$props) $$invalidate(3, max = $$props.max);
     		if ("step" in $$props) $$invalidate(4, step = $$props.step);
     		if ("values" in $$props) $$invalidate(0, values = $$props.values);
-    		if ("pips" in $$props) $$invalidate(5, pips = $$props.pips);
-    		if ("pipstep" in $$props) $$invalidate(6, pipstep = $$props.pipstep);
-    		if ("first" in $$props) $$invalidate(7, first = $$props.first);
-    		if ("last" in $$props) $$invalidate(8, last = $$props.last);
-    		if ("rest" in $$props) $$invalidate(9, rest = $$props.rest);
-    		if ("id" in $$props) $$invalidate(10, id = $$props.id);
-    		if ("prefix" in $$props) $$invalidate(11, prefix = $$props.prefix);
-    		if ("suffix" in $$props) $$invalidate(12, suffix = $$props.suffix);
-    		if ("formatter" in $$props) $$invalidate(13, formatter = $$props.formatter);
-    		if ("handleFormatter" in $$props) $$invalidate(14, handleFormatter = $$props.handleFormatter);
-    		if ("float" in $$props) $$invalidate(15, float = $$props.float);
-    		if ("vertical" in $$props) $$invalidate(16, vertical = $$props.vertical);
+    		if ("vertical" in $$props) $$invalidate(5, vertical = $$props.vertical);
+    		if ("float" in $$props) $$invalidate(6, float = $$props.float);
+    		if ("pips" in $$props) $$invalidate(7, pips = $$props.pips);
+    		if ("pipstep" in $$props) $$invalidate(8, pipstep = $$props.pipstep);
+    		if ("first" in $$props) $$invalidate(9, first = $$props.first);
+    		if ("last" in $$props) $$invalidate(10, last = $$props.last);
+    		if ("rest" in $$props) $$invalidate(11, rest = $$props.rest);
+    		if ("id" in $$props) $$invalidate(12, id = $$props.id);
+    		if ("prefix" in $$props) $$invalidate(13, prefix = $$props.prefix);
+    		if ("suffix" in $$props) $$invalidate(14, suffix = $$props.suffix);
+    		if ("formatter" in $$props) $$invalidate(15, formatter = $$props.formatter);
+    		if ("handleFormatter" in $$props) $$invalidate(16, handleFormatter = $$props.handleFormatter);
     		if ("precision" in $$props) $$invalidate(34, precision = $$props.precision);
     		if ("springValues" in $$props) $$invalidate(35, springValues = $$props.springValues);
     		if ("slider" in $$props) $$invalidate(17, slider = $$props.slider);
@@ -2672,6 +2683,8 @@ var app = (function () {
     		min,
     		max,
     		step,
+    		vertical,
+    		float,
     		pips,
     		pipstep,
     		first,
@@ -2682,8 +2695,6 @@ var app = (function () {
     		suffix,
     		formatter,
     		handleFormatter,
-    		float,
-    		vertical,
     		slider,
     		focus,
     		activeHandle,
@@ -2723,18 +2734,18 @@ var app = (function () {
     				max: 3,
     				step: 4,
     				values: 0,
-    				pips: 5,
-    				pipstep: 6,
-    				first: 7,
-    				last: 8,
-    				rest: 9,
-    				id: 10,
-    				prefix: 11,
-    				suffix: 12,
-    				formatter: 13,
-    				handleFormatter: 14,
-    				float: 15,
-    				vertical: 16,
+    				vertical: 5,
+    				float: 6,
+    				pips: 7,
+    				pipstep: 8,
+    				first: 9,
+    				last: 10,
+    				rest: 11,
+    				id: 12,
+    				prefix: 13,
+    				suffix: 14,
+    				formatter: 15,
+    				handleFormatter: 16,
     				precision: 34,
     				springValues: 35
     			},
@@ -2751,23 +2762,23 @@ var app = (function () {
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*pipstep*/ ctx[6] === undefined && !("pipstep" in props)) {
+    		if (/*pipstep*/ ctx[8] === undefined && !("pipstep" in props)) {
     			console.warn("<RangeSlider> was created without expected prop 'pipstep'");
     		}
 
-    		if (/*first*/ ctx[7] === undefined && !("first" in props)) {
+    		if (/*first*/ ctx[9] === undefined && !("first" in props)) {
     			console.warn("<RangeSlider> was created without expected prop 'first'");
     		}
 
-    		if (/*last*/ ctx[8] === undefined && !("last" in props)) {
+    		if (/*last*/ ctx[10] === undefined && !("last" in props)) {
     			console.warn("<RangeSlider> was created without expected prop 'last'");
     		}
 
-    		if (/*rest*/ ctx[9] === undefined && !("rest" in props)) {
+    		if (/*rest*/ ctx[11] === undefined && !("rest" in props)) {
     			console.warn("<RangeSlider> was created without expected prop 'rest'");
     		}
 
-    		if (/*id*/ ctx[10] === undefined && !("id" in props)) {
+    		if (/*id*/ ctx[12] === undefined && !("id" in props)) {
     			console.warn("<RangeSlider> was created without expected prop 'id'");
     		}
     	}
@@ -2809,6 +2820,22 @@ var app = (function () {
     	}
 
     	set values(value) {
+    		throw new Error("<RangeSlider>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get vertical() {
+    		throw new Error("<RangeSlider>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set vertical(value) {
+    		throw new Error("<RangeSlider>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get float() {
+    		throw new Error("<RangeSlider>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set float(value) {
     		throw new Error("<RangeSlider>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
@@ -2889,22 +2916,6 @@ var app = (function () {
     	}
 
     	set handleFormatter(value) {
-    		throw new Error("<RangeSlider>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get float() {
-    		throw new Error("<RangeSlider>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set float(value) {
-    		throw new Error("<RangeSlider>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get vertical() {
-    		throw new Error("<RangeSlider>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set vertical(value) {
     		throw new Error("<RangeSlider>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
@@ -4534,11 +4545,24 @@ var app = (function () {
     const get_slider_slot_changes = dirty => ({});
     const get_slider_slot_context = ctx => ({});
 
-    // (94:26)          
+    // (103:26)          
     function fallback_block_1(ctx) {
     	let rangeslider;
+    	let updating_values;
     	let current;
-    	rangeslider = new RangeSlider({ $$inline: true });
+
+    	function rangeslider_values_binding(value) {
+    		/*rangeslider_values_binding*/ ctx[5].call(null, value);
+    	}
+
+    	let rangeslider_props = {};
+
+    	if (/*values*/ ctx[1] !== void 0) {
+    		rangeslider_props.values = /*values*/ ctx[1];
+    	}
+
+    	rangeslider = new RangeSlider({ props: rangeslider_props, $$inline: true });
+    	binding_callbacks.push(() => bind(rangeslider, "values", rangeslider_values_binding));
 
     	const block = {
     		c: function create() {
@@ -4547,6 +4571,17 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			mount_component(rangeslider, target, anchor);
     			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const rangeslider_changes = {};
+
+    			if (!updating_values && dirty & /*values*/ 2) {
+    				updating_values = true;
+    				rangeslider_changes.values = /*values*/ ctx[1];
+    				add_flush_callback(() => updating_values = false);
+    			}
+
+    			rangeslider.$set(rangeslider_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -4566,14 +4601,62 @@ var app = (function () {
     		block,
     		id: fallback_block_1.name,
     		type: "fallback",
-    		source: "(94:26)          ",
+    		source: "(103:26)          ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (103:26) &lt;RangeSlider /&gt;
+    // (107:6) {#if values}
+    function create_if_block$3(ctx) {
+    	let span;
+    	let t0;
+    	let code;
+    	let t1;
+    	let t2;
+    	let t3;
+
+    	const block = {
+    		c: function create() {
+    			span = element("span");
+    			t0 = text("values: ");
+    			code = element("code");
+    			t1 = text("[");
+    			t2 = text(/*values*/ ctx[1]);
+    			t3 = text("]");
+    			add_location(code, file$3, 107, 35, 2069);
+    			attr_dev(span, "class", "values svelte-1t9hhd1");
+    			add_location(span, file$3, 107, 6, 2040);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, span, anchor);
+    			append_dev(span, t0);
+    			append_dev(span, code);
+    			append_dev(code, t1);
+    			append_dev(code, t2);
+    			append_dev(code, t3);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*values*/ 2) set_data_dev(t2, /*values*/ ctx[1]);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(span);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$3.name,
+    		type: "if",
+    		source: "(107:6) {#if values}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (116:26) &lt;RangeSlider /&gt;
     function fallback_block(ctx) {
     	let t;
 
@@ -4593,18 +4676,18 @@ var app = (function () {
     		block,
     		id: fallback_block.name,
     		type: "fallback",
-    		source: "(103:26) &lt;RangeSlider /&gt;",
+    		source: "(116:26) &lt;RangeSlider /&gt;",
     		ctx
     	});
 
     	return block;
     }
 
-    // (102:6) <Prism language="svelte">
+    // (115:6) <Prism language="svelte">
     function create_default_slot(ctx) {
     	let current;
-    	const code_slot_template = /*$$slots*/ ctx[1].code;
-    	const code_slot = create_slot(code_slot_template, ctx, /*$$scope*/ ctx[4], get_code_slot_context);
+    	const code_slot_template = /*$$slots*/ ctx[2].code;
+    	const code_slot = create_slot(code_slot_template, ctx, /*$$scope*/ ctx[6], get_code_slot_context);
     	const code_slot_or_fallback = code_slot || fallback_block(ctx);
 
     	const block = {
@@ -4620,8 +4703,8 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			if (code_slot) {
-    				if (code_slot.p && dirty & /*$$scope*/ 16) {
-    					update_slot(code_slot, code_slot_template, ctx, /*$$scope*/ ctx[4], dirty, get_code_slot_changes, get_code_slot_context);
+    				if (code_slot.p && dirty & /*$$scope*/ 64) {
+    					update_slot(code_slot, code_slot_template, ctx, /*$$scope*/ ctx[6], dirty, get_code_slot_changes, get_code_slot_context);
     				}
     			}
     		},
@@ -4643,7 +4726,7 @@ var app = (function () {
     		block,
     		id: create_default_slot.name,
     		type: "slot",
-    		source: "(102:6) <Prism language=\\\"svelte\\\">",
+    		source: "(115:6) <Prism language=\\\"svelte\\\">",
     		ctx
     	});
 
@@ -4664,14 +4747,16 @@ var app = (function () {
     	let div5;
     	let div3;
     	let t2;
+    	let t3;
     	let div4;
     	let prism;
     	let current;
     	let mounted;
     	let dispose;
-    	const slider_slot_template = /*$$slots*/ ctx[1].slider;
-    	const slider_slot = create_slot(slider_slot_template, ctx, /*$$scope*/ ctx[4], get_slider_slot_context);
+    	const slider_slot_template = /*$$slots*/ ctx[2].slider;
+    	const slider_slot = create_slot(slider_slot_template, ctx, /*$$scope*/ ctx[6], get_slider_slot_context);
     	const slider_slot_or_fallback = slider_slot || fallback_block_1(ctx);
+    	let if_block = /*values*/ ctx[1] && create_if_block$3(ctx);
 
     	prism = new Prism$1({
     			props: {
@@ -4696,35 +4781,37 @@ var app = (function () {
     			div3 = element("div");
     			if (slider_slot_or_fallback) slider_slot_or_fallback.c();
     			t2 = space();
+    			if (if_block) if_block.c();
+    			t3 = space();
     			div4 = element("div");
     			create_component(prism.$$.fragment);
     			if (img0.src !== (img0_src_value = "public/images/icons8-search-100.png")) attr_dev(img0, "src", img0_src_value);
     			attr_dev(img0, "alt", "icon of a magnifying glass, for viewing the output slider");
-    			attr_dev(img0, "class", "svelte-11g4vum");
-    			add_location(img0, file$3, 74, 6, 1301);
-    			attr_dev(div0, "class", "tab tab-view svelte-11g4vum");
+    			attr_dev(img0, "class", "svelte-1t9hhd1");
+    			add_location(img0, file$3, 83, 6, 1429);
+    			attr_dev(div0, "class", "tab tab-view svelte-1t9hhd1");
     			toggle_class(div0, "active", /*active*/ ctx[0] === "view");
-    			add_location(div0, file$3, 68, 4, 1165);
+    			add_location(div0, file$3, 77, 4, 1293);
     			if (img1.src !== (img1_src_value = "public/images/icons8-code-100.png")) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "alt", "icon of a code editor, for viewing the input code");
-    			attr_dev(img1, "class", "svelte-11g4vum");
-    			add_location(img1, file$3, 84, 6, 1582);
-    			attr_dev(div1, "class", "tab tab-code svelte-11g4vum");
+    			attr_dev(img1, "class", "svelte-1t9hhd1");
+    			add_location(img1, file$3, 93, 6, 1710);
+    			attr_dev(div1, "class", "tab tab-code svelte-1t9hhd1");
     			toggle_class(div1, "active", /*active*/ ctx[0] === "code");
-    			add_location(div1, file$3, 78, 4, 1446);
-    			attr_dev(div2, "class", "tabs svelte-11g4vum");
+    			add_location(div1, file$3, 87, 4, 1574);
+    			attr_dev(div2, "class", "tabs svelte-1t9hhd1");
     			toggle_class(div2, "border", /*active*/ ctx[0] === "view");
-    			add_location(div2, file$3, 67, 2, 1109);
-    			attr_dev(div3, "class", "slot slider svelte-11g4vum");
+    			add_location(div2, file$3, 76, 2, 1237);
+    			attr_dev(div3, "class", "slot slider svelte-1t9hhd1");
     			toggle_class(div3, "active", /*active*/ ctx[0] === "view");
-    			add_location(div3, file$3, 91, 4, 1749);
-    			attr_dev(div4, "class", "slot code svelte-11g4vum");
+    			add_location(div3, file$3, 100, 4, 1877);
+    			attr_dev(div4, "class", "slot code svelte-1t9hhd1");
     			toggle_class(div4, "active", /*active*/ ctx[0] === "code");
-    			add_location(div4, file$3, 99, 4, 1891);
-    			attr_dev(div5, "class", "slots svelte-11g4vum");
-    			add_location(div5, file$3, 90, 2, 1725);
-    			attr_dev(section, "class", "example svelte-11g4vum");
-    			add_location(section, file$3, 65, 0, 1080);
+    			add_location(div4, file$3, 112, 4, 2135);
+    			attr_dev(div5, "class", "slots svelte-1t9hhd1");
+    			add_location(div5, file$3, 99, 2, 1853);
+    			attr_dev(section, "class", "example svelte-1t9hhd1");
+    			add_location(section, file$3, 74, 0, 1208);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -4745,15 +4832,17 @@ var app = (function () {
     				slider_slot_or_fallback.m(div3, null);
     			}
 
-    			append_dev(div5, t2);
+    			append_dev(div3, t2);
+    			if (if_block) if_block.m(div3, null);
+    			append_dev(div5, t3);
     			append_dev(div5, div4);
     			mount_component(prism, div4, null);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(div0, "click", /*click_handler*/ ctx[2], false, false, false),
-    					listen_dev(div1, "click", /*click_handler_1*/ ctx[3], false, false, false)
+    					listen_dev(div0, "click", /*click_handler*/ ctx[3], false, false, false),
+    					listen_dev(div1, "click", /*click_handler_1*/ ctx[4], false, false, false)
     				];
 
     				mounted = true;
@@ -4773,9 +4862,26 @@ var app = (function () {
     			}
 
     			if (slider_slot) {
-    				if (slider_slot.p && dirty & /*$$scope*/ 16) {
-    					update_slot(slider_slot, slider_slot_template, ctx, /*$$scope*/ ctx[4], dirty, get_slider_slot_changes, get_slider_slot_context);
+    				if (slider_slot.p && dirty & /*$$scope*/ 64) {
+    					update_slot(slider_slot, slider_slot_template, ctx, /*$$scope*/ ctx[6], dirty, get_slider_slot_changes, get_slider_slot_context);
     				}
+    			} else {
+    				if (slider_slot_or_fallback && slider_slot_or_fallback.p && dirty & /*values*/ 2) {
+    					slider_slot_or_fallback.p(ctx, dirty);
+    				}
+    			}
+
+    			if (/*values*/ ctx[1]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+    				} else {
+    					if_block = create_if_block$3(ctx);
+    					if_block.c();
+    					if_block.m(div3, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
     			}
 
     			if (dirty & /*active*/ 1) {
@@ -4784,7 +4890,7 @@ var app = (function () {
 
     			const prism_changes = {};
 
-    			if (dirty & /*$$scope*/ 16) {
+    			if (dirty & /*$$scope*/ 64) {
     				prism_changes.$$scope = { dirty, ctx };
     			}
 
@@ -4808,6 +4914,7 @@ var app = (function () {
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(section);
     			if (slider_slot_or_fallback) slider_slot_or_fallback.d(detaching);
+    			if (if_block) if_block.d();
     			destroy_component(prism);
     			mounted = false;
     			run_all(dispose);
@@ -4827,7 +4934,8 @@ var app = (function () {
 
     function instance$3($$self, $$props, $$invalidate) {
     	let { active = "view" } = $$props;
-    	const writable_props = ["active"];
+    	let { values } = $$props;
+    	const writable_props = ["active", "values"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Example> was created with unknown prop '${key}'`);
@@ -4844,28 +4952,43 @@ var app = (function () {
     		$$invalidate(0, active = "code");
     	};
 
+    	function rangeslider_values_binding(value) {
+    		values = value;
+    		$$invalidate(1, values);
+    	}
+
     	$$self.$set = $$props => {
     		if ("active" in $$props) $$invalidate(0, active = $$props.active);
-    		if ("$$scope" in $$props) $$invalidate(4, $$scope = $$props.$$scope);
+    		if ("values" in $$props) $$invalidate(1, values = $$props.values);
+    		if ("$$scope" in $$props) $$invalidate(6, $$scope = $$props.$$scope);
     	};
 
-    	$$self.$capture_state = () => ({ Prism: Prism$1, RangeSlider, active });
+    	$$self.$capture_state = () => ({ Prism: Prism$1, RangeSlider, active, values });
 
     	$$self.$inject_state = $$props => {
     		if ("active" in $$props) $$invalidate(0, active = $$props.active);
+    		if ("values" in $$props) $$invalidate(1, values = $$props.values);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [active, $$slots, click_handler, click_handler_1, $$scope];
+    	return [
+    		active,
+    		values,
+    		$$slots,
+    		click_handler,
+    		click_handler_1,
+    		rangeslider_values_binding,
+    		$$scope
+    	];
     }
 
     class Example extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$3, create_fragment$3, safe_not_equal, { active: 0 });
+    		init(this, options, instance$3, create_fragment$3, safe_not_equal, { active: 0, values: 1 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -4873,6 +4996,13 @@ var app = (function () {
     			options,
     			id: create_fragment$3.name
     		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*values*/ ctx[1] === undefined && !("values" in props)) {
+    			console.warn("<Example> was created without expected prop 'values'");
+    		}
     	}
 
     	get active() {
@@ -4882,13 +5012,1529 @@ var app = (function () {
     	set active(value) {
     		throw new Error("<Example>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
+
+    	get values() {
+    		throw new Error("<Example>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set values(value) {
+    		throw new Error("<Example>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
     }
 
-    /* src/App.svelte generated by Svelte v3.24.0 */
-    const file$4 = "src/App.svelte";
+    /* src/Components/Options.svx generated by Svelte v3.24.0 */
 
-    // (37:4) <div slot="code">
-    function create_code_slot(ctx) {
+    const file$4 = "src/Components/Options.svx";
+
+    function create_fragment$4(ctx) {
+    	let div;
+    	let table;
+    	let thead;
+    	let tr0;
+    	let th0;
+    	let t1;
+    	let th1;
+    	let t3;
+    	let th2;
+    	let t5;
+    	let th3;
+    	let t6;
+    	let tbody;
+    	let tr1;
+    	let td0;
+    	let strong0;
+    	let t8;
+    	let td1;
+    	let code0;
+    	let t10;
+    	let td2;
+    	let code1;
+    	let t12;
+    	let td3;
+    	let t13;
+    	let em;
+    	let strong1;
+    	let t15;
+    	let code2;
+    	let t17;
+    	let t18;
+    	let t19;
+    	let tr2;
+    	let td4;
+    	let strong2;
+    	let t21;
+    	let td5;
+    	let code3;
+    	let t23;
+    	let td6;
+    	let code4;
+    	let t25;
+    	let td7;
+    	let t27;
+    	let tr3;
+    	let td8;
+    	let strong3;
+    	let t29;
+    	let td9;
+    	let code5;
+    	let t31;
+    	let td10;
+    	let code6;
+    	let t33;
+    	let td11;
+    	let t35;
+    	let tr4;
+    	let td12;
+    	let strong4;
+    	let t37;
+    	let td13;
+    	let code7;
+    	let t39;
+    	let td14;
+    	let code8;
+    	let t41;
+    	let td15;
+    	let t42;
+    	let code9;
+    	let t44;
+    	let t45;
+    	let tr5;
+    	let td16;
+    	let strong5;
+    	let t47;
+    	let td17;
+    	let code10;
+    	let t49;
+    	let code11;
+    	let t51;
+    	let td18;
+    	let code12;
+    	let t53;
+    	let td19;
+    	let t54;
+    	let code13;
+    	let t56;
+    	let code14;
+    	let t58;
+    	let t59;
+    	let tr6;
+    	let td20;
+    	let strong6;
+    	let t61;
+    	let td21;
+    	let code15;
+    	let t63;
+    	let td22;
+    	let code16;
+    	let t65;
+    	let td23;
+    	let t67;
+    	let tr7;
+    	let td24;
+    	let strong7;
+    	let t69;
+    	let td25;
+    	let code17;
+    	let t71;
+    	let td26;
+    	let code18;
+    	let t73;
+    	let td27;
+    	let t75;
+    	let tr8;
+    	let td28;
+    	let strong8;
+    	let t77;
+    	let td29;
+    	let code19;
+    	let t79;
+    	let td30;
+    	let code20;
+    	let t81;
+    	let td31;
+    	let t83;
+    	let tr9;
+    	let td32;
+    	let strong9;
+    	let t85;
+    	let td33;
+    	let code21;
+    	let t87;
+    	let td34;
+    	let code22;
+    	let t89;
+    	let code23;
+    	let t91;
+    	let code24;
+    	let t93;
+    	let td35;
+    	let t94;
+    	let code25;
+    	let t96;
+    	let code26;
+    	let t98;
+    	let t99;
+    	let tr10;
+    	let td36;
+    	let strong10;
+    	let t101;
+    	let td37;
+    	let code27;
+    	let t103;
+    	let code28;
+    	let t105;
+    	let td38;
+    	let code29;
+    	let t107;
+    	let td39;
+    	let t108;
+    	let code30;
+    	let t110;
+    	let t111;
+    	let tr11;
+    	let td40;
+    	let strong11;
+    	let t113;
+    	let td41;
+    	let code31;
+    	let t115;
+    	let code32;
+    	let t117;
+    	let td42;
+    	let code33;
+    	let t119;
+    	let td43;
+    	let t120;
+    	let code34;
+    	let t122;
+    	let t123;
+    	let tr12;
+    	let td44;
+    	let strong12;
+    	let t125;
+    	let td45;
+    	let code35;
+    	let t127;
+    	let code36;
+    	let t129;
+    	let td46;
+    	let code37;
+    	let t131;
+    	let td47;
+    	let t132;
+    	let code38;
+    	let t134;
+    	let t135;
+    	let tr13;
+    	let td48;
+    	let strong13;
+    	let t137;
+    	let td49;
+    	let code39;
+    	let t139;
+    	let td50;
+    	let code40;
+    	let t141;
+    	let td51;
+    	let t143;
+    	let tr14;
+    	let td52;
+    	let strong14;
+    	let t145;
+    	let td53;
+    	let code41;
+    	let t147;
+    	let td54;
+    	let code42;
+    	let t149;
+    	let td55;
+    	let t151;
+    	let tr15;
+    	let td56;
+    	let strong15;
+    	let t153;
+    	let td57;
+    	let code43;
+    	let t155;
+    	let td58;
+    	let code44;
+    	let t157;
+    	let td59;
+    	let t159;
+    	let tr16;
+    	let td60;
+    	let strong16;
+    	let t161;
+    	let td61;
+    	let code45;
+    	let t163;
+    	let td62;
+    	let code46;
+    	let t165;
+    	let td63;
+    	let t166;
+    	let code47;
+    	let t168;
+    	let t169;
+    	let tr17;
+    	let td64;
+    	let strong17;
+    	let t171;
+    	let td65;
+    	let code48;
+    	let t173;
+    	let td66;
+    	let code49;
+    	let t175;
+    	let td67;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			table = element("table");
+    			thead = element("thead");
+    			tr0 = element("tr");
+    			th0 = element("th");
+    			th0.textContent = "prop";
+    			t1 = space();
+    			th1 = element("th");
+    			th1.textContent = "type";
+    			t3 = space();
+    			th2 = element("th");
+    			th2.textContent = "default";
+    			t5 = space();
+    			th3 = element("th");
+    			t6 = space();
+    			tbody = element("tbody");
+    			tr1 = element("tr");
+    			td0 = element("td");
+    			strong0 = element("strong");
+    			strong0.textContent = "values";
+    			t8 = space();
+    			td1 = element("td");
+    			code0 = element("code");
+    			code0.textContent = "Array";
+    			t10 = space();
+    			td2 = element("td");
+    			code1 = element("code");
+    			code1.textContent = "[50]";
+    			t12 = space();
+    			td3 = element("td");
+    			t13 = text("Array of values to apply on the slider. Multiple values creates multiple handles. (");
+    			em = element("em");
+    			strong1 = element("strong");
+    			strong1.textContent = "note:";
+    			t15 = text(" A slider with ");
+    			code2 = element("code");
+    			code2.textContent = "range";
+    			t17 = text(" property set can only have two values max");
+    			t18 = text(")");
+    			t19 = space();
+    			tr2 = element("tr");
+    			td4 = element("td");
+    			strong2 = element("strong");
+    			strong2.textContent = "min";
+    			t21 = space();
+    			td5 = element("td");
+    			code3 = element("code");
+    			code3.textContent = "Number";
+    			t23 = space();
+    			td6 = element("td");
+    			code4 = element("code");
+    			code4.textContent = "0";
+    			t25 = space();
+    			td7 = element("td");
+    			td7.textContent = "Minimum value for the slider";
+    			t27 = space();
+    			tr3 = element("tr");
+    			td8 = element("td");
+    			strong3 = element("strong");
+    			strong3.textContent = "max";
+    			t29 = space();
+    			td9 = element("td");
+    			code5 = element("code");
+    			code5.textContent = "Number";
+    			t31 = space();
+    			td10 = element("td");
+    			code6 = element("code");
+    			code6.textContent = "100";
+    			t33 = space();
+    			td11 = element("td");
+    			td11.textContent = "Maximum value for the slider";
+    			t35 = space();
+    			tr4 = element("tr");
+    			td12 = element("td");
+    			strong4 = element("strong");
+    			strong4.textContent = "step";
+    			t37 = space();
+    			td13 = element("td");
+    			code7 = element("code");
+    			code7.textContent = "Number";
+    			t39 = space();
+    			td14 = element("td");
+    			code8 = element("code");
+    			code8.textContent = "1";
+    			t41 = space();
+    			td15 = element("td");
+    			t42 = text("Every ");
+    			code9 = element("code");
+    			code9.textContent = "nth";
+    			t44 = text(" value to allow handle to stop at");
+    			t45 = space();
+    			tr5 = element("tr");
+    			td16 = element("td");
+    			strong5 = element("strong");
+    			strong5.textContent = "range";
+    			t47 = space();
+    			td17 = element("td");
+    			code10 = element("code");
+    			code10.textContent = "Boolean";
+    			t49 = text("/");
+    			code11 = element("code");
+    			code11.textContent = "String";
+    			t51 = space();
+    			td18 = element("td");
+    			code12 = element("code");
+    			code12.textContent = "false";
+    			t53 = space();
+    			td19 = element("td");
+    			t54 = text("Whether to style as a range picker. Use ");
+    			code13 = element("code");
+    			code13.textContent = "range='min'";
+    			t56 = text(" or ");
+    			code14 = element("code");
+    			code14.textContent = "range='max'";
+    			t58 = text(" for min/max variants");
+    			t59 = space();
+    			tr6 = element("tr");
+    			td20 = element("td");
+    			strong6 = element("strong");
+    			strong6.textContent = "float";
+    			t61 = space();
+    			td21 = element("td");
+    			code15 = element("code");
+    			code15.textContent = "Boolean";
+    			t63 = space();
+    			td22 = element("td");
+    			code16 = element("code");
+    			code16.textContent = "false";
+    			t65 = space();
+    			td23 = element("td");
+    			td23.textContent = "Set true to add a floating label above focussed handles";
+    			t67 = space();
+    			tr7 = element("tr");
+    			td24 = element("td");
+    			strong7 = element("strong");
+    			strong7.textContent = "vertical";
+    			t69 = space();
+    			td25 = element("td");
+    			code17 = element("code");
+    			code17.textContent = "Boolean";
+    			t71 = space();
+    			td26 = element("td");
+    			code18 = element("code");
+    			code18.textContent = "false";
+    			t73 = space();
+    			td27 = element("td");
+    			td27.textContent = "Make the slider render vertically";
+    			t75 = space();
+    			tr8 = element("tr");
+    			td28 = element("td");
+    			strong8 = element("strong");
+    			strong8.textContent = "pips";
+    			t77 = space();
+    			td29 = element("td");
+    			code19 = element("code");
+    			code19.textContent = "Boolean";
+    			t79 = space();
+    			td30 = element("td");
+    			code20 = element("code");
+    			code20.textContent = "false";
+    			t81 = space();
+    			td31 = element("td");
+    			td31.textContent = "Whether to show pips/notches on the slider";
+    			t83 = space();
+    			tr9 = element("tr");
+    			td32 = element("td");
+    			strong9 = element("strong");
+    			strong9.textContent = "pipStep";
+    			t85 = space();
+    			td33 = element("td");
+    			code21 = element("code");
+    			code21.textContent = "Number";
+    			t87 = space();
+    			td34 = element("td");
+    			code22 = element("code");
+    			code22.textContent = "1";
+    			t89 = text("/");
+    			code23 = element("code");
+    			code23.textContent = "10";
+    			t91 = text("/");
+    			code24 = element("code");
+    			code24.textContent = "20";
+    			t93 = space();
+    			td35 = element("td");
+    			t94 = text("Every ");
+    			code25 = element("code");
+    			code25.textContent = "nth";
+    			t96 = text(" step to show a pip for. This has multiple defaults depending on ");
+    			code26 = element("code");
+    			code26.textContent = "values";
+    			t98 = text(" property");
+    			t99 = space();
+    			tr10 = element("tr");
+    			td36 = element("td");
+    			strong10 = element("strong");
+    			strong10.textContent = "first";
+    			t101 = space();
+    			td37 = element("td");
+    			code27 = element("code");
+    			code27.textContent = "Boolean";
+    			t103 = text("/");
+    			code28 = element("code");
+    			code28.textContent = "String";
+    			t105 = space();
+    			td38 = element("td");
+    			code29 = element("code");
+    			code29.textContent = "false";
+    			t107 = space();
+    			td39 = element("td");
+    			t108 = text("Whether to show a pip or label for the first value on slider. Use ");
+    			code30 = element("code");
+    			code30.textContent = "first='label'";
+    			t110 = text(" to show a label value");
+    			t111 = space();
+    			tr11 = element("tr");
+    			td40 = element("td");
+    			strong11 = element("strong");
+    			strong11.textContent = "last";
+    			t113 = space();
+    			td41 = element("td");
+    			code31 = element("code");
+    			code31.textContent = "Boolean";
+    			t115 = text("/");
+    			code32 = element("code");
+    			code32.textContent = "String";
+    			t117 = space();
+    			td42 = element("td");
+    			code33 = element("code");
+    			code33.textContent = "false";
+    			t119 = space();
+    			td43 = element("td");
+    			t120 = text("Whether to show a pip or label for the last value on slider. Use ");
+    			code34 = element("code");
+    			code34.textContent = "last='label'";
+    			t122 = text(" to show a label value");
+    			t123 = space();
+    			tr12 = element("tr");
+    			td44 = element("td");
+    			strong12 = element("strong");
+    			strong12.textContent = "rest";
+    			t125 = space();
+    			td45 = element("td");
+    			code35 = element("code");
+    			code35.textContent = "Boolean";
+    			t127 = text("/");
+    			code36 = element("code");
+    			code36.textContent = "String";
+    			t129 = space();
+    			td46 = element("td");
+    			code37 = element("code");
+    			code37.textContent = "false";
+    			t131 = space();
+    			td47 = element("td");
+    			t132 = text("Whether to show a pip or label for the all other values. Use ");
+    			code38 = element("code");
+    			code38.textContent = "rest='label'";
+    			t134 = text(" to show a label value");
+    			t135 = space();
+    			tr13 = element("tr");
+    			td48 = element("td");
+    			strong13 = element("strong");
+    			strong13.textContent = "prefix";
+    			t137 = space();
+    			td49 = element("td");
+    			code39 = element("code");
+    			code39.textContent = "String";
+    			t139 = space();
+    			td50 = element("td");
+    			code40 = element("code");
+    			code40.textContent = "\"\"";
+    			t141 = space();
+    			td51 = element("td");
+    			td51.textContent = "A string to prefix to all displayed values";
+    			t143 = space();
+    			tr14 = element("tr");
+    			td52 = element("td");
+    			strong14 = element("strong");
+    			strong14.textContent = "suffix";
+    			t145 = space();
+    			td53 = element("td");
+    			code41 = element("code");
+    			code41.textContent = "String";
+    			t147 = space();
+    			td54 = element("td");
+    			code42 = element("code");
+    			code42.textContent = "\"\"";
+    			t149 = space();
+    			td55 = element("td");
+    			td55.textContent = "A string to suffix to all displayed values";
+    			t151 = space();
+    			tr15 = element("tr");
+    			td56 = element("td");
+    			strong15 = element("strong");
+    			strong15.textContent = "formatter";
+    			t153 = space();
+    			td57 = element("td");
+    			code43 = element("code");
+    			code43.textContent = "Function";
+    			t155 = space();
+    			td58 = element("td");
+    			code44 = element("code");
+    			code44.textContent = "(v) => v";
+    			t157 = space();
+    			td59 = element("td");
+    			td59.textContent = "A function to re-format values before they are displayed";
+    			t159 = space();
+    			tr16 = element("tr");
+    			td60 = element("td");
+    			strong16 = element("strong");
+    			strong16.textContent = "handleFormatter";
+    			t161 = space();
+    			td61 = element("td");
+    			code45 = element("code");
+    			code45.textContent = "Function";
+    			t163 = space();
+    			td62 = element("td");
+    			code46 = element("code");
+    			code46.textContent = "formatter";
+    			t165 = space();
+    			td63 = element("td");
+    			t166 = text("A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the ");
+    			code47 = element("code");
+    			code47.textContent = "formatter";
+    			t168 = text(" property");
+    			t169 = space();
+    			tr17 = element("tr");
+    			td64 = element("td");
+    			strong17 = element("strong");
+    			strong17.textContent = "springValues";
+    			t171 = space();
+    			td65 = element("td");
+    			code48 = element("code");
+    			code48.textContent = "Object";
+    			t173 = space();
+    			td66 = element("td");
+    			code49 = element("code");
+    			code49.textContent = "{ stiffness: 0.15, damping: 0.4 }";
+    			t175 = space();
+    			td67 = element("td");
+    			td67.textContent = "Svelte spring physics object to change the behaviour of the handle when moving";
+    			attr_dev(th0, "align", "left");
+    			attr_dev(th0, "class", "svelte-1bf8eo7");
+    			add_location(th0, file$4, 4, 0, 49);
+    			attr_dev(th1, "align", "left");
+    			attr_dev(th1, "class", "svelte-1bf8eo7");
+    			add_location(th1, file$4, 5, 0, 76);
+    			attr_dev(th2, "align", "left");
+    			attr_dev(th2, "class", "svelte-1bf8eo7");
+    			add_location(th2, file$4, 6, 0, 103);
+    			attr_dev(th3, "class", "svelte-1bf8eo7");
+    			add_location(th3, file$4, 7, 0, 133);
+    			attr_dev(tr0, "class", "svelte-1bf8eo7");
+    			add_location(tr0, file$4, 3, 0, 44);
+    			attr_dev(thead, "class", "svelte-1bf8eo7");
+    			add_location(thead, file$4, 2, 0, 36);
+    			attr_dev(strong0, "class", "svelte-1bf8eo7");
+    			add_location(strong0, file$4, 12, 17, 188);
+    			attr_dev(td0, "align", "left");
+    			attr_dev(td0, "class", "svelte-1bf8eo7");
+    			add_location(td0, file$4, 12, 0, 171);
+    			add_location(code0, file$4, 13, 17, 234);
+    			attr_dev(td1, "align", "left");
+    			attr_dev(td1, "class", "svelte-1bf8eo7");
+    			add_location(td1, file$4, 13, 0, 217);
+    			add_location(code1, file$4, 14, 17, 275);
+    			attr_dev(td2, "align", "left");
+    			attr_dev(td2, "class", "svelte-1bf8eo7");
+    			add_location(td2, file$4, 14, 0, 258);
+    			attr_dev(strong1, "class", "svelte-1bf8eo7");
+    			add_location(strong1, file$4, 15, 91, 389);
+    			add_location(code2, file$4, 15, 128, 426);
+    			add_location(em, file$4, 15, 87, 385);
+    			attr_dev(td3, "class", "svelte-1bf8eo7");
+    			add_location(td3, file$4, 15, 0, 298);
+    			attr_dev(tr1, "class", "svelte-1bf8eo7");
+    			add_location(tr1, file$4, 11, 0, 166);
+    			attr_dev(strong2, "class", "svelte-1bf8eo7");
+    			add_location(strong2, file$4, 18, 17, 526);
+    			attr_dev(td4, "align", "left");
+    			attr_dev(td4, "class", "svelte-1bf8eo7");
+    			add_location(td4, file$4, 18, 0, 509);
+    			add_location(code3, file$4, 19, 17, 569);
+    			attr_dev(td5, "align", "left");
+    			attr_dev(td5, "class", "svelte-1bf8eo7");
+    			add_location(td5, file$4, 19, 0, 552);
+    			add_location(code4, file$4, 20, 17, 611);
+    			attr_dev(td6, "align", "left");
+    			attr_dev(td6, "class", "svelte-1bf8eo7");
+    			add_location(td6, file$4, 20, 0, 594);
+    			attr_dev(td7, "class", "svelte-1bf8eo7");
+    			add_location(td7, file$4, 21, 0, 631);
+    			attr_dev(tr2, "class", "svelte-1bf8eo7");
+    			add_location(tr2, file$4, 17, 0, 504);
+    			attr_dev(strong3, "class", "svelte-1bf8eo7");
+    			add_location(strong3, file$4, 24, 17, 697);
+    			attr_dev(td8, "align", "left");
+    			attr_dev(td8, "class", "svelte-1bf8eo7");
+    			add_location(td8, file$4, 24, 0, 680);
+    			add_location(code5, file$4, 25, 17, 740);
+    			attr_dev(td9, "align", "left");
+    			attr_dev(td9, "class", "svelte-1bf8eo7");
+    			add_location(td9, file$4, 25, 0, 723);
+    			add_location(code6, file$4, 26, 17, 782);
+    			attr_dev(td10, "align", "left");
+    			attr_dev(td10, "class", "svelte-1bf8eo7");
+    			add_location(td10, file$4, 26, 0, 765);
+    			attr_dev(td11, "class", "svelte-1bf8eo7");
+    			add_location(td11, file$4, 27, 0, 804);
+    			attr_dev(tr3, "class", "svelte-1bf8eo7");
+    			add_location(tr3, file$4, 23, 0, 675);
+    			attr_dev(strong4, "class", "svelte-1bf8eo7");
+    			add_location(strong4, file$4, 30, 17, 870);
+    			attr_dev(td12, "align", "left");
+    			attr_dev(td12, "class", "svelte-1bf8eo7");
+    			add_location(td12, file$4, 30, 0, 853);
+    			add_location(code7, file$4, 31, 17, 914);
+    			attr_dev(td13, "align", "left");
+    			attr_dev(td13, "class", "svelte-1bf8eo7");
+    			add_location(td13, file$4, 31, 0, 897);
+    			add_location(code8, file$4, 32, 17, 956);
+    			attr_dev(td14, "align", "left");
+    			attr_dev(td14, "class", "svelte-1bf8eo7");
+    			add_location(td14, file$4, 32, 0, 939);
+    			add_location(code9, file$4, 33, 10, 986);
+    			attr_dev(td15, "class", "svelte-1bf8eo7");
+    			add_location(td15, file$4, 33, 0, 976);
+    			attr_dev(tr4, "class", "svelte-1bf8eo7");
+    			add_location(tr4, file$4, 29, 0, 848);
+    			attr_dev(strong5, "class", "svelte-1bf8eo7");
+    			add_location(strong5, file$4, 36, 17, 1069);
+    			attr_dev(td16, "align", "left");
+    			attr_dev(td16, "class", "svelte-1bf8eo7");
+    			add_location(td16, file$4, 36, 0, 1052);
+    			add_location(code10, file$4, 37, 17, 1114);
+    			add_location(code11, file$4, 37, 38, 1135);
+    			attr_dev(td17, "align", "left");
+    			attr_dev(td17, "class", "svelte-1bf8eo7");
+    			add_location(td17, file$4, 37, 0, 1097);
+    			add_location(code12, file$4, 38, 17, 1177);
+    			attr_dev(td18, "align", "left");
+    			attr_dev(td18, "class", "svelte-1bf8eo7");
+    			add_location(td18, file$4, 38, 0, 1160);
+    			add_location(code13, file$4, 39, 44, 1245);
+    			add_location(code14, file$4, 39, 72, 1273);
+    			attr_dev(td19, "class", "svelte-1bf8eo7");
+    			add_location(td19, file$4, 39, 0, 1201);
+    			attr_dev(tr5, "class", "svelte-1bf8eo7");
+    			add_location(tr5, file$4, 35, 0, 1047);
+    			attr_dev(strong6, "class", "svelte-1bf8eo7");
+    			add_location(strong6, file$4, 42, 17, 1352);
+    			attr_dev(td20, "align", "left");
+    			attr_dev(td20, "class", "svelte-1bf8eo7");
+    			add_location(td20, file$4, 42, 0, 1335);
+    			add_location(code15, file$4, 43, 17, 1397);
+    			attr_dev(td21, "align", "left");
+    			attr_dev(td21, "class", "svelte-1bf8eo7");
+    			add_location(td21, file$4, 43, 0, 1380);
+    			add_location(code16, file$4, 44, 17, 1440);
+    			attr_dev(td22, "align", "left");
+    			attr_dev(td22, "class", "svelte-1bf8eo7");
+    			add_location(td22, file$4, 44, 0, 1423);
+    			attr_dev(td23, "class", "svelte-1bf8eo7");
+    			add_location(td23, file$4, 45, 0, 1464);
+    			attr_dev(tr6, "class", "svelte-1bf8eo7");
+    			add_location(tr6, file$4, 41, 0, 1330);
+    			attr_dev(strong7, "class", "svelte-1bf8eo7");
+    			add_location(strong7, file$4, 48, 17, 1557);
+    			attr_dev(td24, "align", "left");
+    			attr_dev(td24, "class", "svelte-1bf8eo7");
+    			add_location(td24, file$4, 48, 0, 1540);
+    			add_location(code17, file$4, 49, 17, 1605);
+    			attr_dev(td25, "align", "left");
+    			attr_dev(td25, "class", "svelte-1bf8eo7");
+    			add_location(td25, file$4, 49, 0, 1588);
+    			add_location(code18, file$4, 50, 17, 1648);
+    			attr_dev(td26, "align", "left");
+    			attr_dev(td26, "class", "svelte-1bf8eo7");
+    			add_location(td26, file$4, 50, 0, 1631);
+    			attr_dev(td27, "class", "svelte-1bf8eo7");
+    			add_location(td27, file$4, 51, 0, 1672);
+    			attr_dev(tr7, "class", "svelte-1bf8eo7");
+    			add_location(tr7, file$4, 47, 0, 1535);
+    			attr_dev(strong8, "class", "svelte-1bf8eo7");
+    			add_location(strong8, file$4, 54, 17, 1743);
+    			attr_dev(td28, "align", "left");
+    			attr_dev(td28, "class", "svelte-1bf8eo7");
+    			add_location(td28, file$4, 54, 0, 1726);
+    			add_location(code19, file$4, 55, 17, 1787);
+    			attr_dev(td29, "align", "left");
+    			attr_dev(td29, "class", "svelte-1bf8eo7");
+    			add_location(td29, file$4, 55, 0, 1770);
+    			add_location(code20, file$4, 56, 17, 1830);
+    			attr_dev(td30, "align", "left");
+    			attr_dev(td30, "class", "svelte-1bf8eo7");
+    			add_location(td30, file$4, 56, 0, 1813);
+    			attr_dev(td31, "class", "svelte-1bf8eo7");
+    			add_location(td31, file$4, 57, 0, 1854);
+    			attr_dev(tr8, "class", "svelte-1bf8eo7");
+    			add_location(tr8, file$4, 53, 0, 1721);
+    			attr_dev(strong9, "class", "svelte-1bf8eo7");
+    			add_location(strong9, file$4, 60, 17, 1934);
+    			attr_dev(td32, "align", "left");
+    			attr_dev(td32, "class", "svelte-1bf8eo7");
+    			add_location(td32, file$4, 60, 0, 1917);
+    			add_location(code21, file$4, 61, 17, 1981);
+    			attr_dev(td33, "align", "left");
+    			attr_dev(td33, "class", "svelte-1bf8eo7");
+    			add_location(td33, file$4, 61, 0, 1964);
+    			add_location(code22, file$4, 62, 17, 2023);
+    			add_location(code23, file$4, 62, 32, 2038);
+    			add_location(code24, file$4, 62, 48, 2054);
+    			attr_dev(td34, "align", "left");
+    			attr_dev(td34, "class", "svelte-1bf8eo7");
+    			add_location(td34, file$4, 62, 0, 2006);
+    			add_location(code25, file$4, 63, 10, 2085);
+    			add_location(code26, file$4, 63, 91, 2166);
+    			attr_dev(td35, "class", "svelte-1bf8eo7");
+    			add_location(td35, file$4, 63, 0, 2075);
+    			attr_dev(tr9, "class", "svelte-1bf8eo7");
+    			add_location(tr9, file$4, 59, 0, 1912);
+    			attr_dev(strong10, "class", "svelte-1bf8eo7");
+    			add_location(strong10, file$4, 66, 17, 2228);
+    			attr_dev(td36, "align", "left");
+    			attr_dev(td36, "class", "svelte-1bf8eo7");
+    			add_location(td36, file$4, 66, 0, 2211);
+    			add_location(code27, file$4, 67, 17, 2273);
+    			add_location(code28, file$4, 67, 38, 2294);
+    			attr_dev(td37, "align", "left");
+    			attr_dev(td37, "class", "svelte-1bf8eo7");
+    			add_location(td37, file$4, 67, 0, 2256);
+    			add_location(code29, file$4, 68, 17, 2336);
+    			attr_dev(td38, "align", "left");
+    			attr_dev(td38, "class", "svelte-1bf8eo7");
+    			add_location(td38, file$4, 68, 0, 2319);
+    			add_location(code30, file$4, 69, 70, 2430);
+    			attr_dev(td39, "class", "svelte-1bf8eo7");
+    			add_location(td39, file$4, 69, 0, 2360);
+    			attr_dev(tr10, "class", "svelte-1bf8eo7");
+    			add_location(tr10, file$4, 65, 0, 2206);
+    			attr_dev(strong11, "class", "svelte-1bf8eo7");
+    			add_location(strong11, file$4, 72, 17, 2512);
+    			attr_dev(td40, "align", "left");
+    			attr_dev(td40, "class", "svelte-1bf8eo7");
+    			add_location(td40, file$4, 72, 0, 2495);
+    			add_location(code31, file$4, 73, 17, 2556);
+    			add_location(code32, file$4, 73, 38, 2577);
+    			attr_dev(td41, "align", "left");
+    			attr_dev(td41, "class", "svelte-1bf8eo7");
+    			add_location(td41, file$4, 73, 0, 2539);
+    			add_location(code33, file$4, 74, 17, 2619);
+    			attr_dev(td42, "align", "left");
+    			attr_dev(td42, "class", "svelte-1bf8eo7");
+    			add_location(td42, file$4, 74, 0, 2602);
+    			add_location(code34, file$4, 75, 69, 2712);
+    			attr_dev(td43, "class", "svelte-1bf8eo7");
+    			add_location(td43, file$4, 75, 0, 2643);
+    			attr_dev(tr11, "class", "svelte-1bf8eo7");
+    			add_location(tr11, file$4, 71, 0, 2490);
+    			attr_dev(strong12, "class", "svelte-1bf8eo7");
+    			add_location(strong12, file$4, 78, 17, 2793);
+    			attr_dev(td44, "align", "left");
+    			attr_dev(td44, "class", "svelte-1bf8eo7");
+    			add_location(td44, file$4, 78, 0, 2776);
+    			add_location(code35, file$4, 79, 17, 2837);
+    			add_location(code36, file$4, 79, 38, 2858);
+    			attr_dev(td45, "align", "left");
+    			attr_dev(td45, "class", "svelte-1bf8eo7");
+    			add_location(td45, file$4, 79, 0, 2820);
+    			add_location(code37, file$4, 80, 17, 2900);
+    			attr_dev(td46, "align", "left");
+    			attr_dev(td46, "class", "svelte-1bf8eo7");
+    			add_location(td46, file$4, 80, 0, 2883);
+    			add_location(code38, file$4, 81, 65, 2989);
+    			attr_dev(td47, "class", "svelte-1bf8eo7");
+    			add_location(td47, file$4, 81, 0, 2924);
+    			attr_dev(tr12, "class", "svelte-1bf8eo7");
+    			add_location(tr12, file$4, 77, 0, 2771);
+    			attr_dev(strong13, "class", "svelte-1bf8eo7");
+    			add_location(strong13, file$4, 84, 17, 3070);
+    			attr_dev(td48, "align", "left");
+    			attr_dev(td48, "class", "svelte-1bf8eo7");
+    			add_location(td48, file$4, 84, 0, 3053);
+    			add_location(code39, file$4, 85, 17, 3116);
+    			attr_dev(td49, "align", "left");
+    			attr_dev(td49, "class", "svelte-1bf8eo7");
+    			add_location(td49, file$4, 85, 0, 3099);
+    			add_location(code40, file$4, 86, 17, 3158);
+    			attr_dev(td50, "align", "left");
+    			attr_dev(td50, "class", "svelte-1bf8eo7");
+    			add_location(td50, file$4, 86, 0, 3141);
+    			attr_dev(td51, "class", "svelte-1bf8eo7");
+    			add_location(td51, file$4, 87, 0, 3179);
+    			attr_dev(tr13, "class", "svelte-1bf8eo7");
+    			add_location(tr13, file$4, 83, 0, 3048);
+    			attr_dev(strong14, "class", "svelte-1bf8eo7");
+    			add_location(strong14, file$4, 90, 17, 3259);
+    			attr_dev(td52, "align", "left");
+    			attr_dev(td52, "class", "svelte-1bf8eo7");
+    			add_location(td52, file$4, 90, 0, 3242);
+    			add_location(code41, file$4, 91, 17, 3305);
+    			attr_dev(td53, "align", "left");
+    			attr_dev(td53, "class", "svelte-1bf8eo7");
+    			add_location(td53, file$4, 91, 0, 3288);
+    			add_location(code42, file$4, 92, 17, 3347);
+    			attr_dev(td54, "align", "left");
+    			attr_dev(td54, "class", "svelte-1bf8eo7");
+    			add_location(td54, file$4, 92, 0, 3330);
+    			attr_dev(td55, "class", "svelte-1bf8eo7");
+    			add_location(td55, file$4, 93, 0, 3368);
+    			attr_dev(tr14, "class", "svelte-1bf8eo7");
+    			add_location(tr14, file$4, 89, 0, 3237);
+    			attr_dev(strong15, "class", "svelte-1bf8eo7");
+    			add_location(strong15, file$4, 96, 17, 3448);
+    			attr_dev(td56, "align", "left");
+    			attr_dev(td56, "class", "svelte-1bf8eo7");
+    			add_location(td56, file$4, 96, 0, 3431);
+    			add_location(code43, file$4, 97, 17, 3497);
+    			attr_dev(td57, "align", "left");
+    			attr_dev(td57, "class", "svelte-1bf8eo7");
+    			add_location(td57, file$4, 97, 0, 3480);
+    			add_location(code44, file$4, 98, 17, 3541);
+    			attr_dev(td58, "align", "left");
+    			attr_dev(td58, "class", "svelte-1bf8eo7");
+    			add_location(td58, file$4, 98, 0, 3524);
+    			attr_dev(td59, "class", "svelte-1bf8eo7");
+    			add_location(td59, file$4, 99, 0, 3571);
+    			attr_dev(tr15, "class", "svelte-1bf8eo7");
+    			add_location(tr15, file$4, 95, 0, 3426);
+    			attr_dev(strong16, "class", "svelte-1bf8eo7");
+    			add_location(strong16, file$4, 102, 17, 3665);
+    			attr_dev(td60, "align", "left");
+    			attr_dev(td60, "class", "svelte-1bf8eo7");
+    			add_location(td60, file$4, 102, 0, 3648);
+    			add_location(code45, file$4, 103, 17, 3720);
+    			attr_dev(td61, "align", "left");
+    			attr_dev(td61, "class", "svelte-1bf8eo7");
+    			add_location(td61, file$4, 103, 0, 3703);
+    			add_location(code46, file$4, 104, 17, 3764);
+    			attr_dev(td62, "align", "left");
+    			attr_dev(td62, "class", "svelte-1bf8eo7");
+    			add_location(td62, file$4, 104, 0, 3747);
+    			add_location(code47, file$4, 105, 125, 3917);
+    			attr_dev(td63, "class", "svelte-1bf8eo7");
+    			add_location(td63, file$4, 105, 0, 3792);
+    			attr_dev(tr16, "class", "svelte-1bf8eo7");
+    			add_location(tr16, file$4, 101, 0, 3643);
+    			attr_dev(strong17, "class", "svelte-1bf8eo7");
+    			add_location(strong17, file$4, 108, 17, 3982);
+    			attr_dev(td64, "align", "left");
+    			attr_dev(td64, "class", "svelte-1bf8eo7");
+    			add_location(td64, file$4, 108, 0, 3965);
+    			add_location(code48, file$4, 109, 17, 4034);
+    			attr_dev(td65, "align", "left");
+    			attr_dev(td65, "class", "svelte-1bf8eo7");
+    			add_location(td65, file$4, 109, 0, 4017);
+    			add_location(code49, file$4, 110, 17, 4076);
+    			attr_dev(td66, "align", "left");
+    			attr_dev(td66, "class", "svelte-1bf8eo7");
+    			add_location(td66, file$4, 110, 0, 4059);
+    			attr_dev(td67, "class", "svelte-1bf8eo7");
+    			add_location(td67, file$4, 111, 0, 4138);
+    			attr_dev(tr17, "class", "svelte-1bf8eo7");
+    			add_location(tr17, file$4, 107, 0, 3960);
+    			attr_dev(tbody, "class", "svelte-1bf8eo7");
+    			add_location(tbody, file$4, 10, 0, 158);
+    			attr_dev(table, "class", "svelte-1bf8eo7");
+    			add_location(table, file$4, 1, 0, 28);
+    			attr_dev(div, "class", "table-wrapper svelte-1bf8eo7");
+    			add_location(div, file$4, 0, 0, 0);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, table);
+    			append_dev(table, thead);
+    			append_dev(thead, tr0);
+    			append_dev(tr0, th0);
+    			append_dev(tr0, t1);
+    			append_dev(tr0, th1);
+    			append_dev(tr0, t3);
+    			append_dev(tr0, th2);
+    			append_dev(tr0, t5);
+    			append_dev(tr0, th3);
+    			append_dev(table, t6);
+    			append_dev(table, tbody);
+    			append_dev(tbody, tr1);
+    			append_dev(tr1, td0);
+    			append_dev(td0, strong0);
+    			append_dev(tr1, t8);
+    			append_dev(tr1, td1);
+    			append_dev(td1, code0);
+    			append_dev(tr1, t10);
+    			append_dev(tr1, td2);
+    			append_dev(td2, code1);
+    			append_dev(tr1, t12);
+    			append_dev(tr1, td3);
+    			append_dev(td3, t13);
+    			append_dev(td3, em);
+    			append_dev(em, strong1);
+    			append_dev(em, t15);
+    			append_dev(em, code2);
+    			append_dev(em, t17);
+    			append_dev(td3, t18);
+    			append_dev(tbody, t19);
+    			append_dev(tbody, tr2);
+    			append_dev(tr2, td4);
+    			append_dev(td4, strong2);
+    			append_dev(tr2, t21);
+    			append_dev(tr2, td5);
+    			append_dev(td5, code3);
+    			append_dev(tr2, t23);
+    			append_dev(tr2, td6);
+    			append_dev(td6, code4);
+    			append_dev(tr2, t25);
+    			append_dev(tr2, td7);
+    			append_dev(tbody, t27);
+    			append_dev(tbody, tr3);
+    			append_dev(tr3, td8);
+    			append_dev(td8, strong3);
+    			append_dev(tr3, t29);
+    			append_dev(tr3, td9);
+    			append_dev(td9, code5);
+    			append_dev(tr3, t31);
+    			append_dev(tr3, td10);
+    			append_dev(td10, code6);
+    			append_dev(tr3, t33);
+    			append_dev(tr3, td11);
+    			append_dev(tbody, t35);
+    			append_dev(tbody, tr4);
+    			append_dev(tr4, td12);
+    			append_dev(td12, strong4);
+    			append_dev(tr4, t37);
+    			append_dev(tr4, td13);
+    			append_dev(td13, code7);
+    			append_dev(tr4, t39);
+    			append_dev(tr4, td14);
+    			append_dev(td14, code8);
+    			append_dev(tr4, t41);
+    			append_dev(tr4, td15);
+    			append_dev(td15, t42);
+    			append_dev(td15, code9);
+    			append_dev(td15, t44);
+    			append_dev(tbody, t45);
+    			append_dev(tbody, tr5);
+    			append_dev(tr5, td16);
+    			append_dev(td16, strong5);
+    			append_dev(tr5, t47);
+    			append_dev(tr5, td17);
+    			append_dev(td17, code10);
+    			append_dev(td17, t49);
+    			append_dev(td17, code11);
+    			append_dev(tr5, t51);
+    			append_dev(tr5, td18);
+    			append_dev(td18, code12);
+    			append_dev(tr5, t53);
+    			append_dev(tr5, td19);
+    			append_dev(td19, t54);
+    			append_dev(td19, code13);
+    			append_dev(td19, t56);
+    			append_dev(td19, code14);
+    			append_dev(td19, t58);
+    			append_dev(tbody, t59);
+    			append_dev(tbody, tr6);
+    			append_dev(tr6, td20);
+    			append_dev(td20, strong6);
+    			append_dev(tr6, t61);
+    			append_dev(tr6, td21);
+    			append_dev(td21, code15);
+    			append_dev(tr6, t63);
+    			append_dev(tr6, td22);
+    			append_dev(td22, code16);
+    			append_dev(tr6, t65);
+    			append_dev(tr6, td23);
+    			append_dev(tbody, t67);
+    			append_dev(tbody, tr7);
+    			append_dev(tr7, td24);
+    			append_dev(td24, strong7);
+    			append_dev(tr7, t69);
+    			append_dev(tr7, td25);
+    			append_dev(td25, code17);
+    			append_dev(tr7, t71);
+    			append_dev(tr7, td26);
+    			append_dev(td26, code18);
+    			append_dev(tr7, t73);
+    			append_dev(tr7, td27);
+    			append_dev(tbody, t75);
+    			append_dev(tbody, tr8);
+    			append_dev(tr8, td28);
+    			append_dev(td28, strong8);
+    			append_dev(tr8, t77);
+    			append_dev(tr8, td29);
+    			append_dev(td29, code19);
+    			append_dev(tr8, t79);
+    			append_dev(tr8, td30);
+    			append_dev(td30, code20);
+    			append_dev(tr8, t81);
+    			append_dev(tr8, td31);
+    			append_dev(tbody, t83);
+    			append_dev(tbody, tr9);
+    			append_dev(tr9, td32);
+    			append_dev(td32, strong9);
+    			append_dev(tr9, t85);
+    			append_dev(tr9, td33);
+    			append_dev(td33, code21);
+    			append_dev(tr9, t87);
+    			append_dev(tr9, td34);
+    			append_dev(td34, code22);
+    			append_dev(td34, t89);
+    			append_dev(td34, code23);
+    			append_dev(td34, t91);
+    			append_dev(td34, code24);
+    			append_dev(tr9, t93);
+    			append_dev(tr9, td35);
+    			append_dev(td35, t94);
+    			append_dev(td35, code25);
+    			append_dev(td35, t96);
+    			append_dev(td35, code26);
+    			append_dev(td35, t98);
+    			append_dev(tbody, t99);
+    			append_dev(tbody, tr10);
+    			append_dev(tr10, td36);
+    			append_dev(td36, strong10);
+    			append_dev(tr10, t101);
+    			append_dev(tr10, td37);
+    			append_dev(td37, code27);
+    			append_dev(td37, t103);
+    			append_dev(td37, code28);
+    			append_dev(tr10, t105);
+    			append_dev(tr10, td38);
+    			append_dev(td38, code29);
+    			append_dev(tr10, t107);
+    			append_dev(tr10, td39);
+    			append_dev(td39, t108);
+    			append_dev(td39, code30);
+    			append_dev(td39, t110);
+    			append_dev(tbody, t111);
+    			append_dev(tbody, tr11);
+    			append_dev(tr11, td40);
+    			append_dev(td40, strong11);
+    			append_dev(tr11, t113);
+    			append_dev(tr11, td41);
+    			append_dev(td41, code31);
+    			append_dev(td41, t115);
+    			append_dev(td41, code32);
+    			append_dev(tr11, t117);
+    			append_dev(tr11, td42);
+    			append_dev(td42, code33);
+    			append_dev(tr11, t119);
+    			append_dev(tr11, td43);
+    			append_dev(td43, t120);
+    			append_dev(td43, code34);
+    			append_dev(td43, t122);
+    			append_dev(tbody, t123);
+    			append_dev(tbody, tr12);
+    			append_dev(tr12, td44);
+    			append_dev(td44, strong12);
+    			append_dev(tr12, t125);
+    			append_dev(tr12, td45);
+    			append_dev(td45, code35);
+    			append_dev(td45, t127);
+    			append_dev(td45, code36);
+    			append_dev(tr12, t129);
+    			append_dev(tr12, td46);
+    			append_dev(td46, code37);
+    			append_dev(tr12, t131);
+    			append_dev(tr12, td47);
+    			append_dev(td47, t132);
+    			append_dev(td47, code38);
+    			append_dev(td47, t134);
+    			append_dev(tbody, t135);
+    			append_dev(tbody, tr13);
+    			append_dev(tr13, td48);
+    			append_dev(td48, strong13);
+    			append_dev(tr13, t137);
+    			append_dev(tr13, td49);
+    			append_dev(td49, code39);
+    			append_dev(tr13, t139);
+    			append_dev(tr13, td50);
+    			append_dev(td50, code40);
+    			append_dev(tr13, t141);
+    			append_dev(tr13, td51);
+    			append_dev(tbody, t143);
+    			append_dev(tbody, tr14);
+    			append_dev(tr14, td52);
+    			append_dev(td52, strong14);
+    			append_dev(tr14, t145);
+    			append_dev(tr14, td53);
+    			append_dev(td53, code41);
+    			append_dev(tr14, t147);
+    			append_dev(tr14, td54);
+    			append_dev(td54, code42);
+    			append_dev(tr14, t149);
+    			append_dev(tr14, td55);
+    			append_dev(tbody, t151);
+    			append_dev(tbody, tr15);
+    			append_dev(tr15, td56);
+    			append_dev(td56, strong15);
+    			append_dev(tr15, t153);
+    			append_dev(tr15, td57);
+    			append_dev(td57, code43);
+    			append_dev(tr15, t155);
+    			append_dev(tr15, td58);
+    			append_dev(td58, code44);
+    			append_dev(tr15, t157);
+    			append_dev(tr15, td59);
+    			append_dev(tbody, t159);
+    			append_dev(tbody, tr16);
+    			append_dev(tr16, td60);
+    			append_dev(td60, strong16);
+    			append_dev(tr16, t161);
+    			append_dev(tr16, td61);
+    			append_dev(td61, code45);
+    			append_dev(tr16, t163);
+    			append_dev(tr16, td62);
+    			append_dev(td62, code46);
+    			append_dev(tr16, t165);
+    			append_dev(tr16, td63);
+    			append_dev(td63, t166);
+    			append_dev(td63, code47);
+    			append_dev(td63, t168);
+    			append_dev(tbody, t169);
+    			append_dev(tbody, tr17);
+    			append_dev(tr17, td64);
+    			append_dev(td64, strong17);
+    			append_dev(tr17, t171);
+    			append_dev(tr17, td65);
+    			append_dev(td65, code48);
+    			append_dev(tr17, t173);
+    			append_dev(tr17, td66);
+    			append_dev(td66, code49);
+    			append_dev(tr17, t175);
+    			append_dev(tr17, td67);
+    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$4.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$4($$self, $$props) {
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Options> was created with unknown prop '${key}'`);
+    	});
+
+    	let { $$slots = {}, $$scope } = $$props;
+    	validate_slots("Options", $$slots, []);
+    	return [];
+    }
+
+    class Options extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$4, create_fragment$4, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Options",
+    			options,
+    			id: create_fragment$4.name
+    		});
+    	}
+    }
+
+    /* src/Docs.svx generated by Svelte v3.24.0 */
+    const file$5 = "src/Docs.svx";
+
+    // (52:2) <div slot="code">
+    function create_code_slot_5(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = `${`<RangeSlider min={-50} max={200} values={[0]} />`}`;
+    			attr_dev(div, "slot", "code");
+    			add_location(div, file$5, 51, 2, 1435);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_code_slot_5.name,
+    		type: "slot",
+    		source: "(52:2) <div slot=\\\"code\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (53:2) <div slot="slider">
+    function create_slider_slot_5(ctx) {
+    	let div;
+    	let rangeslider;
+    	let updating_values;
+    	let current;
+
+    	function rangeslider_values_binding(value) {
+    		/*rangeslider_values_binding*/ ctx[2].call(null, value);
+    	}
+
+    	let rangeslider_props = { min: -50, max: 200 };
+
+    	if (/*values1*/ ctx[0] !== void 0) {
+    		rangeslider_props.values = /*values1*/ ctx[0];
+    	}
+
+    	rangeslider = new RangeSlider({ props: rangeslider_props, $$inline: true });
+    	binding_callbacks.push(() => bind(rangeslider, "values", rangeslider_values_binding));
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(rangeslider.$$.fragment);
+    			attr_dev(div, "slot", "slider");
+    			add_location(div, file$5, 52, 2, 1513);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(rangeslider, div, null);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const rangeslider_changes = {};
+
+    			if (!updating_values && dirty & /*values1*/ 1) {
+    				updating_values = true;
+    				rangeslider_changes.values = /*values1*/ ctx[0];
+    				add_flush_callback(() => updating_values = false);
+    			}
+
+    			rangeslider.$set(rangeslider_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(rangeslider.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(rangeslider.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(rangeslider);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_slider_slot_5.name,
+    		type: "slot",
+    		source: "(53:2) <div slot=\\\"slider\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (51:0) <Example values={values1}>
+    function create_default_slot_5(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = space();
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_5.name,
+    		type: "slot",
+    		source: "(51:0) <Example values={values1}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (59:2) <div slot="code">
+    function create_code_slot_4(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = `${"<RangeSlider float />"}`;
+    			attr_dev(div, "slot", "code");
+    			add_location(div, file$5, 58, 2, 1847);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_code_slot_4.name,
+    		type: "slot",
+    		source: "(59:2) <div slot=\\\"code\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (60:2) <div slot="slider">
+    function create_slider_slot_4(ctx) {
+    	let div;
+    	let rangeslider;
+    	let updating_values;
+    	let current;
+
+    	function rangeslider_values_binding_1(value) {
+    		/*rangeslider_values_binding_1*/ ctx[3].call(null, value);
+    	}
+
+    	let rangeslider_props = { float: true };
+
+    	if (/*values2*/ ctx[1] !== void 0) {
+    		rangeslider_props.values = /*values2*/ ctx[1];
+    	}
+
+    	rangeslider = new RangeSlider({ props: rangeslider_props, $$inline: true });
+    	binding_callbacks.push(() => bind(rangeslider, "values", rangeslider_values_binding_1));
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(rangeslider.$$.fragment);
+    			attr_dev(div, "slot", "slider");
+    			add_location(div, file$5, 59, 2, 1898);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(rangeslider, div, null);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const rangeslider_changes = {};
+
+    			if (!updating_values && dirty & /*values2*/ 2) {
+    				updating_values = true;
+    				rangeslider_changes.values = /*values2*/ ctx[1];
+    				add_flush_callback(() => updating_values = false);
+    			}
+
+    			rangeslider.$set(rangeslider_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(rangeslider.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(rangeslider.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(rangeslider);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_slider_slot_4.name,
+    		type: "slot",
+    		source: "(60:2) <div slot=\\\"slider\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (58:0) <Example values={values2}>
+    function create_default_slot_4(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = space();
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_4.name,
+    		type: "slot",
+    		source: "(58:0) <Example values={values2}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (66:2) <div slot="code">
+    function create_code_slot_3(ctx) {
     	let div;
 
     	const block = {
@@ -4896,7 +6542,346 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${"<RangeSlider pips />"}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$4, 36, 4, 585);
+    			add_location(div, file$5, 65, 2, 2195);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_code_slot_3.name,
+    		type: "slot",
+    		source: "(66:2) <div slot=\\\"code\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (67:2) <div slot="slider">
+    function create_slider_slot_3(ctx) {
+    	let div;
+    	let rangeslider;
+    	let current;
+    	rangeslider = new RangeSlider({ props: { pips: true }, $$inline: true });
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(rangeslider.$$.fragment);
+    			attr_dev(div, "slot", "slider");
+    			add_location(div, file$5, 66, 2, 2245);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(rangeslider, div, null);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(rangeslider.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(rangeslider.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(rangeslider);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_slider_slot_3.name,
+    		type: "slot",
+    		source: "(67:2) <div slot=\\\"slider\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (65:0) <Example>
+    function create_default_slot_3(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = space();
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_3.name,
+    		type: "slot",
+    		source: "(65:0) <Example>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (74:2) <div slot="code">
+    function create_code_slot_2(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = `${"<RangeSlider pips first='label' last='label' rest />"}`;
+    			attr_dev(div, "slot", "code");
+    			add_location(div, file$5, 73, 2, 2591);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_code_slot_2.name,
+    		type: "slot",
+    		source: "(74:2) <div slot=\\\"code\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (75:2) <div slot="slider">
+    function create_slider_slot_2(ctx) {
+    	let div;
+    	let rangeslider;
+    	let current;
+
+    	rangeslider = new RangeSlider({
+    			props: {
+    				pips: true,
+    				first: "label",
+    				last: "label",
+    				rest: true
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(rangeslider.$$.fragment);
+    			attr_dev(div, "slot", "slider");
+    			add_location(div, file$5, 74, 2, 2673);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(rangeslider, div, null);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(rangeslider.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(rangeslider.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(rangeslider);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_slider_slot_2.name,
+    		type: "slot",
+    		source: "(75:2) <div slot=\\\"slider\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (73:0) <Example>
+    function create_default_slot_2(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = space();
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_2.name,
+    		type: "slot",
+    		source: "(73:0) <Example>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (78:2) <div slot="code">
+    function create_code_slot_1(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = `${`<RangeSlider pips first='label' last='label' rest={false} />`}`;
+    			attr_dev(div, "slot", "code");
+    			add_location(div, file$5, 77, 2, 2774);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_code_slot_1.name,
+    		type: "slot",
+    		source: "(78:2) <div slot=\\\"code\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (79:2) <div slot="slider">
+    function create_slider_slot_1(ctx) {
+    	let div;
+    	let rangeslider;
+    	let current;
+
+    	rangeslider = new RangeSlider({
+    			props: {
+    				pips: true,
+    				first: "label",
+    				last: "label",
+    				rest: false
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(rangeslider.$$.fragment);
+    			attr_dev(div, "slot", "slider");
+    			add_location(div, file$5, 78, 2, 2864);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(rangeslider, div, null);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(rangeslider.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(rangeslider.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(rangeslider);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_slider_slot_1.name,
+    		type: "slot",
+    		source: "(79:2) <div slot=\\\"slider\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (77:0) <Example>
+    function create_default_slot_1(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = space();
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_1.name,
+    		type: "slot",
+    		source: "(77:0) <Example>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (82:2) <div slot="code">
+    function create_code_slot(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = `${`<RangeSlider pips first='label' last='label' rest='label' />`}`;
+    			attr_dev(div, "slot", "code");
+    			add_location(div, file$5, 81, 2, 2973);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -4911,26 +6896,35 @@ var app = (function () {
     		block,
     		id: create_code_slot.name,
     		type: "slot",
-    		source: "(37:4) <div slot=\\\"code\\\">",
+    		source: "(82:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (38:4) <div slot="slider">
+    // (83:2) <div slot="slider">
     function create_slider_slot(ctx) {
     	let div;
     	let rangeslider;
     	let current;
-    	rangeslider = new RangeSlider({ props: { pips: true }, $$inline: true });
+
+    	rangeslider = new RangeSlider({
+    			props: {
+    				pips: true,
+    				first: "label",
+    				last: "label",
+    				rest: "label"
+    			},
+    			$$inline: true
+    		});
 
     	const block = {
     		c: function create() {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$4, 37, 4, 637);
+    			add_location(div, file$5, 82, 2, 3063);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -4957,14 +6951,14 @@ var app = (function () {
     		block,
     		id: create_slider_slot.name,
     		type: "slot",
-    		source: "(38:4) <div slot=\\\"slider\\\">",
+    		source: "(83:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (36:2) <Example>
+    // (81:0) <Example>
     function create_default_slot$1(ctx) {
     	let t;
 
@@ -4987,43 +6981,176 @@ var app = (function () {
     		block,
     		id: create_default_slot$1.name,
     		type: "slot",
-    		source: "(36:2) <Example>",
+    		source: "(81:0) <Example>",
     		ctx
     	});
 
     	return block;
     }
 
-    function create_fragment$4(ctx) {
-    	let main;
+    function create_fragment$5(ctx) {
     	let h1;
     	let t1;
     	let p0;
-    	let t3;
-    	let h20;
+    	let t2;
+    	let strong;
+    	let t4;
     	let t5;
-    	let example0;
+    	let rangeslider;
     	let t6;
-    	let h21;
+    	let p1;
     	let t8;
-    	let example1;
+    	let options;
     	let t9;
+    	let h20;
+    	let t11;
+    	let p2;
+    	let t13;
+    	let example0;
+    	let t14;
+    	let h21;
+    	let t16;
+    	let p3;
+    	let t17;
+    	let code0;
+    	let t19;
+    	let code1;
+    	let t21;
+    	let code2;
+    	let t23;
+    	let code3;
+    	let t25;
+    	let t26;
+    	let example1;
+    	let t27;
+    	let h22;
+    	let t29;
+    	let p4;
+    	let t30;
+    	let code4;
+    	let t32;
+    	let em;
+    	let t34;
+    	let example2;
+    	let t35;
+    	let h23;
+    	let t37;
+    	let p5;
+    	let t38;
+    	let code5;
+    	let t40;
+    	let t41;
+    	let example3;
+    	let t42;
+    	let h24;
+    	let t44;
+    	let p6;
+    	let t45;
+    	let code6;
+    	let t47;
+    	let code7;
+    	let t49;
+    	let code8;
+    	let t51;
+    	let t52;
+    	let example4;
+    	let t53;
+    	let example5;
+    	let t54;
+    	let example6;
+    	let t55;
     	let div;
+    	let p7;
     	let img;
     	let img_src_value;
-    	let t10;
-    	let p1;
-    	let t12;
+    	let br;
+    	let t56;
+    	let t57;
     	let small;
     	let a0;
-    	let t14;
+    	let t59;
     	let a1;
-    	let t16;
+    	let t61;
     	let a2;
     	let current;
+
+    	rangeslider = new RangeSlider({
+    			props: {
+    				id: "intro",
+    				float: true,
+    				pips: true,
+    				first: "label",
+    				last: "label"
+    			},
+    			$$inline: true
+    		});
+
+    	options = new Options({ $$inline: true });
     	example0 = new Example({ $$inline: true });
 
     	example1 = new Example({
+    			props: {
+    				values: /*values1*/ ctx[0],
+    				$$slots: {
+    					default: [create_default_slot_5],
+    					slider: [create_slider_slot_5],
+    					code: [create_code_slot_5]
+    				},
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	example2 = new Example({
+    			props: {
+    				values: /*values2*/ ctx[1],
+    				$$slots: {
+    					default: [create_default_slot_4],
+    					slider: [create_slider_slot_4],
+    					code: [create_code_slot_4]
+    				},
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	example3 = new Example({
+    			props: {
+    				$$slots: {
+    					default: [create_default_slot_3],
+    					slider: [create_slider_slot_3],
+    					code: [create_code_slot_3]
+    				},
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	example4 = new Example({
+    			props: {
+    				$$slots: {
+    					default: [create_default_slot_2],
+    					slider: [create_slider_slot_2],
+    					code: [create_code_slot_2]
+    				},
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	example5 = new Example({
+    			props: {
+    				$$slots: {
+    					default: [create_default_slot_1],
+    					slider: [create_slider_slot_1],
+    					code: [create_code_slot_1]
+    				},
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	example6 = new Example({
     			props: {
     				$$slots: {
     					default: [create_default_slot$1],
@@ -5037,123 +7164,367 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			main = element("main");
     			h1 = element("h1");
     			h1.textContent = "Svelte Range Slider & Pips";
     			t1 = space();
     			p0 = element("p");
-    			p0.textContent = "Find a long list of possible options and examples below";
-    			t3 = space();
-    			h20 = element("h2");
-    			h20.textContent = "Default Example";
+    			t2 = text("A reactive, accessible, ");
+    			strong = element("strong");
+    			strong.textContent = "multi-thumb, range slider component for use in a svelte application";
+    			t4 = text("; with the ability to display “pips” or “notches” along the range.");
     			t5 = space();
-    			create_component(example0.$$.fragment);
+    			create_component(rangeslider.$$.fragment);
     			t6 = space();
-    			h21 = element("h2");
-    			h21.textContent = "Example with Pips";
-    			t8 = space();
-    			create_component(example1.$$.fragment);
-    			t9 = space();
-    			div = element("div");
-    			img = element("img");
-    			t10 = space();
     			p1 = element("p");
-    			p1.textContent = "More coming soon";
-    			t12 = space();
+    			p1.textContent = "Find a long list of possible options and examples below";
+    			t8 = space();
+    			create_component(options.$$.fragment);
+    			t9 = space();
+    			h20 = element("h2");
+    			h20.textContent = "Basic Usage";
+    			t11 = space();
+    			p2 = element("p");
+    			p2.textContent = "This is how the slider would appear if no props/arguments are passed along with the component.";
+    			t13 = space();
+    			create_component(example0.$$.fragment);
+    			t14 = space();
+    			h21 = element("h2");
+    			h21.textContent = "Min, Max, Values";
+    			t16 = space();
+    			p3 = element("p");
+    			t17 = text("The slider accepts props for ");
+    			code0 = element("code");
+    			code0.textContent = "min";
+    			t19 = text(", ");
+    			code1 = element("code");
+    			code1.textContent = "max";
+    			t21 = text(" and ");
+    			code2 = element("code");
+    			code2.textContent = "values";
+    			t23 = text(" which can also be bound with ");
+    			code3 = element("code");
+    			code3.textContent = "bind:";
+    			t25 = text("\nand these determine the corresponding values on the slider.");
+    			t26 = space();
+    			create_component(example1.$$.fragment);
+    			t27 = space();
+    			h22 = element("h2");
+    			h22.textContent = "With floating label";
+    			t29 = space();
+    			p4 = element("p");
+    			t30 = text("By passing the ");
+    			code4 = element("code");
+    			code4.textContent = "float";
+    			t32 = text(" prop to the component, we can have a nice label which floats above\nthe handle and shows the current value. ");
+    			em = element("em");
+    			em.textContent = "(hover/select to see it)";
+    			t34 = space();
+    			create_component(example2.$$.fragment);
+    			t35 = space();
+    			h23 = element("h2");
+    			h23.textContent = "With Pips";
+    			t37 = space();
+    			p5 = element("p");
+    			t38 = text("And here, to demonstrate the stand-out feature are some notches, or as I call\nthem ");
+    			code5 = element("code");
+    			code5.textContent = "pips";
+    			t40 = text(" which sit below the slider by default to mark regular intervals in the range.");
+    			t41 = space();
+    			create_component(example3.$$.fragment);
+    			t42 = space();
+    			h24 = element("h2");
+    			h24.textContent = "Pip Labels";
+    			t44 = space();
+    			p6 = element("p");
+    			t45 = text("There are props for ");
+    			code6 = element("code");
+    			code6.textContent = "first";
+    			t47 = text(", ");
+    			code7 = element("code");
+    			code7.textContent = "last";
+    			t49 = text(" and ");
+    			code8 = element("code");
+    			code8.textContent = "rest";
+    			t51 = text(" which determine how to display the pips\nalong the range. Additionally to these simple props, you might also consider some advanced\ncss styles to get your desired result.");
+    			t52 = space();
+    			create_component(example4.$$.fragment);
+    			t53 = space();
+    			create_component(example5.$$.fragment);
+    			t54 = space();
+    			create_component(example6.$$.fragment);
+    			t55 = space();
+    			div = element("div");
+    			p7 = element("p");
+    			img = element("img");
+    			br = element("br");
+    			t56 = text("\nMore coming soon");
+    			t57 = space();
     			small = element("small");
     			a0 = element("a");
     			a0.textContent = "Search";
-    			t14 = text(", ");
+    			t59 = text(", ");
     			a1 = element("a");
     			a1.textContent = "Code";
-    			t16 = text(" and other icons by ");
+    			t61 = text(" and other icons by ");
     			a2 = element("a");
     			a2.textContent = "Icons8";
-    			add_location(h1, file$4, 26, 2, 390);
-    			add_location(p0, file$4, 27, 2, 428);
-    			add_location(h20, file$4, 29, 2, 494);
-    			add_location(h21, file$4, 33, 2, 541);
+    			add_location(h1, file$5, 39, 0, 684);
+    			add_location(strong, file$5, 40, 27, 747);
+    			add_location(p0, file$5, 40, 0, 720);
+    			add_location(p1, file$5, 42, 0, 967);
+    			add_location(h20, file$5, 44, 0, 1042);
+    			add_location(p2, file$5, 45, 0, 1063);
+    			add_location(h21, file$5, 47, 0, 1177);
+    			add_location(code0, file$5, 48, 32, 1235);
+    			add_location(code1, file$5, 48, 50, 1253);
+    			add_location(code2, file$5, 48, 71, 1274);
+    			add_location(code3, file$5, 48, 120, 1323);
+    			add_location(p3, file$5, 48, 0, 1203);
+    			add_location(h22, file$5, 54, 0, 1607);
+    			add_location(code4, file$5, 55, 18, 1654);
+    			add_location(em, file$5, 56, 40, 1780);
+    			add_location(p4, file$5, 55, 0, 1636);
+    			add_location(h23, file$5, 61, 0, 1978);
+    			add_location(code5, file$5, 63, 5, 2083);
+    			add_location(p5, file$5, 62, 0, 1997);
+    			add_location(h24, file$5, 68, 0, 2302);
+    			add_location(code6, file$5, 69, 23, 2345);
+    			add_location(code7, file$5, 69, 43, 2365);
+    			add_location(code8, file$5, 69, 65, 2387);
+    			add_location(p6, file$5, 69, 0, 2322);
     			if (img.src !== (img_src_value = "public/images/icons8-under-construction-100.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "icon of a magnifying glass, for viewing the output slider");
-    			attr_dev(img, "class", "svelte-1pvlp68");
-    			add_location(img, file$4, 41, 4, 722);
-    			add_location(p1, file$4, 44, 4, 864);
-    			attr_dev(div, "class", "soon svelte-1pvlp68");
-    			add_location(div, file$4, 40, 2, 699);
+    			attr_dev(img, "class", "svelte-1dvc7i3");
+    			add_location(img, file$5, 85, 5, 3184);
+    			add_location(br, file$5, 88, 1, 3312);
+    			add_location(p7, file$5, 85, 0, 3179);
+    			attr_dev(div, "class", "soon svelte-1dvc7i3");
+    			add_location(div, file$5, 84, 0, 3160);
     			attr_dev(a0, "target", "_blank");
     			attr_dev(a0, "href", "https://icons8.com/icons/set/search");
-    			add_location(a0, file$4, 48, 4, 927);
+    			add_location(a0, file$5, 92, 2, 3370);
     			attr_dev(a1, "target", "_blank");
     			attr_dev(a1, "href", "https://icons8.com/icons/set/code");
-    			add_location(a1, file$4, 48, 78, 1001);
+    			add_location(a1, file$5, 92, 76, 3444);
     			attr_dev(a2, "target", "_blank");
     			attr_dev(a2, "href", "https://icons8.com");
-    			add_location(a2, file$4, 48, 166, 1089);
-    			attr_dev(small, "class", "credit svelte-1pvlp68");
-    			add_location(small, file$4, 47, 2, 900);
-    			attr_dev(main, "class", "svelte-1pvlp68");
-    			add_location(main, file$4, 24, 0, 380);
+    			add_location(a2, file$5, 92, 164, 3532);
+    			attr_dev(small, "class", "credit svelte-1dvc7i3");
+    			add_location(small, file$5, 91, 0, 3345);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, main, anchor);
-    			append_dev(main, h1);
-    			append_dev(main, t1);
-    			append_dev(main, p0);
-    			append_dev(main, t3);
-    			append_dev(main, h20);
-    			append_dev(main, t5);
-    			mount_component(example0, main, null);
-    			append_dev(main, t6);
-    			append_dev(main, h21);
-    			append_dev(main, t8);
-    			mount_component(example1, main, null);
-    			append_dev(main, t9);
-    			append_dev(main, div);
-    			append_dev(div, img);
-    			append_dev(div, t10);
-    			append_dev(div, p1);
-    			append_dev(main, t12);
-    			append_dev(main, small);
+    			insert_dev(target, h1, anchor);
+    			insert_dev(target, t1, anchor);
+    			insert_dev(target, p0, anchor);
+    			append_dev(p0, t2);
+    			append_dev(p0, strong);
+    			append_dev(p0, t4);
+    			insert_dev(target, t5, anchor);
+    			mount_component(rangeslider, target, anchor);
+    			insert_dev(target, t6, anchor);
+    			insert_dev(target, p1, anchor);
+    			insert_dev(target, t8, anchor);
+    			mount_component(options, target, anchor);
+    			insert_dev(target, t9, anchor);
+    			insert_dev(target, h20, anchor);
+    			insert_dev(target, t11, anchor);
+    			insert_dev(target, p2, anchor);
+    			insert_dev(target, t13, anchor);
+    			mount_component(example0, target, anchor);
+    			insert_dev(target, t14, anchor);
+    			insert_dev(target, h21, anchor);
+    			insert_dev(target, t16, anchor);
+    			insert_dev(target, p3, anchor);
+    			append_dev(p3, t17);
+    			append_dev(p3, code0);
+    			append_dev(p3, t19);
+    			append_dev(p3, code1);
+    			append_dev(p3, t21);
+    			append_dev(p3, code2);
+    			append_dev(p3, t23);
+    			append_dev(p3, code3);
+    			append_dev(p3, t25);
+    			insert_dev(target, t26, anchor);
+    			mount_component(example1, target, anchor);
+    			insert_dev(target, t27, anchor);
+    			insert_dev(target, h22, anchor);
+    			insert_dev(target, t29, anchor);
+    			insert_dev(target, p4, anchor);
+    			append_dev(p4, t30);
+    			append_dev(p4, code4);
+    			append_dev(p4, t32);
+    			append_dev(p4, em);
+    			insert_dev(target, t34, anchor);
+    			mount_component(example2, target, anchor);
+    			insert_dev(target, t35, anchor);
+    			insert_dev(target, h23, anchor);
+    			insert_dev(target, t37, anchor);
+    			insert_dev(target, p5, anchor);
+    			append_dev(p5, t38);
+    			append_dev(p5, code5);
+    			append_dev(p5, t40);
+    			insert_dev(target, t41, anchor);
+    			mount_component(example3, target, anchor);
+    			insert_dev(target, t42, anchor);
+    			insert_dev(target, h24, anchor);
+    			insert_dev(target, t44, anchor);
+    			insert_dev(target, p6, anchor);
+    			append_dev(p6, t45);
+    			append_dev(p6, code6);
+    			append_dev(p6, t47);
+    			append_dev(p6, code7);
+    			append_dev(p6, t49);
+    			append_dev(p6, code8);
+    			append_dev(p6, t51);
+    			insert_dev(target, t52, anchor);
+    			mount_component(example4, target, anchor);
+    			insert_dev(target, t53, anchor);
+    			mount_component(example5, target, anchor);
+    			insert_dev(target, t54, anchor);
+    			mount_component(example6, target, anchor);
+    			insert_dev(target, t55, anchor);
+    			insert_dev(target, div, anchor);
+    			append_dev(div, p7);
+    			append_dev(p7, img);
+    			append_dev(p7, br);
+    			append_dev(p7, t56);
+    			insert_dev(target, t57, anchor);
+    			insert_dev(target, small, anchor);
     			append_dev(small, a0);
-    			append_dev(small, t14);
+    			append_dev(small, t59);
     			append_dev(small, a1);
-    			append_dev(small, t16);
+    			append_dev(small, t61);
     			append_dev(small, a2);
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
     			const example1_changes = {};
+    			if (dirty & /*values1*/ 1) example1_changes.values = /*values1*/ ctx[0];
 
-    			if (dirty & /*$$scope*/ 1) {
+    			if (dirty & /*$$scope, values1*/ 16385) {
     				example1_changes.$$scope = { dirty, ctx };
     			}
 
     			example1.$set(example1_changes);
+    			const example2_changes = {};
+    			if (dirty & /*values2*/ 2) example2_changes.values = /*values2*/ ctx[1];
+
+    			if (dirty & /*$$scope, values2*/ 16386) {
+    				example2_changes.$$scope = { dirty, ctx };
+    			}
+
+    			example2.$set(example2_changes);
+    			const example3_changes = {};
+
+    			if (dirty & /*$$scope*/ 16384) {
+    				example3_changes.$$scope = { dirty, ctx };
+    			}
+
+    			example3.$set(example3_changes);
+    			const example4_changes = {};
+
+    			if (dirty & /*$$scope*/ 16384) {
+    				example4_changes.$$scope = { dirty, ctx };
+    			}
+
+    			example4.$set(example4_changes);
+    			const example5_changes = {};
+
+    			if (dirty & /*$$scope*/ 16384) {
+    				example5_changes.$$scope = { dirty, ctx };
+    			}
+
+    			example5.$set(example5_changes);
+    			const example6_changes = {};
+
+    			if (dirty & /*$$scope*/ 16384) {
+    				example6_changes.$$scope = { dirty, ctx };
+    			}
+
+    			example6.$set(example6_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
+    			transition_in(rangeslider.$$.fragment, local);
+    			transition_in(options.$$.fragment, local);
     			transition_in(example0.$$.fragment, local);
     			transition_in(example1.$$.fragment, local);
+    			transition_in(example2.$$.fragment, local);
+    			transition_in(example3.$$.fragment, local);
+    			transition_in(example4.$$.fragment, local);
+    			transition_in(example5.$$.fragment, local);
+    			transition_in(example6.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
+    			transition_out(rangeslider.$$.fragment, local);
+    			transition_out(options.$$.fragment, local);
     			transition_out(example0.$$.fragment, local);
     			transition_out(example1.$$.fragment, local);
+    			transition_out(example2.$$.fragment, local);
+    			transition_out(example3.$$.fragment, local);
+    			transition_out(example4.$$.fragment, local);
+    			transition_out(example5.$$.fragment, local);
+    			transition_out(example6.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(main);
-    			destroy_component(example0);
-    			destroy_component(example1);
+    			if (detaching) detach_dev(h1);
+    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(p0);
+    			if (detaching) detach_dev(t5);
+    			destroy_component(rangeslider, detaching);
+    			if (detaching) detach_dev(t6);
+    			if (detaching) detach_dev(p1);
+    			if (detaching) detach_dev(t8);
+    			destroy_component(options, detaching);
+    			if (detaching) detach_dev(t9);
+    			if (detaching) detach_dev(h20);
+    			if (detaching) detach_dev(t11);
+    			if (detaching) detach_dev(p2);
+    			if (detaching) detach_dev(t13);
+    			destroy_component(example0, detaching);
+    			if (detaching) detach_dev(t14);
+    			if (detaching) detach_dev(h21);
+    			if (detaching) detach_dev(t16);
+    			if (detaching) detach_dev(p3);
+    			if (detaching) detach_dev(t26);
+    			destroy_component(example1, detaching);
+    			if (detaching) detach_dev(t27);
+    			if (detaching) detach_dev(h22);
+    			if (detaching) detach_dev(t29);
+    			if (detaching) detach_dev(p4);
+    			if (detaching) detach_dev(t34);
+    			destroy_component(example2, detaching);
+    			if (detaching) detach_dev(t35);
+    			if (detaching) detach_dev(h23);
+    			if (detaching) detach_dev(t37);
+    			if (detaching) detach_dev(p5);
+    			if (detaching) detach_dev(t41);
+    			destroy_component(example3, detaching);
+    			if (detaching) detach_dev(t42);
+    			if (detaching) detach_dev(h24);
+    			if (detaching) detach_dev(t44);
+    			if (detaching) detach_dev(p6);
+    			if (detaching) detach_dev(t52);
+    			destroy_component(example4, detaching);
+    			if (detaching) detach_dev(t53);
+    			destroy_component(example5, detaching);
+    			if (detaching) detach_dev(t54);
+    			destroy_component(example6, detaching);
+    			if (detaching) detach_dev(t55);
+    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(t57);
+    			if (detaching) detach_dev(small);
     		}
     	};
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$4.name,
+    		id: create_fragment$5.name,
     		type: "component",
     		source: "",
     		ctx
@@ -5162,7 +7533,144 @@ var app = (function () {
     	return block;
     }
 
-    function instance$4($$self, $$props, $$invalidate) {
+    function instance$5($$self, $$props, $$invalidate) {
+    	let values1 = [0];
+    	let values2 = [50];
+    	let values3 = [50];
+    	let values4 = [50];
+    	let values5 = [50];
+    	let values6 = [50];
+    	let values7 = [50];
+    	let values8 = [50];
+    	let values9 = [50];
+    	let values10 = [50];
+    	let values11 = [50];
+    	let values12 = [50];
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Docs> was created with unknown prop '${key}'`);
+    	});
+
+    	let { $$slots = {}, $$scope } = $$props;
+    	validate_slots("Docs", $$slots, []);
+
+    	function rangeslider_values_binding(value) {
+    		values1 = value;
+    		$$invalidate(0, values1);
+    	}
+
+    	function rangeslider_values_binding_1(value) {
+    		values2 = value;
+    		$$invalidate(1, values2);
+    	}
+
+    	$$self.$capture_state = () => ({
+    		RangeSlider,
+    		Example,
+    		Options,
+    		values1,
+    		values2,
+    		values3,
+    		values4,
+    		values5,
+    		values6,
+    		values7,
+    		values8,
+    		values9,
+    		values10,
+    		values11,
+    		values12
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ("values1" in $$props) $$invalidate(0, values1 = $$props.values1);
+    		if ("values2" in $$props) $$invalidate(1, values2 = $$props.values2);
+    		if ("values3" in $$props) values3 = $$props.values3;
+    		if ("values4" in $$props) values4 = $$props.values4;
+    		if ("values5" in $$props) values5 = $$props.values5;
+    		if ("values6" in $$props) values6 = $$props.values6;
+    		if ("values7" in $$props) values7 = $$props.values7;
+    		if ("values8" in $$props) values8 = $$props.values8;
+    		if ("values9" in $$props) values9 = $$props.values9;
+    		if ("values10" in $$props) values10 = $$props.values10;
+    		if ("values11" in $$props) values11 = $$props.values11;
+    		if ("values12" in $$props) values12 = $$props.values12;
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [values1, values2, rangeslider_values_binding, rangeslider_values_binding_1];
+    }
+
+    class Docs extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$5, create_fragment$5, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Docs",
+    			options,
+    			id: create_fragment$5.name
+    		});
+    	}
+    }
+
+    /* src/App.svelte generated by Svelte v3.24.0 */
+    const file$6 = "src/App.svelte";
+
+    function create_fragment$6(ctx) {
+    	let main;
+    	let docs;
+    	let current;
+    	docs = new Docs({ $$inline: true });
+
+    	const block = {
+    		c: function create() {
+    			main = element("main");
+    			create_component(docs.$$.fragment);
+    			attr_dev(main, "class", "svelte-xnzu95");
+    			add_location(main, file$6, 12, 0, 142);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, main, anchor);
+    			mount_component(docs, main, null);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(docs.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(docs.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(main);
+    			destroy_component(docs);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$6.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$6($$self, $$props, $$invalidate) {
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -5171,20 +7679,20 @@ var app = (function () {
 
     	let { $$slots = {}, $$scope } = $$props;
     	validate_slots("App", $$slots, []);
-    	$$self.$capture_state = () => ({ RangeSlider, Example });
+    	$$self.$capture_state = () => ({ Docs });
     	return [];
     }
 
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$4, create_fragment$4, safe_not_equal, {});
+    		init(this, options, instance$6, create_fragment$6, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "App",
     			options,
-    			id: create_fragment$4.name
+    			id: create_fragment$6.name
     		});
     	}
     }

@@ -382,6 +382,13 @@ magic-string@^0.25.2:
   dependencies:
     sourcemap-codec "^1.4.4"
 
+mdsvex@^0.8.2:
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/mdsvex/-/mdsvex-0.8.2.tgz#836a470db7c6d28453d29a0962747ab94e78667a"
+  integrity sha512-aCgAVzJvsphSgi77128le8t7rfG5yUJ1w/KHs+QrBK0JkAYC5GeEwi/yogm7jeTRI7SxXz3iCttj8gzOtTASMA==
+  dependencies:
+    prismjs "^1.17.1"
+
 merge-stream@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"
@@ -587,8 +594,8 @@ svelte-prism@^1.1.3:
     prismjs "^1.17.1"
 
 "svelte-range-slider-pips@https://github.com/simeydotme/svelte-range-slider-pips":
-  version "1.0.3"
-  resolved "https://github.com/simeydotme/svelte-range-slider-pips#b76ed2e580138a28ef83d037613d8530a8d1e196"
+  version "1.0.5"
+  resolved "https://github.com/simeydotme/svelte-range-slider-pips#b12310b16060961e8f66f2cbeca14b168b464cdc"
 
 svelte@^3.0.0:
   version "3.24.0"

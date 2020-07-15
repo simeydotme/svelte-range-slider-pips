@@ -16,7 +16,7 @@ pre[class*="language-"] {
   border-radius: 5px;
 }
 code {
-  color: #d8007b;
+  color: #6400c8;
   background-color: #f5f9ff;
   border: 1px solid #ebf3ff;
   border-radius: 2px;
@@ -85,7 +85,12 @@ pre .pln {
   pre .atn {
     color: #f99157;
   }
-  pre .atv {
+  pre .attr-name,
+  pre .attr-value .punctuation:first-child {
+    color: #c892fd;
+  }
+  pre .atv,
+  pre .attr-value {
     color: #5cd;
   }
   pre .dec {

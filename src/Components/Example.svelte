@@ -5,6 +5,7 @@
   import RangeSlider from "svelte-range-slider-pips";
 
   export let active = "view";
+  export let values;
 </script>
 
 <style>
@@ -37,9 +38,14 @@
   .slot.active {
     display: block;
   }
-    .slider {
-      padding: 2em .5em;
-    }
+  .slider {
+    padding: 2em .5em;
+  }
+  .values {
+    font-size: 0.875em;
+    text-align: right;
+    display: block;
+  }
   @media screen and (min-width: 56em) {
     .tabs {
       display: none;
@@ -50,15 +56,18 @@
     }
     .slot {
       display: block;
-      flex: 1 1 50%;
+      width: 50%;
     }
     .slider {
       padding: 0 1em 0 0;
     }
   }
   @media screen and (min-width: 72em) {
+    .slot {
+      width: 60%;
+    }
     .slider {
-      flex: 1 1 70%;
+      width: 40%;
     }
   }
 </style>
@@ -92,9 +101,13 @@
     <div class="slot slider" class:active={active === 'view'}>
 
       <slot name="slider">
-        <RangeSlider />
+        <RangeSlider bind:values />
       </slot>
 
+      {#if values}
+      <span class="values">values: <code>[{values}]</code></span>
+      {/if}
+      
     </div>
 
     <div class="slot code" class:active={active === 'code'}>

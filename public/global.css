@@ -1,56 +1,78 @@
-html, body {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	background-color: rgb(255, 249, 244);
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(246, 252, 255);
 }
 
 body {
-	color: #434d5a;
-	margin: 0;
-	padding: 8px;
-	box-sizing: border-box;
-	font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #434d5a;
+  margin: 0;
+  padding: 8px;
+  box-sizing: border-box;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
-input, button, select, textarea {
-	font-family: inherit;
-	font-size: inherit;
-	padding: 0.4em;
-	margin: 0 0 0.5em 0;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.4em;
+  margin: 0 0 0.5em 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
 }
 
 h1 {
-	font-weight: 700;
-}
-h2,h3 {
-	font-weight: 600;
-}
-h4 {
-	font-weight: 700;
+  font-weight: 700;
 }
 
-/**=======================================**/
+h2,
+h3 {
+  font-weight: 600;
+}
+
+h4 {
+  font-weight: 700;
+}
+
+p {
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 1em 0;
+  text-rendering: optimizeLegibility;
+}
 
 a {
-	text-decoration:none;
-	line-height:inherit
- }
- a:focus,
- a:hover {
-	border-bottom: 1px dotted;
- }
- a img {
-	border:none
- }
- p {
-	font-family:inherit;
-	font-weight:400;
-	font-size:1rem;
-	line-height:1.6;
-	margin-bottom:1.25rem;
-	text-rendering:optimizeLegibility
- }
+  text-decoration: none;
+  line-height: inherit;
+}
+
+a:focus,
+a:hover {
+  border-bottom: 1px dotted;
+}
+
+a img {
+  border: none;
+}
