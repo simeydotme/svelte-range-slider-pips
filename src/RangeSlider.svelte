@@ -10,6 +10,7 @@
   export let values = [(max + min) / 2];
   export let vertical = false;
   export let float = false;
+  export let hover = true;
 
   // range pips / values props
   export let pips = false;
@@ -453,6 +454,7 @@
     --handle-focus: var(--range-handle-focus, #4a40d4);
     --range-inactive: var(--range-range-inactive, var(--handle-inactive));
     --range: var(--range-range, var(--handle-focus));
+    --float-inactive: var(--range-float-inactive, var(--handle-inactive));
     --float: var(--range-float, var(--handle-focus));
     --float-text: var(--range-float-text, white);
   }
@@ -536,7 +538,8 @@
     padding: 0.2em 0.4em;
     border-radius: 0.2em;
   }
-  :global(.rangeSlider .rangeHandle.active .rangeFloat) {
+  :global(.rangeSlider .rangeHandle.active .rangeFloat),
+  :global(.rangeSlider .rangeHandle.hoverable:hover .rangeFloat) {
     opacity: 1;
     top: -0.2em;
     transform: translate(-50%, -100%);
@@ -582,6 +585,8 @@
   :global(.rangeSlider .rangeFloat) {
     color: white;
     color: var(--float-text);
+    background-color: #99a2a2;
+    background-color: var(--float-inactive);
   }
   :global(.rangeSlider.focus .rangeFloat) {
     background-color: #4a40d4;
@@ -607,6 +612,7 @@
       role="slider"
       tabindex="0"
       class="rangeHandle"
+      class:hoverable={hover}
       class:active={focus && activeHandle === index}
       on:blur={sliderBlurHandle}
       on:focus={sliderFocusHandle}
