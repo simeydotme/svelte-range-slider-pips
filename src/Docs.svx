@@ -5,7 +5,7 @@
   import Options from "./Components/Options.svx";
 
 
-  let values1 = [0];
+  let values1 = [157];
   let values2 = [50];
   let values3 = [50];
   let values4 = [50];
@@ -72,9 +72,9 @@ the handle and shows the current value. _(hover/select to see it)_
 ## With Pips
 And here, to demonstrate the stand-out feature are some notches, or as I call 
 them `pips` which sit below the slider by default to mark regular intervals in the range.
-<Example>
+<Example values={values3}>
   <div slot="code">{"<RangeSlider pips />"}</div>
-  <div slot="slider"><RangeSlider pips /></div>
+  <div slot="slider"><RangeSlider pips bind:values={values3} /></div>
 </Example>
 
 ## Pip Labels
