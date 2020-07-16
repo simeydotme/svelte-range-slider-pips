@@ -5,12 +5,17 @@
   import Options from "./Components/Options.svx";
 
 
-  let values1 = [157];
-  let values2 = [50];
-  let values3 = [50];
+  let values1 = [11];
+  let values2 = [25,50,75];
+  let minmax1 = [0];
+  let minmax2 = [75];
+  let minmax3 = [333];
   let values4 = [50];
-  let values5 = [50];
-  let values6 = [50];
+  let float1 = [50];
+  let float2 = [40,60];
+  let pips1 = [50];
+  let pips2 = [5];
+  let pips3 = [2];
   let values7 = [50];
   let values8 = [50];
   let values9 = [50];
@@ -42,42 +47,77 @@
 # Svelte Range Slider & Pips
 A reactive, accessible, **multi-thumb, range slider component for use in a svelte application**; with the ability to display "pips" or "notches" along the range.
 
+## Example
+
 <RangeSlider id="intro" float pips first="label" last="label" />
 
-Find a long list of possible options and examples below
+## Options
 
 <Options />
 
-## Basic Usage
+## Usage
+
+### Basic Usage
 This is how the slider would appear if no props/arguments are passed along with the component.
 <Example />
 
-## Min, Max, Values
+### Values
+Setting the defualt value(s) is done with `values` which accepts an `Array`. It will accept any
+number of values from `1`.
+<Example values={values1}>
+  <div slot="code">{`<RangeSlider values={[11]} />`}</div>
+  <div slot="slider"><RangeSlider bind:values={values1} /></div>
+</Example>
+<Example values={values2}>
+  <div slot="code">{`<RangeSlider values={[25,50,75]} />`}</div>
+  <div slot="slider"><RangeSlider bind:values={values2} /></div>
+</Example>
+
+### Min & Max
 The slider accepts props for `min`, `max` and `values` which can also be bound with `bind:`
 and these determine the corresponding values on the slider.
-<Example values={values1}>
-  <div slot="code">{`<RangeSlider min={-50} max={200} values={[0]} />`}</div>
-  <div slot="slider"><RangeSlider min={-50} max={200} bind:values={values1} /></div>
+<Example values={minmax1}>
+  <div slot="code">{`<RangeSlider min={-33} max={33} />`}</div>
+  <div slot="slider"><RangeSlider min={-33} max={33} bind:values={minmax1} /></div>
+</Example>
+<Example values={minmax2}>
+  <div slot="code">{`<RangeSlider min={50} />`}</div>
+  <div slot="slider"><RangeSlider min={50} bind:values={minmax2} /></div>
+</Example>
+<Example values={minmax3}>
+  <div slot="code">{`<RangeSlider max={500} bind:min={${minmax2[0]}} />`}</div>
+  <div slot="slider"><RangeSlider max={500} bind:min={minmax2[0]} bind:values={minmax3} /></div>
 </Example>
 
-
-## With floating label
+### With floating label
 By passing the `float` prop to the component, we can have a nice label which floats above
 the handle and shows the current value. _(hover/select to see it)_
-<Example values={values2}>
+<Example values={float1}>
   <div slot="code">{"<RangeSlider float />"}</div>
-  <div slot="slider"><RangeSlider float bind:values={values2} /></div>
+  <div slot="slider"><RangeSlider float bind:values={float1} /></div>
+</Example>
+<Example values={float2}>
+  <div slot="code">{"<RangeSlider float values={[40,60]}/>"}</div>
+  <div slot="slider"><RangeSlider float bind:values={float2} /></div>
 </Example>
 
-## With Pips
+### With Pips
 And here, to demonstrate the stand-out feature are some notches, or as I call 
 them `pips` which sit below the slider by default to mark regular intervals in the range.
-<Example values={values3}>
+<Example values={pips1}>
   <div slot="code">{"<RangeSlider pips />"}</div>
-  <div slot="slider"><RangeSlider pips bind:values={values3} /></div>
+  <div slot="slider"><RangeSlider pips bind:values={pips1} /></div>
+</Example>
+<Example values={pips2}>
+  <div slot="code">{"<RangeSlider pips max={10} />"}</div>
+  <div slot="slider"><RangeSlider pips max={10} bind:values={pips2} /></div>
+</Example>
+<Example values={pips3}>
+  <div slot="code">{"<RangeSlider pips max={5} />"}</div>
+  <div slot="slider"><RangeSlider pips max={5} bind:values={pips3} /></div>
 </Example>
 
-## Pip Labels
+### Pip Labels
 There are props for `first`, `last` and `rest` which determine how to display the pips
 along the range. Additionally to these simple props, you might also consider some advanced
 css styles to get your desired result.

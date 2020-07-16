@@ -1,5 +1,5 @@
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html,
@@ -42,15 +42,21 @@ h5 {
 }
 
 h1 {
+  font-size: 3em;
   font-weight: 700;
+  margin-top: 1em;
 }
 
-h2,
+h2 {
+  font-size: 2em;
+}
 h3 {
+  font-size: 1.5em;
   font-weight: 600;
 }
 
 h4 {
+  font-size: 1.3em;
   font-weight: 700;
 }
 
@@ -75,4 +81,44 @@ a:hover {
 
 a img {
   border: none;
+}
+
+a[href^="#"],
+a[href^="#"]:hover {
+  color: #434d5a;
+}
+a[href^="#"]:before {
+  content: "";
+  position: absolute;
+  font-size: 0.7em;
+  -webkit-transform: translate(-3em, 0.5em);
+  -ms-transform: translate(-3em, 0.5em);
+  transform: translate(-3em, 0.5em);
+  transition: all 0.2s ease;
+  color: #de6262;
+  opacity: 0;
+}
+a[href^="#"]:focus,
+a[href^="#"]:hover,
+.block:target > h2 > a,
+.sub-block:target > h3 > a {
+  outline: 0;
+}
+@media only screen and (min-width: 701px) {
+  a[href^="#"]:focus:before,
+  a[href^="#"]:hover:before {
+    opacity: 1;
+    -webkit-transform: translate(-1.5em, 0.5em);
+    -ms-transform: translate(-1.5em, 0.5em);
+    transform: translate(-1.5em, 0.5em);
+  }
+}
+@media only screen and (min-width: 701px) {
+  .block:target > h2 > a:before,
+  .sub-block:target > h3 > a:before {
+    opacity: 1;
+    -webkit-transform: translate(-1.5em, 0.5em);
+    -ms-transform: translate(-1.5em, 0.5em);
+    transform: translate(-1.5em, 0.5em);
+  }
 }

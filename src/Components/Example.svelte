@@ -47,27 +47,17 @@
     display: block;
   }
   @media screen and (min-width: 56em) {
+    .example {
+      margin: 1em 0 2em;
+    }
     .tabs {
       display: none;
     }
-    .slots {
-      display: flex;
-      align-items: center;
-    }
     .slot {
       display: block;
-      width: 50%;
     }
     .slider {
-      padding: 0 1em 0 0;
-    }
-  }
-  @media screen and (min-width: 72em) {
-    .slot {
-      width: 60%;
-    }
-    .slider {
-      width: 40%;
+      padding: 1em ;
     }
   }
 </style>
@@ -98,23 +88,24 @@
   </div>
 
   <div class="slots">
-    <div class="slot slider" class:active={active === 'view'}>
-
-      <slot name="slider">
-        <RangeSlider bind:values />
-      </slot>
-
-      {#if values}
-      <span class="values">values: <code>[{values}]</code></span>
-      {/if}
-      
-    </div>
 
     <div class="slot code" class:active={active === 'code'}>
 
       <Prism language="svelte">
         <slot name="code">&lt;RangeSlider /&gt;</slot>
       </Prism>
+
+    </div>
+
+    <div class="slot slider" class:active={active === 'view'}>
+
+      <slot name="slider" v={values}>
+        <RangeSlider  />
+      </slot>
+
+      {#if values}
+      <span class="values">values: <code>[{values}]</code></span>
+      {/if}
 
     </div>
   </div>

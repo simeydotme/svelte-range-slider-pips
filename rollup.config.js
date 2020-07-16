@@ -4,6 +4,8 @@ import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import { mdsvex } from "mdsvex";
+import slug from "remark-slug";
+import headings from "remark-autolink-headings";
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -26,7 +28,9 @@ export default {
 			},
 			// tell svelte to handle mdsvex files
 			extensions: [".svelte", ".svx"],
-			preprocess: mdsvex()
+			preprocess: mdsvex({
+				remarkPlugins: [slug, [headings, { behavior: "wrap" }]]
+			})
 		}),
 
 		// If you have external dependencies installed from
