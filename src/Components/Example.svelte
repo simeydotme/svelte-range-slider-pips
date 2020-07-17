@@ -5,7 +5,9 @@
   import RangeSlider from "svelte-range-slider-pips";
 
   export let active = "view";
+  export let code = true;
   export let values;
+
 </script>
 
 <style>
@@ -91,9 +93,11 @@
 
     <div class="slot code" class:active={active === 'code'}>
 
+      {#if code}
       <Prism language="svelte">
-        <slot name="code">&lt;RangeSlider /&gt;</slot>
+        <slot name="code"></slot>
       </Prism>
+      {/if}
 
     </div>
 
