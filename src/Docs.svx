@@ -10,6 +10,9 @@
   let minmax1 = [0];
   let minmax2 = [75];
   let minmax3 = [111];
+  let step1 = [50];
+  let step2 = [-10,10];
+  let step3 = [5000];
   let values4 = [50];
   let float1 = [50];
   let float2 = [40,60];
@@ -19,10 +22,11 @@
   let range1 = [30,70];
   let range2 = [50];
   let range3 = [50];
-  let values9 = [50];
-  let values10 = [50];
-  let values11 = [50];
+  let pipstep1 = [50];
+  let pipstep2 = [50];
+  let pipstep3 = [50];
   let values12 = [50];
+
 
 </script>
 
@@ -46,6 +50,7 @@
 </style>
 
 # Svelte Range Slider & Pips
+
 A reactive, accessible, **multi-thumb, range slider component for use in a svelte application**; with the ability to display "pips" or "notches" along the range.
 
 ## Example
@@ -59,17 +64,25 @@ A reactive, accessible, **multi-thumb, range slider component for use in a svelt
 ## Usage
 
 ### Basic Usage
+
 This is how the slider would appear if no props/arguments are passed along with the component.
-<Example />
+
+<Example>
+  <div slot="code">{`<RangeSlider />`}</div>
+  <div slot="slider"><RangeSlider /></div>
+</Example>
 
 ### Values
+
 Setting the defualt value(s) is done with `values` which accepts an `Array`. It will accept any
 number of values from `1`. The values should be within the given `min` and `max` range. It can
 also be bound with `bind:values`
+
 <Example values={values1}>
   <div slot="code">{`<RangeSlider values={[11]} />`}</div>
   <div slot="slider"><RangeSlider bind:values={values1} /></div>
 </Example>
+
 <Example values={values2}>
   <div slot="code">{`<RangeSlider values={[25,50,75]} />`}</div>
   <div slot="slider"><RangeSlider bind:values={values2} /></div>
@@ -85,18 +98,18 @@ maximum possible value respectively.
   <div slot="slider"><RangeSlider min={-33} max={33} bind:values={minmax1} /></div>
 </Example>
 
-
 The slider below has it's `values` property bound with the `min` value for the
 slider below that.
 
 <Example values={minmax2}>
   <div slot="code">{`<script> let bound = [75]; </script>
 
- <RangeSlider min={50} bind:values={bound} />`}</div>
+<RangeSlider min={50} bind:values={bound} />`}</div>
+
   <div slot="slider">
     <RangeSlider min={50} bind:values={minmax2} />
   </div>
-</Example>  
+</Example>
 
 <Example values={minmax3}>
   <div slot="code">{`<!-- bound = [${minmax2}] -->
@@ -104,78 +117,147 @@ slider below that.
   <div slot="slider">
     <RangeSlider min={minmax2[0]} max={200} bind:values={minmax3} />
   </div>
-</Example>  
+</Example>
+
+### Steps
+
+Although the slider values are clamped between the `min` and `max` properties, there may be
+times when we'd like to limit the selectable `values`. This can be done with `step` which is
+a modulus of the possible `values` range.
+
+<Example values={step1}>
+  <div slot="code">{`<RangeSlider step={5} />`}</div>
+  <div slot="slider"><RangeSlider step={5} bind:values={step1} /></div>
+</Example>
+
+<Example values={step3}>
+  <div slot="code">{`<RangeSlider step={1000} values={[5000]} min={-10000} max={10000} />`}</div>
+  <div slot="slider"><RangeSlider step={1000} min={-10000} max={10000} bind:values={step3} /></div>
+</Example>
+
+As seen below; handles will always align to the `step` value, even if set incorrectly at
+initialisation. And the handles will always start at the `min` value and end on the `max` value.
+
+<Example values={step2}>
+  <div slot="code">{`<RangeSlider step={7} values={[-10,10]} min={-20} max={23} />`}</div>
+  <div slot="slider"><RangeSlider step={7} min={-20} max={23} bind:values={step2} /></div>
+</Example>
+
+### Ranges
+
+A stand-out feature which makes this component somewhat better than the standard
+`<input type="range">` is the `range` property which allows **two values** to display a selected
+range between them and also prevent the values from going past each other.
+
+<Example values={range1}>
+  <div slot="code">{`<RangeSlider range values={[30,70]} />`}</div>
+  <div slot="slider"><RangeSlider range bind:values={range1} /></div>
+</Example>
+
+The property `range` can also be `"min"` or `"max"` instead of a `boolean`, which will create
+the visual appearance of a slider range which is growing or shrinking.
+
+<Example values={range2}>
+  <div slot="code">{`<RangeSlider range="min" values={[50]} />`}</div>
+  <div slot="slider"><RangeSlider range="min" bind:values={range2} /></div>
+</Example>
+
+<Example values={range3}>
+  <div slot="code">{`<RangeSlider range="max" values={[50]} />`}</div>
+  <div slot="slider"><RangeSlider range="max" bind:values={range3} /></div>
+</Example>
 
 ### With floating label
+
 By passing the `float` prop to the component, we can have a nice label which floats above
 the handle and shows the current value. _(hover/select to see it)_
+
 <Example values={float1}>
   <div slot="code">{`<RangeSlider float />`}</div>
   <div slot="slider"><RangeSlider float bind:values={float1} /></div>
 </Example>
+
 <Example values={float2}>
   <div slot="code">{`<RangeSlider float values={[40,60]}/>`}</div>
   <div slot="slider"><RangeSlider float bind:values={float2} /></div>
 </Example>
 
 ### With Pips
-And here, to demonstrate the stand-out feature are some notches, or as I call 
+
+And here, to demonstrate another stand-out feature are some notches, or as I call
 them `pips` which sit below the slider by default to mark regular intervals in the range.
+
 <Example values={pips1}>
   <div slot="code">{`<RangeSlider pips />`}</div>
   <div slot="slider"><RangeSlider pips bind:values={pips1} /></div>
 </Example>
+
 <Example values={pips2}>
   <div slot="code">{`<RangeSlider pips max={10} />`}</div>
   <div slot="slider"><RangeSlider pips max={10} bind:values={pips2} /></div>
 </Example>
+
 <Example values={pips3}>
   <div slot="code">{`<RangeSlider pips max={5} />`}</div>
   <div slot="slider"><RangeSlider pips max={5} bind:values={pips3} /></div>
 </Example>
 
+<small><em>note: It'd be very bad for performance to display too many pips as they each represent
+an individual DOM node. Also there are only so many pixels on a screen. So use the 
+<a href="#pip-steps"><code>pipstep</code></a> feature to aestheitcally limit the amount of 
+pips rendered to screen.</em></small>
+
 ### Pip Labels
+
 There are props for `first`, `last` and `rest` which determine how to display the pips
 along the range. These props can be a `Boolean` or `"label"` to show a label with the pip.
+
 <Example>
   <div slot="code">{`<RangeSlider pips first='label' last='label' />`}</div>
   <div slot="slider"><RangeSlider pips first='label' last='label' /></div>
 </Example>
+
 <Example>
   <div slot="code">{`<RangeSlider pips first='label' last={false} rest={false} />`}</div>
   <div slot="slider"><RangeSlider pips first='label' last={false} rest={false} /></div>
 </Example>
+
 <Example>
   <div slot="code">{`<RangeSlider pips first='label' last='label' rest='label' />`}</div>
   <div slot="slider"><RangeSlider pips first='label' last='label' rest='label' /></div>
 </Example>
 
-### Ranges
-Another stand-out feature which makes this component somewhat better than the standard
-`<input type="range">` is the `range` property which allows **two values** to display a selected
-range between them and also prevent the values from going past each other.
-<Example values={range1}>
-  <div slot="code">{`<RangeSlider range values={[30,70]} />`}</div>
-  <div slot="slider"><RangeSlider range bind:values={range1} /></div>
-</Example>
-The property `range` can also be `"min"` or `"max"` instead of a `boolean`, which will create
-the visual appearance of a slider range which is growing or shrinking.
-<Example values={range2}>
-  <div slot="code">{`<RangeSlider range="min" values={[50]} />`}</div>
-  <div slot="slider"><RangeSlider range="min" bind:values={range2} /></div>
-</Example>
-<Example values={range3}>
-  <div slot="code">{`<RangeSlider range="max" values={[50]} />`}</div>
-  <div slot="slider"><RangeSlider range="max" bind:values={range3} /></div>
+### Pip Steps
+
+It is not always desirable to show every single value as a `pip` on the range, and so
+this option works much in the same way as `step` but only affects the rendering of the
+pips. 
+
+By default, the `pipstep` is set to 1/20 of the range of values (`max - min`), so for a slider
+with `min=0` and `max=100` the `pipstep` would be `5`
+
+<Example values={pipstep1}>
+  <div slot="code">{`<!-- using default pipstep -->
+ <RangeSlider pips />`}</div>
+  <div slot="slider"><RangeSlider pips first="label" last="label" rest="label" bind:values={pipstep1} /></div>
 </Example>
 
+<Example values={pipstep2}>
+  <div slot="code">{`<RangeSlider pips pipstep={20} />`}</div>
+  <div slot="slider"><RangeSlider pips pipstep={20} first="label" last="label" rest="label" bind:values={pipstep2} /></div>
+</Example>
 
+<Example values={pipstep3}>
+  <div slot="code">{`<RangeSlider pips step={2.5} pipstep={10} />`}</div>
+  <div slot="slider"><RangeSlider pips step={2.5} pipstep={10} first="label" last="label" rest="label" bind:values={pipstep3} /></div>
+</Example>
 
+<small><em>Additional control can be had over the display of pips by using css' <code>nth-child()</code> property.</em></small>
 
 <div class="soon">
 
-  ![icon of a magnifying glass, for viewing the output slider](public/images/icons8-under-construction-100.png)  
-  More coming soon
+![icon of a magnifying glass, for viewing the output slider](public/images/icons8-under-construction-100.png)  
+ More coming soon
 
 </div>
 
