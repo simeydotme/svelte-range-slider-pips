@@ -638,8 +638,8 @@ svelte-prism@^1.1.3:
     prismjs "^1.17.1"
 
 "svelte-range-slider-pips@https://github.com/simeydotme/svelte-range-slider-pips":
-  version "1.1.0"
-  resolved "https://github.com/simeydotme/svelte-range-slider-pips#214163b7528a4ebc5ba643e0b0c44fb73a7b7cbe"
+  version "1.2.0"
+  resolved "https://github.com/simeydotme/svelte-range-slider-pips#6f4483016bcac238e74cb8817f7d21b1be1cbd1d"
 
 svelte@^3.0.0:
   version "3.24.0"

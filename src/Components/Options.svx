@@ -18,6 +18,7 @@
 | **suffix**          | `String`           | `""`                                | A string to suffix to all displayed values                                                                                                                      |
 | **formatter**       | `Function`         | `(v) => v`                          | A function to re-format values before they are displayed                                                                                                        |
 | **handleFormatter** | `Function`         | `formatter`                         | A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property                   |
+| **hover**           | `Boolean`          | `true`                              | Whether to allow labels to show on hover                                                                                                                        |
 | **springValues**    | `Object`           | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving                                                                                  |
 | **id**              | `String`           | `undefined`                         | Provide an optional `id` attribute to the component for styling/other reasons                                                                                   |
 
