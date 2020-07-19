@@ -25,10 +25,10 @@
 <style>
   
   .table-wrapper {
-    background: white;
     border-radius: 5px;
-    border: 1px solid rgba(34, 81, 141, 0.18);
+    border: 1px solid rgba(0, 40, 100, 0.2);
     overflow: hidden;
+    font-size: 0.875em;
   }
 
   table {
@@ -37,12 +37,12 @@
   }
 
   thead {
-    background: rgba(0, 69, 142, 0.1);
+    background: rgba(0, 40, 100, 0.05);
   }
 
   thead th {
     padding: 0.5em 0.4em;
-    color: #6c8ea2;
+    color: rgba(0, 40, 100, 0.6);
   }
 
   th, td strong {
@@ -56,16 +56,22 @@
 
   thead tr,
   tr:not(:last-child) {
-    border-bottom: 1px solid rgba(34, 81, 141, 0.18);
+    border-bottom: 1px solid  rgba(0, 40, 100, 0.2);
   }
 
   th:not(:last-child), 
   td:not(:last-child) {
-    border-right: 1px solid rgba(34, 81, 141, 0.18);
+    border-right: 1px solid  rgba(0, 40, 100, 0.2);
   }
 
-  tbody td:last-child {
-    font-size: 0.875em;
+  tbody td:first-child {
+  font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco,
+    Consolas, monospace;
   }
+
+  tbody tr:nth-child(even) td,
+  tbody tr:nth-child(even) th {
+    background: rgba(0, 40, 100, 0.025);
+  } 
 
 </style>

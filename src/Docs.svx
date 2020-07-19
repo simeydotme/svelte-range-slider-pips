@@ -17,7 +17,7 @@
   let float1 = [50];
   let float2 = [40,60];
   let pips1 = [50];
-  let pips2 = [5];
+  let pips2 = [2];
   let pips3 = [2];
   let range1 = [30,70];
   let range2 = [50];
@@ -193,13 +193,29 @@ them `pips` which sit below the slider by default to mark regular intervals in t
 </Example>
 
 <Example values={pips2}>
-  <div slot="code">{`<RangeSlider pips max={10} />`}</div>
-  <div slot="slider"><RangeSlider pips max={10} bind:values={pips2} /></div>
+  <div slot="code">{`<RangeSlider pips max={5} />`}</div>
+  <div slot="slider"><RangeSlider pips max={5} bind:values={pips2} /></div>
 </Example>
 
-<Example values={pips3}>
-  <div slot="code">{`<RangeSlider pips max={5} />`}</div>
-  <div slot="slider"><RangeSlider pips max={5} bind:values={pips3} /></div>
+<Example values={pips3} css active="css">
+  <div slot="code">{`<RangeSlider pips id="reverse-pips" max={50} />`}</div>
+  <div slot="css">{`#reverse-pips .rangeSlider__pips {
+  bottom: auto;
+  top: -1em;
+}
+#reverse-pips .pip {
+  background: rgb(198, 187, 224);
+  top: auto;
+  bottom: 0.25em;
+  width: 2px;
+  transform: translateX(-1px);
+  transition-duration: 0.5s;
+}
+#reverse-pips .pip.selected {
+  background: rgb(76, 0, 255);
+  transition-duration: 0.05s;
+}`}</div>
+  <div slot="slider"><RangeSlider pips id="reverse-pips" max={50} bind:values={pips3} /></div>
 </Example>
 
 <small><em>note: It'd be very bad for performance to display too many pips as they each represent

@@ -4,24 +4,35 @@
   // import "prism-svelte";
   import RangeSlider from "svelte-range-slider-pips";
 
-  export let active = "view";
+  export let active = "code";
   export let code = true;
+  export let css = false;
   export let values;
 
 </script>
 
 <style>
-  .example {
-    margin: 2em 0;
+  .example + .example,
+  p + .example {
+    margin: 2em 0 0;
   }
   .tabs {
-    border-bottom: 1px solid transparent;
     padding: 0 1em;
     display: flex;
     align-content: center;
+    position: relative;
   }
-  .tabs.border {
-    border-bottom-color: #434d5a;
+  .tabs.hide {
+    display: none;
+  }
+  .tabs.border:after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    bottom: -1px;
+    height: 1px;
+    background: #434d5a;
   }
   .tab {
     padding: 0.5em 1.5em;
@@ -37,7 +48,8 @@
   .slot {
     display: none;
   }
-  .slot.active {
+  .slot.active,
+  .slot.slider {
     display: block;
   }
   .slider {
@@ -48,35 +60,18 @@
     text-align: right;
     display: block;
   }
-  @media screen and (min-width: 56em) {
-    .example {
-      margin: 1em 0 2em;
-    }
-    .tabs {
-      display: none;
-    }
-    .slot {
-      display: block;
-    }
-    .slider {
-      padding: 1em ;
-    }
+  .values code {
+    color: rgb(255, 0, 76);
+  }
+  .example :global(pre) {
+    margin: 0;
   }
 </style>
 
 <section class="example">
 
-  <div class="tabs" class:border={active === 'view'}>
-    <div
-      class="tab tab-view"
-      class:active={active === 'view'}
-      on:click={() => {
-        active = 'view';
-      }}>
-      <img
-        src="public/images/icons8-search-100.png"
-        alt="icon of a magnifying glass, for viewing the output slider" />
-    </div>
+  <div class="tabs border" class:hide={ !css }>
+
     <div
       class="tab tab-code"
       class:active={active === 'code'}
@@ -84,9 +79,21 @@
         active = 'code';
       }}>
       <img
-        src="public/images/icons8-code-100.png"
-        alt="icon of a code editor, for viewing the input code" />
+        src="public/images/icons8-svelte-100.png"
+        alt="icon of the svelte logo, for viewing the input code" />
     </div>
+
+    <div
+      class="tab tab-css"
+      class:active={active === 'css'}
+      on:click={() => {
+        active = 'css';
+      }}>
+      <img
+        src="public/images/icons8-css3-100.png"
+        alt="icon of the css3 logo, for viewing the css code" />
+    </div>
+
   </div>
 
   <div class="slots">
@@ -101,7 +108,17 @@
 
     </div>
 
-    <div class="slot slider" class:active={active === 'view'}>
+    <div class="slot css" class:active={active === 'css'}>
+
+      {#if css}
+      <Prism language="css">
+        <slot name="css"></slot>
+      </Prism>
+      {/if}
+
+    </div>
+
+    <div class="slot slider">
 
       <slot name="slider" v={values}>
         <RangeSlider  />
@@ -112,6 +129,7 @@
       {/if}
 
     </div>
+
   </div>
 
 </section>

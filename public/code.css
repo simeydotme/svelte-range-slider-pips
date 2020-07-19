@@ -16,10 +16,11 @@ pre[class*="language-"] {
   border-radius: 5px;
 }
 code {
-  color: #f01b5b;
-  background-color: #e7edf5;
-  border-radius: 5px;
-  padding: 0.1em 0.4em 0.2em;
+  color: #00869e;
+  background-color: #ecf0f5;
+  border: 1px solid #e0e8f5;
+  border-radius: 3px;
+  padding: 0.1em 0.4em 0.1em;
 }
 pre > code {
   background-color: inherit;
@@ -172,4 +173,15 @@ pre[class*="language-"] {
 
 .token.entity {
   cursor: help;
+}
+
+/* CSS */
+
+.language-css .token.function,
+.language-css .token.punctuation {
+  color: #b6aaff;
+}
+
+.language-css .token.property {
+  color: #8be9fd;
 }

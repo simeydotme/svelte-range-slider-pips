@@ -1,0 +1,19 @@
+
+#reverse-pips .rangeSlider__pips {
+  bottom: auto;
+  top: -1em;
+}
+
+#reverse-pips .pip {
+  background: rgb(198, 187, 224);
+  top: auto;
+  bottom: 0.25em;
+  width: 2px;
+  transform: translateX(-1px);
+  transition-duration: 0.5s;
+}
+
+#reverse-pips .pip.selected {
+  background: rgb(76, 0, 255);
+  transition-duration: 0.05s;
+}
