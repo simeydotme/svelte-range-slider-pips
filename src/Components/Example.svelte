@@ -1,7 +1,5 @@
 <script>
-  // import { onMount } from "svelte/internal";
   import Prism from "svelte-prism";
-  // import "prism-svelte";
   import RangeSlider from "svelte-range-slider-pips";
 
   export let active = "code";
@@ -36,7 +34,13 @@
   }
   .tab {
     padding: 0.5em 1.5em;
+    margin-right: 2px;
     border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .tab:hover {
+    background: rgba(67, 77, 91, 0.1);
   }
   .tab.active {
     background: #434d5a;

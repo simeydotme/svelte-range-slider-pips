@@ -129,3 +129,49 @@ a[href^="#"]:hover,
     transform: translate(-1.5em, 0.5em);
   }
 }
+
+.table-wrapper {
+  border-radius: 5px;
+  border: 1px solid rgba(0, 40, 100, 0.2);
+  overflow: hidden;
+  font-size: 0.875em;
+}
+
+table {
+  border-radius: 5px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  background: rgba(0, 40, 100, 0.05);
+}
+
+thead th {
+  padding: 0.5em 0.4em;
+  color: rgba(0, 40, 100, 0.6);
+}
+
+th, td strong {
+  font-weight: 600;
+}
+
+th, td {
+  padding: 0.3em 0.4em;
+  vertical-align: top;
+}
+
+thead tr,
+tr:not(:last-child) {
+  border-bottom: 1px solid  rgba(0, 40, 100, 0.2);
+}
+
+th:not(:last-child), 
+td:not(:last-child) {
+  border-right: 1px solid  rgba(0, 40, 100, 0.2);
+}
+
+tbody tr:nth-child(even) td,
+tbody tr:nth-child(even) th {
+  background: rgba(0, 40, 100, 0.025);
+} 

@@ -1,0 +1,35 @@
+<script>
+  
+  import RangeSlider from "svelte-range-slider-pips";
+
+</script>
+
+<div class="table-wrapper">
+
+| `step={𝑛}` | `pipstep={𝑛}` | Result                                                         |
+| :--------- | :------------ | :------------------------------------------------------------- |
+| `1`        | `1`           | <RangeSlider step={1} pipstep={1} max={20} pips all float />   |
+| `2.5`      | `1`           | <RangeSlider step={2.5} pipstep={1} max={20} pips all float /> |
+| `5`        | `1`           | <RangeSlider step={5} pipstep={1} max={20} pips all float />   |
+| `1`        | `2`           | <RangeSlider step={1} pipstep={2} max={20} pips all float />   |
+| `2.5`      | `2`           | <RangeSlider step={2.5} pipstep={2} max={20} pips all float /> |
+| `3`        | `2`           | <RangeSlider step={3} pipstep={2} max={20} pips all float />   |
+| `5`        | `2`           | <RangeSlider step={5} pipstep={2} max={20} pips all float />   |
+| `0.5`      | `5`           | <RangeSlider step={0.5} pipstep={5} max={20} pips all float /> |
+| `1`        | `5`           | <RangeSlider step={1} pipstep={5} max={20} pips all float />   |
+| `3`        | `5`           | <RangeSlider step={3} pipstep={5} max={20} pips all float />   |
+
+</div>
+
+<style>
+
+  table td {
+    vertical-align: middle;
+  }
+  
+  td:nth-child(1),
+  td:nth-child(2) {
+    width: 100px;
+  }
+
+</style>

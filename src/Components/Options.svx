@@ -1,77 +1,33 @@
 <div class="table-wrapper">
 
-| prop                | type               | default                             |
-| :------------------ | :----------------- | :---------------------------------- | --
+| prop                | type               | default                             |                                                                                                                                                                 |
+| :------------------ | :----------------- | :---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **values**          | `Array`            | `[50]`                              | Array of values to apply on the slider. Multiple values creates multiple handles. (_**note:** A slider with `range` property set can only have two values max_) |
-| **min**             | `Number`           | `0`                                 | Minimum value for the slider |
-| **max**             | `Number`           | `100`                               | Maximum value for the slider |
-| **step**            | `Number`           | `1`                                 | Every `nth` value to allow handle to stop at |
-| **range**           | `Boolean`/`String` | `false`                             | Whether to style as a range picker. Use `range='min'` or `range='max'` for min/max variants |
-| **float**           | `Boolean`          | `false`                             | Set true to add a floating label above focussed handles |
-| **vertical**        | `Boolean`          | `false`                             | Make the slider render vertically |
-| **pips**            | `Boolean`          | `false`                             | Whether to show pips/notches on the slider |
-| **pipstep**         | `Number`           | `1`/`10`/`20`                       | Every `nth` step to show a pip for. This has multiple defaults depending on `values` property |
-| **first**           | `Boolean`/`String` | `false`                             | Whether to show a pip or label for the first value on slider. Use `first='label'` to show a label value |
-| **last**            | `Boolean`/`String` | `false`                             | Whether to show a pip or label for the last value on slider. Use `last='label'` to show a label value |
-| **rest**            | `Boolean`/`String` | `false`                             | Whether to show a pip or label for the all other values. Use `rest='label'` to show a label value |
-| **prefix**          | `String`           | `""`                                | A string to prefix to all displayed values |
-| **suffix**          | `String`           | `""`                                | A string to suffix to all displayed values |
-| **formatter**       | `Function`         | `(v) => v`                          | A function to re-format values before they are displayed |
-| **handleFormatter** | `Function`         | `formatter`                         | A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property |
-| **springValues**    | `Object`           | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving |
+| **min**             | `Number`           | `0`                                 | Minimum value for the slider                                                                                                                                    |
+| **max**             | `Number`           | `100`                               | Maximum value for the slider                                                                                                                                    |
+| **step**            | `Number`           | `1`                                 | Every `nth` value to allow handle to stop at                                                                                                                    |
+| **range**           | `Boolean`/`String` | `false`                             | Whether to style as a range picker. Use `range='min'` or `range='max'` for min/max variants                                                                     |
+| **float**           | `Boolean`          | `false`                             | Set true to add a floating label above focussed handles                                                                                                         |
+| **vertical**        | `Boolean`          | `false`                             | Make the slider render vertically                                                                                                                               |
+| **pips**            | `Boolean`          | `false`                             | Whether to show pips/notches on the slider                                                                                                                      |
+| **pipstep**         | `Number`           | `1`/`10`/`20`                       | Every `nth` step to show a pip for. This has multiple defaults depending on `values` property                                                                   |
+| **first**           | `Boolean`/`String` | `false`                             | Whether to show a pip or label for the first value on slider. Use `first='label'` to show a label value                                                         |
+| **last**            | `Boolean`/`String` | `false`                             | Whether to show a pip or label for the last value on slider. Use `last='label'` to show a label value                                                           |
+| **rest**            | `Boolean`/`String` | `false`                             | Whether to show a pip or label for the all other values. Use `rest='label'` to show a label value                                                               |
+| **prefix**          | `String`           | `""`                                | A string to prefix to all displayed values                                                                                                                      |
+| **suffix**          | `String`           | `""`                                | A string to suffix to all displayed values                                                                                                                      |
+| **formatter**       | `Function`         | `(v) => v`                          | A function to re-format values before they are displayed                                                                                                        |
+| **handleFormatter** | `Function`         | `formatter`                         | A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property                   |
+| **springValues**    | `Object`           | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving                                                                                  |
+| **id**              | `String`           | `undefined`                         | Provide an optional `id` attribute to the component for styling/other reasons                                                                                   |
 
 </div>
 
 <style>
-  
-  .table-wrapper {
-    border-radius: 5px;
-    border: 1px solid rgba(0, 40, 100, 0.2);
-    overflow: hidden;
-    font-size: 0.875em;
-  }
-
-  table {
-    border-radius: 5px;
-    border-collapse: collapse;
-  }
-
-  thead {
-    background: rgba(0, 40, 100, 0.05);
-  }
-
-  thead th {
-    padding: 0.5em 0.4em;
-    color: rgba(0, 40, 100, 0.6);
-  }
-
-  th, td strong {
-    font-weight: 600;
-  }
-
-  th, td {
-    padding: 0.3em 0.4em;
-    vertical-align: top;
-  }
-
-  thead tr,
-  tr:not(:last-child) {
-    border-bottom: 1px solid  rgba(0, 40, 100, 0.2);
-  }
-
-  th:not(:last-child), 
-  td:not(:last-child) {
-    border-right: 1px solid  rgba(0, 40, 100, 0.2);
-  }
 
   tbody td:first-child {
   font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco,
     Consolas, monospace;
   }
-
-  tbody tr:nth-child(even) td,
-  tbody tr:nth-child(even) th {
-    background: rgba(0, 40, 100, 0.025);
-  } 
 
 </style>
