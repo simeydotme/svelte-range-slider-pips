@@ -49,14 +49,14 @@
 	
   <div class="content" style="--range-handle-focus: {color}; --range-handle: {lightColor}">
 
-    <RangeSlider vertical range values={[10,30]} pips rest="label" />
-    <RangeSlider vertical range="min" values={[10]} pips rest="label" />
-    <RangeSlider vertical range="max" values={[30]} pips rest="label" />
+    <RangeSlider vertical range values={[10,30]} pips all="label" />
+    <RangeSlider vertical range="min" values={[10]} pips all />
+    <RangeSlider vertical range="max" values={[30]} pips />
     <br>
     <RangeSlider />
     <RangeSlider bind:values />{values}
     <RangeSlider float />
-    <RangeSlider float pips />
+    <RangeSlider float pips all="label" />
     <RangeSlider float pips first="label" last="label" />
     <RangeSlider float pips first="label" last="label" rest="label" />
     <br>
@@ -98,8 +98,5 @@
     main {
       padding: 50px;
     }
-  }
-  :global(.rangeSlider.rangeSlider) {
-    /* margin-bottom: 3em; */
   }
 </style>

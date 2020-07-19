@@ -15,6 +15,7 @@
   // range pips / values props
   export let pips = false;
   export let pipstep;
+  export let all;
   export let first;
   export let last;
   export let rest;
@@ -604,7 +605,7 @@
   class:min={range === 'min'}
   class:max={range === 'max'}
   class:pips
-  class:pip-labels={first === 'label' || last === 'label' || rest === 'label'}
+  class:pip-labels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
   on:touchstart|preventDefault={sliderInteractStart}
   on:mousedown={sliderInteractStart}>
   {#each values as value, index}
@@ -643,6 +644,7 @@
       {step}
       {range}
       {vertical}
+      {all}
       {first}
       {last}
       {rest}
