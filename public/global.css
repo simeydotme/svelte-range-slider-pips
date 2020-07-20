@@ -32,6 +32,14 @@ textarea {
   border-radius: 2px;
 }
 
+hr {
+  width: 90%;
+  margin: 2em auto;
+  height: 1px;
+  background: rgba(0, 40, 100, 0.2);
+  border: none;
+}
+
 h1,
 h2,
 h3,
@@ -65,6 +73,8 @@ h3 {
 h4 {
   font-size: 1.3em;
   font-weight: 700;
+  margin-top: 0;
+  padding-top: 2em;
 }
 
 p {
@@ -77,57 +87,25 @@ p {
 }
 
 a {
+  color: #de6262;
+  border-bottom: 1px dotted transparent;
   text-decoration: none;
   line-height: inherit;
+  transition: all 0.2s ease;
 }
 
 a:focus,
 a:hover {
+  color: #00c7d7;
   border-bottom: 1px dotted;
 }
 
-a img {
-  border: none;
-}
-
-a[href^="#"],
-a[href^="#"]:hover {
+h1[id] a,
+h2[id] a,
+h3[id] a,
+h4[id] a,
+h5[id] a {
   color: #434d5a;
-}
-a[href^="#"]:before {
-  content: "";
-  position: absolute;
-  font-size: 0.7em;
-  -webkit-transform: translate(-3em, 0.5em);
-  -ms-transform: translate(-3em, 0.5em);
-  transform: translate(-3em, 0.5em);
-  transition: all 0.2s ease;
-  color: #de6262;
-  opacity: 0;
-}
-a[href^="#"]:focus,
-a[href^="#"]:hover,
-.block:target > h2 > a,
-.sub-block:target > h3 > a {
-  outline: 0;
-}
-@media only screen and (min-width: 701px) {
-  a[href^="#"]:focus:before,
-  a[href^="#"]:hover:before {
-    opacity: 1;
-    -webkit-transform: translate(-1.5em, 0.5em);
-    -ms-transform: translate(-1.5em, 0.5em);
-    transform: translate(-1.5em, 0.5em);
-  }
-}
-@media only screen and (min-width: 701px) {
-  .block:target > h2 > a:before,
-  .sub-block:target > h3 > a:before {
-    opacity: 1;
-    -webkit-transform: translate(-1.5em, 0.5em);
-    -ms-transform: translate(-1.5em, 0.5em);
-    transform: translate(-1.5em, 0.5em);
-  }
 }
 
 .table-wrapper {

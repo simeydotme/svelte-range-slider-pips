@@ -36,13 +36,11 @@ ol.linenums {
   color: #fff;
 }
 
-a,
 code a > .com,
 pre a > .com {
   color: #de6262;
   transition: color 0.2s ease;
 }
-a:hover,
 code a > .com:hover,
 pre a > .com:hover {
   color: #00c7d7;

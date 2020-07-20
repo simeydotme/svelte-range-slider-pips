@@ -1,9 +1,8 @@
 
-#reverse-pips .rangeSlider__pips {
+#reverse-pips .rangePips {
   bottom: auto;
   top: -1em;
 }
-
 #reverse-pips .pip {
   background: rgb(198, 187, 224);
   top: auto;
@@ -11,9 +10,18 @@
   width: 2px;
   transform: translateX(-1px);
   transition-duration: 0.5s;
+  opacity: 0.7;
 }
-
+#reverse-pips .pip:nth-child(5n+1) {
+  height: 0.8em;
+  opacity: 0.9;
+}
+#reverse-pips .pip:nth-child(5n),
+#reverse-pips .pip:nth-child(5n+2) {
+  height: 0.65em;
+}
 #reverse-pips .pip.selected {
-  background: rgb(76, 0, 255);
+  background: rgb(255, 0, 157);
   transition-duration: 0.05s;
+  opacity: 1;
 }

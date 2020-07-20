@@ -35,7 +35,7 @@
 <style>
 
   .soon {
-    margin: 8em auto;
+    margin: 4em auto 8em ;
     text-align: center;
   }
   .soon img {
@@ -54,8 +54,6 @@
 # Svelte Range Slider & Pips
 
 A reactive, accessible, **multi-thumb, range slider component for use in a svelte application**; with the ability to display "pips" or "notches" along the range.
-
-## Example
 
 <RangeSlider id="intro" float pips first="label" last="label" />
 
@@ -102,6 +100,22 @@ with this id.
  .rangeSlider > .rangePips > .pip.selected {}  /* if a pip is selected */
  .rangeSlider > .rangePips > .pip.in-range {}  /* if a pip is somewhere in the range */
  .rangeSlider > .rangePips > .pip > pipVal {}  /* the label for the pip */`}
+</Prism>
+
+There's also a bunch of CSS Variables for color-themeing if only color changes
+are desired; These won't affect IE, though, so if you're looking for IE support it's
+better to completely override the CSS above.
+
+<Prism language="css">
+  --range-slider:          #d7dada; /* slider main background color */
+ --range-handle-inactive: #99a2a2; /* inactive handle color */
+ --range-handle:          #838de7; /* non-focussed handle color */
+ --range-handle-focus:    #4a40d4; /* focussed handle color */
+ --range-range-inactive:  var(--range-handle-inactive); /* inactive range bar background color */
+ --range-range:           var(--range-handle-focus); /* active range bar background color */
+ --range-float-inactive:  var(--range-handle-inactive); /* inactive floating label background color */
+ --range-float:           var(--range-handle-focus); /* floating label background color */
+ --range-float-text:      white; /* text color on floating label */
 </Prism>
 
 ## Usage
@@ -240,38 +254,15 @@ them `pips` which sit below the slider by default to mark regular intervals in t
   <div slot="slider"><RangeSlider pips max={5} bind:values={pips2} /></div>
 </Example>
 
-#### Styling example for pips
-
-<Example values={pips3} css active="css">
-  <div slot="code">{`<RangeSlider pips id="reverse-pips" max={50} />`}</div>
-  <div slot="css">{`#reverse-pips .rangeSlider__pips {
-  bottom: auto;
-  top: -1em;
-}
-#reverse-pips .pip {
-  background: rgb(198, 187, 224);
-  top: auto;
-  bottom: 0.25em;
-  width: 2px;
-  transform: translateX(-1px);
-  transition-duration: 0.5s;
-}
-#reverse-pips .pip.selected {
-  background: rgb(76, 0, 255);
-  transition-duration: 0.05s;
-}`}</div>
-  <div slot="slider"><RangeSlider pips id="reverse-pips" max={50} bind:values={pips3} /></div>
-</Example>
-
-<small><em>note: It'd be very bad for performance to display too many pips as they each represent
-an individual DOM node. Also there are only so many pixels on a screen. So use the 
-<a href="#pip-steps"><code>pipstep</code></a> feature to aestheitcally limit the amount of 
-pips rendered to screen.</em></small>
-
 ### Pip Labels
 
-There are props for `first`, `last` and `rest` which determine how to display the pips
+There are props for `all`, `first`, `last` and `rest` which determine how to display the pips
 along the range. These props can be a `Boolean` or `"label"` to show a label with the pip.
+
+<Example>
+  <div slot="code">{`<RangeSlider pips all rest={false} />`}</div>
+  <div slot="slider"><RangeSlider pips all rest={false} /></div>
+</Example>
 
 <Example>
   <div slot="code">{`<RangeSlider pips first='label' last='label' />`}</div>
@@ -284,8 +275,8 @@ along the range. These props can be a `Boolean` or `"label"` to show a label wit
 </Example>
 
 <Example>
-  <div slot="code">{`<RangeSlider pips first='label' last='label' rest='label' />`}</div>
-  <div slot="slider"><RangeSlider pips first='label' last='label' rest='label' /></div>
+  <div slot="code">{`<RangeSlider pips all='label' />`}</div>
+  <div slot="slider"><RangeSlider pips all='label' /></div>
 </Example>
 
 ### Pip Steps
@@ -313,10 +304,52 @@ with `min=0` and `max=100` the `pipstep` would be `5`
   <div slot="slider"><RangeSlider pips step={2.5} pipstep={10} first="label" last="label" rest="label" bind:values={pipstep3} /></div>
 </Example>
 
-<small><em>Additional control can be had over the display of pips <a href="#">by using css' <code>nth-child()</code> property.</a></em></small>
+It'd be quite bad for performance to display too many pips as they each represent
+an individual DOM node. Also there are only so many pixels on a screen. So use the 
+`pipstep` feature to aesthetically limit the amount of pips rendered to screen.
+
+#### Styling example for pips
+
+Additional control can be had over the display of pips [by using css' `nth-child()` property.](#styling-example-for-pips)
+
+<Example values={pips3} css active="css">
+  <div slot="code">{`<RangeSlider pips id="reverse-pips" max={50} />`}</div>
+  <div slot="css">{`#reverse-pips .rangePips {
+   bottom: auto;
+   top: -1em;
+ }
+ #reverse-pips .pip {
+   background: rgb(198, 187, 224);
+   top: auto;
+   bottom: 0.25em;
+   width: 2px;
+   transform: translateX(-1px);
+   transition-duration: 0.5s;
+   opacity: 0.7;
+ }
+ #reverse-pips .pip:nth-child(5n+1) {
+   height: 0.8em;
+   opacity: 0.9;
+ }
+ #reverse-pips .pip:nth-child(5n),
+ #reverse-pips .pip:nth-child(5n+2) {
+   height: 0.65em;
+ }
+ #reverse-pips .pip.selected {
+   background: rgb(255, 0, 157);
+   transition-duration: 0.05s;
+   opacity: 1;
+ }`}</div>
+  <div slot="slider"><RangeSlider pips id="reverse-pips" max={50} bind:values={pips3} /></div>
+</Example>
 
 #### Example table of `step` and `pipstep` interaction
 <Steps />
+
+
+
+
+---
 
 <div class="soon">
 
