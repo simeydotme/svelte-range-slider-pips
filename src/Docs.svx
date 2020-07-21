@@ -30,8 +30,13 @@
   let prefix1 = [50];
   let prefix2 = [40,60];
   let prefix3 = [50];
-  let prefix4 = [50];
+  let formatter1 = [50];
+  let formatter2 = [3];
+  let formatter3 = [7];
+  let formatter4 = [new Date().getDay()];
 
+  const format1 = new Intl.NumberFormat("en-US");
+  const moods = ["😁","😀","😊","😐","😥","😫"];
 
 </script>
 
@@ -238,8 +243,8 @@ the handle and shows the current value. _(hover/select to see it)_
 </Example>
 
 <Example values={float2}>
-  <div slot="code">{`<RangeSlider float values={[40,60]}/>`}</div>
-  <div slot="slider"><RangeSlider float bind:values={float2} /></div>
+  <div slot="code">{`<RangeSlider float hover={false} values={[40,60]} />`}</div>
+  <div slot="slider"><RangeSlider float hover={false} bind:values={float2} /></div>
 </Example>
 
 ### With Pips
@@ -286,7 +291,7 @@ along the range. These props can be a `Boolean` or `"label"` to show a label wit
 
 It is not always desirable to show every single value as a `pip` on the range, and so
 this option works much in the same way as `step` but only affects the rendering of the
-pips. 
+pips.
 
 By default, the `pipstep` is set to 1/20 of the range of values (`max - min`), so for a slider
 with `min=0` and `max=100` the `pipstep` would be `5`
@@ -308,7 +313,7 @@ with `min=0` and `max=100` the `pipstep` would be `5`
 </Example>
 
 It'd be quite bad for performance to display too many pips as they each represent
-an individual DOM node. Also there are only so many pixels on a screen. So use the 
+an individual DOM node. Also there are only so many pixels on a screen. So use the
 `pipstep` feature to aesthetically limit the amount of pips rendered to screen.
 
 #### Styling example for pips
@@ -346,13 +351,15 @@ Additional control can be had over the display of pips [by using css' `nth-child
   <div slot="slider"><RangeSlider pips id="reverse-pips" max={50} bind:values={pips3} /></div>
 </Example>
 
-#### `step` and `pipstep` interaction 
+#### `step` and `pipstep` interaction
+
 See the table below for examples of how different `step` and `pipstep` values interact.
 <Steps />
 
 ### Prefixes and Suffixes
-When rendering the labels (on handle, and pips) both for screen and readers, the values
-can be prefixed or suffixed with a string value to add context to the values.
+
+When rendering the labels (on handle, and pips) both for screen and readers; the values
+can be prefixed or suffixed with a string to add context to the values.
 
 <Example values={prefix1}>
   <div slot="code">{`<RangeSlider prefix="€" />`}</div>
@@ -368,6 +375,44 @@ can be prefixed or suffixed with a string value to add context to the values.
   <div slot="code">{`<RangeSlider prefix="~" suffix=" 🎈" />`}</div>
   <div slot="slider"><RangeSlider step={1} pips float last="label" prefix="~" suffix=" 🎈" bind:values={prefix3} max={99} /></div>
 </Example>
+
+### Formatter
+
+If a more complicated way of rendering labels is required, and `prefix`/`suffix` cannot
+accomplish the desired result, then it's possible to define a `formatter` which accepts
+a function with the argument of the current value.
+
+<Example values={formatter1}>
+  <div slot="code">{`<script>
+   // use the Intl formatter to add the correct number notation
+   const num = new Intl.NumberFormat("en-US");
+ </script>
+ <RangeSlider step={10} formatter={ v => num.format(v * 1000) } />`}</div>
+  <div slot="slider"><RangeSlider formatter={ v => format1.format(v * 1000) } pips float all="label" step={10} bind:values={formatter1} /></div>
+</Example>
+
+<Example>
+  <div slot="code">{`<script>
+  const moods = ["😁","😀","😊","😐","😥","😫"];
+ </script>
+   
+ <RangeSlider bind:values formatter={ v => moods[v] } max={moods.length-1} /> 
+  
+ <p>{moods[values[0]]}</p>`}</div>  
+  <div slot="slider">
+    <RangeSlider formatter={ v => moods[v] } max={moods.length-1} pips all="label" bind:values={formatter2} />
+    <p style="font-size: 2em; text-align: center;">{moods[formatter2[0]]}</p>
+  </div>
+</Example>
+
+`handleFormatter` can be used additionally to format the handle in a different
+way to the pip labels.
+
+<Example values={formatter3}>
+  <div slot="code">{`<RangeSlider formatter={ v => v + "²" } handleFormatter={ v => v * v } />`}</div>
+  <div slot="slider"><RangeSlider formatter={ v => v + "²" } handleFormatter={ v => v * v } pips float all="label" max={15} bind:values={formatter3} /></div>
+</Example>
+
 
 ---
 
