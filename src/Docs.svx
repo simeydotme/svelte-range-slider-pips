@@ -27,7 +27,10 @@
   let pipstep1 = [50];
   let pipstep2 = [50];
   let pipstep3 = [50];
-  let values12 = [50];
+  let prefix1 = [50];
+  let prefix2 = [40,60];
+  let prefix3 = [50];
+  let prefix4 = [50];
 
 
 </script>
@@ -291,17 +294,17 @@ with `min=0` and `max=100` the `pipstep` would be `5`
 <Example values={pipstep1}>
   <div slot="code">{`<!-- using default pipstep -->
  <RangeSlider pips />`}</div>
-  <div slot="slider"><RangeSlider pips first="label" last="label" rest="label" bind:values={pipstep1} /></div>
+  <div slot="slider"><RangeSlider pips all="label" bind:values={pipstep1} /></div>
 </Example>
 
 <Example values={pipstep2}>
   <div slot="code">{`<RangeSlider pips pipstep={20} />`}</div>
-  <div slot="slider"><RangeSlider pips pipstep={20} first="label" last="label" rest="label" bind:values={pipstep2} /></div>
+  <div slot="slider"><RangeSlider pips pipstep={20} all="label" bind:values={pipstep2} /></div>
 </Example>
 
 <Example values={pipstep3}>
   <div slot="code">{`<RangeSlider pips step={2.5} pipstep={10} />`}</div>
-  <div slot="slider"><RangeSlider pips step={2.5} pipstep={10} first="label" last="label" rest="label" bind:values={pipstep3} /></div>
+  <div slot="slider"><RangeSlider pips step={2.5} pipstep={10} all="label" bind:values={pipstep3} /></div>
 </Example>
 
 It'd be quite bad for performance to display too many pips as they each represent
@@ -343,11 +346,28 @@ Additional control can be had over the display of pips [by using css' `nth-child
   <div slot="slider"><RangeSlider pips id="reverse-pips" max={50} bind:values={pips3} /></div>
 </Example>
 
-#### Example table of `step` and `pipstep` interaction
+#### `step` and `pipstep` interaction 
+See the table below for examples of how different `step` and `pipstep` values interact.
 <Steps />
 
+### Prefixes and Suffixes
+When rendering the labels (on handle, and pips) both for screen and readers, the values
+can be prefixed or suffixed with a string value to add context to the values.
 
+<Example values={prefix1}>
+  <div slot="code">{`<RangeSlider prefix="€" />`}</div>
+  <div slot="slider"><RangeSlider step={10} pips float all="label" prefix="€" bind:values={prefix1} /></div>
+</Example>
 
+<Example values={prefix2}>
+  <div slot="code">{`<RangeSlider suffix="%" />`}</div>
+  <div slot="slider"><RangeSlider step={10} pips float all="label" suffix="%" bind:values={prefix2} /></div>
+</Example>
+
+<Example values={prefix3}>
+  <div slot="code">{`<RangeSlider prefix="~" suffix=" 🎈" />`}</div>
+  <div slot="slider"><RangeSlider step={1} pips float last="label" prefix="~" suffix=" 🎈" bind:values={prefix3} max={99} /></div>
+</Example>
 
 ---
 
