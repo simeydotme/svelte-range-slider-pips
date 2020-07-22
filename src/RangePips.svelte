@@ -36,9 +36,9 @@
 
   $: inRange = function(val) {
     if (range === "min") {
-      return values[0] < val;
-    } else if (range === "max") {
       return values[0] > val;
+    } else if (range === "max") {
+      return values[0] < val;
     } else if (range) {
       return values[0] < val && values[1] > val;
     }

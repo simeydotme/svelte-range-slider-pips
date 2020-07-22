@@ -60,9 +60,9 @@
     <RangeSlider float pips first="label" last="label" />
     <RangeSlider float pips first="label" last="label" rest="label" />
     <br>
-    <RangeSlider range values={[35,65]} float pips />
-    <RangeSlider range="min" values={[65]} float />
-    <RangeSlider range="max" values={[35]} pips />
+    <RangeSlider range values={[35,65]} pips all="label" float />
+    <RangeSlider range="min" values={[65]} pips all="label" float />
+    <RangeSlider range="max" values={[35]} pips all="label" float />
     <br>
     <RangeSlider float pips step={10} pipstep={1} />
     <RangeSlider float pips step={10} pipstep={2} />
