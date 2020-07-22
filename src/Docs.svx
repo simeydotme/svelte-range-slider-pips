@@ -34,9 +34,13 @@
   let formatter2 = [3];
   let formatter3 = [7];
   let formatter4 = [new Date().getDay()];
+  let hue = [244];
 
   const format1 = new Intl.NumberFormat("en-US");
   const moods = ["😁","😀","😊","😐","😥","😫"];
+
+  $: lightColor = `hsl(${Math.round(hue[0]) - 10}, 65%, 70%)`;
+  $: color = `hsl(${Math.round(hue[0])}, 63%, 54%)`;
 
 </script>
 
@@ -412,6 +416,66 @@ way to the pip labels.
   <div slot="code">{`<RangeSlider formatter={ v => v + "²" } handleFormatter={ v => v * v } />`}</div>
   <div slot="slider"><RangeSlider formatter={ v => v + "²" } handleFormatter={ v => v * v } pips float all="label" max={15} bind:values={formatter3} /></div>
 </Example>
+
+
+## Fancy Examples
+
+Here's a bunch of examples to give ideas of how to use the different options/styles.
+
+### Color Shifting Slider
+
+Using CSS variables bound to the input values for shifting the colours.
+
+<Example values={hue} css active="code">
+  <div slot="code">{`<script>
+    let hue = [244];
+    $: lightColor = \`hsl(\${Math.round(hue[0]) - 10}, 65%, 70%)\`;
+    $: color = \`hsl(\${Math.round(hue[0])}, 63%, 54%)\`;
+  </script>  
+  
+  <div style="--range-handle-focus: {color}; --range-range: {lightColor}">
+   <RangeSlider id="color-pips" bind:values={hue} 
+      range="min" max={255} pips pipstep={26} first={false} last={false} 
+    />
+  </div>`}</div>
+
+  <div slot="css">{`#color-pips {
+   border: 1px solid rgb(142, 142, 175);
+   height: 15px;
+ }
+ #color-pips .rangeBar {
+   height: 13px;
+ }
+ #color-pips .rangeHandle {
+   top: 7px;
+   height: 30px;
+   width: 30px;
+ }
+ #color-pips .rangeHandle .rangeNub {
+   border: 1px solid rgb(142, 142, 175);
+   border-radius: 3px;
+   box-shadow: -2px -2px 10px 1px rgba(0,0,0,0.3);
+ }
+ #color-pips .rangePips {
+   bottom: -3px;
+   z-index: 1;
+ }
+ #color-pips .rangePips .pip {
+   border-radius: 10px;
+   width: 5px;
+  height: 5px;
+  transform: translateX(-50%);
+ }
+ #color-pips .rangePips .pip.in-range {
+  opacity: 0.5;
+ }`}</div>
+  <div slot="slider" style="--range-handle-focus: {color}; --range-range: {lightColor}">
+    <RangeSlider id="color-pips" bind:values={hue} 
+      range="min" max={255} pips pipstep={26} first={false} last={false}  />
+  </div>
+</Example>
+
+
 
 
 ---

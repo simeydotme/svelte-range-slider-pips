@@ -25,3 +25,36 @@
   transition-duration: 0.05s;
   opacity: 1;
 }
+
+/***********************************/
+
+#color-pips {
+  border: 1px solid rgb(142, 142, 175);
+  height: 15px;
+}
+#color-pips .rangeBar {
+  height: 13px;
+}
+#color-pips .rangeHandle {
+  top: 7px;
+  height: 30px;
+  width: 30px;
+}
+#color-pips .rangeHandle .rangeNub {
+  border: 1px solid rgb(142, 142, 175);
+  border-radius: 3px;
+  box-shadow: -2px -2px 10px 1px rgba(0,0,0,0.3);
+}
+#color-pips .rangePips {
+  bottom: -3px;
+  z-index: 1;
+}
+#color-pips .rangePips .pip {
+  border-radius: 10px;
+  width: 5px;
+  height: 5px;
+  transform: translateX(-50%);
+}
+#color-pips .rangePips .pip.in-range {
+  opacity: 0.5;
+}

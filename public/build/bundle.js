@@ -5397,96 +5397,96 @@ var app = (function () {
     	let td34;
     	let code22;
     	let t89;
-    	let code23;
-    	let t91;
-    	let code24;
-    	let t93;
     	let td35;
-    	let t94;
-    	let code25;
-    	let t96;
-    	let code26;
-    	let t98;
-    	let t99;
+    	let t91;
     	let tr10;
     	let td36;
     	let strong10;
-    	let t101;
+    	let t93;
     	let td37;
-    	let code27;
-    	let t103;
-    	let code28;
-    	let t105;
+    	let code23;
+    	let t95;
     	let td38;
-    	let code29;
-    	let t107;
+    	let code24;
+    	let t97;
+    	let code25;
+    	let t99;
+    	let code26;
+    	let t101;
     	let td39;
-    	let t108;
-    	let code30;
-    	let t110;
-    	let t111;
+    	let t102;
+    	let code27;
+    	let t104;
+    	let code28;
+    	let t106;
+    	let t107;
     	let tr11;
     	let td40;
     	let strong11;
-    	let t113;
+    	let t109;
     	let td41;
+    	let code29;
+    	let t111;
+    	let code30;
+    	let t113;
+    	let td42;
     	let code31;
     	let t115;
-    	let code32;
-    	let t117;
-    	let td42;
-    	let code33;
-    	let t119;
     	let td43;
-    	let t120;
-    	let code34;
-    	let t122;
-    	let t123;
+    	let t116;
+    	let code32;
+    	let t118;
+    	let t119;
     	let tr12;
     	let td44;
     	let strong12;
-    	let t125;
+    	let t121;
     	let td45;
+    	let code33;
+    	let t123;
+    	let code34;
+    	let t125;
+    	let td46;
     	let code35;
     	let t127;
-    	let code36;
-    	let t129;
-    	let td46;
-    	let code37;
-    	let t131;
     	let td47;
-    	let t132;
-    	let code38;
-    	let t134;
-    	let t135;
+    	let t128;
+    	let code36;
+    	let t130;
+    	let t131;
     	let tr13;
     	let td48;
     	let strong13;
-    	let t137;
+    	let t133;
     	let td49;
+    	let code37;
+    	let t135;
+    	let code38;
+    	let t137;
+    	let td50;
     	let code39;
     	let t139;
-    	let code40;
-    	let t141;
-    	let td50;
-    	let code41;
-    	let t143;
     	let td51;
-    	let t144;
-    	let code42;
-    	let t146;
-    	let t147;
+    	let t140;
+    	let code40;
+    	let t142;
+    	let t143;
     	let tr14;
     	let td52;
     	let strong14;
-    	let t149;
+    	let t145;
     	let td53;
+    	let code41;
+    	let t147;
+    	let code42;
+    	let t149;
+    	let td54;
     	let code43;
     	let t151;
-    	let td54;
-    	let code44;
-    	let t153;
     	let td55;
+    	let t152;
+    	let code44;
+    	let t154;
     	let t155;
     	let tr15;
     	let td56;
@@ -5523,21 +5523,21 @@ var app = (function () {
     	let code50;
     	let t177;
     	let td67;
-    	let t178;
-    	let code51;
-    	let t180;
-    	let t181;
+    	let t179;
     	let tr18;
     	let td68;
     	let strong18;
-    	let t183;
+    	let t181;
     	let td69;
+    	let code51;
+    	let t183;
+    	let td70;
     	let code52;
     	let t185;
-    	let td70;
-    	let code53;
-    	let t187;
     	let td71;
+    	let t186;
+    	let code53;
+    	let t188;
     	let t189;
     	let tr19;
     	let td72;
@@ -5703,7 +5703,7 @@ var app = (function () {
     			tr7 = element("tr");
     			td24 = element("td");
     			strong7 = element("strong");
-    			strong7.textContent = "vertical";
+    			strong7.textContent = "hover";
     			t69 = space();
     			td25 = element("td");
     			code17 = element("code");
@@ -5711,15 +5711,15 @@ var app = (function () {
     			t71 = space();
     			td26 = element("td");
     			code18 = element("code");
-    			code18.textContent = "false";
+    			code18.textContent = "true";
     			t73 = space();
     			td27 = element("td");
-    			td27.textContent = "Make the slider render vertically";
+    			td27.textContent = "Whether to allow flaot-labels to show on hover";
     			t75 = space();
     			tr8 = element("tr");
     			td28 = element("td");
     			strong8 = element("strong");
-    			strong8.textContent = "pips";
+    			strong8.textContent = "vertical";
     			t77 = space();
     			td29 = element("td");
     			code19 = element("code");
@@ -5730,144 +5730,144 @@ var app = (function () {
     			code20.textContent = "false";
     			t81 = space();
     			td31 = element("td");
-    			td31.textContent = "Whether to show pips/notches on the slider";
+    			td31.textContent = "Make the slider render vertically";
     			t83 = space();
     			tr9 = element("tr");
     			td32 = element("td");
     			strong9 = element("strong");
-    			strong9.textContent = "pipstep";
+    			strong9.textContent = "pips";
     			t85 = space();
     			td33 = element("td");
     			code21 = element("code");
-    			code21.textContent = "Number";
+    			code21.textContent = "Boolean";
     			t87 = space();
     			td34 = element("td");
     			code22 = element("code");
-    			code22.textContent = "1";
-    			t89 = text("/");
-    			code23 = element("code");
-    			code23.textContent = "10";
-    			t91 = text("/");
-    			code24 = element("code");
-    			code24.textContent = "20";
-    			t93 = space();
+    			code22.textContent = "false";
+    			t89 = space();
     			td35 = element("td");
-    			t94 = text("Every ");
-    			code25 = element("code");
-    			code25.textContent = "nth";
-    			t96 = text(" step to show a pip for. This has multiple defaults depending on ");
-    			code26 = element("code");
-    			code26.textContent = "values";
-    			t98 = text(" property");
-    			t99 = space();
+    			td35.textContent = "Whether to show pips/notches on the slider";
+    			t91 = space();
     			tr10 = element("tr");
     			td36 = element("td");
     			strong10 = element("strong");
-    			strong10.textContent = "all";
-    			t101 = space();
+    			strong10.textContent = "pipstep";
+    			t93 = space();
     			td37 = element("td");
-    			code27 = element("code");
-    			code27.textContent = "Boolean";
-    			t103 = text("/");
-    			code28 = element("code");
-    			code28.textContent = "String";
-    			t105 = space();
+    			code23 = element("code");
+    			code23.textContent = "Number";
+    			t95 = space();
     			td38 = element("td");
-    			code29 = element("code");
-    			code29.textContent = "true";
-    			t107 = space();
+    			code24 = element("code");
+    			code24.textContent = "1";
+    			t97 = text("/");
+    			code25 = element("code");
+    			code25.textContent = "10";
+    			t99 = text("/");
+    			code26 = element("code");
+    			code26.textContent = "20";
+    			t101 = space();
     			td39 = element("td");
-    			t108 = text("Whether to show a pip or label for all the slider values. Use ");
-    			code30 = element("code");
-    			code30.textContent = "all='label'";
-    			t110 = text(" to show a labels");
-    			t111 = space();
+    			t102 = text("Every ");
+    			code27 = element("code");
+    			code27.textContent = "nth";
+    			t104 = text(" step to show a pip for. This has multiple defaults depending on ");
+    			code28 = element("code");
+    			code28.textContent = "values";
+    			t106 = text(" property");
+    			t107 = space();
     			tr11 = element("tr");
     			td40 = element("td");
     			strong11 = element("strong");
-    			strong11.textContent = "first";
-    			t113 = space();
+    			strong11.textContent = "all";
+    			t109 = space();
     			td41 = element("td");
-    			code31 = element("code");
-    			code31.textContent = "Boolean";
-    			t115 = text("/");
-    			code32 = element("code");
-    			code32.textContent = "String";
-    			t117 = space();
+    			code29 = element("code");
+    			code29.textContent = "Boolean";
+    			t111 = text("/");
+    			code30 = element("code");
+    			code30.textContent = "String";
+    			t113 = space();
     			td42 = element("td");
-    			code33 = element("code");
-    			code33.textContent = "false";
-    			t119 = space();
+    			code31 = element("code");
+    			code31.textContent = "true";
+    			t115 = space();
     			td43 = element("td");
-    			t120 = text("Whether to show a pip or label for the first value on slider. Use ");
-    			code34 = element("code");
-    			code34.textContent = "first='label'";
-    			t122 = text(" to show a label value");
-    			t123 = space();
+    			t116 = text("Whether to show a pip or label for all the slider values. Use ");
+    			code32 = element("code");
+    			code32.textContent = "all='label'";
+    			t118 = text(" to show a labels");
+    			t119 = space();
     			tr12 = element("tr");
     			td44 = element("td");
     			strong12 = element("strong");
-    			strong12.textContent = "last";
-    			t125 = space();
+    			strong12.textContent = "first";
+    			t121 = space();
     			td45 = element("td");
-    			code35 = element("code");
-    			code35.textContent = "Boolean";
-    			t127 = text("/");
-    			code36 = element("code");
-    			code36.textContent = "String";
-    			t129 = space();
+    			code33 = element("code");
+    			code33.textContent = "Boolean";
+    			t123 = text("/");
+    			code34 = element("code");
+    			code34.textContent = "String";
+    			t125 = space();
     			td46 = element("td");
-    			code37 = element("code");
-    			code37.textContent = "false";
-    			t131 = space();
+    			code35 = element("code");
+    			code35.textContent = "false";
+    			t127 = space();
     			td47 = element("td");
-    			t132 = text("Whether to show a pip or label for the last value on slider. Use ");
-    			code38 = element("code");
-    			code38.textContent = "last='label'";
-    			t134 = text(" to show a label value");
-    			t135 = space();
+    			t128 = text("Whether to show a pip or label for the first value on slider. Use ");
+    			code36 = element("code");
+    			code36.textContent = "first='label'";
+    			t130 = text(" to show a label value");
+    			t131 = space();
     			tr13 = element("tr");
     			td48 = element("td");
     			strong13 = element("strong");
-    			strong13.textContent = "rest";
-    			t137 = space();
+    			strong13.textContent = "last";
+    			t133 = space();
     			td49 = element("td");
-    			code39 = element("code");
-    			code39.textContent = "Boolean";
-    			t139 = text("/");
-    			code40 = element("code");
-    			code40.textContent = "String";
-    			t141 = space();
+    			code37 = element("code");
+    			code37.textContent = "Boolean";
+    			t135 = text("/");
+    			code38 = element("code");
+    			code38.textContent = "String";
+    			t137 = space();
     			td50 = element("td");
-    			code41 = element("code");
-    			code41.textContent = "false";
-    			t143 = space();
+    			code39 = element("code");
+    			code39.textContent = "false";
+    			t139 = space();
     			td51 = element("td");
-    			t144 = text("Whether to show a pip or label for the all other values. Use ");
-    			code42 = element("code");
-    			code42.textContent = "rest='label'";
-    			t146 = text(" to show a label value");
-    			t147 = space();
+    			t140 = text("Whether to show a pip or label for the last value on slider. Use ");
+    			code40 = element("code");
+    			code40.textContent = "last='label'";
+    			t142 = text(" to show a label value");
+    			t143 = space();
     			tr14 = element("tr");
     			td52 = element("td");
     			strong14 = element("strong");
-    			strong14.textContent = "prefix";
-    			t149 = space();
+    			strong14.textContent = "rest";
+    			t145 = space();
     			td53 = element("td");
-    			code43 = element("code");
-    			code43.textContent = "String";
-    			t151 = space();
+    			code41 = element("code");
+    			code41.textContent = "Boolean";
+    			t147 = text("/");
+    			code42 = element("code");
+    			code42.textContent = "String";
+    			t149 = space();
     			td54 = element("td");
-    			code44 = element("code");
-    			code44.textContent = "\"\"";
-    			t153 = space();
+    			code43 = element("code");
+    			code43.textContent = "false";
+    			t151 = space();
     			td55 = element("td");
-    			td55.textContent = "A string to prefix to all displayed values";
+    			t152 = text("Whether to show a pip or label for the all other values. Use ");
+    			code44 = element("code");
+    			code44.textContent = "rest='label'";
+    			t154 = text(" to show a label value");
     			t155 = space();
     			tr15 = element("tr");
     			td56 = element("td");
     			strong15 = element("strong");
-    			strong15.textContent = "suffix";
+    			strong15.textContent = "prefix";
     			t157 = space();
     			td57 = element("td");
     			code45 = element("code");
@@ -5878,28 +5878,28 @@ var app = (function () {
     			code46.textContent = "\"\"";
     			t161 = space();
     			td59 = element("td");
-    			td59.textContent = "A string to suffix to all displayed values";
+    			td59.textContent = "A string to prefix to all displayed values";
     			t163 = space();
     			tr16 = element("tr");
     			td60 = element("td");
     			strong16 = element("strong");
-    			strong16.textContent = "formatter";
+    			strong16.textContent = "suffix";
     			t165 = space();
     			td61 = element("td");
     			code47 = element("code");
-    			code47.textContent = "Function";
+    			code47.textContent = "String";
     			t167 = space();
     			td62 = element("td");
     			code48 = element("code");
-    			code48.textContent = "(v) => v";
+    			code48.textContent = "\"\"";
     			t169 = space();
     			td63 = element("td");
-    			td63.textContent = "A function to re-format values before they are displayed";
+    			td63.textContent = "A string to suffix to all displayed values";
     			t171 = space();
     			tr17 = element("tr");
     			td64 = element("td");
     			strong17 = element("strong");
-    			strong17.textContent = "handleFormatter";
+    			strong17.textContent = "formatter";
     			t173 = space();
     			td65 = element("td");
     			code49 = element("code");
@@ -5907,29 +5907,29 @@ var app = (function () {
     			t175 = space();
     			td66 = element("td");
     			code50 = element("code");
-    			code50.textContent = "formatter";
+    			code50.textContent = "(v) => v";
     			t177 = space();
     			td67 = element("td");
-    			t178 = text("A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the ");
-    			code51 = element("code");
-    			code51.textContent = "formatter";
-    			t180 = text(" property");
-    			t181 = space();
+    			td67.textContent = "A function to re-format values before they are displayed";
+    			t179 = space();
     			tr18 = element("tr");
     			td68 = element("td");
     			strong18 = element("strong");
-    			strong18.textContent = "hover";
-    			t183 = space();
+    			strong18.textContent = "handleFormatter";
+    			t181 = space();
     			td69 = element("td");
-    			code52 = element("code");
-    			code52.textContent = "Boolean";
-    			t185 = space();
+    			code51 = element("code");
+    			code51.textContent = "Function";
+    			t183 = space();
     			td70 = element("td");
-    			code53 = element("code");
-    			code53.textContent = "true";
-    			t187 = space();
+    			code52 = element("code");
+    			code52.textContent = "formatter";
+    			t185 = space();
     			td71 = element("td");
-    			td71.textContent = "Whether to allow labels to show on hover";
+    			t186 = text("A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the ");
+    			code53 = element("code");
+    			code53.textContent = "formatter";
+    			t188 = text(" property");
     			t189 = space();
     			tr19 = element("tr");
     			td72 = element("td");
@@ -6075,226 +6075,226 @@ var app = (function () {
     			attr_dev(td24, "align", "left");
     			attr_dev(td24, "class", "svelte-rjzvba");
     			add_location(td24, file$4, 48, 0, 1540);
-    			add_location(code17, file$4, 49, 17, 1605);
+    			add_location(code17, file$4, 49, 17, 1602);
     			attr_dev(td25, "align", "left");
     			attr_dev(td25, "class", "svelte-rjzvba");
-    			add_location(td25, file$4, 49, 0, 1588);
-    			add_location(code18, file$4, 50, 17, 1648);
+    			add_location(td25, file$4, 49, 0, 1585);
+    			add_location(code18, file$4, 50, 17, 1645);
     			attr_dev(td26, "align", "left");
     			attr_dev(td26, "class", "svelte-rjzvba");
-    			add_location(td26, file$4, 50, 0, 1631);
+    			add_location(td26, file$4, 50, 0, 1628);
     			attr_dev(td27, "class", "svelte-rjzvba");
-    			add_location(td27, file$4, 51, 0, 1672);
+    			add_location(td27, file$4, 51, 0, 1668);
     			add_location(tr7, file$4, 47, 0, 1535);
-    			add_location(strong8, file$4, 54, 17, 1743);
+    			add_location(strong8, file$4, 54, 17, 1752);
     			attr_dev(td28, "align", "left");
     			attr_dev(td28, "class", "svelte-rjzvba");
-    			add_location(td28, file$4, 54, 0, 1726);
-    			add_location(code19, file$4, 55, 17, 1787);
+    			add_location(td28, file$4, 54, 0, 1735);
+    			add_location(code19, file$4, 55, 17, 1800);
     			attr_dev(td29, "align", "left");
     			attr_dev(td29, "class", "svelte-rjzvba");
-    			add_location(td29, file$4, 55, 0, 1770);
-    			add_location(code20, file$4, 56, 17, 1830);
+    			add_location(td29, file$4, 55, 0, 1783);
+    			add_location(code20, file$4, 56, 17, 1843);
     			attr_dev(td30, "align", "left");
     			attr_dev(td30, "class", "svelte-rjzvba");
-    			add_location(td30, file$4, 56, 0, 1813);
+    			add_location(td30, file$4, 56, 0, 1826);
     			attr_dev(td31, "class", "svelte-rjzvba");
-    			add_location(td31, file$4, 57, 0, 1854);
-    			add_location(tr8, file$4, 53, 0, 1721);
-    			add_location(strong9, file$4, 60, 17, 1934);
+    			add_location(td31, file$4, 57, 0, 1867);
+    			add_location(tr8, file$4, 53, 0, 1730);
+    			add_location(strong9, file$4, 60, 17, 1938);
     			attr_dev(td32, "align", "left");
     			attr_dev(td32, "class", "svelte-rjzvba");
-    			add_location(td32, file$4, 60, 0, 1917);
-    			add_location(code21, file$4, 61, 17, 1981);
+    			add_location(td32, file$4, 60, 0, 1921);
+    			add_location(code21, file$4, 61, 17, 1982);
     			attr_dev(td33, "align", "left");
     			attr_dev(td33, "class", "svelte-rjzvba");
-    			add_location(td33, file$4, 61, 0, 1964);
-    			add_location(code22, file$4, 62, 17, 2023);
-    			add_location(code23, file$4, 62, 32, 2038);
-    			add_location(code24, file$4, 62, 48, 2054);
+    			add_location(td33, file$4, 61, 0, 1965);
+    			add_location(code22, file$4, 62, 17, 2025);
     			attr_dev(td34, "align", "left");
     			attr_dev(td34, "class", "svelte-rjzvba");
-    			add_location(td34, file$4, 62, 0, 2006);
-    			add_location(code25, file$4, 63, 10, 2085);
-    			add_location(code26, file$4, 63, 91, 2166);
+    			add_location(td34, file$4, 62, 0, 2008);
     			attr_dev(td35, "class", "svelte-rjzvba");
-    			add_location(td35, file$4, 63, 0, 2075);
-    			add_location(tr9, file$4, 59, 0, 1912);
-    			add_location(strong10, file$4, 66, 17, 2228);
+    			add_location(td35, file$4, 63, 0, 2049);
+    			add_location(tr9, file$4, 59, 0, 1916);
+    			add_location(strong10, file$4, 66, 17, 2129);
     			attr_dev(td36, "align", "left");
     			attr_dev(td36, "class", "svelte-rjzvba");
-    			add_location(td36, file$4, 66, 0, 2211);
-    			add_location(code27, file$4, 67, 17, 2271);
-    			add_location(code28, file$4, 67, 38, 2292);
+    			add_location(td36, file$4, 66, 0, 2112);
+    			add_location(code23, file$4, 67, 17, 2176);
     			attr_dev(td37, "align", "left");
     			attr_dev(td37, "class", "svelte-rjzvba");
-    			add_location(td37, file$4, 67, 0, 2254);
-    			add_location(code29, file$4, 68, 17, 2334);
+    			add_location(td37, file$4, 67, 0, 2159);
+    			add_location(code24, file$4, 68, 17, 2218);
+    			add_location(code25, file$4, 68, 32, 2233);
+    			add_location(code26, file$4, 68, 48, 2249);
     			attr_dev(td38, "align", "left");
     			attr_dev(td38, "class", "svelte-rjzvba");
-    			add_location(td38, file$4, 68, 0, 2317);
-    			add_location(code30, file$4, 69, 66, 2423);
+    			add_location(td38, file$4, 68, 0, 2201);
+    			add_location(code27, file$4, 69, 10, 2280);
+    			add_location(code28, file$4, 69, 91, 2361);
     			attr_dev(td39, "class", "svelte-rjzvba");
-    			add_location(td39, file$4, 69, 0, 2357);
-    			add_location(tr10, file$4, 65, 0, 2206);
-    			add_location(strong11, file$4, 72, 17, 2498);
+    			add_location(td39, file$4, 69, 0, 2270);
+    			add_location(tr10, file$4, 65, 0, 2107);
+    			add_location(strong11, file$4, 72, 17, 2423);
     			attr_dev(td40, "align", "left");
     			attr_dev(td40, "class", "svelte-rjzvba");
-    			add_location(td40, file$4, 72, 0, 2481);
-    			add_location(code31, file$4, 73, 17, 2543);
-    			add_location(code32, file$4, 73, 38, 2564);
+    			add_location(td40, file$4, 72, 0, 2406);
+    			add_location(code29, file$4, 73, 17, 2466);
+    			add_location(code30, file$4, 73, 38, 2487);
     			attr_dev(td41, "align", "left");
     			attr_dev(td41, "class", "svelte-rjzvba");
-    			add_location(td41, file$4, 73, 0, 2526);
-    			add_location(code33, file$4, 74, 17, 2606);
+    			add_location(td41, file$4, 73, 0, 2449);
+    			add_location(code31, file$4, 74, 17, 2529);
     			attr_dev(td42, "align", "left");
     			attr_dev(td42, "class", "svelte-rjzvba");
-    			add_location(td42, file$4, 74, 0, 2589);
-    			add_location(code34, file$4, 75, 70, 2700);
+    			add_location(td42, file$4, 74, 0, 2512);
+    			add_location(code32, file$4, 75, 66, 2618);
     			attr_dev(td43, "class", "svelte-rjzvba");
-    			add_location(td43, file$4, 75, 0, 2630);
-    			add_location(tr11, file$4, 71, 0, 2476);
-    			add_location(strong12, file$4, 78, 17, 2782);
+    			add_location(td43, file$4, 75, 0, 2552);
+    			add_location(tr11, file$4, 71, 0, 2401);
+    			add_location(strong12, file$4, 78, 17, 2693);
     			attr_dev(td44, "align", "left");
     			attr_dev(td44, "class", "svelte-rjzvba");
-    			add_location(td44, file$4, 78, 0, 2765);
-    			add_location(code35, file$4, 79, 17, 2826);
-    			add_location(code36, file$4, 79, 38, 2847);
+    			add_location(td44, file$4, 78, 0, 2676);
+    			add_location(code33, file$4, 79, 17, 2738);
+    			add_location(code34, file$4, 79, 38, 2759);
     			attr_dev(td45, "align", "left");
     			attr_dev(td45, "class", "svelte-rjzvba");
-    			add_location(td45, file$4, 79, 0, 2809);
-    			add_location(code37, file$4, 80, 17, 2889);
+    			add_location(td45, file$4, 79, 0, 2721);
+    			add_location(code35, file$4, 80, 17, 2801);
     			attr_dev(td46, "align", "left");
     			attr_dev(td46, "class", "svelte-rjzvba");
-    			add_location(td46, file$4, 80, 0, 2872);
-    			add_location(code38, file$4, 81, 69, 2982);
+    			add_location(td46, file$4, 80, 0, 2784);
+    			add_location(code36, file$4, 81, 70, 2895);
     			attr_dev(td47, "class", "svelte-rjzvba");
-    			add_location(td47, file$4, 81, 0, 2913);
-    			add_location(tr12, file$4, 77, 0, 2760);
-    			add_location(strong13, file$4, 84, 17, 3063);
+    			add_location(td47, file$4, 81, 0, 2825);
+    			add_location(tr12, file$4, 77, 0, 2671);
+    			add_location(strong13, file$4, 84, 17, 2977);
     			attr_dev(td48, "align", "left");
     			attr_dev(td48, "class", "svelte-rjzvba");
-    			add_location(td48, file$4, 84, 0, 3046);
-    			add_location(code39, file$4, 85, 17, 3107);
-    			add_location(code40, file$4, 85, 38, 3128);
+    			add_location(td48, file$4, 84, 0, 2960);
+    			add_location(code37, file$4, 85, 17, 3021);
+    			add_location(code38, file$4, 85, 38, 3042);
     			attr_dev(td49, "align", "left");
     			attr_dev(td49, "class", "svelte-rjzvba");
-    			add_location(td49, file$4, 85, 0, 3090);
-    			add_location(code41, file$4, 86, 17, 3170);
+    			add_location(td49, file$4, 85, 0, 3004);
+    			add_location(code39, file$4, 86, 17, 3084);
     			attr_dev(td50, "align", "left");
     			attr_dev(td50, "class", "svelte-rjzvba");
-    			add_location(td50, file$4, 86, 0, 3153);
-    			add_location(code42, file$4, 87, 65, 3259);
+    			add_location(td50, file$4, 86, 0, 3067);
+    			add_location(code40, file$4, 87, 69, 3177);
     			attr_dev(td51, "class", "svelte-rjzvba");
-    			add_location(td51, file$4, 87, 0, 3194);
-    			add_location(tr13, file$4, 83, 0, 3041);
-    			add_location(strong14, file$4, 90, 17, 3340);
+    			add_location(td51, file$4, 87, 0, 3108);
+    			add_location(tr13, file$4, 83, 0, 2955);
+    			add_location(strong14, file$4, 90, 17, 3258);
     			attr_dev(td52, "align", "left");
     			attr_dev(td52, "class", "svelte-rjzvba");
-    			add_location(td52, file$4, 90, 0, 3323);
-    			add_location(code43, file$4, 91, 17, 3386);
+    			add_location(td52, file$4, 90, 0, 3241);
+    			add_location(code41, file$4, 91, 17, 3302);
+    			add_location(code42, file$4, 91, 38, 3323);
     			attr_dev(td53, "align", "left");
     			attr_dev(td53, "class", "svelte-rjzvba");
-    			add_location(td53, file$4, 91, 0, 3369);
-    			add_location(code44, file$4, 92, 17, 3428);
+    			add_location(td53, file$4, 91, 0, 3285);
+    			add_location(code43, file$4, 92, 17, 3365);
     			attr_dev(td54, "align", "left");
     			attr_dev(td54, "class", "svelte-rjzvba");
-    			add_location(td54, file$4, 92, 0, 3411);
+    			add_location(td54, file$4, 92, 0, 3348);
+    			add_location(code44, file$4, 93, 65, 3454);
     			attr_dev(td55, "class", "svelte-rjzvba");
-    			add_location(td55, file$4, 93, 0, 3449);
-    			add_location(tr14, file$4, 89, 0, 3318);
-    			add_location(strong15, file$4, 96, 17, 3529);
+    			add_location(td55, file$4, 93, 0, 3389);
+    			add_location(tr14, file$4, 89, 0, 3236);
+    			add_location(strong15, file$4, 96, 17, 3535);
     			attr_dev(td56, "align", "left");
     			attr_dev(td56, "class", "svelte-rjzvba");
-    			add_location(td56, file$4, 96, 0, 3512);
-    			add_location(code45, file$4, 97, 17, 3575);
+    			add_location(td56, file$4, 96, 0, 3518);
+    			add_location(code45, file$4, 97, 17, 3581);
     			attr_dev(td57, "align", "left");
     			attr_dev(td57, "class", "svelte-rjzvba");
-    			add_location(td57, file$4, 97, 0, 3558);
-    			add_location(code46, file$4, 98, 17, 3617);
+    			add_location(td57, file$4, 97, 0, 3564);
+    			add_location(code46, file$4, 98, 17, 3623);
     			attr_dev(td58, "align", "left");
     			attr_dev(td58, "class", "svelte-rjzvba");
-    			add_location(td58, file$4, 98, 0, 3600);
+    			add_location(td58, file$4, 98, 0, 3606);
     			attr_dev(td59, "class", "svelte-rjzvba");
-    			add_location(td59, file$4, 99, 0, 3638);
-    			add_location(tr15, file$4, 95, 0, 3507);
-    			add_location(strong16, file$4, 102, 17, 3718);
+    			add_location(td59, file$4, 99, 0, 3644);
+    			add_location(tr15, file$4, 95, 0, 3513);
+    			add_location(strong16, file$4, 102, 17, 3724);
     			attr_dev(td60, "align", "left");
     			attr_dev(td60, "class", "svelte-rjzvba");
-    			add_location(td60, file$4, 102, 0, 3701);
-    			add_location(code47, file$4, 103, 17, 3767);
+    			add_location(td60, file$4, 102, 0, 3707);
+    			add_location(code47, file$4, 103, 17, 3770);
     			attr_dev(td61, "align", "left");
     			attr_dev(td61, "class", "svelte-rjzvba");
-    			add_location(td61, file$4, 103, 0, 3750);
-    			add_location(code48, file$4, 104, 17, 3811);
+    			add_location(td61, file$4, 103, 0, 3753);
+    			add_location(code48, file$4, 104, 17, 3812);
     			attr_dev(td62, "align", "left");
     			attr_dev(td62, "class", "svelte-rjzvba");
-    			add_location(td62, file$4, 104, 0, 3794);
+    			add_location(td62, file$4, 104, 0, 3795);
     			attr_dev(td63, "class", "svelte-rjzvba");
-    			add_location(td63, file$4, 105, 0, 3841);
-    			add_location(tr16, file$4, 101, 0, 3696);
-    			add_location(strong17, file$4, 108, 17, 3935);
+    			add_location(td63, file$4, 105, 0, 3833);
+    			add_location(tr16, file$4, 101, 0, 3702);
+    			add_location(strong17, file$4, 108, 17, 3913);
     			attr_dev(td64, "align", "left");
     			attr_dev(td64, "class", "svelte-rjzvba");
-    			add_location(td64, file$4, 108, 0, 3918);
-    			add_location(code49, file$4, 109, 17, 3990);
+    			add_location(td64, file$4, 108, 0, 3896);
+    			add_location(code49, file$4, 109, 17, 3962);
     			attr_dev(td65, "align", "left");
     			attr_dev(td65, "class", "svelte-rjzvba");
-    			add_location(td65, file$4, 109, 0, 3973);
-    			add_location(code50, file$4, 110, 17, 4034);
+    			add_location(td65, file$4, 109, 0, 3945);
+    			add_location(code50, file$4, 110, 17, 4006);
     			attr_dev(td66, "align", "left");
     			attr_dev(td66, "class", "svelte-rjzvba");
-    			add_location(td66, file$4, 110, 0, 4017);
-    			add_location(code51, file$4, 111, 125, 4187);
+    			add_location(td66, file$4, 110, 0, 3989);
     			attr_dev(td67, "class", "svelte-rjzvba");
-    			add_location(td67, file$4, 111, 0, 4062);
-    			add_location(tr17, file$4, 107, 0, 3913);
-    			add_location(strong18, file$4, 114, 17, 4252);
+    			add_location(td67, file$4, 111, 0, 4036);
+    			add_location(tr17, file$4, 107, 0, 3891);
+    			add_location(strong18, file$4, 114, 17, 4130);
     			attr_dev(td68, "align", "left");
     			attr_dev(td68, "class", "svelte-rjzvba");
-    			add_location(td68, file$4, 114, 0, 4235);
-    			add_location(code52, file$4, 115, 17, 4297);
+    			add_location(td68, file$4, 114, 0, 4113);
+    			add_location(code51, file$4, 115, 17, 4185);
     			attr_dev(td69, "align", "left");
     			attr_dev(td69, "class", "svelte-rjzvba");
-    			add_location(td69, file$4, 115, 0, 4280);
-    			add_location(code53, file$4, 116, 17, 4340);
+    			add_location(td69, file$4, 115, 0, 4168);
+    			add_location(code52, file$4, 116, 17, 4229);
     			attr_dev(td70, "align", "left");
     			attr_dev(td70, "class", "svelte-rjzvba");
-    			add_location(td70, file$4, 116, 0, 4323);
+    			add_location(td70, file$4, 116, 0, 4212);
+    			add_location(code53, file$4, 117, 125, 4382);
     			attr_dev(td71, "class", "svelte-rjzvba");
-    			add_location(td71, file$4, 117, 0, 4363);
-    			add_location(tr18, file$4, 113, 0, 4230);
-    			add_location(strong19, file$4, 120, 17, 4441);
+    			add_location(td71, file$4, 117, 0, 4257);
+    			add_location(tr18, file$4, 113, 0, 4108);
+    			add_location(strong19, file$4, 120, 17, 4447);
     			attr_dev(td72, "align", "left");
     			attr_dev(td72, "class", "svelte-rjzvba");
-    			add_location(td72, file$4, 120, 0, 4424);
-    			add_location(code54, file$4, 121, 17, 4493);
+    			add_location(td72, file$4, 120, 0, 4430);
+    			add_location(code54, file$4, 121, 17, 4499);
     			attr_dev(td73, "align", "left");
     			attr_dev(td73, "class", "svelte-rjzvba");
-    			add_location(td73, file$4, 121, 0, 4476);
-    			add_location(code55, file$4, 122, 17, 4535);
+    			add_location(td73, file$4, 121, 0, 4482);
+    			add_location(code55, file$4, 122, 17, 4541);
     			attr_dev(td74, "align", "left");
     			attr_dev(td74, "class", "svelte-rjzvba");
-    			add_location(td74, file$4, 122, 0, 4518);
+    			add_location(td74, file$4, 122, 0, 4524);
     			attr_dev(td75, "class", "svelte-rjzvba");
-    			add_location(td75, file$4, 123, 0, 4597);
-    			add_location(tr19, file$4, 119, 0, 4419);
-    			add_location(strong20, file$4, 126, 17, 4713);
+    			add_location(td75, file$4, 123, 0, 4603);
+    			add_location(tr19, file$4, 119, 0, 4425);
+    			add_location(strong20, file$4, 126, 17, 4719);
     			attr_dev(td76, "align", "left");
     			attr_dev(td76, "class", "svelte-rjzvba");
-    			add_location(td76, file$4, 126, 0, 4696);
-    			add_location(code56, file$4, 127, 17, 4755);
+    			add_location(td76, file$4, 126, 0, 4702);
+    			add_location(code56, file$4, 127, 17, 4761);
     			attr_dev(td77, "align", "left");
     			attr_dev(td77, "class", "svelte-rjzvba");
-    			add_location(td77, file$4, 127, 0, 4738);
-    			add_location(code57, file$4, 128, 17, 4797);
+    			add_location(td77, file$4, 127, 0, 4744);
+    			add_location(code57, file$4, 128, 17, 4803);
     			attr_dev(td78, "align", "left");
     			attr_dev(td78, "class", "svelte-rjzvba");
-    			add_location(td78, file$4, 128, 0, 4780);
-    			add_location(code58, file$4, 129, 24, 4849);
+    			add_location(td78, file$4, 128, 0, 4786);
+    			add_location(code58, file$4, 129, 24, 4855);
     			attr_dev(td79, "class", "svelte-rjzvba");
-    			add_location(td79, file$4, 129, 0, 4825);
-    			add_location(tr20, file$4, 125, 0, 4691);
+    			add_location(td79, file$4, 129, 0, 4831);
+    			add_location(tr20, file$4, 125, 0, 4697);
     			attr_dev(tbody, "class", "svelte-rjzvba");
     			add_location(tbody, file$4, 10, 0, 158);
     			add_location(table, file$4, 1, 0, 28);
@@ -6440,97 +6440,97 @@ var app = (function () {
     			append_dev(tr9, t87);
     			append_dev(tr9, td34);
     			append_dev(td34, code22);
-    			append_dev(td34, t89);
-    			append_dev(td34, code23);
-    			append_dev(td34, t91);
-    			append_dev(td34, code24);
-    			append_dev(tr9, t93);
+    			append_dev(tr9, t89);
     			append_dev(tr9, td35);
-    			append_dev(td35, t94);
-    			append_dev(td35, code25);
-    			append_dev(td35, t96);
-    			append_dev(td35, code26);
-    			append_dev(td35, t98);
-    			append_dev(tbody, t99);
+    			append_dev(tbody, t91);
     			append_dev(tbody, tr10);
     			append_dev(tr10, td36);
     			append_dev(td36, strong10);
-    			append_dev(tr10, t101);
+    			append_dev(tr10, t93);
     			append_dev(tr10, td37);
-    			append_dev(td37, code27);
-    			append_dev(td37, t103);
-    			append_dev(td37, code28);
-    			append_dev(tr10, t105);
+    			append_dev(td37, code23);
+    			append_dev(tr10, t95);
     			append_dev(tr10, td38);
-    			append_dev(td38, code29);
-    			append_dev(tr10, t107);
+    			append_dev(td38, code24);
+    			append_dev(td38, t97);
+    			append_dev(td38, code25);
+    			append_dev(td38, t99);
+    			append_dev(td38, code26);
+    			append_dev(tr10, t101);
     			append_dev(tr10, td39);
-    			append_dev(td39, t108);
-    			append_dev(td39, code30);
-    			append_dev(td39, t110);
-    			append_dev(tbody, t111);
+    			append_dev(td39, t102);
+    			append_dev(td39, code27);
+    			append_dev(td39, t104);
+    			append_dev(td39, code28);
+    			append_dev(td39, t106);
+    			append_dev(tbody, t107);
     			append_dev(tbody, tr11);
     			append_dev(tr11, td40);
     			append_dev(td40, strong11);
-    			append_dev(tr11, t113);
+    			append_dev(tr11, t109);
     			append_dev(tr11, td41);
-    			append_dev(td41, code31);
-    			append_dev(td41, t115);
-    			append_dev(td41, code32);
-    			append_dev(tr11, t117);
+    			append_dev(td41, code29);
+    			append_dev(td41, t111);
+    			append_dev(td41, code30);
+    			append_dev(tr11, t113);
     			append_dev(tr11, td42);
-    			append_dev(td42, code33);
-    			append_dev(tr11, t119);
+    			append_dev(td42, code31);
+    			append_dev(tr11, t115);
     			append_dev(tr11, td43);
-    			append_dev(td43, t120);
-    			append_dev(td43, code34);
-    			append_dev(td43, t122);
-    			append_dev(tbody, t123);
+    			append_dev(td43, t116);
+    			append_dev(td43, code32);
+    			append_dev(td43, t118);
+    			append_dev(tbody, t119);
     			append_dev(tbody, tr12);
     			append_dev(tr12, td44);
     			append_dev(td44, strong12);
-    			append_dev(tr12, t125);
+    			append_dev(tr12, t121);
     			append_dev(tr12, td45);
-    			append_dev(td45, code35);
-    			append_dev(td45, t127);
-    			append_dev(td45, code36);
-    			append_dev(tr12, t129);
+    			append_dev(td45, code33);
+    			append_dev(td45, t123);
+    			append_dev(td45, code34);
+    			append_dev(tr12, t125);
     			append_dev(tr12, td46);
-    			append_dev(td46, code37);
-    			append_dev(tr12, t131);
+    			append_dev(td46, code35);
+    			append_dev(tr12, t127);
     			append_dev(tr12, td47);
-    			append_dev(td47, t132);
-    			append_dev(td47, code38);
-    			append_dev(td47, t134);
-    			append_dev(tbody, t135);
+    			append_dev(td47, t128);
+    			append_dev(td47, code36);
+    			append_dev(td47, t130);
+    			append_dev(tbody, t131);
     			append_dev(tbody, tr13);
     			append_dev(tr13, td48);
     			append_dev(td48, strong13);
-    			append_dev(tr13, t137);
+    			append_dev(tr13, t133);
     			append_dev(tr13, td49);
-    			append_dev(td49, code39);
-    			append_dev(td49, t139);
-    			append_dev(td49, code40);
-    			append_dev(tr13, t141);
+    			append_dev(td49, code37);
+    			append_dev(td49, t135);
+    			append_dev(td49, code38);
+    			append_dev(tr13, t137);
     			append_dev(tr13, td50);
-    			append_dev(td50, code41);
-    			append_dev(tr13, t143);
+    			append_dev(td50, code39);
+    			append_dev(tr13, t139);
     			append_dev(tr13, td51);
-    			append_dev(td51, t144);
-    			append_dev(td51, code42);
-    			append_dev(td51, t146);
-    			append_dev(tbody, t147);
+    			append_dev(td51, t140);
+    			append_dev(td51, code40);
+    			append_dev(td51, t142);
+    			append_dev(tbody, t143);
     			append_dev(tbody, tr14);
     			append_dev(tr14, td52);
     			append_dev(td52, strong14);
-    			append_dev(tr14, t149);
+    			append_dev(tr14, t145);
     			append_dev(tr14, td53);
-    			append_dev(td53, code43);
-    			append_dev(tr14, t151);
+    			append_dev(td53, code41);
+    			append_dev(td53, t147);
+    			append_dev(td53, code42);
+    			append_dev(tr14, t149);
     			append_dev(tr14, td54);
-    			append_dev(td54, code44);
-    			append_dev(tr14, t153);
+    			append_dev(td54, code43);
+    			append_dev(tr14, t151);
     			append_dev(tr14, td55);
+    			append_dev(td55, t152);
+    			append_dev(td55, code44);
+    			append_dev(td55, t154);
     			append_dev(tbody, t155);
     			append_dev(tbody, tr15);
     			append_dev(tr15, td56);
@@ -6567,21 +6567,21 @@ var app = (function () {
     			append_dev(td66, code50);
     			append_dev(tr17, t177);
     			append_dev(tr17, td67);
-    			append_dev(td67, t178);
-    			append_dev(td67, code51);
-    			append_dev(td67, t180);
-    			append_dev(tbody, t181);
+    			append_dev(tbody, t179);
     			append_dev(tbody, tr18);
     			append_dev(tr18, td68);
     			append_dev(td68, strong18);
-    			append_dev(tr18, t183);
+    			append_dev(tr18, t181);
     			append_dev(tr18, td69);
-    			append_dev(td69, code52);
-    			append_dev(tr18, t185);
+    			append_dev(td69, code51);
+    			append_dev(tr18, t183);
     			append_dev(tr18, td70);
-    			append_dev(td70, code53);
-    			append_dev(tr18, t187);
+    			append_dev(td70, code52);
+    			append_dev(tr18, t185);
     			append_dev(tr18, td71);
+    			append_dev(td71, t186);
+    			append_dev(td71, code53);
+    			append_dev(td71, t188);
     			append_dev(tbody, t189);
     			append_dev(tbody, tr19);
     			append_dev(tr19, td72);
@@ -7368,8 +7368,8 @@ var app = (function () {
     /* src/Docs.svx generated by Svelte v3.24.0 */
     const file$6 = "src/Docs.svx";
 
-    // (72:0) <Prism language="css">
-    function create_default_slot_31(ctx) {
+    // (76:0) <Prism language="css">
+    function create_default_slot_32(ctx) {
     	let t_value = `/* main slider element */
  .rangeSlider {}
  .rangeSlider.vertical {}   /* if slider is vertical */
@@ -7415,17 +7415,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_31.name,
+    		id: create_default_slot_32.name,
     		type: "slot",
-    		source: "(72:0) <Prism language=\\\"css\\\">",
+    		source: "(76:0) <Prism language=\\\"css\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (104:0) <Prism language="css">
-    function create_default_slot_30(ctx) {
+    // (108:0) <Prism language="css">
+    function create_default_slot_31(ctx) {
     	let t;
 
     	const block = {
@@ -7442,17 +7442,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_30.name,
+    		id: create_default_slot_31.name,
     		type: "slot",
-    		source: "(104:0) <Prism language=\\\"css\\\">",
+    		source: "(108:0) <Prism language=\\\"css\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (119:2) <div slot="code">
-    function create_code_slot_29(ctx) {
+    // (123:2) <div slot="code">
+    function create_code_slot_30(ctx) {
     	let div;
 
     	const block = {
@@ -7460,7 +7460,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 118, 2, 5130);
+    			add_location(div, file$6, 122, 2, 5266);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7473,17 +7473,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_29.name,
+    		id: create_code_slot_30.name,
     		type: "slot",
-    		source: "(119:2) <div slot=\\\"code\\\">",
+    		source: "(123:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (120:2) <div slot="slider">
-    function create_slider_slot_29(ctx) {
+    // (124:2) <div slot="slider">
+    function create_slider_slot_30(ctx) {
     	let div;
     	let rangeslider;
     	let current;
@@ -7494,7 +7494,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 119, 2, 5175);
+    			add_location(div, file$6, 123, 2, 5311);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7518,17 +7518,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_29.name,
+    		id: create_slider_slot_30.name,
     		type: "slot",
-    		source: "(120:2) <div slot=\\\"slider\\\">",
+    		source: "(124:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (118:0) <Example>
-    function create_default_slot_29(ctx) {
+    // (122:0) <Example>
+    function create_default_slot_30(ctx) {
     	let t;
 
     	const block = {
@@ -7548,17 +7548,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_29.name,
+    		id: create_default_slot_30.name,
     		type: "slot",
-    		source: "(118:0) <Example>",
+    		source: "(122:0) <Example>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (127:2) <div slot="code">
-    function create_code_slot_28(ctx) {
+    // (131:2) <div slot="code">
+    function create_code_slot_29(ctx) {
     	let div;
 
     	const block = {
@@ -7566,7 +7566,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider values={[11]} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 126, 2, 5603);
+    			add_location(div, file$6, 130, 2, 5739);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7579,24 +7579,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_28.name,
+    		id: create_code_slot_29.name,
     		type: "slot",
-    		source: "(127:2) <div slot=\\\"code\\\">",
+    		source: "(131:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (128:2) <div slot="slider">
-    function create_slider_slot_28(ctx) {
+    // (132:2) <div slot="slider">
+    function create_slider_slot_29(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding(value) {
-    		/*rangeslider_values_binding*/ ctx[27].call(null, value);
+    		/*rangeslider_values_binding*/ ctx[30].call(null, value);
     	}
 
     	let rangeslider_props = {};
@@ -7613,7 +7613,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 127, 2, 5662);
+    			add_location(div, file$6, 131, 2, 5798);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7648,17 +7648,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_28.name,
+    		id: create_slider_slot_29.name,
     		type: "slot",
-    		source: "(128:2) <div slot=\\\"slider\\\">",
+    		source: "(132:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (126:0) <Example values={values1}>
-    function create_default_slot_28(ctx) {
+    // (130:0) <Example values={values1}>
+    function create_default_slot_29(ctx) {
     	let t;
 
     	const block = {
@@ -7678,17 +7678,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_28.name,
+    		id: create_default_slot_29.name,
     		type: "slot",
-    		source: "(126:0) <Example values={values1}>",
+    		source: "(130:0) <Example values={values1}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (131:2) <div slot="code">
-    function create_code_slot_27(ctx) {
+    // (135:2) <div slot="code">
+    function create_code_slot_28(ctx) {
     	let div;
 
     	const block = {
@@ -7696,7 +7696,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider values={[25,50,75]} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 130, 2, 5765);
+    			add_location(div, file$6, 134, 2, 5901);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7709,24 +7709,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_27.name,
+    		id: create_code_slot_28.name,
     		type: "slot",
-    		source: "(131:2) <div slot=\\\"code\\\">",
+    		source: "(135:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (132:2) <div slot="slider">
-    function create_slider_slot_27(ctx) {
+    // (136:2) <div slot="slider">
+    function create_slider_slot_28(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_1(value) {
-    		/*rangeslider_values_binding_1*/ ctx[28].call(null, value);
+    		/*rangeslider_values_binding_1*/ ctx[31].call(null, value);
     	}
 
     	let rangeslider_props = {};
@@ -7743,7 +7743,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 131, 2, 5830);
+    			add_location(div, file$6, 135, 2, 5966);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7778,17 +7778,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_27.name,
+    		id: create_slider_slot_28.name,
     		type: "slot",
-    		source: "(132:2) <div slot=\\\"slider\\\">",
+    		source: "(136:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (130:0) <Example values={values2}>
-    function create_default_slot_27(ctx) {
+    // (134:0) <Example values={values2}>
+    function create_default_slot_28(ctx) {
     	let t;
 
     	const block = {
@@ -7808,17 +7808,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_27.name,
+    		id: create_default_slot_28.name,
     		type: "slot",
-    		source: "(130:0) <Example values={values2}>",
+    		source: "(134:0) <Example values={values2}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (138:2) <div slot="code">
-    function create_code_slot_26(ctx) {
+    // (142:2) <div slot="code">
+    function create_code_slot_27(ctx) {
     	let div;
 
     	const block = {
@@ -7826,7 +7826,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider min={-33} max={33} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 137, 2, 6137);
+    			add_location(div, file$6, 141, 2, 6273);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7839,24 +7839,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_26.name,
+    		id: create_code_slot_27.name,
     		type: "slot",
-    		source: "(138:2) <div slot=\\\"code\\\">",
+    		source: "(142:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (139:2) <div slot="slider">
-    function create_slider_slot_26(ctx) {
+    // (143:2) <div slot="slider">
+    function create_slider_slot_27(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_2(value) {
-    		/*rangeslider_values_binding_2*/ ctx[29].call(null, value);
+    		/*rangeslider_values_binding_2*/ ctx[32].call(null, value);
     	}
 
     	let rangeslider_props = { min: -33, max: 33 };
@@ -7873,7 +7873,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 138, 2, 6201);
+    			add_location(div, file$6, 142, 2, 6337);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7908,17 +7908,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_26.name,
+    		id: create_slider_slot_27.name,
     		type: "slot",
-    		source: "(139:2) <div slot=\\\"slider\\\">",
+    		source: "(143:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (137:0) <Example values={minmax1}>
-    function create_default_slot_26(ctx) {
+    // (141:0) <Example values={minmax1}>
+    function create_default_slot_27(ctx) {
     	let t;
 
     	const block = {
@@ -7938,17 +7938,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_26.name,
+    		id: create_default_slot_27.name,
     		type: "slot",
-    		source: "(137:0) <Example values={minmax1}>",
+    		source: "(141:0) <Example values={minmax1}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (144:2) <div slot="code">
-    function create_code_slot_25(ctx) {
+    // (148:2) <div slot="code">
+    function create_code_slot_26(ctx) {
     	let div;
 
     	const block = {
@@ -7959,7 +7959,7 @@ var app = (function () {
 <RangeSlider min={50} bind:values={bound} />`}`;
 
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 143, 2, 6450);
+    			add_location(div, file$6, 147, 2, 6586);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -7972,24 +7972,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_25.name,
+    		id: create_code_slot_26.name,
     		type: "slot",
-    		source: "(144:2) <div slot=\\\"code\\\">",
+    		source: "(148:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (146:2) <div slot="slider">
-    function create_slider_slot_25(ctx) {
+    // (150:2) <div slot="slider">
+    function create_slider_slot_26(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_3(value) {
-    		/*rangeslider_values_binding_3*/ ctx[30].call(null, value);
+    		/*rangeslider_values_binding_3*/ ctx[33].call(null, value);
     	}
 
     	let rangeslider_props = { min: 50 };
@@ -8006,7 +8006,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 145, 2, 6561);
+    			add_location(div, file$6, 149, 2, 6697);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8041,17 +8041,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_25.name,
+    		id: create_slider_slot_26.name,
     		type: "slot",
-    		source: "(146:2) <div slot=\\\"slider\\\">",
+    		source: "(150:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (143:0) <Example values={minmax2}>
-    function create_default_slot_25(ctx) {
+    // (147:0) <Example values={minmax2}>
+    function create_default_slot_26(ctx) {
     	let t;
 
     	const block = {
@@ -8071,17 +8071,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_25.name,
+    		id: create_default_slot_26.name,
     		type: "slot",
-    		source: "(143:0) <Example values={minmax2}>",
+    		source: "(147:0) <Example values={minmax2}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (151:2) <div slot="code">
-    function create_code_slot_24(ctx) {
+    // (155:2) <div slot="code">
+    function create_code_slot_25(ctx) {
     	let div;
 
     	let t_value = `<!-- bound = [${/*minmax2*/ ctx[3]}] -->
@@ -8094,7 +8094,7 @@ var app = (function () {
     			div = element("div");
     			t = text(t_value);
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 150, 2, 6681);
+    			add_location(div, file$6, 154, 2, 6817);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8111,24 +8111,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_24.name,
+    		id: create_code_slot_25.name,
     		type: "slot",
-    		source: "(151:2) <div slot=\\\"code\\\">",
+    		source: "(155:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (153:2) <div slot="slider">
-    function create_slider_slot_24(ctx) {
+    // (157:2) <div slot="slider">
+    function create_slider_slot_25(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_4(value) {
-    		/*rangeslider_values_binding_4*/ ctx[31].call(null, value);
+    		/*rangeslider_values_binding_4*/ ctx[34].call(null, value);
     	}
 
     	let rangeslider_props = { min: /*minmax2*/ ctx[3][0], max: 200 };
@@ -8145,7 +8145,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 152, 2, 6797);
+    			add_location(div, file$6, 156, 2, 6933);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8181,17 +8181,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_24.name,
+    		id: create_slider_slot_25.name,
     		type: "slot",
-    		source: "(153:2) <div slot=\\\"slider\\\">",
+    		source: "(157:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (150:0) <Example values={minmax3}>
-    function create_default_slot_24(ctx) {
+    // (154:0) <Example values={minmax3}>
+    function create_default_slot_25(ctx) {
     	let t;
 
     	const block = {
@@ -8211,17 +8211,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_24.name,
+    		id: create_default_slot_25.name,
     		type: "slot",
-    		source: "(150:0) <Example values={minmax3}>",
+    		source: "(154:0) <Example values={minmax3}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (162:2) <div slot="code">
-    function create_code_slot_23(ctx) {
+    // (166:2) <div slot="code">
+    function create_code_slot_24(ctx) {
     	let div;
 
     	const block = {
@@ -8229,7 +8229,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider step={5} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 161, 2, 7269);
+    			add_location(div, file$6, 165, 2, 7405);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8242,24 +8242,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_23.name,
+    		id: create_code_slot_24.name,
     		type: "slot",
-    		source: "(162:2) <div slot=\\\"code\\\">",
+    		source: "(166:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (163:2) <div slot="slider">
-    function create_slider_slot_23(ctx) {
+    // (167:2) <div slot="slider">
+    function create_slider_slot_24(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_5(value) {
-    		/*rangeslider_values_binding_5*/ ctx[32].call(null, value);
+    		/*rangeslider_values_binding_5*/ ctx[35].call(null, value);
     	}
 
     	let rangeslider_props = { step: 5 };
@@ -8276,7 +8276,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 162, 2, 7323);
+    			add_location(div, file$6, 166, 2, 7459);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8311,17 +8311,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_23.name,
+    		id: create_slider_slot_24.name,
     		type: "slot",
-    		source: "(163:2) <div slot=\\\"slider\\\">",
+    		source: "(167:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (161:0) <Example values={step1}>
-    function create_default_slot_23(ctx) {
+    // (165:0) <Example values={step1}>
+    function create_default_slot_24(ctx) {
     	let t;
 
     	const block = {
@@ -8341,17 +8341,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_23.name,
+    		id: create_default_slot_24.name,
     		type: "slot",
-    		source: "(161:0) <Example values={step1}>",
+    		source: "(165:0) <Example values={step1}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (166:2) <div slot="code">
-    function create_code_slot_22(ctx) {
+    // (170:2) <div slot="code">
+    function create_code_slot_23(ctx) {
     	let div;
 
     	const block = {
@@ -8359,7 +8359,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider step={1000} values={[5000]} min={-10000} max={10000} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 165, 2, 7431);
+    			add_location(div, file$6, 169, 2, 7567);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8372,24 +8372,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_22.name,
+    		id: create_code_slot_23.name,
     		type: "slot",
-    		source: "(166:2) <div slot=\\\"code\\\">",
+    		source: "(170:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (167:2) <div slot="slider">
-    function create_slider_slot_22(ctx) {
+    // (171:2) <div slot="slider">
+    function create_slider_slot_23(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_6(value) {
-    		/*rangeslider_values_binding_6*/ ctx[33].call(null, value);
+    		/*rangeslider_values_binding_6*/ ctx[36].call(null, value);
     	}
 
     	let rangeslider_props = { step: 1000, min: -10000, max: 10000 };
@@ -8406,7 +8406,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 166, 2, 7529);
+    			add_location(div, file$6, 170, 2, 7665);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8441,17 +8441,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_22.name,
+    		id: create_slider_slot_23.name,
     		type: "slot",
-    		source: "(167:2) <div slot=\\\"slider\\\">",
+    		source: "(171:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (165:0) <Example values={step3}>
-    function create_default_slot_22(ctx) {
+    // (169:0) <Example values={step3}>
+    function create_default_slot_23(ctx) {
     	let t;
 
     	const block = {
@@ -8471,17 +8471,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_22.name,
+    		id: create_default_slot_23.name,
     		type: "slot",
-    		source: "(165:0) <Example values={step3}>",
+    		source: "(169:0) <Example values={step3}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (172:2) <div slot="code">
-    function create_code_slot_21(ctx) {
+    // (176:2) <div slot="code">
+    function create_code_slot_22(ctx) {
     	let div;
 
     	const block = {
@@ -8489,7 +8489,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider step={7} values={[-10,10]} min={-20} max={23} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 171, 2, 7891);
+    			add_location(div, file$6, 175, 2, 8027);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8502,24 +8502,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_21.name,
+    		id: create_code_slot_22.name,
     		type: "slot",
-    		source: "(172:2) <div slot=\\\"code\\\">",
+    		source: "(176:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (173:2) <div slot="slider">
-    function create_slider_slot_21(ctx) {
+    // (177:2) <div slot="slider">
+    function create_slider_slot_22(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_7(value) {
-    		/*rangeslider_values_binding_7*/ ctx[34].call(null, value);
+    		/*rangeslider_values_binding_7*/ ctx[37].call(null, value);
     	}
 
     	let rangeslider_props = { step: 7, min: -20, max: 23 };
@@ -8536,7 +8536,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 172, 2, 7982);
+    			add_location(div, file$6, 176, 2, 8118);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8571,17 +8571,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_21.name,
+    		id: create_slider_slot_22.name,
     		type: "slot",
-    		source: "(173:2) <div slot=\\\"slider\\\">",
+    		source: "(177:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (171:0) <Example values={step2}>
-    function create_default_slot_21(ctx) {
+    // (175:0) <Example values={step2}>
+    function create_default_slot_22(ctx) {
     	let t;
 
     	const block = {
@@ -8601,17 +8601,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_21.name,
+    		id: create_default_slot_22.name,
     		type: "slot",
-    		source: "(171:0) <Example values={step2}>",
+    		source: "(175:0) <Example values={step2}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (180:2) <div slot="code">
-    function create_code_slot_20(ctx) {
+    // (184:2) <div slot="code">
+    function create_code_slot_21(ctx) {
     	let div;
 
     	const block = {
@@ -8619,7 +8619,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider range values={[30,70]} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 179, 2, 8461);
+    			add_location(div, file$6, 183, 2, 8597);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8632,24 +8632,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_20.name,
+    		id: create_code_slot_21.name,
     		type: "slot",
-    		source: "(180:2) <div slot=\\\"code\\\">",
+    		source: "(184:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (181:2) <div slot="slider">
-    function create_slider_slot_20(ctx) {
+    // (185:2) <div slot="slider">
+    function create_slider_slot_21(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_8(value) {
-    		/*rangeslider_values_binding_8*/ ctx[35].call(null, value);
+    		/*rangeslider_values_binding_8*/ ctx[38].call(null, value);
     	}
 
     	let rangeslider_props = { range: true };
@@ -8666,7 +8666,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 180, 2, 8529);
+    			add_location(div, file$6, 184, 2, 8665);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8701,17 +8701,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_20.name,
+    		id: create_slider_slot_21.name,
     		type: "slot",
-    		source: "(181:2) <div slot=\\\"slider\\\">",
+    		source: "(185:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (179:0) <Example values={range1}>
-    function create_default_slot_20(ctx) {
+    // (183:0) <Example values={range1}>
+    function create_default_slot_21(ctx) {
     	let t;
 
     	const block = {
@@ -8731,17 +8731,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_20.name,
+    		id: create_default_slot_21.name,
     		type: "slot",
-    		source: "(179:0) <Example values={range1}>",
+    		source: "(183:0) <Example values={range1}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (186:2) <div slot="code">
-    function create_code_slot_19(ctx) {
+    // (190:2) <div slot="code">
+    function create_code_slot_20(ctx) {
     	let div;
 
     	const block = {
@@ -8749,7 +8749,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider range="min" values={[50]} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 185, 2, 8852);
+    			add_location(div, file$6, 189, 2, 8988);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8762,24 +8762,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_19.name,
+    		id: create_code_slot_20.name,
     		type: "slot",
-    		source: "(186:2) <div slot=\\\"code\\\">",
+    		source: "(190:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (187:2) <div slot="slider">
-    function create_slider_slot_19(ctx) {
+    // (191:2) <div slot="slider">
+    function create_slider_slot_20(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_9(value) {
-    		/*rangeslider_values_binding_9*/ ctx[36].call(null, value);
+    		/*rangeslider_values_binding_9*/ ctx[39].call(null, value);
     	}
 
     	let rangeslider_props = { range: "min" };
@@ -8796,7 +8796,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 186, 2, 8923);
+    			add_location(div, file$6, 190, 2, 9059);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8831,17 +8831,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_19.name,
+    		id: create_slider_slot_20.name,
     		type: "slot",
-    		source: "(187:2) <div slot=\\\"slider\\\">",
+    		source: "(191:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (185:0) <Example values={range2}>
-    function create_default_slot_19(ctx) {
+    // (189:0) <Example values={range2}>
+    function create_default_slot_20(ctx) {
     	let t;
 
     	const block = {
@@ -8861,17 +8861,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_19.name,
+    		id: create_default_slot_20.name,
     		type: "slot",
-    		source: "(185:0) <Example values={range2}>",
+    		source: "(189:0) <Example values={range2}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (190:2) <div slot="code">
-    function create_code_slot_18(ctx) {
+    // (194:2) <div slot="code">
+    function create_code_slot_19(ctx) {
     	let div;
 
     	const block = {
@@ -8879,7 +8879,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider range="max" values={[50]} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 189, 2, 9036);
+    			add_location(div, file$6, 193, 2, 9172);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8892,24 +8892,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_18.name,
+    		id: create_code_slot_19.name,
     		type: "slot",
-    		source: "(190:2) <div slot=\\\"code\\\">",
+    		source: "(194:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (191:2) <div slot="slider">
-    function create_slider_slot_18(ctx) {
+    // (195:2) <div slot="slider">
+    function create_slider_slot_19(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_10(value) {
-    		/*rangeslider_values_binding_10*/ ctx[37].call(null, value);
+    		/*rangeslider_values_binding_10*/ ctx[40].call(null, value);
     	}
 
     	let rangeslider_props = { range: "max" };
@@ -8926,7 +8926,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 190, 2, 9107);
+    			add_location(div, file$6, 194, 2, 9243);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -8961,17 +8961,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_18.name,
+    		id: create_slider_slot_19.name,
     		type: "slot",
-    		source: "(191:2) <div slot=\\\"slider\\\">",
+    		source: "(195:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (189:0) <Example values={range3}>
-    function create_default_slot_18(ctx) {
+    // (193:0) <Example values={range3}>
+    function create_default_slot_19(ctx) {
     	let t;
 
     	const block = {
@@ -8991,17 +8991,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_18.name,
+    		id: create_default_slot_19.name,
     		type: "slot",
-    		source: "(189:0) <Example values={range3}>",
+    		source: "(193:0) <Example values={range3}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (197:2) <div slot="code">
-    function create_code_slot_17(ctx) {
+    // (201:2) <div slot="code">
+    function create_code_slot_18(ctx) {
     	let div;
 
     	const block = {
@@ -9009,7 +9009,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider float />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 196, 2, 9491);
+    			add_location(div, file$6, 200, 2, 9627);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9022,24 +9022,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_17.name,
+    		id: create_code_slot_18.name,
     		type: "slot",
-    		source: "(197:2) <div slot=\\\"code\\\">",
+    		source: "(201:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (198:2) <div slot="slider">
-    function create_slider_slot_17(ctx) {
+    // (202:2) <div slot="slider">
+    function create_slider_slot_18(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_11(value) {
-    		/*rangeslider_values_binding_11*/ ctx[38].call(null, value);
+    		/*rangeslider_values_binding_11*/ ctx[41].call(null, value);
     	}
 
     	let rangeslider_props = { float: true };
@@ -9056,7 +9056,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 197, 2, 9542);
+    			add_location(div, file$6, 201, 2, 9678);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9091,17 +9091,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_17.name,
+    		id: create_slider_slot_18.name,
     		type: "slot",
-    		source: "(198:2) <div slot=\\\"slider\\\">",
+    		source: "(202:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (196:0) <Example values={float1}>
-    function create_default_slot_17(ctx) {
+    // (200:0) <Example values={float1}>
+    function create_default_slot_18(ctx) {
     	let t;
 
     	const block = {
@@ -9121,17 +9121,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_17.name,
+    		id: create_default_slot_18.name,
     		type: "slot",
-    		source: "(196:0) <Example values={float1}>",
+    		source: "(200:0) <Example values={float1}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (201:2) <div slot="code">
-    function create_code_slot_16(ctx) {
+    // (205:2) <div slot="code">
+    function create_code_slot_17(ctx) {
     	let div;
 
     	const block = {
@@ -9139,7 +9139,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider float hover={false} values={[40,60]} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 200, 2, 9649);
+    			add_location(div, file$6, 204, 2, 9785);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9152,24 +9152,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_16.name,
+    		id: create_code_slot_17.name,
     		type: "slot",
-    		source: "(201:2) <div slot=\\\"code\\\">",
+    		source: "(205:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (202:2) <div slot="slider">
-    function create_slider_slot_16(ctx) {
+    // (206:2) <div slot="slider">
+    function create_slider_slot_17(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_12(value) {
-    		/*rangeslider_values_binding_12*/ ctx[39].call(null, value);
+    		/*rangeslider_values_binding_12*/ ctx[42].call(null, value);
     	}
 
     	let rangeslider_props = { float: true, hover: false };
@@ -9186,7 +9186,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 201, 2, 9731);
+    			add_location(div, file$6, 205, 2, 9867);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9221,17 +9221,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_16.name,
+    		id: create_slider_slot_17.name,
     		type: "slot",
-    		source: "(202:2) <div slot=\\\"slider\\\">",
+    		source: "(206:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (200:0) <Example values={float2}>
-    function create_default_slot_16(ctx) {
+    // (204:0) <Example values={float2}>
+    function create_default_slot_17(ctx) {
     	let t;
 
     	const block = {
@@ -9251,17 +9251,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_16.name,
+    		id: create_default_slot_17.name,
     		type: "slot",
-    		source: "(200:0) <Example values={float2}>",
+    		source: "(204:0) <Example values={float2}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (208:2) <div slot="code">
-    function create_code_slot_15(ctx) {
+    // (212:2) <div slot="code">
+    function create_code_slot_16(ctx) {
     	let div;
 
     	const block = {
@@ -9269,7 +9269,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider pips />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 207, 2, 10100);
+    			add_location(div, file$6, 211, 2, 10236);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9282,24 +9282,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_15.name,
+    		id: create_code_slot_16.name,
     		type: "slot",
-    		source: "(208:2) <div slot=\\\"code\\\">",
+    		source: "(212:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (209:2) <div slot="slider">
-    function create_slider_slot_15(ctx) {
+    // (213:2) <div slot="slider">
+    function create_slider_slot_16(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_13(value) {
-    		/*rangeslider_values_binding_13*/ ctx[40].call(null, value);
+    		/*rangeslider_values_binding_13*/ ctx[43].call(null, value);
     	}
 
     	let rangeslider_props = { pips: true };
@@ -9316,7 +9316,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 208, 2, 10150);
+    			add_location(div, file$6, 212, 2, 10286);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9351,17 +9351,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_15.name,
+    		id: create_slider_slot_16.name,
     		type: "slot",
-    		source: "(209:2) <div slot=\\\"slider\\\">",
+    		source: "(213:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (207:0) <Example values={pips1}>
-    function create_default_slot_15(ctx) {
+    // (211:0) <Example values={pips1}>
+    function create_default_slot_16(ctx) {
     	let t;
 
     	const block = {
@@ -9381,17 +9381,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_15.name,
+    		id: create_default_slot_16.name,
     		type: "slot",
-    		source: "(207:0) <Example values={pips1}>",
+    		source: "(211:0) <Example values={pips1}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (212:2) <div slot="code">
-    function create_code_slot_14(ctx) {
+    // (216:2) <div slot="code">
+    function create_code_slot_15(ctx) {
     	let div;
 
     	const block = {
@@ -9399,7 +9399,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider pips max={5} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 211, 2, 10254);
+    			add_location(div, file$6, 215, 2, 10390);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9412,24 +9412,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_14.name,
+    		id: create_code_slot_15.name,
     		type: "slot",
-    		source: "(212:2) <div slot=\\\"code\\\">",
+    		source: "(216:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (213:2) <div slot="slider">
-    function create_slider_slot_14(ctx) {
+    // (217:2) <div slot="slider">
+    function create_slider_slot_15(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_14(value) {
-    		/*rangeslider_values_binding_14*/ ctx[41].call(null, value);
+    		/*rangeslider_values_binding_14*/ ctx[44].call(null, value);
     	}
 
     	let rangeslider_props = { pips: true, max: 5 };
@@ -9446,7 +9446,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 212, 2, 10312);
+    			add_location(div, file$6, 216, 2, 10448);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9481,16 +9481,127 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_14.name,
+    		id: create_slider_slot_15.name,
     		type: "slot",
-    		source: "(213:2) <div slot=\\\"slider\\\">",
+    		source: "(217:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (211:0) <Example values={pips2}>
+    // (215:0) <Example values={pips2}>
+    function create_default_slot_15(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = space();
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_15.name,
+    		type: "slot",
+    		source: "(215:0) <Example values={pips2}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (223:2) <div slot="code">
+    function create_code_slot_14(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = `${`<RangeSlider pips all rest={false} />`}`;
+    			attr_dev(div, "slot", "code");
+    			add_location(div, file$6, 222, 2, 10865);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_code_slot_14.name,
+    		type: "slot",
+    		source: "(223:2) <div slot=\\\"code\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (224:2) <div slot="slider">
+    function create_slider_slot_14(ctx) {
+    	let div;
+    	let rangeslider;
+    	let current;
+
+    	rangeslider = new RangeSlider({
+    			props: { pips: true, all: true, rest: false },
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(rangeslider.$$.fragment);
+    			attr_dev(div, "slot", "slider");
+    			add_location(div, file$6, 223, 2, 10932);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(rangeslider, div, null);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(rangeslider.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(rangeslider.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(rangeslider);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_slider_slot_14.name,
+    		type: "slot",
+    		source: "(224:2) <div slot=\\\"slider\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (222:0) <Example>
     function create_default_slot_14(ctx) {
     	let t;
 
@@ -9513,23 +9624,23 @@ var app = (function () {
     		block,
     		id: create_default_slot_14.name,
     		type: "slot",
-    		source: "(211:0) <Example values={pips2}>",
+    		source: "(222:0) <Example>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (219:2) <div slot="code">
+    // (227:2) <div slot="code">
     function create_code_slot_13(ctx) {
     	let div;
 
     	const block = {
     		c: function create() {
     			div = element("div");
-    			div.textContent = `${`<RangeSlider pips all rest={false} />`}`;
+    			div.textContent = `${`<RangeSlider pips first='label' last='label' />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 218, 2, 10729);
+    			add_location(div, file$6, 226, 2, 11018);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9544,21 +9655,25 @@ var app = (function () {
     		block,
     		id: create_code_slot_13.name,
     		type: "slot",
-    		source: "(219:2) <div slot=\\\"code\\\">",
+    		source: "(227:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (220:2) <div slot="slider">
+    // (228:2) <div slot="slider">
     function create_slider_slot_13(ctx) {
     	let div;
     	let rangeslider;
     	let current;
 
     	rangeslider = new RangeSlider({
-    			props: { pips: true, all: true, rest: false },
+    			props: {
+    				pips: true,
+    				first: "label",
+    				last: "label"
+    			},
     			$$inline: true
     		});
 
@@ -9567,7 +9682,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 219, 2, 10796);
+    			add_location(div, file$6, 227, 2, 11095);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9594,14 +9709,14 @@ var app = (function () {
     		block,
     		id: create_slider_slot_13.name,
     		type: "slot",
-    		source: "(220:2) <div slot=\\\"slider\\\">",
+    		source: "(228:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (218:0) <Example>
+    // (226:0) <Example>
     function create_default_slot_13(ctx) {
     	let t;
 
@@ -9624,23 +9739,23 @@ var app = (function () {
     		block,
     		id: create_default_slot_13.name,
     		type: "slot",
-    		source: "(218:0) <Example>",
+    		source: "(226:0) <Example>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (223:2) <div slot="code">
+    // (231:2) <div slot="code">
     function create_code_slot_12(ctx) {
     	let div;
 
     	const block = {
     		c: function create() {
     			div = element("div");
-    			div.textContent = `${`<RangeSlider pips first='label' last='label' />`}`;
+    			div.textContent = `${`<RangeSlider pips first='label' last={false} rest={false} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 222, 2, 10882);
+    			add_location(div, file$6, 230, 2, 11191);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9655,14 +9770,14 @@ var app = (function () {
     		block,
     		id: create_code_slot_12.name,
     		type: "slot",
-    		source: "(223:2) <div slot=\\\"code\\\">",
+    		source: "(231:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (224:2) <div slot="slider">
+    // (232:2) <div slot="slider">
     function create_slider_slot_12(ctx) {
     	let div;
     	let rangeslider;
@@ -9672,7 +9787,8 @@ var app = (function () {
     			props: {
     				pips: true,
     				first: "label",
-    				last: "label"
+    				last: false,
+    				rest: false
     			},
     			$$inline: true
     		});
@@ -9682,7 +9798,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 223, 2, 10959);
+    			add_location(div, file$6, 231, 2, 11281);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9709,14 +9825,14 @@ var app = (function () {
     		block,
     		id: create_slider_slot_12.name,
     		type: "slot",
-    		source: "(224:2) <div slot=\\\"slider\\\">",
+    		source: "(232:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (222:0) <Example>
+    // (230:0) <Example>
     function create_default_slot_12(ctx) {
     	let t;
 
@@ -9739,23 +9855,23 @@ var app = (function () {
     		block,
     		id: create_default_slot_12.name,
     		type: "slot",
-    		source: "(222:0) <Example>",
+    		source: "(230:0) <Example>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (227:2) <div slot="code">
+    // (235:2) <div slot="code">
     function create_code_slot_11(ctx) {
     	let div;
 
     	const block = {
     		c: function create() {
     			div = element("div");
-    			div.textContent = `${`<RangeSlider pips first='label' last={false} rest={false} />`}`;
+    			div.textContent = `${`<RangeSlider pips all='label' />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 226, 2, 11055);
+    			add_location(div, file$6, 234, 2, 11390);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9770,26 +9886,21 @@ var app = (function () {
     		block,
     		id: create_code_slot_11.name,
     		type: "slot",
-    		source: "(227:2) <div slot=\\\"code\\\">",
+    		source: "(235:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (228:2) <div slot="slider">
+    // (236:2) <div slot="slider">
     function create_slider_slot_11(ctx) {
     	let div;
     	let rangeslider;
     	let current;
 
     	rangeslider = new RangeSlider({
-    			props: {
-    				pips: true,
-    				first: "label",
-    				last: false,
-    				rest: false
-    			},
+    			props: { pips: true, all: "label" },
     			$$inline: true
     		});
 
@@ -9798,7 +9909,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 227, 2, 11145);
+    			add_location(div, file$6, 235, 2, 11452);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9825,14 +9936,14 @@ var app = (function () {
     		block,
     		id: create_slider_slot_11.name,
     		type: "slot",
-    		source: "(228:2) <div slot=\\\"slider\\\">",
+    		source: "(236:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (226:0) <Example>
+    // (234:0) <Example>
     function create_default_slot_11(ctx) {
     	let t;
 
@@ -9855,23 +9966,26 @@ var app = (function () {
     		block,
     		id: create_default_slot_11.name,
     		type: "slot",
-    		source: "(226:0) <Example>",
+    		source: "(234:0) <Example>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (231:2) <div slot="code">
+    // (245:2) <div slot="code">
     function create_code_slot_10(ctx) {
     	let div;
 
     	const block = {
     		c: function create() {
     			div = element("div");
-    			div.textContent = `${`<RangeSlider pips all='label' />`}`;
+
+    			div.textContent = `${`<!-- using default pipstep -->
+ <RangeSlider pips />`}`;
+
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 230, 2, 11254);
+    			add_location(div, file$6, 244, 2, 12040);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9886,136 +10000,22 @@ var app = (function () {
     		block,
     		id: create_code_slot_10.name,
     		type: "slot",
-    		source: "(231:2) <div slot=\\\"code\\\">",
+    		source: "(245:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (232:2) <div slot="slider">
+    // (247:2) <div slot="slider">
     function create_slider_slot_10(ctx) {
-    	let div;
-    	let rangeslider;
-    	let current;
-
-    	rangeslider = new RangeSlider({
-    			props: { pips: true, all: "label" },
-    			$$inline: true
-    		});
-
-    	const block = {
-    		c: function create() {
-    			div = element("div");
-    			create_component(rangeslider.$$.fragment);
-    			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 231, 2, 11316);
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			mount_component(rangeslider, div, null);
-    			current = true;
-    		},
-    		p: noop,
-    		i: function intro(local) {
-    			if (current) return;
-    			transition_in(rangeslider.$$.fragment, local);
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			transition_out(rangeslider.$$.fragment, local);
-    			current = false;
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
-    			destroy_component(rangeslider);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_slider_slot_10.name,
-    		type: "slot",
-    		source: "(232:2) <div slot=\\\"slider\\\">",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (230:0) <Example>
-    function create_default_slot_10(ctx) {
-    	let t;
-
-    	const block = {
-    		c: function create() {
-    			t = space();
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, t, anchor);
-    		},
-    		p: noop,
-    		i: noop,
-    		o: noop,
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(t);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_default_slot_10.name,
-    		type: "slot",
-    		source: "(230:0) <Example>",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (241:2) <div slot="code">
-    function create_code_slot_9(ctx) {
-    	let div;
-
-    	const block = {
-    		c: function create() {
-    			div = element("div");
-
-    			div.textContent = `${`<!-- using default pipstep -->
- <RangeSlider pips />`}`;
-
-    			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 240, 2, 11904);
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    		},
-    		p: noop,
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_code_slot_9.name,
-    		type: "slot",
-    		source: "(241:2) <div slot=\\\"code\\\">",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (243:2) <div slot="slider">
-    function create_slider_slot_9(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_15(value) {
-    		/*rangeslider_values_binding_15*/ ctx[42].call(null, value);
+    		/*rangeslider_values_binding_15*/ ctx[45].call(null, value);
     	}
 
     	let rangeslider_props = { pips: true, all: "label" };
@@ -10032,7 +10032,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 242, 2, 11986);
+    			add_location(div, file$6, 246, 2, 12122);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10067,17 +10067,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_9.name,
+    		id: create_slider_slot_10.name,
     		type: "slot",
-    		source: "(243:2) <div slot=\\\"slider\\\">",
+    		source: "(247:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (240:0) <Example values={pipstep1}>
-    function create_default_slot_9(ctx) {
+    // (244:0) <Example values={pipstep1}>
+    function create_default_slot_10(ctx) {
     	let t;
 
     	const block = {
@@ -10097,17 +10097,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_9.name,
+    		id: create_default_slot_10.name,
     		type: "slot",
-    		source: "(240:0) <Example values={pipstep1}>",
+    		source: "(244:0) <Example values={pipstep1}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (246:2) <div slot="code">
-    function create_code_slot_8(ctx) {
+    // (250:2) <div slot="code">
+    function create_code_slot_9(ctx) {
     	let div;
 
     	const block = {
@@ -10115,7 +10115,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider pips pipstep={20} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 245, 2, 12108);
+    			add_location(div, file$6, 249, 2, 12244);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10128,24 +10128,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_8.name,
+    		id: create_code_slot_9.name,
     		type: "slot",
-    		source: "(246:2) <div slot=\\\"code\\\">",
+    		source: "(250:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (247:2) <div slot="slider">
-    function create_slider_slot_8(ctx) {
+    // (251:2) <div slot="slider">
+    function create_slider_slot_9(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_16(value) {
-    		/*rangeslider_values_binding_16*/ ctx[43].call(null, value);
+    		/*rangeslider_values_binding_16*/ ctx[46].call(null, value);
     	}
 
     	let rangeslider_props = { pips: true, pipstep: 20, all: "label" };
@@ -10162,7 +10162,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 246, 2, 12171);
+    			add_location(div, file$6, 250, 2, 12307);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10197,17 +10197,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_8.name,
+    		id: create_slider_slot_9.name,
     		type: "slot",
-    		source: "(247:2) <div slot=\\\"slider\\\">",
+    		source: "(251:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (245:0) <Example values={pipstep2}>
-    function create_default_slot_8(ctx) {
+    // (249:0) <Example values={pipstep2}>
+    function create_default_slot_9(ctx) {
     	let t;
 
     	const block = {
@@ -10227,17 +10227,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_8.name,
+    		id: create_default_slot_9.name,
     		type: "slot",
-    		source: "(245:0) <Example values={pipstep2}>",
+    		source: "(249:0) <Example values={pipstep2}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (250:2) <div slot="code">
-    function create_code_slot_7(ctx) {
+    // (254:2) <div slot="code">
+    function create_code_slot_8(ctx) {
     	let div;
 
     	const block = {
@@ -10245,7 +10245,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider pips step={2.5} pipstep={10} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 249, 2, 12306);
+    			add_location(div, file$6, 253, 2, 12442);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10258,24 +10258,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_7.name,
+    		id: create_code_slot_8.name,
     		type: "slot",
-    		source: "(250:2) <div slot=\\\"code\\\">",
+    		source: "(254:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (251:2) <div slot="slider">
-    function create_slider_slot_7(ctx) {
+    // (255:2) <div slot="slider">
+    function create_slider_slot_8(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_17(value) {
-    		/*rangeslider_values_binding_17*/ ctx[44].call(null, value);
+    		/*rangeslider_values_binding_17*/ ctx[47].call(null, value);
     	}
 
     	let rangeslider_props = {
@@ -10297,7 +10297,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 250, 2, 12380);
+    			add_location(div, file$6, 254, 2, 12516);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10332,17 +10332,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_7.name,
+    		id: create_slider_slot_8.name,
     		type: "slot",
-    		source: "(251:2) <div slot=\\\"slider\\\">",
+    		source: "(255:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (249:0) <Example values={pipstep3}>
-    function create_default_slot_7(ctx) {
+    // (253:0) <Example values={pipstep3}>
+    function create_default_slot_8(ctx) {
     	let t;
 
     	const block = {
@@ -10362,17 +10362,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_7.name,
+    		id: create_default_slot_8.name,
     		type: "slot",
-    		source: "(249:0) <Example values={pipstep3}>",
+    		source: "(253:0) <Example values={pipstep3}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (261:2) <div slot="code">
-    function create_code_slot_6(ctx) {
+    // (265:2) <div slot="code">
+    function create_code_slot_7(ctx) {
     	let div;
 
     	const block = {
@@ -10380,7 +10380,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider pips id="reverse-pips" max={50} />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 260, 2, 13061);
+    			add_location(div, file$6, 264, 2, 13197);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10393,17 +10393,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_6.name,
+    		id: create_code_slot_7.name,
     		type: "slot",
-    		source: "(261:2) <div slot=\\\"code\\\">",
+    		source: "(265:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (262:2) <div slot="css">
-    function create_css_slot(ctx) {
+    // (266:2) <div slot="css">
+    function create_css_slot_1(ctx) {
     	let div;
 
     	const block = {
@@ -10438,7 +10438,7 @@ var app = (function () {
  }`}`;
 
     			attr_dev(div, "slot", "css");
-    			add_location(div, file$6, 261, 2, 13138);
+    			add_location(div, file$6, 265, 2, 13274);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10451,24 +10451,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_css_slot.name,
+    		id: create_css_slot_1.name,
     		type: "slot",
-    		source: "(262:2) <div slot=\\\"css\\\">",
+    		source: "(266:2) <div slot=\\\"css\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (288:2) <div slot="slider">
-    function create_slider_slot_6(ctx) {
+    // (292:2) <div slot="slider">
+    function create_slider_slot_7(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_18(value) {
-    		/*rangeslider_values_binding_18*/ ctx[45].call(null, value);
+    		/*rangeslider_values_binding_18*/ ctx[48].call(null, value);
     	}
 
     	let rangeslider_props = { pips: true, id: "reverse-pips", max: 50 };
@@ -10485,7 +10485,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 287, 2, 13698);
+    			add_location(div, file$6, 291, 2, 13834);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10520,17 +10520,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_6.name,
+    		id: create_slider_slot_7.name,
     		type: "slot",
-    		source: "(288:2) <div slot=\\\"slider\\\">",
+    		source: "(292:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (260:0) <Example values={pips3} css active="css">
-    function create_default_slot_6(ctx) {
+    // (264:0) <Example values={pips3} css active="css">
+    function create_default_slot_7(ctx) {
     	let t0;
     	let t1;
 
@@ -10554,17 +10554,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_6.name,
+    		id: create_default_slot_7.name,
     		type: "slot",
-    		source: "(260:0) <Example values={pips3} css active=\\\"css\\\">",
+    		source: "(264:0) <Example values={pips3} css active=\\\"css\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (297:2) <div slot="code">
-    function create_code_slot_5(ctx) {
+    // (301:2) <div slot="code">
+    function create_code_slot_6(ctx) {
     	let div;
 
     	const block = {
@@ -10572,7 +10572,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider prefix="€" />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 296, 2, 14362);
+    			add_location(div, file$6, 300, 2, 14498);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10585,24 +10585,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_5.name,
+    		id: create_code_slot_6.name,
     		type: "slot",
-    		source: "(297:2) <div slot=\\\"code\\\">",
+    		source: "(301:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (298:2) <div slot="slider">
-    function create_slider_slot_5(ctx) {
+    // (302:2) <div slot="slider">
+    function create_slider_slot_6(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_19(value) {
-    		/*rangeslider_values_binding_19*/ ctx[46].call(null, value);
+    		/*rangeslider_values_binding_19*/ ctx[49].call(null, value);
     	}
 
     	let rangeslider_props = {
@@ -10625,7 +10625,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 297, 2, 14418);
+    			add_location(div, file$6, 301, 2, 14554);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10660,17 +10660,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_5.name,
+    		id: create_slider_slot_6.name,
     		type: "slot",
-    		source: "(298:2) <div slot=\\\"slider\\\">",
+    		source: "(302:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (296:0) <Example values={prefix1}>
-    function create_default_slot_5(ctx) {
+    // (300:0) <Example values={prefix1}>
+    function create_default_slot_6(ctx) {
     	let t;
 
     	const block = {
@@ -10690,17 +10690,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_5.name,
+    		id: create_default_slot_6.name,
     		type: "slot",
-    		source: "(296:0) <Example values={prefix1}>",
+    		source: "(300:0) <Example values={prefix1}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (301:2) <div slot="code">
-    function create_code_slot_4(ctx) {
+    // (305:2) <div slot="code">
+    function create_code_slot_5(ctx) {
     	let div;
 
     	const block = {
@@ -10708,7 +10708,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider suffix="%" />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 300, 2, 14565);
+    			add_location(div, file$6, 304, 2, 14701);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10721,24 +10721,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_4.name,
+    		id: create_code_slot_5.name,
     		type: "slot",
-    		source: "(301:2) <div slot=\\\"code\\\">",
+    		source: "(305:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (302:2) <div slot="slider">
-    function create_slider_slot_4(ctx) {
+    // (306:2) <div slot="slider">
+    function create_slider_slot_5(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_20(value) {
-    		/*rangeslider_values_binding_20*/ ctx[47].call(null, value);
+    		/*rangeslider_values_binding_20*/ ctx[50].call(null, value);
     	}
 
     	let rangeslider_props = {
@@ -10761,7 +10761,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 301, 2, 14621);
+    			add_location(div, file$6, 305, 2, 14757);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10796,17 +10796,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_4.name,
+    		id: create_slider_slot_5.name,
     		type: "slot",
-    		source: "(302:2) <div slot=\\\"slider\\\">",
+    		source: "(306:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (300:0) <Example values={prefix2}>
-    function create_default_slot_4(ctx) {
+    // (304:0) <Example values={prefix2}>
+    function create_default_slot_5(ctx) {
     	let t;
 
     	const block = {
@@ -10826,17 +10826,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_4.name,
+    		id: create_default_slot_5.name,
     		type: "slot",
-    		source: "(300:0) <Example values={prefix2}>",
+    		source: "(304:0) <Example values={prefix2}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (305:2) <div slot="code">
-    function create_code_slot_3(ctx) {
+    // (309:2) <div slot="code">
+    function create_code_slot_4(ctx) {
     	let div;
 
     	const block = {
@@ -10844,7 +10844,7 @@ var app = (function () {
     			div = element("div");
     			div.textContent = `${`<RangeSlider prefix="~" suffix=" 🎈" />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 304, 2, 14768);
+    			add_location(div, file$6, 308, 2, 14904);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10857,24 +10857,24 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_3.name,
+    		id: create_code_slot_4.name,
     		type: "slot",
-    		source: "(305:2) <div slot=\\\"code\\\">",
+    		source: "(309:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (306:2) <div slot="slider">
-    function create_slider_slot_3(ctx) {
+    // (310:2) <div slot="slider">
+    function create_slider_slot_4(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_21(value) {
-    		/*rangeslider_values_binding_21*/ ctx[48].call(null, value);
+    		/*rangeslider_values_binding_21*/ ctx[51].call(null, value);
     	}
 
     	let rangeslider_props = {
@@ -10899,7 +10899,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 305, 2, 14837);
+    			add_location(div, file$6, 309, 2, 14973);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -10934,17 +10934,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_3.name,
+    		id: create_slider_slot_4.name,
     		type: "slot",
-    		source: "(306:2) <div slot=\\\"slider\\\">",
+    		source: "(310:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (304:0) <Example values={prefix3}>
-    function create_default_slot_3(ctx) {
+    // (308:0) <Example values={prefix3}>
+    function create_default_slot_4(ctx) {
     	let t;
 
     	const block = {
@@ -10964,17 +10964,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_3.name,
+    		id: create_default_slot_4.name,
     		type: "slot",
-    		source: "(304:0) <Example values={prefix3}>",
+    		source: "(308:0) <Example values={prefix3}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (313:2) <div slot="code">
-    function create_code_slot_2(ctx) {
+    // (317:2) <div slot="code">
+    function create_code_slot_3(ctx) {
     	let div;
 
     	const block = {
@@ -10988,7 +10988,7 @@ var app = (function () {
  <RangeSlider step={10} formatter={ v => num.format(v * 1000) } />`}`;
 
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 312, 2, 15335);
+    			add_location(div, file$6, 316, 2, 15471);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11001,28 +11001,28 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_code_slot_2.name,
+    		id: create_code_slot_3.name,
     		type: "slot",
-    		source: "(313:2) <div slot=\\\"code\\\">",
+    		source: "(317:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (318:2) <div slot="slider">
-    function create_slider_slot_2(ctx) {
+    // (322:2) <div slot="slider">
+    function create_slider_slot_3(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_22(value) {
-    		/*rangeslider_values_binding_22*/ ctx[50].call(null, value);
+    		/*rangeslider_values_binding_22*/ ctx[53].call(null, value);
     	}
 
     	let rangeslider_props = {
-    		formatter: /*func*/ ctx[49],
+    		formatter: /*func*/ ctx[52],
     		pips: true,
     		float: true,
     		all: "label",
@@ -11041,7 +11041,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 317, 2, 15562);
+    			add_location(div, file$6, 321, 2, 15698);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11076,16 +11076,173 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot_2.name,
+    		id: create_slider_slot_3.name,
     		type: "slot",
-    		source: "(318:2) <div slot=\\\"slider\\\">",
+    		source: "(322:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (312:0) <Example values={formatter1}>
+    // (316:0) <Example values={formatter1}>
+    function create_default_slot_3(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = space();
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_3.name,
+    		type: "slot",
+    		source: "(316:0) <Example values={formatter1}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (325:2) <div slot="code">
+    function create_code_slot_2(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+
+    			div.textContent = `${`<script>
+  const moods = ["😁","😀","😊","😐","😥","😫"];
+ </script>
+   
+ <RangeSlider bind:values formatter={ v => moods[v] } max={moods.length-1} /> 
+  
+ <p>{moods[values[0]]}</p>`}`;
+
+    			attr_dev(div, "slot", "code");
+    			add_location(div, file$6, 324, 2, 15864);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_code_slot_2.name,
+    		type: "slot",
+    		source: "(325:2) <div slot=\\\"code\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (332:2) <div slot="slider">
+    function create_slider_slot_2(ctx) {
+    	let div;
+    	let rangeslider;
+    	let updating_values;
+    	let t0;
+    	let p;
+    	let t1_value = /*moods*/ ctx[29][/*formatter2*/ ctx[23][0]] + "";
+    	let t1;
+    	let current;
+
+    	function rangeslider_values_binding_23(value) {
+    		/*rangeslider_values_binding_23*/ ctx[55].call(null, value);
+    	}
+
+    	let rangeslider_props = {
+    		formatter: /*func_1*/ ctx[54],
+    		max: /*moods*/ ctx[29].length - 1,
+    		pips: true,
+    		all: "label"
+    	};
+
+    	if (/*formatter2*/ ctx[23] !== void 0) {
+    		rangeslider_props.values = /*formatter2*/ ctx[23];
+    	}
+
+    	rangeslider = new RangeSlider({ props: rangeslider_props, $$inline: true });
+    	binding_callbacks.push(() => bind(rangeslider, "values", rangeslider_values_binding_23));
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(rangeslider.$$.fragment);
+    			t0 = space();
+    			p = element("p");
+    			t1 = text(t1_value);
+    			set_style(p, "font-size", "2em");
+    			set_style(p, "text-align", "center");
+    			add_location(p, file$6, 333, 4, 16212);
+    			attr_dev(div, "slot", "slider");
+    			add_location(div, file$6, 331, 2, 16077);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(rangeslider, div, null);
+    			append_dev(div, t0);
+    			append_dev(div, p);
+    			append_dev(p, t1);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const rangeslider_changes = {};
+
+    			if (!updating_values && dirty[0] & /*formatter2*/ 8388608) {
+    				updating_values = true;
+    				rangeslider_changes.values = /*formatter2*/ ctx[23];
+    				add_flush_callback(() => updating_values = false);
+    			}
+
+    			rangeslider.$set(rangeslider_changes);
+    			if ((!current || dirty[0] & /*formatter2*/ 8388608) && t1_value !== (t1_value = /*moods*/ ctx[29][/*formatter2*/ ctx[23][0]] + "")) set_data_dev(t1, t1_value);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(rangeslider.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(rangeslider.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(rangeslider);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_slider_slot_2.name,
+    		type: "slot",
+    		source: "(332:2) <div slot=\\\"slider\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (324:0) <Example>
     function create_default_slot_2(ctx) {
     	let t;
 
@@ -11108,31 +11265,23 @@ var app = (function () {
     		block,
     		id: create_default_slot_2.name,
     		type: "slot",
-    		source: "(312:0) <Example values={formatter1}>",
+    		source: "(324:0) <Example>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (321:2) <div slot="code">
+    // (340:2) <div slot="code">
     function create_code_slot_1(ctx) {
     	let div;
 
     	const block = {
     		c: function create() {
     			div = element("div");
-
-    			div.textContent = `${`<script>
-  const moods = ["😁","😀","😊","😐","😥","😫"];
- </script>
-   
- <RangeSlider bind:values formatter={ v => moods[v] } max={moods.length-1} /> 
-  
- <p>{moods[values[0]]}</p>`}`;
-
+    			div.textContent = `${`<RangeSlider formatter={ v => v + "²" } handleFormatter={ v => v * v } />`}`;
     			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 320, 2, 15728);
+    			add_location(div, file$6, 339, 2, 16458);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11147,171 +11296,22 @@ var app = (function () {
     		block,
     		id: create_code_slot_1.name,
     		type: "slot",
-    		source: "(321:2) <div slot=\\\"code\\\">",
+    		source: "(340:2) <div slot=\\\"code\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (328:2) <div slot="slider">
+    // (341:2) <div slot="slider">
     function create_slider_slot_1(ctx) {
-    	let div;
-    	let rangeslider;
-    	let updating_values;
-    	let t0;
-    	let p;
-    	let t1_value = /*moods*/ ctx[26][/*formatter2*/ ctx[23][0]] + "";
-    	let t1;
-    	let current;
-
-    	function rangeslider_values_binding_23(value) {
-    		/*rangeslider_values_binding_23*/ ctx[52].call(null, value);
-    	}
-
-    	let rangeslider_props = {
-    		formatter: /*func_1*/ ctx[51],
-    		max: /*moods*/ ctx[26].length - 1,
-    		pips: true,
-    		all: "label"
-    	};
-
-    	if (/*formatter2*/ ctx[23] !== void 0) {
-    		rangeslider_props.values = /*formatter2*/ ctx[23];
-    	}
-
-    	rangeslider = new RangeSlider({ props: rangeslider_props, $$inline: true });
-    	binding_callbacks.push(() => bind(rangeslider, "values", rangeslider_values_binding_23));
-
-    	const block = {
-    		c: function create() {
-    			div = element("div");
-    			create_component(rangeslider.$$.fragment);
-    			t0 = space();
-    			p = element("p");
-    			t1 = text(t1_value);
-    			set_style(p, "font-size", "2em");
-    			set_style(p, "text-align", "center");
-    			add_location(p, file$6, 329, 4, 16076);
-    			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 327, 2, 15941);
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			mount_component(rangeslider, div, null);
-    			append_dev(div, t0);
-    			append_dev(div, p);
-    			append_dev(p, t1);
-    			current = true;
-    		},
-    		p: function update(ctx, dirty) {
-    			const rangeslider_changes = {};
-
-    			if (!updating_values && dirty[0] & /*formatter2*/ 8388608) {
-    				updating_values = true;
-    				rangeslider_changes.values = /*formatter2*/ ctx[23];
-    				add_flush_callback(() => updating_values = false);
-    			}
-
-    			rangeslider.$set(rangeslider_changes);
-    			if ((!current || dirty[0] & /*formatter2*/ 8388608) && t1_value !== (t1_value = /*moods*/ ctx[26][/*formatter2*/ ctx[23][0]] + "")) set_data_dev(t1, t1_value);
-    		},
-    		i: function intro(local) {
-    			if (current) return;
-    			transition_in(rangeslider.$$.fragment, local);
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			transition_out(rangeslider.$$.fragment, local);
-    			current = false;
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
-    			destroy_component(rangeslider);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_slider_slot_1.name,
-    		type: "slot",
-    		source: "(328:2) <div slot=\\\"slider\\\">",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (320:0) <Example>
-    function create_default_slot_1$1(ctx) {
-    	let t;
-
-    	const block = {
-    		c: function create() {
-    			t = space();
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, t, anchor);
-    		},
-    		p: noop,
-    		i: noop,
-    		o: noop,
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(t);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_default_slot_1$1.name,
-    		type: "slot",
-    		source: "(320:0) <Example>",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (336:2) <div slot="code">
-    function create_code_slot(ctx) {
-    	let div;
-
-    	const block = {
-    		c: function create() {
-    			div = element("div");
-    			div.textContent = `${`<RangeSlider formatter={ v => v + "²" } handleFormatter={ v => v * v } />`}`;
-    			attr_dev(div, "slot", "code");
-    			add_location(div, file$6, 335, 2, 16322);
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    		},
-    		p: noop,
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_code_slot.name,
-    		type: "slot",
-    		source: "(336:2) <div slot=\\\"code\\\">",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (337:2) <div slot="slider">
-    function create_slider_slot(ctx) {
     	let div;
     	let rangeslider;
     	let updating_values;
     	let current;
 
     	function rangeslider_values_binding_24(value) {
-    		/*rangeslider_values_binding_24*/ ctx[53].call(null, value);
+    		/*rangeslider_values_binding_24*/ ctx[56].call(null, value);
     	}
 
     	let rangeslider_props = {
@@ -11335,7 +11335,7 @@ var app = (function () {
     			div = element("div");
     			create_component(rangeslider.$$.fragment);
     			attr_dev(div, "slot", "slider");
-    			add_location(div, file$6, 336, 2, 16425);
+    			add_location(div, file$6, 340, 2, 16561);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -11370,17 +11370,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_slider_slot.name,
+    		id: create_slider_slot_1.name,
     		type: "slot",
-    		source: "(337:2) <div slot=\\\"slider\\\">",
+    		source: "(341:2) <div slot=\\\"slider\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (335:0) <Example values={formatter3}>
-    function create_default_slot$1(ctx) {
+    // (339:0) <Example values={formatter3}>
+    function create_default_slot_1$1(ctx) {
     	let t;
 
     	const block = {
@@ -11400,9 +11400,235 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
+    		id: create_default_slot_1$1.name,
+    		type: "slot",
+    		source: "(339:0) <Example values={formatter3}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (348:2) <div slot="code">
+    function create_code_slot(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+
+    			div.textContent = `${`<script>
+    let hue = [244];
+    $: lightColor = \`hsl(\${Math.round(hue[0]) - 10}, 65%, 70%)\`;
+    $: color = \`hsl(\${Math.round(hue[0])}, 63%, 54%)\`;
+  </script>  
+  
+  <div style="--range-handle-focus: {color}; --range-range: {lightColor}">
+   <RangeSlider id="color-pips" bind:values={hue} 
+      range="min" max={255} pips pipstep={26} first={false} last={false} 
+    />
+  </div>`}`;
+
+    			attr_dev(div, "slot", "code");
+    			add_location(div, file$6, 347, 2, 17111);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_code_slot.name,
+    		type: "slot",
+    		source: "(348:2) <div slot=\\\"code\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (359:2) <div slot="css">
+    function create_css_slot(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+
+    			div.textContent = `${`#color-pips {
+   border: 1px solid rgb(142, 142, 175);
+   height: 15px;
+ }
+ #color-pips .rangeBar {
+   height: 13px;
+ }
+ #color-pips .rangeHandle {
+   top: 7px;
+   height: 30px;
+   width: 30px;
+ }
+ #color-pips .rangeHandle .rangeNub {
+   border: 1px solid rgb(142, 142, 175);
+   border-radius: 3px;
+   box-shadow: -2px -2px 10px 1px rgba(0,0,0,0.3);
+ }
+ #color-pips .rangePips {
+   bottom: -3px;
+   z-index: 1;
+ }
+ #color-pips .rangePips .pip {
+   border-radius: 10px;
+   width: 5px;
+  height: 5px;
+  transform: translateX(-50%);
+ }
+ #color-pips .rangePips .pip.in-range {
+  opacity: 0.5;
+ }`}`;
+
+    			attr_dev(div, "slot", "css");
+    			add_location(div, file$6, 358, 2, 17529);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_css_slot.name,
+    		type: "slot",
+    		source: "(359:2) <div slot=\\\"css\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (389:2) <div slot="slider" style="--range-handle-focus: {color}; --range-range: {lightColor}">
+    function create_slider_slot(ctx) {
+    	let div;
+    	let rangeslider;
+    	let updating_values;
+    	let current;
+
+    	function rangeslider_values_binding_25(value) {
+    		/*rangeslider_values_binding_25*/ ctx[57].call(null, value);
+    	}
+
+    	let rangeslider_props = {
+    		id: "color-pips",
+    		range: "min",
+    		max: 255,
+    		pips: true,
+    		pipstep: 26,
+    		first: false,
+    		last: false
+    	};
+
+    	if (/*hue*/ ctx[25] !== void 0) {
+    		rangeslider_props.values = /*hue*/ ctx[25];
+    	}
+
+    	rangeslider = new RangeSlider({ props: rangeslider_props, $$inline: true });
+    	binding_callbacks.push(() => bind(rangeslider, "values", rangeslider_values_binding_25));
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(rangeslider.$$.fragment);
+    			attr_dev(div, "slot", "slider");
+    			set_style(div, "--range-handle-focus", /*color*/ ctx[27]);
+    			set_style(div, "--range-range", /*lightColor*/ ctx[26]);
+    			add_location(div, file$6, 388, 2, 18149);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(rangeslider, div, null);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const rangeslider_changes = {};
+
+    			if (!updating_values && dirty[0] & /*hue*/ 33554432) {
+    				updating_values = true;
+    				rangeslider_changes.values = /*hue*/ ctx[25];
+    				add_flush_callback(() => updating_values = false);
+    			}
+
+    			rangeslider.$set(rangeslider_changes);
+
+    			if (!current || dirty[0] & /*color*/ 134217728) {
+    				set_style(div, "--range-handle-focus", /*color*/ ctx[27]);
+    			}
+
+    			if (!current || dirty[0] & /*lightColor*/ 67108864) {
+    				set_style(div, "--range-range", /*lightColor*/ ctx[26]);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(rangeslider.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(rangeslider.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(rangeslider);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_slider_slot.name,
+    		type: "slot",
+    		source: "(389:2) <div slot=\\\"slider\\\" style=\\\"--range-handle-focus: {color}; --range-range: {lightColor}\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (347:0) <Example values={hue} css active="code">
+    function create_default_slot$1(ctx) {
+    	let t0;
+    	let t1;
+
+    	const block = {
+    		c: function create() {
+    			t0 = space();
+    			t1 = space();
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, t1, anchor);
+    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(t1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
     		id: create_default_slot$1.name,
     		type: "slot",
-    		source: "(335:0) <Example values={formatter3}>",
+    		source: "(347:0) <Example values={hue} css active=\\\"code\\\">",
     		ctx
     	});
 
@@ -11708,21 +11934,33 @@ var app = (function () {
     	let t221;
     	let example29;
     	let t222;
-    	let hr;
-    	let t223;
-    	let div;
+    	let h22;
+    	let a19;
+    	let t224;
     	let p23;
+    	let t226;
+    	let h313;
+    	let a20;
+    	let t228;
+    	let p24;
+    	let t230;
+    	let example30;
+    	let t231;
+    	let hr;
+    	let t232;
+    	let div;
+    	let p25;
     	let img;
     	let img_src_value;
     	let br;
-    	let t224;
-    	let t225;
+    	let t233;
+    	let t234;
     	let small;
-    	let a19;
-    	let t227;
-    	let a20;
-    	let t229;
     	let a21;
+    	let t236;
+    	let a22;
+    	let t238;
+    	let a23;
     	let current;
 
     	rangeslider = new RangeSlider({
@@ -11741,7 +11979,7 @@ var app = (function () {
     	prism0 = new Prism$1({
     			props: {
     				language: "css",
-    				$$slots: { default: [create_default_slot_31] },
+    				$$slots: { default: [create_default_slot_32] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -11750,7 +11988,7 @@ var app = (function () {
     	prism1 = new Prism$1({
     			props: {
     				language: "css",
-    				$$slots: { default: [create_default_slot_30] },
+    				$$slots: { default: [create_default_slot_31] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -11759,9 +11997,9 @@ var app = (function () {
     	example0 = new Example({
     			props: {
     				$$slots: {
-    					default: [create_default_slot_29],
-    					slider: [create_slider_slot_29],
-    					code: [create_code_slot_29]
+    					default: [create_default_slot_30],
+    					slider: [create_slider_slot_30],
+    					code: [create_code_slot_30]
     				},
     				$$scope: { ctx }
     			},
@@ -11772,9 +12010,9 @@ var app = (function () {
     			props: {
     				values: /*values1*/ ctx[0],
     				$$slots: {
-    					default: [create_default_slot_28],
-    					slider: [create_slider_slot_28],
-    					code: [create_code_slot_28]
+    					default: [create_default_slot_29],
+    					slider: [create_slider_slot_29],
+    					code: [create_code_slot_29]
     				},
     				$$scope: { ctx }
     			},
@@ -11785,9 +12023,9 @@ var app = (function () {
     			props: {
     				values: /*values2*/ ctx[1],
     				$$slots: {
-    					default: [create_default_slot_27],
-    					slider: [create_slider_slot_27],
-    					code: [create_code_slot_27]
+    					default: [create_default_slot_28],
+    					slider: [create_slider_slot_28],
+    					code: [create_code_slot_28]
     				},
     				$$scope: { ctx }
     			},
@@ -11798,9 +12036,9 @@ var app = (function () {
     			props: {
     				values: /*minmax1*/ ctx[2],
     				$$slots: {
-    					default: [create_default_slot_26],
-    					slider: [create_slider_slot_26],
-    					code: [create_code_slot_26]
+    					default: [create_default_slot_27],
+    					slider: [create_slider_slot_27],
+    					code: [create_code_slot_27]
     				},
     				$$scope: { ctx }
     			},
@@ -11811,9 +12049,9 @@ var app = (function () {
     			props: {
     				values: /*minmax2*/ ctx[3],
     				$$slots: {
-    					default: [create_default_slot_25],
-    					slider: [create_slider_slot_25],
-    					code: [create_code_slot_25]
+    					default: [create_default_slot_26],
+    					slider: [create_slider_slot_26],
+    					code: [create_code_slot_26]
     				},
     				$$scope: { ctx }
     			},
@@ -11824,9 +12062,9 @@ var app = (function () {
     			props: {
     				values: /*minmax3*/ ctx[4],
     				$$slots: {
-    					default: [create_default_slot_24],
-    					slider: [create_slider_slot_24],
-    					code: [create_code_slot_24]
+    					default: [create_default_slot_25],
+    					slider: [create_slider_slot_25],
+    					code: [create_code_slot_25]
     				},
     				$$scope: { ctx }
     			},
@@ -11837,9 +12075,9 @@ var app = (function () {
     			props: {
     				values: /*step1*/ ctx[5],
     				$$slots: {
-    					default: [create_default_slot_23],
-    					slider: [create_slider_slot_23],
-    					code: [create_code_slot_23]
+    					default: [create_default_slot_24],
+    					slider: [create_slider_slot_24],
+    					code: [create_code_slot_24]
     				},
     				$$scope: { ctx }
     			},
@@ -11850,9 +12088,9 @@ var app = (function () {
     			props: {
     				values: /*step3*/ ctx[7],
     				$$slots: {
-    					default: [create_default_slot_22],
-    					slider: [create_slider_slot_22],
-    					code: [create_code_slot_22]
+    					default: [create_default_slot_23],
+    					slider: [create_slider_slot_23],
+    					code: [create_code_slot_23]
     				},
     				$$scope: { ctx }
     			},
@@ -11863,9 +12101,9 @@ var app = (function () {
     			props: {
     				values: /*step2*/ ctx[6],
     				$$slots: {
-    					default: [create_default_slot_21],
-    					slider: [create_slider_slot_21],
-    					code: [create_code_slot_21]
+    					default: [create_default_slot_22],
+    					slider: [create_slider_slot_22],
+    					code: [create_code_slot_22]
     				},
     				$$scope: { ctx }
     			},
@@ -11876,9 +12114,9 @@ var app = (function () {
     			props: {
     				values: /*range1*/ ctx[13],
     				$$slots: {
-    					default: [create_default_slot_20],
-    					slider: [create_slider_slot_20],
-    					code: [create_code_slot_20]
+    					default: [create_default_slot_21],
+    					slider: [create_slider_slot_21],
+    					code: [create_code_slot_21]
     				},
     				$$scope: { ctx }
     			},
@@ -11889,9 +12127,9 @@ var app = (function () {
     			props: {
     				values: /*range2*/ ctx[14],
     				$$slots: {
-    					default: [create_default_slot_19],
-    					slider: [create_slider_slot_19],
-    					code: [create_code_slot_19]
+    					default: [create_default_slot_20],
+    					slider: [create_slider_slot_20],
+    					code: [create_code_slot_20]
     				},
     				$$scope: { ctx }
     			},
@@ -11902,9 +12140,9 @@ var app = (function () {
     			props: {
     				values: /*range3*/ ctx[15],
     				$$slots: {
-    					default: [create_default_slot_18],
-    					slider: [create_slider_slot_18],
-    					code: [create_code_slot_18]
+    					default: [create_default_slot_19],
+    					slider: [create_slider_slot_19],
+    					code: [create_code_slot_19]
     				},
     				$$scope: { ctx }
     			},
@@ -11915,9 +12153,9 @@ var app = (function () {
     			props: {
     				values: /*float1*/ ctx[8],
     				$$slots: {
-    					default: [create_default_slot_17],
-    					slider: [create_slider_slot_17],
-    					code: [create_code_slot_17]
+    					default: [create_default_slot_18],
+    					slider: [create_slider_slot_18],
+    					code: [create_code_slot_18]
     				},
     				$$scope: { ctx }
     			},
@@ -11928,9 +12166,9 @@ var app = (function () {
     			props: {
     				values: /*float2*/ ctx[9],
     				$$slots: {
-    					default: [create_default_slot_16],
-    					slider: [create_slider_slot_16],
-    					code: [create_code_slot_16]
+    					default: [create_default_slot_17],
+    					slider: [create_slider_slot_17],
+    					code: [create_code_slot_17]
     				},
     				$$scope: { ctx }
     			},
@@ -11941,9 +12179,9 @@ var app = (function () {
     			props: {
     				values: /*pips1*/ ctx[10],
     				$$slots: {
-    					default: [create_default_slot_15],
-    					slider: [create_slider_slot_15],
-    					code: [create_code_slot_15]
+    					default: [create_default_slot_16],
+    					slider: [create_slider_slot_16],
+    					code: [create_code_slot_16]
     				},
     				$$scope: { ctx }
     			},
@@ -11954,6 +12192,18 @@ var app = (function () {
     			props: {
     				values: /*pips2*/ ctx[11],
     				$$slots: {
+    					default: [create_default_slot_15],
+    					slider: [create_slider_slot_15],
+    					code: [create_code_slot_15]
+    				},
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	example16 = new Example({
+    			props: {
+    				$$slots: {
     					default: [create_default_slot_14],
     					slider: [create_slider_slot_14],
     					code: [create_code_slot_14]
@@ -11963,7 +12213,7 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	example16 = new Example({
+    	example17 = new Example({
     			props: {
     				$$slots: {
     					default: [create_default_slot_13],
@@ -11975,7 +12225,7 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	example17 = new Example({
+    	example18 = new Example({
     			props: {
     				$$slots: {
     					default: [create_default_slot_12],
@@ -11987,7 +12237,7 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	example18 = new Example({
+    	example19 = new Example({
     			props: {
     				$$slots: {
     					default: [create_default_slot_11],
@@ -11999,8 +12249,9 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	example19 = new Example({
+    	example20 = new Example({
     			props: {
+    				values: /*pipstep1*/ ctx[16],
     				$$slots: {
     					default: [create_default_slot_10],
     					slider: [create_slider_slot_10],
@@ -12011,9 +12262,9 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	example20 = new Example({
+    	example21 = new Example({
     			props: {
-    				values: /*pipstep1*/ ctx[16],
+    				values: /*pipstep2*/ ctx[17],
     				$$slots: {
     					default: [create_default_slot_9],
     					slider: [create_slider_slot_9],
@@ -12024,26 +12275,13 @@ var app = (function () {
     			$$inline: true
     		});
 
-    	example21 = new Example({
-    			props: {
-    				values: /*pipstep2*/ ctx[17],
-    				$$slots: {
-    					default: [create_default_slot_8],
-    					slider: [create_slider_slot_8],
-    					code: [create_code_slot_8]
-    				},
-    				$$scope: { ctx }
-    			},
-    			$$inline: true
-    		});
-
     	example22 = new Example({
     			props: {
     				values: /*pipstep3*/ ctx[18],
     				$$slots: {
-    					default: [create_default_slot_7],
-    					slider: [create_slider_slot_7],
-    					code: [create_code_slot_7]
+    					default: [create_default_slot_8],
+    					slider: [create_slider_slot_8],
+    					code: [create_code_slot_8]
     				},
     				$$scope: { ctx }
     			},
@@ -12056,10 +12294,10 @@ var app = (function () {
     				css: true,
     				active: "css",
     				$$slots: {
-    					default: [create_default_slot_6],
-    					slider: [create_slider_slot_6],
-    					css: [create_css_slot],
-    					code: [create_code_slot_6]
+    					default: [create_default_slot_7],
+    					slider: [create_slider_slot_7],
+    					css: [create_css_slot_1],
+    					code: [create_code_slot_7]
     				},
     				$$scope: { ctx }
     			},
@@ -12072,9 +12310,9 @@ var app = (function () {
     			props: {
     				values: /*prefix1*/ ctx[19],
     				$$slots: {
-    					default: [create_default_slot_5],
-    					slider: [create_slider_slot_5],
-    					code: [create_code_slot_5]
+    					default: [create_default_slot_6],
+    					slider: [create_slider_slot_6],
+    					code: [create_code_slot_6]
     				},
     				$$scope: { ctx }
     			},
@@ -12085,9 +12323,9 @@ var app = (function () {
     			props: {
     				values: /*prefix2*/ ctx[20],
     				$$slots: {
-    					default: [create_default_slot_4],
-    					slider: [create_slider_slot_4],
-    					code: [create_code_slot_4]
+    					default: [create_default_slot_5],
+    					slider: [create_slider_slot_5],
+    					code: [create_code_slot_5]
     				},
     				$$scope: { ctx }
     			},
@@ -12098,9 +12336,9 @@ var app = (function () {
     			props: {
     				values: /*prefix3*/ ctx[21],
     				$$slots: {
-    					default: [create_default_slot_3],
-    					slider: [create_slider_slot_3],
-    					code: [create_code_slot_3]
+    					default: [create_default_slot_4],
+    					slider: [create_slider_slot_4],
+    					code: [create_code_slot_4]
     				},
     				$$scope: { ctx }
     			},
@@ -12111,9 +12349,9 @@ var app = (function () {
     			props: {
     				values: /*formatter1*/ ctx[22],
     				$$slots: {
-    					default: [create_default_slot_2],
-    					slider: [create_slider_slot_2],
-    					code: [create_code_slot_2]
+    					default: [create_default_slot_3],
+    					slider: [create_slider_slot_3],
+    					code: [create_code_slot_3]
     				},
     				$$scope: { ctx }
     			},
@@ -12123,9 +12361,9 @@ var app = (function () {
     	example28 = new Example({
     			props: {
     				$$slots: {
-    					default: [create_default_slot_1$1],
-    					slider: [create_slider_slot_1],
-    					code: [create_code_slot_1]
+    					default: [create_default_slot_2],
+    					slider: [create_slider_slot_2],
+    					code: [create_code_slot_2]
     				},
     				$$scope: { ctx }
     			},
@@ -12136,8 +12374,24 @@ var app = (function () {
     			props: {
     				values: /*formatter3*/ ctx[24],
     				$$slots: {
+    					default: [create_default_slot_1$1],
+    					slider: [create_slider_slot_1],
+    					code: [create_code_slot_1]
+    				},
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	example30 = new Example({
+    			props: {
+    				values: /*hue*/ ctx[25],
+    				css: true,
+    				active: "code",
+    				$$slots: {
     					default: [create_default_slot$1],
     					slider: [create_slider_slot],
+    					css: [create_css_slot],
     					code: [create_code_slot]
     				},
     				$$scope: { ctx }
@@ -12520,195 +12774,221 @@ var app = (function () {
     			t221 = space();
     			create_component(example29.$$.fragment);
     			t222 = space();
-    			hr = element("hr");
-    			t223 = space();
-    			div = element("div");
+    			h22 = element("h2");
+    			a19 = element("a");
+    			a19.textContent = "Fancy Examples";
+    			t224 = space();
     			p23 = element("p");
+    			p23.textContent = "Here’s a bunch of examples to give ideas of how to use the different options/styles.";
+    			t226 = space();
+    			h313 = element("h3");
+    			a20 = element("a");
+    			a20.textContent = "Color Shifting Slider";
+    			t228 = space();
+    			p24 = element("p");
+    			p24.textContent = "Using CSS variables bound to the input values for shifting the colours.";
+    			t230 = space();
+    			create_component(example30.$$.fragment);
+    			t231 = space();
+    			hr = element("hr");
+    			t232 = space();
+    			div = element("div");
+    			p25 = element("p");
     			img = element("img");
     			br = element("br");
-    			t224 = text("\nMore coming soon");
-    			t225 = space();
+    			t233 = text("\nMore coming soon");
+    			t234 = space();
     			small = element("small");
-    			a19 = element("a");
-    			a19.textContent = "Search";
-    			t227 = text(", ");
-    			a20 = element("a");
-    			a20.textContent = "Code";
-    			t229 = text(" and other icons by ");
     			a21 = element("a");
-    			a21.textContent = "Icons8";
+    			a21.textContent = "Search";
+    			t236 = text(", ");
+    			a22 = element("a");
+    			a22.textContent = "Code";
+    			t238 = text(" and other icons by ");
+    			a23 = element("a");
+    			a23.textContent = "Icons8";
     			attr_dev(a0, "href", "#svelte-range-slider--pips");
-    			add_location(a0, file$6, 59, 35, 1266);
+    			add_location(a0, file$6, 63, 35, 1402);
     			attr_dev(h1, "id", "svelte-range-slider--pips");
-    			add_location(h1, file$6, 59, 0, 1231);
-    			add_location(strong0, file$6, 60, 27, 1366);
-    			add_location(p0, file$6, 60, 0, 1339);
+    			add_location(h1, file$6, 63, 0, 1367);
+    			add_location(strong0, file$6, 64, 27, 1502);
+    			add_location(p0, file$6, 64, 0, 1475);
     			attr_dev(a1, "href", "#customisation");
-    			add_location(a1, file$6, 62, 23, 1609);
+    			add_location(a1, file$6, 66, 23, 1745);
     			attr_dev(h20, "id", "customisation");
-    			add_location(h20, file$6, 62, 0, 1586);
+    			add_location(h20, file$6, 66, 0, 1722);
     			attr_dev(a2, "href", "#options");
-    			add_location(a2, file$6, 63, 17, 1674);
+    			add_location(a2, file$6, 67, 17, 1810);
     			attr_dev(h30, "id", "options");
-    			add_location(h30, file$6, 63, 0, 1657);
-    			add_location(code0, file$6, 64, 70, 1780);
-    			add_location(p1, file$6, 64, 0, 1710);
+    			add_location(h30, file$6, 67, 0, 1793);
+    			add_location(code0, file$6, 68, 70, 1916);
+    			add_location(p1, file$6, 68, 0, 1846);
     			attr_dev(a3, "href", "#styling");
-    			add_location(a3, file$6, 67, 17, 1898);
+    			add_location(a3, file$6, 71, 17, 2034);
     			attr_dev(h31, "id", "styling");
-    			add_location(h31, file$6, 67, 0, 1881);
-    			add_location(code1, file$6, 69, 51, 2084);
-    			add_location(p2, file$6, 68, 0, 1934);
-    			add_location(p3, file$6, 100, 0, 3939);
+    			add_location(h31, file$6, 71, 0, 2017);
+    			add_location(code1, file$6, 73, 51, 2220);
+    			add_location(p2, file$6, 72, 0, 2070);
+    			add_location(p3, file$6, 104, 0, 4075);
     			attr_dev(a4, "href", "#usage");
-    			add_location(a4, file$6, 114, 15, 4919);
+    			add_location(a4, file$6, 118, 15, 5055);
     			attr_dev(h21, "id", "usage");
-    			add_location(h21, file$6, 114, 0, 4904);
+    			add_location(h21, file$6, 118, 0, 5040);
     			attr_dev(a5, "href", "#basic-usage");
-    			add_location(a5, file$6, 115, 21, 4972);
+    			add_location(a5, file$6, 119, 21, 5108);
     			attr_dev(h32, "id", "basic-usage");
-    			add_location(h32, file$6, 115, 0, 4951);
-    			add_location(p4, file$6, 116, 0, 5016);
+    			add_location(h32, file$6, 119, 0, 5087);
+    			add_location(p4, file$6, 120, 0, 5152);
     			attr_dev(a6, "href", "#values");
-    			add_location(a6, file$6, 121, 16, 5243);
+    			add_location(a6, file$6, 125, 16, 5379);
     			attr_dev(h33, "id", "values");
-    			add_location(h33, file$6, 121, 0, 5227);
-    			add_location(code2, file$6, 122, 45, 5322);
-    			add_location(code3, file$6, 122, 82, 5359);
-    			add_location(code4, file$6, 123, 22, 5420);
-    			add_location(code5, file$6, 123, 76, 5474);
-    			add_location(code6, file$6, 123, 97, 5495);
-    			add_location(code7, file$6, 124, 19, 5545);
-    			add_location(p5, file$6, 122, 0, 5277);
+    			add_location(h33, file$6, 125, 0, 5363);
+    			add_location(code2, file$6, 126, 45, 5458);
+    			add_location(code3, file$6, 126, 82, 5495);
+    			add_location(code4, file$6, 127, 22, 5556);
+    			add_location(code5, file$6, 127, 76, 5610);
+    			add_location(code6, file$6, 127, 97, 5631);
+    			add_location(code7, file$6, 128, 19, 5681);
+    			add_location(p5, file$6, 126, 0, 5413);
     			attr_dev(a7, "href", "#min--max");
-    			add_location(a7, file$6, 133, 18, 5922);
+    			add_location(a7, file$6, 137, 18, 6058);
     			attr_dev(h34, "id", "min--max");
-    			add_location(h34, file$6, 133, 0, 5904);
-    			add_location(code8, file$6, 134, 32, 5993);
-    			add_location(code9, file$6, 134, 53, 6014);
-    			add_location(p6, file$6, 134, 0, 5961);
-    			add_location(code10, file$6, 140, 29, 6323);
-    			add_location(code11, file$6, 140, 73, 6367);
-    			add_location(p7, file$6, 140, 0, 6294);
+    			add_location(h34, file$6, 137, 0, 6040);
+    			add_location(code8, file$6, 138, 32, 6129);
+    			add_location(code9, file$6, 138, 53, 6150);
+    			add_location(p6, file$6, 138, 0, 6097);
+    			add_location(code10, file$6, 144, 29, 6459);
+    			add_location(code11, file$6, 144, 73, 6503);
+    			add_location(p7, file$6, 144, 0, 6430);
     			attr_dev(a8, "href", "#steps");
-    			add_location(a8, file$6, 156, 15, 6921);
+    			add_location(a8, file$6, 160, 15, 7057);
     			attr_dev(h35, "id", "steps");
-    			add_location(h35, file$6, 156, 0, 6906);
-    			add_location(code12, file$6, 157, 54, 7007);
-    			add_location(code13, file$6, 157, 75, 7028);
-    			add_location(code14, file$6, 158, 45, 7115);
-    			add_location(code15, file$6, 158, 88, 7158);
-    			add_location(code16, file$6, 159, 26, 7211);
-    			add_location(p8, file$6, 157, 0, 6953);
-    			add_location(code17, file$6, 168, 51, 7689);
-    			add_location(code18, file$6, 169, 57, 7798);
-    			add_location(code19, file$6, 169, 95, 7836);
-    			add_location(p9, file$6, 168, 0, 7638);
+    			add_location(h35, file$6, 160, 0, 7042);
+    			add_location(code12, file$6, 161, 54, 7143);
+    			add_location(code13, file$6, 161, 75, 7164);
+    			add_location(code14, file$6, 162, 45, 7251);
+    			add_location(code15, file$6, 162, 88, 7294);
+    			add_location(code16, file$6, 163, 26, 7347);
+    			add_location(p8, file$6, 161, 0, 7089);
+    			add_location(code17, file$6, 172, 51, 7825);
+    			add_location(code18, file$6, 173, 57, 7934);
+    			add_location(code19, file$6, 173, 95, 7972);
+    			add_location(p9, file$6, 172, 0, 7774);
     			attr_dev(a9, "href", "#ranges");
-    			add_location(a9, file$6, 174, 16, 8098);
+    			add_location(a9, file$6, 178, 16, 8234);
     			attr_dev(h36, "id", "ranges");
-    			add_location(h36, file$6, 174, 0, 8082);
-    			add_location(code20, file$6, 176, 0, 8216);
-    			add_location(code21, file$6, 176, 47, 8263);
-    			add_location(strong1, file$6, 176, 88, 8304);
-    			add_location(p10, file$6, 175, 0, 8132);
-    			add_location(code22, file$6, 182, 16, 8624);
-    			add_location(code23, file$6, 182, 47, 8655);
-    			add_location(code24, file$6, 182, 69, 8677);
-    			add_location(code25, file$6, 182, 101, 8709);
-    			add_location(p11, file$6, 182, 0, 8608);
+    			add_location(h36, file$6, 178, 0, 8218);
+    			add_location(code20, file$6, 180, 0, 8352);
+    			add_location(code21, file$6, 180, 47, 8399);
+    			add_location(strong1, file$6, 180, 88, 8440);
+    			add_location(p10, file$6, 179, 0, 8268);
+    			add_location(code22, file$6, 186, 16, 8760);
+    			add_location(code23, file$6, 186, 47, 8791);
+    			add_location(code24, file$6, 186, 69, 8813);
+    			add_location(code25, file$6, 186, 101, 8845);
+    			add_location(p11, file$6, 186, 0, 8744);
     			attr_dev(a10, "href", "#with-floating-label");
-    			add_location(a10, file$6, 192, 29, 9221);
+    			add_location(a10, file$6, 196, 29, 9357);
     			attr_dev(h37, "id", "with-floating-label");
-    			add_location(h37, file$6, 192, 0, 9192);
-    			add_location(code26, file$6, 193, 18, 9299);
-    			add_location(em, file$6, 194, 40, 9425);
-    			add_location(p12, file$6, 193, 0, 9281);
+    			add_location(h37, file$6, 196, 0, 9328);
+    			add_location(code26, file$6, 197, 18, 9435);
+    			add_location(em, file$6, 198, 40, 9561);
+    			add_location(p12, file$6, 197, 0, 9417);
     			attr_dev(a11, "href", "#with-pips");
-    			add_location(a11, file$6, 203, 19, 9843);
+    			add_location(a11, file$6, 207, 19, 9979);
     			attr_dev(h38, "id", "with-pips");
-    			add_location(h38, file$6, 203, 0, 9824);
-    			add_location(code27, file$6, 205, 5, 9973);
-    			add_location(p13, file$6, 204, 0, 9883);
+    			add_location(h38, file$6, 207, 0, 9960);
+    			add_location(code27, file$6, 209, 5, 10109);
+    			add_location(p13, file$6, 208, 0, 10019);
     			attr_dev(a12, "href", "#pip-labels");
-    			add_location(a12, file$6, 214, 20, 10417);
+    			add_location(a12, file$6, 218, 20, 10553);
     			attr_dev(h39, "id", "pip-labels");
-    			add_location(h39, file$6, 214, 0, 10397);
-    			add_location(code28, file$6, 215, 23, 10482);
-    			add_location(code29, file$6, 215, 41, 10500);
-    			add_location(code30, file$6, 215, 61, 10520);
-    			add_location(code31, file$6, 215, 83, 10542);
-    			add_location(code32, file$6, 216, 38, 10638);
-    			add_location(code33, file$6, 216, 62, 10662);
-    			add_location(p14, file$6, 215, 0, 10459);
+    			add_location(h39, file$6, 218, 0, 10533);
+    			add_location(code28, file$6, 219, 23, 10618);
+    			add_location(code29, file$6, 219, 41, 10636);
+    			add_location(code30, file$6, 219, 61, 10656);
+    			add_location(code31, file$6, 219, 83, 10678);
+    			add_location(code32, file$6, 220, 38, 10774);
+    			add_location(code33, file$6, 220, 62, 10798);
+    			add_location(p14, file$6, 219, 0, 10595);
     			attr_dev(a13, "href", "#pip-steps");
-    			add_location(a13, file$6, 233, 19, 11404);
+    			add_location(a13, file$6, 237, 19, 11540);
     			attr_dev(h310, "id", "pip-steps");
-    			add_location(h310, file$6, 233, 0, 11385);
-    			add_location(code34, file$6, 234, 62, 11506);
-    			add_location(code35, file$6, 235, 42, 11586);
-    			add_location(p15, file$6, 234, 0, 11444);
-    			add_location(code36, file$6, 237, 19, 11671);
-    			add_location(code37, file$6, 237, 79, 11731);
-    			add_location(code38, file$6, 238, 5, 11777);
-    			add_location(code39, file$6, 238, 28, 11800);
-    			add_location(code40, file$6, 238, 53, 11825);
-    			add_location(code41, file$6, 238, 83, 11855);
-    			add_location(p16, file$6, 237, 0, 11652);
-    			add_location(code42, file$6, 254, 0, 12664);
-    			add_location(p17, file$6, 252, 0, 12496);
+    			add_location(h310, file$6, 237, 0, 11521);
+    			add_location(code34, file$6, 238, 62, 11642);
+    			add_location(code35, file$6, 239, 42, 11722);
+    			add_location(p15, file$6, 238, 0, 11580);
+    			add_location(code36, file$6, 241, 19, 11807);
+    			add_location(code37, file$6, 241, 79, 11867);
+    			add_location(code38, file$6, 242, 5, 11913);
+    			add_location(code39, file$6, 242, 28, 11936);
+    			add_location(code40, file$6, 242, 53, 11961);
+    			add_location(code41, file$6, 242, 83, 11991);
+    			add_location(p16, file$6, 241, 0, 11788);
+    			add_location(code42, file$6, 258, 0, 12800);
+    			add_location(p17, file$6, 256, 0, 12632);
     			attr_dev(a14, "href", "#styling-example-for-pips");
-    			add_location(a14, file$6, 255, 34, 12793);
+    			add_location(a14, file$6, 259, 34, 12929);
     			attr_dev(h40, "id", "styling-example-for-pips");
-    			add_location(h40, file$6, 255, 0, 12759);
-    			add_location(code43, file$6, 258, 15, 12974);
+    			add_location(h40, file$6, 259, 0, 12895);
+    			add_location(code43, file$6, 262, 15, 13110);
     			attr_dev(a15, "href", "#styling-example-for-pips");
-    			add_location(a15, file$6, 256, 58, 12921);
-    			add_location(p18, file$6, 256, 0, 12863);
-    			add_location(code44, file$6, 289, 78, 13880);
-    			add_location(code45, file$6, 289, 100, 13902);
+    			add_location(a15, file$6, 260, 58, 13057);
+    			add_location(p18, file$6, 260, 0, 12999);
+    			add_location(code44, file$6, 293, 78, 14016);
+    			add_location(code45, file$6, 293, 100, 14038);
     			attr_dev(a16, "href", "#step-and-pipstep-interaction");
-    			add_location(a16, file$6, 289, 38, 13840);
+    			add_location(a16, file$6, 293, 38, 13976);
     			attr_dev(h41, "id", "step-and-pipstep-interaction");
-    			add_location(h41, file$6, 289, 0, 13802);
-    			add_location(code46, file$6, 290, 53, 13997);
-    			add_location(code47, file$6, 290, 75, 14019);
-    			add_location(p19, file$6, 290, 0, 13944);
+    			add_location(h41, file$6, 293, 0, 13938);
+    			add_location(code46, file$6, 294, 53, 14133);
+    			add_location(code47, file$6, 294, 75, 14155);
+    			add_location(p19, file$6, 294, 0, 14080);
     			attr_dev(a17, "href", "#prefixes-and-suffixes");
-    			add_location(a17, file$6, 292, 31, 14102);
+    			add_location(a17, file$6, 296, 31, 14238);
     			attr_dev(h311, "id", "prefixes-and-suffixes");
-    			add_location(h311, file$6, 292, 0, 14071);
-    			add_location(p20, file$6, 293, 0, 14166);
+    			add_location(h311, file$6, 296, 0, 14207);
+    			add_location(p20, file$6, 297, 0, 14302);
     			attr_dev(a18, "href", "#formatter");
-    			add_location(a18, file$6, 307, 19, 14996);
+    			add_location(a18, file$6, 311, 19, 15132);
     			attr_dev(h312, "id", "formatter");
-    			add_location(h312, file$6, 307, 0, 14977);
-    			add_location(code48, file$6, 308, 66, 15102);
-    			add_location(code49, file$6, 308, 86, 15122);
-    			add_location(code50, file$6, 309, 62, 15211);
-    			add_location(p21, file$6, 308, 0, 15036);
-    			add_location(code51, file$6, 332, 3, 16173);
-    			add_location(p22, file$6, 332, 0, 16170);
-    			add_location(hr, file$6, 338, 0, 16592);
+    			add_location(h312, file$6, 311, 0, 15113);
+    			add_location(code48, file$6, 312, 66, 15238);
+    			add_location(code49, file$6, 312, 86, 15258);
+    			add_location(code50, file$6, 313, 62, 15347);
+    			add_location(p21, file$6, 312, 0, 15172);
+    			add_location(code51, file$6, 336, 3, 16309);
+    			add_location(p22, file$6, 336, 0, 16306);
+    			attr_dev(a19, "href", "#fancy-examples");
+    			add_location(a19, file$6, 342, 24, 16752);
+    			attr_dev(h22, "id", "fancy-examples");
+    			add_location(h22, file$6, 342, 0, 16728);
+    			add_location(p23, file$6, 343, 0, 16802);
+    			attr_dev(a20, "href", "#color-shifting-slider");
+    			add_location(a20, file$6, 344, 31, 16925);
+    			attr_dev(h313, "id", "color-shifting-slider");
+    			add_location(h313, file$6, 344, 0, 16894);
+    			add_location(p24, file$6, 345, 0, 16989);
+    			add_location(hr, file$6, 393, 0, 18385);
     			if (img.src !== (img_src_value = "public/images/icons8-under-construction-100.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "icon of a magnifying glass, for viewing the output slider");
     			attr_dev(img, "class", "svelte-8kyhgt");
-    			add_location(img, file$6, 340, 3, 16619);
-    			add_location(br, file$6, 343, 1, 16747);
-    			add_location(p23, file$6, 340, 0, 16616);
+    			add_location(img, file$6, 395, 3, 18412);
+    			add_location(br, file$6, 398, 1, 18540);
+    			add_location(p25, file$6, 395, 0, 18409);
     			attr_dev(div, "class", "soon svelte-8kyhgt");
-    			add_location(div, file$6, 339, 0, 16597);
-    			attr_dev(a19, "target", "_blank");
-    			attr_dev(a19, "href", "https://icons8.com/icons/set/search");
-    			add_location(a19, file$6, 347, 2, 16805);
-    			attr_dev(a20, "target", "_blank");
-    			attr_dev(a20, "href", "https://icons8.com/icons/set/code");
-    			add_location(a20, file$6, 347, 76, 16879);
+    			add_location(div, file$6, 394, 0, 18390);
     			attr_dev(a21, "target", "_blank");
-    			attr_dev(a21, "href", "https://icons8.com");
-    			add_location(a21, file$6, 347, 164, 16967);
+    			attr_dev(a21, "href", "https://icons8.com/icons/set/search");
+    			add_location(a21, file$6, 402, 2, 18598);
+    			attr_dev(a22, "target", "_blank");
+    			attr_dev(a22, "href", "https://icons8.com/icons/set/code");
+    			add_location(a22, file$6, 402, 76, 18672);
+    			attr_dev(a23, "target", "_blank");
+    			attr_dev(a23, "href", "https://icons8.com");
+    			add_location(a23, file$6, 402, 164, 18760);
     			attr_dev(small, "class", "credit svelte-8kyhgt");
-    			add_location(small, file$6, 346, 0, 16780);
+    			add_location(small, file$6, 401, 0, 18573);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -13012,40 +13292,52 @@ var app = (function () {
     			insert_dev(target, t221, anchor);
     			mount_component(example29, target, anchor);
     			insert_dev(target, t222, anchor);
+    			insert_dev(target, h22, anchor);
+    			append_dev(h22, a19);
+    			insert_dev(target, t224, anchor);
+    			insert_dev(target, p23, anchor);
+    			insert_dev(target, t226, anchor);
+    			insert_dev(target, h313, anchor);
+    			append_dev(h313, a20);
+    			insert_dev(target, t228, anchor);
+    			insert_dev(target, p24, anchor);
+    			insert_dev(target, t230, anchor);
+    			mount_component(example30, target, anchor);
+    			insert_dev(target, t231, anchor);
     			insert_dev(target, hr, anchor);
-    			insert_dev(target, t223, anchor);
+    			insert_dev(target, t232, anchor);
     			insert_dev(target, div, anchor);
-    			append_dev(div, p23);
-    			append_dev(p23, img);
-    			append_dev(p23, br);
-    			append_dev(p23, t224);
-    			insert_dev(target, t225, anchor);
+    			append_dev(div, p25);
+    			append_dev(p25, img);
+    			append_dev(p25, br);
+    			append_dev(p25, t233);
+    			insert_dev(target, t234, anchor);
     			insert_dev(target, small, anchor);
-    			append_dev(small, a19);
-    			append_dev(small, t227);
-    			append_dev(small, a20);
-    			append_dev(small, t229);
     			append_dev(small, a21);
+    			append_dev(small, t236);
+    			append_dev(small, a22);
+    			append_dev(small, t238);
+    			append_dev(small, a23);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
     			const prism0_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[1] & /*$$scope*/ 536870912) {
     				prism0_changes.$$scope = { dirty, ctx };
     			}
 
     			prism0.$set(prism0_changes);
     			const prism1_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[1] & /*$$scope*/ 536870912) {
     				prism1_changes.$$scope = { dirty, ctx };
     			}
 
     			prism1.$set(prism1_changes);
     			const example0_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[1] & /*$$scope*/ 536870912) {
     				example0_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13053,7 +13345,7 @@ var app = (function () {
     			const example1_changes = {};
     			if (dirty[0] & /*values1*/ 1) example1_changes.values = /*values1*/ ctx[0];
 
-    			if (dirty[0] & /*values1*/ 1 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*values1*/ 1 | dirty[1] & /*$$scope*/ 536870912) {
     				example1_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13061,7 +13353,7 @@ var app = (function () {
     			const example2_changes = {};
     			if (dirty[0] & /*values2*/ 2) example2_changes.values = /*values2*/ ctx[1];
 
-    			if (dirty[0] & /*values2*/ 2 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*values2*/ 2 | dirty[1] & /*$$scope*/ 536870912) {
     				example2_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13069,7 +13361,7 @@ var app = (function () {
     			const example3_changes = {};
     			if (dirty[0] & /*minmax1*/ 4) example3_changes.values = /*minmax1*/ ctx[2];
 
-    			if (dirty[0] & /*minmax1*/ 4 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*minmax1*/ 4 | dirty[1] & /*$$scope*/ 536870912) {
     				example3_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13077,7 +13369,7 @@ var app = (function () {
     			const example4_changes = {};
     			if (dirty[0] & /*minmax2*/ 8) example4_changes.values = /*minmax2*/ ctx[3];
 
-    			if (dirty[0] & /*minmax2*/ 8 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*minmax2*/ 8 | dirty[1] & /*$$scope*/ 536870912) {
     				example4_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13085,7 +13377,7 @@ var app = (function () {
     			const example5_changes = {};
     			if (dirty[0] & /*minmax3*/ 16) example5_changes.values = /*minmax3*/ ctx[4];
 
-    			if (dirty[0] & /*minmax2, minmax3*/ 24 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*minmax2, minmax3*/ 24 | dirty[1] & /*$$scope*/ 536870912) {
     				example5_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13093,7 +13385,7 @@ var app = (function () {
     			const example6_changes = {};
     			if (dirty[0] & /*step1*/ 32) example6_changes.values = /*step1*/ ctx[5];
 
-    			if (dirty[0] & /*step1*/ 32 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*step1*/ 32 | dirty[1] & /*$$scope*/ 536870912) {
     				example6_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13101,7 +13393,7 @@ var app = (function () {
     			const example7_changes = {};
     			if (dirty[0] & /*step3*/ 128) example7_changes.values = /*step3*/ ctx[7];
 
-    			if (dirty[0] & /*step3*/ 128 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*step3*/ 128 | dirty[1] & /*$$scope*/ 536870912) {
     				example7_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13109,7 +13401,7 @@ var app = (function () {
     			const example8_changes = {};
     			if (dirty[0] & /*step2*/ 64) example8_changes.values = /*step2*/ ctx[6];
 
-    			if (dirty[0] & /*step2*/ 64 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*step2*/ 64 | dirty[1] & /*$$scope*/ 536870912) {
     				example8_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13117,7 +13409,7 @@ var app = (function () {
     			const example9_changes = {};
     			if (dirty[0] & /*range1*/ 8192) example9_changes.values = /*range1*/ ctx[13];
 
-    			if (dirty[0] & /*range1*/ 8192 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*range1*/ 8192 | dirty[1] & /*$$scope*/ 536870912) {
     				example9_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13125,7 +13417,7 @@ var app = (function () {
     			const example10_changes = {};
     			if (dirty[0] & /*range2*/ 16384) example10_changes.values = /*range2*/ ctx[14];
 
-    			if (dirty[0] & /*range2*/ 16384 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*range2*/ 16384 | dirty[1] & /*$$scope*/ 536870912) {
     				example10_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13133,7 +13425,7 @@ var app = (function () {
     			const example11_changes = {};
     			if (dirty[0] & /*range3*/ 32768) example11_changes.values = /*range3*/ ctx[15];
 
-    			if (dirty[0] & /*range3*/ 32768 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*range3*/ 32768 | dirty[1] & /*$$scope*/ 536870912) {
     				example11_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13141,7 +13433,7 @@ var app = (function () {
     			const example12_changes = {};
     			if (dirty[0] & /*float1*/ 256) example12_changes.values = /*float1*/ ctx[8];
 
-    			if (dirty[0] & /*float1*/ 256 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*float1*/ 256 | dirty[1] & /*$$scope*/ 536870912) {
     				example12_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13149,7 +13441,7 @@ var app = (function () {
     			const example13_changes = {};
     			if (dirty[0] & /*float2*/ 512) example13_changes.values = /*float2*/ ctx[9];
 
-    			if (dirty[0] & /*float2*/ 512 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*float2*/ 512 | dirty[1] & /*$$scope*/ 536870912) {
     				example13_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13157,7 +13449,7 @@ var app = (function () {
     			const example14_changes = {};
     			if (dirty[0] & /*pips1*/ 1024) example14_changes.values = /*pips1*/ ctx[10];
 
-    			if (dirty[0] & /*pips1*/ 1024 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*pips1*/ 1024 | dirty[1] & /*$$scope*/ 536870912) {
     				example14_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13165,35 +13457,35 @@ var app = (function () {
     			const example15_changes = {};
     			if (dirty[0] & /*pips2*/ 2048) example15_changes.values = /*pips2*/ ctx[11];
 
-    			if (dirty[0] & /*pips2*/ 2048 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*pips2*/ 2048 | dirty[1] & /*$$scope*/ 536870912) {
     				example15_changes.$$scope = { dirty, ctx };
     			}
 
     			example15.$set(example15_changes);
     			const example16_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[1] & /*$$scope*/ 536870912) {
     				example16_changes.$$scope = { dirty, ctx };
     			}
 
     			example16.$set(example16_changes);
     			const example17_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[1] & /*$$scope*/ 536870912) {
     				example17_changes.$$scope = { dirty, ctx };
     			}
 
     			example17.$set(example17_changes);
     			const example18_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[1] & /*$$scope*/ 536870912) {
     				example18_changes.$$scope = { dirty, ctx };
     			}
 
     			example18.$set(example18_changes);
     			const example19_changes = {};
 
-    			if (dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[1] & /*$$scope*/ 536870912) {
     				example19_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13201,7 +13493,7 @@ var app = (function () {
     			const example20_changes = {};
     			if (dirty[0] & /*pipstep1*/ 65536) example20_changes.values = /*pipstep1*/ ctx[16];
 
-    			if (dirty[0] & /*pipstep1*/ 65536 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*pipstep1*/ 65536 | dirty[1] & /*$$scope*/ 536870912) {
     				example20_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13209,7 +13501,7 @@ var app = (function () {
     			const example21_changes = {};
     			if (dirty[0] & /*pipstep2*/ 131072) example21_changes.values = /*pipstep2*/ ctx[17];
 
-    			if (dirty[0] & /*pipstep2*/ 131072 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*pipstep2*/ 131072 | dirty[1] & /*$$scope*/ 536870912) {
     				example21_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13217,7 +13509,7 @@ var app = (function () {
     			const example22_changes = {};
     			if (dirty[0] & /*pipstep3*/ 262144) example22_changes.values = /*pipstep3*/ ctx[18];
 
-    			if (dirty[0] & /*pipstep3*/ 262144 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*pipstep3*/ 262144 | dirty[1] & /*$$scope*/ 536870912) {
     				example22_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13225,7 +13517,7 @@ var app = (function () {
     			const example23_changes = {};
     			if (dirty[0] & /*pips3*/ 4096) example23_changes.values = /*pips3*/ ctx[12];
 
-    			if (dirty[0] & /*pips3*/ 4096 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*pips3*/ 4096 | dirty[1] & /*$$scope*/ 536870912) {
     				example23_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13233,7 +13525,7 @@ var app = (function () {
     			const example24_changes = {};
     			if (dirty[0] & /*prefix1*/ 524288) example24_changes.values = /*prefix1*/ ctx[19];
 
-    			if (dirty[0] & /*prefix1*/ 524288 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*prefix1*/ 524288 | dirty[1] & /*$$scope*/ 536870912) {
     				example24_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13241,7 +13533,7 @@ var app = (function () {
     			const example25_changes = {};
     			if (dirty[0] & /*prefix2*/ 1048576) example25_changes.values = /*prefix2*/ ctx[20];
 
-    			if (dirty[0] & /*prefix2*/ 1048576 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*prefix2*/ 1048576 | dirty[1] & /*$$scope*/ 536870912) {
     				example25_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13249,7 +13541,7 @@ var app = (function () {
     			const example26_changes = {};
     			if (dirty[0] & /*prefix3*/ 2097152) example26_changes.values = /*prefix3*/ ctx[21];
 
-    			if (dirty[0] & /*prefix3*/ 2097152 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*prefix3*/ 2097152 | dirty[1] & /*$$scope*/ 536870912) {
     				example26_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13257,14 +13549,14 @@ var app = (function () {
     			const example27_changes = {};
     			if (dirty[0] & /*formatter1*/ 4194304) example27_changes.values = /*formatter1*/ ctx[22];
 
-    			if (dirty[0] & /*formatter1*/ 4194304 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*formatter1*/ 4194304 | dirty[1] & /*$$scope*/ 536870912) {
     				example27_changes.$$scope = { dirty, ctx };
     			}
 
     			example27.$set(example27_changes);
     			const example28_changes = {};
 
-    			if (dirty[0] & /*formatter2*/ 8388608 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*formatter2*/ 8388608 | dirty[1] & /*$$scope*/ 536870912) {
     				example28_changes.$$scope = { dirty, ctx };
     			}
 
@@ -13272,11 +13564,19 @@ var app = (function () {
     			const example29_changes = {};
     			if (dirty[0] & /*formatter3*/ 16777216) example29_changes.values = /*formatter3*/ ctx[24];
 
-    			if (dirty[0] & /*formatter3*/ 16777216 | dirty[1] & /*$$scope*/ 33554432) {
+    			if (dirty[0] & /*formatter3*/ 16777216 | dirty[1] & /*$$scope*/ 536870912) {
     				example29_changes.$$scope = { dirty, ctx };
     			}
 
     			example29.$set(example29_changes);
+    			const example30_changes = {};
+    			if (dirty[0] & /*hue*/ 33554432) example30_changes.values = /*hue*/ ctx[25];
+
+    			if (dirty[0] & /*color, lightColor, hue*/ 234881024 | dirty[1] & /*$$scope*/ 536870912) {
+    				example30_changes.$$scope = { dirty, ctx };
+    			}
+
+    			example30.$set(example30_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -13315,6 +13615,7 @@ var app = (function () {
     			transition_in(example27.$$.fragment, local);
     			transition_in(example28.$$.fragment, local);
     			transition_in(example29.$$.fragment, local);
+    			transition_in(example30.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
@@ -13353,6 +13654,7 @@ var app = (function () {
     			transition_out(example27.$$.fragment, local);
     			transition_out(example28.$$.fragment, local);
     			transition_out(example29.$$.fragment, local);
+    			transition_out(example30.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
@@ -13508,10 +13810,20 @@ var app = (function () {
     			if (detaching) detach_dev(t221);
     			destroy_component(example29, detaching);
     			if (detaching) detach_dev(t222);
+    			if (detaching) detach_dev(h22);
+    			if (detaching) detach_dev(t224);
+    			if (detaching) detach_dev(p23);
+    			if (detaching) detach_dev(t226);
+    			if (detaching) detach_dev(h313);
+    			if (detaching) detach_dev(t228);
+    			if (detaching) detach_dev(p24);
+    			if (detaching) detach_dev(t230);
+    			destroy_component(example30, detaching);
+    			if (detaching) detach_dev(t231);
     			if (detaching) detach_dev(hr);
-    			if (detaching) detach_dev(t223);
+    			if (detaching) detach_dev(t232);
     			if (detaching) detach_dev(div);
-    			if (detaching) detach_dev(t225);
+    			if (detaching) detach_dev(t234);
     			if (detaching) detach_dev(small);
     		}
     	};
@@ -13558,6 +13870,7 @@ var app = (function () {
     	let formatter2 = [3];
     	let formatter3 = [7];
     	let formatter4 = [new Date().getDay()];
+    	let hue = [244];
     	const format1 = new Intl.NumberFormat("en-US");
     	const moods = ["😁", "😀", "😊", "😐", "😥", "😫"];
     	const writable_props = [];
@@ -13698,6 +14011,11 @@ var app = (function () {
     		$$invalidate(24, formatter3);
     	}
 
+    	function rangeslider_values_binding_25(value) {
+    		hue = value;
+    		$$invalidate(25, hue);
+    	}
+
     	$$self.$capture_state = () => ({
     		Prism: Prism$1,
     		RangeSlider,
@@ -13731,8 +14049,11 @@ var app = (function () {
     		formatter2,
     		formatter3,
     		formatter4,
+    		hue,
     		format1,
-    		moods
+    		moods,
+    		lightColor,
+    		color
     	});
 
     	$$self.$inject_state = $$props => {
@@ -13763,11 +14084,27 @@ var app = (function () {
     		if ("formatter2" in $$props) $$invalidate(23, formatter2 = $$props.formatter2);
     		if ("formatter3" in $$props) $$invalidate(24, formatter3 = $$props.formatter3);
     		if ("formatter4" in $$props) formatter4 = $$props.formatter4;
+    		if ("hue" in $$props) $$invalidate(25, hue = $$props.hue);
+    		if ("lightColor" in $$props) $$invalidate(26, lightColor = $$props.lightColor);
+    		if ("color" in $$props) $$invalidate(27, color = $$props.color);
     	};
+
+    	let lightColor;
+    	let color;
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty[0] & /*hue*/ 33554432) {
+    			 $$invalidate(26, lightColor = `hsl(${Math.round(hue[0]) - 10}, 65%, 70%)`);
+    		}
+
+    		if ($$self.$$.dirty[0] & /*hue*/ 33554432) {
+    			 $$invalidate(27, color = `hsl(${Math.round(hue[0])}, 63%, 54%)`);
+    		}
+    	};
 
     	return [
     		values1,
@@ -13795,6 +14132,9 @@ var app = (function () {
     		formatter1,
     		formatter2,
     		formatter3,
+    		hue,
+    		lightColor,
+    		color,
     		format1,
     		moods,
     		rangeslider_values_binding,
@@ -13823,7 +14163,8 @@ var app = (function () {
     		rangeslider_values_binding_22,
     		func_1,
     		rangeslider_values_binding_23,
-    		rangeslider_values_binding_24
+    		rangeslider_values_binding_24,
+    		rangeslider_values_binding_25
     	];
     }
 
