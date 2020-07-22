@@ -1,8 +1,8 @@
 {
   "name": "svelte-range-slider-pips",
   "svelte": "src/index.js",
-  "module": "dist/index.mjs",
-  "main": "dist/index.js",
+  "module": "dist/svelte-range-slider-pips.mjs",
+  "main": "dist/svelte-range-slider-pips.js",
   "scripts": {
     "build": "rollup -c",
     "prepublishOnly": "yarn run build"
