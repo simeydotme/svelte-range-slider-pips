@@ -43,7 +43,7 @@
   // save spring-tweened copies of the values for use
   // when changing values and animating the handle/range nicely
   let springPositions = spring(
-    values.map((v) => 50),
+    values.map((v) => parseFloat((((v - min) / (max - min)) * 100).toFixed(precision))),
     springValues
   );
 
