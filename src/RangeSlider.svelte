@@ -14,14 +14,14 @@
 
   // range pips / values props
   export let pips = false;
-  export let pipstep;
-  export let all;
-  export let first;
-  export let last;
-  export let rest;
+  export let pipstep = undefined;
+  export let all = undefined;
+  export let first = undefined;
+  export let last = undefined;
+  export let rest = undefined;
 
   // formatting props
-  export let id;
+  export let id = undefined;
   export let prefix = "";
   export let suffix = "";
   export let formatter = (v) => v;
@@ -203,11 +203,11 @@
     let iPercent = 0;
     let iVal = 0;
     if (vertical) {
-      iPos = clientPos - dims.y;
+      iPos = clientPos - dims.top;
       iPercent = (iPos / dims.height) * 100;
       iVal = ((max - min) / 100) * iPercent + min;
     } else {
-      iPos = clientPos - dims.x;
+      iPos = clientPos - dims.left;
       iPercent = (iPos / dims.width) * 100;
       iVal = ((max - min) / 100) * iPercent + min;
     }
@@ -250,11 +250,11 @@
     let iPercent = 0;
     let iVal = 0;
     if (vertical) {
-      iPos = clientPos - dims.y;
+      iPos = clientPos - dims.top;
       iPercent = (iPos / dims.height) * 100;
       iVal = ((max - min) / 100) * iPercent + min;
     } else {
-      iPos = clientPos - dims.x;
+      iPos = clientPos - dims.left;
       iPercent = (iPos / dims.width) * 100;
       iVal = ((max - min) / 100) * iPercent + min;
     }
@@ -464,6 +464,8 @@
     border-radius: 100px;
     height: 0.5em;
     margin: 1em;
+    user-select: none;
+    cursor: default;
   }
   :global(.rangeSlider, .rangeSlider *) {
     user-select: none;
