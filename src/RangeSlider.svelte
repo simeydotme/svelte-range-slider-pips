@@ -14,14 +14,14 @@
 
   // range pips / values props
   export let pips = false;
-  export let pipstep;
-  export let all;
-  export let first;
-  export let last;
-  export let rest;
+  export let pipstep = undefined;
+  export let all = undefined;
+  export let first = undefined;
+  export let last = undefined;
+  export let rest = undefined;
 
   // formatting props
-  export let id;
+  export let id = undefined;
   export let prefix = "";
   export let suffix = "";
   export let formatter = (v) => v;
