@@ -14,14 +14,14 @@
 
   // range pips / values props
   export let pips = false;
-  export let pipstep = undefined;
-  export let all = undefined;
-  export let first = undefined;
-  export let last = undefined;
-  export let rest = undefined;
+  export let pipstep;
+  export let all;
+  export let first;
+  export let last;
+  export let rest;
 
   // formatting props
-  export let id = undefined;
+  export let id;
   export let prefix = "";
   export let suffix = "";
   export let formatter = (v) => v;
@@ -464,8 +464,6 @@
     border-radius: 100px;
     height: 0.5em;
     margin: 1em;
-    user-select: none;
-    cursor: default;
   }
   :global(.rangeSlider, .rangeSlider *) {
     user-select: none;
