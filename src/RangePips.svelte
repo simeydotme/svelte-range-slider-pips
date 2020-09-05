@@ -9,7 +9,7 @@
   export let vertical = false;
 
   // range pips / values props
-  export let pipstep = ((max - min) / step >= ( vertical ? 50 : 100 ) ? (max - min) / ( vertical ? 10 : 20 ) : 1);
+  export let pipstep = undefined;
   export let all = true;
   export let first = undefined;
   export let last = undefined;
@@ -24,10 +24,12 @@
   export let focus = undefined;
   export let percentOf = undefined;
 
-  $: pipCount = parseInt((max - min) / (step * pipstep), 10);
+  $: pipStep = pipstep || ((max - min) / step >= ( vertical ? 50 : 100 ) ? (max - min) / ( vertical ? 10 : 20 ) : 1);
+
+  $: pipCount = parseInt((max - min) / (step * pipStep), 10);
 
   $: pipVal = function(val) {
-    return min + val * step * pipstep;
+    return min + val * step * pipStep;
   };
 
   $: isSelected = function(val) {
