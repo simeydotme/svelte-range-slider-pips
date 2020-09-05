@@ -203,11 +203,11 @@
     let iPercent = 0;
     let iVal = 0;
     if (vertical) {
-      iPos = clientPos - dims.y;
+      iPos = clientPos - dims.top;
       iPercent = (iPos / dims.height) * 100;
       iVal = ((max - min) / 100) * iPercent + min;
     } else {
-      iPos = clientPos - dims.x;
+      iPos = clientPos - dims.left;
       iPercent = (iPos / dims.width) * 100;
       iVal = ((max - min) / 100) * iPercent + min;
     }
@@ -250,11 +250,11 @@
     let iPercent = 0;
     let iVal = 0;
     if (vertical) {
-      iPos = clientPos - dims.y;
+      iPos = clientPos - dims.top;
       iPercent = (iPos / dims.height) * 100;
       iVal = ((max - min) / 100) * iPercent + min;
     } else {
-      iPos = clientPos - dims.x;
+      iPos = clientPos - dims.left;
       iPercent = (iPos / dims.width) * 100;
       iVal = ((max - min) / 100) * iPercent + min;
     }
