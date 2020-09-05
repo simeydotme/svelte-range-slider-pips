@@ -457,7 +457,7 @@ rollup-plugin-svelte@^5.0.3:
     rollup-pluginutils "^2.8.2"
     sourcemap-codec "^1.4.8"
 
-rollup-plugin-terser@^5.1.2:
+rollup-plugin-terser@^5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/rollup-plugin-terser/-/rollup-plugin-terser-5.3.1.tgz#8c650062c22a8426c64268548957463bf981b413"
   integrity sha512-1pkwkervMJQGFYvM9nscrUoncPwiKR/K+bHdjv6PFgRo3cgPHoRT83y2Aa3GvINj4539S15t/tpFPb775TDs6w==
@@ -553,6 +553,11 @@ supports-color@^6.1.0:
   integrity sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ==
   dependencies:
     has-flag "^3.0.0"
+
+svelte-range-slider-pips@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/svelte-range-slider-pips/-/svelte-range-slider-pips-1.3.1.tgz#f7fdf7c5aaeb2ba39dd7eda7594299b8c894cefe"
+  integrity sha512-yIpLof5H46yQTydI9zQzOjKHHdsDnSzxqZVDBA3jl8hbT3B13N4Zp9lvp+SqF/nq0RL/NlmmUFQRyHobhncxpA==
 
 svelte@^3.0.0:
   version "3.24.0"

@@ -21,6 +21,8 @@ npm install --save-dev svelte-range-slider-pips # if you prefer npm
 
 ## usage
 
+### in a svelte project
+
 Assuming you have a Svelte app up and running;
 
 ```html
@@ -30,6 +32,37 @@ Assuming you have a Svelte app up and running;
 
 <RangeSlider />
 ```
+
+### as a regular JS file
+
+If you're using a different framework, or none, you can use the [`/dist/`
+version of the script `/dist/svelte-range-slider-pips.js`](dist/svelte-range-slider-pips.js) and include it
+either with a regular `<script>` tag, or by using js imports (`import`)
+
+```html
+<script src="./js/vendor/svelte-range-slider-pips.js" />
+
+<div id="my-slider"></div>
+
+<script>
+  var mySlider = new RangeSliderPips({
+    target: document.getElementById("my-slider"),
+    props: { /* props as js object */ }
+  });
+</script>
+```
+
+### as a JS module
+```js
+import RangeSlider from "./node_modules/svelte-range-slider-pips/dist/svelte-range-slider-pips.mjs";
+
+var mySlider = new RangeSlider({
+  target: node, // js reference to a DOM element
+  props: { /* props as js object */ }
+});
+```
+
+---
 
 ## props (options)
 ### slider props
@@ -59,11 +92,11 @@ prop | type | default | description
 ## contribue
 
 I am very happy to accept;
-- suggestions/requests for new features or changes with examples of how they would be useful
-- pull-requests for bug fixes, or issue resolution
-- help with creating a proper test-suite
+- 🌟 suggestions/requests for new features or changes with examples of how they would be useful
+- 🛠 pull-requests for bug fixes, or issue resolution
+- 🧪 help with creating a proper test-suite
 
-When making changes/edits to the code you should use the `/test/` folder and check the Readme.md in there
+**When making changes/edits to the code you should use the `/test/` folder** and check the [README.md](test/README.md) in there
 to help with testing all the functionality. I don't have real tests set up, and would appreciate anyone's 
 help who knows how to accomplish that.
 
