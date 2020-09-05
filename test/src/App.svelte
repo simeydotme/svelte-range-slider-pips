@@ -31,6 +31,11 @@
 
 <svelte:head>
 <style>
+  #test-id {
+    --range-handle-inactive: rgb(245, 200, 230);
+    --range-handle-focus: rgb(245, 0, 46);
+    --range-slider: var(--range-handle-inactive);
+  }
   #clr-test {
     --range-slider: rgb(195, 228, 222);
     --range-handle-inactive: rgb(81, 185, 180);
@@ -53,7 +58,7 @@
     <RangeSlider vertical range="min" values={[10]} pips all />
     <RangeSlider vertical range="max" values={[30]} pips />
     <br>
-    <RangeSlider />
+    <RangeSlider id="test-id" />
     <RangeSlider bind:values />{values}
     <RangeSlider float />
     <RangeSlider float pips all="label" />
@@ -70,7 +75,7 @@
     <br>
     <RangeSlider float pips first="label" last="label" rest pipstep={1} bind:values={dynamic} range />
     <RangeSlider prefix="$" range values={[20,80]} float pips first="label" last="label" />
-    <RangeSlider prefix="~" suffix="m²" {formatter} range values={[100,3000]} min={100} max={3000} step={50} float pips first="label" last="label" id="clr-test" />
+    <RangeSlider id="clr-test" prefix="~" suffix="m²" {formatter} range values={[100,3000]} min={100} max={3000} step={50} float pips first="label" last="label" />
     <RangeSlider handleFormatter={()=>"O²"} formatter={(v)=>`${v}% O²`} step={1} float pips first="label" last="label" hover={false} />
     <br>
     <RangeSlider bind:values={day} min={0} max={6} formatter={dayFormat} float pips first="label" last="label" rest="label" />
