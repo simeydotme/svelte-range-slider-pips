@@ -37,7 +37,7 @@
     "src",
     "dist"
   ],
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Multi-Thumb, Accessible, Beautiful Range Slider with Pips",
   "repository": "https://github.com/simeydotme/svelte-range-slider-pips",
   "homepage": "https://simeydotme.github.io/svelte-range-slider-pips/",

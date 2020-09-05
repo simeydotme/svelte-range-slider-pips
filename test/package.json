@@ -1,6 +1,7 @@
 {
-  "name": "svelte-app",
-  "version": "1.0.0",
+  "name": "svelte-range-slider-pips-testing",
+  "private": true,
+  "version": "1.1.0",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
@@ -12,7 +13,7 @@
     "rollup": "^2.3.4",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
-    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-terser": "^5.3.1",
     "svelte": "^3.0.0"
   },
   "dependencies": {
