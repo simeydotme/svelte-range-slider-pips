@@ -11,9 +11,9 @@
   // range pips / values props
   export let pipstep = ((max - min) / step >= ( vertical ? 50 : 100 ) ? (max - min) / ( vertical ? 10 : 20 ) : 1);
   export let all = true;
-  export let first;
-  export let last;
-  export let rest;
+  export let first = undefined;
+  export let last = undefined;
+  export let rest = undefined;
 
   // formatting props
   export let prefix = "";
@@ -21,8 +21,8 @@
   export let formatter = v => v;
 
   // stylistic props
-  export let focus;
-  export let percentOf;
+  export let focus = undefined;
+  export let percentOf = undefined;
 
   $: pipCount = parseInt((max - min) / (step * pipstep), 10);
 
