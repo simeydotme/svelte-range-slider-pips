@@ -54,3 +54,16 @@ prop | type | default | description
 **springValues** | `Object` | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving
 
 **[🔗 _For full documentation and examples, see the Github Pages_](https://simeydotme.github.io/svelte-range-slider-pips/)**
+
+
+## contribue
+
+I am very happy to accept;
+- suggestions/requests for new features or changes with examples of how they would be useful
+- pull-requests for bug fixes, or issue resolution
+- help with creating a proper test-suite
+
+When making changes/edits to the code you should use the `/test/` folder and check the Readme.md in there
+to help with testing all the functionality. I don't have real tests set up, and would appreciate anyone's 
+help who knows how to accomplish that.
+
