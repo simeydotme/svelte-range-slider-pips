@@ -33,9 +33,10 @@
 <svelte:head>
 <style>
   #test-id {
-    --range-handle-inactive: rgb(245, 200, 230);
+    --range-slider: rgb(245, 200, 230);
+    --range-handle: var(--range-slider);
+    --range-handle-inactive: var(--range-slider);
     --range-handle-focus: rgb(245, 0, 46);
-    --range-slider: var(--range-handle-inactive);
   }
   #clr-test {
     --range-slider: rgb(195, 228, 222);

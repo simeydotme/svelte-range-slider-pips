@@ -38,6 +38,7 @@
   // state management
   let focus = false;
   let handleActivated = false;
+  let handlePressed = false;
   let keyboardActive = false;
   let activeHandle = values.length - 1;
 
@@ -273,20 +274,20 @@
    **/
   function moveHandle(index, value) {
     if (range) {
-    // restrict the handles of a range-slider from
+      // restrict the handles of a range-slider from
       // going past one-another unless "pushy" is true
       if (index === 0 && value > values[1]) {
         if (pushy) {
           values[1] = value;
         } else {
-      value = values[1];
+          value = values[1];
         }
       } else if (index === 1 && value < values[0]) {
         if (pushy) {
           values[0] = value;
         } else {
-      value = values[0];
-    }
+          value = values[0];
+        }
       }
     }
     // set the value for the handle, and align/clamp it
@@ -330,6 +331,7 @@
     if (keyboardActive) {
       focus = false;
       handleActivated = false;
+      handlePressed = false;
     }
   }
 
@@ -393,12 +395,22 @@
     // set the closest handle as active
     focus = true;
     handleActivated = true;
+    handlePressed = true;
     activeHandle = getClosestHandle(p);
     // for touch devices we want the handle to instantly
     // move to the position touched for more responsive feeling
     if (e.type === "touchstart") {
       handleInteract(p);
     }
+  }
+
+  /**
+   * function to run when the user stops touching
+   * down on the slider element anywhere
+   * @param {event} e the event from browser
+   **/
+  function sliderInteractEnd(e) {
+    handlePressed = false;
   }
 
   /**
@@ -442,6 +454,7 @@
       }
     }
     handleActivated = false;
+    handlePressed = false;
   }
 
   /**
@@ -451,6 +464,7 @@
    **/
   function bodyTouchEnd(e) {
     handleActivated = false;
+    handlePressed = false;
   }
 
   function bodyKeyDown(e) {
@@ -466,6 +480,7 @@
     --handle-inactive: var(--range-handle-inactive, #99a2a2);
     --handle: var(--range-handle, #838de7);
     --handle-focus: var(--range-handle-focus, #4a40d4);
+    --handle-border: var(--range-handle-border, var(--handle));
     --range-inactive: var(--range-range-inactive, var(--handle-inactive));
     --range: var(--range-range, var(--handle-focus));
     --float-inactive: var(--range-float-inactive, var(--handle-inactive));
@@ -511,7 +526,8 @@
     transform: translateY(-50%) translateX(-50%);
     z-index: 2;
   }
-  :global(.rangeSlider .rangeNub) {
+  :global(.rangeSlider .rangeNub),
+  :global(.rangeSlider .rangeHandle:before) {
     position: absolute;
     left: 0;
     top: 0;
@@ -520,6 +536,26 @@
     height: 100%;
     width: 100%;
     transition: all 0.2s ease;
+  }
+  :global(.rangeSlider .rangeHandle:before) {
+    content: "";
+    left: 1px;
+    top: 1px;
+    bottom: 1px;
+    right: 1px;
+    height: auto;
+    width: auto;
+    box-shadow: 0 0 0 0px var(--handle-border);
+    opacity: 0;
+  }
+  :global(.rangeSlider .rangeHandle.hoverable:hover:before) {
+    box-shadow: 0 0 0 8px var(--handle-border);
+    opacity: 0.2;
+  }
+  :global(.rangeSlider .rangeHandle.hoverable.press:before),
+  :global(.rangeSlider .rangeHandle.hoverable.press:hover:before) {
+    box-shadow: 0 0 0 12px var(--handle-border);
+    opacity: 0.4;
   }
   :global(.rangeSlider.range:not(.min):not(.max) .rangeNub) {
     border-radius: 10em 10em 10em 1.6em;
@@ -620,7 +656,9 @@
   class:pips
   class:pip-labels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
   on:touchstart|preventDefault={sliderInteractStart}
-  on:mousedown={sliderInteractStart}>
+  on:mousedown={sliderInteractStart}
+  on:touchend|preventDefault={sliderInteractEnd}
+  on:mouseup={sliderInteractEnd}>
   {#each values as value, index}
     <span
       role="slider"
@@ -628,6 +666,7 @@
       class="rangeHandle"
       class:hoverable={hover}
       class:active={focus && activeHandle === index}
+      class:press={handlePressed && activeHandle === index}
       on:blur={sliderBlurHandle}
       on:focus={sliderFocusHandle}
       on:keydown={sliderKeydown}
