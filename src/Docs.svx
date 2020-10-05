@@ -87,31 +87,32 @@ with this id.
 <Prism language="css">
 {`/* main slider element */
  .rangeSlider {}
- .rangeSlider.vertical {}   /* if slider is vertical */
- .rangeSlider.focus {}      /* if slider is focussed */
- .rangeSlider.range {}      /* if slider is a range */
- .rangeSlider.min {}        /* if slider is a min-range */
- .rangeSlider.max {}        /* if slider is a max-range */
- .rangeSlider.pips {}       /* if slider has visible pips */
- .rangeSlider.pip-labels {} /* if slider has labels for pips */
+ .rangeSlider.vertical {}       /* if slider is vertical */
+ .rangeSlider.focus {}          /* if slider is focussed */
+ .rangeSlider.range {}          /* if slider is a range */
+ .rangeSlider.min {}            /* if slider is a min-range */
+ .rangeSlider.max {}            /* if slider is a max-range */
+ .rangeSlider.pips {}           /* if slider has visible pips */
+ .rangeSlider.pip-labels {}     /* if slider has labels for pips */
  /* slider handles */
- .rangeSlider > .rangeHandle {}               /* positioned wrapper for the handle/float */
- .rangeSlider > .rangeHandle.active {}        /* if a handle is being moved/selected */
- .rangeSlider > .rangeHandle.hoverable {}     /* if the handles allow hover effect */
- .rangeSlider > .rangeHandle > .rangeNub {}   /* the actual nub rendered as a handle */
- .rangeSlider > .rangeHandle > .rangeFloat {} /* the floating value above the handle */
+ .rangeSlider > .rangeHandle {}                 /* positioned wrapper for the handle/float */
+ .rangeSlider > .rangeHandle.active {}          /* if a handle is active in any way */
+ .rangeSlider > .rangeHandle.press {}           /* if a handle is being pressed down */
+ .rangeSlider > .rangeHandle.hoverable {}       /* if the handles allow hover effect */
+ .rangeSlider > .rangeHandle > .rangeNub {}     /* the actual nub rendered as a handle */
+ .rangeSlider > .rangeHandle > .rangeFloat {}   /* the floating value above the handle */
  /* slider range */
- .rangeSlider > .rangeBar {}               /* the range between the two handles */
+ .rangeSlider > .rangeBar {}                    /* the range between the two handles */
  /* slider pips */
- .rangeSlider > .rangePips {}                  /* the container element for the pips */
- .rangeSlider > .rangePips.focus {}            /* if slider is focussed */
- .rangeSlider > .rangePips.vertical {}         /* if slider is vertical */
- .rangeSlider > .rangePips > .pip {}           /* an individual pip */
- .rangeSlider > .rangePips > .pip.first {}     /* the first pip on the slider */
- .rangeSlider > .rangePips > .pip.last {}      /* the last pip on the slider */
- .rangeSlider > .rangePips > .pip.selected {}  /* if a pip is selected */
- .rangeSlider > .rangePips > .pip.in-range {}  /* if a pip is somewhere in the range */
- .rangeSlider > .rangePips > .pip > pipVal {}  /* the label for the pip */`}
+ .rangeSlider > .rangePips {}                   /* the container element for the pips */
+ .rangeSlider > .rangePips.focus {}             /* if slider is focussed */
+ .rangeSlider > .rangePips.vertical {}          /* if slider is vertical */
+ .rangeSlider > .rangePips > .pip {}            /* an individual pip */
+ .rangeSlider > .rangePips > .pip.first {}      /* the first pip on the slider */
+ .rangeSlider > .rangePips > .pip.last {}       /* the last pip on the slider */
+ .rangeSlider > .rangePips > .pip.selected {}   /* if a pip is selected */
+ .rangeSlider > .rangePips > .pip.in-range {}   /* if a pip is somewhere in the range */
+ .rangeSlider > .rangePips > .pip > pipVal {}   /* the label for the pip */`}
 </Prism>
 
 There's also a bunch of CSS Variables for color-themeing if only color changes
@@ -123,6 +124,7 @@ better to completely override the CSS above.
  --range-handle-inactive: #99a2a2; /* inactive handle color */
  --range-handle:          #838de7; /* non-focussed handle color */
  --range-handle-focus:    #4a40d4; /* focussed handle color */
+ --range-handle-border:   var(--range-handle);
  --range-range-inactive:  var(--range-handle-inactive); /* inactive range bar background color */
  --range-range:           var(--range-handle-focus); /* active range bar background color */
  --range-float-inactive:  var(--range-handle-inactive); /* inactive floating label background color */
