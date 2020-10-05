@@ -1,7 +1,7 @@
 /**
- * svelte-range-slider-pips ~ 1.4.0
+ * svelte-range-slider-pips ~ 1.5.0
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
- * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 5/9/2020
+ * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 5/10/2020
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -1097,23 +1097,23 @@
 
     function add_css$1() {
     	var style = element("style");
-    	style.id = "svelte-163jvmt-style";
-    	style.textContent = ".rangeSlider{--slider:var(--range-slider, #d7dada);--handle-inactive:var(--range-handle-inactive, #99a2a2);--handle:var(--range-handle, #838de7);--handle-focus:var(--range-handle-focus, #4a40d4);--range-inactive:var(--range-range-inactive, var(--handle-inactive));--range:var(--range-range, var(--handle-focus));--float-inactive:var(--range-float-inactive, var(--handle-inactive));--float:var(--range-float, var(--handle-focus));--float-text:var(--range-float-text, white)}.rangeSlider{position:relative;border-radius:100px;height:0.5em;margin:1em}.rangeSlider, .rangeSlider *{user-select:none}.rangeSlider.pips{margin-bottom:1.8em}.rangeSlider.pip-labels{margin-bottom:2.8em}.rangeSlider.vertical{display:inline-block;border-radius:100px;width:0.5em;min-height:200px}.rangeSlider.vertical.pips{margin-right:1.8em;margin-bottom:1em}.rangeSlider.vertical.pip-labels{margin-right:2.8em;margin-bottom:1em}.rangeSlider .rangeHandle{position:absolute;display:block;height:1.4em;width:1.4em;top:0.25em;left:0.25em;transform:translateY(-50%) translateX(-50%);z-index:2}.rangeSlider .rangeNub{position:absolute;left:0;top:0;display:block;border-radius:10em;height:100%;width:100%;transition:all 0.2s ease}.rangeSlider.range:not(.min):not(.max) .rangeNub{border-radius:10em 10em 10em 1.6em}.rangeSlider.range .rangeHandle:nth-of-type(1) .rangeNub{transform:rotate(-135deg)}.rangeSlider.range .rangeHandle:nth-of-type(2) .rangeNub{transform:rotate(45deg)}.rangeSlider.range.vertical .rangeHandle:nth-of-type(1) .rangeNub{transform:rotate(-45deg)}.rangeSlider.range.vertical .rangeHandle:nth-of-type(2) .rangeNub{transform:rotate(135deg)}.rangeSlider .rangeFloat{display:block;position:absolute;left:50%;top:-0.5em;transform:translate(-50%, -100%);font-size:1em;text-align:center;opacity:0;pointer-events:none;white-space:nowrap;transition:all 0.2s ease;font-size:0.9em;padding:0.2em 0.4em;border-radius:0.2em}.rangeSlider .rangeHandle.active .rangeFloat,.rangeSlider .rangeHandle.hoverable:hover .rangeFloat{opacity:1;top:-0.2em;transform:translate(-50%, -100%)}.rangeSlider .rangeBar{position:absolute;display:block;transition:background 0.2s ease;border-radius:1em;height:0.5em;top:0;user-select:none;z-index:1}.rangeSlider.vertical .rangeBar{width:0.5em;height:auto}.rangeSlider{background-color:#d7dada;background-color:var(--slider)}.rangeSlider .rangeBar{background-color:#99a2a2;background-color:var(--range-inactive)}.rangeSlider.focus .rangeBar{background-color:#838de7;background-color:var(--range)}.rangeSlider .rangeNub{background-color:#99a2a2;background-color:var(--handle-inactive)}.rangeSlider.focus .rangeNub{background-color:#838de7;background-color:var(--handle)}.rangeSlider .rangeHandle.active .rangeNub{background-color:#4a40d4;background-color:var(--handle-focus)}.rangeSlider .rangeFloat{color:white;color:var(--float-text);background-color:#99a2a2;background-color:var(--float-inactive)}.rangeSlider.focus .rangeFloat{background-color:#4a40d4;background-color:var(--float)}";
+    	style.id = "svelte-1o0h0q7-style";
+    	style.textContent = ".rangeSlider{--slider:var(--range-slider, #d7dada);--handle-inactive:var(--range-handle-inactive, #99a2a2);--handle:var(--range-handle, #838de7);--handle-focus:var(--range-handle-focus, #4a40d4);--handle-border:var(--range-handle-border, var(--handle));--range-inactive:var(--range-range-inactive, var(--handle-inactive));--range:var(--range-range, var(--handle-focus));--float-inactive:var(--range-float-inactive, var(--handle-inactive));--float:var(--range-float, var(--handle-focus));--float-text:var(--range-float-text, white)}.rangeSlider{position:relative;border-radius:100px;height:0.5em;margin:1em}.rangeSlider, .rangeSlider *{user-select:none}.rangeSlider.pips{margin-bottom:1.8em}.rangeSlider.pip-labels{margin-bottom:2.8em}.rangeSlider.vertical{display:inline-block;border-radius:100px;width:0.5em;min-height:200px}.rangeSlider.vertical.pips{margin-right:1.8em;margin-bottom:1em}.rangeSlider.vertical.pip-labels{margin-right:2.8em;margin-bottom:1em}.rangeSlider .rangeHandle{position:absolute;display:block;height:1.4em;width:1.4em;top:0.25em;left:0.25em;transform:translateY(-50%) translateX(-50%);z-index:2}.rangeSlider .rangeNub,.rangeSlider .rangeHandle:before{position:absolute;left:0;top:0;display:block;border-radius:10em;height:100%;width:100%;transition:all 0.2s ease}.rangeSlider .rangeHandle:before{content:\"\";left:1px;top:1px;bottom:1px;right:1px;height:auto;width:auto;box-shadow:0 0 0 0px var(--handle-border);opacity:0}.rangeSlider .rangeHandle.hoverable:hover:before{box-shadow:0 0 0 8px var(--handle-border);opacity:0.2}.rangeSlider .rangeHandle.hoverable.press:before,.rangeSlider .rangeHandle.hoverable.press:hover:before{box-shadow:0 0 0 12px var(--handle-border);opacity:0.4}.rangeSlider.range:not(.min):not(.max) .rangeNub{border-radius:10em 10em 10em 1.6em}.rangeSlider.range .rangeHandle:nth-of-type(1) .rangeNub{transform:rotate(-135deg)}.rangeSlider.range .rangeHandle:nth-of-type(2) .rangeNub{transform:rotate(45deg)}.rangeSlider.range.vertical .rangeHandle:nth-of-type(1) .rangeNub{transform:rotate(-45deg)}.rangeSlider.range.vertical .rangeHandle:nth-of-type(2) .rangeNub{transform:rotate(135deg)}.rangeSlider .rangeFloat{display:block;position:absolute;left:50%;top:-0.5em;transform:translate(-50%, -100%);font-size:1em;text-align:center;opacity:0;pointer-events:none;white-space:nowrap;transition:all 0.2s ease;font-size:0.9em;padding:0.2em 0.4em;border-radius:0.2em}.rangeSlider .rangeHandle.active .rangeFloat,.rangeSlider .rangeHandle.hoverable:hover .rangeFloat{opacity:1;top:-0.2em;transform:translate(-50%, -100%)}.rangeSlider .rangeBar{position:absolute;display:block;transition:background 0.2s ease;border-radius:1em;height:0.5em;top:0;user-select:none;z-index:1}.rangeSlider.vertical .rangeBar{width:0.5em;height:auto}.rangeSlider{background-color:#d7dada;background-color:var(--slider)}.rangeSlider .rangeBar{background-color:#99a2a2;background-color:var(--range-inactive)}.rangeSlider.focus .rangeBar{background-color:#838de7;background-color:var(--range)}.rangeSlider .rangeNub{background-color:#99a2a2;background-color:var(--handle-inactive)}.rangeSlider.focus .rangeNub{background-color:#838de7;background-color:var(--handle)}.rangeSlider .rangeHandle.active .rangeNub{background-color:#4a40d4;background-color:var(--handle-focus)}.rangeSlider .rangeFloat{color:white;color:var(--float-text);background-color:#99a2a2;background-color:var(--float-inactive)}.rangeSlider.focus .rangeFloat{background-color:#4a40d4;background-color:var(--float)}";
     	append(document.head, style);
     }
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[50] = list[i];
-    	child_ctx[52] = i;
+    	child_ctx[53] = list[i];
+    	child_ctx[55] = i;
     	return child_ctx;
     }
 
-    // (628:6) {#if float}
+    // (680:6) {#if float}
     function create_if_block_2$1(ctx) {
     	let span;
     	let t0;
-    	let t1_value = /*handleFormatter*/ ctx[18](/*value*/ ctx[50]) + "";
+    	let t1_value = /*handleFormatter*/ ctx[18](/*value*/ ctx[53]) + "";
     	let t1;
     	let t2;
 
@@ -1133,7 +1133,7 @@
     		},
     		p(ctx, dirty) {
     			if (dirty[0] & /*prefix*/ 32768) set_data(t0, /*prefix*/ ctx[15]);
-    			if (dirty[0] & /*handleFormatter, values*/ 262145 && t1_value !== (t1_value = /*handleFormatter*/ ctx[18](/*value*/ ctx[50]) + "")) set_data(t1, t1_value);
+    			if (dirty[0] & /*handleFormatter, values*/ 262145 && t1_value !== (t1_value = /*handleFormatter*/ ctx[18](/*value*/ ctx[53]) + "")) set_data(t1, t1_value);
     			if (dirty[0] & /*suffix*/ 65536) set_data(t2, /*suffix*/ ctx[16]);
     		},
     		d(detaching) {
@@ -1142,7 +1142,7 @@
     	};
     }
 
-    // (611:2) {#each values as value, index}
+    // (662:2) {#each values as value, index}
     function create_each_block$1(ctx) {
     	let span1;
     	let span0;
@@ -1167,21 +1167,22 @@
     			attr(span1, "role", "slider");
     			attr(span1, "class", "rangeHandle");
     			attr(span1, "tabindex", "0");
-    			attr(span1, "style", span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[23][/*index*/ ctx[52]] + "%; z-index: " + (/*activeHandle*/ ctx[21] === /*index*/ ctx[52] ? 3 : 2) + ";"));
+    			attr(span1, "style", span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[24][/*index*/ ctx[55]] + "%; z-index: " + (/*activeHandle*/ ctx[22] === /*index*/ ctx[55] ? 3 : 2) + ";"));
 
-    			attr(span1, "aria-valuemin", span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[52] === 1
+    			attr(span1, "aria-valuemin", span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[55] === 1
     			? /*values*/ ctx[0][0]
     			: /*min*/ ctx[2]);
 
-    			attr(span1, "aria-valuemax", span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[52] === 0
+    			attr(span1, "aria-valuemax", span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[55] === 0
     			? /*values*/ ctx[0][1]
     			: /*max*/ ctx[3]);
 
-    			attr(span1, "aria-valuenow", span1_aria_valuenow_value = /*value*/ ctx[50]);
-    			attr(span1, "aria-valuetext", span1_aria_valuetext_value = "" + (/*prefix*/ ctx[15] + /*handleFormatter*/ ctx[18](/*value*/ ctx[50]) + /*suffix*/ ctx[16]));
+    			attr(span1, "aria-valuenow", span1_aria_valuenow_value = /*value*/ ctx[53]);
+    			attr(span1, "aria-valuetext", span1_aria_valuetext_value = "" + (/*prefix*/ ctx[15] + /*handleFormatter*/ ctx[18](/*value*/ ctx[53]) + /*suffix*/ ctx[16]));
     			attr(span1, "aria-orientation", span1_aria_orientation_value = /*vertical*/ ctx[5] ? "vertical" : "horizontal");
     			toggle_class(span1, "hoverable", /*hover*/ ctx[7]);
-    			toggle_class(span1, "active", /*focus*/ ctx[20] && /*activeHandle*/ ctx[21] === /*index*/ ctx[52]);
+    			toggle_class(span1, "active", /*focus*/ ctx[20] && /*activeHandle*/ ctx[22] === /*index*/ ctx[55]);
+    			toggle_class(span1, "press", /*handlePressed*/ ctx[21] && /*activeHandle*/ ctx[22] === /*index*/ ctx[55]);
     		},
     		m(target, anchor) {
     			insert(target, span1, anchor);
@@ -1191,9 +1192,9 @@
 
     			if (!mounted) {
     				dispose = [
-    					listen(span1, "blur", /*sliderBlurHandle*/ ctx[27]),
-    					listen(span1, "focus", /*sliderFocusHandle*/ ctx[28]),
-    					listen(span1, "keydown", /*sliderKeydown*/ ctx[29])
+    					listen(span1, "blur", /*sliderBlurHandle*/ ctx[28]),
+    					listen(span1, "focus", /*sliderFocusHandle*/ ctx[29]),
+    					listen(span1, "keydown", /*sliderKeydown*/ ctx[30])
     				];
 
     				mounted = true;
@@ -1213,27 +1214,27 @@
     				if_block = null;
     			}
 
-    			if (dirty[0] & /*vertical, $springPositions, activeHandle*/ 10485792 && span1_style_value !== (span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[23][/*index*/ ctx[52]] + "%; z-index: " + (/*activeHandle*/ ctx[21] === /*index*/ ctx[52] ? 3 : 2) + ";"))) {
+    			if (dirty[0] & /*vertical, $springPositions, activeHandle*/ 20971552 && span1_style_value !== (span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[24][/*index*/ ctx[55]] + "%; z-index: " + (/*activeHandle*/ ctx[22] === /*index*/ ctx[55] ? 3 : 2) + ";"))) {
     				attr(span1, "style", span1_style_value);
     			}
 
-    			if (dirty[0] & /*range, values, min*/ 7 && span1_aria_valuemin_value !== (span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[52] === 1
+    			if (dirty[0] & /*range, values, min*/ 7 && span1_aria_valuemin_value !== (span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[55] === 1
     			? /*values*/ ctx[0][0]
     			: /*min*/ ctx[2])) {
     				attr(span1, "aria-valuemin", span1_aria_valuemin_value);
     			}
 
-    			if (dirty[0] & /*range, values, max*/ 11 && span1_aria_valuemax_value !== (span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[52] === 0
+    			if (dirty[0] & /*range, values, max*/ 11 && span1_aria_valuemax_value !== (span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[55] === 0
     			? /*values*/ ctx[0][1]
     			: /*max*/ ctx[3])) {
     				attr(span1, "aria-valuemax", span1_aria_valuemax_value);
     			}
 
-    			if (dirty[0] & /*values*/ 1 && span1_aria_valuenow_value !== (span1_aria_valuenow_value = /*value*/ ctx[50])) {
+    			if (dirty[0] & /*values*/ 1 && span1_aria_valuenow_value !== (span1_aria_valuenow_value = /*value*/ ctx[53])) {
     				attr(span1, "aria-valuenow", span1_aria_valuenow_value);
     			}
 
-    			if (dirty[0] & /*prefix, handleFormatter, values, suffix*/ 360449 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = "" + (/*prefix*/ ctx[15] + /*handleFormatter*/ ctx[18](/*value*/ ctx[50]) + /*suffix*/ ctx[16]))) {
+    			if (dirty[0] & /*prefix, handleFormatter, values, suffix*/ 360449 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = "" + (/*prefix*/ ctx[15] + /*handleFormatter*/ ctx[18](/*value*/ ctx[53]) + /*suffix*/ ctx[16]))) {
     				attr(span1, "aria-valuetext", span1_aria_valuetext_value);
     			}
 
@@ -1245,8 +1246,12 @@
     				toggle_class(span1, "hoverable", /*hover*/ ctx[7]);
     			}
 
-    			if (dirty[0] & /*focus, activeHandle*/ 3145728) {
-    				toggle_class(span1, "active", /*focus*/ ctx[20] && /*activeHandle*/ ctx[21] === /*index*/ ctx[52]);
+    			if (dirty[0] & /*focus, activeHandle*/ 5242880) {
+    				toggle_class(span1, "active", /*focus*/ ctx[20] && /*activeHandle*/ ctx[22] === /*index*/ ctx[55]);
+    			}
+
+    			if (dirty[0] & /*handlePressed, activeHandle*/ 6291456) {
+    				toggle_class(span1, "press", /*handlePressed*/ ctx[21] && /*activeHandle*/ ctx[22] === /*index*/ ctx[55]);
     			}
     		},
     		d(detaching) {
@@ -1258,7 +1263,7 @@
     	};
     }
 
-    // (633:2) {#if range}
+    // (685:2) {#if range}
     function create_if_block_1$1(ctx) {
     	let span;
     	let span_style_value;
@@ -1267,13 +1272,13 @@
     		c() {
     			span = element("span");
     			attr(span, "class", "rangeBar");
-    			attr(span, "style", span_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*rangeStart*/ ctx[25](/*$springPositions*/ ctx[23]) + "%; " + (/*vertical*/ ctx[5] ? "bottom" : "right") + ":\n      " + /*rangeEnd*/ ctx[26](/*$springPositions*/ ctx[23]) + "%;"));
+    			attr(span, "style", span_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*rangeStart*/ ctx[26](/*$springPositions*/ ctx[24]) + "%; " + (/*vertical*/ ctx[5] ? "bottom" : "right") + ":\n      " + /*rangeEnd*/ ctx[27](/*$springPositions*/ ctx[24]) + "%;"));
     		},
     		m(target, anchor) {
     			insert(target, span, anchor);
     		},
     		p(ctx, dirty) {
-    			if (dirty[0] & /*vertical, $springPositions*/ 8388640 && span_style_value !== (span_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*rangeStart*/ ctx[25](/*$springPositions*/ ctx[23]) + "%; " + (/*vertical*/ ctx[5] ? "bottom" : "right") + ":\n      " + /*rangeEnd*/ ctx[26](/*$springPositions*/ ctx[23]) + "%;"))) {
+    			if (dirty[0] & /*vertical, $springPositions*/ 16777248 && span_style_value !== (span_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*rangeStart*/ ctx[26](/*$springPositions*/ ctx[24]) + "%; " + (/*vertical*/ ctx[5] ? "bottom" : "right") + ":\n      " + /*rangeEnd*/ ctx[27](/*$springPositions*/ ctx[24]) + "%;"))) {
     				attr(span, "style", span_style_value);
     			}
     		},
@@ -1283,7 +1288,7 @@
     	};
     }
 
-    // (639:2) {#if pips}
+    // (691:2) {#if pips}
     function create_if_block$1(ctx) {
     	let rangepips;
     	let current;
@@ -1305,7 +1310,7 @@
     				suffix: /*suffix*/ ctx[16],
     				formatter: /*formatter*/ ctx[17],
     				focus: /*focus*/ ctx[20],
-    				percentOf: /*percentOf*/ ctx[22]
+    				percentOf: /*percentOf*/ ctx[23]
     			}
     		});
 
@@ -1334,7 +1339,7 @@
     			if (dirty[0] & /*suffix*/ 65536) rangepips_changes.suffix = /*suffix*/ ctx[16];
     			if (dirty[0] & /*formatter*/ 131072) rangepips_changes.formatter = /*formatter*/ ctx[17];
     			if (dirty[0] & /*focus*/ 1048576) rangepips_changes.focus = /*focus*/ ctx[20];
-    			if (dirty[0] & /*percentOf*/ 4194304) rangepips_changes.percentOf = /*percentOf*/ ctx[22];
+    			if (dirty[0] & /*percentOf*/ 8388608) rangepips_changes.percentOf = /*percentOf*/ ctx[23];
     			rangepips.$set(rangepips_changes);
     		},
     		i(local) {
@@ -1383,11 +1388,11 @@
     			if (if_block1) if_block1.c();
     			attr(div, "id", /*id*/ ctx[14]);
     			attr(div, "class", "rangeSlider");
-    			toggle_class(div, "min", /*range*/ ctx[1] === "min");
+    			toggle_class(div, "max", /*range*/ ctx[1] === "max");
     			toggle_class(div, "range", /*range*/ ctx[1]);
     			toggle_class(div, "vertical", /*vertical*/ ctx[5]);
     			toggle_class(div, "focus", /*focus*/ ctx[20]);
-    			toggle_class(div, "max", /*range*/ ctx[1] === "max");
+    			toggle_class(div, "min", /*range*/ ctx[1] === "min");
     			toggle_class(div, "pips", /*pips*/ ctx[8]);
     			toggle_class(div, "pip-labels", /*all*/ ctx[10] === "label" || /*first*/ ctx[11] === "label" || /*last*/ ctx[12] === "label" || /*rest*/ ctx[13] === "label");
     		},
@@ -1402,27 +1407,29 @@
     			if (if_block0) if_block0.m(div, null);
     			append(div, t1);
     			if (if_block1) if_block1.m(div, null);
-    			/*div_binding*/ ctx[38](div);
+    			/*div_binding*/ ctx[41](div);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen(window, "mousedown", /*bodyInteractStart*/ ctx[31]),
-    					listen(window, "touchstart", /*bodyInteractStart*/ ctx[31]),
-    					listen(window, "mousemove", /*bodyInteract*/ ctx[32]),
-    					listen(window, "touchmove", /*bodyInteract*/ ctx[32]),
-    					listen(window, "mouseup", /*bodyMouseUp*/ ctx[33]),
-    					listen(window, "touchend", /*bodyTouchEnd*/ ctx[34]),
-    					listen(window, "keydown", /*bodyKeyDown*/ ctx[35]),
-    					listen(div, "touchstart", prevent_default(/*sliderInteractStart*/ ctx[30])),
-    					listen(div, "mousedown", /*sliderInteractStart*/ ctx[30])
+    					listen(window, "mousedown", /*bodyInteractStart*/ ctx[33]),
+    					listen(window, "touchstart", /*bodyInteractStart*/ ctx[33]),
+    					listen(window, "mousemove", /*bodyInteract*/ ctx[34]),
+    					listen(window, "touchmove", /*bodyInteract*/ ctx[34]),
+    					listen(window, "mouseup", /*bodyMouseUp*/ ctx[35]),
+    					listen(window, "touchend", /*bodyTouchEnd*/ ctx[36]),
+    					listen(window, "keydown", /*bodyKeyDown*/ ctx[37]),
+    					listen(div, "touchstart", prevent_default(/*sliderInteractStart*/ ctx[31])),
+    					listen(div, "mousedown", /*sliderInteractStart*/ ctx[31]),
+    					listen(div, "touchend", prevent_default(/*sliderInteractEnd*/ ctx[32])),
+    					listen(div, "mouseup", /*sliderInteractEnd*/ ctx[32])
     				];
 
     				mounted = true;
     			}
     		},
     		p(ctx, dirty) {
-    			if (dirty[0] & /*vertical, $springPositions, activeHandle, range, values, min, max, prefix, handleFormatter, suffix, hover, focus, sliderKeydown, sliderBlurHandle, sliderFocusHandle, float*/ 951419119) {
+    			if (dirty[0] & /*vertical, $springPositions, activeHandle, range, values, min, max, prefix, handleFormatter, suffix, hover, focus, handlePressed, sliderFocusHandle, sliderBlurHandle, sliderKeydown, float*/ 1903526127) {
     				each_value = /*values*/ ctx[0];
     				let i;
 
@@ -1486,7 +1493,7 @@
     			}
 
     			if (dirty[0] & /*range*/ 2) {
-    				toggle_class(div, "min", /*range*/ ctx[1] === "min");
+    				toggle_class(div, "max", /*range*/ ctx[1] === "max");
     			}
 
     			if (dirty[0] & /*range*/ 2) {
@@ -1502,7 +1509,7 @@
     			}
 
     			if (dirty[0] & /*range*/ 2) {
-    				toggle_class(div, "max", /*range*/ ctx[1] === "max");
+    				toggle_class(div, "min", /*range*/ ctx[1] === "min");
     			}
 
     			if (dirty[0] & /*pips*/ 256) {
@@ -1527,7 +1534,7 @@
     			destroy_each(each_blocks, detaching);
     			if (if_block0) if_block0.d();
     			if (if_block1) if_block1.d();
-    			/*div_binding*/ ctx[38](null);
+    			/*div_binding*/ ctx[41](null);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -1562,6 +1569,7 @@
     function instance$1($$self, $$props, $$invalidate) {
     	let $springPositions;
     	let { range = false } = $$props;
+    	let { pushy = false } = $$props;
     	let { min = 0 } = $$props;
     	let { max = 100 } = $$props;
     	let { step = 1 } = $$props;
@@ -1590,6 +1598,7 @@
     	let focus = false;
 
     	let handleActivated = false;
+    	let handlePressed = false;
     	let keyboardActive = false;
     	let activeHandle = values.length - 1;
 
@@ -1597,7 +1606,7 @@
     	// when changing values and animating the handle/range nicely
     	let springPositions = spring(values.map(v => parseFloat(((v - min) / (max - min) * 100).toFixed(precision))), springValues);
 
-    	component_subscribe($$self, springPositions, value => $$invalidate(23, $springPositions = value));
+    	component_subscribe($$self, springPositions, value => $$invalidate(24, $springPositions = value));
 
     	/**
      * get the position (x/y) of a mouse/touch event on the screen
@@ -1732,12 +1741,22 @@
      * @return {number} the value that was moved to (after alignment/clamping)
      **/
     	function moveHandle(index, value) {
-    		// restrict the handles of a range-slider from
-    		// going past one-another
-    		if (range && index === 0 && value > values[1]) {
-    			value = values[1];
-    		} else if (range && index === 1 && value < values[0]) {
-    			value = values[0];
+    		if (range) {
+    			// restrict the handles of a range-slider from
+    			// going past one-another unless "pushy" is true
+    			if (index === 0 && value > values[1]) {
+    				if (pushy) {
+    					$$invalidate(0, values[1] = value, values);
+    				} else {
+    					value = values[1];
+    				}
+    			} else if (index === 1 && value < values[0]) {
+    				if (pushy) {
+    					$$invalidate(0, values[0] = value, values);
+    				} else {
+    					value = values[0];
+    				}
+    			}
     		}
 
     		// set the value for the handle, and align/clamp it
@@ -1781,6 +1800,7 @@
     		if (keyboardActive) {
     			$$invalidate(20, focus = false);
     			handleActivated = false;
+    			$$invalidate(21, handlePressed = false);
     		}
     	}
 
@@ -1790,7 +1810,7 @@
      * @param {event} e the event from browser
      **/
     	function sliderFocusHandle(e) {
-    		$$invalidate(21, activeHandle = index(e.target));
+    		$$invalidate(22, activeHandle = index(e.target));
     		$$invalidate(20, focus = true);
     	}
 
@@ -1847,13 +1867,23 @@
     		$$invalidate(20, focus = true);
 
     		handleActivated = true;
-    		$$invalidate(21, activeHandle = getClosestHandle(p));
+    		$$invalidate(21, handlePressed = true);
+    		$$invalidate(22, activeHandle = getClosestHandle(p));
 
     		// for touch devices we want the handle to instantly
     		// move to the position touched for more responsive feeling
     		if (e.type === "touchstart") {
     			handleInteract(p);
     		}
+    	}
+
+    	/**
+     * function to run when the user stops touching
+     * down on the slider element anywhere
+     * @param {event} e the event from browser
+     **/
+    	function sliderInteractEnd(e) {
+    		$$invalidate(21, handlePressed = false);
     	}
 
     	/**
@@ -1901,6 +1931,7 @@
     		}
 
     		handleActivated = false;
+    		$$invalidate(21, handlePressed = false);
     	}
 
     	/**
@@ -1910,6 +1941,7 @@
      **/
     	function bodyTouchEnd(e) {
     		handleActivated = false;
+    		$$invalidate(21, handlePressed = false);
     	}
 
     	function bodyKeyDown(e) {
@@ -1927,6 +1959,7 @@
 
     	$$self.$set = $$props => {
     		if ("range" in $$props) $$invalidate(1, range = $$props.range);
+    		if ("pushy" in $$props) $$invalidate(38, pushy = $$props.pushy);
     		if ("min" in $$props) $$invalidate(2, min = $$props.min);
     		if ("max" in $$props) $$invalidate(3, max = $$props.max);
     		if ("step" in $$props) $$invalidate(4, step = $$props.step);
@@ -1945,8 +1978,8 @@
     		if ("suffix" in $$props) $$invalidate(16, suffix = $$props.suffix);
     		if ("formatter" in $$props) $$invalidate(17, formatter = $$props.formatter);
     		if ("handleFormatter" in $$props) $$invalidate(18, handleFormatter = $$props.handleFormatter);
-    		if ("precision" in $$props) $$invalidate(36, precision = $$props.precision);
-    		if ("springValues" in $$props) $$invalidate(37, springValues = $$props.springValues);
+    		if ("precision" in $$props) $$invalidate(39, precision = $$props.precision);
+    		if ("springValues" in $$props) $$invalidate(40, springValues = $$props.springValues);
     	};
 
     	let percentOf;
@@ -1961,20 +1994,20 @@
      * @param {number} val the value to clamp
      * @return {number} the value after it's been clamped
      **/
-    			 $$invalidate(42, clampValue = function (val) {
+    			 $$invalidate(45, clampValue = function (val) {
     				// return the min/max if outside of that range
     				return val <= min ? min : val >= max ? max : val;
     			});
     		}
 
-    		if ($$self.$$.dirty[0] & /*min, max, step*/ 28 | $$self.$$.dirty[1] & /*clampValue, precision*/ 2080) {
+    		if ($$self.$$.dirty[0] & /*min, max, step*/ 28 | $$self.$$.dirty[1] & /*clampValue, precision*/ 16640) {
     			/**
      * align the value with the steps so that it
      * always sits on the closest (above/below) step
      * @param {number} val the value to align
      * @return {number} the value after it's been aligned
      **/
-    			 $$invalidate(41, alignValueToStep = function (val) {
+    			 $$invalidate(44, alignValueToStep = function (val) {
     				// sanity check for performance
     				if (val <= min) {
     					return min;
@@ -2003,20 +2036,20 @@
     			});
     		}
 
-    		if ($$self.$$.dirty[0] & /*values*/ 1 | $$self.$$.dirty[1] & /*alignValueToStep*/ 1024) {
+    		if ($$self.$$.dirty[0] & /*values*/ 1 | $$self.$$.dirty[1] & /*alignValueToStep*/ 8192) {
     			// watch the values array, and trim / clamp the values to the steps
     			// and boundaries set up in the slider on change
     			 $$invalidate(0, values = trimRange(values).map(v => alignValueToStep(v)));
     		}
 
-    		if ($$self.$$.dirty[0] & /*min, max*/ 12 | $$self.$$.dirty[1] & /*precision*/ 32) {
+    		if ($$self.$$.dirty[0] & /*min, max*/ 12 | $$self.$$.dirty[1] & /*precision*/ 256) {
     			/**
      * take in a value, and then calculate that value's percentage
      * of the overall range (min-max);
      * @param {number} val the value we're getting percent for
      * @return {number} the percentage value
      **/
-    			 $$invalidate(22, percentOf = function (val) {
+    			 $$invalidate(23, percentOf = function (val) {
     				let perc = (val - min) / (max - min) * 100;
 
     				if (perc >= 100) {
@@ -2029,7 +2062,7 @@
     			});
     		}
 
-    		if ($$self.$$.dirty[0] & /*values, percentOf*/ 4194305) {
+    		if ($$self.$$.dirty[0] & /*values, percentOf*/ 8388609) {
     			// update the spring function so that movement can happen in the UI
     			 {
     				springPositions.set(values.map(v => percentOf(v)));
@@ -2059,6 +2092,7 @@
     		handleFormatter,
     		slider,
     		focus,
+    		handlePressed,
     		activeHandle,
     		percentOf,
     		$springPositions,
@@ -2069,11 +2103,13 @@
     		sliderFocusHandle,
     		sliderKeydown,
     		sliderInteractStart,
+    		sliderInteractEnd,
     		bodyInteractStart,
     		bodyInteract,
     		bodyMouseUp,
     		bodyTouchEnd,
     		bodyKeyDown,
+    		pushy,
     		precision,
     		springValues,
     		div_binding
@@ -2083,7 +2119,7 @@
     class RangeSlider extends SvelteComponent {
     	constructor(options) {
     		super();
-    		if (!document.getElementById("svelte-163jvmt-style")) add_css$1();
+    		if (!document.getElementById("svelte-1o0h0q7-style")) add_css$1();
 
     		init(
     			this,
@@ -2093,6 +2129,7 @@
     			safe_not_equal,
     			{
     				range: 1,
+    				pushy: 38,
     				min: 2,
     				max: 3,
     				step: 4,
@@ -2111,8 +2148,8 @@
     				suffix: 16,
     				formatter: 17,
     				handleFormatter: 18,
-    				precision: 36,
-    				springValues: 37
+    				precision: 39,
+    				springValues: 40
     			},
     			[-1, -1]
     		);
