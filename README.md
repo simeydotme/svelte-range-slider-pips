@@ -11,6 +11,20 @@ A reactive, accessible, multi-thumb, range slider for use in a svelte applicatio
 
 ---
 
+## features
+
+- ✨ fully customisable
+- ✨ fully stylable
+- ✨ fully accessible (with aria)
+- 👍🏽 multi-thumb
+- 🎚 range (min/max)
+- 🏷 floating labels
+- 📏 ruler notches
+- 🏷 labels for notches
+- 🧮 step function
+- 🖍 formatter
+- 🎭 animated
+
 ## install
 
 Open your project and use the command line to install the package;
@@ -89,14 +103,12 @@ prop | type | default | description
 **[🔗 _For full documentation and examples, see the Github Pages_](https://simeydotme.github.io/svelte-range-slider-pips/)**
 
 
-## contribue
+## contribute
 
 I am very happy to accept;
-- 🌟 suggestions/requests for new features or changes with examples of how they would be useful
+- 🌟 suggestions/requests for new features or changes
 - 🛠 pull-requests for bug fixes, or issue resolution
 - 🧪 help with creating a proper test-suite
 
-**When making changes/edits to the code you should use the `/test/` folder** and check the [README.md](test/README.md) in there
-to help with testing all the functionality. I don't have real tests set up, and would appreciate anyone's 
-help who knows how to accomplish that.
+[Read the CONTRIBUTING.md](./CONTRIBUTING.md)
 
