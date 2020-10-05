@@ -87,6 +87,7 @@ prop | type | default | description
 **max** | `Number` | `100` | Maximum value for the slider
 **step** | `Number` | `1` | Every `nth` value to allow handle to stop at
 **range** | `Boolean`/`String` | `false` | Whether to style as a range picker. Use `range='min'` or `range='max'` for min/max variants
+**pushy** | `Boolean` | `false` | If `range` is `true`, then this boolean decides if one handle will push the other along
 **float** | `Boolean` | `false` | Set true to add a floating label above focussed handles
 **vertical** | `Boolean` | `false` | Make the slider render vertically
 **pips** | `Boolean` | `false` | Whether to show pips/notches on the slider

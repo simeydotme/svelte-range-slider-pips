@@ -4,6 +4,7 @@
 
   // range slider props
   export let range = false;
+  export let pushy = false;
   export let min = 0;
   export let max = 100;
   export let step = 1;
@@ -269,12 +270,22 @@
    * @return {number} the value that was moved to (after alignment/clamping)
    **/
   function moveHandle(index, value) {
+    if (range) {
     // restrict the handles of a range-slider from
-    // going past one-another
-    if (range && index === 0 && value > values[1]) {
+      // going past one-another unless "pushy" is true
+      if (index === 0 && value > values[1]) {
+        if (pushy) {
+          values[1] = value;
+        } else {
       value = values[1];
-    } else if (range && index === 1 && value < values[0]) {
+        }
+      } else if (index === 1 && value < values[0]) {
+        if (pushy) {
+          values[0] = value;
+        } else {
       value = values[0];
+    }
+      }
     }
     // set the value for the handle, and align/clamp it
     values[index] = value;

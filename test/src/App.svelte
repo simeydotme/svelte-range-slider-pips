@@ -6,6 +6,7 @@
   let day = [3];
   let hue = [244];
   let dynamic = [0,50];
+  let pushy = [30,60]
   const formatter = v => {
     return num.format(v);
   };
@@ -65,7 +66,8 @@
     <RangeSlider float pips first="label" last="label" />
     <RangeSlider float pips first="label" last="label" rest="label" />
     <br>
-    <RangeSlider range values={[35,65]} pips all="label" float />
+    <RangeSlider range bind:values={pushy} float />
+    <RangeSlider range pushy bind:values={pushy} pips all="label" float />
     <RangeSlider range="min" values={[65]} pips all="label" float />
     <RangeSlider range="max" values={[35]} pips all="label" float />
     <br>
