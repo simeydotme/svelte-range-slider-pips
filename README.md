@@ -4,7 +4,7 @@
 
 A reactive, accessible, multi-thumb, range slider with the ability to display "pips" or "notches" along the range. Importable as a svelte-component, or used directly in any javascript application.
 
-![Image of the Svelte Range Slider, set as focussed, including some pips](test/public/slider.png)
+![Image of the Svelte Range Slider, set as focussed, including some pips](test/public/range-slider.png)
 
 
 **[🔗 _For full documentation and examples, see the Github Pages_](https://simeydotme.github.io/svelte-range-slider-pips/)**
@@ -14,9 +14,7 @@ A reactive, accessible, multi-thumb, range slider with the ability to display "p
 
 ## features
 
-- ✨ fully customisable
-- ✨ fully stylable
-- ✨ fully accessible (with aria)
+- ✨ fully customisable, stylable & accessible
 - 👍🏽 multi-thumb
 - 🎚 range (min/max)
 - 🏷 floating labels
