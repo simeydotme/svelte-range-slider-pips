@@ -1,10 +1,11 @@
 
-# Svelte Range Slider (with pips)
+# Range Slider (with pips)
 ## [`svelte-range-slider-pips`](https://www.npmjs.com/package/svelte-range-slider-pips) @ **npm**
 
-A reactive, accessible, multi-thumb, range slider for use in a svelte application; with the ability to display "pips" or "notches" along the range.
+A reactive, accessible, multi-thumb, range slider with the ability to display "pips" or "notches" along the range. Importable as a svelte-component, or used directly in any javascript application.
 
 ![Image of the Svelte Range Slider, set as focussed, including some pips](test/public/slider.png)
+
 
 **[🔗 _For full documentation and examples, see the Github Pages_](https://simeydotme.github.io/svelte-range-slider-pips/)**
 
@@ -35,23 +36,11 @@ npm install --save-dev svelte-range-slider-pips # if you prefer npm
 
 ## usage
 
-### in a svelte project
-
-Assuming you have a Svelte app up and running;
-
-```html
-<script>
-  import RangeSlider from "svelte-range-slider-pips";
-</script>
-
-<RangeSlider />
-```
-
 ### as a regular JS file
 
-If you're using a different framework, or none, you can use the [`/dist/`
+If you're not building a svelte-app, you can use the [`/dist/`
 version of the script `/dist/svelte-range-slider-pips.js`](dist/svelte-range-slider-pips.js) and include it
-either with a regular `<script>` tag, or by using js imports (`import`)
+either with a regular `<script>` tag. This should even work with jQuery.
 
 ```html
 <script src="./js/vendor/svelte-range-slider-pips.js" />
@@ -66,7 +55,23 @@ either with a regular `<script>` tag, or by using js imports (`import`)
 </script>
 ```
 
+### in a svelte project
+
+Assuming you have a Svelte app up and running;
+
+```html
+<script>
+  import RangeSlider from "svelte-range-slider-pips";
+</script>
+
+<RangeSlider />
+```
+
 ### as a JS module
+
+If you're building a bleeding-edge JS application (not svelte), you might 
+want to use js imports (`import`)
+
 ```js
 import RangeSlider from "./node_modules/svelte-range-slider-pips/dist/svelte-range-slider-pips.mjs";
 
