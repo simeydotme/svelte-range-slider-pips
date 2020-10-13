@@ -24,6 +24,7 @@
   let range1 = [30,70];
   let range2 = [50];
   let range3 = [50];
+  let rangePushy = [30,70];
   let pipstep1 = [50];
   let pipstep2 = [50];
   let pipstep3 = [50];
@@ -237,6 +238,30 @@ the visual appearance of a slider range which is growing or shrinking.
   <div slot="code">{`<RangeSlider range="max" values={[50]} />`}</div>
   <div slot="slider"><RangeSlider range="max" bind:values={range3} /></div>
 </Example>
+
+#### Pushy Range
+
+When applying a range the two **handles are not allowed to pass each other**,
+and by default they will block each other from moving. But applying the `pushy`
+property to the slider **will allow each handle to push the other one along**
+when they collide.
+
+<Example values={rangePushy}>
+  <div slot="code">{`<RangeSlider range pushy values={[30,70]} />`}</div>
+  <div slot="slider">
+    <table class="middle">
+      <tr>
+        <td width=100><h5><code>Pushy</code></h5></td>
+        <td><RangeSlider range pushy bind:values={rangePushy} /></td>
+      </tr>
+      <tr>
+        <td width=100><h5>Not <code>Pushy</code></h5></td>
+        <td><RangeSlider range bind:values={rangePushy} /></td>
+      </tr>
+    </table>
+  </div>
+</Example>
+
 
 ### With floating label
 

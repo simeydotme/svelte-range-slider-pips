@@ -152,4 +152,13 @@ td:not(:last-child) {
 tbody tr:nth-child(even) td,
 tbody tr:nth-child(even) th {
   background: rgba(0, 40, 100, 0.025);
-} 
+}
+
+table.middle th,
+table.middle td {
+  vertical-align: middle;
+}
+
+td > h5 {
+  margin: 0;
+}
