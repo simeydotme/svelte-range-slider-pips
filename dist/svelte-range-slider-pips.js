@@ -1,7 +1,7 @@
 /**
- * svelte-range-slider-pips ~ 1.5.0
+ * svelte-range-slider-pips ~ 1.5.1
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
- * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 5/10/2020
+ * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 29/12/2020
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -1104,16 +1104,16 @@
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[53] = list[i];
-    	child_ctx[55] = i;
+    	child_ctx[52] = list[i];
+    	child_ctx[54] = i;
     	return child_ctx;
     }
 
-    // (680:6) {#if float}
+    // (671:6) {#if float}
     function create_if_block_2$1(ctx) {
     	let span;
     	let t0;
-    	let t1_value = /*handleFormatter*/ ctx[18](/*value*/ ctx[53]) + "";
+    	let t1_value = /*handleFormatter*/ ctx[18](/*value*/ ctx[52]) + "";
     	let t1;
     	let t2;
 
@@ -1133,7 +1133,7 @@
     		},
     		p(ctx, dirty) {
     			if (dirty[0] & /*prefix*/ 32768) set_data(t0, /*prefix*/ ctx[15]);
-    			if (dirty[0] & /*handleFormatter, values*/ 262145 && t1_value !== (t1_value = /*handleFormatter*/ ctx[18](/*value*/ ctx[53]) + "")) set_data(t1, t1_value);
+    			if (dirty[0] & /*handleFormatter, values*/ 262145 && t1_value !== (t1_value = /*handleFormatter*/ ctx[18](/*value*/ ctx[52]) + "")) set_data(t1, t1_value);
     			if (dirty[0] & /*suffix*/ 65536) set_data(t2, /*suffix*/ ctx[16]);
     		},
     		d(detaching) {
@@ -1142,7 +1142,7 @@
     	};
     }
 
-    // (662:2) {#each values as value, index}
+    // (653:2) {#each values as value, index}
     function create_each_block$1(ctx) {
     	let span1;
     	let span0;
@@ -1167,22 +1167,22 @@
     			attr(span1, "role", "slider");
     			attr(span1, "class", "rangeHandle");
     			attr(span1, "tabindex", "0");
-    			attr(span1, "style", span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[24][/*index*/ ctx[55]] + "%; z-index: " + (/*activeHandle*/ ctx[22] === /*index*/ ctx[55] ? 3 : 2) + ";"));
+    			attr(span1, "style", span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[24][/*index*/ ctx[54]] + "%; z-index: " + (/*activeHandle*/ ctx[22] === /*index*/ ctx[54] ? 3 : 2) + ";"));
 
-    			attr(span1, "aria-valuemin", span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[55] === 1
+    			attr(span1, "aria-valuemin", span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[54] === 1
     			? /*values*/ ctx[0][0]
     			: /*min*/ ctx[2]);
 
-    			attr(span1, "aria-valuemax", span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[55] === 0
+    			attr(span1, "aria-valuemax", span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[54] === 0
     			? /*values*/ ctx[0][1]
     			: /*max*/ ctx[3]);
 
-    			attr(span1, "aria-valuenow", span1_aria_valuenow_value = /*value*/ ctx[53]);
-    			attr(span1, "aria-valuetext", span1_aria_valuetext_value = "" + (/*prefix*/ ctx[15] + /*handleFormatter*/ ctx[18](/*value*/ ctx[53]) + /*suffix*/ ctx[16]));
+    			attr(span1, "aria-valuenow", span1_aria_valuenow_value = /*value*/ ctx[52]);
+    			attr(span1, "aria-valuetext", span1_aria_valuetext_value = "" + (/*prefix*/ ctx[15] + /*handleFormatter*/ ctx[18](/*value*/ ctx[52]) + /*suffix*/ ctx[16]));
     			attr(span1, "aria-orientation", span1_aria_orientation_value = /*vertical*/ ctx[5] ? "vertical" : "horizontal");
     			toggle_class(span1, "hoverable", /*hover*/ ctx[7]);
-    			toggle_class(span1, "active", /*focus*/ ctx[20] && /*activeHandle*/ ctx[22] === /*index*/ ctx[55]);
-    			toggle_class(span1, "press", /*handlePressed*/ ctx[21] && /*activeHandle*/ ctx[22] === /*index*/ ctx[55]);
+    			toggle_class(span1, "active", /*focus*/ ctx[20] && /*activeHandle*/ ctx[22] === /*index*/ ctx[54]);
+    			toggle_class(span1, "press", /*handlePressed*/ ctx[21] && /*activeHandle*/ ctx[22] === /*index*/ ctx[54]);
     		},
     		m(target, anchor) {
     			insert(target, span1, anchor);
@@ -1214,27 +1214,27 @@
     				if_block = null;
     			}
 
-    			if (dirty[0] & /*vertical, $springPositions, activeHandle*/ 20971552 && span1_style_value !== (span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[24][/*index*/ ctx[55]] + "%; z-index: " + (/*activeHandle*/ ctx[22] === /*index*/ ctx[55] ? 3 : 2) + ";"))) {
+    			if (dirty[0] & /*vertical, $springPositions, activeHandle*/ 20971552 && span1_style_value !== (span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[24][/*index*/ ctx[54]] + "%; z-index: " + (/*activeHandle*/ ctx[22] === /*index*/ ctx[54] ? 3 : 2) + ";"))) {
     				attr(span1, "style", span1_style_value);
     			}
 
-    			if (dirty[0] & /*range, values, min*/ 7 && span1_aria_valuemin_value !== (span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[55] === 1
+    			if (dirty[0] & /*range, values, min*/ 7 && span1_aria_valuemin_value !== (span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[54] === 1
     			? /*values*/ ctx[0][0]
     			: /*min*/ ctx[2])) {
     				attr(span1, "aria-valuemin", span1_aria_valuemin_value);
     			}
 
-    			if (dirty[0] & /*range, values, max*/ 11 && span1_aria_valuemax_value !== (span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[55] === 0
+    			if (dirty[0] & /*range, values, max*/ 11 && span1_aria_valuemax_value !== (span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[54] === 0
     			? /*values*/ ctx[0][1]
     			: /*max*/ ctx[3])) {
     				attr(span1, "aria-valuemax", span1_aria_valuemax_value);
     			}
 
-    			if (dirty[0] & /*values*/ 1 && span1_aria_valuenow_value !== (span1_aria_valuenow_value = /*value*/ ctx[53])) {
+    			if (dirty[0] & /*values*/ 1 && span1_aria_valuenow_value !== (span1_aria_valuenow_value = /*value*/ ctx[52])) {
     				attr(span1, "aria-valuenow", span1_aria_valuenow_value);
     			}
 
-    			if (dirty[0] & /*prefix, handleFormatter, values, suffix*/ 360449 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = "" + (/*prefix*/ ctx[15] + /*handleFormatter*/ ctx[18](/*value*/ ctx[53]) + /*suffix*/ ctx[16]))) {
+    			if (dirty[0] & /*prefix, handleFormatter, values, suffix*/ 360449 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = "" + (/*prefix*/ ctx[15] + /*handleFormatter*/ ctx[18](/*value*/ ctx[52]) + /*suffix*/ ctx[16]))) {
     				attr(span1, "aria-valuetext", span1_aria_valuetext_value);
     			}
 
@@ -1247,11 +1247,11 @@
     			}
 
     			if (dirty[0] & /*focus, activeHandle*/ 5242880) {
-    				toggle_class(span1, "active", /*focus*/ ctx[20] && /*activeHandle*/ ctx[22] === /*index*/ ctx[55]);
+    				toggle_class(span1, "active", /*focus*/ ctx[20] && /*activeHandle*/ ctx[22] === /*index*/ ctx[54]);
     			}
 
     			if (dirty[0] & /*handlePressed, activeHandle*/ 6291456) {
-    				toggle_class(span1, "press", /*handlePressed*/ ctx[21] && /*activeHandle*/ ctx[22] === /*index*/ ctx[55]);
+    				toggle_class(span1, "press", /*handlePressed*/ ctx[21] && /*activeHandle*/ ctx[22] === /*index*/ ctx[54]);
     			}
     		},
     		d(detaching) {
@@ -1263,7 +1263,7 @@
     	};
     }
 
-    // (685:2) {#if range}
+    // (676:2) {#if range}
     function create_if_block_1$1(ctx) {
     	let span;
     	let span_style_value;
@@ -1288,7 +1288,7 @@
     	};
     }
 
-    // (691:2) {#if pips}
+    // (682:2) {#if pips}
     function create_if_block$1(ctx) {
     	let rangepips;
     	let current;
@@ -1609,17 +1609,6 @@
     	component_subscribe($$self, springPositions, value => $$invalidate(24, $springPositions = value));
 
     	/**
-     * get the position (x/y) of a mouse/touch event on the screen
-     * @param {event} e a mouse/touch event
-     * @returns {object} position on screen (x,y)
-     **/
-    	function eventPosition(e) {
-    		return vertical
-    		? normalisedClient(e).clientY
-    		: normalisedClient(e).clientX;
-    	}
-
-    	/**
      * check if an element is a handle on the slider
      * @param {object} el dom object reference we want to check
      * @returns {boolean}
@@ -1658,7 +1647,7 @@
 
     	/**
      * helper to return closest handle to user interaction
-     * @param {number} clientPos the pixel (clientX/Y) to check against
+     * @param {object} clientPos the client{x,y} positions to check against
      * @return {number} the index of the closest handle to clientPos
      **/
     	function getClosestHandle(clientPos) {
@@ -1667,19 +1656,19 @@
     		const dims = getSliderDimensions();
 
     		// calculate the interaction position, percent and value
-    		let iPos = 0;
+    		let hPos = 0;
 
-    		let iPercent = 0;
-    		let iVal = 0;
+    		let hPercent = 0;
+    		let hVal = 0;
 
     		if (vertical) {
-    			iPos = clientPos - dims.top;
-    			iPercent = iPos / dims.height * 100;
-    			iVal = (max - min) / 100 * iPercent + min;
+    			hPos = clientPos.y - dims.top;
+    			hPercent = hPos / dims.height * 100;
+    			hVal = (max - min) / 100 * hPercent + min;
     		} else {
-    			iPos = clientPos - dims.left;
-    			iPercent = iPos / dims.width * 100;
-    			iVal = (max - min) / 100 * iPercent + min;
+    			hPos = clientPos.x - dims.left;
+    			hPercent = hPos / dims.width * 100;
+    			hVal = (max - min) / 100 * hPercent + min;
     		}
 
     		let closest;
@@ -1688,7 +1677,7 @@
     		// position, we want a simple check if the interaction
     		// value is greater than return the second handle
     		if (range === true && values[0] === values[1]) {
-    			if (iVal > values[1]) {
+    			if (hVal > values[1]) {
     				return 1;
     			} else {
     				return 0;
@@ -1696,7 +1685,7 @@
     		} else // we sort the handles values, and return the first one closest
     		// to the interaction value
     		{
-    			closest = values.indexOf([...values].sort((a, b) => Math.abs(iVal - a) - Math.abs(iVal - b))[0]); // if there are multiple handles, and not a range, then
+    			closest = values.indexOf([...values].sort((a, b) => Math.abs(hVal - a) - Math.abs(hVal - b))[0]); // if there are multiple handles, and not a range, then
     		}
 
     		return closest;
@@ -1707,7 +1696,7 @@
      * it to a value on the range, and then send that value
      * through to the moveHandle() method to set the active
      * handle's position
-     * @param {number} clientPos the clientX/Y of the interaction
+     * @param {object} clientPos the client{x,y} of the interaction
      **/
     	function handleInteract(clientPos) {
     		// first make sure we have the latest dimensions
@@ -1715,23 +1704,23 @@
     		const dims = getSliderDimensions();
 
     		// calculate the interaction position, percent and value
-    		let iPos = 0;
+    		let hPos = 0;
 
-    		let iPercent = 0;
-    		let iVal = 0;
+    		let hPercent = 0;
+    		let hVal = 0;
 
     		if (vertical) {
-    			iPos = clientPos - dims.top;
-    			iPercent = iPos / dims.height * 100;
-    			iVal = (max - min) / 100 * iPercent + min;
+    			hPos = clientPos.y - dims.top;
+    			hPercent = hPos / dims.height * 100;
+    			hVal = (max - min) / 100 * hPercent + min;
     		} else {
-    			iPos = clientPos - dims.left;
-    			iPercent = iPos / dims.width * 100;
-    			iVal = (max - min) / 100 * iPercent + min;
+    			hPos = clientPos.x - dims.left;
+    			hPercent = hPos / dims.width * 100;
+    			hVal = (max - min) / 100 * hPercent + min;
     		}
 
     		// move handle to the value
-    		moveHandle(activeHandle, iVal);
+    		moveHandle(activeHandle, hVal);
     	}
 
     	/**
@@ -1861,19 +1850,19 @@
      * @param {event} e the event from browser
      **/
     	function sliderInteractStart(e) {
-    		const p = eventPosition(e);
+    		const clientPos = normalisedClient(e);
 
     		// set the closest handle as active
     		$$invalidate(20, focus = true);
 
     		handleActivated = true;
     		$$invalidate(21, handlePressed = true);
-    		$$invalidate(22, activeHandle = getClosestHandle(p));
+    		$$invalidate(22, activeHandle = getClosestHandle(clientPos));
 
     		// for touch devices we want the handle to instantly
     		// move to the position touched for more responsive feeling
     		if (e.type === "touchstart") {
-    			handleInteract(p);
+    			handleInteract(clientPos);
     		}
     	}
 
@@ -1906,7 +1895,7 @@
      **/
     	function bodyInteract(e) {
     		if (handleActivated) {
-    			handleInteract(eventPosition(e));
+    			handleInteract(normalisedClient(e));
     		}
     	}
 
@@ -1926,7 +1915,7 @@
     			$$invalidate(20, focus = true);
 
     			if (!targetIsHandle(el)) {
-    				handleInteract(eventPosition(e));
+    				handleInteract(normalisedClient(e));
     			}
     		}
 

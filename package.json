@@ -1,5 +1,6 @@
 {
   "name": "svelte-range-slider-pips",
+  "version": "1.5.1",
   "svelte": "src/index.js",
   "module": "dist/svelte-range-slider-pips.mjs",
   "main": "dist/svelte-range-slider-pips.js",
@@ -10,6 +11,7 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^6.0.0",
     "rollup": "^1.20.0",
+    "rollup-plugin-filesize": "^9.0.2",
     "rollup-plugin-svelte": "^5.0.0",
     "svelte": "^3.0.0"
   },
@@ -37,7 +39,6 @@
     "src",
     "dist"
   ],
-  "version": "1.5.0",
   "description": "Multi-Thumb, Accessible, Beautiful Range Slider with Pips",
   "repository": "https://github.com/simeydotme/svelte-range-slider-pips",
   "homepage": "https://simeydotme.github.io/svelte-range-slider-pips/",

@@ -1,4 +1,5 @@
 import svelte from "rollup-plugin-svelte";
+import filesize from "rollup-plugin-filesize";
 import resolve from "@rollup/plugin-node-resolve";
 import pkg from "./package.json";
 
@@ -30,6 +31,7 @@ export default {
 	],
 	plugins: [
 		svelte(),
-		resolve()
+		resolve(),
+		filesize()
 	]
 };

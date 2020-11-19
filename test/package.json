@@ -17,7 +17,6 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "sirv-cli": "^0.4.4",
-    "svelte-range-slider-pips": "^1.3.1"
+    "sirv-cli": "^0.4.4"
   }
 }

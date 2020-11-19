@@ -148,15 +148,6 @@
   }
 
   /**
-   * get the position (x/y) of a mouse/touch event on the screen
-   * @param {event} e a mouse/touch event
-   * @returns {object} position on screen (x,y)
-   **/
-  function eventPosition(e) {
-    return vertical ? normalisedClient(e).clientY : normalisedClient(e).clientX;
-  }
-
-  /**
    * check if an element is a handle on the slider
    * @param {object} el dom object reference we want to check
    * @returns {boolean}
@@ -195,7 +186,7 @@
 
   /**
    * helper to return closest handle to user interaction
-   * @param {number} clientPos the pixel (clientX/Y) to check against
+   * @param {object} clientPos the client{x,y} positions to check against
    * @return {number} the index of the closest handle to clientPos
    **/
   function getClosestHandle(clientPos) {
@@ -203,17 +194,17 @@
     // of the slider, as it may have changed size
     const dims = getSliderDimensions();
     // calculate the interaction position, percent and value
-    let iPos = 0;
-    let iPercent = 0;
-    let iVal = 0;
+    let hPos = 0;
+    let hPercent = 0;
+    let hVal = 0;
     if (vertical) {
-      iPos = clientPos - dims.top;
-      iPercent = (iPos / dims.height) * 100;
-      iVal = ((max - min) / 100) * iPercent + min;
+      hPos = clientPos.y - dims.top;
+      hPercent = (hPos / dims.height) * 100;
+      hVal = ((max - min) / 100) * hPercent + min;
     } else {
-      iPos = clientPos - dims.left;
-      iPercent = (iPos / dims.width) * 100;
-      iVal = ((max - min) / 100) * iPercent + min;
+      hPos = clientPos.x - dims.left;
+      hPercent = (hPos / dims.width) * 100;
+      hVal = ((max - min) / 100) * hPercent + min;
     }
 
     let closest;
@@ -222,7 +213,7 @@
     // position, we want a simple check if the interaction
     // value is greater than return the second handle
     if (range === true && values[0] === values[1]) {
-      if (iVal > values[1]) {
+      if (hVal > values[1]) {
         return 1;
       } else {
         return 0;
@@ -232,7 +223,7 @@
       // to the interaction value
     } else {
       closest = values.indexOf(
-        [...values].sort((a, b) => Math.abs(iVal - a) - Math.abs(iVal - b))[0]
+        [...values].sort((a, b) => Math.abs(hVal - a) - Math.abs(hVal - b))[0]
       );
     }
     return closest;
@@ -243,27 +234,27 @@
    * it to a value on the range, and then send that value
    * through to the moveHandle() method to set the active
    * handle's position
-   * @param {number} clientPos the clientX/Y of the interaction
+   * @param {object} clientPos the client{x,y} of the interaction
    **/
   function handleInteract(clientPos) {
     // first make sure we have the latest dimensions
     // of the slider, as it may have changed size
     const dims = getSliderDimensions();
     // calculate the interaction position, percent and value
-    let iPos = 0;
-    let iPercent = 0;
-    let iVal = 0;
+    let hPos = 0;
+    let hPercent = 0;
+    let hVal = 0;
     if (vertical) {
-      iPos = clientPos - dims.top;
-      iPercent = (iPos / dims.height) * 100;
-      iVal = ((max - min) / 100) * iPercent + min;
+      hPos = clientPos.y - dims.top;
+      hPercent = (hPos / dims.height) * 100;
+      hVal = ((max - min) / 100) * hPercent + min;
     } else {
-      iPos = clientPos - dims.left;
-      iPercent = (iPos / dims.width) * 100;
-      iVal = ((max - min) / 100) * iPercent + min;
+      hPos = clientPos.x - dims.left;
+      hPercent = (hPos / dims.width) * 100;
+      hVal = ((max - min) / 100) * hPercent + min;
     }
     // move handle to the value
-    moveHandle(activeHandle, iVal);
+    moveHandle(activeHandle, hVal);
   }
 
   /**
@@ -391,16 +382,16 @@
    * @param {event} e the event from browser
    **/
   function sliderInteractStart(e) {
-    const p = eventPosition(e);
+    const clientPos = normalisedClient(e);
     // set the closest handle as active
     focus = true;
     handleActivated = true;
     handlePressed = true;
-    activeHandle = getClosestHandle(p);
+    activeHandle = getClosestHandle(clientPos);
     // for touch devices we want the handle to instantly
     // move to the position touched for more responsive feeling
     if (e.type === "touchstart") {
-      handleInteract(p);
+      handleInteract(clientPos);
     }
   }
 
@@ -432,7 +423,7 @@
    **/
   function bodyInteract(e) {
     if (handleActivated) {
-      handleInteract(eventPosition(e));
+      handleInteract(normalisedClient(e));
     }
   }
 
@@ -450,7 +441,7 @@
     if (handleActivated && (el === slider || slider.contains(el))) {
       focus = true;
       if (!targetIsHandle(el)) {
-        handleInteract(eventPosition(e));
+        handleInteract(normalisedClient(e));
       }
     }
     handleActivated = false;
