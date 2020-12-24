@@ -9,9 +9,16 @@
   export let max = 100;
   export let step = 1;
   export let values = [(max + min) / 2];
+  export let value = values[0];
   export let vertical = false;
   export let float = false;
   export let hover = true;
+
+  // keep value and values in sync with each other
+  const updateValues = () => { if (value !== values[0]) values = [value] };
+  const updateValue = () => { if (value !== values[0]) value = values[0] };
+  $: value, updateValues();
+  $: values, updateValue();
 
   // range pips / values props
   export let pips = false;

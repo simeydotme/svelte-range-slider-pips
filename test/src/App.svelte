@@ -4,6 +4,7 @@
   const numzh = new Intl.NumberFormat("zh-Hans-CN-u-nu-hanidec");
   let values = [20, 40, 60, 80];
   let day = [3];
+  let day2 = 3;
   let hue = [244];
   let dynamic = [0,50];
   let pushy = [30,60]
@@ -85,6 +86,11 @@
     <RangeSlider bind:values={day} min={0} max={6} formatter={dayFormatCn} float pips first="label" last="label" rest="label" />
     <br>
     <br>{dayFormatCn(day[0])} | {dayFormat(day[0])}<br>
+    <br>
+    <RangeSlider bind:value={day2} min={0} max={6} formatter={dayFormat} float pips first="label" last="label" rest="label" />
+    <RangeSlider bind:value={day2} min={0} max={6} formatter={dayFormatCn} float pips first="label" last="label" rest="label" />
+    <br>
+    <br>{dayFormatCn(day2)} | {dayFormat(day2)}<br>
     <br>
     <RangeSlider bind:values={hue} max={360} range="min" float formatter={(v)=>color} />
   </div>
