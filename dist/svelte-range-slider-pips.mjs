@@ -1,5 +1,5 @@
 /**
- * svelte-range-slider-pips ~ 1.5.1
+ * svelte-range-slider-pips ~ 1.5.2
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 29/12/2020
  */
@@ -2035,10 +2035,10 @@ function instance$1($$self, $$props, $$invalidate) {
 			 $$invalidate(23, percentOf = function (val) {
 				let perc = (val - min) / (max - min) * 100;
 
-				if (perc >= 100) {
-					return 100;
-				} else if (perc <= 0) {
+				if (isNaN(perc) || perc <= 0) {
 					return 0;
+				} else if (perc >= 100) {
+					return 100;
 				} else {
 					return parseFloat(perc.toFixed(precision));
 				}
