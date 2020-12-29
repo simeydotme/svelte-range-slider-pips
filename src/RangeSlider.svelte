@@ -68,10 +68,10 @@
    **/
   $: percentOf = function (val) {
     let perc = ((val - min) / (max - min)) * 100;
-    if (perc >= 100) {
-      return 100;
-    } else if (perc <= 0 || isNaN(perc)) {
+    if (isNaN(perc) || perc <= 0) {
       return 0;
+    } else if (perc >= 100) {
+      return 100;
     } else {
       return parseFloat(perc.toFixed(precision));
     }
