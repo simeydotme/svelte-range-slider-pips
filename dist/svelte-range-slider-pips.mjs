@@ -1,7 +1,7 @@
 /**
- * svelte-range-slider-pips ~ 1.5.2
+ * svelte-range-slider-pips ~ 1.5.3
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
- * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 29/12/2020
+ * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 7/1/2021
  */
 function noop() { }
 function run(fn) {
@@ -1656,11 +1656,11 @@ function instance$1($$self, $$props, $$invalidate) {
 		let hVal = 0;
 
 		if (vertical) {
-			hPos = clientPos.y - dims.top;
+			hPos = clientPos.clientY - dims.top;
 			hPercent = hPos / dims.height * 100;
 			hVal = (max - min) / 100 * hPercent + min;
 		} else {
-			hPos = clientPos.x - dims.left;
+			hPos = clientPos.clientX - dims.left;
 			hPercent = hPos / dims.width * 100;
 			hVal = (max - min) / 100 * hPercent + min;
 		}
@@ -1704,11 +1704,11 @@ function instance$1($$self, $$props, $$invalidate) {
 		let hVal = 0;
 
 		if (vertical) {
-			hPos = clientPos.y - dims.top;
+			hPos = clientPos.clientY - dims.top;
 			hPercent = hPos / dims.height * 100;
 			hVal = (max - min) / 100 * hPercent + min;
 		} else {
-			hPos = clientPos.x - dims.left;
+			hPos = clientPos.clientX - dims.left;
 			hPercent = hPos / dims.width * 100;
 			hVal = (max - min) / 100 * hPercent + min;
 		}
