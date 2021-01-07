@@ -198,11 +198,11 @@
     let hPercent = 0;
     let hVal = 0;
     if (vertical) {
-      hPos = clientPos.y - dims.top;
+      hPos = clientPos.clientY - dims.top;
       hPercent = (hPos / dims.height) * 100;
       hVal = ((max - min) / 100) * hPercent + min;
     } else {
-      hPos = clientPos.x - dims.left;
+      hPos = clientPos.clientX - dims.left;
       hPercent = (hPos / dims.width) * 100;
       hVal = ((max - min) / 100) * hPercent + min;
     }
@@ -245,11 +245,11 @@
     let hPercent = 0;
     let hVal = 0;
     if (vertical) {
-      hPos = clientPos.y - dims.top;
+      hPos = clientPos.clientY - dims.top;
       hPercent = (hPos / dims.height) * 100;
       hVal = ((max - min) / 100) * hPercent + min;
     } else {
-      hPos = clientPos.x - dims.left;
+      hPos = clientPos.clientX - dims.left;
       hPercent = (hPos / dims.width) * 100;
       hVal = ((max - min) / 100) * hPercent + min;
     }
