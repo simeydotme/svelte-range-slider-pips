@@ -7,7 +7,7 @@ A reactive, accessible, multi-thumb, range slider with the ability to display "p
 ![Svelte Range Slider -- focussed, including some pips](test/public/slider.png)
 
 
-**[🔗 _For full documentation and examples, see the Github Pages_](https://simeydotme.github.io/svelte-range-slider-pips/)**
+**[📔📘📖 _Full Documentation & Examples_](https://simeydotme.github.io/svelte-range-slider-pips/)**
 
 
 ---
@@ -31,8 +31,8 @@ A reactive, accessible, multi-thumb, range slider with the ability to display "p
 
 Open your project and use the command line to install the package;
 ```bash
-yarn add --dev svelte-range-slider-pips         # or
-npm install --save-dev svelte-range-slider-pips # if you prefer npm
+yarn add svelte-range-slider-pips --dev          # or
+npm install svelte-range-slider-pips --save-dev  # if you prefer npm
 ```
 
 ## usage
@@ -107,7 +107,14 @@ prop | type | default | description
 **handleFormatter** | `Function` | `formatter` | A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property
 **springValues** | `Object` | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving
 
-**[🔗 _For full documentation and examples, see the Github Pages_](https://simeydotme.github.io/svelte-range-slider-pips/)**
+### slider events (dispatched)
+event | example | `event.detail` | description
+------|------------|--------|-------------
+**start** | `on:start={(e) => { ... }}` | `{ activeHandle: Integer, value: Float, values: Array }` | Event fired when the user begins interaction with the slider
+**change** | `on:change={(e) => { ... }}` | `{ activeHandle: Integer, previousValue: Float, value: Float, values: Array }` | Event fired when the user changes the value; returns the previous value, also
+**stop** | `on:stop={(e) => { ... }}` | `{ activeHandle: Integer, startValue: Float, value: Float, values: Array }` | Event fired when the user stops interacting with slider; returns the beginning value, also
+
+**[📔📘📖 _Full Documentation & Examples_](https://simeydotme.github.io/svelte-range-slider-pips/)**
 
 
 ## contribute

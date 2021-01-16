@@ -61,7 +61,18 @@
     <RangeSlider vertical range="max" values={[30]} pips />
     <br>
     <RangeSlider id="test-id" />
-    <RangeSlider bind:values />{values}
+    <RangeSlider bind:values 
+      on:start={(e) => { console.log("start",e.detail)}}
+      on:stop={(e) => { console.log("end",e.detail)}} 
+      on:change={(e) => { console.log("change",e.detail)}} 
+    />
+    <hr>
+      {values}<br>
+      <input type="number" bind:value={values[0]} />
+      <input type="number" bind:value={values[1]} />
+      <input type="number" bind:value={values[2]} />
+      <input type="number" bind:value={values[3]} />
+    <hr>
     <RangeSlider float />
     <RangeSlider float pips all="label" />
     <RangeSlider float pips first="label" last="label" />
@@ -74,7 +85,11 @@
     <br>
     <RangeSlider float pips step={10} pipstep={1} />
     <RangeSlider float pips step={10} pipstep={2} />
-    <RangeSlider float pips step={0.1} min={dynamic[0]} max={dynamic[1]} />
+    <RangeSlider float pips step={0.1} min={dynamic[0]} max={dynamic[1]} 
+      on:start={(e) => { console.log("start",e.detail)}}
+      on:stop={(e) => { console.log("stop",e.detail)}} 
+      on:change={(e) => { console.log("change",e.detail)}} 
+    />
     <br>
     <RangeSlider float pips first="label" last="label" rest pipstep={1} bind:values={dynamic} range />
     <RangeSlider prefix="$" range values={[20,80]} float pips first="label" last="label" />
@@ -106,5 +121,8 @@
     main {
       padding: 50px;
     }
+  }
+  input {
+    width: 100px;
   }
 </style>

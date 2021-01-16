@@ -1,7 +1,7 @@
 /**
- * svelte-range-slider-pips ~ 1.5.3
+ * svelte-range-slider-pips ~ 1.6.0
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
- * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 7/1/2021
+ * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 16/1/2021
  */
 function noop() { }
 function run(fn) {
@@ -120,10 +120,34 @@ function set_data(text, data) {
 function toggle_class(element, name, toggle) {
     element.classList[toggle ? 'add' : 'remove'](name);
 }
+function custom_event(type, detail) {
+    const e = document.createEvent('CustomEvent');
+    e.initCustomEvent(type, false, false, detail);
+    return e;
+}
 
 let current_component;
 function set_current_component(component) {
     current_component = component;
+}
+function get_current_component() {
+    if (!current_component)
+        throw new Error(`Function called outside component initialization`);
+    return current_component;
+}
+function createEventDispatcher() {
+    const component = get_current_component();
+    return (type, detail) => {
+        const callbacks = component.$$.callbacks[type];
+        if (callbacks) {
+            // TODO are there situations where events could be dispatched
+            // in a server (non-DOM) environment?
+            const event = custom_event(type, detail);
+            callbacks.slice().forEach(fn => {
+                fn.call(component, event);
+            });
+        }
+    };
 }
 
 const dirty_components = [];
@@ -1098,16 +1122,16 @@ function add_css$1() {
 
 function get_each_context$1(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[52] = list[i];
-	child_ctx[54] = i;
+	child_ctx[58] = list[i];
+	child_ctx[60] = i;
 	return child_ctx;
 }
 
-// (671:6) {#if float}
+// (724:6) {#if float}
 function create_if_block_2$1(ctx) {
 	let span;
 	let t0;
-	let t1_value = /*handleFormatter*/ ctx[18](/*value*/ ctx[52]) + "";
+	let t1_value = /*handleFormatter*/ ctx[18](/*value*/ ctx[58]) + "";
 	let t1;
 	let t2;
 
@@ -1127,7 +1151,7 @@ function create_if_block_2$1(ctx) {
 		},
 		p(ctx, dirty) {
 			if (dirty[0] & /*prefix*/ 32768) set_data(t0, /*prefix*/ ctx[15]);
-			if (dirty[0] & /*handleFormatter, values*/ 262145 && t1_value !== (t1_value = /*handleFormatter*/ ctx[18](/*value*/ ctx[52]) + "")) set_data(t1, t1_value);
+			if (dirty[0] & /*handleFormatter, values*/ 262145 && t1_value !== (t1_value = /*handleFormatter*/ ctx[18](/*value*/ ctx[58]) + "")) set_data(t1, t1_value);
 			if (dirty[0] & /*suffix*/ 65536) set_data(t2, /*suffix*/ ctx[16]);
 		},
 		d(detaching) {
@@ -1136,7 +1160,7 @@ function create_if_block_2$1(ctx) {
 	};
 }
 
-// (653:2) {#each values as value, index}
+// (706:2) {#each values as value, index}
 function create_each_block$1(ctx) {
 	let span1;
 	let span0;
@@ -1161,22 +1185,22 @@ function create_each_block$1(ctx) {
 			attr(span1, "role", "slider");
 			attr(span1, "class", "rangeHandle");
 			attr(span1, "tabindex", "0");
-			attr(span1, "style", span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[24][/*index*/ ctx[54]] + "%; z-index: " + (/*activeHandle*/ ctx[22] === /*index*/ ctx[54] ? 3 : 2) + ";"));
+			attr(span1, "style", span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[24][/*index*/ ctx[60]] + "%; z-index: " + (/*activeHandle*/ ctx[22] === /*index*/ ctx[60] ? 3 : 2) + ";"));
 
-			attr(span1, "aria-valuemin", span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[54] === 1
+			attr(span1, "aria-valuemin", span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[60] === 1
 			? /*values*/ ctx[0][0]
 			: /*min*/ ctx[2]);
 
-			attr(span1, "aria-valuemax", span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[54] === 0
+			attr(span1, "aria-valuemax", span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[60] === 0
 			? /*values*/ ctx[0][1]
 			: /*max*/ ctx[3]);
 
-			attr(span1, "aria-valuenow", span1_aria_valuenow_value = /*value*/ ctx[52]);
-			attr(span1, "aria-valuetext", span1_aria_valuetext_value = "" + (/*prefix*/ ctx[15] + /*handleFormatter*/ ctx[18](/*value*/ ctx[52]) + /*suffix*/ ctx[16]));
+			attr(span1, "aria-valuenow", span1_aria_valuenow_value = /*value*/ ctx[58]);
+			attr(span1, "aria-valuetext", span1_aria_valuetext_value = "" + (/*prefix*/ ctx[15] + /*handleFormatter*/ ctx[18](/*value*/ ctx[58]) + /*suffix*/ ctx[16]));
 			attr(span1, "aria-orientation", span1_aria_orientation_value = /*vertical*/ ctx[5] ? "vertical" : "horizontal");
 			toggle_class(span1, "hoverable", /*hover*/ ctx[7]);
-			toggle_class(span1, "active", /*focus*/ ctx[20] && /*activeHandle*/ ctx[22] === /*index*/ ctx[54]);
-			toggle_class(span1, "press", /*handlePressed*/ ctx[21] && /*activeHandle*/ ctx[22] === /*index*/ ctx[54]);
+			toggle_class(span1, "active", /*focus*/ ctx[20] && /*activeHandle*/ ctx[22] === /*index*/ ctx[60]);
+			toggle_class(span1, "press", /*handlePressed*/ ctx[21] && /*activeHandle*/ ctx[22] === /*index*/ ctx[60]);
 		},
 		m(target, anchor) {
 			insert(target, span1, anchor);
@@ -1208,27 +1232,27 @@ function create_each_block$1(ctx) {
 				if_block = null;
 			}
 
-			if (dirty[0] & /*vertical, $springPositions, activeHandle*/ 20971552 && span1_style_value !== (span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[24][/*index*/ ctx[54]] + "%; z-index: " + (/*activeHandle*/ ctx[22] === /*index*/ ctx[54] ? 3 : 2) + ";"))) {
+			if (dirty[0] & /*vertical, $springPositions, activeHandle*/ 20971552 && span1_style_value !== (span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[24][/*index*/ ctx[60]] + "%; z-index: " + (/*activeHandle*/ ctx[22] === /*index*/ ctx[60] ? 3 : 2) + ";"))) {
 				attr(span1, "style", span1_style_value);
 			}
 
-			if (dirty[0] & /*range, values, min*/ 7 && span1_aria_valuemin_value !== (span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[54] === 1
+			if (dirty[0] & /*range, values, min*/ 7 && span1_aria_valuemin_value !== (span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[60] === 1
 			? /*values*/ ctx[0][0]
 			: /*min*/ ctx[2])) {
 				attr(span1, "aria-valuemin", span1_aria_valuemin_value);
 			}
 
-			if (dirty[0] & /*range, values, max*/ 11 && span1_aria_valuemax_value !== (span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[54] === 0
+			if (dirty[0] & /*range, values, max*/ 11 && span1_aria_valuemax_value !== (span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[60] === 0
 			? /*values*/ ctx[0][1]
 			: /*max*/ ctx[3])) {
 				attr(span1, "aria-valuemax", span1_aria_valuemax_value);
 			}
 
-			if (dirty[0] & /*values*/ 1 && span1_aria_valuenow_value !== (span1_aria_valuenow_value = /*value*/ ctx[52])) {
+			if (dirty[0] & /*values*/ 1 && span1_aria_valuenow_value !== (span1_aria_valuenow_value = /*value*/ ctx[58])) {
 				attr(span1, "aria-valuenow", span1_aria_valuenow_value);
 			}
 
-			if (dirty[0] & /*prefix, handleFormatter, values, suffix*/ 360449 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = "" + (/*prefix*/ ctx[15] + /*handleFormatter*/ ctx[18](/*value*/ ctx[52]) + /*suffix*/ ctx[16]))) {
+			if (dirty[0] & /*prefix, handleFormatter, values, suffix*/ 360449 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = "" + (/*prefix*/ ctx[15] + /*handleFormatter*/ ctx[18](/*value*/ ctx[58]) + /*suffix*/ ctx[16]))) {
 				attr(span1, "aria-valuetext", span1_aria_valuetext_value);
 			}
 
@@ -1241,11 +1265,11 @@ function create_each_block$1(ctx) {
 			}
 
 			if (dirty[0] & /*focus, activeHandle*/ 5242880) {
-				toggle_class(span1, "active", /*focus*/ ctx[20] && /*activeHandle*/ ctx[22] === /*index*/ ctx[54]);
+				toggle_class(span1, "active", /*focus*/ ctx[20] && /*activeHandle*/ ctx[22] === /*index*/ ctx[60]);
 			}
 
 			if (dirty[0] & /*handlePressed, activeHandle*/ 6291456) {
-				toggle_class(span1, "press", /*handlePressed*/ ctx[21] && /*activeHandle*/ ctx[22] === /*index*/ ctx[54]);
+				toggle_class(span1, "press", /*handlePressed*/ ctx[21] && /*activeHandle*/ ctx[22] === /*index*/ ctx[60]);
 			}
 		},
 		d(detaching) {
@@ -1257,7 +1281,7 @@ function create_each_block$1(ctx) {
 	};
 }
 
-// (676:2) {#if range}
+// (729:2) {#if range}
 function create_if_block_1$1(ctx) {
 	let span;
 	let span_style_value;
@@ -1282,7 +1306,7 @@ function create_if_block_1$1(ctx) {
 	};
 }
 
-// (682:2) {#if pips}
+// (735:2) {#if pips}
 function create_if_block$1(ctx) {
 	let rangepips;
 	let current;
@@ -1413,10 +1437,10 @@ function create_fragment$1(ctx) {
 					listen(window, "mouseup", /*bodyMouseUp*/ ctx[35]),
 					listen(window, "touchend", /*bodyTouchEnd*/ ctx[36]),
 					listen(window, "keydown", /*bodyKeyDown*/ ctx[37]),
-					listen(div, "touchstart", prevent_default(/*sliderInteractStart*/ ctx[31])),
 					listen(div, "mousedown", /*sliderInteractStart*/ ctx[31]),
-					listen(div, "touchend", prevent_default(/*sliderInteractEnd*/ ctx[32])),
-					listen(div, "mouseup", /*sliderInteractEnd*/ ctx[32])
+					listen(div, "mouseup", /*sliderInteractEnd*/ ctx[32]),
+					listen(div, "touchstart", prevent_default(/*sliderInteractStart*/ ctx[31])),
+					listen(div, "touchend", prevent_default(/*sliderInteractEnd*/ ctx[32]))
 				];
 
 				mounted = true;
@@ -1584,6 +1608,7 @@ function instance$1($$self, $$props, $$invalidate) {
 	let { handleFormatter = formatter } = $$props;
 	let { precision = 2 } = $$props;
 	let { springValues = { stiffness: 0.15, damping: 0.4 } } = $$props;
+	const dispatch = createEventDispatcher();
 
 	// dom references
 	let slider;
@@ -1595,6 +1620,8 @@ function instance$1($$self, $$props, $$invalidate) {
 	let handlePressed = false;
 	let keyboardActive = false;
 	let activeHandle = values.length - 1;
+	let startValue;
+	let previousValue;
 
 	// save spring-tweened copies of the values for use
 	// when changing values and animating the handle/range nicely
@@ -1744,6 +1771,13 @@ function instance$1($$self, $$props, $$invalidate) {
 
 		// set the value for the handle, and align/clamp it
 		$$invalidate(0, values[index] = value, values);
+
+		// fire the change event when the handle moves,
+		// and store the previous value for the next time
+		if (previousValue !== alignValueToStep(value)) {
+			eChange();
+			previousValue = alignValueToStep(value);
+		}
 	}
 
 	/**
@@ -1853,6 +1887,11 @@ function instance$1($$self, $$props, $$invalidate) {
 		$$invalidate(21, handlePressed = true);
 		$$invalidate(22, activeHandle = getClosestHandle(clientPos));
 
+		// fire the start event
+		startValue = values[activeHandle];
+
+		eStart();
+
 		// for touch devices we want the handle to instantly
 		// move to the position touched for more responsive feeling
 		if (e.type === "touchstart") {
@@ -1866,6 +1905,11 @@ function instance$1($$self, $$props, $$invalidate) {
  * @param {event} e the event from browser
  **/
 	function sliderInteractEnd(e) {
+		// fire the stop event for touch devices
+		if (e.type === "touchend") {
+			eStop();
+		}
+
 		$$invalidate(21, handlePressed = false);
 	}
 
@@ -1905,12 +1949,18 @@ function instance$1($$self, $$props, $$invalidate) {
 		// this only works if a handle is active, which can
 		// only happen if there was sliderInteractStart triggered
 		// on the slider, already
-		if (handleActivated && (el === slider || slider.contains(el))) {
-			$$invalidate(20, focus = true);
+		if (handleActivated) {
+			if (el === slider || slider.contains(el)) {
+				$$invalidate(20, focus = true);
 
-			if (!targetIsHandle(el)) {
-				handleInteract(normalisedClient(e));
+				if (!targetIsHandle(el)) {
+					handleInteract(normalisedClient(e));
+				}
 			}
+
+			// fire the stop event for mouse device
+			// when the body is triggered with an active handle
+			eStop();
 		}
 
 		handleActivated = false;
@@ -1931,6 +1981,32 @@ function instance$1($$self, $$props, $$invalidate) {
 		if (e.target === slider || slider.contains(e.target)) {
 			keyboardActive = true;
 		}
+	}
+
+	function eStart() {
+		dispatch("start", {
+			activeHandle,
+			value: alignValueToStep(startValue),
+			values: values.map(v => alignValueToStep(v))
+		});
+	}
+
+	function eStop() {
+		dispatch("stop", {
+			activeHandle,
+			startValue: alignValueToStep(startValue),
+			value: alignValueToStep(values[activeHandle]),
+			values: values.map(v => alignValueToStep(v))
+		});
+	}
+
+	function eChange() {
+		dispatch("change", {
+			activeHandle,
+			previousValue: alignValueToStep(previousValue) || alignValueToStep(startValue) || alignValueToStep(values[activeHandle]),
+			value: alignValueToStep(values[activeHandle]),
+			values: values.map(v => alignValueToStep(v))
+		});
 	}
 
 	function div_binding($$value) {
@@ -1977,20 +2053,20 @@ function instance$1($$self, $$props, $$invalidate) {
  * @param {number} val the value to clamp
  * @return {number} the value after it's been clamped
  **/
-			 $$invalidate(45, clampValue = function (val) {
+			 $$invalidate(47, clampValue = function (val) {
 				// return the min/max if outside of that range
 				return val <= min ? min : val >= max ? max : val;
 			});
 		}
 
-		if ($$self.$$.dirty[0] & /*min, max, step*/ 28 | $$self.$$.dirty[1] & /*clampValue, precision*/ 16640) {
+		if ($$self.$$.dirty[0] & /*min, max, step*/ 28 | $$self.$$.dirty[1] & /*clampValue, precision*/ 65792) {
 			/**
  * align the value with the steps so that it
  * always sits on the closest (above/below) step
  * @param {number} val the value to align
  * @return {number} the value after it's been aligned
  **/
-			 $$invalidate(44, alignValueToStep = function (val) {
+			 $$invalidate(46, alignValueToStep = function (val) {
 				// sanity check for performance
 				if (val <= min) {
 					return min;
@@ -2019,7 +2095,7 @@ function instance$1($$self, $$props, $$invalidate) {
 			});
 		}
 
-		if ($$self.$$.dirty[0] & /*values*/ 1 | $$self.$$.dirty[1] & /*alignValueToStep*/ 8192) {
+		if ($$self.$$.dirty[0] & /*values*/ 1 | $$self.$$.dirty[1] & /*alignValueToStep*/ 32768) {
 			// watch the values array, and trim / clamp the values to the steps
 			// and boundaries set up in the slider on change
 			 $$invalidate(0, values = trimRange(values).map(v => alignValueToStep(v)));

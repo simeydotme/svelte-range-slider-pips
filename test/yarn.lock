@@ -554,15 +554,10 @@ supports-color@^6.1.0:
   dependencies:
     has-flag "^3.0.0"
 
-svelte-range-slider-pips@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/svelte-range-slider-pips/-/svelte-range-slider-pips-1.3.1.tgz#f7fdf7c5aaeb2ba39dd7eda7594299b8c894cefe"
-  integrity sha512-yIpLof5H46yQTydI9zQzOjKHHdsDnSzxqZVDBA3jl8hbT3B13N4Zp9lvp+SqF/nq0RL/NlmmUFQRyHobhncxpA==
-
-svelte@^3.0.0:
-  version "3.24.0"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.24.0.tgz#6565a42c9705796fa66c6abb4fedc09f4323a4a8"
-  integrity sha512-VFXom6EP2DK83kxy4ZlBbaZklSbZIrpNH3oNXlPYHJUuW4q1OuAr3ZoYbfIVTVYPDgrI7Yq0gQcOhDlAtO4qfw==
+svelte@^3.31.2:
+  version "3.31.2"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.31.2.tgz#d2ddf6cacbb95e4cc3796207510b660a25586324"
+  integrity sha512-TxZGrXzX2ggFH3BIKY5fmbeMdJuZrMIMDYPMX6R9255bueuYIuVaBQSLUeY2oD7W4IdeqRZiAVGCjDw2POKBRA==
 
 terser@^4.6.2:
   version "4.8.0"

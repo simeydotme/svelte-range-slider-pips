@@ -1,5 +1,6 @@
 <script>
   import { spring } from "svelte/motion";
+  import { createEventDispatcher } from "svelte";
   import RangePips from "./RangePips.svelte";
 
   // range slider props
@@ -32,6 +33,8 @@
   export let precision = 2;
   export let springValues = { stiffness: 0.15, damping: 0.4 };
 
+  const dispatch = createEventDispatcher();
+
   // dom references
   let slider;
 
@@ -41,6 +44,8 @@
   let handlePressed = false;
   let keyboardActive = false;
   let activeHandle = values.length - 1;
+  let startValue;
+  let previousValue;
 
   // save spring-tweened copies of the values for use
   // when changing values and animating the handle/range nicely
@@ -283,6 +288,13 @@
     }
     // set the value for the handle, and align/clamp it
     values[index] = value;
+
+    // fire the change event when the handle moves,
+    // and store the previous value for the next time
+    if ( previousValue !== alignValueToStep(value) ) {
+      eChange();
+      previousValue = alignValueToStep(value);
+    }
   }
 
   /**
@@ -388,6 +400,11 @@
     handleActivated = true;
     handlePressed = true;
     activeHandle = getClosestHandle(clientPos);
+
+    // fire the start event
+    startValue = values[activeHandle];
+    eStart();
+
     // for touch devices we want the handle to instantly
     // move to the position touched for more responsive feeling
     if (e.type === "touchstart") {
@@ -401,6 +418,10 @@
    * @param {event} e the event from browser
    **/
   function sliderInteractEnd(e) {
+    // fire the stop event for touch devices
+    if( e.type === "touchend" ) {
+      eStop();
+    }
     handlePressed = false;
   }
 
@@ -438,11 +459,16 @@
     // this only works if a handle is active, which can
     // only happen if there was sliderInteractStart triggered
     // on the slider, already
-    if (handleActivated && (el === slider || slider.contains(el))) {
-      focus = true;
-      if (!targetIsHandle(el)) {
-        handleInteract(normalisedClient(e));
+    if (handleActivated) {
+      if (el === slider || slider.contains(el)) {
+        focus = true;
+        if (!targetIsHandle(el)) {
+          handleInteract(normalisedClient(e));
+        }
       }
+      // fire the stop event for mouse device
+      // when the body is triggered with an active handle
+      eStop();
     }
     handleActivated = false;
     handlePressed = false;
@@ -462,6 +488,32 @@
     if (e.target === slider || slider.contains(e.target)) {
       keyboardActive = true;
     }
+  }
+
+  function eStart() {
+      dispatch("start", { 
+        activeHandle, 
+        value: alignValueToStep(startValue),
+        values: values.map((v) => alignValueToStep(v)) 
+      });
+  }
+
+  function eStop() {
+    dispatch("stop", { 
+        activeHandle, 
+        startValue: alignValueToStep(startValue),
+        value: alignValueToStep(values[activeHandle]),
+        values: values.map((v) => alignValueToStep(v)) 
+      });
+  }
+
+  function eChange() {
+    dispatch("change", { 
+        activeHandle, 
+        previousValue: alignValueToStep(previousValue) || alignValueToStep(startValue) || alignValueToStep(values[activeHandle]),
+        value: alignValueToStep(values[activeHandle]),
+        values: values.map((v) => alignValueToStep(v)) 
+      });
   }
 </script>
 
@@ -646,10 +698,11 @@
   class:max={range === 'max'}
   class:pips
   class:pip-labels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
-  on:touchstart|preventDefault={sliderInteractStart}
   on:mousedown={sliderInteractStart}
+  on:mouseup={sliderInteractEnd}
+  on:touchstart|preventDefault={sliderInteractStart}
   on:touchend|preventDefault={sliderInteractEnd}
-  on:mouseup={sliderInteractEnd}>
+>
   {#each values as value, index}
     <span
       role="slider"
