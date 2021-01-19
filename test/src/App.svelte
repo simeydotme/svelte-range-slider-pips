@@ -2,7 +2,7 @@
   import RangeSlider from "../../src/RangeSlider.svelte";
   const num = new Intl.NumberFormat("en-US");
   const numzh = new Intl.NumberFormat("zh-Hans-CN-u-nu-hanidec");
-  let values = [20, 40, 60, 80];
+  let values = [21.3, 40, 60, 80];
   let day = [3];
   let hue = [244];
   let dynamic = [0,50];
@@ -28,6 +28,11 @@
   };
   $: lightColor = `hsl(${Math.round(hue[0]) - 10}, 65%, 70%)`;
   $: color = `hsl(${Math.round(hue[0])}, 63%, 54%)`;
+
+  let perc1 = [5];
+	let perc2 = [100 - perc1];
+  $: perc2max = 100 - perc1[0];
+  
 </script>
 
 <svelte:head>
@@ -76,7 +81,11 @@
     <RangeSlider float />
     <RangeSlider float pips all="label" />
     <RangeSlider float pips first="label" last="label" />
-    <RangeSlider float pips first="label" last="label" rest="label" />
+    <RangeSlider float pips first="label" last="label" rest="label"
+      on:start={(e) => { console.log("start",e.detail)}}
+      on:stop={(e) => { console.log("stop",e.detail)}} 
+      on:change={(e) => { console.log("change",e.detail)}} 
+    />
     <br>
     <RangeSlider range bind:values={pushy} float />
     <RangeSlider range pushy bind:values={pushy} pips all="label" float />
@@ -102,6 +111,13 @@
     <br>{dayFormatCn(day[0])} | {dayFormat(day[0])}<br>
     <br>
     <RangeSlider bind:values={hue} max={360} range="min" float formatter={(v)=>color} />
+
+
+    <RangeSlider bind:values={perc1} min={0} max={50} pips all="label" float />
+    <RangeSlider bind:values={perc2} min={0} max={perc2max} pips all="label" float /> 
+    <hr>
+    percent1: {perc1}<br>percent2: {perc2} 
+
   </div>
 
 
@@ -124,5 +140,8 @@
   }
   input {
     width: 100px;
+  }
+  :global(.rangeSlider ) {
+    margin: 60px!important;
   }
 </style>

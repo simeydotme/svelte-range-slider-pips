@@ -33,6 +33,7 @@
   export let precision = 2;
   export let springValues = { stiffness: 0.15, damping: 0.4 };
 
+  // prepare dispatched events
   const dispatch = createEventDispatcher();
 
   // dom references
@@ -47,8 +48,8 @@
   let startValue;
   let previousValue;
 
-  // save spring-tweened copies of the values for use
-  // when changing values and animating the handle/range nicely
+  // copy the initial values in to a spring function which
+  // will update every time the values array is modified
   let springPositions = spring(
     values.map((v) =>
       parseFloat((((v - min) / (max - min)) * 100).toFixed(precision))
@@ -56,8 +57,8 @@
     springValues
   );
 
-  // watch the values array, and trim / clamp the values to the steps
-  // and boundaries set up in the slider on change
+  // check the values array, and trim it if needed (range)
+  // and clamp the values to the steps and boundaries set up in the slider
   $: values = trimRange(values).map((v) => alignValueToStep(v));
 
   // update the spring function so that movement can happen in the UI
@@ -165,8 +166,8 @@
   }
 
   /**
-   * take in the value from the "range" parameter and see if
-   * we should make a min/max/range slider.
+   * trim the values array based on whether the property
+   * for 'range' is 'min', 'max', or truthy.
    * @param {array} values the input values for the rangeSlider
    * @return {array} the range array for creating a rangeSlider
    **/
@@ -269,6 +270,10 @@
    * @return {number} the value that was moved to (after alignment/clamping)
    **/
   function moveHandle(index, value) {
+    // align & clamp the value so we're not doing extra
+    // calculation on an out-of-range value down below
+    value = alignValueToStep(value);
+    // if this is a range slider
     if (range) {
       // restrict the handles of a range-slider from
       // going past one-another unless "pushy" is true
@@ -286,14 +291,17 @@
         }
       }
     }
-    // set the value for the handle, and align/clamp it
-    values[index] = value;
+
+    // if the value has changed, update it
+    if (values[index] !== value) {
+      values[index] = value;
+    }
 
     // fire the change event when the handle moves,
     // and store the previous value for the next time
-    if ( previousValue !== alignValueToStep(value) ) {
+    if (previousValue !== value) {
       eChange();
-      previousValue = alignValueToStep(value);
+      previousValue = value;
     }
   }
 
@@ -402,7 +410,7 @@
     activeHandle = getClosestHandle(clientPos);
 
     // fire the start event
-    startValue = values[activeHandle];
+    startValue = previousValue = alignValueToStep(values[activeHandle]);
     eStart();
 
     // for touch devices we want the handle to instantly
@@ -419,7 +427,7 @@
    **/
   function sliderInteractEnd(e) {
     // fire the stop event for touch devices
-    if( e.type === "touchend" ) {
+    if (e.type === "touchend") {
       eStop();
     }
     handlePressed = false;
@@ -491,29 +499,31 @@
   }
 
   function eStart() {
-      dispatch("start", { 
-        activeHandle, 
-        value: alignValueToStep(startValue),
-        values: values.map((v) => alignValueToStep(v)) 
-      });
+    dispatch("start", {
+      activeHandle,
+      value: startValue,
+      values: values.map((v) => alignValueToStep(v)),
+    });
   }
 
   function eStop() {
-    dispatch("stop", { 
-        activeHandle, 
-        startValue: alignValueToStep(startValue),
-        value: alignValueToStep(values[activeHandle]),
-        values: values.map((v) => alignValueToStep(v)) 
-      });
+    dispatch("stop", {
+      activeHandle,
+      startValue: startValue,
+      value: values[activeHandle],
+      values: values.map((v) => alignValueToStep(v)),
+    });
   }
 
   function eChange() {
-    dispatch("change", { 
-        activeHandle, 
-        previousValue: alignValueToStep(previousValue) || alignValueToStep(startValue) || alignValueToStep(values[activeHandle]),
-        value: alignValueToStep(values[activeHandle]),
-        values: values.map((v) => alignValueToStep(v)) 
-      });
+    dispatch("change", {
+      activeHandle,
+      startValue: startValue,
+      previousValue:
+        typeof previousValue === "undefined" ? startValue : previousValue,
+      value: values[activeHandle],
+      values: values.map((v) => alignValueToStep(v)),
+    });
   }
 </script>
 

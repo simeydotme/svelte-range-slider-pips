@@ -1,7 +1,7 @@
 /**
- * svelte-range-slider-pips ~ 1.6.0
+ * svelte-range-slider-pips ~ 1.6.1
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
- * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 16/1/2021
+ * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 20/1/2021
  */
 function noop() { }
 function run(fn) {
@@ -1127,7 +1127,7 @@ function get_each_context$1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (724:6) {#if float}
+// (734:6) {#if float}
 function create_if_block_2$1(ctx) {
 	let span;
 	let t0;
@@ -1160,7 +1160,7 @@ function create_if_block_2$1(ctx) {
 	};
 }
 
-// (706:2) {#each values as value, index}
+// (716:2) {#each values as value, index}
 function create_each_block$1(ctx) {
 	let span1;
 	let span0;
@@ -1281,7 +1281,7 @@ function create_each_block$1(ctx) {
 	};
 }
 
-// (729:2) {#if range}
+// (739:2) {#if range}
 function create_if_block_1$1(ctx) {
 	let span;
 	let span_style_value;
@@ -1306,7 +1306,7 @@ function create_if_block_1$1(ctx) {
 	};
 }
 
-// (735:2) {#if pips}
+// (745:2) {#if pips}
 function create_if_block$1(ctx) {
 	let rangepips;
 	let current;
@@ -1608,6 +1608,8 @@ function instance$1($$self, $$props, $$invalidate) {
 	let { handleFormatter = formatter } = $$props;
 	let { precision = 2 } = $$props;
 	let { springValues = { stiffness: 0.15, damping: 0.4 } } = $$props;
+
+	// prepare dispatched events
 	const dispatch = createEventDispatcher();
 
 	// dom references
@@ -1623,8 +1625,8 @@ function instance$1($$self, $$props, $$invalidate) {
 	let startValue;
 	let previousValue;
 
-	// save spring-tweened copies of the values for use
-	// when changing values and animating the handle/range nicely
+	// copy the initial values in to a spring function which
+	// will update every time the values array is modified
 	let springPositions = spring(values.map(v => parseFloat(((v - min) / (max - min) * 100).toFixed(precision))), springValues);
 
 	component_subscribe($$self, springPositions, value => $$invalidate(24, $springPositions = value));
@@ -1642,8 +1644,8 @@ function instance$1($$self, $$props, $$invalidate) {
 	}
 
 	/**
- * take in the value from the "range" parameter and see if
- * we should make a min/max/range slider.
+ * trim the values array based on whether the property
+ * for 'range' is 'min', 'max', or truthy.
  * @param {array} values the input values for the rangeSlider
  * @return {array} the range array for creating a rangeSlider
  **/
@@ -1751,6 +1753,11 @@ function instance$1($$self, $$props, $$invalidate) {
  * @return {number} the value that was moved to (after alignment/clamping)
  **/
 	function moveHandle(index, value) {
+		// align & clamp the value so we're not doing extra
+		// calculation on an out-of-range value down below
+		value = alignValueToStep(value);
+
+		// if this is a range slider
 		if (range) {
 			// restrict the handles of a range-slider from
 			// going past one-another unless "pushy" is true
@@ -1769,14 +1776,16 @@ function instance$1($$self, $$props, $$invalidate) {
 			}
 		}
 
-		// set the value for the handle, and align/clamp it
-		$$invalidate(0, values[index] = value, values);
+		// if the value has changed, update it
+		if (values[index] !== value) {
+			$$invalidate(0, values[index] = value, values);
+		}
 
 		// fire the change event when the handle moves,
 		// and store the previous value for the next time
-		if (previousValue !== alignValueToStep(value)) {
+		if (previousValue !== value) {
 			eChange();
-			previousValue = alignValueToStep(value);
+			previousValue = value;
 		}
 	}
 
@@ -1888,7 +1897,7 @@ function instance$1($$self, $$props, $$invalidate) {
 		$$invalidate(22, activeHandle = getClosestHandle(clientPos));
 
 		// fire the start event
-		startValue = values[activeHandle];
+		startValue = previousValue = alignValueToStep(values[activeHandle]);
 
 		eStart();
 
@@ -1986,7 +1995,7 @@ function instance$1($$self, $$props, $$invalidate) {
 	function eStart() {
 		dispatch("start", {
 			activeHandle,
-			value: alignValueToStep(startValue),
+			value: startValue,
 			values: values.map(v => alignValueToStep(v))
 		});
 	}
@@ -1994,8 +2003,8 @@ function instance$1($$self, $$props, $$invalidate) {
 	function eStop() {
 		dispatch("stop", {
 			activeHandle,
-			startValue: alignValueToStep(startValue),
-			value: alignValueToStep(values[activeHandle]),
+			startValue,
+			value: values[activeHandle],
 			values: values.map(v => alignValueToStep(v))
 		});
 	}
@@ -2003,8 +2012,11 @@ function instance$1($$self, $$props, $$invalidate) {
 	function eChange() {
 		dispatch("change", {
 			activeHandle,
-			previousValue: alignValueToStep(previousValue) || alignValueToStep(startValue) || alignValueToStep(values[activeHandle]),
-			value: alignValueToStep(values[activeHandle]),
+			startValue,
+			previousValue: typeof previousValue === "undefined"
+			? startValue
+			: previousValue,
+			value: values[activeHandle],
 			values: values.map(v => alignValueToStep(v))
 		});
 	}
@@ -2096,8 +2108,8 @@ function instance$1($$self, $$props, $$invalidate) {
 		}
 
 		if ($$self.$$.dirty[0] & /*values*/ 1 | $$self.$$.dirty[1] & /*alignValueToStep*/ 32768) {
-			// watch the values array, and trim / clamp the values to the steps
-			// and boundaries set up in the slider on change
+			// check the values array, and trim it if needed (range)
+			// and clamp the values to the steps and boundaries set up in the slider
 			 $$invalidate(0, values = trimRange(values).map(v => alignValueToStep(v)));
 		}
 

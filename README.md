@@ -111,7 +111,7 @@ prop | type | default | description
 event | example | `event.detail` | description
 ------|------------|--------|-------------
 **start** | `on:start={(e) => { ... }}` | `{ activeHandle: Integer, value: Float, values: Array }` | Event fired when the user begins interaction with the slider
-**change** | `on:change={(e) => { ... }}` | `{ activeHandle: Integer, previousValue: Float, value: Float, values: Array }` | Event fired when the user changes the value; returns the previous value, also
+**change** | `on:change={(e) => { ... }}` | `{ activeHandle: Integer, startValue: Float, previousValue: Float, value: Float, values: Array }` | Event fired when the user changes the value; returns the previous value, also
 **stop** | `on:stop={(e) => { ... }}` | `{ activeHandle: Integer, startValue: Float, value: Float, values: Array }` | Event fired when the user stops interacting with slider; returns the beginning value, also
 
 **[📔📘📖 _Full Documentation & Examples_](https://simeydotme.github.io/svelte-range-slider-pips/)**
