@@ -97,7 +97,7 @@ prop | type | default | description
 **float** | `Boolean` | `false` | Set true to add a floating label above focussed handles
 **vertical** | `Boolean` | `false` | Make the slider render vertically
 **pips** | `Boolean` | `false` | Whether to show pips/notches on the slider
-**pipStep** | `Number` | `1`/`10`/`20` | Every `nth` step to show a pip for. This has multiple defaults depending on `values` property
+**pipstep** | `Number` | `1`/`10`/`20` | Every `nth` step to show a pip for. This has multiple defaults depending on `values` property
 **first** | `Boolean`/`String` | `false` | Whether to show a pip or label for the first value on slider. Use `first='label'` to show a label value
 **last** | `Boolean`/`String` | `false` | Whether to show a pip or label for the last value on slider. Use `last='label'` to show a label value
 **rest** | `Boolean`/`String` | `false` | Whether to show a pip or label for the all other values. Use `rest='label'` to show a label value
