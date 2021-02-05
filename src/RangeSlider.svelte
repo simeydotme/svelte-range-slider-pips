@@ -50,21 +50,26 @@
 
   // copy the initial values in to a spring function which
   // will update every time the values array is modified
-  let springPositions = spring(
-    values.map((v) =>
-      parseFloat((((v - min) / (max - min)) * 100).toFixed(precision))
-    ),
-    springValues
-  );
+  let springPositions;
 
-  // check the values array, and trim it if needed (range)
-  // and clamp the values to the steps and boundaries set up in the slider
-  $: values = trimRange(values).map((v) => alignValueToStep(v));
-
-  // update the spring function so that movement can happen in the UI
   $: {
-    springPositions.set(values.map((v) => percentOf(v)));
-  }
+    // check that "values" is an array, or set it as array
+    // to prevent any errors in springs, or range trimming
+    if ( !Array.isArray( values ) ) {
+      values = [(max + min) / 2];
+      console.error( "'values' prop should be an Array (https://github.com/simeydotme/svelte-range-slider-pips#slider-props)" );
+    }
+    // trim the range as needed
+    values = trimRange(values);
+    // clamp the values to the steps and boundaries set up in the slider
+    values = values.map((v) => alignValueToStep(v));
+    // update the spring function so that movement can happen in the UI
+    if ( springPositions ) {
+      springPositions.set(values.map((v) => percentOf(v)));
+    } else {
+      springPositions = spring( values.map((v) => percentOf(v)), springValues );
+    }
+  };
 
   /**
    * take in a value, and then calculate that value's percentage
@@ -167,7 +172,9 @@
 
   /**
    * trim the values array based on whether the property
-   * for 'range' is 'min', 'max', or truthy.
+   * for 'range' is 'min', 'max', or truthy. This is because we
+   * do not want more than one handle for a min/max range, and we do
+   * not want more than two handles for a true range.
    * @param {array} values the input values for the rangeSlider
    * @return {array} the range array for creating a rangeSlider
    **/
