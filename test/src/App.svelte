@@ -1,37 +1,33 @@
 <script>
+
   import RangeSlider from "../../src/RangeSlider.svelte";
-  const num = new Intl.NumberFormat("en-US");
-  const numzh = new Intl.NumberFormat("zh-Hans-CN-u-nu-hanidec");
+
   let values = [21.3, 40, 60, 80];
-  let day = [3];
-  let hue = [244];
   let dynamic = [0,50];
   let pushy = [30,60]
-  const formatter = v => {
-    return num.format(v);
-  };
-  const days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Happy Days"
-  ];
-  const dayFormat = v => days[v];
-  const dayFormatCn = v => {
-    if (v === 6) {
-      return "星期日";
-    }
-    return "星期" + numzh.format(v + 1);
-  };
-  $: lightColor = `hsl(${Math.round(hue[0]) - 10}, 65%, 70%)`;
-  $: color = `hsl(${Math.round(hue[0])}, 63%, 54%)`;
 
+  const num = new Intl.NumberFormat("en-US");
+  const numzh = new Intl.NumberFormat("zh-Hans-CN-u-nu-hanidec");
+  const formatter = v => { return num.format(v); };
+
+  let day = [3];
+  const days = [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Happy Days" ];
+  const dayFormat = v => days[v];
+  const dayFormatCn = v => { if (v === 6) { return "星期日"; }; return "星期" + numzh.format(v + 1); };
+  
   let perc1 = [5];
 	let perc2 = [100 - perc1];
   $: perc2max = 100 - perc1[0];
+
+  let hue = [244];
+  $: lightColor = `hsl(${Math.round(hue[0]) - 10}, 65%, 70%)`;
+  $: color = `hsl(${Math.round(hue[0])}, 63%, 54%)`;
+
+  let zero = [2,10];
+  let zeromin = 0;
+  let zeromax = 0;
+
+  let disabled = false;
   
 </script>
 
@@ -61,26 +57,30 @@
 	
   <div class="content" style="--range-handle-focus: {color}; --range-handle: {lightColor}">
 
-    <RangeSlider vertical range values={[10,30]} pips all="label" />
+    <RangeSlider vertical range values={[10,30]} pips all="label" {disabled} />
     <RangeSlider vertical range="min" values={[10]} pips all />
     <RangeSlider vertical range="max" values={[30]} pips />
+    
     <br>
-    <RangeSlider id="test-id" />
-    <RangeSlider bind:values 
+    <RangeSlider id="test-id" springValues={{ stiffness: 0.03, damping: 0.08 }} />
+    <br>
+ 
+    <RangeSlider bind:values {disabled} 
       on:start={(e) => { console.log("start",e.detail)}}
       on:stop={(e) => { console.log("end",e.detail)}} 
       on:change={(e) => { console.log("change",e.detail)}} 
     />
     <hr>
-      {values}<br>
-      <input type="number" bind:value={values[0]} />
-      <input type="number" bind:value={values[1]} />
-      <input type="number" bind:value={values[2]} />
-      <input type="number" bind:value={values[3]} />
+    {values}
+    <br>
+    <input type="number" bind:value={values[0]} />
+    <input type="number" bind:value={values[1]} />
+    <input type="number" bind:value={values[2]} />
+    <input type="number" bind:value={values[3]} />
     <hr>
     <RangeSlider float />
     <RangeSlider float pips all="label" />
-    <RangeSlider float pips first="label" last="label" />
+    <RangeSlider float pips first="label" last="label"  {disabled} />
     <RangeSlider float pips first="label" last="label" rest="label"
       on:start={(e) => { console.log("start",e.detail)}}
       on:stop={(e) => { console.log("stop",e.detail)}} 
@@ -117,6 +117,14 @@
     <RangeSlider bind:values={perc2} min={0} max={perc2max} pips all="label" float /> 
     <hr>
     percent1: {perc1}<br>percent2: {perc2} 
+
+    <br><br>
+
+    <RangeSlider bind:values={zero} min={zeromin} max={zeromax} range float pips all="label" step={1} pipstep={5} />
+    <br><button on:click={()=>{ zeromin = 1; zeromax = 30; zero = 10; }}>increase min/max</button> - {zero} 
+    
+    <RangeSlider bind:values  float pips all="label" {disabled} />
+    <button on:click={()=>{disabled=!disabled}}>toggle disabled</button>
 
   </div>
 

@@ -1,7 +1,7 @@
 /**
- * svelte-range-slider-pips ~ 1.6.1
+ * svelte-range-slider-pips ~ 1.7.0
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
- * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 20/1/2021
+ * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 6/2/2021
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -31,9 +31,6 @@
         }
         const unsub = store.subscribe(...callbacks);
         return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
-    }
-    function component_subscribe(component, store, callback) {
-        component.$$.on_destroy.push(subscribe(store, callback));
     }
 
     const is_client = typeof window !== 'undefined';
@@ -1121,32 +1118,32 @@
 
     function add_css$1() {
     	var style = element("style");
-    	style.id = "svelte-1o0h0q7-style";
-    	style.textContent = ".rangeSlider{--slider:var(--range-slider, #d7dada);--handle-inactive:var(--range-handle-inactive, #99a2a2);--handle:var(--range-handle, #838de7);--handle-focus:var(--range-handle-focus, #4a40d4);--handle-border:var(--range-handle-border, var(--handle));--range-inactive:var(--range-range-inactive, var(--handle-inactive));--range:var(--range-range, var(--handle-focus));--float-inactive:var(--range-float-inactive, var(--handle-inactive));--float:var(--range-float, var(--handle-focus));--float-text:var(--range-float-text, white)}.rangeSlider{position:relative;border-radius:100px;height:0.5em;margin:1em}.rangeSlider, .rangeSlider *{user-select:none}.rangeSlider.pips{margin-bottom:1.8em}.rangeSlider.pip-labels{margin-bottom:2.8em}.rangeSlider.vertical{display:inline-block;border-radius:100px;width:0.5em;min-height:200px}.rangeSlider.vertical.pips{margin-right:1.8em;margin-bottom:1em}.rangeSlider.vertical.pip-labels{margin-right:2.8em;margin-bottom:1em}.rangeSlider .rangeHandle{position:absolute;display:block;height:1.4em;width:1.4em;top:0.25em;left:0.25em;transform:translateY(-50%) translateX(-50%);z-index:2}.rangeSlider .rangeNub,.rangeSlider .rangeHandle:before{position:absolute;left:0;top:0;display:block;border-radius:10em;height:100%;width:100%;transition:all 0.2s ease}.rangeSlider .rangeHandle:before{content:\"\";left:1px;top:1px;bottom:1px;right:1px;height:auto;width:auto;box-shadow:0 0 0 0px var(--handle-border);opacity:0}.rangeSlider .rangeHandle.hoverable:hover:before{box-shadow:0 0 0 8px var(--handle-border);opacity:0.2}.rangeSlider .rangeHandle.hoverable.press:before,.rangeSlider .rangeHandle.hoverable.press:hover:before{box-shadow:0 0 0 12px var(--handle-border);opacity:0.4}.rangeSlider.range:not(.min):not(.max) .rangeNub{border-radius:10em 10em 10em 1.6em}.rangeSlider.range .rangeHandle:nth-of-type(1) .rangeNub{transform:rotate(-135deg)}.rangeSlider.range .rangeHandle:nth-of-type(2) .rangeNub{transform:rotate(45deg)}.rangeSlider.range.vertical .rangeHandle:nth-of-type(1) .rangeNub{transform:rotate(-45deg)}.rangeSlider.range.vertical .rangeHandle:nth-of-type(2) .rangeNub{transform:rotate(135deg)}.rangeSlider .rangeFloat{display:block;position:absolute;left:50%;top:-0.5em;transform:translate(-50%, -100%);font-size:1em;text-align:center;opacity:0;pointer-events:none;white-space:nowrap;transition:all 0.2s ease;font-size:0.9em;padding:0.2em 0.4em;border-radius:0.2em}.rangeSlider .rangeHandle.active .rangeFloat,.rangeSlider .rangeHandle.hoverable:hover .rangeFloat{opacity:1;top:-0.2em;transform:translate(-50%, -100%)}.rangeSlider .rangeBar{position:absolute;display:block;transition:background 0.2s ease;border-radius:1em;height:0.5em;top:0;user-select:none;z-index:1}.rangeSlider.vertical .rangeBar{width:0.5em;height:auto}.rangeSlider{background-color:#d7dada;background-color:var(--slider)}.rangeSlider .rangeBar{background-color:#99a2a2;background-color:var(--range-inactive)}.rangeSlider.focus .rangeBar{background-color:#838de7;background-color:var(--range)}.rangeSlider .rangeNub{background-color:#99a2a2;background-color:var(--handle-inactive)}.rangeSlider.focus .rangeNub{background-color:#838de7;background-color:var(--handle)}.rangeSlider .rangeHandle.active .rangeNub{background-color:#4a40d4;background-color:var(--handle-focus)}.rangeSlider .rangeFloat{color:white;color:var(--float-text);background-color:#99a2a2;background-color:var(--float-inactive)}.rangeSlider.focus .rangeFloat{background-color:#4a40d4;background-color:var(--float)}";
+    	style.id = "svelte-5451cf-style";
+    	style.textContent = ".rangeSlider{--slider:var(--range-slider, #d7dada);--handle-inactive:var(--range-handle-inactive, #99a2a2);--handle:var(--range-handle, #838de7);--handle-focus:var(--range-handle-focus, #4a40d4);--handle-border:var(--range-handle-border, var(--handle));--range-inactive:var(--range-range-inactive, var(--handle-inactive));--range:var(--range-range, var(--handle-focus));--float-inactive:var(--range-float-inactive, var(--handle-inactive));--float:var(--range-float, var(--handle-focus));--float-text:var(--range-float-text, white)}.rangeSlider{position:relative;border-radius:100px;height:0.5em;margin:1em;transition:opacity 0.2s ease}.rangeSlider, .rangeSlider *{user-select:none}.rangeSlider.pips{margin-bottom:1.8em}.rangeSlider.pip-labels{margin-bottom:2.8em}.rangeSlider.vertical{display:inline-block;border-radius:100px;width:0.5em;min-height:200px}.rangeSlider.vertical.pips{margin-right:1.8em;margin-bottom:1em}.rangeSlider.vertical.pip-labels{margin-right:2.8em;margin-bottom:1em}.rangeSlider .rangeHandle{position:absolute;display:block;height:1.4em;width:1.4em;top:0.25em;left:0.25em;transform:translateY(-50%) translateX(-50%);z-index:2}.rangeSlider .rangeNub,.rangeSlider .rangeHandle:before{position:absolute;left:0;top:0;display:block;border-radius:10em;height:100%;width:100%;transition:all 0.2s ease}.rangeSlider .rangeHandle:before{content:\"\";left:1px;top:1px;bottom:1px;right:1px;height:auto;width:auto;box-shadow:0 0 0 0px var(--handle-border);opacity:0}.rangeSlider .rangeHandle.hoverable:hover:before{box-shadow:0 0 0 8px var(--handle-border);opacity:0.2}.rangeSlider .rangeHandle.hoverable.press:before,.rangeSlider .rangeHandle.hoverable.press:hover:before{box-shadow:0 0 0 12px var(--handle-border);opacity:0.4}.rangeSlider.range:not(.min):not(.max) .rangeNub{border-radius:10em 10em 10em 1.6em}.rangeSlider.range .rangeHandle:nth-of-type(1) .rangeNub{transform:rotate(-135deg)}.rangeSlider.range .rangeHandle:nth-of-type(2) .rangeNub{transform:rotate(45deg)}.rangeSlider.range.vertical .rangeHandle:nth-of-type(1) .rangeNub{transform:rotate(-45deg)}.rangeSlider.range.vertical .rangeHandle:nth-of-type(2) .rangeNub{transform:rotate(135deg)}.rangeSlider .rangeFloat{display:block;position:absolute;left:50%;top:-0.5em;transform:translate(-50%, -100%);font-size:1em;text-align:center;opacity:0;pointer-events:none;white-space:nowrap;transition:all 0.2s ease;font-size:0.9em;padding:0.2em 0.4em;border-radius:0.2em}.rangeSlider .rangeHandle.active .rangeFloat,.rangeSlider .rangeHandle.hoverable:hover .rangeFloat{opacity:1;top:-0.2em;transform:translate(-50%, -100%)}.rangeSlider .rangeBar{position:absolute;display:block;transition:background 0.2s ease;border-radius:1em;height:0.5em;top:0;user-select:none;z-index:1}.rangeSlider.vertical .rangeBar{width:0.5em;height:auto}.rangeSlider{background-color:#d7dada;background-color:var(--slider)}.rangeSlider .rangeBar{background-color:#99a2a2;background-color:var(--range-inactive)}.rangeSlider.focus .rangeBar{background-color:#838de7;background-color:var(--range)}.rangeSlider .rangeNub{background-color:#99a2a2;background-color:var(--handle-inactive)}.rangeSlider.focus .rangeNub{background-color:#838de7;background-color:var(--handle)}.rangeSlider .rangeHandle.active .rangeNub{background-color:#4a40d4;background-color:var(--handle-focus)}.rangeSlider .rangeFloat{color:white;color:var(--float-text);background-color:#99a2a2;background-color:var(--float-inactive)}.rangeSlider.focus .rangeFloat{background-color:#4a40d4;background-color:var(--float)}.rangeSlider.disabled {opacity:0.5}.rangeSlider.disabled .rangeNub{background-color:#d7dada;background-color:var(--slider)}";
     	append(document.head, style);
     }
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[58] = list[i];
-    	child_ctx[60] = i;
+    	child_ctx[59] = list[i];
+    	child_ctx[61] = i;
     	return child_ctx;
     }
 
-    // (734:6) {#if float}
+    // (766:6) {#if float}
     function create_if_block_2$1(ctx) {
     	let span;
     	let t0;
-    	let t1_value = /*handleFormatter*/ ctx[18](/*value*/ ctx[58]) + "";
+    	let t1_value = /*handleFormatter*/ ctx[19](/*value*/ ctx[59]) + "";
     	let t1;
     	let t2;
 
     	return {
     		c() {
     			span = element("span");
-    			t0 = text(/*prefix*/ ctx[15]);
+    			t0 = text(/*prefix*/ ctx[16]);
     			t1 = text(t1_value);
-    			t2 = text(/*suffix*/ ctx[16]);
+    			t2 = text(/*suffix*/ ctx[17]);
     			attr(span, "class", "rangeFloat");
     		},
     		m(target, anchor) {
@@ -1156,9 +1153,9 @@
     			append(span, t2);
     		},
     		p(ctx, dirty) {
-    			if (dirty[0] & /*prefix*/ 32768) set_data(t0, /*prefix*/ ctx[15]);
-    			if (dirty[0] & /*handleFormatter, values*/ 262145 && t1_value !== (t1_value = /*handleFormatter*/ ctx[18](/*value*/ ctx[58]) + "")) set_data(t1, t1_value);
-    			if (dirty[0] & /*suffix*/ 65536) set_data(t2, /*suffix*/ ctx[16]);
+    			if (dirty[0] & /*prefix*/ 65536) set_data(t0, /*prefix*/ ctx[16]);
+    			if (dirty[0] & /*handleFormatter, values*/ 524289 && t1_value !== (t1_value = /*handleFormatter*/ ctx[19](/*value*/ ctx[59]) + "")) set_data(t1, t1_value);
+    			if (dirty[0] & /*suffix*/ 131072) set_data(t2, /*suffix*/ ctx[17]);
     		},
     		d(detaching) {
     			if (detaching) detach(span);
@@ -1166,7 +1163,7 @@
     	};
     }
 
-    // (716:2) {#each values as value, index}
+    // (745:2) {#each values as value, index}
     function create_each_block$1(ctx) {
     	let span1;
     	let span0;
@@ -1177,6 +1174,7 @@
     	let span1_aria_valuenow_value;
     	let span1_aria_valuetext_value;
     	let span1_aria_orientation_value;
+    	let span1_tabindex_value;
     	let mounted;
     	let dispose;
     	let if_block = /*float*/ ctx[6] && create_if_block_2$1(ctx);
@@ -1188,25 +1186,27 @@
     			t = space();
     			if (if_block) if_block.c();
     			attr(span0, "class", "rangeNub");
+    			attr(span1, "style", span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[26][/*index*/ ctx[61]] + "%; z-index: " + (/*activeHandle*/ ctx[23] === /*index*/ ctx[61] ? 3 : 2) + ";"));
     			attr(span1, "role", "slider");
     			attr(span1, "class", "rangeHandle");
-    			attr(span1, "tabindex", "0");
-    			attr(span1, "style", span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[24][/*index*/ ctx[60]] + "%; z-index: " + (/*activeHandle*/ ctx[22] === /*index*/ ctx[60] ? 3 : 2) + ";"));
 
-    			attr(span1, "aria-valuemin", span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[60] === 1
+    			attr(span1, "aria-valuemin", span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[61] === 1
     			? /*values*/ ctx[0][0]
     			: /*min*/ ctx[2]);
 
-    			attr(span1, "aria-valuemax", span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[60] === 0
+    			attr(span1, "aria-valuemax", span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[61] === 0
     			? /*values*/ ctx[0][1]
     			: /*max*/ ctx[3]);
 
-    			attr(span1, "aria-valuenow", span1_aria_valuenow_value = /*value*/ ctx[58]);
-    			attr(span1, "aria-valuetext", span1_aria_valuetext_value = "" + (/*prefix*/ ctx[15] + /*handleFormatter*/ ctx[18](/*value*/ ctx[58]) + /*suffix*/ ctx[16]));
+    			attr(span1, "aria-valuenow", span1_aria_valuenow_value = /*value*/ ctx[59]);
+    			attr(span1, "aria-valuetext", span1_aria_valuetext_value = "" + (/*prefix*/ ctx[16] + /*handleFormatter*/ ctx[19](/*value*/ ctx[59]) + /*suffix*/ ctx[17]));
     			attr(span1, "aria-orientation", span1_aria_orientation_value = /*vertical*/ ctx[5] ? "vertical" : "horizontal");
-    			toggle_class(span1, "hoverable", /*hover*/ ctx[7]);
-    			toggle_class(span1, "active", /*focus*/ ctx[20] && /*activeHandle*/ ctx[22] === /*index*/ ctx[60]);
-    			toggle_class(span1, "press", /*handlePressed*/ ctx[21] && /*activeHandle*/ ctx[22] === /*index*/ ctx[60]);
+    			attr(span1, "aria-disabled", /*disabled*/ ctx[8]);
+    			attr(span1, "disabled", /*disabled*/ ctx[8]);
+    			attr(span1, "tabindex", span1_tabindex_value = /*disabled*/ ctx[8] ? -1 : 0);
+    			toggle_class(span1, "hoverable", /*hover*/ ctx[7] && !/*disabled*/ ctx[8]);
+    			toggle_class(span1, "active", /*focus*/ ctx[21] && /*activeHandle*/ ctx[23] === /*index*/ ctx[61]);
+    			toggle_class(span1, "press", /*handlePressed*/ ctx[22] && /*activeHandle*/ ctx[23] === /*index*/ ctx[61]);
     		},
     		m(target, anchor) {
     			insert(target, span1, anchor);
@@ -1216,9 +1216,9 @@
 
     			if (!mounted) {
     				dispose = [
-    					listen(span1, "blur", /*sliderBlurHandle*/ ctx[28]),
-    					listen(span1, "focus", /*sliderFocusHandle*/ ctx[29]),
-    					listen(span1, "keydown", /*sliderKeydown*/ ctx[30])
+    					listen(span1, "blur", /*sliderBlurHandle*/ ctx[29]),
+    					listen(span1, "focus", /*sliderFocusHandle*/ ctx[30]),
+    					listen(span1, "keydown", /*sliderKeydown*/ ctx[31])
     				];
 
     				mounted = true;
@@ -1238,27 +1238,27 @@
     				if_block = null;
     			}
 
-    			if (dirty[0] & /*vertical, $springPositions, activeHandle*/ 20971552 && span1_style_value !== (span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[24][/*index*/ ctx[60]] + "%; z-index: " + (/*activeHandle*/ ctx[22] === /*index*/ ctx[60] ? 3 : 2) + ";"))) {
+    			if (dirty[0] & /*vertical, $springPositions, activeHandle*/ 75497504 && span1_style_value !== (span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[26][/*index*/ ctx[61]] + "%; z-index: " + (/*activeHandle*/ ctx[23] === /*index*/ ctx[61] ? 3 : 2) + ";"))) {
     				attr(span1, "style", span1_style_value);
     			}
 
-    			if (dirty[0] & /*range, values, min*/ 7 && span1_aria_valuemin_value !== (span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[60] === 1
+    			if (dirty[0] & /*range, values, min*/ 7 && span1_aria_valuemin_value !== (span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[61] === 1
     			? /*values*/ ctx[0][0]
     			: /*min*/ ctx[2])) {
     				attr(span1, "aria-valuemin", span1_aria_valuemin_value);
     			}
 
-    			if (dirty[0] & /*range, values, max*/ 11 && span1_aria_valuemax_value !== (span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[60] === 0
+    			if (dirty[0] & /*range, values, max*/ 11 && span1_aria_valuemax_value !== (span1_aria_valuemax_value = /*range*/ ctx[1] === true && /*index*/ ctx[61] === 0
     			? /*values*/ ctx[0][1]
     			: /*max*/ ctx[3])) {
     				attr(span1, "aria-valuemax", span1_aria_valuemax_value);
     			}
 
-    			if (dirty[0] & /*values*/ 1 && span1_aria_valuenow_value !== (span1_aria_valuenow_value = /*value*/ ctx[58])) {
+    			if (dirty[0] & /*values*/ 1 && span1_aria_valuenow_value !== (span1_aria_valuenow_value = /*value*/ ctx[59])) {
     				attr(span1, "aria-valuenow", span1_aria_valuenow_value);
     			}
 
-    			if (dirty[0] & /*prefix, handleFormatter, values, suffix*/ 360449 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = "" + (/*prefix*/ ctx[15] + /*handleFormatter*/ ctx[18](/*value*/ ctx[58]) + /*suffix*/ ctx[16]))) {
+    			if (dirty[0] & /*prefix, handleFormatter, values, suffix*/ 720897 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = "" + (/*prefix*/ ctx[16] + /*handleFormatter*/ ctx[19](/*value*/ ctx[59]) + /*suffix*/ ctx[17]))) {
     				attr(span1, "aria-valuetext", span1_aria_valuetext_value);
     			}
 
@@ -1266,16 +1266,28 @@
     				attr(span1, "aria-orientation", span1_aria_orientation_value);
     			}
 
-    			if (dirty[0] & /*hover*/ 128) {
-    				toggle_class(span1, "hoverable", /*hover*/ ctx[7]);
+    			if (dirty[0] & /*disabled*/ 256) {
+    				attr(span1, "aria-disabled", /*disabled*/ ctx[8]);
     			}
 
-    			if (dirty[0] & /*focus, activeHandle*/ 5242880) {
-    				toggle_class(span1, "active", /*focus*/ ctx[20] && /*activeHandle*/ ctx[22] === /*index*/ ctx[60]);
+    			if (dirty[0] & /*disabled*/ 256) {
+    				attr(span1, "disabled", /*disabled*/ ctx[8]);
     			}
 
-    			if (dirty[0] & /*handlePressed, activeHandle*/ 6291456) {
-    				toggle_class(span1, "press", /*handlePressed*/ ctx[21] && /*activeHandle*/ ctx[22] === /*index*/ ctx[60]);
+    			if (dirty[0] & /*disabled*/ 256 && span1_tabindex_value !== (span1_tabindex_value = /*disabled*/ ctx[8] ? -1 : 0)) {
+    				attr(span1, "tabindex", span1_tabindex_value);
+    			}
+
+    			if (dirty[0] & /*hover, disabled*/ 384) {
+    				toggle_class(span1, "hoverable", /*hover*/ ctx[7] && !/*disabled*/ ctx[8]);
+    			}
+
+    			if (dirty[0] & /*focus, activeHandle*/ 10485760) {
+    				toggle_class(span1, "active", /*focus*/ ctx[21] && /*activeHandle*/ ctx[23] === /*index*/ ctx[61]);
+    			}
+
+    			if (dirty[0] & /*handlePressed, activeHandle*/ 12582912) {
+    				toggle_class(span1, "press", /*handlePressed*/ ctx[22] && /*activeHandle*/ ctx[23] === /*index*/ ctx[61]);
     			}
     		},
     		d(detaching) {
@@ -1287,7 +1299,7 @@
     	};
     }
 
-    // (739:2) {#if range}
+    // (771:2) {#if range}
     function create_if_block_1$1(ctx) {
     	let span;
     	let span_style_value;
@@ -1296,13 +1308,13 @@
     		c() {
     			span = element("span");
     			attr(span, "class", "rangeBar");
-    			attr(span, "style", span_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*rangeStart*/ ctx[26](/*$springPositions*/ ctx[24]) + "%; " + (/*vertical*/ ctx[5] ? "bottom" : "right") + ":\n      " + /*rangeEnd*/ ctx[27](/*$springPositions*/ ctx[24]) + "%;"));
+    			attr(span, "style", span_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*rangeStart*/ ctx[27](/*$springPositions*/ ctx[26]) + "%; " + (/*vertical*/ ctx[5] ? "bottom" : "right") + ":\n      " + /*rangeEnd*/ ctx[28](/*$springPositions*/ ctx[26]) + "%;"));
     		},
     		m(target, anchor) {
     			insert(target, span, anchor);
     		},
     		p(ctx, dirty) {
-    			if (dirty[0] & /*vertical, $springPositions*/ 16777248 && span_style_value !== (span_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*rangeStart*/ ctx[26](/*$springPositions*/ ctx[24]) + "%; " + (/*vertical*/ ctx[5] ? "bottom" : "right") + ":\n      " + /*rangeEnd*/ ctx[27](/*$springPositions*/ ctx[24]) + "%;"))) {
+    			if (dirty[0] & /*vertical, $springPositions*/ 67108896 && span_style_value !== (span_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*rangeStart*/ ctx[27](/*$springPositions*/ ctx[26]) + "%; " + (/*vertical*/ ctx[5] ? "bottom" : "right") + ":\n      " + /*rangeEnd*/ ctx[28](/*$springPositions*/ ctx[26]) + "%;"))) {
     				attr(span, "style", span_style_value);
     			}
     		},
@@ -1312,7 +1324,7 @@
     	};
     }
 
-    // (745:2) {#if pips}
+    // (777:2) {#if pips}
     function create_if_block$1(ctx) {
     	let rangepips;
     	let current;
@@ -1325,16 +1337,17 @@
     				step: /*step*/ ctx[4],
     				range: /*range*/ ctx[1],
     				vertical: /*vertical*/ ctx[5],
-    				all: /*all*/ ctx[10],
-    				first: /*first*/ ctx[11],
-    				last: /*last*/ ctx[12],
-    				rest: /*rest*/ ctx[13],
-    				pipstep: /*pipstep*/ ctx[9],
-    				prefix: /*prefix*/ ctx[15],
-    				suffix: /*suffix*/ ctx[16],
-    				formatter: /*formatter*/ ctx[17],
-    				focus: /*focus*/ ctx[20],
-    				percentOf: /*percentOf*/ ctx[23]
+    				all: /*all*/ ctx[11],
+    				first: /*first*/ ctx[12],
+    				last: /*last*/ ctx[13],
+    				rest: /*rest*/ ctx[14],
+    				pipstep: /*pipstep*/ ctx[10],
+    				prefix: /*prefix*/ ctx[16],
+    				suffix: /*suffix*/ ctx[17],
+    				formatter: /*formatter*/ ctx[18],
+    				focus: /*focus*/ ctx[21],
+    				disabled: /*disabled*/ ctx[8],
+    				percentOf: /*percentOf*/ ctx[25]
     			}
     		});
 
@@ -1354,16 +1367,17 @@
     			if (dirty[0] & /*step*/ 16) rangepips_changes.step = /*step*/ ctx[4];
     			if (dirty[0] & /*range*/ 2) rangepips_changes.range = /*range*/ ctx[1];
     			if (dirty[0] & /*vertical*/ 32) rangepips_changes.vertical = /*vertical*/ ctx[5];
-    			if (dirty[0] & /*all*/ 1024) rangepips_changes.all = /*all*/ ctx[10];
-    			if (dirty[0] & /*first*/ 2048) rangepips_changes.first = /*first*/ ctx[11];
-    			if (dirty[0] & /*last*/ 4096) rangepips_changes.last = /*last*/ ctx[12];
-    			if (dirty[0] & /*rest*/ 8192) rangepips_changes.rest = /*rest*/ ctx[13];
-    			if (dirty[0] & /*pipstep*/ 512) rangepips_changes.pipstep = /*pipstep*/ ctx[9];
-    			if (dirty[0] & /*prefix*/ 32768) rangepips_changes.prefix = /*prefix*/ ctx[15];
-    			if (dirty[0] & /*suffix*/ 65536) rangepips_changes.suffix = /*suffix*/ ctx[16];
-    			if (dirty[0] & /*formatter*/ 131072) rangepips_changes.formatter = /*formatter*/ ctx[17];
-    			if (dirty[0] & /*focus*/ 1048576) rangepips_changes.focus = /*focus*/ ctx[20];
-    			if (dirty[0] & /*percentOf*/ 8388608) rangepips_changes.percentOf = /*percentOf*/ ctx[23];
+    			if (dirty[0] & /*all*/ 2048) rangepips_changes.all = /*all*/ ctx[11];
+    			if (dirty[0] & /*first*/ 4096) rangepips_changes.first = /*first*/ ctx[12];
+    			if (dirty[0] & /*last*/ 8192) rangepips_changes.last = /*last*/ ctx[13];
+    			if (dirty[0] & /*rest*/ 16384) rangepips_changes.rest = /*rest*/ ctx[14];
+    			if (dirty[0] & /*pipstep*/ 1024) rangepips_changes.pipstep = /*pipstep*/ ctx[10];
+    			if (dirty[0] & /*prefix*/ 65536) rangepips_changes.prefix = /*prefix*/ ctx[16];
+    			if (dirty[0] & /*suffix*/ 131072) rangepips_changes.suffix = /*suffix*/ ctx[17];
+    			if (dirty[0] & /*formatter*/ 262144) rangepips_changes.formatter = /*formatter*/ ctx[18];
+    			if (dirty[0] & /*focus*/ 2097152) rangepips_changes.focus = /*focus*/ ctx[21];
+    			if (dirty[0] & /*disabled*/ 256) rangepips_changes.disabled = /*disabled*/ ctx[8];
+    			if (dirty[0] & /*percentOf*/ 33554432) rangepips_changes.percentOf = /*percentOf*/ ctx[25];
     			rangepips.$set(rangepips_changes);
     		},
     		i(local) {
@@ -1396,7 +1410,7 @@
     	}
 
     	let if_block0 = /*range*/ ctx[1] && create_if_block_1$1(ctx);
-    	let if_block1 = /*pips*/ ctx[8] && create_if_block$1(ctx);
+    	let if_block1 = /*pips*/ ctx[9] && create_if_block$1(ctx);
 
     	return {
     		c() {
@@ -1410,15 +1424,16 @@
     			if (if_block0) if_block0.c();
     			t1 = space();
     			if (if_block1) if_block1.c();
-    			attr(div, "id", /*id*/ ctx[14]);
+    			attr(div, "id", /*id*/ ctx[15]);
     			attr(div, "class", "rangeSlider");
-    			toggle_class(div, "max", /*range*/ ctx[1] === "max");
-    			toggle_class(div, "range", /*range*/ ctx[1]);
-    			toggle_class(div, "vertical", /*vertical*/ ctx[5]);
-    			toggle_class(div, "focus", /*focus*/ ctx[20]);
     			toggle_class(div, "min", /*range*/ ctx[1] === "min");
-    			toggle_class(div, "pips", /*pips*/ ctx[8]);
-    			toggle_class(div, "pip-labels", /*all*/ ctx[10] === "label" || /*first*/ ctx[11] === "label" || /*last*/ ctx[12] === "label" || /*rest*/ ctx[13] === "label");
+    			toggle_class(div, "range", /*range*/ ctx[1]);
+    			toggle_class(div, "disabled", /*disabled*/ ctx[8]);
+    			toggle_class(div, "vertical", /*vertical*/ ctx[5]);
+    			toggle_class(div, "focus", /*focus*/ ctx[21]);
+    			toggle_class(div, "max", /*range*/ ctx[1] === "max");
+    			toggle_class(div, "pips", /*pips*/ ctx[9]);
+    			toggle_class(div, "pip-labels", /*all*/ ctx[11] === "label" || /*first*/ ctx[12] === "label" || /*last*/ ctx[13] === "label" || /*rest*/ ctx[14] === "label");
     		},
     		m(target, anchor) {
     			insert(target, div, anchor);
@@ -1431,29 +1446,29 @@
     			if (if_block0) if_block0.m(div, null);
     			append(div, t1);
     			if (if_block1) if_block1.m(div, null);
-    			/*div_binding*/ ctx[41](div);
+    			/*div_binding*/ ctx[42](div);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen(window, "mousedown", /*bodyInteractStart*/ ctx[33]),
-    					listen(window, "touchstart", /*bodyInteractStart*/ ctx[33]),
-    					listen(window, "mousemove", /*bodyInteract*/ ctx[34]),
-    					listen(window, "touchmove", /*bodyInteract*/ ctx[34]),
-    					listen(window, "mouseup", /*bodyMouseUp*/ ctx[35]),
-    					listen(window, "touchend", /*bodyTouchEnd*/ ctx[36]),
-    					listen(window, "keydown", /*bodyKeyDown*/ ctx[37]),
-    					listen(div, "mousedown", /*sliderInteractStart*/ ctx[31]),
-    					listen(div, "mouseup", /*sliderInteractEnd*/ ctx[32]),
-    					listen(div, "touchstart", prevent_default(/*sliderInteractStart*/ ctx[31])),
-    					listen(div, "touchend", prevent_default(/*sliderInteractEnd*/ ctx[32]))
+    					listen(window, "mousedown", /*bodyInteractStart*/ ctx[34]),
+    					listen(window, "touchstart", /*bodyInteractStart*/ ctx[34]),
+    					listen(window, "mousemove", /*bodyInteract*/ ctx[35]),
+    					listen(window, "touchmove", /*bodyInteract*/ ctx[35]),
+    					listen(window, "mouseup", /*bodyMouseUp*/ ctx[36]),
+    					listen(window, "touchend", /*bodyTouchEnd*/ ctx[37]),
+    					listen(window, "keydown", /*bodyKeyDown*/ ctx[38]),
+    					listen(div, "mousedown", /*sliderInteractStart*/ ctx[32]),
+    					listen(div, "mouseup", /*sliderInteractEnd*/ ctx[33]),
+    					listen(div, "touchstart", prevent_default(/*sliderInteractStart*/ ctx[32])),
+    					listen(div, "touchend", prevent_default(/*sliderInteractEnd*/ ctx[33]))
     				];
 
     				mounted = true;
     			}
     		},
     		p(ctx, dirty) {
-    			if (dirty[0] & /*vertical, $springPositions, activeHandle, range, values, min, max, prefix, handleFormatter, suffix, hover, focus, handlePressed, sliderFocusHandle, sliderBlurHandle, sliderKeydown, float*/ 1903526127) {
+    			if (dirty[0] & /*vertical, $springPositions, activeHandle, range, values, min, max, prefix, handleFormatter, suffix, disabled, hover, focus, handlePressed, sliderBlurHandle, sliderFocusHandle, float*/ 1693123055 | dirty[1] & /*sliderKeydown*/ 1) {
     				each_value = /*values*/ ctx[0];
     				let i;
 
@@ -1489,11 +1504,11 @@
     				if_block0 = null;
     			}
 
-    			if (/*pips*/ ctx[8]) {
+    			if (/*pips*/ ctx[9]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
 
-    					if (dirty[0] & /*pips*/ 256) {
+    					if (dirty[0] & /*pips*/ 512) {
     						transition_in(if_block1, 1);
     					}
     				} else {
@@ -1512,36 +1527,40 @@
     				check_outros();
     			}
 
-    			if (!current || dirty[0] & /*id*/ 16384) {
-    				attr(div, "id", /*id*/ ctx[14]);
-    			}
-
-    			if (dirty[0] & /*range*/ 2) {
-    				toggle_class(div, "max", /*range*/ ctx[1] === "max");
-    			}
-
-    			if (dirty[0] & /*range*/ 2) {
-    				toggle_class(div, "range", /*range*/ ctx[1]);
-    			}
-
-    			if (dirty[0] & /*vertical*/ 32) {
-    				toggle_class(div, "vertical", /*vertical*/ ctx[5]);
-    			}
-
-    			if (dirty[0] & /*focus*/ 1048576) {
-    				toggle_class(div, "focus", /*focus*/ ctx[20]);
+    			if (!current || dirty[0] & /*id*/ 32768) {
+    				attr(div, "id", /*id*/ ctx[15]);
     			}
 
     			if (dirty[0] & /*range*/ 2) {
     				toggle_class(div, "min", /*range*/ ctx[1] === "min");
     			}
 
-    			if (dirty[0] & /*pips*/ 256) {
-    				toggle_class(div, "pips", /*pips*/ ctx[8]);
+    			if (dirty[0] & /*range*/ 2) {
+    				toggle_class(div, "range", /*range*/ ctx[1]);
     			}
 
-    			if (dirty[0] & /*all, first, last, rest*/ 15360) {
-    				toggle_class(div, "pip-labels", /*all*/ ctx[10] === "label" || /*first*/ ctx[11] === "label" || /*last*/ ctx[12] === "label" || /*rest*/ ctx[13] === "label");
+    			if (dirty[0] & /*disabled*/ 256) {
+    				toggle_class(div, "disabled", /*disabled*/ ctx[8]);
+    			}
+
+    			if (dirty[0] & /*vertical*/ 32) {
+    				toggle_class(div, "vertical", /*vertical*/ ctx[5]);
+    			}
+
+    			if (dirty[0] & /*focus*/ 2097152) {
+    				toggle_class(div, "focus", /*focus*/ ctx[21]);
+    			}
+
+    			if (dirty[0] & /*range*/ 2) {
+    				toggle_class(div, "max", /*range*/ ctx[1] === "max");
+    			}
+
+    			if (dirty[0] & /*pips*/ 512) {
+    				toggle_class(div, "pips", /*pips*/ ctx[9]);
+    			}
+
+    			if (dirty[0] & /*all, first, last, rest*/ 30720) {
+    				toggle_class(div, "pip-labels", /*all*/ ctx[11] === "label" || /*first*/ ctx[12] === "label" || /*last*/ ctx[13] === "label" || /*rest*/ ctx[14] === "label");
     			}
     		},
     		i(local) {
@@ -1558,7 +1577,7 @@
     			destroy_each(each_blocks, detaching);
     			if (if_block0) if_block0.d();
     			if (if_block1) if_block1.d();
-    			/*div_binding*/ ctx[41](null);
+    			/*div_binding*/ ctx[42](null);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -1591,7 +1610,11 @@
     }
 
     function instance$1($$self, $$props, $$invalidate) {
-    	let $springPositions;
+    	let $springPositions,
+    		$$unsubscribe_springPositions = noop,
+    		$$subscribe_springPositions = () => ($$unsubscribe_springPositions(), $$unsubscribe_springPositions = subscribe(springPositions, $$value => $$invalidate(26, $springPositions = $$value)), springPositions);
+
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_springPositions());
     	let { range = false } = $$props;
     	let { pushy = false } = $$props;
     	let { min = 0 } = $$props;
@@ -1601,6 +1624,7 @@
     	let { vertical = false } = $$props;
     	let { float = false } = $$props;
     	let { hover = true } = $$props;
+    	let { disabled = false } = $$props;
     	let { pips = false } = $$props;
     	let { pipstep = undefined } = $$props;
     	let { all = undefined } = $$props;
@@ -1633,9 +1657,10 @@
 
     	// copy the initial values in to a spring function which
     	// will update every time the values array is modified
-    	let springPositions = spring(values.map(v => parseFloat(((v - min) / (max - min) * 100).toFixed(precision))), springValues);
+    	let springPositions;
 
-    	component_subscribe($$self, springPositions, value => $$invalidate(24, $springPositions = value));
+    	$$subscribe_springPositions();
+    	
 
     	/**
      * check if an element is a handle on the slider
@@ -1651,7 +1676,9 @@
 
     	/**
      * trim the values array based on whether the property
-     * for 'range' is 'min', 'max', or truthy.
+     * for 'range' is 'min', 'max', or truthy. This is because we
+     * do not want more than one handle for a min/max range, and we do
+     * not want more than two handles for a true range.
      * @param {array} values the input values for the rangeSlider
      * @return {array} the range array for creating a rangeSlider
      **/
@@ -1830,9 +1857,9 @@
      **/
     	function sliderBlurHandle(e) {
     		if (keyboardActive) {
-    			$$invalidate(20, focus = false);
+    			$$invalidate(21, focus = false);
     			handleActivated = false;
-    			$$invalidate(21, handlePressed = false);
+    			$$invalidate(22, handlePressed = false);
     		}
     	}
 
@@ -1842,8 +1869,10 @@
      * @param {event} e the event from browser
      **/
     	function sliderFocusHandle(e) {
-    		$$invalidate(22, activeHandle = index(e.target));
-    		$$invalidate(20, focus = true);
+    		if (!disabled) {
+    			$$invalidate(23, activeHandle = index(e.target));
+    			$$invalidate(21, focus = true);
+    		}
     	}
 
     	/**
@@ -1852,38 +1881,40 @@
      * @param {event} e the event from browser
      **/
     	function sliderKeydown(e) {
-    		const handle = index(e.target);
-    		let jump = e.ctrlKey || e.metaKey || e.shiftKey ? step * 10 : step;
-    		let prevent = false;
+    		if (!disabled) {
+    			const handle = index(e.target);
+    			let jump = e.ctrlKey || e.metaKey || e.shiftKey ? step * 10 : step;
+    			let prevent = false;
 
-    		switch (e.key) {
-    			case "PageDown":
-    				jump *= 10;
-    			case "ArrowRight":
-    			case "ArrowUp":
-    				moveHandle(handle, values[handle] + jump);
-    				prevent = true;
-    				break;
-    			case "PageUp":
-    				jump *= 10;
-    			case "ArrowLeft":
-    			case "ArrowDown":
-    				moveHandle(handle, values[handle] - jump);
-    				prevent = true;
-    				break;
-    			case "Home":
-    				moveHandle(handle, min);
-    				prevent = true;
-    				break;
-    			case "End":
-    				moveHandle(handle, max);
-    				prevent = true;
-    				break;
-    		}
+    			switch (e.key) {
+    				case "PageDown":
+    					jump *= 10;
+    				case "ArrowRight":
+    				case "ArrowUp":
+    					moveHandle(handle, values[handle] + jump);
+    					prevent = true;
+    					break;
+    				case "PageUp":
+    					jump *= 10;
+    				case "ArrowLeft":
+    				case "ArrowDown":
+    					moveHandle(handle, values[handle] - jump);
+    					prevent = true;
+    					break;
+    				case "Home":
+    					moveHandle(handle, min);
+    					prevent = true;
+    					break;
+    				case "End":
+    					moveHandle(handle, max);
+    					prevent = true;
+    					break;
+    			}
 
-    		if (prevent) {
-    			e.preventDefault();
-    			e.stopPropagation();
+    			if (prevent) {
+    				e.preventDefault();
+    				e.stopPropagation();
+    			}
     		}
     	}
 
@@ -1893,24 +1924,26 @@
      * @param {event} e the event from browser
      **/
     	function sliderInteractStart(e) {
-    		const clientPos = normalisedClient(e);
+    		if (!disabled) {
+    			const clientPos = normalisedClient(e);
 
-    		// set the closest handle as active
-    		$$invalidate(20, focus = true);
+    			// set the closest handle as active
+    			$$invalidate(21, focus = true);
 
-    		handleActivated = true;
-    		$$invalidate(21, handlePressed = true);
-    		$$invalidate(22, activeHandle = getClosestHandle(clientPos));
+    			handleActivated = true;
+    			$$invalidate(22, handlePressed = true);
+    			$$invalidate(23, activeHandle = getClosestHandle(clientPos));
 
-    		// fire the start event
-    		startValue = previousValue = alignValueToStep(values[activeHandle]);
+    			// fire the start event
+    			startValue = previousValue = alignValueToStep(values[activeHandle]);
 
-    		eStart();
+    			eStart();
 
-    		// for touch devices we want the handle to instantly
-    		// move to the position touched for more responsive feeling
-    		if (e.type === "touchstart") {
-    			handleInteract(clientPos);
+    			// for touch devices we want the handle to instantly
+    			// move to the position touched for more responsive feeling
+    			if (e.type === "touchstart") {
+    				handleInteract(clientPos);
+    			}
     		}
     	}
 
@@ -1925,7 +1958,7 @@
     			eStop();
     		}
 
-    		$$invalidate(21, handlePressed = false);
+    		$$invalidate(22, handlePressed = false);
     	}
 
     	/**
@@ -1937,7 +1970,7 @@
     		keyboardActive = false;
 
     		if (focus && e.target !== slider && !slider.contains(e.target)) {
-    			$$invalidate(20, focus = false);
+    			$$invalidate(21, focus = false);
     		}
     	}
 
@@ -1947,8 +1980,10 @@
      * @param {event} e the event from browser
      **/
     	function bodyInteract(e) {
-    		if (handleActivated) {
-    			handleInteract(normalisedClient(e));
+    		if (!disabled) {
+    			if (handleActivated) {
+    				handleInteract(normalisedClient(e));
+    			}
     		}
     	}
 
@@ -1959,27 +1994,29 @@
      * @param {event} e the event from browser
      **/
     	function bodyMouseUp(e) {
-    		const el = e.target;
+    		if (!disabled) {
+    			const el = e.target;
 
-    		// this only works if a handle is active, which can
-    		// only happen if there was sliderInteractStart triggered
-    		// on the slider, already
-    		if (handleActivated) {
-    			if (el === slider || slider.contains(el)) {
-    				$$invalidate(20, focus = true);
+    			// this only works if a handle is active, which can
+    			// only happen if there was sliderInteractStart triggered
+    			// on the slider, already
+    			if (handleActivated) {
+    				if (el === slider || slider.contains(el)) {
+    					$$invalidate(21, focus = true);
 
-    				if (!targetIsHandle(el)) {
-    					handleInteract(normalisedClient(e));
+    					if (!targetIsHandle(el)) {
+    						handleInteract(normalisedClient(e));
+    					}
     				}
-    			}
 
-    			// fire the stop event for mouse device
-    			// when the body is triggered with an active handle
-    			eStop();
+    				// fire the stop event for mouse device
+    				// when the body is triggered with an active handle
+    				eStop();
+    			}
     		}
 
     		handleActivated = false;
-    		$$invalidate(21, handlePressed = false);
+    		$$invalidate(22, handlePressed = false);
     	}
 
     	/**
@@ -1989,17 +2026,19 @@
      **/
     	function bodyTouchEnd(e) {
     		handleActivated = false;
-    		$$invalidate(21, handlePressed = false);
+    		$$invalidate(22, handlePressed = false);
     	}
 
     	function bodyKeyDown(e) {
-    		if (e.target === slider || slider.contains(e.target)) {
-    			keyboardActive = true;
+    		if (!disabled) {
+    			if (e.target === slider || slider.contains(e.target)) {
+    				keyboardActive = true;
+    			}
     		}
     	}
 
     	function eStart() {
-    		dispatch("start", {
+    		!disabled && dispatch("start", {
     			activeHandle,
     			value: startValue,
     			values: values.map(v => alignValueToStep(v))
@@ -2007,7 +2046,7 @@
     	}
 
     	function eStop() {
-    		dispatch("stop", {
+    		!disabled && dispatch("stop", {
     			activeHandle,
     			startValue,
     			value: values[activeHandle],
@@ -2016,7 +2055,7 @@
     	}
 
     	function eChange() {
-    		dispatch("change", {
+    		!disabled && dispatch("change", {
     			activeHandle,
     			startValue,
     			previousValue: typeof previousValue === "undefined"
@@ -2030,13 +2069,13 @@
     	function div_binding($$value) {
     		binding_callbacks[$$value ? "unshift" : "push"](() => {
     			slider = $$value;
-    			$$invalidate(19, slider);
+    			$$invalidate(20, slider);
     		});
     	}
 
     	$$self.$set = $$props => {
     		if ("range" in $$props) $$invalidate(1, range = $$props.range);
-    		if ("pushy" in $$props) $$invalidate(38, pushy = $$props.pushy);
+    		if ("pushy" in $$props) $$invalidate(39, pushy = $$props.pushy);
     		if ("min" in $$props) $$invalidate(2, min = $$props.min);
     		if ("max" in $$props) $$invalidate(3, max = $$props.max);
     		if ("step" in $$props) $$invalidate(4, step = $$props.step);
@@ -2044,19 +2083,20 @@
     		if ("vertical" in $$props) $$invalidate(5, vertical = $$props.vertical);
     		if ("float" in $$props) $$invalidate(6, float = $$props.float);
     		if ("hover" in $$props) $$invalidate(7, hover = $$props.hover);
-    		if ("pips" in $$props) $$invalidate(8, pips = $$props.pips);
-    		if ("pipstep" in $$props) $$invalidate(9, pipstep = $$props.pipstep);
-    		if ("all" in $$props) $$invalidate(10, all = $$props.all);
-    		if ("first" in $$props) $$invalidate(11, first = $$props.first);
-    		if ("last" in $$props) $$invalidate(12, last = $$props.last);
-    		if ("rest" in $$props) $$invalidate(13, rest = $$props.rest);
-    		if ("id" in $$props) $$invalidate(14, id = $$props.id);
-    		if ("prefix" in $$props) $$invalidate(15, prefix = $$props.prefix);
-    		if ("suffix" in $$props) $$invalidate(16, suffix = $$props.suffix);
-    		if ("formatter" in $$props) $$invalidate(17, formatter = $$props.formatter);
-    		if ("handleFormatter" in $$props) $$invalidate(18, handleFormatter = $$props.handleFormatter);
-    		if ("precision" in $$props) $$invalidate(39, precision = $$props.precision);
-    		if ("springValues" in $$props) $$invalidate(40, springValues = $$props.springValues);
+    		if ("disabled" in $$props) $$invalidate(8, disabled = $$props.disabled);
+    		if ("pips" in $$props) $$invalidate(9, pips = $$props.pips);
+    		if ("pipstep" in $$props) $$invalidate(10, pipstep = $$props.pipstep);
+    		if ("all" in $$props) $$invalidate(11, all = $$props.all);
+    		if ("first" in $$props) $$invalidate(12, first = $$props.first);
+    		if ("last" in $$props) $$invalidate(13, last = $$props.last);
+    		if ("rest" in $$props) $$invalidate(14, rest = $$props.rest);
+    		if ("id" in $$props) $$invalidate(15, id = $$props.id);
+    		if ("prefix" in $$props) $$invalidate(16, prefix = $$props.prefix);
+    		if ("suffix" in $$props) $$invalidate(17, suffix = $$props.suffix);
+    		if ("formatter" in $$props) $$invalidate(18, formatter = $$props.formatter);
+    		if ("handleFormatter" in $$props) $$invalidate(19, handleFormatter = $$props.handleFormatter);
+    		if ("precision" in $$props) $$invalidate(40, precision = $$props.precision);
+    		if ("springValues" in $$props) $$invalidate(41, springValues = $$props.springValues);
     	};
 
     	let percentOf;
@@ -2071,20 +2111,20 @@
      * @param {number} val the value to clamp
      * @return {number} the value after it's been clamped
      **/
-    			 $$invalidate(47, clampValue = function (val) {
+    			 $$invalidate(48, clampValue = function (val) {
     				// return the min/max if outside of that range
     				return val <= min ? min : val >= max ? max : val;
     			});
     		}
 
-    		if ($$self.$$.dirty[0] & /*min, max, step*/ 28 | $$self.$$.dirty[1] & /*clampValue, precision*/ 65792) {
+    		if ($$self.$$.dirty[0] & /*min, max, step*/ 28 | $$self.$$.dirty[1] & /*clampValue, precision*/ 131584) {
     			/**
      * align the value with the steps so that it
      * always sits on the closest (above/below) step
      * @param {number} val the value to align
      * @return {number} the value after it's been aligned
      **/
-    			 $$invalidate(46, alignValueToStep = function (val) {
+    			 $$invalidate(47, alignValueToStep = function (val) {
     				// sanity check for performance
     				if (val <= min) {
     					return min;
@@ -2113,20 +2153,14 @@
     			});
     		}
 
-    		if ($$self.$$.dirty[0] & /*values*/ 1 | $$self.$$.dirty[1] & /*alignValueToStep*/ 32768) {
-    			// check the values array, and trim it if needed (range)
-    			// and clamp the values to the steps and boundaries set up in the slider
-    			 $$invalidate(0, values = trimRange(values).map(v => alignValueToStep(v)));
-    		}
-
-    		if ($$self.$$.dirty[0] & /*min, max*/ 12 | $$self.$$.dirty[1] & /*precision*/ 256) {
+    		if ($$self.$$.dirty[0] & /*min, max*/ 12 | $$self.$$.dirty[1] & /*precision*/ 512) {
     			/**
      * take in a value, and then calculate that value's percentage
      * of the overall range (min-max);
      * @param {number} val the value we're getting percent for
      * @return {number} the percentage value
      **/
-    			 $$invalidate(23, percentOf = function (val) {
+    			 $$invalidate(25, percentOf = function (val) {
     				let perc = (val - min) / (max - min) * 100;
 
     				if (isNaN(perc) || perc <= 0) {
@@ -2139,10 +2173,27 @@
     			});
     		}
 
-    		if ($$self.$$.dirty[0] & /*values, percentOf*/ 8388609) {
-    			// update the spring function so that movement can happen in the UI
+    		if ($$self.$$.dirty[0] & /*values, max, min, springPositions, percentOf*/ 50331661 | $$self.$$.dirty[1] & /*alignValueToStep, springValues*/ 66560) {
     			 {
-    				springPositions.set(values.map(v => percentOf(v)));
+    				// check that "values" is an array, or set it as array
+    				// to prevent any errors in springs, or range trimming
+    				if (!Array.isArray(values)) {
+    					$$invalidate(0, values = [(max + min) / 2]);
+    					console.error("'values' prop should be an Array (https://github.com/simeydotme/svelte-range-slider-pips#slider-props)");
+    				}
+
+    				// trim the range as needed
+    				$$invalidate(0, values = trimRange(values));
+
+    				// clamp the values to the steps and boundaries set up in the slider
+    				$$invalidate(0, values = values.map(v => alignValueToStep(v)));
+
+    				// update the spring function so that movement can happen in the UI
+    				if (springPositions) {
+    					springPositions.set(values.map(v => percentOf(v)));
+    				} else {
+    					$$subscribe_springPositions($$invalidate(24, springPositions = spring(values.map(v => percentOf(v)), springValues)));
+    				}
     			}
     		}
     	};
@@ -2156,6 +2207,7 @@
     		vertical,
     		float,
     		hover,
+    		disabled,
     		pips,
     		pipstep,
     		all,
@@ -2171,9 +2223,9 @@
     		focus,
     		handlePressed,
     		activeHandle,
+    		springPositions,
     		percentOf,
     		$springPositions,
-    		springPositions,
     		rangeStart,
     		rangeEnd,
     		sliderBlurHandle,
@@ -2196,7 +2248,7 @@
     class RangeSlider extends SvelteComponent {
     	constructor(options) {
     		super();
-    		if (!document.getElementById("svelte-1o0h0q7-style")) add_css$1();
+    		if (!document.getElementById("svelte-5451cf-style")) add_css$1();
 
     		init(
     			this,
@@ -2206,7 +2258,7 @@
     			safe_not_equal,
     			{
     				range: 1,
-    				pushy: 38,
+    				pushy: 39,
     				min: 2,
     				max: 3,
     				step: 4,
@@ -2214,19 +2266,20 @@
     				vertical: 5,
     				float: 6,
     				hover: 7,
-    				pips: 8,
-    				pipstep: 9,
-    				all: 10,
-    				first: 11,
-    				last: 12,
-    				rest: 13,
-    				id: 14,
-    				prefix: 15,
-    				suffix: 16,
-    				formatter: 17,
-    				handleFormatter: 18,
-    				precision: 39,
-    				springValues: 40
+    				disabled: 8,
+    				pips: 9,
+    				pipstep: 10,
+    				all: 11,
+    				first: 12,
+    				last: 13,
+    				rest: 14,
+    				id: 15,
+    				prefix: 16,
+    				suffix: 17,
+    				formatter: 18,
+    				handleFormatter: 19,
+    				precision: 40,
+    				springValues: 41
     			},
     			[-1, -1]
     		);
