@@ -13,6 +13,7 @@
   export let vertical = false;
   export let float = false;
   export let hover = true;
+  export let disabled = false;
 
   // range pips / values props
   export let pips = false;
@@ -359,8 +360,10 @@
    * @param {event} e the event from browser
    **/
   function sliderFocusHandle(e) {
-    activeHandle = index(e.target);
-    focus = true;
+    if ( !disabled ) {
+      activeHandle = index(e.target);
+      focus = true;
+    }
   }
 
   /**
@@ -369,37 +372,39 @@
    * @param {event} e the event from browser
    **/
   function sliderKeydown(e) {
-    const handle = index(e.target);
-    let jump = e.ctrlKey || e.metaKey || e.shiftKey ? step * 10 : step;
-    let prevent = false;
+    if ( !disabled ) {
+      const handle = index(e.target);
+      let jump = e.ctrlKey || e.metaKey || e.shiftKey ? step * 10 : step;
+      let prevent = false;
 
-    switch (e.key) {
-      case "PageDown":
-        jump *= 10;
-      case "ArrowRight":
-      case "ArrowUp":
-        moveHandle(handle, values[handle] + jump);
-        prevent = true;
-        break;
-      case "PageUp":
-        jump *= 10;
-      case "ArrowLeft":
-      case "ArrowDown":
-        moveHandle(handle, values[handle] - jump);
-        prevent = true;
-        break;
-      case "Home":
-        moveHandle(handle, min);
-        prevent = true;
-        break;
-      case "End":
-        moveHandle(handle, max);
-        prevent = true;
-        break;
-    }
-    if (prevent) {
-      e.preventDefault();
-      e.stopPropagation();
+      switch (e.key) {
+        case "PageDown":
+          jump *= 10;
+        case "ArrowRight":
+        case "ArrowUp":
+          moveHandle(handle, values[handle] + jump);
+          prevent = true;
+          break;
+        case "PageUp":
+          jump *= 10;
+        case "ArrowLeft":
+        case "ArrowDown":
+          moveHandle(handle, values[handle] - jump);
+          prevent = true;
+          break;
+        case "Home":
+          moveHandle(handle, min);
+          prevent = true;
+          break;
+        case "End":
+          moveHandle(handle, max);
+          prevent = true;
+          break;
+      }
+      if (prevent) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
     }
   }
 
@@ -409,21 +414,23 @@
    * @param {event} e the event from browser
    **/
   function sliderInteractStart(e) {
-    const clientPos = normalisedClient(e);
-    // set the closest handle as active
-    focus = true;
-    handleActivated = true;
-    handlePressed = true;
-    activeHandle = getClosestHandle(clientPos);
+    if ( !disabled ) {
+      const clientPos = normalisedClient(e);
+      // set the closest handle as active
+      focus = true;
+      handleActivated = true;
+      handlePressed = true;
+      activeHandle = getClosestHandle(clientPos);
 
-    // fire the start event
-    startValue = previousValue = alignValueToStep(values[activeHandle]);
-    eStart();
+      // fire the start event
+      startValue = previousValue = alignValueToStep(values[activeHandle]);
+      eStart();
 
-    // for touch devices we want the handle to instantly
-    // move to the position touched for more responsive feeling
-    if (e.type === "touchstart") {
-      handleInteract(clientPos);
+      // for touch devices we want the handle to instantly
+      // move to the position touched for more responsive feeling
+      if (e.type === "touchstart") {
+        handleInteract(clientPos);
+      }
     }
   }
 
@@ -458,8 +465,10 @@
    * @param {event} e the event from browser
    **/
   function bodyInteract(e) {
-    if (handleActivated) {
-      handleInteract(normalisedClient(e));
+    if ( !disabled ) {
+      if (handleActivated) {
+        handleInteract(normalisedClient(e));
+      }
     }
   }
 
@@ -470,20 +479,22 @@
    * @param {event} e the event from browser
    **/
   function bodyMouseUp(e) {
-    const el = e.target;
-    // this only works if a handle is active, which can
-    // only happen if there was sliderInteractStart triggered
-    // on the slider, already
-    if (handleActivated) {
-      if (el === slider || slider.contains(el)) {
-        focus = true;
-        if (!targetIsHandle(el)) {
-          handleInteract(normalisedClient(e));
+    if ( !disabled ) {
+      const el = e.target;
+      // this only works if a handle is active, which can
+      // only happen if there was sliderInteractStart triggered
+      // on the slider, already
+      if (handleActivated) {
+        if (el === slider || slider.contains(el)) {
+          focus = true;
+          if (!targetIsHandle(el)) {
+            handleInteract(normalisedClient(e));
+          }
         }
+        // fire the stop event for mouse device
+        // when the body is triggered with an active handle
+        eStop();
       }
-      // fire the stop event for mouse device
-      // when the body is triggered with an active handle
-      eStop();
     }
     handleActivated = false;
     handlePressed = false;
@@ -500,13 +511,15 @@
   }
 
   function bodyKeyDown(e) {
-    if (e.target === slider || slider.contains(e.target)) {
-      keyboardActive = true;
+    if ( !disabled ) {
+      if (e.target === slider || slider.contains(e.target)) {
+        keyboardActive = true;
+      }
     }
   }
 
   function eStart() {
-    dispatch("start", {
+    !disabled && dispatch("start", {
       activeHandle,
       value: startValue,
       values: values.map((v) => alignValueToStep(v)),
@@ -514,7 +527,7 @@
   }
 
   function eStop() {
-    dispatch("stop", {
+    !disabled && dispatch("stop", {
       activeHandle,
       startValue: startValue,
       value: values[activeHandle],
@@ -523,7 +536,7 @@
   }
 
   function eChange() {
-    dispatch("change", {
+    !disabled && dispatch("change", {
       activeHandle,
       startValue: startValue,
       previousValue:
@@ -552,6 +565,7 @@
     border-radius: 100px;
     height: 0.5em;
     margin: 1em;
+    transition: opacity 0.2s ease;
   }
   :global(.rangeSlider, .rangeSlider *) {
     user-select: none;
@@ -702,6 +716,13 @@
     background-color: #4a40d4;
     background-color: var(--float);
   }
+  :global(.rangeSlider.disabled ) {
+    opacity: 0.5;
+  }
+  :global(.rangeSlider.disabled .rangeNub) {
+    background-color: #d7dada;
+    background-color: var(--slider);
+  }
 </style>
 
 <div
@@ -709,6 +730,7 @@
   bind:this={slider}
   class="rangeSlider"
   class:range
+  class:disabled
   class:vertical
   class:focus
   class:min={range === 'min'}
@@ -723,9 +745,8 @@
   {#each values as value, index}
     <span
       role="slider"
-      tabindex="0"
       class="rangeHandle"
-      class:hoverable={hover}
+      class:hoverable={hover && !disabled}
       class:active={focus && activeHandle === index}
       class:press={handlePressed && activeHandle === index}
       on:blur={sliderBlurHandle}
@@ -736,7 +757,11 @@
       aria-valuemax={range === true && index === 0 ? values[1] : max}
       aria-valuenow={value}
       aria-valuetext="{prefix}{handleFormatter(value)}{suffix}"
-      aria-orientation={vertical ? 'vertical' : 'horizontal'}>
+      aria-orientation={vertical ? 'vertical' : 'horizontal'}
+      aria-disabled={disabled}
+      {disabled}
+      tabindex="{ disabled ? -1 : 0 }"
+    >
       <span class="rangeNub" />
       {#if float}
         <span class="rangeFloat">{prefix}{handleFormatter(value)}{suffix}</span>
@@ -766,6 +791,7 @@
       {suffix}
       {formatter}
       {focus}
+      {disabled}
       {percentOf} />
   {/if}
 </div>

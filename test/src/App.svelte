@@ -26,6 +26,8 @@
   let zero = [2,10];
   let zeromin = 0;
   let zeromax = 0;
+
+  let disabled = false;
   
 </script>
 
@@ -55,29 +57,30 @@
 	
   <div class="content" style="--range-handle-focus: {color}; --range-handle: {lightColor}">
 
-    <RangeSlider vertical range values={[10,30]} pips all="label" />
+    <RangeSlider vertical range values={[10,30]} pips all="label" {disabled} />
     <RangeSlider vertical range="min" values={[10]} pips all />
     <RangeSlider vertical range="max" values={[30]} pips />
     
     <br>
     <RangeSlider id="test-id" springValues={{ stiffness: 0.03, damping: 0.08 }} />
     <br>
-
-    <RangeSlider bind:values 
+ 
+    <RangeSlider bind:values {disabled} 
       on:start={(e) => { console.log("start",e.detail)}}
       on:stop={(e) => { console.log("end",e.detail)}} 
       on:change={(e) => { console.log("change",e.detail)}} 
     />
     <hr>
-      {values}<br>
-      <input type="number" bind:value={values[0]} />
-      <input type="number" bind:value={values[1]} />
-      <input type="number" bind:value={values[2]} />
-      <input type="number" bind:value={values[3]} />
+    {values}
+    <br>
+    <input type="number" bind:value={values[0]} />
+    <input type="number" bind:value={values[1]} />
+    <input type="number" bind:value={values[2]} />
+    <input type="number" bind:value={values[3]} />
     <hr>
     <RangeSlider float />
     <RangeSlider float pips all="label" />
-    <RangeSlider float pips first="label" last="label" />
+    <RangeSlider float pips first="label" last="label"  {disabled} />
     <RangeSlider float pips first="label" last="label" rest="label"
       on:start={(e) => { console.log("start",e.detail)}}
       on:stop={(e) => { console.log("stop",e.detail)}} 
@@ -117,9 +120,11 @@
 
     <br><br>
 
-    <RangeSlider bind:values={zero} bind:min={zeromin} bind:max={zeromax} range float pips all="label" step={1} pipstep={5} />
-    <br><button on:click={()=>{ zeromin = 1; zeromax = 30; zero = 10; }}>increase min/max</button> - {zero}
+    <RangeSlider bind:values={zero} min={zeromin} max={zeromax} range float pips all="label" step={1} pipstep={5} />
+    <br><button on:click={()=>{ zeromin = 1; zeromax = 30; zero = 10; }}>increase min/max</button> - {zero} 
     
+    <RangeSlider bind:values  float pips all="label" {disabled} />
+    <button on:click={()=>{disabled=!disabled}}>toggle disabled</button>
 
   </div>
 
