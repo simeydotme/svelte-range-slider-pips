@@ -306,6 +306,10 @@
     if ( typeof index === 'undefined' ) {
       index = activeHandle;
     }
+    // mutate values, to ensure that the following changes in its content
+    // are detected even when compiled with Svelte option "immutable" set
+    // to true
+    values = [...values]
     // if this is a range slider perform special checks
     if (range) {
       // restrict the handles of a range-slider from
