@@ -7,8 +7,12 @@ A reactive, accessible, multi-thumb, range slider with the ability to display "p
 ![Svelte Range Slider -- focussed, including some pips](test/public/slider.png)
 
 
-**[📔📘📖 _Full Documentation & Examples_](https://simeydotme.github.io/svelte-range-slider-pips/)**
+---
 
+📔 | External | [_Full Documentation & Examples_](https://simeydotme.github.io/svelte-range-slider-pips/)
+:--: | -----: | :------
+💲 | **REPL** |[_Svelte component demo_](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43?version=3.32.1)
+❤ | **Codepen** |[_Plain JS component demo_](https://codepen.io/simeydotme/pen/KKNJdbK)
 
 ---
 
