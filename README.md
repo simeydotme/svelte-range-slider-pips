@@ -1,11 +1,11 @@
 
 # Range Slider (with pips)
+
 ## [`svelte-range-slider-pips`](https://www.npmjs.com/package/svelte-range-slider-pips) @ **npm**
 
 A reactive, accessible, multi-thumb, range slider with the ability to display "pips" or "notches" along the range. Importable as a svelte-component, or used directly in any javascript application.
 
 ![Svelte Range Slider -- focussed, including some pips](test/public/slider.png)
-
 
 ---
 
@@ -17,7 +17,6 @@ A reactive, accessible, multi-thumb, range slider with the ability to display "p
 ---
 
 ## features
-
 
 ![Features of the range slider plugin (written below)](test/public/range-slider.png)
 
@@ -34,6 +33,7 @@ A reactive, accessible, multi-thumb, range slider with the ability to display "p
 ## install
 
 Open your project and use the command line to install the package;
+
 ```bash
 yarn add svelte-range-slider-pips --dev          # or
 npm install svelte-range-slider-pips --save-dev  # if you prefer npm
@@ -74,7 +74,7 @@ Assuming you have a Svelte app up and running;
 
 ### as a JS module
 
-If you're building a bleeding-edge JS application (not svelte), you might 
+If you're building a bleeding-edge JS application (not svelte), you might
 want to use js imports (`import`)
 
 ```js
@@ -89,7 +89,9 @@ var mySlider = new RangeSlider({
 ---
 
 ## props (options)
+
 ### slider props
+
 prop | type | default | description
 -----|------|---------|-------------
 **values** | `Array` | `[50]` | Array of values to apply on the slider. Multiple values creates multiple handles. (_**note:** A slider with `range` property set can only have two values max_)
@@ -104,7 +106,8 @@ prop | type | default | description
 **pipstep** | `Number` | `1`/`10`/`20` | Every `nth` step to show a pip for. This has multiple defaults depending on `values` property
 **first** | `Boolean`/`String` | `false` | Whether to show a pip or label for the first value on slider. Use `first='label'` to show a label value
 **last** | `Boolean`/`String` | `false` | Whether to show a pip or label for the last value on slider. Use `last='label'` to show a label value
-**rest** | `Boolean`/`String` | `false` | Whether to show a pip or label for the all other values. Use `rest='label'` to show a label value
+**rest** | `Boolean`/`String` | `false` | Whether to show a pip or label for all other values. Use `rest='label'` to show a label value
+**all** | `Boolean`/`String` | `false` | Whether to show a pip or label for all values. Same as combining `first`, `last` and `rest`. Use `all='label'` to show a label value
 **prefix** | `String` | `""` | A string to prefix to all displayed values
 **suffix** | `String` | `""` | A string to suffix to all displayed values
 **disabled** | `Boolean` | `false` | Determine if the slider is disabled, or enabled _(only disables interactions, and events)_
@@ -113,6 +116,7 @@ prop | type | default | description
 **springValues** | `Object` | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving
 
 ### slider events (dispatched)
+
 event | example | `event.detail` | description
 ------|------------|--------|-------------
 **start** | `on:start={(e) => { ... }}` | `{ activeHandle: Integer, value: Float, values: Array }` | Event fired when the user begins interaction with the slider
@@ -121,13 +125,12 @@ event | example | `event.detail` | description
 
 **[📔📘📖 _Full Documentation & Examples_](https://simeydotme.github.io/svelte-range-slider-pips/)**
 
-
 ## contribute
 
 I am very happy to accept;
+
 - 🌟 suggestions/requests for new features or changes
 - 🛠 pull-requests for bug fixes, or issue resolution
 - 🧪 help with creating a proper test-suite
 
 [Read the CONTRIBUTING.md](./CONTRIBUTING.md)
-
