@@ -110,7 +110,10 @@
     top: 0;
     left: 0.75em;
   }
-  :global(.rangePips .pip, .rangePips .pipVal) {
+  :global(.rangePips .pip) {
+    transition: all 0.15s ease;
+  }
+  :global(.rangePips .pipVal) {
     transition: all 0.15s ease;
   }
   :global(.rangePips .pip) {

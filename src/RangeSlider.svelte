@@ -566,8 +566,9 @@
     height: 0.5em;
     margin: 1em;
     transition: opacity 0.2s ease;
+      user-select: none;
   }
-  :global(.rangeSlider, .rangeSlider *) {
+  :global(.rangeSlider *) {
     user-select: none;
   }
   :global(.rangeSlider.pips) {
