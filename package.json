@@ -1,6 +1,6 @@
 {
   "name": "svelte-range-slider-pips",
-  "version": "1.7.0",
+  "version": "1.7.2",
   "svelte": "src/index.js",
   "module": "dist/svelte-range-slider-pips.mjs",
   "main": "dist/svelte-range-slider-pips.js",
