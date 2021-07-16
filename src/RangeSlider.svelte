@@ -281,6 +281,10 @@
     // align & clamp the value so we're not doing extra
     // calculation on an out-of-range value down below
     value = alignValueToStep(value);
+    // mutate values, to ensure that the following changes in its content
+    // are detected even when compiled with Svelte option "immutable" set
+    // to true
+    values = [...values]
     // if this is a range slider
     if (range) {
       // restrict the handles of a range-slider from
