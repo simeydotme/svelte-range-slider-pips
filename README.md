@@ -111,8 +111,8 @@ prop | type | default | description
 **prefix** | `String` | `""` | A string to prefix to all displayed values
 **suffix** | `String` | `""` | A string to suffix to all displayed values
 **disabled** | `Boolean` | `false` | Determine if the slider is disabled, or enabled _(only disables interactions, and events)_
-**formatter** | `Function` | `(v) => v` | A function to re-format values before they are displayed
-**handleFormatter** | `Function` | `formatter` | A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property
+**formatter** | `Function` | `(v,i) => v` | A function to re-format values before they are displayed (`v = value, i = pip index`)
+**handleFormatter** | `Function` | `formatter` | A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property (`v = value, i = handle index`)
 **springValues** | `Object` | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving
 
 ### slider events (dispatched)

@@ -1,0 +1,39 @@
+
+
+body,html {
+    padding: 0;
+    margin: 0;
+}
+main {
+    font-family: sans-serif;
+    text-align: center;
+    padding: 15px;
+}
+@media screen and ( min-width: 600px ) {
+    main {
+        padding: 50px;
+    }
+}
+input {
+    width: 100px;
+}
+
+.rangeSlider.rangeSlider {
+    margin: 60px;
+}
+
+h2,h3,h4 {
+    margin: 20px 0 10px;
+}
+
+h2 + .rangeSlider.rangeSlider, h3 + .rangeSlider.rangeSlider, h4 + .rangeSlider.rangeSlider {
+    margin-top: 10px;
+}
+
+.pipVal-prefix {
+    color: coral;
+}
+
+.pipVal-suffix {
+    color: blueviolet;
+}

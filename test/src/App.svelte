@@ -39,6 +39,12 @@
     --range-handle-inactive: var(--range-slider);
     --range-handle-focus: rgb(245, 0, 46);
   }
+  #test-id [data-handle="1"] {
+    --handle: turquoise;
+    --handle-inactive: #a0ffe0;
+    --handle-border: #a0ffe0;
+    --handle-focus: var(--handle);
+  }
   #clr-test {
     --range-slider: rgb(195, 228, 222);
     --range-handle-inactive: rgb(81, 185, 180);
@@ -62,7 +68,8 @@
     <RangeSlider vertical range="max" values={[30]} pips />
     
     <br>
-    <RangeSlider id="test-id" springValues={{ stiffness: 0.03, damping: 0.08 }} />
+    <h2>Spring & Colors Test</h2>
+    <RangeSlider id="test-id" springValues={{ stiffness: 0.03, damping: 0.08 }} values={[30,50,70]} />
     <br>
  
     <RangeSlider bind:values {disabled} 
@@ -87,9 +94,14 @@
       on:change={(e) => { console.log("change",e.detail)}} 
     />
     <br>
+    <h2>range</h2>
+    <h3>Handles block each other</h3>
     <RangeSlider range bind:values={pushy} float />
+    <h3>Handles push each other</h3>
     <RangeSlider range pushy bind:values={pushy} pips all="label" float />
+    <h2>min range</h2>
     <RangeSlider range="min" values={[65]} pips all="label" float />
+    <h2>max range</h2>
     <RangeSlider range="max" values={[35]} pips all="label" float />
     <br>
     <RangeSlider float pips step={10} pipstep={1} />
@@ -101,9 +113,14 @@
     />
     <br>
     <RangeSlider float pips first="label" last="label" rest pipstep={1} bind:values={dynamic} range />
+
+    <h2>Prefix</h2>
     <RangeSlider prefix="$" range values={[20,80]} float pips first="label" last="label" />
-    <RangeSlider id="clr-test" prefix="~" suffix="m²" {formatter} range values={[100,3000]} min={100} max={3000} step={50} float pips first="label" last="label" />
-    <RangeSlider handleFormatter={()=>"O²"} formatter={(v)=>`${v}% O²`} step={1} float pips first="label" last="label" hover={false} />
+    <h2>Prefix & Suffix, color</h2>
+    <RangeSlider id="clr-test" prefix="~" suffix="m²" {formatter} range values={[100,3000]} min={100} max={3000} step={200} float pips all="label" />
+    <h2>Formatters</h2>
+    <RangeSlider handleFormatter={(v,i)=>"O²"} formatter={(v,i)=>`${v}% O²`} step={1} float pips first="label" last="label" hover={false} values={[25,50,75]} />
+    <RangeSlider handleFormatter={(v,i)=>`v: ${v}, i: ${i}`} formatter={(v,i)=>`v: ${v}, i: ${i}`} step={10} float pips all="label" values={[25,50,75]} />
     <br>
     <RangeSlider bind:values={day} min={0} max={6} formatter={dayFormat} float pips first="label" last="label" rest="label" />
     <RangeSlider bind:values={day} min={0} max={6} formatter={dayFormatCn} float pips first="label" last="label" rest="label" />
@@ -121,7 +138,7 @@
     <br><br>
 
     <RangeSlider bind:values={zero} min={zeromin} max={zeromax} range float pips all="label" step={1} pipstep={5} />
-    <br><button on:click={()=>{ zeromin = 1; zeromax = 30; zero = 10; }}>increase min/max</button> - {zero} 
+    <br><button on:click={()=>{ zeromin = 10; zeromax = 30; zero = [3,70]; }}>increase min/max</button> - {zero} 
     
     <RangeSlider bind:values  float pips all="label" {disabled} />
     <button on:click={()=>{disabled=!disabled}}>toggle disabled</button>
@@ -130,26 +147,3 @@
 
 
 </main>
-
-<style>
-  :global(body,html) {
-    padding: 0;
-    margin: 0;
-  }
-  main {
-    font-family: sans-serif;
-    text-align: center;
-    padding: 15px;
-  }
-  @media screen and ( min-width: 600px ) {
-    main {
-      padding: 50px;
-    }
-  }
-  input {
-    width: 100px;
-  }
-  :global(.rangeSlider ) {
-    margin: 60px!important;
-  }
-</style>

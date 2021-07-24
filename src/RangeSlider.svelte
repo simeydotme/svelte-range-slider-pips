@@ -27,7 +27,7 @@
   export let id = undefined;
   export let prefix = "";
   export let suffix = "";
-  export let formatter = (v) => v;
+  export let formatter = (v,i) => v;
   export let handleFormatter = formatter;
 
   // stylistic props
@@ -750,6 +750,7 @@
       class:hoverable={hover && !disabled}
       class:active={focus && activeHandle === index}
       class:press={handlePressed && activeHandle === index}
+      data-handle={index}
       on:blur={sliderBlurHandle}
       on:focus={sliderFocusHandle}
       on:keydown={sliderKeydown}
@@ -757,7 +758,7 @@
       aria-valuemin={range === true && index === 1 ? values[0] : min}
       aria-valuemax={range === true && index === 0 ? values[1] : max}
       aria-valuenow={value}
-      aria-valuetext="{prefix}{handleFormatter(value)}{suffix}"
+      aria-valuetext="{prefix}{handleFormatter(value,index)}{suffix}"
       aria-orientation={vertical ? 'vertical' : 'horizontal'}
       aria-disabled={disabled}
       {disabled}
@@ -765,7 +766,9 @@
     >
       <span class="rangeNub" />
       {#if float}
-        <span class="rangeFloat">{prefix}{handleFormatter(value)}{suffix}</span>
+        <span class="rangeFloat">
+          {#if prefix}<span class="rangeFloat-prefix">{prefix}</span>{/if}{handleFormatter(value,index)}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
+        </span>
       {/if}
     </span>
   {/each}

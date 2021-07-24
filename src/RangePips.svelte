@@ -18,7 +18,7 @@
   // formatting props
   export let prefix = "";
   export let suffix = "";
-  export let formatter = v => v;
+  export let formatter = (v,i) => v;
 
   // stylistic props
   export let focus = undefined;
@@ -145,7 +145,7 @@
       style="{vertical ? 'top' : 'left'}: 0%;">
       {#if all === 'label' || first === 'label'}
         <span class="pipVal">
-          {prefix}{formatter(min)}{suffix}
+          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(min,0)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
         </span>
       {/if}
     </span>
@@ -160,7 +160,7 @@
           style="{vertical ? 'top' : 'left'}: {percentOf(pipVal(i))}%;">
           {#if all === 'label' || rest === 'label'}
             <span class="pipVal">
-              {prefix}{formatter(pipVal(i))}{suffix}
+              {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(pipVal(i),i)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
             </span>
           {/if}
         </span>
@@ -175,7 +175,7 @@
       style="{vertical ? 'top' : 'left'}: 100%;">
       {#if all === 'label' || last === 'label'}
         <span class="pipVal">
-          {prefix}{formatter(max)}{suffix}
+          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(max,pipCount)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
         </span>
       {/if}
     </span>
