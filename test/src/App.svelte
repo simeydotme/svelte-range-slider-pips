@@ -28,6 +28,16 @@
   let zeromax = 0;
 
   let disabled = false;
+
+  let arrayPush = [11,99];
+  let pushValues = () => {
+    values.push(Math.random()*100);
+    values = values
+  }
+  let popValues = () => {
+    values.pop();
+    values = values
+  }
   
 </script>
 
@@ -63,31 +73,22 @@
 	
   <div class="content" style="--range-handle-focus: {color}; --range-handle: {lightColor}">
 
-    <RangeSlider vertical range values={[10,30]} pips all="label" {disabled} />
+    <RangeSlider vertical range values={[10,30]} pips all="label" />
     <RangeSlider vertical range="min" values={[10]} pips all />
     <RangeSlider vertical range="max" values={[30]} pips />
     
     <br>
     <h2>Spring & Colors Test</h2>
-    <RangeSlider id="test-id" springValues={{ stiffness: 0.03, damping: 0.08 }} values={[30,50,70]} />
+    <RangeSlider id="test-id" springValues={{ stiffness: 0.03, damping: 0.08 }} bind:values />
     <br>
- 
-    <RangeSlider bind:values {disabled} 
-      on:start={(e) => { console.log("start",e.detail)}}
-      on:stop={(e) => { console.log("end",e.detail)}} 
-      on:change={(e) => { console.log("change",e.detail)}} 
-    />
-    <hr>
-    {values}
-    <br>
-    <input type="number" bind:value={values[0]} />
-    <input type="number" bind:value={values[1]} />
-    <input type="number" bind:value={values[2]} />
-    <input type="number" bind:value={values[3]} />
-    <hr>
+    
+    
     <RangeSlider float />
     <RangeSlider float pips all="label" />
-    <RangeSlider float pips first="label" last="label"  {disabled} />
+    <RangeSlider float pips first="label" last="label" {disabled} />
+    <h2>trim/align</h2>
+    <RangeSlider values="{[-10,12,103]}" float pips step={5} all="label" {disabled} />
+    <h2>events</h2>
     <RangeSlider float pips first="label" last="label" rest="label"
       on:start={(e) => { console.log("start",e.detail)}}
       on:stop={(e) => { console.log("stop",e.detail)}} 
@@ -140,8 +141,26 @@
     <RangeSlider bind:values={zero} min={zeromin} max={zeromax} range float pips all="label" step={1} pipstep={5} />
     <br><button on:click={()=>{ zeromin = 10; zeromax = 30; zero = [3,70]; }}>increase min/max</button> - {zero} 
     
-    <RangeSlider bind:values  float pips all="label" {disabled} />
+    <h2>disable / enable</h2>
+    <RangeSlider bind:values float pips all="label" {disabled} />
     <button on:click={()=>{disabled=!disabled}}>toggle disabled</button>
+
+    <h2>push & pop values</h2>
+    <RangeSlider bind:values float pips all="label" />
+    <button on:click={pushValues}>push</button>
+    <button on:click={popValues}>pop</button>
+    <br>({values})
+    
+    <h2>Binding to inputs</h2>
+    <RangeSlider bind:values {disabled} 
+      on:start={(e) => { console.log("start",e.detail)}}
+      on:stop={(e) => { console.log("end",e.detail)}} 
+      on:change={(e) => { console.log("change",e.detail)}} 
+    />
+    {#each values as v}
+      <input type="number" bind:value={v} {disabled} />
+    {/each}
+    <hr>
 
   </div>
 

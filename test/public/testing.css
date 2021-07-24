@@ -18,12 +18,19 @@ input {
     width: 100px;
 }
 
+hr {
+    height: 1px;
+    border: none;
+    border-bottom: 1px dashed rgb(125, 129, 138);
+    margin: 50px 0;
+}
+
 .rangeSlider.rangeSlider {
     margin: 60px;
 }
 
 h2,h3,h4 {
-    margin: 20px 0 10px;
+    margin: 30px 0 10px;
 }
 
 h2 + .rangeSlider.rangeSlider, h3 + .rangeSlider.rangeSlider, h4 + .rangeSlider.rangeSlider {

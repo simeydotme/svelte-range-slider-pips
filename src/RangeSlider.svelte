@@ -41,6 +41,7 @@
   let slider;
 
   // state management
+  let valueLength = 0;
   let focus = false;
   let handleActivated = false;
   let handlePressed = false;
@@ -51,25 +52,35 @@
 
   // copy the initial values in to a spring function which
   // will update every time the values array is modified
+
   let springPositions;
 
   $: {
+
     // check that "values" is an array, or set it as array
     // to prevent any errors in springs, or range trimming
     if ( !Array.isArray( values ) ) {
       values = [(max + min) / 2];
       console.error( "'values' prop should be an Array (https://github.com/simeydotme/svelte-range-slider-pips#slider-props)" );
     }
-    // trim the range as needed
-    values = trimRange(values);
-    // clamp the values to the steps and boundaries set up in the slider
-    values = values.map((v) => alignValueToStep(v));
-    // update the spring function so that movement can happen in the UI
-    if ( springPositions ) {
-      springPositions.set(values.map((v) => percentOf(v)));
+    // trim the range so it remains as a min/max (only 2 handles)
+    // and also align the handles to the steps
+    values = trimRange(values.map((v) => alignValueToStep(v)));
+
+    // check if the valueLength (length of values[]) has changed,
+    // because if so we need to re-seed the spring function with the
+    // new values array.
+    if ( valueLength !== values.length ) {
+      // set the initial spring values when the slider initialises,
+      // or when values array length has changed
+      springPositions = spring(values.map((v) => percentOf(v)), springValues );
     } else {
-      springPositions = spring( values.map((v) => percentOf(v)), springValues );
+      // update the value of the spring function for animated handles
+      // whenever the values has updated
+      springPositions.set(values.map((v) => percentOf(v)));
     }
+    // set the valueLength for the next check
+    valueLength = values.length;
   };
 
   /**
@@ -795,7 +806,6 @@
       {suffix}
       {formatter}
       {focus}
-      {disabled}
       {percentOf} />
   {/if}
 </div>
