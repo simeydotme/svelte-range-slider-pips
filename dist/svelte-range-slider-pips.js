@@ -1,7 +1,7 @@
 /**
- * svelte-range-slider-pips ~ 1.7.2
+ * svelte-range-slider-pips ~ 1.8.0
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
- * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 1/7/2021
+ * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 24/7/2021
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -547,10 +547,10 @@
     }
 
     // (140:2) {#if ( all && first !== false ) || first }
-    function create_if_block_5(ctx) {
+    function create_if_block_9(ctx) {
     	let span;
     	let span_style_value;
-    	let if_block = (/*all*/ ctx[3] === "label" || /*first*/ ctx[4] === "label") && create_if_block_6(ctx);
+    	let if_block = (/*all*/ ctx[3] === "label" || /*first*/ ctx[4] === "label") && create_if_block_10(ctx);
 
     	return {
     		c() {
@@ -570,7 +570,7 @@
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_6(ctx);
+    					if_block = create_if_block_10(ctx);
     					if_block.c();
     					if_block.m(span, null);
     				}
@@ -599,31 +599,105 @@
     }
 
     // (146:6) {#if all === 'label' || first === 'label'}
-    function create_if_block_6(ctx) {
+    function create_if_block_10(ctx) {
     	let span;
-    	let t0;
-    	let t1_value = /*formatter*/ ctx[9](/*min*/ ctx[0]) + "";
-    	let t1;
-    	let t2;
+    	let t_value = /*formatter*/ ctx[9](/*min*/ ctx[0], 0) + "";
+    	let t;
+    	let if_block0 = /*prefix*/ ctx[7] && create_if_block_12(ctx);
+    	let if_block1 = /*suffix*/ ctx[8] && create_if_block_11(ctx);
 
     	return {
     		c() {
     			span = element("span");
-    			t0 = text(/*prefix*/ ctx[7]);
-    			t1 = text(t1_value);
-    			t2 = text(/*suffix*/ ctx[8]);
+    			if (if_block0) if_block0.c();
+    			t = text(t_value);
+    			if (if_block1) if_block1.c();
     			attr(span, "class", "pipVal");
     		},
     		m(target, anchor) {
     			insert(target, span, anchor);
-    			append(span, t0);
-    			append(span, t1);
-    			append(span, t2);
+    			if (if_block0) if_block0.m(span, null);
+    			append(span, t);
+    			if (if_block1) if_block1.m(span, null);
     		},
     		p(ctx, dirty) {
-    			if (dirty & /*prefix*/ 128) set_data(t0, /*prefix*/ ctx[7]);
-    			if (dirty & /*formatter, min*/ 513 && t1_value !== (t1_value = /*formatter*/ ctx[9](/*min*/ ctx[0]) + "")) set_data(t1, t1_value);
-    			if (dirty & /*suffix*/ 256) set_data(t2, /*suffix*/ ctx[8]);
+    			if (/*prefix*/ ctx[7]) {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
+    				} else {
+    					if_block0 = create_if_block_12(ctx);
+    					if_block0.c();
+    					if_block0.m(span, t);
+    				}
+    			} else if (if_block0) {
+    				if_block0.d(1);
+    				if_block0 = null;
+    			}
+
+    			if (dirty & /*formatter, min*/ 513 && t_value !== (t_value = /*formatter*/ ctx[9](/*min*/ ctx[0], 0) + "")) set_data(t, t_value);
+
+    			if (/*suffix*/ ctx[8]) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+    				} else {
+    					if_block1 = create_if_block_11(ctx);
+    					if_block1.c();
+    					if_block1.m(span, null);
+    				}
+    			} else if (if_block1) {
+    				if_block1.d(1);
+    				if_block1 = null;
+    			}
+    		},
+    		d(detaching) {
+    			if (detaching) detach(span);
+    			if (if_block0) if_block0.d();
+    			if (if_block1) if_block1.d();
+    		}
+    	};
+    }
+
+    // (148:10) {#if prefix}
+    function create_if_block_12(ctx) {
+    	let span;
+    	let t;
+
+    	return {
+    		c() {
+    			span = element("span");
+    			t = text(/*prefix*/ ctx[7]);
+    			attr(span, "class", "pipVal-prefix");
+    		},
+    		m(target, anchor) {
+    			insert(target, span, anchor);
+    			append(span, t);
+    		},
+    		p(ctx, dirty) {
+    			if (dirty & /*prefix*/ 128) set_data(t, /*prefix*/ ctx[7]);
+    		},
+    		d(detaching) {
+    			if (detaching) detach(span);
+    		}
+    	};
+    }
+
+    // (148:88) {#if suffix}
+    function create_if_block_11(ctx) {
+    	let span;
+    	let t;
+
+    	return {
+    		c() {
+    			span = element("span");
+    			t = text(/*suffix*/ ctx[8]);
+    			attr(span, "class", "pipVal-suffix");
+    		},
+    		m(target, anchor) {
+    			insert(target, span, anchor);
+    			append(span, t);
+    		},
+    		p(ctx, dirty) {
+    			if (dirty & /*suffix*/ 256) set_data(t, /*suffix*/ ctx[8]);
     		},
     		d(detaching) {
     			if (detaching) detach(span);
@@ -632,7 +706,7 @@
     }
 
     // (153:2) {#if ( all && rest !== false ) || rest}
-    function create_if_block_2(ctx) {
+    function create_if_block_4(ctx) {
     	let each_1_anchor;
     	let each_value = Array(/*pipCount*/ ctx[12] + 1);
     	let each_blocks = [];
@@ -688,11 +762,11 @@
     }
 
     // (155:6) {#if pipVal(i) !== min && pipVal(i) !== max}
-    function create_if_block_3(ctx) {
+    function create_if_block_5(ctx) {
     	let span;
     	let t;
     	let span_style_value;
-    	let if_block = (/*all*/ ctx[3] === "label" || /*rest*/ ctx[6] === "label") && create_if_block_4(ctx);
+    	let if_block = (/*all*/ ctx[3] === "label" || /*rest*/ ctx[6] === "label") && create_if_block_6(ctx);
 
     	return {
     		c() {
@@ -714,7 +788,7 @@
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_4(ctx);
+    					if_block = create_if_block_6(ctx);
     					if_block.c();
     					if_block.m(span, t);
     				}
@@ -743,31 +817,105 @@
     }
 
     // (161:10) {#if all === 'label' || rest === 'label'}
-    function create_if_block_4(ctx) {
+    function create_if_block_6(ctx) {
     	let span;
-    	let t0;
-    	let t1_value = /*formatter*/ ctx[9](/*pipVal*/ ctx[13](/*i*/ ctx[23])) + "";
-    	let t1;
-    	let t2;
+    	let t_value = /*formatter*/ ctx[9](/*pipVal*/ ctx[13](/*i*/ ctx[23]), /*i*/ ctx[23]) + "";
+    	let t;
+    	let if_block0 = /*prefix*/ ctx[7] && create_if_block_8(ctx);
+    	let if_block1 = /*suffix*/ ctx[8] && create_if_block_7(ctx);
 
     	return {
     		c() {
     			span = element("span");
-    			t0 = text(/*prefix*/ ctx[7]);
-    			t1 = text(t1_value);
-    			t2 = text(/*suffix*/ ctx[8]);
+    			if (if_block0) if_block0.c();
+    			t = text(t_value);
+    			if (if_block1) if_block1.c();
     			attr(span, "class", "pipVal");
     		},
     		m(target, anchor) {
     			insert(target, span, anchor);
-    			append(span, t0);
-    			append(span, t1);
-    			append(span, t2);
+    			if (if_block0) if_block0.m(span, null);
+    			append(span, t);
+    			if (if_block1) if_block1.m(span, null);
     		},
     		p(ctx, dirty) {
-    			if (dirty & /*prefix*/ 128) set_data(t0, /*prefix*/ ctx[7]);
-    			if (dirty & /*formatter, pipVal*/ 8704 && t1_value !== (t1_value = /*formatter*/ ctx[9](/*pipVal*/ ctx[13](/*i*/ ctx[23])) + "")) set_data(t1, t1_value);
-    			if (dirty & /*suffix*/ 256) set_data(t2, /*suffix*/ ctx[8]);
+    			if (/*prefix*/ ctx[7]) {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
+    				} else {
+    					if_block0 = create_if_block_8(ctx);
+    					if_block0.c();
+    					if_block0.m(span, t);
+    				}
+    			} else if (if_block0) {
+    				if_block0.d(1);
+    				if_block0 = null;
+    			}
+
+    			if (dirty & /*formatter, pipVal*/ 8704 && t_value !== (t_value = /*formatter*/ ctx[9](/*pipVal*/ ctx[13](/*i*/ ctx[23]), /*i*/ ctx[23]) + "")) set_data(t, t_value);
+
+    			if (/*suffix*/ ctx[8]) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+    				} else {
+    					if_block1 = create_if_block_7(ctx);
+    					if_block1.c();
+    					if_block1.m(span, null);
+    				}
+    			} else if (if_block1) {
+    				if_block1.d(1);
+    				if_block1 = null;
+    			}
+    		},
+    		d(detaching) {
+    			if (detaching) detach(span);
+    			if (if_block0) if_block0.d();
+    			if (if_block1) if_block1.d();
+    		}
+    	};
+    }
+
+    // (163:14) {#if prefix}
+    function create_if_block_8(ctx) {
+    	let span;
+    	let t;
+
+    	return {
+    		c() {
+    			span = element("span");
+    			t = text(/*prefix*/ ctx[7]);
+    			attr(span, "class", "pipVal-prefix");
+    		},
+    		m(target, anchor) {
+    			insert(target, span, anchor);
+    			append(span, t);
+    		},
+    		p(ctx, dirty) {
+    			if (dirty & /*prefix*/ 128) set_data(t, /*prefix*/ ctx[7]);
+    		},
+    		d(detaching) {
+    			if (detaching) detach(span);
+    		}
+    	};
+    }
+
+    // (163:98) {#if suffix}
+    function create_if_block_7(ctx) {
+    	let span;
+    	let t;
+
+    	return {
+    		c() {
+    			span = element("span");
+    			t = text(/*suffix*/ ctx[8]);
+    			attr(span, "class", "pipVal-suffix");
+    		},
+    		m(target, anchor) {
+    			insert(target, span, anchor);
+    			append(span, t);
+    		},
+    		p(ctx, dirty) {
+    			if (dirty & /*suffix*/ 256) set_data(t, /*suffix*/ ctx[8]);
     		},
     		d(detaching) {
     			if (detaching) detach(span);
@@ -779,7 +927,7 @@
     function create_each_block(ctx) {
     	let show_if = /*pipVal*/ ctx[13](/*i*/ ctx[23]) !== /*min*/ ctx[0] && /*pipVal*/ ctx[13](/*i*/ ctx[23]) !== /*max*/ ctx[1];
     	let if_block_anchor;
-    	let if_block = show_if && create_if_block_3(ctx);
+    	let if_block = show_if && create_if_block_5(ctx);
 
     	return {
     		c() {
@@ -797,7 +945,7 @@
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block_3(ctx);
+    					if_block = create_if_block_5(ctx);
     					if_block.c();
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
     				}
@@ -868,29 +1016,103 @@
     // (176:6) {#if all === 'label' || last === 'label'}
     function create_if_block_1(ctx) {
     	let span;
-    	let t0;
-    	let t1_value = /*formatter*/ ctx[9](/*max*/ ctx[1]) + "";
-    	let t1;
-    	let t2;
+    	let t_value = /*formatter*/ ctx[9](/*max*/ ctx[1], /*pipCount*/ ctx[12]) + "";
+    	let t;
+    	let if_block0 = /*prefix*/ ctx[7] && create_if_block_3(ctx);
+    	let if_block1 = /*suffix*/ ctx[8] && create_if_block_2(ctx);
 
     	return {
     		c() {
     			span = element("span");
-    			t0 = text(/*prefix*/ ctx[7]);
-    			t1 = text(t1_value);
-    			t2 = text(/*suffix*/ ctx[8]);
+    			if (if_block0) if_block0.c();
+    			t = text(t_value);
+    			if (if_block1) if_block1.c();
     			attr(span, "class", "pipVal");
     		},
     		m(target, anchor) {
     			insert(target, span, anchor);
-    			append(span, t0);
-    			append(span, t1);
-    			append(span, t2);
+    			if (if_block0) if_block0.m(span, null);
+    			append(span, t);
+    			if (if_block1) if_block1.m(span, null);
     		},
     		p(ctx, dirty) {
-    			if (dirty & /*prefix*/ 128) set_data(t0, /*prefix*/ ctx[7]);
-    			if (dirty & /*formatter, max*/ 514 && t1_value !== (t1_value = /*formatter*/ ctx[9](/*max*/ ctx[1]) + "")) set_data(t1, t1_value);
-    			if (dirty & /*suffix*/ 256) set_data(t2, /*suffix*/ ctx[8]);
+    			if (/*prefix*/ ctx[7]) {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
+    				} else {
+    					if_block0 = create_if_block_3(ctx);
+    					if_block0.c();
+    					if_block0.m(span, t);
+    				}
+    			} else if (if_block0) {
+    				if_block0.d(1);
+    				if_block0 = null;
+    			}
+
+    			if (dirty & /*formatter, max, pipCount*/ 4610 && t_value !== (t_value = /*formatter*/ ctx[9](/*max*/ ctx[1], /*pipCount*/ ctx[12]) + "")) set_data(t, t_value);
+
+    			if (/*suffix*/ ctx[8]) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+    				} else {
+    					if_block1 = create_if_block_2(ctx);
+    					if_block1.c();
+    					if_block1.m(span, null);
+    				}
+    			} else if (if_block1) {
+    				if_block1.d(1);
+    				if_block1 = null;
+    			}
+    		},
+    		d(detaching) {
+    			if (detaching) detach(span);
+    			if (if_block0) if_block0.d();
+    			if (if_block1) if_block1.d();
+    		}
+    	};
+    }
+
+    // (178:10) {#if prefix}
+    function create_if_block_3(ctx) {
+    	let span;
+    	let t;
+
+    	return {
+    		c() {
+    			span = element("span");
+    			t = text(/*prefix*/ ctx[7]);
+    			attr(span, "class", "pipVal-prefix");
+    		},
+    		m(target, anchor) {
+    			insert(target, span, anchor);
+    			append(span, t);
+    		},
+    		p(ctx, dirty) {
+    			if (dirty & /*prefix*/ 128) set_data(t, /*prefix*/ ctx[7]);
+    		},
+    		d(detaching) {
+    			if (detaching) detach(span);
+    		}
+    	};
+    }
+
+    // (178:95) {#if suffix}
+    function create_if_block_2(ctx) {
+    	let span;
+    	let t;
+
+    	return {
+    		c() {
+    			span = element("span");
+    			t = text(/*suffix*/ ctx[8]);
+    			attr(span, "class", "pipVal-suffix");
+    		},
+    		m(target, anchor) {
+    			insert(target, span, anchor);
+    			append(span, t);
+    		},
+    		p(ctx, dirty) {
+    			if (dirty & /*suffix*/ 256) set_data(t, /*suffix*/ ctx[8]);
     		},
     		d(detaching) {
     			if (detaching) detach(span);
@@ -902,8 +1124,8 @@
     	let div;
     	let t0;
     	let t1;
-    	let if_block0 = (/*all*/ ctx[3] && /*first*/ ctx[4] !== false || /*first*/ ctx[4]) && create_if_block_5(ctx);
-    	let if_block1 = (/*all*/ ctx[3] && /*rest*/ ctx[6] !== false || /*rest*/ ctx[6]) && create_if_block_2(ctx);
+    	let if_block0 = (/*all*/ ctx[3] && /*first*/ ctx[4] !== false || /*first*/ ctx[4]) && create_if_block_9(ctx);
+    	let if_block1 = (/*all*/ ctx[3] && /*rest*/ ctx[6] !== false || /*rest*/ ctx[6]) && create_if_block_4(ctx);
     	let if_block2 = (/*all*/ ctx[3] && /*last*/ ctx[5] !== false || /*last*/ ctx[5]) && create_if_block(ctx);
 
     	return {
@@ -931,7 +1153,7 @@
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
-    					if_block0 = create_if_block_5(ctx);
+    					if_block0 = create_if_block_9(ctx);
     					if_block0.c();
     					if_block0.m(div, t0);
     				}
@@ -944,7 +1166,7 @@
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
     				} else {
-    					if_block1 = create_if_block_2(ctx);
+    					if_block1 = create_if_block_4(ctx);
     					if_block1.c();
     					if_block1.m(div, t1);
     				}
@@ -999,7 +1221,7 @@
     	let { rest = undefined } = $$props;
     	let { prefix = "" } = $$props;
     	let { suffix = "" } = $$props;
-    	let { formatter = v => v } = $$props;
+    	let { formatter = (v, i) => v } = $$props;
     	let { focus = undefined } = $$props;
     	let { percentOf = undefined } = $$props;
 
@@ -1130,32 +1352,106 @@
     	return child_ctx;
     }
 
-    // (767:6) {#if float}
+    // (768:6) {#if float}
     function create_if_block_2$1(ctx) {
     	let span;
-    	let t0;
-    	let t1_value = /*handleFormatter*/ ctx[19](/*value*/ ctx[59]) + "";
-    	let t1;
-    	let t2;
+    	let t_value = /*handleFormatter*/ ctx[19](/*value*/ ctx[59], /*index*/ ctx[61]) + "";
+    	let t;
+    	let if_block0 = /*prefix*/ ctx[16] && create_if_block_4$1(ctx);
+    	let if_block1 = /*suffix*/ ctx[17] && create_if_block_3$1(ctx);
 
     	return {
     		c() {
     			span = element("span");
-    			t0 = text(/*prefix*/ ctx[16]);
-    			t1 = text(t1_value);
-    			t2 = text(/*suffix*/ ctx[17]);
+    			if (if_block0) if_block0.c();
+    			t = text(t_value);
+    			if (if_block1) if_block1.c();
     			attr(span, "class", "rangeFloat");
     		},
     		m(target, anchor) {
     			insert(target, span, anchor);
-    			append(span, t0);
-    			append(span, t1);
-    			append(span, t2);
+    			if (if_block0) if_block0.m(span, null);
+    			append(span, t);
+    			if (if_block1) if_block1.m(span, null);
     		},
     		p(ctx, dirty) {
-    			if (dirty[0] & /*prefix*/ 65536) set_data(t0, /*prefix*/ ctx[16]);
-    			if (dirty[0] & /*handleFormatter, values*/ 524289 && t1_value !== (t1_value = /*handleFormatter*/ ctx[19](/*value*/ ctx[59]) + "")) set_data(t1, t1_value);
-    			if (dirty[0] & /*suffix*/ 131072) set_data(t2, /*suffix*/ ctx[17]);
+    			if (/*prefix*/ ctx[16]) {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
+    				} else {
+    					if_block0 = create_if_block_4$1(ctx);
+    					if_block0.c();
+    					if_block0.m(span, t);
+    				}
+    			} else if (if_block0) {
+    				if_block0.d(1);
+    				if_block0 = null;
+    			}
+
+    			if (dirty[0] & /*handleFormatter, values*/ 524289 && t_value !== (t_value = /*handleFormatter*/ ctx[19](/*value*/ ctx[59], /*index*/ ctx[61]) + "")) set_data(t, t_value);
+
+    			if (/*suffix*/ ctx[17]) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+    				} else {
+    					if_block1 = create_if_block_3$1(ctx);
+    					if_block1.c();
+    					if_block1.m(span, null);
+    				}
+    			} else if (if_block1) {
+    				if_block1.d(1);
+    				if_block1 = null;
+    			}
+    		},
+    		d(detaching) {
+    			if (detaching) detach(span);
+    			if (if_block0) if_block0.d();
+    			if (if_block1) if_block1.d();
+    		}
+    	};
+    }
+
+    // (770:10) {#if prefix}
+    function create_if_block_4$1(ctx) {
+    	let span;
+    	let t;
+
+    	return {
+    		c() {
+    			span = element("span");
+    			t = text(/*prefix*/ ctx[16]);
+    			attr(span, "class", "rangeFloat-prefix");
+    		},
+    		m(target, anchor) {
+    			insert(target, span, anchor);
+    			append(span, t);
+    		},
+    		p(ctx, dirty) {
+    			if (dirty[0] & /*prefix*/ 65536) set_data(t, /*prefix*/ ctx[16]);
+    		},
+    		d(detaching) {
+    			if (detaching) detach(span);
+    		}
+    	};
+    }
+
+    // (770:104) {#if suffix}
+    function create_if_block_3$1(ctx) {
+    	let span;
+    	let t;
+
+    	return {
+    		c() {
+    			span = element("span");
+    			t = text(/*suffix*/ ctx[17]);
+    			attr(span, "class", "rangeFloat-suffix");
+    		},
+    		m(target, anchor) {
+    			insert(target, span, anchor);
+    			append(span, t);
+    		},
+    		p(ctx, dirty) {
+    			if (dirty[0] & /*suffix*/ 131072) set_data(t, /*suffix*/ ctx[17]);
     		},
     		d(detaching) {
     			if (detaching) detach(span);
@@ -1169,6 +1465,7 @@
     	let span0;
     	let t;
     	let span1_style_value;
+    	let span1_data_handle_value;
     	let span1_aria_valuemin_value;
     	let span1_aria_valuemax_value;
     	let span1_aria_valuenow_value;
@@ -1188,6 +1485,7 @@
     			attr(span0, "class", "rangeNub");
     			attr(span1, "style", span1_style_value = "" + ((/*vertical*/ ctx[5] ? "top" : "left") + ": " + /*$springPositions*/ ctx[26][/*index*/ ctx[61]] + "%; z-index: " + (/*activeHandle*/ ctx[23] === /*index*/ ctx[61] ? 3 : 2) + ";"));
     			attr(span1, "role", "slider");
+    			attr(span1, "data-handle", span1_data_handle_value = /*index*/ ctx[61]);
     			attr(span1, "class", "rangeHandle");
 
     			attr(span1, "aria-valuemin", span1_aria_valuemin_value = /*range*/ ctx[1] === true && /*index*/ ctx[61] === 1
@@ -1199,7 +1497,7 @@
     			: /*max*/ ctx[3]);
 
     			attr(span1, "aria-valuenow", span1_aria_valuenow_value = /*value*/ ctx[59]);
-    			attr(span1, "aria-valuetext", span1_aria_valuetext_value = "" + (/*prefix*/ ctx[16] + /*handleFormatter*/ ctx[19](/*value*/ ctx[59]) + /*suffix*/ ctx[17]));
+    			attr(span1, "aria-valuetext", span1_aria_valuetext_value = "" + (/*prefix*/ ctx[16] + /*handleFormatter*/ ctx[19](/*value*/ ctx[59], /*index*/ ctx[61]) + /*suffix*/ ctx[17]));
     			attr(span1, "aria-orientation", span1_aria_orientation_value = /*vertical*/ ctx[5] ? "vertical" : "horizontal");
     			attr(span1, "aria-disabled", /*disabled*/ ctx[8]);
     			attr(span1, "disabled", /*disabled*/ ctx[8]);
@@ -1258,7 +1556,7 @@
     				attr(span1, "aria-valuenow", span1_aria_valuenow_value);
     			}
 
-    			if (dirty[0] & /*prefix, handleFormatter, values, suffix*/ 720897 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = "" + (/*prefix*/ ctx[16] + /*handleFormatter*/ ctx[19](/*value*/ ctx[59]) + /*suffix*/ ctx[17]))) {
+    			if (dirty[0] & /*prefix, handleFormatter, values, suffix*/ 720897 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = "" + (/*prefix*/ ctx[16] + /*handleFormatter*/ ctx[19](/*value*/ ctx[59], /*index*/ ctx[61]) + /*suffix*/ ctx[17]))) {
     				attr(span1, "aria-valuetext", span1_aria_valuetext_value);
     			}
 
@@ -1299,7 +1597,7 @@
     	};
     }
 
-    // (772:2) {#if range}
+    // (775:2) {#if range}
     function create_if_block_1$1(ctx) {
     	let span;
     	let span_style_value;
@@ -1324,7 +1622,7 @@
     	};
     }
 
-    // (778:2) {#if pips}
+    // (781:2) {#if pips}
     function create_if_block$1(ctx) {
     	let rangepips;
     	let current;
@@ -1634,7 +1932,7 @@
     	let { id = undefined } = $$props;
     	let { prefix = "" } = $$props;
     	let { suffix = "" } = $$props;
-    	let { formatter = v => v } = $$props;
+    	let { formatter = (v, i) => v } = $$props;
     	let { handleFormatter = formatter } = $$props;
     	let { precision = 2 } = $$props;
     	let { springValues = { stiffness: 0.15, damping: 0.4 } } = $$props;
