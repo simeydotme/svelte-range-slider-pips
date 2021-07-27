@@ -22,6 +22,7 @@
   export let first = undefined;
   export let last = undefined;
   export let rest = undefined;
+  export let reversed = undefined;
 
   // formatting props
   export let id = undefined;
@@ -302,7 +303,7 @@
 
     // if the value has changed, update it
     if (values[index] !== value) {
-      values[index] = value;
+      values[index] = reversed ? max - value : value;
     }
 
     // fire the change event when the handle moves,
@@ -753,7 +754,7 @@
       on:blur={sliderBlurHandle}
       on:focus={sliderFocusHandle}
       on:keydown={sliderKeydown}
-      style="{vertical ? 'top' : 'left'}: {$springPositions[index]}%; z-index: {activeHandle === index ? 3 : 2};"
+      style="{vertical ? 'top' : 'left'}: {reversed ? 100 - $springPositions[index] : $springPositions[index]}%; z-index: {activeHandle === index ? 3 : 2};"
       aria-valuemin={range === true && index === 1 ? values[0] : min}
       aria-valuemax={range === true && index === 0 ? values[1] : max}
       aria-valuenow={value}
@@ -772,7 +773,7 @@
   {#if range}
     <span
       class="rangeBar"
-      style="{vertical ? 'top' : 'left'}: {rangeStart($springPositions)}%; {vertical ? 'bottom' : 'right'}:
+      style="{vertical ? 'top' : 'left'}: {reversed ? 100 - rangeStart($springPositions) : rangeStart($springPositions)}%; {vertical ? 'bottom' : 'right'}:
       {rangeEnd($springPositions)}%;" />
   {/if}
   {#if pips}
@@ -793,7 +794,8 @@
       {formatter}
       {focus}
       {disabled}
-      {percentOf} />
+      {percentOf}
+      {reversed} />
   {/if}
 </div>
 

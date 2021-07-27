@@ -16,6 +16,7 @@
   const dayFormatCn = v => { if (v === 6) { return "星期日"; }; return "星期" + numzh.format(v + 1); };
   
   let perc1 = [5];
+  let perc1Reversed = [5];
 	let perc2 = [100 - perc1];
   $: perc2max = 100 - perc1[0];
 
@@ -60,7 +61,9 @@
     <RangeSlider vertical range values={[10,30]} pips all="label" {disabled} />
     <RangeSlider vertical range="min" values={[10]} pips all />
     <RangeSlider vertical range="max" values={[30]} pips />
-    
+    <RangeSlider vertical range="min" values={[20]} float pips all="label" />
+    <RangeSlider vertical range="max" values={[20]} float pips all="label" reversed/>
+
     <br>
     <RangeSlider id="test-id" springValues={{ stiffness: 0.03, damping: 0.08 }} />
     <br>
@@ -114,9 +117,10 @@
 
 
     <RangeSlider bind:values={perc1} min={0} max={50} pips all="label" float />
+    <RangeSlider bind:values={perc1Reversed} min={0} max={50} pips all="label" float reversed/>
     <RangeSlider bind:values={perc2} min={0} max={perc2max} pips all="label" float /> 
     <hr>
-    percent1: {perc1}<br>percent2: {perc2} 
+    percent1: {perc1}<br>percent1 reversed: {perc1Reversed} <br>percent2: {perc2} 
 
     <br><br>
 

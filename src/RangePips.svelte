@@ -14,6 +14,7 @@
   export let first = undefined;
   export let last = undefined;
   export let rest = undefined;
+  export let reversed = undefined;
 
   // formatting props
   export let prefix = "";
@@ -140,12 +141,12 @@
   {#if ( all && first !== false ) || first }
     <span
       class="pip first"
-      class:selected={isSelected(min)}
-      class:in-range={inRange(min)}
+      class:selected={isSelected(reversed ? max : min)}
+      class:in-range={inRange(reversed ? max : min)}
       style="{vertical ? 'top' : 'left'}: 0%;">
       {#if all === 'label' || first === 'label'}
         <span class="pipVal">
-          {prefix}{formatter(min)}{suffix}
+          {prefix}{formatter(reversed ? max : min)}{suffix}
         </span>
       {/if}
     </span>
@@ -155,12 +156,12 @@
       {#if pipVal(i) !== min && pipVal(i) !== max}
         <span
           class="pip"
-          class:selected={isSelected(pipVal(i))}
+          class:selected={isSelected(reversed ? max - pipVal(i) : pipVal(i))}
           class:in-range={inRange(pipVal(i))}
           style="{vertical ? 'top' : 'left'}: {percentOf(pipVal(i))}%;">
           {#if all === 'label' || rest === 'label'}
             <span class="pipVal">
-              {prefix}{formatter(pipVal(i))}{suffix}
+              {prefix}{formatter(reversed ? max - pipVal(i) : pipVal(i))}{suffix}
             </span>
           {/if}
         </span>
@@ -170,12 +171,12 @@
   {#if ( all && last !== false ) || last}
     <span
       class="pip last"
-      class:selected={isSelected(max)}
-      class:in-range={inRange(max)}
+      class:selected={isSelected(reversed ? min : max)}
+      class:in-range={inRange(reversed ? min : max)}
       style="{vertical ? 'top' : 'left'}: 100%;">
       {#if all === 'label' || last === 'label'}
         <span class="pipVal">
-          {prefix}{formatter(max)}{suffix}
+          {prefix}{formatter(reversed ? min : max)}{suffix}
         </span>
       {/if}
     </span>

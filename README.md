@@ -114,6 +114,7 @@ prop | type | default | description
 **formatter** | `Function` | `(v) => v` | A function to re-format values before they are displayed
 **handleFormatter** | `Function` | `formatter` | A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property
 **springValues** | `Object` | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving
+**reversed** | `Boolean` | `false` | Reverse the values ​​of the slider
 
 ### slider events (dispatched)
 
