@@ -15,7 +15,14 @@ main {
     }
 }
 input {
-    width: 100px;
+    min-width: 50px;
+    padding: 5px 5px;
+}
+input[type=checkbox] { 
+    padding: 0; 
+    margin: 0; 
+    display: inline-block;
+    min-width: auto;
 }
 
 hr {

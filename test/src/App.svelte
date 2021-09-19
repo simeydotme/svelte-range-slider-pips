@@ -28,6 +28,7 @@
   let zeromax = 0;
 
   let disabled = false;
+  let hoverable = true;
 
   let arrayPush = [11,99];
   let pushValues = () => {
@@ -44,16 +45,22 @@
 <svelte:head>
 <style>
   #test-id {
-    --range-slider: rgb(245, 200, 230);
-    --range-handle: var(--range-slider);
-    --range-handle-inactive: var(--range-slider);
+    --range-slider: #9dceff;
+    --range-handle: rgb(245, 200, 230);
+    --range-handle-inactive: rgb(245, 200, 230);
     --range-handle-focus: rgb(245, 0, 46);
   }
   #test-id [data-handle="1"] {
-    --handle: turquoise;
-    --handle-inactive: #a0ffe0;
-    --handle-border: #a0ffe0;
-    --handle-focus: var(--handle);
+    --handle: #a0ffe0;
+    --handle-inactive:  var(--handle);
+    --handle-border:  var(--handle);
+    --handle-focus: turquoise;
+  }
+  #test-id [data-handle="2"] {
+    --handle: #fdcebd;
+    --handle-inactive:  var(--handle);
+    --handle-border:  var(--handle);
+    --handle-focus: coral;
   }
   #clr-test {
     --range-slider: rgb(195, 228, 222);
@@ -141,18 +148,19 @@
     <RangeSlider bind:values={zero} min={zeromin} max={zeromax} range float pips all="label" step={1} pipstep={5} />
     <br><button on:click={()=>{ zeromin = 10; zeromax = 30; zero = [3,70]; }}>increase min/max</button> - {zero} 
     
-    <h2>disable / enable</h2>
-    <RangeSlider bind:values float pips all="label" {disabled} />
-    <button on:click={()=>{disabled=!disabled}}>toggle disabled</button>
+    <h2>interaction states</h2>
+    <RangeSlider bind:values float pips all="label" {hoverable} {disabled}  />
+    <button on:click={()=>{hoverable=!hoverable}}>hoverable <input type='checkbox' checked={hoverable} /></button>
+    <button on:click={()=>{disabled=!disabled}}>disabled <input type='checkbox' checked={disabled} /></button>
 
     <h2>push & pop values</h2>
-    <RangeSlider bind:values float pips all="label" />
+    <RangeSlider bind:values float pips all="label" {disabled} {hoverable}  />
     <button on:click={pushValues}>push</button>
     <button on:click={popValues}>pop</button>
     <br>({values})
     
     <h2>Binding to inputs</h2>
-    <RangeSlider bind:values {disabled} 
+    <RangeSlider bind:values {disabled} {hoverable}  
       on:start={(e) => { console.log("start",e.detail)}}
       on:stop={(e) => { console.log("end",e.detail)}} 
       on:change={(e) => { console.log("change",e.detail)}} 

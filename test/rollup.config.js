@@ -49,7 +49,13 @@ export default {
 		production && terser()
 	],
 	watch: {
-		clearScreen: false
+		clearScreen: false,
+		chokidar: {
+		  usePolling: true,
+		  interval: 2000,
+		  binaryInterval: 2000,
+		},
+		buildDelay: 1000,
 	}
 };
 

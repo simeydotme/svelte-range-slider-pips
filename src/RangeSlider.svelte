@@ -12,7 +12,7 @@
   export let values = [(max + min) / 2];
   export let vertical = false;
   export let float = false;
-  export let hover = true;
+  export let hoverable = true;
   export let disabled = false;
 
   // range pips / values props
@@ -157,7 +157,7 @@
   }
 
   /**
-   * noramlise a mouse or touch event to return the
+   * normalise a mouse or touch event to return the
    * client (x/y) object for that event
    * @param {event} e a mouse/touch event to normalise
    * @returns {object} normalised event client object (x,y)
@@ -292,7 +292,11 @@
     // align & clamp the value so we're not doing extra
     // calculation on an out-of-range value down below
     value = alignValueToStep(value);
-    // if this is a range slider
+    // use the active handle if handle index is not provided
+    if ( typeof index === 'undefined' ) {
+      index = activeHandle;
+    }
+    // if this is a range slider perform special checks
     if (range) {
       // restrict the handles of a range-slider from
       // going past one-another unless "pushy" is true
@@ -322,6 +326,7 @@
       eChange();
       previousValue = value;
     }
+    return value;
   }
 
   /**
@@ -354,7 +359,7 @@
 
   /**
    * when the user has unfocussed (blurred) from the
-   * slider, deactivated all handles
+   * slider, deactivate all handles
    * @param {event} e the event from browser
    **/
   function sliderBlurHandle(e) {
@@ -426,6 +431,7 @@
    **/
   function sliderInteractStart(e) {
     if ( !disabled ) {
+      const el = e.target;
       const clientPos = normalisedClient(e);
       // set the closest handle as active
       focus = true;
@@ -439,7 +445,7 @@
 
       // for touch devices we want the handle to instantly
       // move to the position touched for more responsive feeling
-      if (e.type === "touchstart") {
+      if (e.type === "touchstart" && !el.matches(".pipVal")) {
         handleInteract(clientPos);
       }
     }
@@ -498,7 +504,9 @@
       if (handleActivated) {
         if (el === slider || slider.contains(el)) {
           focus = true;
-          if (!targetIsHandle(el)) {
+          // don't trigger interact if the target is a handle (no need) or
+          // if the target is a label (we want to move to that value from rangePips)
+          if (!targetIsHandle(el) && !el.matches(".pipVal")) {
             handleInteract(normalisedClient(e));
           }
         }
@@ -634,12 +642,12 @@
     box-shadow: 0 0 0 0px var(--handle-border);
     opacity: 0;
   }
-  :global(.rangeSlider .rangeHandle.hoverable:hover:before) {
+  :global(.rangeSlider.hoverable:not(.disabled) .rangeHandle:hover:before) {
     box-shadow: 0 0 0 8px var(--handle-border);
     opacity: 0.2;
   }
-  :global(.rangeSlider .rangeHandle.hoverable.press:before),
-  :global(.rangeSlider .rangeHandle.hoverable.press:hover:before) {
+  :global(.rangeSlider.hoverable:not(.disabled) .rangeHandle.press:before),
+  :global(.rangeSlider.hoverable:not(.disabled) .rangeHandle.press:hover:before) {
     box-shadow: 0 0 0 12px var(--handle-border);
     opacity: 0.4;
   }
@@ -743,6 +751,7 @@
   class="rangeSlider"
   class:range
   class:disabled
+  class:hoverable
   class:vertical
   class:focus
   class:min={range === 'min'}
@@ -758,7 +767,6 @@
     <span
       role="slider"
       class="rangeHandle"
-      class:hoverable={hover && !disabled}
       class:active={focus && activeHandle === index}
       class:press={handlePressed && activeHandle === index}
       data-handle={index}
@@ -797,6 +805,8 @@
       {step}
       {range}
       {vertical}
+      {hoverable}
+      {disabled}
       {all}
       {first}
       {last}
@@ -806,7 +816,9 @@
       {suffix}
       {formatter}
       {focus}
-      {percentOf} />
+      {percentOf}
+      {moveHandle} 
+    />
   {/if}
 </div>
 

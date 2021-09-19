@@ -7,6 +7,8 @@
   export let step = 1;
   export let values = [(max + min) / 2];
   export let vertical = false;
+  export let hoverable = true;
+  export let disabled = false;
 
   // range pips / values props
   export let pipstep = undefined;
@@ -22,7 +24,10 @@
 
   // stylistic props
   export let focus = undefined;
+
+  // methods
   export let percentOf = undefined;
+  export let moveHandle = undefined;
 
   $: pipStep = pipstep || ((max - min) / step >= ( vertical ? 50 : 100 ) ? (max - min) / ( vertical ? 10 : 20 ) : 1);
 
@@ -45,6 +50,10 @@
       return values[0] < val && values[1] > val;
     }
   };
+
+  function labelClick(val) {
+    moveHandle( undefined, val );
+  }
 </script>
 
 <style>
@@ -53,6 +62,8 @@
     --pip-text: var(--range-pip-text, var(--pip));
     --pip-active: var(--range-pip-active, darkslategrey);
     --pip-active-text: var(--range-pip-active-text, var(--pip-active));
+    --pip-hover: var(--range-pip-hover, darkslategrey);
+    --pip-hover-text: var(--range-pip-hover-text, var(--pip-hover));
     --pip-in-range: var(--range-pip-in-range, var(--pip-active));
     --pip-in-range-text: var(--range-pip-in-range-text, var(--pip-active-text));
   }
@@ -84,13 +95,6 @@
     top: 0;
     left: 0.25em;
   }
-  :global(.rangePips .pip.selected) {
-    height: 0.75em;
-  }
-  :global(.rangePips.vertical .pip.selected) {
-    height: 1px;
-    width: 0.75em;
-  }
   :global(.rangePips .pipVal) {
     position: absolute;
     top: 0.4em;
@@ -102,19 +106,11 @@
     left: 0.4em;
     transform: translate(25%, -50%);
   }
-  :global(.rangePips .pip.selected .pipVal) {
-    font-weight: bold;
-    top: 0.75em;
-  }
-  :global(.rangePips.vertical .pip.selected .pipVal) {
-    top: 0;
-    left: 0.75em;
-  }
   :global(.rangePips .pip) {
     transition: all 0.15s ease;
   }
   :global(.rangePips .pipVal) {
-    transition: all 0.15s ease;
+    transition: all 0.15s ease, font-weight 0s linear;
   }
   :global(.rangePips .pip) {
     color: lightslategray;
@@ -128,21 +124,58 @@
     background-color: darkslategrey;
     background-color: var(--pip-active);
   }
+  :global(.rangePips.hoverable:not(.disabled) .pip:hover) {
+    color: darkslategrey;
+    color: var(--pip-hover-text);
+    background-color: darkslategrey;
+    background-color: var(--pip-hover);
+  }
   :global(.rangePips .pip.in-range) {
     color: darkslategrey;
     color: var(--pip-in-range-text);
     background-color: darkslategrey;
     background-color: var(--pip-in-range);
   }
+  :global(.rangePips .pip.selected) {
+    height: 0.75em;
+  }
+  :global(.rangePips.vertical .pip.selected) {
+    height: 1px;
+    width: 0.75em;
+  }
+  :global(.rangePips .pip.selected .pipVal) {
+    font-weight: bold;
+    top: 0.75em;
+  }
+  :global(.rangePips.vertical .pip.selected .pipVal) {
+    top: 0;
+    left: 0.75em;
+  }
+  :global(.rangePips.hoverable:not(.disabled) .pip:not(.selected):hover) {
+    transition: none;
+  }
+  :global(.rangePips.hoverable:not(.disabled) .pip:not(.selected):hover .pipVal) {
+    transition: none;
+    font-weight: bold;
+  }
 </style>
 
-<div class="rangePips" class:focus class:vertical>
+<div 
+  class="rangePips" 
+  class:disabled
+  class:hoverable 
+  class:vertical 
+  class:focus 
+>
   {#if ( all && first !== false ) || first }
     <span
       class="pip first"
       class:selected={isSelected(min)}
       class:in-range={inRange(min)}
-      style="{vertical ? 'top' : 'left'}: 0%;">
+      style="{vertical ? 'top' : 'left'}: 0%;"
+      on:click={labelClick(min)}
+      on:touchend|preventDefault={labelClick(min)}
+    >
       {#if all === 'label' || first === 'label'}
         <span class="pipVal">
           {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(min,0)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
@@ -150,6 +183,7 @@
       {/if}
     </span>
   {/if}
+
   {#if ( all && rest !== false ) || rest}
     {#each Array(pipCount + 1) as _, i}
       {#if pipVal(i) !== min && pipVal(i) !== max}
@@ -157,7 +191,10 @@
           class="pip"
           class:selected={isSelected(pipVal(i))}
           class:in-range={inRange(pipVal(i))}
-          style="{vertical ? 'top' : 'left'}: {percentOf(pipVal(i))}%;">
+          style="{vertical ? 'top' : 'left'}: {percentOf(pipVal(i))}%;"
+          on:click={labelClick(pipVal(i))}
+          on:touchend|preventDefault={labelClick(pipVal(i))}
+        >
           {#if all === 'label' || rest === 'label'}
             <span class="pipVal">
               {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(pipVal(i),i)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
@@ -167,12 +204,16 @@
       {/if}
     {/each}
   {/if}
+
   {#if ( all && last !== false ) || last}
     <span
       class="pip last"
       class:selected={isSelected(max)}
       class:in-range={inRange(max)}
-      style="{vertical ? 'top' : 'left'}: 100%;">
+      style="{vertical ? 'top' : 'left'}: 100%;"
+      on:click={labelClick(max)}
+      on:touchend|preventDefault={labelClick(max)}
+    >
       {#if all === 'label' || last === 'label'}
         <span class="pipVal">
           {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(max,pipCount)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
@@ -180,4 +221,5 @@
       {/if}
     </span>
   {/if}
+  
 </div>

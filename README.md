@@ -9,10 +9,10 @@ A reactive, accessible, multi-thumb, range slider with the ability to display "p
 
 ---
 
-📔 | External | [_Full Documentation & Examples_](https://simeydotme.github.io/svelte-range-slider-pips/)
+📔 | External | [Full Documentation & Examples](https://simeydotme.github.io/svelte-range-slider-pips/)
 :--: | -----: | :------
-💲 | **REPL** |[_Svelte component demo_](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43?version=3.32.1)
-❤ | **Codepen** |[_Plain JS component demo_](https://codepen.io/simeydotme/pen/KKNJdbK)
+📝 | **REPL** |[Svelte component demo](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43?version=3.32.1)
+❤ | **Codepen** |[Plain JS component demo](https://codepen.io/simeydotme/pen/KKNJdbK)
 
 ---
 
@@ -41,25 +41,6 @@ npm install svelte-range-slider-pips --save-dev  # if you prefer npm
 
 ## usage
 
-### as a regular JS file
-
-If you're not building a svelte-app, you can use the [`/dist/`
-version of the script `/dist/svelte-range-slider-pips.js`](dist/svelte-range-slider-pips.js) and include it
-either with a regular `<script>` tag. This should even work with jQuery.
-
-```html
-<script src="./js/vendor/svelte-range-slider-pips.js" />
-
-<div id="my-slider"></div>
-
-<script>
-  var mySlider = new RangeSliderPips({
-    target: document.getElementById("my-slider"),
-    props: { /* props as js object */ }
-  });
-</script>
-```
-
 ### in a svelte project
 
 Assuming you have a Svelte app up and running;
@@ -69,12 +50,31 @@ Assuming you have a Svelte app up and running;
   import RangeSlider from "svelte-range-slider-pips";
 </script>
 
-<RangeSlider />
+<RangeSlider values={[50]} pips />
+```
+
+### as a regular JS file
+
+If you're not building a svelte-app, you can use the [`/dist/`
+version of the script `/dist/svelte-range-slider-pips.js`](dist/svelte-range-slider-pips.js) and include it
+with a regular `<script>` tag. This should even work with jQuery.
+
+```html
+<script src="./js/vendor/svelte-range-slider-pips.js" />
+
+<div id="my-slider"></div>
+
+<script>
+  var mySlider = new RangeSliderPips({
+    target: document.querySelector(".mySlider"),
+    props: { values: [50], pips: true }
+  });
+</script>
 ```
 
 ### as a JS module
 
-If you're building a bleeding-edge JS application (not svelte), you might
+If you're building a bleeding-edge JS application (maybe Vue or React), you might
 want to use js imports (`import`)
 
 ```js
@@ -82,7 +82,7 @@ import RangeSlider from "./node_modules/svelte-range-slider-pips/dist/svelte-ran
 
 var mySlider = new RangeSlider({
   target: node, // js reference to a DOM element
-  props: { /* props as js object */ }
+  props: { values: [50], pips: true }
 });
 ```
 
@@ -110,7 +110,9 @@ prop | type | default | description
 **all** | `Boolean`/`String` | `false` | Whether to show a pip or label for all values. Same as combining `first`, `last` and `rest`. Use `all='label'` to show a label value
 **prefix** | `String` | `""` | A string to prefix to all displayed values
 **suffix** | `String` | `""` | A string to suffix to all displayed values
+**hoverable** | `Boolean` | `true` | Whether hover styles are enabled for both handles and pips/values
 **disabled** | `Boolean` | `false` | Determine if the slider is disabled, or enabled _(only disables interactions, and events)_
+**id** | `String` | `""` | Give the slider a unique ID for use in styling
 **formatter** | `Function` | `(v,i) => v` | A function to re-format values before they are displayed (`v = value, i = pip index`)
 **handleFormatter** | `Function` | `formatter` | A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property (`v = value, i = handle index`)
 **springValues** | `Object` | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving
@@ -124,6 +126,19 @@ event | example | `event.detail` | description
 **stop** | `on:stop={(e) => { ... }}` | `{ activeHandle: Integer, startValue: Float, value: Float, values: Array }` | Event fired when the user stops interacting with slider; returns the beginning value, also
 
 **[📔📘📖 _Full Documentation & Examples_](https://simeydotme.github.io/svelte-range-slider-pips/)**
+
+## styling
+
+**Styling should mostly be done with CSS.**  
+There's a [bunch of css variables for controlling the colors](https://simeydotme.github.io/svelte-range-slider-pips/#styling) of the elements. 
+And the slider is fluid horizontally, with the size of things controlled by font-size. So you may change he `font-size` on the `.rangeSlider` base
+element to change the scale of everything.
+
+If you require more fine control of the widths, heights, etc, then you may override the default css. This can be easier by using the `id` prop
+to give your slider a unique id.
+
+Values of labels can be styled with CSS, and the format can be modified with the `formatter()` function prop. And animation of the handles is
+controlled by the `springValues` object prop.
 
 ## contribute
 
