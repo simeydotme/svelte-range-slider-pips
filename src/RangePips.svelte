@@ -178,7 +178,7 @@
     >
       {#if all === 'label' || first === 'label'}
         <span class="pipVal">
-          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(min,0)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
+          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(min,0,0)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
         </span>
       {/if}
     </span>
@@ -197,7 +197,7 @@
         >
           {#if all === 'label' || rest === 'label'}
             <span class="pipVal">
-              {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(pipVal(i),i)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
+              {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(pipVal(i),i,percentOf(pipVal(i)))}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
             </span>
           {/if}
         </span>
@@ -216,7 +216,7 @@
     >
       {#if all === 'label' || last === 'label'}
         <span class="pipVal">
-          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(max,pipCount)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
+          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(max,pipCount,100)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
         </span>
       {/if}
     </span>

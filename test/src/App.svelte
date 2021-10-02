@@ -19,6 +19,10 @@
 	let perc2 = [100 - perc1];
   $: perc2max = 100 - perc1[0];
 
+  let big = [500,1000];
+  let hramp = ( v,i,p ) => { return ((v) * (((p/100)*(p/100)) )).toFixed(0) + " (" + p + "%)"; };
+  let ramp = ( v,i,p ) => { return ((v) * (((p/100)*(p/100)) )).toFixed(0); };
+
   let hue = [244];
   $: lightColor = `hsl(${Math.round(hue[0]) - 10}, 65%, 70%)`;
   $: color = `hsl(${Math.round(hue[0])}, 63%, 54%)`;
@@ -140,10 +144,25 @@
 
     <RangeSlider bind:values={perc1} min={0} max={50} pips all="label" float />
     <RangeSlider bind:values={perc2} min={0} max={perc2max} pips all="label" float /> 
-    <hr>
-    percent1: {perc1}<br>percent2: {perc2} 
+    <hr> {perc1} / {perc2} 
 
-    <br><br>
+    <br>
+    
+    <h2>BIG, ramped value</h2>
+    <RangeSlider bind:values={big} min={0} max={10000} pips first="label" last="label" float formatter={ramp} handleFormatter={hramp} />
+    <table>
+      <tr>
+        <th>real value</th><th>formatted (ramp(v,i,p))</th>
+      </tr>
+      <tr>
+        <td>{big}</td><td>{[ ramp(big[0],0,parseFloat((big[0] / 10000 * 100).toFixed(1))), ramp(big[1],0,parseFloat((big[1] / 10000 * 100).toFixed(1))) ]}</td>
+      </tr>
+      <tr>
+        <td colspan=2>{[ parseInt((big[0] / 10000 * 100).toFixed(1)) + "%", parseInt((big[1] / 10000 * 100).toFixed(1)) + "%" ]}</td>
+      </tr>
+    </table>
+    
+    <br>
 
     <RangeSlider bind:values={zero} min={zeromin} max={zeromax} range float pips all="label" step={1} pipstep={5} />
     <br><button on:click={()=>{ zeromin = 10; zeromax = 30; zero = [3,70]; }}>increase min/max</button> - {zero} 

@@ -27,7 +27,7 @@
   export let id = undefined;
   export let prefix = "";
   export let suffix = "";
-  export let formatter = (v,i) => v;
+  export let formatter = (v,i,p) => v;
   export let handleFormatter = formatter;
 
   // stylistic props
@@ -266,20 +266,20 @@
     // of the slider, as it may have changed size
     const dims = getSliderDimensions();
     // calculate the interaction position, percent and value
-    let hPos = 0;
-    let hPercent = 0;
-    let hVal = 0;
+    let handlePos = 0;
+    let handlePercent = 0;
+    let handleVal = 0;
     if (vertical) {
-      hPos = clientPos.clientY - dims.top;
-      hPercent = (hPos / dims.height) * 100;
-      hVal = ((max - min) / 100) * hPercent + min;
+      handlePos = clientPos.clientY - dims.top;
+      handlePercent = (handlePos / dims.height) * 100;
+      handleVal = ((max - min) / 100) * handlePercent + min;
     } else {
-      hPos = clientPos.clientX - dims.left;
-      hPercent = (hPos / dims.width) * 100;
-      hVal = ((max - min) / 100) * hPercent + min;
+      handlePos = clientPos.clientX - dims.left;
+      handlePercent = (handlePos / dims.width) * 100;
+      handleVal = ((max - min) / 100) * handlePercent + min;
     }
     // move handle to the value
-    moveHandle(activeHandle, hVal);
+    moveHandle(activeHandle, handleVal);
   }
 
   /**
@@ -777,7 +777,7 @@
       aria-valuemin={range === true && index === 1 ? values[0] : min}
       aria-valuemax={range === true && index === 0 ? values[1] : max}
       aria-valuenow={value}
-      aria-valuetext="{prefix}{handleFormatter(value,index)}{suffix}"
+      aria-valuetext="{prefix}{handleFormatter(value,index,percentOf(value))}{suffix}"
       aria-orientation={vertical ? 'vertical' : 'horizontal'}
       aria-disabled={disabled}
       {disabled}
@@ -786,7 +786,7 @@
       <span class="rangeNub" />
       {#if float}
         <span class="rangeFloat">
-          {#if prefix}<span class="rangeFloat-prefix">{prefix}</span>{/if}{handleFormatter(value,index)}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
+          {#if prefix}<span class="rangeFloat-prefix">{prefix}</span>{/if}{handleFormatter(value,index,percentOf(value))}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
         </span>
       {/if}
     </span>
@@ -817,7 +817,7 @@
       {formatter}
       {focus}
       {percentOf}
-      {moveHandle} 
+      {moveHandle}
     />
   {/if}
 </div>

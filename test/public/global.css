@@ -64,3 +64,12 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+
+table {
+	margin: 10px;
+	width: 100%;
+}
+
+td, th {
+	padding: 5px;
+}

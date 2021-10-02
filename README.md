@@ -113,8 +113,8 @@ prop | type | default | description
 **hoverable** | `Boolean` | `true` | Whether hover styles are enabled for both handles and pips/values
 **disabled** | `Boolean` | `false` | Determine if the slider is disabled, or enabled _(only disables interactions, and events)_
 **id** | `String` | `""` | Give the slider a unique ID for use in styling
-**formatter** | `Function` | `(v,i) => v` | A function to re-format values before they are displayed (`v = value, i = pip index`)
-**handleFormatter** | `Function` | `formatter` | A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property (`v = value, i = handle index`)
+**formatter** | `Function` | `(v,i,p) => v` | A function to re-format values before they are displayed (`v = value, i = pip index, p = percent`)
+**handleFormatter** | `Function` | `formatter` | A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property (`v = value, i = handle index, p = percent`)
 **springValues** | `Object` | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving
 
 ### slider events (dispatched)
