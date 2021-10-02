@@ -7,6 +7,7 @@
   export let step = 1;
   export let values = [(max + min) / 2];
   export let vertical = false;
+  export let reversed = false;
   export let hoverable = true;
   export let disabled = false;
 
@@ -24,6 +25,7 @@
 
   // stylistic props
   export let focus = undefined;
+  export let orientationStart = undefined;
 
   // methods
   export let percentOf = undefined;
@@ -92,8 +94,9 @@
   :global(.rangePips.vertical .pip) {
     height: 1px;
     width: 0.4em;
-    top: 0;
     left: 0.25em;
+    top: auto;
+    bottom: auto;
   }
   :global(.rangePips .pipVal) {
     position: absolute;
@@ -165,6 +168,7 @@
   class:disabled
   class:hoverable 
   class:vertical 
+  class:reversed 
   class:focus 
 >
   {#if ( all && first !== false ) || first }
@@ -172,7 +176,7 @@
       class="pip first"
       class:selected={isSelected(min)}
       class:in-range={inRange(min)}
-      style="{vertical ? 'top' : 'left'}: 0%;"
+      style="{orientationStart}: 0%;"
       on:click={labelClick(min)}
       on:touchend|preventDefault={labelClick(min)}
     >
@@ -191,7 +195,7 @@
           class="pip"
           class:selected={isSelected(pipVal(i))}
           class:in-range={inRange(pipVal(i))}
-          style="{vertical ? 'top' : 'left'}: {percentOf(pipVal(i))}%;"
+          style="{orientationStart}: {percentOf(pipVal(i))}%;"
           on:click={labelClick(pipVal(i))}
           on:touchend|preventDefault={labelClick(pipVal(i))}
         >
@@ -210,7 +214,7 @@
       class="pip last"
       class:selected={isSelected(max)}
       class:in-range={inRange(max)}
-      style="{vertical ? 'top' : 'left'}: 100%;"
+      style="{orientationStart}: 100%;"
       on:click={labelClick(max)}
       on:touchend|preventDefault={labelClick(max)}
     >

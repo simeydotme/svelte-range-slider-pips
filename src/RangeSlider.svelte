@@ -12,6 +12,7 @@
   export let values = [(max + min) / 2];
   export let vertical = false;
   export let float = false;
+  export let reversed = false;
   export let hoverable = true;
   export let disabled = false;
 
@@ -143,6 +144,13 @@
   };
 
   /**
+   * the orientation of the handles/pips based on the
+   * input values of vertical and reversed
+   **/
+  $: orientationStart = vertical ? reversed ? 'top' : 'bottom' : reversed ? 'right' : 'left';
+  $: orientationEnd = vertical ? reversed ? 'bottom' : 'top' : reversed ? 'left' : 'right';
+
+  /**
    * helper func to get the index of an element in it's DOM container
    * @param {object} el dom object reference we want the index of
    * @returns {number} the index of the input element
@@ -219,18 +227,19 @@
     // of the slider, as it may have changed size
     const dims = getSliderDimensions();
     // calculate the interaction position, percent and value
-    let hPos = 0;
-    let hPercent = 0;
-    let hVal = 0;
+    let handlePos = 0;
+    let handlePercent = 0;
+    let handleVal = 0;
     if (vertical) {
-      hPos = clientPos.clientY - dims.top;
-      hPercent = (hPos / dims.height) * 100;
-      hVal = ((max - min) / 100) * hPercent + min;
+      handlePos = clientPos.clientY - dims.top;
+      handlePercent = (handlePos / dims.height) * 100;
+      handlePercent = reversed ? handlePercent : 100 - handlePercent;
     } else {
-      hPos = clientPos.clientX - dims.left;
-      hPercent = (hPos / dims.width) * 100;
-      hVal = ((max - min) / 100) * hPercent + min;
+      handlePos = clientPos.clientX - dims.left;
+      handlePercent = (handlePos / dims.width) * 100;
+      handlePercent = reversed ? 100 - handlePercent : handlePercent;
     }
+    handleVal = ((max - min) / 100) * handlePercent + min;
 
     let closest;
 
@@ -238,7 +247,7 @@
     // position, we want a simple check if the interaction
     // value is greater than return the second handle
     if (range === true && values[0] === values[1]) {
-      if (hVal > values[1]) {
+      if (handleVal > values[1]) {
         return 1;
       } else {
         return 0;
@@ -248,7 +257,7 @@
       // to the interaction value
     } else {
       closest = values.indexOf(
-        [...values].sort((a, b) => Math.abs(hVal - a) - Math.abs(hVal - b))[0]
+        [...values].sort((a, b) => Math.abs(handleVal - a) - Math.abs(handleVal - b))[0]
       );
     }
     return closest;
@@ -272,12 +281,13 @@
     if (vertical) {
       handlePos = clientPos.clientY - dims.top;
       handlePercent = (handlePos / dims.height) * 100;
-      handleVal = ((max - min) / 100) * handlePercent + min;
+      handlePercent = reversed ? handlePercent : 100 - handlePercent;
     } else {
       handlePos = clientPos.clientX - dims.left;
       handlePercent = (handlePos / dims.width) * 100;
-      handleVal = ((max - min) / 100) * handlePercent + min;
+      handlePercent = reversed ? 100 - handlePercent : handlePercent;
     }
+    handleVal = ((max - min) / 100) * handlePercent + min;
     // move handle to the value
     moveHandle(activeHandle, handleVal);
   }
@@ -616,9 +626,20 @@
     height: 1.4em;
     width: 1.4em;
     top: 0.25em;
-    left: 0.25em;
+    bottom: auto;
     transform: translateY(-50%) translateX(-50%);
     z-index: 2;
+  }
+  :global(.rangeSlider.reversed .rangeHandle) {
+    transform: translateY(-50%) translateX(50%);
+  }
+  :global(.rangeSlider.vertical .rangeHandle) {
+    left: 0.25em;
+    top: auto;
+    transform: translateY(50%) translateX(-50%);
+  }
+  :global(.rangeSlider.vertical.reversed .rangeHandle) {
+    transform: translateY(-50%) translateX(-50%);
   }
   :global(.rangeSlider .rangeNub),
   :global(.rangeSlider .rangeHandle:before) {
@@ -629,7 +650,7 @@
     border-radius: 10em;
     height: 100%;
     width: 100%;
-    transition: all 0.2s ease;
+    transition: box-shadow 0.2s ease;
   }
   :global(.rangeSlider .rangeHandle:before) {
     content: "";
@@ -660,10 +681,22 @@
   :global(.rangeSlider.range .rangeHandle:nth-of-type(2) .rangeNub) {
     transform: rotate(45deg);
   }
+  :global(.rangeSlider.range.reversed .rangeHandle:nth-of-type(1) .rangeNub) {
+    transform: rotate(45deg);
+  }
+  :global(.rangeSlider.range.reversed .rangeHandle:nth-of-type(2) .rangeNub) {
+    transform: rotate(-135deg);
+  }
   :global(.rangeSlider.range.vertical .rangeHandle:nth-of-type(1) .rangeNub) {
-    transform: rotate(-45deg);
+    transform: rotate(135deg);
   }
   :global(.rangeSlider.range.vertical .rangeHandle:nth-of-type(2) .rangeNub) {
+    transform: rotate(-45deg);
+  }
+  :global(.rangeSlider.range.vertical.reversed .rangeHandle:nth-of-type(1) .rangeNub) {
+    transform: rotate(-45deg);
+  }
+  :global(.rangeSlider.range.vertical.reversed .rangeHandle:nth-of-type(2) .rangeNub) {
     transform: rotate(135deg);
   }
   :global(.rangeSlider .rangeFloat) {
@@ -753,6 +786,7 @@
   class:disabled
   class:hoverable
   class:vertical
+  class:reversed
   class:focus
   class:min={range === 'min'}
   class:max={range === 'max'}
@@ -773,7 +807,7 @@
       on:blur={sliderBlurHandle}
       on:focus={sliderFocusHandle}
       on:keydown={sliderKeydown}
-      style="{vertical ? 'top' : 'left'}: {$springPositions[index]}%; z-index: {activeHandle === index ? 3 : 2};"
+      style="{orientationStart}: {$springPositions[index]}%; z-index: {activeHandle === index ? 3 : 2};"
       aria-valuemin={range === true && index === 1 ? values[0] : min}
       aria-valuemax={range === true && index === 0 ? values[1] : max}
       aria-valuenow={value}
@@ -794,8 +828,8 @@
   {#if range}
     <span
       class="rangeBar"
-      style="{vertical ? 'top' : 'left'}: {rangeStart($springPositions)}%; {vertical ? 'bottom' : 'right'}:
-      {rangeEnd($springPositions)}%;" />
+      style="{orientationStart}: {rangeStart($springPositions)}%; 
+             {orientationEnd}: {rangeEnd($springPositions)}%;" />
   {/if}
   {#if pips}
     <RangePips
@@ -805,6 +839,9 @@
       {step}
       {range}
       {vertical}
+      {reversed}
+      {orientationStart}
+      {orientationEnd}
       {hoverable}
       {disabled}
       {all}

@@ -101,7 +101,7 @@ prop | type | default | description
 **range** | `Boolean`/`String` | `false` | Whether to style as a range picker. Use `range='min'` or `range='max'` for min/max variants
 **pushy** | `Boolean` | `false` | If `range` is `true`, then this boolean decides if one handle will push the other along
 **float** | `Boolean` | `false` | Set true to add a floating label above focussed handles
-**vertical** | `Boolean` | `false` | Make the slider render vertically
+**vertical** | `Boolean` | `false` | Make the slider render vertically (lower value on bottom)
 **pips** | `Boolean` | `false` | Whether to show pips/notches on the slider
 **pipstep** | `Number` | `1`/`10`/`20` | Every `nth` step to show a pip for. This has multiple defaults depending on `values` property
 **first** | `Boolean`/`String` | `false` | Whether to show a pip or label for the first value on slider. Use `first='label'` to show a label value
@@ -110,6 +110,7 @@ prop | type | default | description
 **all** | `Boolean`/`String` | `false` | Whether to show a pip or label for all values. Same as combining `first`, `last` and `rest`. Use `all='label'` to show a label value
 **prefix** | `String` | `""` | A string to prefix to all displayed values
 **suffix** | `String` | `""` | A string to suffix to all displayed values
+**reversed** | `Boolean` | `false` | Reverse the orientation of min/max
 **hoverable** | `Boolean` | `true` | Whether hover styles are enabled for both handles and pips/values
 **disabled** | `Boolean` | `false` | Determine if the slider is disabled, or enabled _(only disables interactions, and events)_
 **id** | `String` | `""` | Give the slider a unique ID for use in styling
