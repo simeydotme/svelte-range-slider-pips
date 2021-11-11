@@ -2,6 +2,11 @@
   import { spring } from "svelte/motion";
   import { createEventDispatcher } from "svelte";
   import RangePips from "./RangePips.svelte";
+  import { onMount } from "svelte";
+
+  onMount(() => {
+    if(force_float) focus = true;
+  })
 
   // range slider props
   export let range = false;
@@ -15,6 +20,8 @@
   export let reversed = false;
   export let hoverable = true;
   export let disabled = false;
+
+  export let force_float = false;
 
   // range pips / values props
   export let pips = false;
@@ -374,7 +381,7 @@
    **/
   function sliderBlurHandle(e) {
     if (keyboardActive) {
-      focus = false;
+      force_float ? focus = true : focus = false;
       handleActivated = false;
       handlePressed = false;
     }
