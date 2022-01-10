@@ -595,7 +595,7 @@
     height: 0.5em;
     margin: 1em;
     transition: opacity 0.2s ease;
-      user-select: none;
+    user-select: none;
   }
   :global(.rangeSlider *) {
     user-select: none;
@@ -716,7 +716,7 @@
     border-radius: 0.2em;
   }
   :global(.rangeSlider .rangeHandle.active .rangeFloat),
-  :global(.rangeSlider .rangeHandle.hoverable:hover .rangeFloat) {
+  :global(.rangeSlider.hoverable .rangeHandle:hover .rangeFloat) {
     opacity: 1;
     top: -0.2em;
     transform: translate(-50%, -100%);
@@ -769,7 +769,7 @@
     background-color: #4a40d4;
     background-color: var(--float);
   }
-  :global(.rangeSlider.disabled ) {
+  :global(.rangeSlider.disabled) {
     opacity: 0.5;
   }
   :global(.rangeSlider.disabled .rangeNub) {
@@ -841,7 +841,6 @@
       {vertical}
       {reversed}
       {orientationStart}
-      {orientationEnd}
       {hoverable}
       {disabled}
       {all}

@@ -118,8 +118,10 @@
     
     <br>
     
-    
+    <h2>Default with float</h2>
     <RangeSlider float {reversed} {hoverable} {disabled} />
+
+    <h2>Pips & Floats</h2>
     <RangeSlider float pips all="label" {reversed} {hoverable} {disabled} />
     <RangeSlider float pips first="label" last="label" {reversed} {hoverable} {disabled} />
     <h2>trim/align</h2>
