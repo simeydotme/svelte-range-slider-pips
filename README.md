@@ -1,17 +1,17 @@
 
 # Range Slider (with pips)
 
-## [`svelte-range-slider-pips`](https://www.npmjs.com/package/svelte-range-slider-pips) @ **npm**
-
-A reactive, accessible, multi-thumb, range slider with the ability to display "pips" or "notches" along the range. Importable as a svelte-component, or used directly in any javascript application.
-
 ![Svelte Range Slider -- focussed, including some pips](test/public/slider.png)
+
+A reactive, accessible, multi-thumb, range slider with the ability to display "pips" or "notches" along the range.  
+Importable as a ***svelte-component***, or **used directly in any javascript application**.
 
 ---
 
-📔 | External | [Full Documentation & Examples](https://simeydotme.github.io/svelte-range-slider-pips/)
+📔 | Docs | [Full Documentation & Examples](https://simeydotme.github.io/svelte-range-slider-pips/)
 :--: | -----: | :------
-📝 | **REPL** |[Svelte component demo](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43?version=3.32.1)
+📦 | **NPM** |[Node Module details](https://www.npmjs.com/package/svelte-range-slider-pips)
+📝 | **REPL** |[Svelte component demo](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43?version=3)
 ❤ | **Codepen** |[Plain JS component demo](https://codepen.io/simeydotme/pen/KKNJdbK)
 
 ---
@@ -95,9 +95,9 @@ var mySlider = new RangeSlider({
 prop | type | default | description
 -----|------|---------|-------------
 **values** | `Array` | `[50]` | Array of values to apply on the slider. Multiple values creates multiple handles. (_**note:** A slider with `range` property set can only have two values max_)
-**min** | `Number` | `0` | Minimum value for the slider
-**max** | `Number` | `100` | Maximum value for the slider
-**step** | `Number` | `1` | Every `nth` value to allow handle to stop at
+**min** | `Number` | `0` | Minimum value for the slider _(should be `< max`)_
+**max** | `Number` | `100` | Maximum value for the slider _(should be `> min`)_
+**step** | `Number` | `1` | Every `nth` value to allow handle to stop at _(should be a positive value)_
 **range** | `Boolean`/`String` | `false` | Whether to style as a range picker. Use `range='min'` or `range='max'` for min/max variants
 **pushy** | `Boolean` | `false` | If `range` is `true`, then this boolean decides if one handle will push the other along
 **float** | `Boolean` | `false` | Set true to add a floating label above focussed handles
