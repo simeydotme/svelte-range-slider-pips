@@ -1,1 +1,1 @@
-export { default as default } from "./RangeSlider.svelte";
+export { default } from "./RangeSlider.svelte";

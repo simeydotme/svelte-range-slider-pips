@@ -39,7 +39,7 @@
   const dispatch = createEventDispatcher();
 
   // dom references
-  let slider;
+  export let slider;
 
   // state management
   let valueLength = 0;
