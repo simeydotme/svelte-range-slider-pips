@@ -1,5 +1,6 @@
 <script>
 
+  import { onMount } from "svelte";
   import RangeSlider from "../../src/RangeSlider.svelte";
 
   let reversed = false;
@@ -45,6 +46,16 @@
     values.pop();
     values = values
   }
+
+  let boundSlider;
+  onMount(() => {
+    console.log( boundSlider );
+    setTimeout(() => {
+      boundSlider.scrollIntoView({ behavior: "smooth", block: "center" });
+      boundSlider.style.outline = "1px dotted black";
+      boundSlider.style.outlineOffset = "15px";
+    },500);
+  });
   
 </script>
 
@@ -120,6 +131,7 @@
     
     <h2>Default with float</h2>
     <RangeSlider float {reversed} {hoverable} {disabled} />
+    <RangeSlider float {reversed} {hoverable} {disabled} bind:slider="{boundSlider}" />
 
     <h2>Pips & Floats</h2>
     <RangeSlider float pips all="label" {reversed} {hoverable} {disabled} />

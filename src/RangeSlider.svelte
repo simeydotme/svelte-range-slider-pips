@@ -3,6 +3,9 @@
   import { createEventDispatcher } from "svelte";
   import RangePips from "./RangePips.svelte";
 
+  // dom references
+  export let slider;
+
   // range slider props
   export let range = false;
   export let pushy = false;
@@ -37,9 +40,6 @@
 
   // prepare dispatched events
   const dispatch = createEventDispatcher();
-
-  // dom references
-  export let slider;
 
   // state management
   let valueLength = 0;
