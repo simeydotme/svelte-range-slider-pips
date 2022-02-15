@@ -49,7 +49,7 @@
 
   let boundSlider;
   onMount(() => {
-    console.log( boundSlider );
+    console.log( "slider is bound: ", boundSlider );
     setTimeout(() => {
       boundSlider.scrollIntoView({ behavior: "smooth", block: "center" });
       boundSlider.style.outline = "1px dotted black";
@@ -59,7 +59,7 @@
 
   let decimals = [0.003, 0.123];
   let decimals2 = [-0.133, 0.444444444];
-  
+
 </script>
 
 <svelte:head>
@@ -174,7 +174,7 @@
     <h2>Prefix & Suffix, color</h2>
     <RangeSlider id="clr-test" prefix="~" suffix="m²" {formatter} range values={[100,3000]} min={100} max={3000} step={200} float pips all="label" {reversed} {hoverable} {disabled} />
     <h2>Formatters</h2>
-    <RangeSlider handleFormatter={(v,i)=>`${v}% O²`} formatter={(v,i)=>`${v}% O²`} step={1} float pips first="label" last="label" hover={false} values={[25,50,75]} {reversed} {hoverable} {disabled} />
+    <RangeSlider handleFormatter={(v,i)=>`${v}% O²`} formatter={(v,i)=>`${v}% O²`} step={1} float pips first="label" last="label" values={[25,50,75]} {reversed} {hoverable} {disabled} />
     <RangeSlider handleFormatter={(v,i)=>`v: ${v}, i: ${i}`} formatter={(v,i)=>`v: ${v}, i: ${i}`} step={10} float pips all="label" values={[25,50,75]} {reversed} {hoverable} {disabled} />
     <br>
     <RangeSlider bind:values={day} min={0} max={6} formatter={dayFormat} float pips first="label" last="label" rest="label" {reversed} {hoverable} {disabled} />

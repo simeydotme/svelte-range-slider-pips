@@ -4,7 +4,7 @@
   import RangePips from "./RangePips.svelte";
 
   // dom references
-  export let slider;
+  export let slider = undefined;
 
   // range slider props
   export let range = false;
