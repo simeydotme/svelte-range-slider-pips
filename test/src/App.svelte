@@ -56,6 +56,9 @@
       boundSlider.style.outlineOffset = "15px";
     },500);
   });
+
+  let decimals = [0.003, 0.123];
+  let decimals2 = [-0.133, 0.444444444];
   
 </script>
 
@@ -157,6 +160,7 @@
     <br>
     <RangeSlider float pips step={10} pipstep={1} {reversed} {hoverable} {disabled} />
     <RangeSlider float pips step={10} pipstep={2} {reversed} {hoverable} {disabled} />
+    <RangeSlider float pips step={10} pipstep={0.25} {reversed} {hoverable} {disabled} />
     <RangeSlider float pips step={0.1} min={dynamic[0]} max={dynamic[1]} 
       on:start={(e) => { console.log("start",e.detail)}}
       on:stop={(e) => { console.log("stop",e.detail)}} 
@@ -222,6 +226,13 @@
       <input type="number" bind:value={v} />
     {/each}
     <hr>
+
+    <h2>Decimal / Float Values</h2>
+    <RangeSlider bind:values={decimals} float pips all="label" min={-0.01} max={0.01} step={0.0005} precision={3} {reversed} {hoverable} {disabled} />
+    {decimals}<br>
+    
+    <RangeSlider bind:values={decimals2} float pips all="label" min={-0.01} max={0.01} step={0.0005} precision={5} {reversed} {hoverable} {disabled} />
+    {decimals2}<br>
 
   </div>
 

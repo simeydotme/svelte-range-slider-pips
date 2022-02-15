@@ -56,6 +56,8 @@
 
   let springPositions;
 
+  const fixFloat = (v) => parseFloat(v.toFixed(precision));
+
   $: {
 
     // check that "values" is an array, or set it as array
@@ -97,7 +99,7 @@
     } else if (perc >= 100) {
       return 100;
     } else {
-      return parseFloat(perc.toFixed(precision));
+      return fixFloat(perc);
     }
   };
 
@@ -121,11 +123,10 @@
   $: alignValueToStep = function (val) {
     // sanity check for performance
     if (val <= min) {
-      return min;
+      return fixFloat(min);
     } else if (val >= max) {
-      return max;
+      return fixFloat(max);
     }
-
     // find the middle-point between steps
     // and see if the value is closer to the
     // next step, or previous step
@@ -139,8 +140,7 @@
     // make sure the returned value is set to the precision desired
     // this is also because javascript often returns weird floats
     // when dealing with odd numbers and percentages
-
-    return parseFloat(aligned.toFixed(precision));
+    return fixFloat(aligned);
   };
 
   /**
@@ -854,6 +854,7 @@
       {focus}
       {percentOf}
       {moveHandle}
+      {fixFloat}
     />
   {/if}
 </div>

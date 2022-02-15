@@ -30,17 +30,18 @@
   // methods
   export let percentOf = undefined;
   export let moveHandle = undefined;
+  export let fixFloat = undefined;
 
   $: pipStep = pipstep || ((max - min) / step >= ( vertical ? 50 : 100 ) ? (max - min) / ( vertical ? 10 : 20 ) : 1);
 
   $: pipCount = parseInt((max - min) / (step * pipStep), 10);
 
   $: pipVal = function(val) {
-    return min + val * step * pipStep;
+    return fixFloat( min + val * step * pipStep );
   };
 
   $: isSelected = function(val) {
-    return values.some(v => v === val);
+    return values.some(v => fixFloat(v) === fixFloat(val));
   };
 
   $: inRange = function(val) {
@@ -182,7 +183,7 @@
     >
       {#if all === 'label' || first === 'label'}
         <span class="pipVal">
-          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(min,0,0)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
+          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(fixFloat(min),0,0)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
         </span>
       {/if}
     </span>
@@ -220,7 +221,7 @@
     >
       {#if all === 'label' || last === 'label'}
         <span class="pipVal">
-          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(max,pipCount,100)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
+          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{formatter(fixFloat(max),pipCount,100)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
         </span>
       {/if}
     </span>
