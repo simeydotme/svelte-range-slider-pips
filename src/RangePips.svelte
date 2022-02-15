@@ -55,7 +55,9 @@
   };
 
   function labelClick(val) {
-    moveHandle( undefined, val );
+    if ( !disabled ) {
+      moveHandle( undefined, val );
+    }
   }
 </script>
 
