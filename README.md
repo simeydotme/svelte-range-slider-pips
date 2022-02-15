@@ -117,6 +117,7 @@ prop | type | default | description
 **formatter** | `Function` | `(v,i,p) => v` | A function to re-format values before they are displayed (`v = value, i = pip index, p = percent`)
 **handleFormatter** | `Function` | `formatter` | A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property (`v = value, i = handle index, p = percent`)
 **springValues** | `Object` | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving
+**slider** | `Element` | `undefined` | DOM reference for binding to the main `<div />` of the component (`bind:slider='ref'`)
 
 ### slider events (dispatched)
 
