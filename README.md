@@ -1,5 +1,14 @@
+<br>
 
-# Range Slider (with pips)
+<div align="center">
+<img src="svelte-slider%20logo.svg" alt="logo" width="130" />
+</div>
+
+<h1 align="center">Svelte Range Slider</h1>
+
+<p align="center">
+<a href="https://www.npmjs.com/package/svelte-range-slider-pips"><img src="https://img.shields.io/npm/v/svelte-range-slider-pips?color=%234a40d4" alt="NPM version"></a>
+</p>
 
 ![Svelte Range Slider -- focussed, including some pips](test/public/slider.png)
 
