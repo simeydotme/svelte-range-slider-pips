@@ -30,7 +30,7 @@ Importable as a ***svelte-component***, or **used directly in any javascript app
 
 ## Features
 
-![Features of the range slider plugin (written below)](test/public/svelte-slider-features.png)
+![Features of the range slider plugin (written below)](/svelte-slider-features2.png)
 
 - ✨ fully customisable, stylable & accessible
 - 👍🏽 multi-thumb
