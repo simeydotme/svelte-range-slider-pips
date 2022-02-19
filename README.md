@@ -20,17 +20,17 @@ Importable as a ***svelte-component***, or **used directly in any javascript app
 
 <br>
 
-📔🔍 | Docs | [Full Documentation & Examples](https://simeydotme.github.io/svelte-range-slider-pips/)
-:--: | -----: | :------
-📦🔽 | **NPM** |[Node Module details](https://www.npmjs.com/package/svelte-range-slider-pips)
-📝⚙ | **REPL** |[Svelte component demo](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43?version=3)
-❤✒ | **Codepen** |[Plain JS component demo](https://codepen.io/simeydotme/pen/KKNJdbK)
+|   |   |   |
+| ----------- | ----------- | -- |
+| 📔🔍 | Docs | [Full Documentation & Examples](https://simeydotme.github.io/svelte-range-slider-pips/) |
+| 📝⚙ | **REPL** | [Svelte component demo](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43?version=3) |
+| ❤✒ | **Codepen** | [Plain JS component demo](https://codepen.io/simeydotme/pen/KKNJdbK) |
 
-<br>
+---
 
 ## Features
 
-![Features of the range slider plugin (written below)](test/public/range-slider.png)
+![Features of the range slider plugin (written below)](test/public/svelte-slider-features.png)
 
 - ✨ fully customisable, stylable & accessible
 - 👍🏽 multi-thumb
