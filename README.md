@@ -18,7 +18,7 @@ Importable as a ***svelte-component***, or **used directly in any javascript app
 
 <img src="test/public/svelte-slider-screenshot.png" alt="Svelte Range Slider -- focussed, including some pips"/>
 
-<br>
+---
 
 |   |   |   |
 | ----------- | ----------- | -- |
