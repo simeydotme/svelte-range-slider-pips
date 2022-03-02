@@ -1,7 +1,7 @@
 <br>
 
 <div align="center">
-<img src="svelte-slider%20logo.svg" alt="logo" width="130"/>
+<img src="test/public/svelte-slider%20logo.svg" alt="logo" width="130"/>
 </div>
 
 <h1 align="center">Svelte Range Slider</h1>
@@ -30,7 +30,7 @@ Importable as a ***svelte-component***, or **used directly in any javascript app
 
 ## Features
 
-![Features of the range slider plugin (written below)](/svelte-slider-features2.png)
+![Features of the range slider plugin (written below)](test/public/svelte-slider-features.png)
 
 - ✨ fully customisable, stylable & accessible
 - 👍🏽 multi-thumb
