@@ -20,11 +20,10 @@ Importable as a ***svelte-component***, or **used directly in any javascript app
 
 ---
 
-|   |   |   |
-| ----------- | ----------- | -- |
 | 📔🔍 | Docs | [Full Documentation & Examples](https://simeydotme.github.io/svelte-range-slider-pips/) |
-| 📝⚙ | **REPL** | [Svelte component demo](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43?version=3) |
-| ❤✒ | **Codepen** | [Plain JS component demo](https://codepen.io/simeydotme/pen/KKNJdbK) |
+| :--: | -----: | :------ |
+| 📝⚙ | **REPL** | **[Svelte component demo](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43?version=3)** |
+| ❤✒ | **Codepen** | **[Plain JS component demo](https://codepen.io/simeydotme/pen/KKNJdbK)** |
 
 ---
 
