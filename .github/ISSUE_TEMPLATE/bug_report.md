@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Use this tempalte to submit a bug report
+about: Report a bug / error in the code
 title: "[bug]"
 labels: bug, investigating
 assignees: ''
