@@ -66,7 +66,7 @@ with a regular `<script>` tag. This should even work with jQuery.
 
 <script>
   var mySlider = new RangeSliderPips({
-    target: document.querySelector("#mySlider"),
+    target: document.querySelector("#my-slider"),
     props: { values: [50], pips: true }
   });
 </script>
