@@ -113,7 +113,7 @@ with this id.
  .rangeSlider > .rangePips > .pip.last {}       /* the last pip on the slider */
  .rangeSlider > .rangePips > .pip.selected {}   /* if a pip is selected */
  .rangeSlider > .rangePips > .pip.in-range {}   /* if a pip is somewhere in the range */
- .rangeSlider > .rangePips > .pip > pipVal {}   /* the label for the pip */`}
+ .rangeSlider > .rangePips > .pip > .pipVal {}   /* the label for the pip */`}
 </Prism>
 
 There's also a bunch of CSS Variables for color-themeing if only color changes
