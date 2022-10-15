@@ -181,6 +181,7 @@
       class:in-range={inRange(min)}
       style="{orientationStart}: 0%;"
       on:click={labelClick(min)}
+      on:keyup={labelClick(min)}
       on:touchend|preventDefault={labelClick(min)}
     >
       {#if all === 'label' || first === 'label'}
@@ -200,6 +201,7 @@
           class:in-range={inRange(pipVal(i))}
           style="{orientationStart}: {percentOf(pipVal(i))}%;"
           on:click={labelClick(pipVal(i))}
+          on:keyup={labelClick(pipVal(i))}
           on:touchend|preventDefault={labelClick(pipVal(i))}
         >
           {#if all === 'label' || rest === 'label'}
@@ -219,6 +221,7 @@
       class:in-range={inRange(max)}
       style="{orientationStart}: 100%;"
       on:click={labelClick(max)}
+      on:keyup={labelClick(max)}
       on:touchend|preventDefault={labelClick(max)}
     >
       {#if all === 'label' || last === 'label'}
