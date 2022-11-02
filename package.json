@@ -1,6 +1,6 @@
 {
   "name": "svelte-range-slider-pips",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "svelte": "src/index.js",
   "module": "dist/svelte-range-slider-pips.mjs",
   "main": "dist/svelte-range-slider-pips.js",
@@ -12,7 +12,7 @@
     "@rollup/plugin-node-resolve": "^6.0.0",
     "rollup": "^1.20.0",
     "rollup-plugin-filesize": "^9.0.2",
-    "rollup-plugin-svelte": "^5.0.0",
+    "rollup-plugin-svelte": "6.1.1",
     "svelte": "^3.0.0"
   },
   "keywords": [
