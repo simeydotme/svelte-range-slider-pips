@@ -133,7 +133,7 @@ event | example | `event.detail` | description
 
 **Styling should mostly be done with CSS.**  
 There's a [bunch of css variables for controlling the colors](https://simeydotme.github.io/svelte-range-slider-pips/#styling) of the elements. 
-And the slider is fluid horizontally, with the size of things controlled by font-size. So you may change he `font-size` on the `.rangeSlider` base
+And the slider is fluid horizontally, with the size of things controlled by font-size. So you may change the `font-size` on the `.rangeSlider` base
 element to change the scale of everything.
 
 If you require more fine control of the widths, heights, etc, then you may override the default css. This can be easier by using the `id` prop
