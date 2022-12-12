@@ -628,6 +628,9 @@
     top: 0.25em;
     bottom: auto;
     transform: translateY(-50%) translateX(-50%);
+    outline-offset: 2px;
+    outline: 2px solid transparent;
+    border-radius: 100px;
     z-index: 2;
   }
   :global(.rangeSlider.reversed .rangeHandle) {
@@ -672,8 +675,11 @@
     box-shadow: 0 0 0 12px var(--handle-border);
     opacity: 0.4;
   }
-  :global(.rangeSlider.range:not(.min):not(.max) .rangeNub) {
+  :global(.rangeSlider.range .rangeNub) {
     border-radius: 10em 10em 10em 1.6em;
+  }
+  :global(.rangeSlider.range.min .rangeNub) {
+      border-radius: 10em  1.6em 10em 10em;
   }
   :global(.rangeSlider.range .rangeHandle:nth-of-type(1) .rangeNub) {
     transform: rotate(-135deg);
@@ -720,6 +726,9 @@
     opacity: 1;
     top: -0.2em;
     transform: translate(-50%, -100%);
+  }
+  :global(.rangeSlider .rangeHandle.active:focus-visible .rangeFloat) {
+    top: -0.35em;
   }
   :global(.rangeSlider .rangeBar) {
     position: absolute;
@@ -775,6 +784,18 @@
   :global(.rangeSlider.disabled .rangeNub) {
     background-color: #d7dada;
     background-color: var(--slider);
+  }
+  :global(.rangeSlider .rangeHandle:focus) {
+      outline: none;
+  }
+  :global(.rangeSlider .rangeHandle:focus-visible) {
+      outline: 2px solid #334;
+  }
+  @supports not selector(:focus-visible) {
+    :global(.rangeSlider .rangeHandle:focus) {
+        outline: 1px solid #334;
+        outline-offset: 1px;
+      }
   }
 </style>
 
