@@ -18,6 +18,7 @@ export default {
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,
+			immutable: false,
 			// we'll extract any component CSS out into
 			// a separate file - better for performance
 			css: css => {

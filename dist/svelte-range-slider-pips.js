@@ -1,7 +1,7 @@
 /**
- * svelte-range-slider-pips ~ 2.1.0
+ * svelte-range-slider-pips ~ 2.2.0
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
- * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 2/11/2022
+ * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 27/7/2023
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -1513,7 +1513,7 @@
     	return child_ctx;
     }
 
-    // (821:6) {#if float}
+    // (823:6) {#if float}
     function create_if_block_2$1(ctx) {
     	let span;
     	let t_value = /*handleFormatter*/ ctx[21](/*value*/ ctx[64], /*index*/ ctx[66], /*percentOf*/ ctx[23](/*value*/ ctx[64])) + "";
@@ -1572,7 +1572,7 @@
     	};
     }
 
-    // (823:10) {#if prefix}
+    // (825:10) {#if prefix}
     function create_if_block_4$1(ctx) {
     	let span;
     	let t;
@@ -1596,7 +1596,7 @@
     	};
     }
 
-    // (823:121) {#if suffix}
+    // (825:121) {#if suffix}
     function create_if_block_3$1(ctx) {
     	let span;
     	let t;
@@ -1620,7 +1620,7 @@
     	};
     }
 
-    // (800:2) {#each values as value, index}
+    // (802:2) {#each values as value, index}
     function create_each_block$1(ctx) {
     	let span1;
     	let span0;
@@ -1753,7 +1753,7 @@
     	};
     }
 
-    // (828:2) {#if range}
+    // (830:2) {#if range}
     function create_if_block_1$1(ctx) {
     	let span;
     	let span_style_value;
@@ -1778,7 +1778,7 @@
     	};
     }
 
-    // (834:2) {#if pips}
+    // (836:2) {#if pips}
     function create_if_block$1(ctx) {
     	let rangepips;
     	let current;
