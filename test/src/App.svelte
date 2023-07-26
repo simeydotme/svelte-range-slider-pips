@@ -254,6 +254,12 @@
     <RangeSlider bind:values={decimals2} float pips all="label" min={-0.01} max={0.01} step={0.0005} precision={5} {reversed} {hoverable} {disabled} />
     {decimals2}<br>
 
+    <h2>Aria Labels</h2>
+    <RangeSlider ariaLabels={["a"]} {reversed} {hoverable} {disabled} />
+    <RangeSlider ariaLabels={["a", "b"]} values={[5,20]} {reversed} {hoverable} {disabled} />
+    <RangeSlider ariaLabels={["a", "b"]} values={[5,20,40]} {reversed} {hoverable} {disabled} />
+    <RangeSlider ariaLabels={["", "b"]} values={[5,20]} range {reversed} {hoverable} {disabled} />
+
   </div>
 
 

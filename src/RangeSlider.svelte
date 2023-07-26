@@ -35,6 +35,7 @@
   export let suffix = "";
   export let formatter = (v,i,p) => v;
   export let handleFormatter = formatter;
+  export let ariaLabels = [];
 
   // stylistic props
   export let precision = 2;
@@ -86,7 +87,26 @@
     }
     // set the valueLength for the next check
     valueLength = values.length;
+
   };
+
+  $: {
+      // set default aria labels if none provided,
+      // and also update the aria labels if the values change
+      if ( !ariaLabels.length ) {
+        if ( range === true && values.length === 2 ) {
+          ariaLabels[0] = `Minimum value in range from ${min} to ${max}`;
+          ariaLabels[1] = `Maximum value in range from ${min} to ${max}`;
+        } else {
+          ariaLabels = values.map((v, i) => `Value ${i + 1} in range from ${min} to ${max}`);
+        }
+      } else if ( ariaLabels.length !== values.length ) {
+        for ( let i = ariaLabels.length; i < values.length; i++ ) {
+          ariaLabels[i] = `Value ${i + 1} in range from ${min} to ${max}`;
+        }
+      }
+
+  }
 
   /**
    * take in a value, and then calculate that value's percentage
@@ -810,6 +830,7 @@
       on:focus={sliderFocusHandle}
       on:keydown={sliderKeydown}
       style="{orientationStart}: {$springPositions[index]}%; z-index: {activeHandle === index ? 3 : 2};"
+      aria-label={ariaLabels[index]}
       aria-valuemin={range === true && index === 1 ? values[0] : min}
       aria-valuemax={range === true && index === 0 ? values[1] : max}
       aria-valuenow={value}
