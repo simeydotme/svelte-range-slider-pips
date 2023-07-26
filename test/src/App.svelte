@@ -108,6 +108,7 @@
 	
   <div class="content" style="--range-handle-focus: {color}; --range-handle: {lightColor}">
 
+    <h2>Vertical Tests</h2>
     
     <section style="display: flex; justify-content: space-evenly;">
       <RangeSlider vertical pips all="label" {reversed} {hoverable} {disabled} />
@@ -125,10 +126,29 @@
     <br>
     <h2>Spring & Colors Test</h2>
     <br>
-    springValues = stiffness: .05, damping: 0.05 
-    <RangeSlider id="test-id" springValues={{ stiffness: .05, damping: 0.05 }} bind:values {reversed} {hoverable} {disabled} />
-    <RangeSlider id="test-id" springValues={{ stiffness: .1, damping: .857 }} bind:values {reversed} {hoverable} {disabled} />
-    springValues = stiffness: .1, damping: .85 
+
+    <table> 
+      <tr>
+        <th width="50">stiffness</th>
+        <th width="50">damping</th>
+        <th>result</th>
+      </tr>
+      <tr>
+        <td><code>0.75</code></td>
+        <td><code>0.1</code></td>
+        <td><RangeSlider id="test-id3" springValues={{ stiffness: .75, damping: 1 }} bind:values {reversed} {hoverable} {disabled} /></td>
+      </tr>
+      <tr>
+        <td><code>0.1</code></td>
+        <td><code>0.85</code></td>
+        <td><RangeSlider id="test-id2" springValues={{ stiffness: .1, damping: .857 }} bind:values {reversed} {hoverable} {disabled} /></td>
+      </tr>
+      <tr>
+        <td><code>0.05</code></td>
+        <td><code>0.05</code></td>
+        <td><RangeSlider id="test-id" springValues={{ stiffness: .05, damping: 0.05 }} bind:values {reversed} {hoverable} {disabled} /></td>
+      </tr>
+    </table>
     
     <br>
     
