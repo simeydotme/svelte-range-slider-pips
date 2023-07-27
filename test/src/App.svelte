@@ -231,7 +231,7 @@
     <br><button on:click={()=>{ zeromin = 10; zeromax = 30; zero = [3,70]; }}>increase min/max</button> - {zero} 
     
     <h2>push & pop values</h2>
-    <RangeSlider bind:values float pips all="label" {reversed} {hoverable} {disabled} />
+    <RangeSlider bind:values float pips all="label" {reversed} {hoverable} {disabled} ariaLabels="x" />
     <button on:click={pushValues}>push</button>
     <button on:click={popValues}>pop</button>
     <br>({values})
@@ -255,7 +255,9 @@
     {decimals2}<br>
 
     <h2>Aria Labels</h2>
-    <RangeSlider ariaLabels={["a"]} {reversed} {hoverable} {disabled} />
+    <RangeSlider ariaLabels="ab" values={[5,20]} {reversed} {hoverable} {disabled} />
+    <RangeSlider ariaLabels="{6}" {reversed} {hoverable} {disabled} />
+    <RangeSlider ariaLabels="{{}}" {reversed} {hoverable} {disabled} />
     <RangeSlider ariaLabels={["a", "b"]} values={[5,20]} {reversed} {hoverable} {disabled} />
     <RangeSlider ariaLabels={["a", "b"]} values={[5,20,40]} {reversed} {hoverable} {disabled} />
     <RangeSlider ariaLabels={["", "b"]} values={[5,20]} range {reversed} {hoverable} {disabled} />

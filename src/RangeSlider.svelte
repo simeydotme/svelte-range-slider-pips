@@ -88,25 +88,11 @@
     // set the valueLength for the next check
     valueLength = values.length;
 
+    if ( values.length > 1 && !Array.isArray(ariaLabels) ) {
+      console.warn( `'ariaLabels' prop should be an Array (https://github.com/simeydotme/svelte-range-slider-pips#slider-props)` );
+    }
+
   };
-
-  $: {
-      // set default aria labels if none provided,
-      // and also update the aria labels if the values change
-      if ( !ariaLabels.length ) {
-        if ( range === true && values.length === 2 ) {
-          ariaLabels[0] = `Minimum value in range from ${min} to ${max}`;
-          ariaLabels[1] = `Maximum value in range from ${min} to ${max}`;
-        } else {
-          ariaLabels = values.map((v, i) => `Value ${i + 1} in range from ${min} to ${max}`);
-        }
-      } else if ( ariaLabels.length !== values.length ) {
-        for ( let i = ariaLabels.length; i < values.length; i++ ) {
-          ariaLabels[i] = `Value ${i + 1} in range from ${min} to ${max}`;
-        }
-      }
-
-  }
 
   /**
    * take in a value, and then calculate that value's percentage
