@@ -180,7 +180,7 @@
    **/
   function normalisedClient(e) {
     if (e.type.includes("touch")) {
-      return e.touches[0];
+      return e.touches[0] || e.changedTouches[0];
     } else {
       return e;
     }
@@ -864,6 +864,7 @@
       {percentOf}
       {moveHandle}
       {fixFloat}
+      {normalisedClient}
     />
   {/if}
 </div>

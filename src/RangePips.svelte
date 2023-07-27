@@ -31,6 +31,9 @@
   export let percentOf = undefined;
   export let moveHandle = undefined;
   export let fixFloat = undefined;
+  export let normalisedClient = undefined;
+
+  let clientStart;
 
   $: pipStep = pipstep || ((max - min) / step >= ( vertical ? 50 : 100 ) ? (max - min) / ( vertical ? 10 : 20 ) : 1);
 
@@ -54,9 +57,30 @@
     }
   };
 
-  function labelClick(val) {
+  /**
+   * function to run when the user clicks on a label
+   * we store the original client position so we can check if the user has moved the mouse/finger
+   * @param {event} e the event from browser
+   **/
+  function labelDown(e) {
+    e = normalisedClient(e);
+    clientStart = { x: e.clientX, y: e.clientY };
+  }
+
+  /**
+   * function to run when the user releases the mouse/finger
+   * we check if the user has moved the mouse/finger, if not we "click" the label
+   * and move the handle it to the label position
+   * @param {number} val the value of the label
+   * @param {event} e the event from browser
+   */
+  function labelUp(val,e) {
+    e = normalisedClient(e);
     if ( !disabled ) {
-      moveHandle( undefined, val );
+      const distanceMoved = Math.sqrt( Math.pow( clientStart.x - e.clientX, 2 ) + Math.pow( clientStart.y - e.clientY, 2 ) );
+      if ( clientStart && ( distanceMoved <= 5 ) ) {
+        moveHandle( undefined, val );
+      }
     }
   }
 </script>
@@ -181,8 +205,8 @@
       class:selected={isSelected(min)}
       class:in-range={inRange(min)}
       style="{orientationStart}: 0%;"
-      on:click={labelClick(min)}
-      on:touchend|preventDefault={labelClick(min)}
+      on:pointerdown={(e)=>{labelDown(e)}}
+      on:pointerup={(e)=>{labelUp(pipVal(min),e)}}
     >
       {#if all === 'label' || first === 'label'}
         <span class="pipVal">
@@ -200,8 +224,8 @@
           class:selected={isSelected(pipVal(i))}
           class:in-range={inRange(pipVal(i))}
           style="{orientationStart}: {percentOf(pipVal(i))}%;"
-          on:click={labelClick(pipVal(i))}
-          on:touchend|preventDefault={labelClick(pipVal(i))}
+          on:pointerdown={(e)=>{labelDown(e)}}
+          on:pointerup={(e)=>{labelUp(pipVal(i),e)}}
         >
           {#if all === 'label' || rest === 'label'}
             <span class="pipVal">
@@ -219,8 +243,8 @@
       class:selected={isSelected(max)}
       class:in-range={inRange(max)}
       style="{orientationStart}: 100%;"
-      on:click={labelClick(max)}
-      on:touchend|preventDefault={labelClick(max)}
+      on:pointerdown={(e)=>{labelDown(e)}}
+      on:pointerup={(e)=>{labelUp(pipVal(max),e)}}
     >
       {#if all === 'label' || last === 'label'}
         <span class="pipVal">
