@@ -1,5 +1,5 @@
 /**
- * svelte-range-slider-pips ~ 2.2.1
+ * svelte-range-slider-pips ~ 2.2.2
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 28/7/2023
  */
@@ -589,12 +589,12 @@ function add_css(target) {
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[28] = list[i];
-	child_ctx[30] = i;
+	child_ctx[37] = list[i];
+	child_ctx[39] = i;
 	return child_ctx;
 }
 
-// (178:2) {#if ( all && first !== false ) || first }
+// (202:2) {#if ( all && first !== false ) || first }
 function create_if_block_9(ctx) {
 	let span;
 	let span_style_value;
@@ -617,20 +617,14 @@ function create_if_block_9(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(span, "click", function () {
-						if (is_function(/*labelClick*/ ctx[21](/*min*/ ctx[0]))) /*labelClick*/ ctx[21](/*min*/ ctx[0]).apply(this, arguments);
-					}),
-					listen(span, "touchend", prevent_default(function () {
-						if (is_function(/*labelClick*/ ctx[21](/*min*/ ctx[0]))) /*labelClick*/ ctx[21](/*min*/ ctx[0]).apply(this, arguments);
-					}))
+					listen(span, "pointerdown", /*pointerdown_handler*/ ctx[30]),
+					listen(span, "pointerup", /*pointerup_handler*/ ctx[31])
 				];
 
 				mounted = true;
 			}
 		},
-		p(new_ctx, dirty) {
-			ctx = new_ctx;
-
+		p(ctx, dirty) {
 			if (/*all*/ ctx[6] === 'label' || /*first*/ ctx[7] === 'label') {
 				if (if_block) {
 					if_block.p(ctx, dirty);
@@ -644,15 +638,15 @@ function create_if_block_9(ctx) {
 				if_block = null;
 			}
 
-			if (dirty & /*orientationStart*/ 16384 && span_style_value !== (span_style_value = "" + (/*orientationStart*/ ctx[14] + ": 0%;"))) {
+			if (dirty[0] & /*orientationStart*/ 16384 && span_style_value !== (span_style_value = "" + (/*orientationStart*/ ctx[14] + ": 0%;"))) {
 				attr(span, "style", span_style_value);
 			}
 
-			if (dirty & /*isSelected, min*/ 262145) {
+			if (dirty[0] & /*isSelected, min*/ 262145) {
 				toggle_class(span, "selected", /*isSelected*/ ctx[18](/*min*/ ctx[0]));
 			}
 
-			if (dirty & /*inRange, min*/ 131073) {
+			if (dirty[0] & /*inRange, min*/ 131073) {
 				toggle_class(span, "in-range", /*inRange*/ ctx[17](/*min*/ ctx[0]));
 			}
 		},
@@ -665,7 +659,7 @@ function create_if_block_9(ctx) {
 	};
 }
 
-// (187:6) {#if all === 'label' || first === 'label'}
+// (211:6) {#if all === 'label' || first === 'label'}
 function create_if_block_10(ctx) {
 	let span;
 	let t_value = /*formatter*/ ctx[12](/*fixFloat*/ ctx[16](/*min*/ ctx[0]), 0, 0) + "";
@@ -701,7 +695,7 @@ function create_if_block_10(ctx) {
 				if_block0 = null;
 			}
 
-			if (dirty & /*formatter, fixFloat, min*/ 69633 && t_value !== (t_value = /*formatter*/ ctx[12](/*fixFloat*/ ctx[16](/*min*/ ctx[0]), 0, 0) + "")) set_data(t, t_value);
+			if (dirty[0] & /*formatter, fixFloat, min*/ 69633 && t_value !== (t_value = /*formatter*/ ctx[12](/*fixFloat*/ ctx[16](/*min*/ ctx[0]), 0, 0) + "")) set_data(t, t_value);
 
 			if (/*suffix*/ ctx[11]) {
 				if (if_block1) {
@@ -724,7 +718,7 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (189:10) {#if prefix}
+// (213:10) {#if prefix}
 function create_if_block_12(ctx) {
 	let span;
 	let t;
@@ -740,7 +734,7 @@ function create_if_block_12(ctx) {
 			append(span, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*prefix*/ 1024) set_data(t, /*prefix*/ ctx[10]);
+			if (dirty[0] & /*prefix*/ 1024) set_data(t, /*prefix*/ ctx[10]);
 		},
 		d(detaching) {
 			if (detaching) detach(span);
@@ -748,7 +742,7 @@ function create_if_block_12(ctx) {
 	};
 }
 
-// (189:100) {#if suffix}
+// (213:100) {#if suffix}
 function create_if_block_11(ctx) {
 	let span;
 	let t;
@@ -764,7 +758,7 @@ function create_if_block_11(ctx) {
 			append(span, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*suffix*/ 2048) set_data(t, /*suffix*/ ctx[11]);
+			if (dirty[0] & /*suffix*/ 2048) set_data(t, /*suffix*/ ctx[11]);
 		},
 		d(detaching) {
 			if (detaching) detach(span);
@@ -772,7 +766,7 @@ function create_if_block_11(ctx) {
 	};
 }
 
-// (195:2) {#if ( all && rest !== false ) || rest}
+// (219:2) {#if ( all && rest !== false ) || rest}
 function create_if_block_4(ctx) {
 	let each_1_anchor;
 	let each_value = Array(/*pipCount*/ ctx[20] + 1);
@@ -798,7 +792,7 @@ function create_if_block_4(ctx) {
 			insert(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*orientationStart, percentOf, pipVal, isSelected, inRange, labelClick, suffix, formatter, prefix, all, rest, min, max, pipCount*/ 4120131) {
+			if (dirty[0] & /*orientationStart, percentOf, pipVal, isSelected, inRange, labelDown, labelUp, suffix, formatter, prefix, all, rest, min, max, pipCount*/ 8314435) {
 				each_value = Array(/*pipCount*/ ctx[20] + 1);
 				let i;
 
@@ -828,7 +822,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (197:6) {#if pipVal(i) !== min && pipVal(i) !== max}
+// (221:6) {#if pipVal(i) !== min && pipVal(i) !== max}
 function create_if_block_5(ctx) {
 	let span;
 	let t;
@@ -837,15 +831,19 @@ function create_if_block_5(ctx) {
 	let dispose;
 	let if_block = (/*all*/ ctx[6] === 'label' || /*rest*/ ctx[9] === 'label') && create_if_block_6(ctx);
 
+	function pointerup_handler_1(...args) {
+		return /*pointerup_handler_1*/ ctx[33](/*i*/ ctx[39], ...args);
+	}
+
 	return {
 		c() {
 			span = element("span");
 			if (if_block) if_block.c();
 			t = space();
 			attr(span, "class", "pip");
-			attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[14] + ": " + /*percentOf*/ ctx[15](/*pipVal*/ ctx[19](/*i*/ ctx[30])) + "%;"));
-			toggle_class(span, "selected", /*isSelected*/ ctx[18](/*pipVal*/ ctx[19](/*i*/ ctx[30])));
-			toggle_class(span, "in-range", /*inRange*/ ctx[17](/*pipVal*/ ctx[19](/*i*/ ctx[30])));
+			attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[14] + ": " + /*percentOf*/ ctx[15](/*pipVal*/ ctx[19](/*i*/ ctx[39])) + "%;"));
+			toggle_class(span, "selected", /*isSelected*/ ctx[18](/*pipVal*/ ctx[19](/*i*/ ctx[39])));
+			toggle_class(span, "in-range", /*inRange*/ ctx[17](/*pipVal*/ ctx[19](/*i*/ ctx[39])));
 		},
 		m(target, anchor) {
 			insert(target, span, anchor);
@@ -854,12 +852,8 @@ function create_if_block_5(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(span, "click", function () {
-						if (is_function(/*labelClick*/ ctx[21](/*pipVal*/ ctx[19](/*i*/ ctx[30])))) /*labelClick*/ ctx[21](/*pipVal*/ ctx[19](/*i*/ ctx[30])).apply(this, arguments);
-					}),
-					listen(span, "touchend", prevent_default(function () {
-						if (is_function(/*labelClick*/ ctx[21](/*pipVal*/ ctx[19](/*i*/ ctx[30])))) /*labelClick*/ ctx[21](/*pipVal*/ ctx[19](/*i*/ ctx[30])).apply(this, arguments);
-					}))
+					listen(span, "pointerdown", /*pointerdown_handler_1*/ ctx[32]),
+					listen(span, "pointerup", pointerup_handler_1)
 				];
 
 				mounted = true;
@@ -881,16 +875,16 @@ function create_if_block_5(ctx) {
 				if_block = null;
 			}
 
-			if (dirty & /*orientationStart, percentOf, pipVal*/ 573440 && span_style_value !== (span_style_value = "" + (/*orientationStart*/ ctx[14] + ": " + /*percentOf*/ ctx[15](/*pipVal*/ ctx[19](/*i*/ ctx[30])) + "%;"))) {
+			if (dirty[0] & /*orientationStart, percentOf, pipVal*/ 573440 && span_style_value !== (span_style_value = "" + (/*orientationStart*/ ctx[14] + ": " + /*percentOf*/ ctx[15](/*pipVal*/ ctx[19](/*i*/ ctx[39])) + "%;"))) {
 				attr(span, "style", span_style_value);
 			}
 
-			if (dirty & /*isSelected, pipVal*/ 786432) {
-				toggle_class(span, "selected", /*isSelected*/ ctx[18](/*pipVal*/ ctx[19](/*i*/ ctx[30])));
+			if (dirty[0] & /*isSelected, pipVal*/ 786432) {
+				toggle_class(span, "selected", /*isSelected*/ ctx[18](/*pipVal*/ ctx[19](/*i*/ ctx[39])));
 			}
 
-			if (dirty & /*inRange, pipVal*/ 655360) {
-				toggle_class(span, "in-range", /*inRange*/ ctx[17](/*pipVal*/ ctx[19](/*i*/ ctx[30])));
+			if (dirty[0] & /*inRange, pipVal*/ 655360) {
+				toggle_class(span, "in-range", /*inRange*/ ctx[17](/*pipVal*/ ctx[19](/*i*/ ctx[39])));
 			}
 		},
 		d(detaching) {
@@ -902,10 +896,10 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (206:10) {#if all === 'label' || rest === 'label'}
+// (230:10) {#if all === 'label' || rest === 'label'}
 function create_if_block_6(ctx) {
 	let span;
-	let t_value = /*formatter*/ ctx[12](/*pipVal*/ ctx[19](/*i*/ ctx[30]), /*i*/ ctx[30], /*percentOf*/ ctx[15](/*pipVal*/ ctx[19](/*i*/ ctx[30]))) + "";
+	let t_value = /*formatter*/ ctx[12](/*pipVal*/ ctx[19](/*i*/ ctx[39]), /*i*/ ctx[39], /*percentOf*/ ctx[15](/*pipVal*/ ctx[19](/*i*/ ctx[39]))) + "";
 	let t;
 	let if_block0 = /*prefix*/ ctx[10] && create_if_block_8(ctx);
 	let if_block1 = /*suffix*/ ctx[11] && create_if_block_7(ctx);
@@ -938,7 +932,7 @@ function create_if_block_6(ctx) {
 				if_block0 = null;
 			}
 
-			if (dirty & /*formatter, pipVal, percentOf*/ 561152 && t_value !== (t_value = /*formatter*/ ctx[12](/*pipVal*/ ctx[19](/*i*/ ctx[30]), /*i*/ ctx[30], /*percentOf*/ ctx[15](/*pipVal*/ ctx[19](/*i*/ ctx[30]))) + "")) set_data(t, t_value);
+			if (dirty[0] & /*formatter, pipVal, percentOf*/ 561152 && t_value !== (t_value = /*formatter*/ ctx[12](/*pipVal*/ ctx[19](/*i*/ ctx[39]), /*i*/ ctx[39], /*percentOf*/ ctx[15](/*pipVal*/ ctx[19](/*i*/ ctx[39]))) + "")) set_data(t, t_value);
 
 			if (/*suffix*/ ctx[11]) {
 				if (if_block1) {
@@ -961,7 +955,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (208:14) {#if prefix}
+// (232:14) {#if prefix}
 function create_if_block_8(ctx) {
 	let span;
 	let t;
@@ -977,7 +971,7 @@ function create_if_block_8(ctx) {
 			append(span, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*prefix*/ 1024) set_data(t, /*prefix*/ ctx[10]);
+			if (dirty[0] & /*prefix*/ 1024) set_data(t, /*prefix*/ ctx[10]);
 		},
 		d(detaching) {
 			if (detaching) detach(span);
@@ -985,7 +979,7 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (208:119) {#if suffix}
+// (232:119) {#if suffix}
 function create_if_block_7(ctx) {
 	let span;
 	let t;
@@ -1001,7 +995,7 @@ function create_if_block_7(ctx) {
 			append(span, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*suffix*/ 2048) set_data(t, /*suffix*/ ctx[11]);
+			if (dirty[0] & /*suffix*/ 2048) set_data(t, /*suffix*/ ctx[11]);
 		},
 		d(detaching) {
 			if (detaching) detach(span);
@@ -1009,9 +1003,9 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (196:4) {#each Array(pipCount + 1) as _, i}
+// (220:4) {#each Array(pipCount + 1) as _, i}
 function create_each_block(ctx) {
-	let show_if = /*pipVal*/ ctx[19](/*i*/ ctx[30]) !== /*min*/ ctx[0] && /*pipVal*/ ctx[19](/*i*/ ctx[30]) !== /*max*/ ctx[1];
+	let show_if = /*pipVal*/ ctx[19](/*i*/ ctx[39]) !== /*min*/ ctx[0] && /*pipVal*/ ctx[19](/*i*/ ctx[39]) !== /*max*/ ctx[1];
 	let if_block_anchor;
 	let if_block = show_if && create_if_block_5(ctx);
 
@@ -1025,7 +1019,7 @@ function create_each_block(ctx) {
 			insert(target, if_block_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*pipVal, min, max*/ 524291) show_if = /*pipVal*/ ctx[19](/*i*/ ctx[30]) !== /*min*/ ctx[0] && /*pipVal*/ ctx[19](/*i*/ ctx[30]) !== /*max*/ ctx[1];
+			if (dirty[0] & /*pipVal, min, max*/ 524291) show_if = /*pipVal*/ ctx[19](/*i*/ ctx[39]) !== /*min*/ ctx[0] && /*pipVal*/ ctx[19](/*i*/ ctx[39]) !== /*max*/ ctx[1];
 
 			if (show_if) {
 				if (if_block) {
@@ -1047,7 +1041,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (216:2) {#if ( all && last !== false ) || last}
+// (240:2) {#if ( all && last !== false ) || last}
 function create_if_block(ctx) {
 	let span;
 	let span_style_value;
@@ -1070,20 +1064,14 @@ function create_if_block(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(span, "click", function () {
-						if (is_function(/*labelClick*/ ctx[21](/*max*/ ctx[1]))) /*labelClick*/ ctx[21](/*max*/ ctx[1]).apply(this, arguments);
-					}),
-					listen(span, "touchend", prevent_default(function () {
-						if (is_function(/*labelClick*/ ctx[21](/*max*/ ctx[1]))) /*labelClick*/ ctx[21](/*max*/ ctx[1]).apply(this, arguments);
-					}))
+					listen(span, "pointerdown", /*pointerdown_handler_2*/ ctx[34]),
+					listen(span, "pointerup", /*pointerup_handler_2*/ ctx[35])
 				];
 
 				mounted = true;
 			}
 		},
-		p(new_ctx, dirty) {
-			ctx = new_ctx;
-
+		p(ctx, dirty) {
 			if (/*all*/ ctx[6] === 'label' || /*last*/ ctx[8] === 'label') {
 				if (if_block) {
 					if_block.p(ctx, dirty);
@@ -1097,15 +1085,15 @@ function create_if_block(ctx) {
 				if_block = null;
 			}
 
-			if (dirty & /*orientationStart*/ 16384 && span_style_value !== (span_style_value = "" + (/*orientationStart*/ ctx[14] + ": 100%;"))) {
+			if (dirty[0] & /*orientationStart*/ 16384 && span_style_value !== (span_style_value = "" + (/*orientationStart*/ ctx[14] + ": 100%;"))) {
 				attr(span, "style", span_style_value);
 			}
 
-			if (dirty & /*isSelected, max*/ 262146) {
+			if (dirty[0] & /*isSelected, max*/ 262146) {
 				toggle_class(span, "selected", /*isSelected*/ ctx[18](/*max*/ ctx[1]));
 			}
 
-			if (dirty & /*inRange, max*/ 131074) {
+			if (dirty[0] & /*inRange, max*/ 131074) {
 				toggle_class(span, "in-range", /*inRange*/ ctx[17](/*max*/ ctx[1]));
 			}
 		},
@@ -1118,7 +1106,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (225:6) {#if all === 'label' || last === 'label'}
+// (249:6) {#if all === 'label' || last === 'label'}
 function create_if_block_1(ctx) {
 	let span;
 	let t_value = /*formatter*/ ctx[12](/*fixFloat*/ ctx[16](/*max*/ ctx[1]), /*pipCount*/ ctx[20], 100) + "";
@@ -1154,7 +1142,7 @@ function create_if_block_1(ctx) {
 				if_block0 = null;
 			}
 
-			if (dirty & /*formatter, fixFloat, max, pipCount*/ 1118210 && t_value !== (t_value = /*formatter*/ ctx[12](/*fixFloat*/ ctx[16](/*max*/ ctx[1]), /*pipCount*/ ctx[20], 100) + "")) set_data(t, t_value);
+			if (dirty[0] & /*formatter, fixFloat, max, pipCount*/ 1118210 && t_value !== (t_value = /*formatter*/ ctx[12](/*fixFloat*/ ctx[16](/*max*/ ctx[1]), /*pipCount*/ ctx[20], 100) + "")) set_data(t, t_value);
 
 			if (/*suffix*/ ctx[11]) {
 				if (if_block1) {
@@ -1177,7 +1165,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (227:10) {#if prefix}
+// (251:10) {#if prefix}
 function create_if_block_3(ctx) {
 	let span;
 	let t;
@@ -1193,7 +1181,7 @@ function create_if_block_3(ctx) {
 			append(span, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*prefix*/ 1024) set_data(t, /*prefix*/ ctx[10]);
+			if (dirty[0] & /*prefix*/ 1024) set_data(t, /*prefix*/ ctx[10]);
 		},
 		d(detaching) {
 			if (detaching) detach(span);
@@ -1201,7 +1189,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (227:109) {#if suffix}
+// (251:109) {#if suffix}
 function create_if_block_2(ctx) {
 	let span;
 	let t;
@@ -1217,7 +1205,7 @@ function create_if_block_2(ctx) {
 			append(span, t);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*suffix*/ 2048) set_data(t, /*suffix*/ ctx[11]);
+			if (dirty[0] & /*suffix*/ 2048) set_data(t, /*suffix*/ ctx[11]);
 		},
 		d(detaching) {
 			if (detaching) detach(span);
@@ -1256,7 +1244,7 @@ function create_fragment(ctx) {
 			append(div, t1);
 			if (if_block2) if_block2.m(div, null);
 		},
-		p(ctx, [dirty]) {
+		p(ctx, dirty) {
 			if (/*all*/ ctx[6] && /*first*/ ctx[7] !== false || /*first*/ ctx[7]) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
@@ -1296,23 +1284,23 @@ function create_fragment(ctx) {
 				if_block2 = null;
 			}
 
-			if (dirty & /*disabled*/ 32) {
+			if (dirty[0] & /*disabled*/ 32) {
 				toggle_class(div, "disabled", /*disabled*/ ctx[5]);
 			}
 
-			if (dirty & /*hoverable*/ 16) {
+			if (dirty[0] & /*hoverable*/ 16) {
 				toggle_class(div, "hoverable", /*hoverable*/ ctx[4]);
 			}
 
-			if (dirty & /*vertical*/ 4) {
+			if (dirty[0] & /*vertical*/ 4) {
 				toggle_class(div, "vertical", /*vertical*/ ctx[2]);
 			}
 
-			if (dirty & /*reversed*/ 8) {
+			if (dirty[0] & /*reversed*/ 8) {
 				toggle_class(div, "reversed", /*reversed*/ ctx[3]);
 			}
 
-			if (dirty & /*focus*/ 8192) {
+			if (dirty[0] & /*focus*/ 8192) {
 				toggle_class(div, "focus", /*focus*/ ctx[13]);
 			}
 		},
@@ -1355,24 +1343,73 @@ function instance($$self, $$props, $$invalidate) {
 	let { percentOf = undefined } = $$props;
 	let { moveHandle = undefined } = $$props;
 	let { fixFloat = undefined } = $$props;
+	let { normalisedClient = undefined } = $$props;
+	let clientStart;
 
-	function labelClick(val) {
+	/**
+ * function to run when the user clicks on a label
+ * we store the original client position so we can check if the user has moved the mouse/finger
+ * @param {event} e the event from browser
+ **/
+	function labelDown(e) {
+		e = normalisedClient(e);
+		clientStart = { x: e.clientX, y: e.clientY };
+	}
+
+	/**
+ * function to run when the user releases the mouse/finger
+ * we check if the user has moved the mouse/finger, if not we "click" the label
+ * and move the handle it to the label position
+ * @param {number} val the value of the label
+ * @param {event} e the event from browser
+ */
+	function labelUp(val, e) {
+		e = normalisedClient(e);
+
 		if (!disabled) {
-			moveHandle(undefined, val);
+			const distanceMoved = Math.sqrt(Math.pow(clientStart.x - e.clientX, 2) + Math.pow(clientStart.y - e.clientY, 2));
+
+			if (clientStart && distanceMoved <= 5) {
+				moveHandle(undefined, val);
+			}
 		}
 	}
 
+	const pointerdown_handler = e => {
+		labelDown(e);
+	};
+
+	const pointerup_handler = e => {
+		labelUp(pipVal(min), e);
+	};
+
+	const pointerdown_handler_1 = e => {
+		labelDown(e);
+	};
+
+	const pointerup_handler_1 = (i, e) => {
+		labelUp(pipVal(i), e);
+	};
+
+	const pointerdown_handler_2 = e => {
+		labelDown(e);
+	};
+
+	const pointerup_handler_2 = e => {
+		labelUp(pipVal(max), e);
+	};
+
 	$$self.$$set = $$props => {
-		if ('range' in $$props) $$invalidate(22, range = $$props.range);
+		if ('range' in $$props) $$invalidate(23, range = $$props.range);
 		if ('min' in $$props) $$invalidate(0, min = $$props.min);
 		if ('max' in $$props) $$invalidate(1, max = $$props.max);
-		if ('step' in $$props) $$invalidate(23, step = $$props.step);
-		if ('values' in $$props) $$invalidate(24, values = $$props.values);
+		if ('step' in $$props) $$invalidate(24, step = $$props.step);
+		if ('values' in $$props) $$invalidate(25, values = $$props.values);
 		if ('vertical' in $$props) $$invalidate(2, vertical = $$props.vertical);
 		if ('reversed' in $$props) $$invalidate(3, reversed = $$props.reversed);
 		if ('hoverable' in $$props) $$invalidate(4, hoverable = $$props.hoverable);
 		if ('disabled' in $$props) $$invalidate(5, disabled = $$props.disabled);
-		if ('pipstep' in $$props) $$invalidate(25, pipstep = $$props.pipstep);
+		if ('pipstep' in $$props) $$invalidate(26, pipstep = $$props.pipstep);
 		if ('all' in $$props) $$invalidate(6, all = $$props.all);
 		if ('first' in $$props) $$invalidate(7, first = $$props.first);
 		if ('last' in $$props) $$invalidate(8, last = $$props.last);
@@ -1383,34 +1420,35 @@ function instance($$self, $$props, $$invalidate) {
 		if ('focus' in $$props) $$invalidate(13, focus = $$props.focus);
 		if ('orientationStart' in $$props) $$invalidate(14, orientationStart = $$props.orientationStart);
 		if ('percentOf' in $$props) $$invalidate(15, percentOf = $$props.percentOf);
-		if ('moveHandle' in $$props) $$invalidate(26, moveHandle = $$props.moveHandle);
+		if ('moveHandle' in $$props) $$invalidate(27, moveHandle = $$props.moveHandle);
 		if ('fixFloat' in $$props) $$invalidate(16, fixFloat = $$props.fixFloat);
+		if ('normalisedClient' in $$props) $$invalidate(28, normalisedClient = $$props.normalisedClient);
 	};
 
 	$$self.$$.update = () => {
-		if ($$self.$$.dirty & /*pipstep, max, min, step, vertical*/ 41943047) {
-			 $$invalidate(27, pipStep = pipstep || ((max - min) / step >= (vertical ? 50 : 100)
+		if ($$self.$$.dirty[0] & /*pipstep, max, min, step, vertical*/ 83886087) {
+			 $$invalidate(29, pipStep = pipstep || ((max - min) / step >= (vertical ? 50 : 100)
 			? (max - min) / (vertical ? 10 : 20)
 			: 1));
 		}
 
-		if ($$self.$$.dirty & /*max, min, step, pipStep*/ 142606339) {
+		if ($$self.$$.dirty[0] & /*max, min, step, pipStep*/ 553648131) {
 			 $$invalidate(20, pipCount = parseInt((max - min) / (step * pipStep), 10));
 		}
 
-		if ($$self.$$.dirty & /*fixFloat, min, step, pipStep*/ 142671873) {
+		if ($$self.$$.dirty[0] & /*fixFloat, min, step, pipStep*/ 553713665) {
 			 $$invalidate(19, pipVal = function (val) {
 				return fixFloat(min + val * step * pipStep);
 			});
 		}
 
-		if ($$self.$$.dirty & /*values, fixFloat*/ 16842752) {
+		if ($$self.$$.dirty[0] & /*values, fixFloat*/ 33619968) {
 			 $$invalidate(18, isSelected = function (val) {
 				return values.some(v => fixFloat(v) === fixFloat(val));
 			});
 		}
 
-		if ($$self.$$.dirty & /*range, values*/ 20971520) {
+		if ($$self.$$.dirty[0] & /*range, values*/ 41943040) {
 			 $$invalidate(17, inRange = function (val) {
 				if (range === "min") {
 					return values[0] > val;
@@ -1445,13 +1483,21 @@ function instance($$self, $$props, $$invalidate) {
 		isSelected,
 		pipVal,
 		pipCount,
-		labelClick,
+		labelDown,
+		labelUp,
 		range,
 		step,
 		values,
 		pipstep,
 		moveHandle,
-		pipStep
+		normalisedClient,
+		pipStep,
+		pointerdown_handler,
+		pointerup_handler,
+		pointerdown_handler_1,
+		pointerup_handler_1,
+		pointerdown_handler_2,
+		pointerup_handler_2
 	];
 }
 
@@ -1466,16 +1512,16 @@ class RangePips extends SvelteComponent {
 			create_fragment,
 			safe_not_equal,
 			{
-				range: 22,
+				range: 23,
 				min: 0,
 				max: 1,
-				step: 23,
-				values: 24,
+				step: 24,
+				values: 25,
 				vertical: 2,
 				reversed: 3,
 				hoverable: 4,
 				disabled: 5,
-				pipstep: 25,
+				pipstep: 26,
 				all: 6,
 				first: 7,
 				last: 8,
@@ -1486,10 +1532,12 @@ class RangePips extends SvelteComponent {
 				focus: 13,
 				orientationStart: 14,
 				percentOf: 15,
-				moveHandle: 26,
-				fixFloat: 16
+				moveHandle: 27,
+				fixFloat: 16,
+				normalisedClient: 28
 			},
-			add_css
+			add_css,
+			[-1, -1]
 		);
 	}
 }
@@ -1806,7 +1854,8 @@ function create_if_block$1(ctx) {
 				focus: /*focus*/ ctx[25],
 				percentOf: /*percentOf*/ ctx[24],
 				moveHandle: /*moveHandle*/ ctx[32],
-				fixFloat: /*fixFloat*/ ctx[31]
+				fixFloat: /*fixFloat*/ ctx[31],
+				normalisedClient
 			}
 		});
 
@@ -2075,7 +2124,7 @@ function index(el) {
  **/
 function normalisedClient(e) {
 	if (e.type.includes("touch")) {
-		return e.touches[0];
+		return e.touches[0] || e.changedTouches[0];
 	} else {
 		return e;
 	}
