@@ -2,3 +2,6 @@
 node_modules
 /public/
 /test/public/build/
+
+yarn-error.log
+npm-error.log
