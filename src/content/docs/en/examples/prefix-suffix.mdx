@@ -1,0 +1,68 @@
+---
+title: 'Prefix & Suffix'
+description: 'Give labels a prefix string, or a suffix string'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import Prefix from '~demos/examples/formatting/Prefix.svelte';
+import PrefixRaw from '~demos/examples/formatting/Prefix.svelte?raw';
+
+import Suffix from '~demos/examples/formatting/Suffix.svelte';
+import SuffixRaw from '~demos/examples/formatting/Suffix.svelte?raw';
+
+import LuftBalloons from '~demos/examples/formatting/LuftBalloons.svelte';
+import LuftBalloonsRaw from '~demos/examples/formatting/LuftBalloons.svelte?raw';
+
+
+
+
+
+When rendering the labels (on handle, and pips) both for screen and readers; 
+the values can be prefixed or suffixed with a string to add context to the values.
+
+
+
+
+## Simple _€_ Prefix
+Here we will add a simple _€_ prefix, this is a very common use-case, and demonstrates
+that the `prefix` is applied both to the handles and pips-labels, however you can see the
+actual output **value is still just a number**.
+
+<Demo name="Prepend the '€' symbol" client:visible>
+  <Prefix client:visible />
+  <Code slot="svelte" code={cleanImport(PrefixRaw)} lang="svelte" />
+</Demo>
+
+
+
+
+
+## Simple _%_ Suffix
+Just as with the `prefix`, we can supply a `suffix` prop which will be appended to the
+value in the UI. This is useful for adding a simple symbol to the end of values.
+
+<Demo name="Append the '%' symbol" client:visible>
+  <Suffix client:visible />
+  <Code slot="svelte" code={cleanImport(SuffixRaw)} lang="svelte" />
+</Demo>
+
+
+
+
+
+
+## Fancy Pants
+`suffix` and `prefix` can be combined for some interesting effects, here we will add a
+`prefix` of _**"~"**_ and a `suffix` of _**" 🎈"**_, showing off how the values are still just
+numbers, but the UI is more interesting/meaningful.
+
+<Demo name="Floating in the summer sky" client:visible>
+  <LuftBalloons client:visible />
+  <Code slot="svelte" code={cleanImport(LuftBalloonsRaw)} lang="svelte" />
+</Demo>
+

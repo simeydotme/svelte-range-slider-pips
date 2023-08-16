@@ -1,0 +1,60 @@
+---
+title: 'Min & Max'
+description: 'How to use the minimum and maximum props'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import MinMax from '~demos/examples/minmax/MinMax.svelte';
+import MinMaxRaw from '~demos/examples/minmax/MinMax.svelte?raw';
+
+import Negative from '~demos/examples/minmax/Negative.svelte';
+import NegativeRaw from '~demos/examples/minmax/Negative.svelte?raw';
+
+import BoundClamped from '~demos/examples/minmax/BoundClamped.svelte';
+import BoundClampedRaw from '~demos/examples/minmax/BoundClamped.svelte?raw';
+
+
+
+
+The `min` and `max` props are used to set the minimum and maximum values of the Slider. 
+The default values are `0` and `100` respectively.
+
+## Basic Example
+
+`min` and `max` can be set to any number and all handles will be constrained to these.
+
+<Demo name="Minimum & Maximum props" client:visible>
+  <MinMax client:visible />
+  <Code slot="svelte" code={cleanImport(MinMaxRaw)} lang="svelte" />
+</Demo>
+
+
+
+
+## Negative Values
+
+Negative values are also accepted for `min` and `max`.
+
+<Demo name="Negative Values" client:visible>
+  <Negative client:visible />
+  <Code slot="svelte" code={cleanImport(NegativeRaw)} lang="svelte" />
+</Demo>
+
+
+
+
+## Bound & Clamped
+
+The `min` and `max` props can also be bound to a variable. Not really sure why you'd want to do this, but it's possible.
+
+Also demonstrated here is that if a Slider's `value` is outside of the `min` and `max` range, it will be clamped to the nearest value.
+
+<Demo name="Min and Max binding" client:visible>
+  <BoundClamped client:visible />
+  <Code slot="svelte" code={cleanImport(BoundClampedRaw)} lang="svelte" />
+</Demo>

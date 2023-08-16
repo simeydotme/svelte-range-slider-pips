@@ -1,0 +1,69 @@
+---
+title: 'Steps'
+description: 'Limiting the values that can be selected'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+import Info from '~components/Reusable/Info.astro';
+
+import Steps from '~demos/examples/steps/Steps.svelte';
+import StepsRaw from '~demos/examples/steps/Steps.svelte?raw';
+
+import Clamp from '~demos/examples/steps/Clamp.svelte';
+import ClampRaw from '~demos/examples/steps/Clamp.svelte?raw';
+
+
+
+
+
+Occasionally you may want to limit the interval of values that can be selected.
+For example, maybe we are only allowing the user to to choose multiples of 10, but up
+to a maximum of 100. This is where `step` can be used.
+
+<Note title="Pips Placement" type="info">
+  The `step` property interacts with the `pipstep` property. [Read more](./steps-combined)
+</Note>
+
+## Basic Example
+
+Here's an example where we're limiting the `values` that can be 
+selected to multiples of `2.5` or `1000`.
+
+<Demo name="Step at Multiples of 10" client:visible>
+  <Steps client:visible />
+  <Code slot="svelte" code={cleanImport(StepsRaw)} lang="svelte" />
+</Demo>
+
+
+
+## Clamping Values to Step
+
+When `step` is supplied, the initial `values` of the Slider will be clamped to the
+nearest value that is a multiple of `step`. This is to ensure that the `values`
+are always valid.
+
+<Info>The `max` value is always rendered and selectable, regardless 
+  of whether it is a multiple of `step`. So try to make it a multiple if you
+  want a nice looking Slider.</Info>
+
+<Demo name="Step at Multiples of 10" client:visible>
+  <Clamp client:visible />
+  <Code slot="svelte" code={cleanImport(ClampRaw)} lang="svelte" />
+</Demo>
+
+<Note type="info">
+  In this example above; the `values` that are put in to the Slider are not
+  correct according to the `step` value. Therefore, the `values` are clamped.
+</Note>
+  You can see that as the Slider initialises, the `values` change from `[-2,10]` to
+  `[1,8]` as those are the closest values possible.
+
+  Additionally, there is always a `last` pip that is selectable, which is aligned to
+  the `max` value. In this case, the `max` value is `24`, so the last pip is `24`, even
+  though it is not a multiple of `7`.
+
+

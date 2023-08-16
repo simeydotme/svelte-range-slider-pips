@@ -1,0 +1,122 @@
+---
+title: 'Styling'
+description: 'How to style your Range Slider'
+---
+
+import Info from "~components/Reusable/Info.astro";
+import Note from "~components/Reusable/Note.astro";
+import Demo from '~components/Reusable/Demo.svelte';
+import Variables from "~demos/styling/variables.svelte";
+import Sizing from "~demos/styling/sizing.svelte";
+
+
+## Colors
+The Range Slider comes out of the box with a set style, and it's
+colored using CSS variables. You can override these variables to
+change the color of the Slider.
+
+Here's the default values, with a little tool to help you roll your
+own color setup.
+
+```css
+/* Slider Ranges, Handles and Floats colors */
+
+:root {
+  --range-slider:          #d7dada; /* slider main background color */
+  --range-handle-inactive: #99a2a2; /* inactive handle color */
+  --range-handle:          #838de7; /* non-focussed handle color */
+  --range-handle-focus:    #4a40d4; /* focussed handle color */
+  --range-handle-border:   var(--range-handle); /* handle border color */
+  --range-range-inactive:  var(--range-handle-inactive); /* inactive range bar background color */
+  --range-range:           var(--range-handle-focus); /* active range background color */
+  --range-float-inactive:  var(--range-handle-inactive); /* inactive floating label background color */
+  --range-float:           var(--range-handle-focus); /* floating label background color */
+  --range-float-text:      white; /* text color on floating label */
+}
+```
+
+```css
+/* Slider Pips and Labels colors */
+
+:root {
+  --range-pip:                lightslategray; /* color of the base pips */
+  --range-pip-text:           var(--range-pip); /* color of the base labels */
+  --range-pip-active:         darkslategrey; /* active pips (when handle is on a slider-stop) */
+  --range-pip-active-text:    var(--range-pip-active); /* active labels (when handle is on a slider-stop) */
+  --range-pip-hover:          darkslategrey; /* when a slider-stop is hovered */
+  --range-pip-hover-text:     var(--range-pip-hover); /* when a slider-stop is hovered */
+  --range-pip-in-range:       var(--range-pip-active); /* pips inside the range */
+  --range-pip-in-range-text:  var(--range-pip-active-text); /* labels inside the range */
+}
+```
+
+### Test the color variables
+
+<Demo name="Color Variables for the Slider" client:visible>
+  <Variables client:visible />
+</Demo>
+
+
+
+## Size
+
+Because the Range Slider uses `em` units for the 
+range, handles, floats and pips, you can easily change the size
+of the Slider by changing the `font-size` of the base `.rangeSlider` element.
+
+```css
+.rangeSlider {
+  font-size: 1rem; /* default size */
+}
+```
+
+### Test the font size
+
+<Demo name="Changing the Font Size" client:visible>
+  <Sizing client:visible />
+</Demo>
+
+
+
+## Layout
+
+Below is a quick rundown of the main `<html>` elements that
+have classes applied, allowing them to be modified with css.
+
+<Note>There's a bunch of demos in the Examples section that show
+  how to style the Slider in different ways.</Note>
+
+```css
+/* main slider element */
+.rangeSlider {}                /* the main slider background track */
+.rangeSlider.vertical {}       /* if slider is vertical */
+.rangeSlider.focus {}          /* if slider is focussed */
+.rangeSlider.range {}          /* if slider is a range */
+.rangeSlider.min {}            /* if slider is a min-range */
+.rangeSlider.max {}            /* if slider is a max-range */
+.rangeSlider.pips {}           /* if slider has visible pips */
+.rangeSlider.pip-labels {}     /* if slider has labels for pips */
+.rangeSlider.hoverable {}      /* if slider can trigger hover effects */
+/* slider handles */
+.rangeSlider > .rangeHandle {}                 /* positioned wrapper for the handle/float */
+.rangeSlider > .rangeHandle.active {}          /* if a handle is active in any way */
+.rangeSlider > .rangeHandle.press {}           /* if a handle is being pressed down */
+.rangeSlider > .rangeHandle > .rangeNub {}     /* the actual nub rendered as a handle */
+.rangeSlider > .rangeHandle > .rangeFloat {}   /* the floating value above the handle */
+/* slider range */
+.rangeSlider > .rangeBar {}                    /* the range between the two handles */
+/* slider pips */
+.rangeSlider > .rangePips {}                   /* the container element for the pips */
+.rangeSlider > .rangePips.focus {}             /* if slider is focussed */
+.rangeSlider > .rangePips.vertical {}          /* if slider is vertical */
+.rangeSlider > .rangePips.hoverable {}         /* if the pips allow hover effect */
+.rangeSlider > .rangePips > .pip {}            /* an individual pip */
+.rangeSlider > .rangePips > .pip.first {}      /* the first pip on the slider */
+.rangeSlider > .rangePips > .pip.last {}       /* the last pip on the slider */
+.rangeSlider > .rangePips > .pip.selected {}   /* if a pip is selected */
+.rangeSlider > .rangePips > .pip.in-range {}   /* if a pip is somewhere in the range */
+.rangeSlider > .rangePips > .pip > .pipVal {}   /* the label for the pip */
+```
+
+<Info>Additionally, if you supply and custom html to the `formatter()` function,
+this could also be styled with css.</Info>

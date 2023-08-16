@@ -1,0 +1,170 @@
+---
+import { getLanguageFromURL } from '../../languages'
+import { SIDEBAR } from '../../consts'
+
+type Props = {
+  currentPage: string
+}
+
+const { currentPage } = Astro.props
+const currentPageMatch = currentPage.endsWith('/')
+  ? currentPage.slice(1, -1)
+  : currentPage.slice(1)
+const langCode = getLanguageFromURL(currentPage)
+const sidebar = SIDEBAR[langCode]
+---
+
+<nav aria-labelledby="grid-left">
+  <ul class="nav-groups">
+    {
+      Object.entries(sidebar).map(([header, children]) => (
+        <li>
+          <div class="nav-group">
+            <h2>{header}</h2>
+            <ul>
+              {children.map((child) => {
+                const url = Astro.site?.pathname + child.link
+                const ariaCurrent = currentPageMatch === child.link.split("#")[0] ? 'page' : false
+                if ( !child.children || child.children.length === 0 ) {
+                  return (
+                    <li class="nav-link">
+                      <a href={url} aria-current={ ariaCurrent }>
+                        {child.text}
+                      </a>
+                    </li>
+                  )
+                } else {
+                  return (
+                    <li class="nav-link">
+                      <a href={url} aria-current={ ariaCurrent }>
+                        {child.text}
+                      </a>
+                      <ul>
+                        {child.children.map((grandchild) => {
+                          const url = Astro.site?.pathname + grandchild.link
+                          return (
+                          <li class="nav-link nav-sublink">
+                            <a href={url}>
+                              {grandchild.text}
+                            </a>
+                          </li>
+                          )
+                        })}
+                      </ul>
+                    </li>
+                  )
+                }
+              })}
+            </ul>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', () => {
+    var target = document.querySelector('[aria-current="page"]')
+    if (target && target.offsetTop > window.innerHeight - 100) {
+      document.querySelector('.nav-groups').scrollTop = target.offsetTop
+    }
+  });
+  const focusSubLink = () => {
+    const url = window.location.pathname + window.location.hash;
+    document.querySelectorAll(`.nav-sublink a`)?.forEach((el) => el.removeAttribute('aria-current'));
+    document.querySelector(`.nav-sublink a[href="${url}"]`)?.setAttribute('aria-current', 'page');
+  }
+  window.addEventListener('hashchange', focusSubLink);
+  focusSubLink();
+</script>
+
+<style>
+  nav {
+    width: 100%;
+    margin-right: 1rem;
+  }
+
+  .nav-groups {
+    height: 100%;
+    padding: 2rem 1rem;
+    overflow-x: visible;
+    overflow-y: auto;
+    max-height: 100vh;
+  }
+
+  .nav-groups > li + li {
+    margin-top: 2rem;
+  }
+
+  .nav-groups > :first-child {
+    padding-top: var(--doc-padding);
+  }
+
+  .nav-groups > :last-child {
+    padding-bottom: 2rem;
+    margin-bottom: var(--theme-navbar-height);
+  }
+
+  .nav-group-title {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.1rem 1rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-link a {
+    font-size: 1rem;
+    margin: 1px;
+    padding: 0.3rem 1rem;
+    text-decoration: none;
+    display: block;
+    border-radius: 99em;
+  }
+
+  .nav-sublink a {
+    margin-block: 0;
+    margin-inline-start: 1rem;
+    padding-block: 0 .1rem;
+    padding-inline-start: 1rem;
+    border-radius: 0;
+    border-left: 2px solid var(--theme-bg-hover);
+    transition: border 0.2s ease;
+  }
+
+  .nav-link a:hover,
+  .nav-link a:focus {
+    background-color: var(--theme-bg-hover);
+  }
+
+  .nav-sublink a:hover,
+  .nav-sublink a:focus {
+    background: none;
+    border-left: 2px solid hsla(var(--color-gray-70), 1);
+  }
+
+.nav-link a[aria-current='page'] {
+  color: var(--theme-text-accent);
+  background-color: var(--theme-bg-accent);
+  font-weight: 600;
+}
+
+.nav-sublink a[aria-current='page'] {
+  border-left: 2px solid var(--theme-accent);
+  background-color: transparent;
+}
+
+  @media (min-width: 50em) {
+    .nav-groups {
+      padding-block: 0;
+      padding-inline: 0 1rem;
+    }
+  }
+</style>
+
+<style is:global>
+  :root.theme-dark .nav-link a[aria-current='page'] {
+    color: hsla(var(--color-base-white), 100%, 1);
+  }
+</style>

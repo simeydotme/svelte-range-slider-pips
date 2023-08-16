@@ -1,0 +1,156 @@
+---
+title: 'Formatter'
+description: 'Use the formatter function to style the Slider values'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import Formatter from '~demos/examples/formatting/Formatter.svelte';
+import FormatterRaw from '~demos/examples/formatting/Formatter.svelte?raw';
+
+import HandleFormatter from '~demos/examples/formatting/HandleFormatter.svelte';
+import HandleFormatterRaw from '~demos/examples/formatting/HandleFormatter.svelte?raw';
+
+import FunFormatter from '~demos/examples/formatting/FunFormatter.svelte';
+import FunFormatterRaw from '~demos/examples/formatting/FunFormatter.svelte?raw';
+
+import GigaBytes from '~demos/examples/formatting/GigaBytes.svelte';
+import GigaBytesRaw from '~demos/examples/formatting/GigaBytes.svelte?raw';
+
+import Squared from '~demos/examples/formatting/Squared.svelte';
+import SquaredRaw from '~demos/examples/formatting/Squared.svelte?raw';
+
+
+
+
+
+So although we used `prefix` and `suffix` to add some formatting before and
+after the `values`, we can also use the `formatter` function to format the
+values in any way we like.
+
+The formatter function is passed the `value`, `index` and `percent` of the pip/handle
+to allow us to modify the display.
+
+```svelte
+<RangeSlider formatter={(value, index, percent) => { return value }} />
+```
+
+
+
+
+## Pips and Floats
+There are two properties that deal with formatting; `formatter` and `handleFormatter`. These
+are for the pips and handles respectively. If the `handleFormatter` is not set, then the
+`formatter` will be used for both.
+
+
+
+## Single Formatter
+Like [in the `prefix` example](./prefix-suffix#simple--prefix), where we added a simple _€_ prefix. This time we will also style
+as a currency, but we will format the whole number into a currency string using the
+`Intl.NumberFormat` API.
+
+<Demo name="Advanced Formatting Currency" client:visible>
+  <Formatter client:visible />
+  <Code slot="svelte" code={cleanImport(FormatterRaw)} lang="svelte" />
+</Demo>
+
+<Note type="info">
+  Notice how the labels have their values split into thousands and decimals, with the
+  currency symbol at the end. But we didn't provide a suffix.
+</Note>
+
+
+
+
+## Multiple Formatters
+Here we will use the same formatter example as above for displaying the `handleFormatter`, but
+we will use a different `formatter` for the pip labels to demonstrate how you can use different
+formatters for each.
+
+<Demo name="Different Formatter for Handles" client:visible>
+  <HandleFormatter client:visible />
+  <Code slot="svelte" code={cleanImport(HandleFormatterRaw)} lang="svelte" />
+</Demo>
+
+<Note type="ok">
+  This patterns allows us to show approximate and stylised values on the pips, but
+  show the exact value on the handle to allow for more precise control.
+</Note>
+
+
+
+
+## Fun Formatters
+A cute example where we don't even care about numbers, a sort-of Net Promoter Score.
+
+<Demo name="Net Promoter Survey" client:visible>
+  <FunFormatter client:visible />
+  <Code slot="svelte" code={cleanImport(FunFormatterRaw)} lang="svelte" />
+  <div slot="css">
+  ```css
+  .floating-head { 
+    position: absolute; 
+    top: 0; 
+    right: 1.5em; 
+    font-size: 1.625em; 
+  }
+  .rangePips .pip .pipVal { 
+    font-size: 1.25em; 
+    opacity: 0.5; 
+    filter: saturate(0); 
+    top: -0.25em;
+  }
+  .rangePips .pip.selected .pipVal,
+  .rangePips .pip.in-range .pipVal { 
+    font-size: 2em; 
+    opacity: 1; 
+    filter: saturate(1); 
+    top: -0.25em;
+  }
+  ```
+  </div>
+</Demo>
+
+
+
+
+## Giga
+Here's a pretty intense example, where we use the `formatter` to convert the values
+into Gigabytes, Terabytes, Petabytes, etc. There's a pretty hefty algorithm to scale
+the values logarithmically, and then [a special function for styling](https://github.com/sindresorhus/pretty-bytes) the numbers as
+Giga, Tera, Peta, etc.
+
+<Demo name="Gigabytes Scale" client:visible>
+  <GigaBytes client:visible />
+  <Code slot="svelte" code={cleanImport(GigaBytesRaw)} lang="svelte" />
+</Demo>
+
+<Note title="Values as Gigabytes" type="alert">
+  In this example, it might be true that **we want to store the value of the
+  slider as Gigabytes**, but it _would be crazy_ to have a slider that goes from
+  1 Gigabyte to 1 Petabyte (1,000,000 points on the slider). 
+  
+  So we use a much reduced slider (`max={55}`) and run an algorithm to get 
+  the value in Gigabytes. The algorithm is a standalone function, so we can
+  format the output of that function, and also use the raw output as the value
+  we want to store in the Database.
+</Note>
+
+
+
+
+
+## Squares
+One last example of handle and pip formatters working to compliment
+each other. This time we will use the `handleFormatter` to show the
+real value, and the `formatter` to show the square of the value.
+
+<Demo name="Square Numbers" client:visible>
+  <Squared client:visible />
+  <Code slot="svelte" code={cleanImport(SquaredRaw)} lang="svelte" />
+</Demo>

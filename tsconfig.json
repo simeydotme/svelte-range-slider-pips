@@ -1,0 +1,18 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "baseUrl": ".",
+    "paths": {
+      "~public/*": ["public/*"],
+      "~lib/*": ["src/lib/*"],
+      "~demos/*": ["src/components/Demos/*"],
+      "~components/*": ["src/components/*"],
+      "~styles/*": ["src/styles/*"],
+      "~/*": ["src/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "public"]
+}

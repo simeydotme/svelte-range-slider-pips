@@ -1,0 +1,148 @@
+---
+type propType = "String" | "Number" | "Boolean" | "Object" | "Array" | "Function" | "Symbol" | "Node" | "Element" | "Element[]"
+
+interface Props {
+  propName: string;
+  propType: propType | propType[];
+  defaultValue: string;
+  open?: boolean;
+  link?: string;
+}
+
+const { propName, propType, defaultValue, link, open } = Astro.props
+const propTypeString = Array.isArray(propType) ? propType.join(" | ") : propType
+const isRender = propName && propType && defaultValue
+---
+
+{isRender &&
+
+  <section class="sliderProp" id={propName}>
+    <header class="sliderProp__header">
+      <h2 title="The prop name"><a href={`#${propName}`}>{propName}</a></h2>
+      <code title="The type that the prop expects">{propTypeString}</code>
+      <code title="The default value for this prop (if not provided)">{defaultValue}</code>
+    </header>
+
+    <div class="sliderProp__content">
+      <slot />
+    </div>
+
+  </section>  
+
+}
+
+<style>
+
+  .sliderProp {
+    padding: .5rem;
+    border: 1px solid transparent;
+    transition: background 0.2s ease-in-out;
+    overflow: hidden;
+  }
+
+  .sliderProp + .sliderProp {
+    margin-block-end: 2rem;
+  }
+
+  .sliderProp:nth-of-type(even) {
+    background: hsla(var(--color-gray-90), .5);
+  }
+
+  .sliderProp:nth-of-type(even) :global(code) {
+    background-color: white;
+  }
+
+  .sliderProp:target,
+  .sliderProp:focus-within,
+  .sliderProp:hover {
+    border-color: hsla(var(--color-purple), .5);
+    border-radius: 5px;
+    padding-inline: .5rem;
+  }
+
+.sliderProp:target,
+.sliderProp:focus-within {
+  box-shadow: var(--shadow-elevation-medium);
+}
+
+.sliderProp:target {
+  animation: pulsate-fwd 1s cubic-bezier(0.770, 0.000, 0.175, 1.000) both;
+}
+
+  .sliderProp:hover {
+    border-color: hsla(var(--color-gray-50), .5);
+  }
+
+  .sliderProp__header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-block: .25rem .75rem;
+    padding-inline: .25rem 0;
+    border-bottom: 1px solid hsla(var(--color-gray-90));
+  }
+
+  .sliderProp__header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .sliderProp__header h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .sliderProp:target .sliderProp__header {
+    border-bottom-color: hsla(var(--color-gray-70));
+  }
+
+  .sliderProp__header > :nth-child(1) {
+    flex: 1 1 auto;
+  }
+  .sliderProp__header > :nth-child(1n + 2) {
+    flex: 0 0 fit-content;
+    margin-left: 1rem;
+  }
+
+  .sliderProp__content {
+    padding: .5rem;
+    transition: all 0.2s ease-in-out;
+  }
+
+/**
+ * ----------------------------------------
+ * animation pulsate-fwd
+ * ----------------------------------------
+ */
+@-webkit-keyframes pulsate-fwd {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes pulsate-fwd {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+
+</style>

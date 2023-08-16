@@ -1,0 +1,126 @@
+---
+title: 'Pip Steps'
+description: 'Algorithm for the display of pips along the Slider'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+import Info from '~components/Reusable/Info.astro';
+
+import PipStepsDefault from '~demos/examples/pips/PipStepsDefault.svelte';
+import PipStepsDefaultRaw from '~demos/examples/pips/PipStepsDefault.svelte?raw';
+
+import PipStepsExplicit from '~demos/examples/pips/PipStepsExplicit.svelte';
+import PipStepsExplicitRaw from '~demos/examples/pips/PipStepsExplicit.svelte?raw';
+
+import PipStepsExtreme from '~demos/examples/pips/PipStepsExtreme.svelte';
+import PipStepsExtremeRaw from '~demos/examples/pips/PipStepsExtreme.svelte?raw';
+
+
+
+
+
+It is not always desirable to show every selectable value as a `pip` on the Slider, and so 
+this option works much in the same way as `step`, but it only affects the rendering of the pips
+and not which values can be selected.
+
+<Note type="" title="Default Value">
+  By default, if not explicitly set, the `pipstep` has two possible options based on the
+  total range of values (`max - min`);
+
+  - if `< 100`; then `pipstep` is set to `1` 
+  - if `>= 100`; then `pipstep` is set to `⅟₂₀` 
+
+
+  so for a Slider with `min={0}` and `max={100}` the `pipstep` would be `5`
+</Note>
+
+<Note title="Pips Placement" type="info">
+  The `pipstep` property interacts with the `step` property. [Read more](./steps-combined)
+</Note>
+
+
+
+
+## `pipstep` default
+Here's some examples of the default `pipstep` in action.
+
+<Demo name="Pipstep as a default" client:visible>
+  <PipStepsDefault client:visible />
+  <Code slot="svelte" code={cleanImport(PipStepsDefaultRaw)} lang="svelte" />
+</Demo>
+<Info>Note how the first Slider in this example has pips every 5 values, 
+but the values in-between are still selectable.</Info>
+
+
+
+
+
+## Explicity set
+In this example we have explicitly set the `pipstep` to be `3`, so a `pip` will
+be displayed every 3 values.
+
+<Info>Notice how the ending of the Sliders have the pips kind of bunched up, this is because
+the `pipstep` is set to `3` but the `max` props are not multiples of `3`.</Info>
+
+<Demo name="Setting the pipstep manually" client:visible>
+  <PipStepsExplicit client:visible />
+  <Code slot="svelte" code={cleanImport(PipStepsExplicitRaw)} lang="svelte" />
+</Demo>
+
+
+
+
+
+## Extreme values &amp; Labels
+Here we're demonstrating some very extreme `max` values that a Slider
+may encounter. At this extreme it would be unwise and impossible to show a
+pip for every value. So we use `pipstep` to limit the amount of pips shown.
+
+You could imagine this setup for something like a Home selling website to
+restrict the price range the user is looking to buy in.
+
+<Demo name="Labels on Extreme Ranges" client:visible>
+  <PipStepsExtreme client:visible />
+  <Code slot="svelte" code={cleanImport(PipStepsExtremeRaw)} lang="svelte" />
+</Demo>
+
+<Note title="Performance" type="warning">
+  It’d be quite bad for performance to display too many `pips`, as each one is an 
+  individual DOM node. Additionally, there's only so many pixels on a screen, limiting
+  the space for pips to exist in. 
+  
+  So it is suggested to use the `pipstep` feature to aesthetically limit the amount 
+  of `pips` rendered to screen.
+</Note>
+
+
+
+
+
+## Special Styling
+So far we've seen the use of `pipstep` to limit how many pips are rendered to the
+slider. But sometimes we don't want to only choose to show/hide, but also how to style them
+differently based on the `pip` position on the Slider.
+
+Unique styling can be achieved with css, and the
+css selector `nth-child()`. [See here for some examples](../styling/pip-step)
+
+
+
+
+
+## Special Formatting
+As evident with the _"extreme"_ Slider above, having large numbers such as "1000000"
+rendered on the Slider is fairly unreadable. And sometimes we don't even want to show
+numbers at all. We might want to display a currency symbol, or a percentage, or just
+strings of text.
+
+Special formatting of `labels` can be done using the `formatter()` property. 
+[Read more about `formatter()`](./)
+
+
+

@@ -1,0 +1,64 @@
+---
+title: 'Labels over Pips'
+description: 'How to display labels over the Slider Pips'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import PipLabels from '~demos/examples/pips/PipLabels.svelte';
+import PipLabelsRaw from '~demos/examples/pips/PipLabels.svelte?raw';
+
+
+
+
+
+Each pip has an intrinsic value based on the `min` and `max` and its position
+in the Slider. This value can be displayed as a `label` over the `pip`.
+
+The labels are displayed using the `all`, `first` `last` and `rest` props.
+
+<Note title="Demo" type="info">
+  [Try the pips/labels configuration demo](./pips#control-the-display)
+</Note>
+
+
+
+
+## Labels over All
+<Demo name="Labels over All" client:visible>
+  <RangeSlider pips all="label" client:visible />
+  <Code slot="svelte" lang="svelte" code='<RangeSlider pips all="label" />' />
+</Demo>
+
+
+
+
+## Labels over First &amp; Last
+<Demo name="Labels over First &amp; Last" client:visible>
+  <RangeSlider pips first="label" last="label" client:visible />
+  <Code slot="svelte" lang="svelte" code='<RangeSlider pips first="label" last="label" />' />
+</Demo>
+
+
+
+
+## No Pips over Rest
+<Demo name="No Pips over Rest" client:visible>
+  <RangeSlider pips all="label" rest={false} client:visible />
+  <Code slot="svelte" lang="svelte" code='<RangeSlider pips all="label" rest={false} />' />
+</Demo>
+
+
+
+
+## Labels over Rest
+<Demo name="Labels over Rest" client:visible>
+  <RangeSlider pips rest="label" client:visible />
+  <Code slot="svelte" lang="svelte" code='<RangeSlider pips rest="label" />' />
+</Demo>
+
+

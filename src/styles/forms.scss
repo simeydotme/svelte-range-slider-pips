@@ -1,0 +1,308 @@
+:root form {
+
+  --h: 222;
+  --s: 20%;
+  --light: hsl(var(--h), var(--s), 95%);
+  --dark: hsl(var(--h), var(--s), 20%);
+  --tint: hsl(160, 85%, 60%);
+  --tint2: hsl(200, 85%, 60%);
+  --pads: max(1vw, 10px);
+
+  --bor: hsl(var(--h), var(--s), 85%);
+  --bg: var(--light);
+  --fg: var(--dark);
+  --labels: hsl(var(--h), var(--s), 40%);
+  --b: hsla(var(--h), var(--s), 100%, 1);
+  --svg: var(--fg);
+
+  // --theme-code-inline-bg: hsla(var(--color-base-simey-dark), 90%, 1);
+  // --theme-code-inline-text:hsla(var(--color-base-simey-dark), 30%, 1);
+
+}
+
+:root.theme-dark form {
+
+  --bor: hsl(var(--h), var(--s), 35%);
+  --bg: var(--dark);
+  --fg: var(--light);
+  --labels: hsl(var(--h), var(--s), 65%);
+  --b: hsla(var(--h), var(--s), 12%, 1);
+  
+  --tint: hsl(260, 85%, 60%);
+  --tint2: hsl(300, 85%, 60%);
+  
+  // --theme-code-inline-bg: hsla(var(--color-gray-30), 1);
+
+}
+
+form {
+
+  background-color: var(--bg);
+  color: var(--fg);
+  padding: var(--pads);
+  border-radius: 10px;
+
+  fieldset {
+    border: 1px solid var(--bor);
+    border-radius: calc( 10px - var(--pads));
+    padding: var(--pads);
+    margin-block: 0;
+  }
+
+  legend {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.25px;
+    padding: 0 2em;
+    transform: translateX(-1em);
+  }
+    
+  svg {
+    fill: currentColor;
+    height: 1.5em;
+    width: auto;
+  }
+
+  .group {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    margin-block: 1em;
+    width: max-content;
+
+    input + label {
+      display: inline-block;
+      margin-block: 0;
+      padding: 0.5em  1em;
+      margin-inline-end: 2em;
+    }
+  }
+
+  @media screen and ( min-width: 600px ) {
+    .group {
+      grid-template-columns: repeat(2, auto 1fr);
+    }
+  }
+
+  @media screen and ( min-width: 1200px ) {
+    .group {
+      grid-template-columns: repeat(4, auto 1fr);
+    }
+  }
+
+  label {
+    display: block;
+    width: max-content;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    margin-inline-start: 0;
+    margin-block-end: 0.5em;
+    color: var(--labels);
+    transition: all 0.5s ease;
+  }
+  .field:focus-within label {
+    color: var(--fg);
+  }
+
+  .field {
+    margin-block: 2.5em;
+  }
+  .field:nth-of-type(1) {
+    margin-block-start: 1em;
+  }
+  .field:nth-last-of-type(1) {
+    margin-block-end: 1em;
+  }
+
+  input,
+  select,
+  button,
+  textarea {
+    font-family: inherit;
+    color: var(--fg);
+    background: var(--b);
+    padding: 0.875em;
+    border-radius: 8px;
+    width: max( 33%, 120px );
+    border: 1px solid transparent;
+    outline: 1px solid transparent;
+    accent-color: var(--tint2);
+    box-shadow: 0 3px 2px -3px var(--bor);
+    transition: border 0.3s ease-in, outline 0.6s ease-in, box-shadow 0.6s ease-in;
+
+    &:focus {
+      border-color: var(--tint);
+      outline-color: var(--tint2);
+      transition: border 0.6s ease-out, outline 0.3s ease-out,
+        box-shadow 0.3s ease-out;
+    }
+
+    &::placeholder {
+      opacity: 0.33;
+      font-style: italic;
+    }
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 10em;
+    resize: vertical;
+    display: block;
+  }
+
+  select {
+    appearance: none;
+    background-image: url('data:image/svg+xml; utf8, <svg width="16px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.2929,5.292875 C12.6834,4.902375 13.3166,4.902375 13.7071,5.292875 C14.0976,5.683375 14.0976,6.316555 13.7071,6.707085 L8.70711,11.707085 C8.31658,12.097605 7.68342,12.097605 7.29289,11.707085 L2.29289,6.707085 C1.90237,6.316555 1.90237,5.683375 2.29289,5.292875 C2.68342,4.902375 3.31658,4.902375 3.70711,5.292875 L8,9.585765 L12.2929,5.292875 Z"  style="fill: hsl(222,20%,40%);"/></svg>');
+    background-size: 1em;
+    background-position: calc(100% - 1em) 50%;
+    background-repeat: no-repeat;
+
+    .dark & {
+      background-image: url('data:image/svg+xml; utf8, <svg width="16px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.2929,5.292875 C12.6834,4.902375 13.3166,4.902375 13.7071,5.292875 C14.0976,5.683375 14.0976,6.316555 13.7071,6.707085 L8.70711,11.707085 C8.31658,12.097605 7.68342,12.097605 7.29289,11.707085 L2.29289,6.707085 C1.90237,6.316555 1.90237,5.683375 2.29289,5.292875 C2.68342,4.902375 3.31658,4.902375 3.70711,5.292875 L8,9.585765 L12.2929,5.292875 Z"  style="fill: hsl(222,20%,70%);"/></svg>');
+    }
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    width: calc(1em + 8px);
+    height: calc(1em + 8px);
+    border: none;
+    outline: none;
+    appearance: none;
+    border-radius: 100%;
+
+    &,
+    &:after {
+      flex: 0 0 auto;
+      transition: all 0.6s ease-in;
+    }
+    &:focus,
+    &:focus:after {
+      transition: all 0.3s ease-out;
+    }
+
+    &:after {
+      content: "";
+      width: 1em;
+      height: 1em;
+      background: transparent;
+      border-radius: 100%;
+      opacity: 0.9;
+    }
+
+    &:checked {
+      &:after {
+        background: var(--fg);
+      }
+    }
+
+    &:focus,
+    &:active {
+      background-color: var(--tint);
+      &:after {
+        opacity: 1;
+      }
+    }
+
+    & + label {
+      text-transform: none;
+      display: inline-flex;
+      padding: 0 0.25em;
+      user-select: none;
+      transition: none;
+    }
+
+    &:checked + label {
+      font-weight: bold;
+      font-style: italic;
+      color: var(--fg);
+    }
+  }
+
+  input[type="checkbox"] {
+    border-radius: 5px;
+
+    &:after,
+    &:focus:after {
+      background-size: 1.2em;
+      background-position: center;
+      opacity: 0;
+    }
+
+    &:checked:after {
+      background: url('data:image/svg+xml; utf8, <svg width="16px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M13.7071,4.29289 C14.0976,4.68342 14.0976,5.31658 13.7071,5.70711 L7.70711,11.7071 C7.31658,12.0976 6.68342,12.0976 6.29289,11.7071 L3.29289,8.70711 C2.90237,8.31658 2.90237,7.68342 3.29289,7.29289 C3.68342,6.90237 4.31658,6.90237 4.70711,7.29289 L7,9.58579 L12.2929,4.29289 C12.6834,3.90237 13.3166,3.90237 13.7071,4.29289 Z"  style="fill: hsl(222,20%,40%);"/></svg>');
+      background-size: 1.2em;
+      background-position: center;
+      opacity: 1;
+    }
+
+    .dark &:checked:after {
+      background-image: url('data:image/svg+xml; utf8, <svg width="16px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M13.7071,4.29289 C14.0976,4.68342 14.0976,5.31658 13.7071,5.70711 L7.70711,11.7071 C7.31658,12.0976 6.68342,12.0976 6.29289,11.7071 L3.29289,8.70711 C2.90237,8.31658 2.90237,7.68342 3.29289,7.29289 C3.68342,6.90237 4.31658,6.90237 4.70711,7.29289 L7,9.58579 L12.2929,4.29289 C12.6834,3.90237 13.3166,3.90237 13.7071,4.29289 Z"  style="fill: hsl(222,20%,95%);"/></svg>');
+    }
+  }
+
+
+  input[type="color"] {
+    appearance: none;
+    max-width: 4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5em;
+    padding: 5px;
+    border-radius: 10em;
+  }
+
+  input[type="color"]::-moz-color-swatch,
+  input[type="color"]::-webkit-color-swatch {
+    border: inherit;
+    border-radius: inherit;
+    display: block;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5em;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    background: hsl(var(--h), var(--s), 90%);
+    text-transform: uppercase;
+    width: auto;
+    padding-inline: 2em;
+    box-shadow: inset 0 0 0 1px transparent;
+    transition: all 0.3s ease;
+
+    .dark & {
+      background: hsl(var(--h), var(--s), 15%);
+    }
+
+    &:hover {
+      opacity: 0.8;
+      box-shadow: inset 0 0 0 1px var(--fg);
+    }
+
+    &[type="submit"] {
+      --svg: var(--bg);
+      background: var(--fg);
+      color: var(--bg);
+      font-weight: 600;
+    }
+    
+  }
+
+  svg {
+    fill: var(--svg);
+    height: 1.5em;
+    width: auto;
+  }
+
+}

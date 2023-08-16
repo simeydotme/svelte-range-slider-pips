@@ -1,0 +1,64 @@
+---
+title: 'Float'
+description: 'Labels that float above the Slider handles'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+import Info from '~components/Reusable/Info.astro'
+
+import Float from '~demos/examples/float/Float.svelte';
+import FloatRaw from '~demos/examples/float/Float.svelte?raw';
+
+import NoHover from '~demos/examples/float/NoHover.svelte';
+import NoHoverRaw from '~demos/examples/float/NoHover.svelte?raw';
+
+
+
+
+
+By passing the float prop to the component, we can have a nice label which floats 
+above the handle and shows the current value.
+
+<Info>Hover/Drag the Slider handles below to see the float</Info>
+
+<Demo name="Floating Labels" client:visible>
+  <Float client:visible />
+  <div slot="svelte">
+    ```svelte
+    <RangeSlider float />
+    ```
+  </div>
+</Demo>
+
+<Note type="info">
+  I manually set the above Slider to be focussed on load so that the float is
+  visible.
+</Note>
+
+
+
+
+
+
+## Float without Hover
+
+The Slider can be initialised with `hoverable` set `false` which will prevent
+the float from appearing on hover.
+
+<Demo name="Floating Labels" client:visible>
+  <NoHover client:visible />
+  <div slot="svelte">
+    ```svelte
+    <RangeSlider float hoverable={false} />
+    ```
+  </div>
+</Demo>
+
+<Note type="warning">
+  This will also **prevent all other hover effects** on the Slider. If you wish
+  only to hide the hover effect for floats, you may edit the CSS for more control.
+</Note>

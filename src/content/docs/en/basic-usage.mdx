@@ -1,0 +1,67 @@
+---
+title: 'Basic Usage'
+description: 'A quick guide to using the Slider with minimal configuration'
+---
+import { Code } from 'astro/components';
+import { Icon } from 'astro-icon'
+import RangeSlider from 'svelte-range-slider-pips';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import Useless from '~demos/basic/useless.svelte';
+import UselessRaw from '~demos/basic/useless.svelte?raw';
+
+import BasicBinding from '~demos/basic/binding.svelte';
+import BasicBindingRaw from '~demos/basic/binding.svelte?raw';
+
+import TypicalUsage from '~demos/basic/typical.svelte';
+import TypicalUsageRaw from '~demos/basic/typical.svelte?raw';
+
+
+## Minimal Configuration
+<Icon name="twemoji:fire" /> The most basic example is to provide a `min`, `max` and `value` prop. 
+This will render a Slider with a single handle.
+
+<Demo name="Default (useless) Slider" client:visible>
+  <RangeSlider min={0} max={100} values={[10]} client:visible />
+  <Code slot="svelte" code={UselessRaw} lang="svelte" />
+</Demo>
+
+But this is kind of useless! Unless you just want a pretty UI toy to play with! <Icon name="twemoji:face-with-tears-of-joy" />
+Because once rendered to the page, there's no feedback upon interaction.
+
+
+
+## Binding the values
+
+Typically we would want to be able to use the values of the Slider in our application. This
+could either be to change another part of the interface in a Rich Internet Application, or to
+send the values to a server as part of a Form.
+
+<Demo name="Basic Binding to an <input>" client:visible>
+  <BasicBinding client:visible />
+  <Code code={BasicBindingRaw} lang="svelte" slot="svelte" />
+</Demo>
+
+
+
+## Common Setup
+
+The most common use case is to allow a user to select a value
+from a range of values. Using the special feature of `pips` to render
+beside the Slider to hint at the progress. It's also common to show a `float` value
+above the handle to help the user see the exact value they are selecting.
+
+Again; we are binding to a `values[]` variable so that the Slider's value can be
+used in our application.
+
+<Demo name="A typically styled Range Slider with pips" client:visible>
+  <TypicalUsage client:visible />
+  <Code code={TypicalUsageRaw} lang="svelte" slot="svelte" />
+</Demo>
+
+<Note type="info" title="Clicky Labels">
+  When displaying labels below a Slider (`first=label`, `last=label`), this also enables them to be
+  interactive. Clicking on a label will move the closest handle to that value.
+</Note>

@@ -1,0 +1,148 @@
+---
+title: 'Options (Props)'
+description: 'List of options (props) available for the component'
+---
+import Option from '~components/Reusable/Option.astro'
+import Info from '~components/Reusable/Info.astro'
+
+Below you'll find a list of options (props) that you can pass to the component to
+configure it to your liking. There's a link to an example for each option.
+
+<Option propName="values" propType="Array" defaultValue="[50]" link="#">
+  Array of values to apply on the Slider. If multiple values are provided, multiple handles will be rendered.  
+  <Info>A Slider with `range` property set can only have two values max</Info>
+</Option>
+
+<Option propName="min" propType="Number" defaultValue="0" link="#">
+  Minimum value for the Slider  
+  should be set to lower than `max` property
+</Option>
+
+<Option propName="max" propType="Number" defaultValue="100" link="#">
+  Maximum value for the Slider  
+  should be set to higher than `min` property
+</Option>
+
+<Option propName="step" propType="Number" defaultValue="1" link="#">
+  Every `nth` **value to allow handle to stop at**. For example if the `step` is 
+  `5`, then the handle will only stop at `5`, `10`, `15`, `20`, etc.  
+  <Info>should be a positive value</Info>
+</Option>
+
+<Option propName="pips" propType="Boolean" defaultValue="false" link="#">
+  Whether to show pips/notches on the Slider. The pips will be rendered at the
+  `pipstep` value. Pips can be styled as necessary but by default sit below the
+  Slider (Horizontal) like a gauge.
+</Option>
+
+<Option propName="pipstep" propType="Number" defaultValue="1" link="#">
+  Every `nth` **step to show a pip for**. This has multiple defaults depending on
+  `min`, `max` and `step` properties. A sensible default is chosen, but can be overridden.
+  <Info>should be a positive value</Info>
+</Option>
+
+<Option propName="range" propType={["Boolean","String"]} defaultValue="false" link="#">
+  Whether to style as a range picker. Possible values are: 
+  - `false` no range styling
+  - `true` styles like a range with a `min` and `max`
+  - `min` styles like a range going from `min` to `value`
+  - `max` styles like a range going from `value` to `max`
+
+  <Info>A Slider with `range=min/max` or `range=true` only have one or two values respectively.</Info>
+</Option>
+
+<Option propName="pushy" propType="Boolean" defaultValue="false" link="#">
+  If `range` is `true`, then this decides if one handle will push the other along. By default, the handles 
+  will not push each other along, they will block each other.
+</Option>
+
+<Option propName="float" propType="Boolean" defaultValue="false" link="#">
+  Set true to add a floating label above focussed handles. This is good for displaying the
+  current value of the Slider while interacting with it.
+</Option>
+
+<Option propName="vertical" propType="Boolean" defaultValue="false" link="#">
+  Make the Slider render vertically (lower value on bottom)
+</Option>
+
+<Option propName="first" propType={["Boolean","String"]} defaultValue="false" link="#">
+  Whether to show a pip or label **for the first value on Slider**. Possible values are:  
+  - `false` the first value in the Slider will not have a pip or label
+  - `pip` a pip (only) will be shown for the first value
+  - `label` label (and pip) is shown on the first value
+</Option>
+
+<Option propName="last" propType={["Boolean","String"]} defaultValue="false" link="#">
+  Whether to show a pip or label **for the last value on Slider**. Possible values are:  
+  - `false` the last value in the Slider will not have a pip or label
+  - `pip` a pip (only) will be shown for the last value
+  - `label` label (and pip) is shown on the last value
+</Option>
+
+<Option propName="rest" propType={["Boolean","String"]} defaultValue="false" link="#">
+  Whether to show a pip or label **for all values except first & last**. Possible values are:  
+  - `false` the middle values in the Slider will not have a pip or label
+  - `pip` a pip (only) will be shown for the middle values
+  - `label` label (and pip) is shown on the middle values
+</Option>
+
+<Option propName="all" propType={["Boolean","String"]} defaultValue="false" link="#">
+  Whether to show a pip or label **for every value**.  Possible values are:  
+  - `false` all values in the Slider will not have a pip or label
+  - `pip` a pip (only) will be shown for all values
+  - `label` label (and pip) is shown on all values
+
+  <Info>The same as combining `first`, `last` and `rest`.</Info>
+</Option>
+
+<Option propName="prefix" propType="String" defaultValue="''" link="#">
+  A simple string to prepend to all displayed values
+  <Info>For more complex prefixes, use the `formatter` property</Info>
+</Option>
+
+<Option propName="suffix" propType="String" defaultValue="''" link="#">
+  A simple string to append to all displayed values
+  <Info>For more complex suffixes, use the `formatter` property</Info>
+</Option>
+
+<Option propName="reversed" propType="Boolean" defaultValue="false" link="#">
+  Reverse the orientation of min/max
+</Option>
+
+<Option propName="hoverable" propType="Boolean" defaultValue="true" link="#">
+  Whether hover styles are enabled for both handles and pips/values
+</Option>
+
+<Option propName="disabled" propType="Boolean" defaultValue="false" link="#">
+  Determine if the Slider is disabled, or enabled
+</Option>
+
+<Option propName="id" propType="String" defaultValue="''" link="#">
+  Give the Slider a unique ID for use in styling
+</Option>
+
+<Option propName="ariaLabels" propType="Array" defaultValue="[]" link="#">
+  An array of strings to use for the `aria-label` attribute on the handles.  
+  <Info>The array should be the same length as the `values` array.</Info>
+</Option>
+
+<Option propName="formatter" propType="Function" defaultValue="(v,i,p) => v" link="#">
+  A function to format the value of the Slider. Should return a String value.
+  <Info>function arguments are: `v(value), i(handle index), p(percent)`</Info>
+</Option>
+
+<Option propName="handleFormatter" propType="Function" defaultValue="formatter()" link="#">
+  A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property.
+  <Info>function arguments are: `v(value), i(handle index), p(percent)`</Info>
+</Option>
+
+<Option propName="springValues" propType="Object" defaultValue="{ stiffness: 0.15, damping: 0.4 }" link="#">
+  Svelte spring physics object to change the behaviour of the handle when moving.
+  <Info>Set to both to 1 for basically no spring effect</Info>
+</Option>
+
+<Option propName="slider" propType="Element" defaultValue="undefined" link="#">
+  DOM reference for binding to the main `<div />` of the component.  
+  e.g. `bind:slider='ref'`
+  <Info>Useful for doing any kind of manipulation at mount time</Info>
+</Option>

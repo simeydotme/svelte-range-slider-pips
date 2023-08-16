@@ -1,0 +1,39 @@
+
+.slider-table {
+
+  overflow-x: auto;
+  padding-bottom: 2em;
+  scrollbar-width: thin;
+  scrollbar-color: hsla( var(--color-base-code-block), 70%, 1) hsla( var(--color-base-code-block), 90%, 1);
+  
+  td, th {
+    text-align: center;
+    vertical-align: top;
+    padding-top: .25rem;
+  }
+
+  td:nth-child(1),
+  td:nth-child(2) {
+    min-width: 3em;
+    width: 3em;
+    font-size: 1.75em;
+    padding: .25rem 0 0;
+  }
+
+  td:nth-last-child(2),
+  th:nth-last-child(2) {
+    width: auto;
+    min-width: 25em;
+  }
+
+  td:nth-last-child(1),
+  th:nth-last-child(1) {
+    min-width: 4em;
+    width: 4em;
+  }
+
+  th {
+    background: hsla( var(--color-base-code-block), 70%, 1);
+  }
+
+}

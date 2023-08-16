@@ -1,0 +1,9 @@
+vscode:
+  extensions:
+    - astro-build.astro-vscode
+
+# Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
+
+tasks:
+  - init: pnpm install && pnpm run build
+    command: pnpm run start

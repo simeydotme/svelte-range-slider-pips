@@ -1,0 +1,98 @@
+---
+title: 'Range'
+description: 'Displaying a selected-area of the Slider between two handles'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import Range from '~demos/examples/range/Range.svelte';
+import RangeRaw from '~demos/examples/range/Range.svelte?raw';
+
+import RangeMinMax from '~demos/examples/range/RangeMinMax.svelte';
+import RangeMinMaxRaw from '~demos/examples/range/RangeMinMax.svelte?raw';
+
+import Pushy from '~demos/examples/range/Pushy.svelte';
+import PushyRaw from '~demos/examples/range/Pushy.svelte?raw';
+
+import InRangeCss from '~demos/examples/range/InRangeCss.svelte';
+import InRangeCssRaw from '~demos/examples/range/InRangeCss.svelte?raw';
+
+
+
+
+
+A stand-out feature which makes this component considerably better than the standard `<input type="range">` is 
+the `range` property. This `Boolean` allows two `values` to appear as a selected range, and also prevents the handles from going past each other.
+
+<Demo name="Range as a Boolean" client:visible>
+  <Range client:visible />
+  <Code slot="svelte" code={cleanImport(RangeRaw)} lang="svelte" />
+</Demo>
+
+<Note type="alert">
+  Notice how there are 4 `values` in the above example, but only 2 handles. This is because the `range` property
+  limits the number of handles to 2.
+</Note>
+
+
+
+
+
+
+## Range as Min and Max
+
+Aside from a `Boolean`, the `range` property can also accept `"min"` or `"max"` values. This will
+set the range visual to begin from the `min` value, or extend to the `max` value, respectively.
+
+<Demo name="min/max range" client:visible>
+  <RangeMinMax client:visible />
+  <Code slot="svelte" code={cleanImport(RangeMinMaxRaw)} lang="svelte" />
+</Demo>
+
+<Note type="alert">
+  Notice how there are 3 `values` in the above example, but only 1 handle for each Slider. This is because the `range` property
+  limits the number of handles to 1 when the value is `"min"` or `"max"`.
+</Note>
+
+
+
+
+
+
+## Pushy Range Handles
+
+When applying a `range`, the two **handles are not allowed to pass each other**, and by default they will block each other from moving. 
+But by applying the `pushy` property to the Slider, it will allow each handle to push the other one along when they collide.
+
+<Demo name="Pushy vs. Regular" client:visible>
+  <Pushy client:visible />
+  <Code slot="svelte" code={cleanImport(PushyRaw)} lang="svelte" />
+</Demo>
+
+
+
+
+
+
+## Styling Range
+
+Something to notice is that when a `pip` falls inside of the `range`, it is given a special
+css class so it can be differentiated as in-range. Here I am using the `pip-in-range` class to
+style the pip differently when it is in-range.
+
+<Demo name="In-Range css style" client:visible>
+  <InRangeCss client:visible />
+  <Code slot="svelte" code={cleanImport(InRangeCssRaw)} lang="svelte" />
+  <div slot="css">
+  ```css
+  .rangePips :is(.in-range, .selected) {
+    background: #f00;
+    width: 2px;
+  }
+  ```
+  </div>
+</Demo>

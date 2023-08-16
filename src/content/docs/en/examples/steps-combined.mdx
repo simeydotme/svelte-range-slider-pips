@@ -1,0 +1,30 @@
+---
+title: 'Combined Steps'
+description: 'Interaction between Steps & Pip Steps'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import '~styles/steps-table.scss';
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+import Info from '~components/Reusable/Info.astro';
+
+import CombinedTable from '~demos/examples/steps/CombinedTable.svelte';
+import CombinedTableRaw from '~demos/examples/steps/CombinedTable.svelte?raw';
+
+
+
+
+Because we have two ways of determining how `pips` are rendered along the
+Slider, here's a breakdown of how they interact with each other.
+
+- **`step`**: determines how many _**points are selectable**_ along the Slider
+- **`pipstep`**:  determines how many _**points are visible**_ along the Slider
+
+## Examples
+
+Here's a table demonstrating how the two interact with each other.
+
+<CombinedTable client:visible />

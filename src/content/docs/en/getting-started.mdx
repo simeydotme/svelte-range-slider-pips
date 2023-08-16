@@ -1,0 +1,132 @@
+---
+title: 'Getting Started'
+description: 'Installation and Basic Setup'
+---
+
+import { Icon } from 'astro-icon'
+
+
+## Installation
+
+Open your project and use the command line to install the package;
+
+```bash
+yarn add svelte-range-slider-pips --dev
+# or
+pnpm install -D svelte-range-slider-pips
+# or
+npm install svelte-range-slider-pips --save-dev
+```
+
+## Using it in your project
+
+> The following instructions assume you have your environment setup in a fairly
+  typical/traditional way.
+
+### <Icon name="vscode-icons:file-type-svelte" /> In a typical Svelte Project
+
+Assuming you have your svelte project up and running, to include a range Slider
+component into your page, use the following code;
+
+```svelte 
+<script>
+  import RangeSlider from 'svelte-range-slider-pips'
+  // ----
+  let values = [50];
+</script>
+
+<RangeSlider bind:values />
+```
+[<Icon name="tabler:external-link" /> see Svelte example running at svelte.dev](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43)
+
+This is a very basic example, and probably not useful. You'll probably want to
+add some more options to the component. See the [Options](./options) page for
+more information.
+
+### <Icon name="vscode-icons:file-type-vue" /> for use in a VueJS Project
+
+Because the component is built with Svelte, you can't just import it into Vue
+as a regular component. Instead, you need to import it as a JS function and
+bind it to an element on mount. This is fairly simple and the following example
+should get you started.
+
+```vue
+<script setup>
+  import { ref, onMounted } from 'vue';
+  import RangeSlider from 'svelte-range-slider-pips';
+
+  const values = ref([50]);     // values to bind to slider
+  const $node = ref(null);     // dom reference for binding on mount
+  const MyRangeSlider = ref(null);   // slider instance reference
+
+  onMounted(() => {
+    MyRangeSlider = 
+      new RangeSlider({ 
+        target: $node.value, 
+        props: { values: values.value } 
+      })
+      .$on( 'change', (e) => values.value = e.detail.values );
+  });
+</script>
+
+<template>
+  <div id="my-slider" ref="$node"></div>
+</template>
+```
+[<Icon name="tabler:external-link" /> see Vue example running at play.vuejs](https://tinyurl.com/39kfnpm4)
+
+{/*  */}
+
+### <Icon name="vscode-icons:file-type-js-official" /> as a Vanilla JS script
+
+If you're not building a Svelte App, you can use the [<Icon name="tabler:external-link" /> **/dist/** version of the script `/dist/svelte-range-slider-pips.js`](https://github.com/simeydotme/svelte-range-slider-pips/blob/main/dist/svelte-range-slider-pips.js) from GitHub, and include it with a regular 
+`<script>` tag. This should work even with jQuery.
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/svelte-range-slider-pips/dist/svelte-range-slider-pips.min.js" />
+
+<div id="my-slider"></div>
+
+<script>
+  var MySlider = new RangeSliderPips({
+    target: document.querySelector("#my-slider"),
+    props: { values: [50] }
+  });
+</script>
+```
+[<Icon name="tabler:external-link" /> see a Vanilla JS example running at CodePen](https://codepen.io/simeydotme/pen/KKNJdbK)
+
+### <Icon name="vscode-icons:file-type-reactjs" /> in a React Project
+
+Because the component is built with Svelte, you can't just import it into React
+as a regular component. Instead, you need to import it as a JS function and
+bind it to an element on mount. This is fairly simple and the following example
+should get you started.
+
+```jsx
+  import React, { useState, useEffect, useRef } from 'react';
+  import RangeSlider from 'svelte-range-slider-pips';
+
+  export default function MyComponent() {
+    const [values, setValues] = useState([50]);
+    const $node = useRef();
+    const MySlider = useRef();
+
+    useEffect(() => {
+      if (!MySlider.current) {
+        MySlider.current = new RangeSlider({
+          target: $node.current,
+          props: { values: values, range: true },
+        });
+        MySlider.current.$on('change', (e) => {
+          setValues(e.detail.values);
+        });
+      }
+    }, []);
+
+    return (
+      <div id="my-slider" ref={$node}></div>
+    );
+  }
+```
+[<Icon name="tabler:external-link" /> see a React example running at Stackblitz](https://stackblitz.com/edit/react-ag6lyg?file=src%2FApp.js)

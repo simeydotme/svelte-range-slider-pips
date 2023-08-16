@@ -1,0 +1,53 @@
+---
+title: 'Pips'
+description: 'Little Pips / Notches / Marks to display below the Slider'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import Pips from '~demos/examples/pips/Pips.svelte';
+import PipsRaw from '~demos/examples/pips/Pips.svelte?raw';
+
+import PipDisplay from '~demos/examples/pips/PipDisplay.svelte';
+import PipDisplayRaw from '~demos/examples/pips/PipDisplay.svelte?raw';
+
+
+
+
+
+Here we demonstrate the **Slider's main feature; "notches"**, or as I call them; **"`pips`"**. These little markers sit below 
+the Slider by default to mark regular intervals along the Slider's length.
+
+<Demo name="Pips/Notches/Markers along the Slider" client:visible>
+  <Pips client:visible />
+  <Code slot="svelte" code={cleanImport(PipsRaw)} lang="svelte" />
+</Demo>
+
+<Note title="Pip Spread / Placement" type="info">
+  The pips are placed according to the `step` & `pipStep` algorithm. [Read more](./steps-combined)
+</Note>
+
+
+
+
+## Control the Display
+
+Pip display is controlled by the properties; `all`, `first`, `last` and `rest`. 
+These properties can be set to `true` or `false` to control the display of the pips.
+
+This is also true for `labels`. [See more here](./pip-labels)
+
+<Demo name="Controlling the Display" client:visible>
+  <PipDisplay client:visible />
+  <div slot="svelte">
+    ```svelte
+    <RangeSlider pips bind:all bind:first bind:last bind:rest />
+    ```
+  </div>
+</Demo>
+
+

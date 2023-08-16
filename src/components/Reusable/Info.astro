@@ -1,0 +1,20 @@
+---
+import { Icon } from 'astro-icon'
+---
+
+<p class="note"><Icon name="fluent:info-24-filled" /><slot /></p>
+
+
+<style>
+  .note {
+    font-style: italic;
+    font-size: .925rem;
+    padding: .25rem .5rem;
+    margin: 1rem -.5rem 0;
+  }
+
+  [astro-icon] {
+    margin-right: .5em;
+    color: hsla(var(--color-base-simey-dark), 40%, 1);
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+title: 'Vertical'
+description: 'Orientate the Range Slider vertically'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import Vertical from '~demos/examples/Vertical.svelte';
+import VerticalRaw from '~demos/examples/Vertical.svelte?raw';
+
+
+
+
+
+RangeSlider also has the ability to render in a vertical orientation. This is done by 
+setting the `vertical` property to `true`. When in vertical mode, the `min` value is at the bottom
+and the `max` value is at the top. This can be changed [with the `reversed` property.](./reversed)
+
+<Demo name="Vertical Sliders" client:visible>
+  <Vertical client:visible />
+  <Code slot="svelte" code={cleanImport(VerticalRaw)} lang="svelte" />
+</Demo>
+
+<Note title="Boolean or not to Boolean">
+  As is normal with Svelte, the `vertical` property can be explicity set `true`, or it can be
+  any truthy value. This means that `vertical="yes"` or `vertical="1"` would also work.
+
+  But idiomatically you should just use `vertical` or `vertical={true}`
+</Note>
+
+

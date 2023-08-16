@@ -1,0 +1,57 @@
+---
+title: 'Values & Binding'
+description: 'Short example of how to bind values'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import Binding from '~demos/examples/values/Binding.svelte';
+import BindingRaw from '~demos/examples/values/Binding.svelte?raw';
+
+import Multiple from '~demos/examples/values/Multiple.svelte';
+import MultipleRaw from '~demos/examples/values/Multiple.svelte?raw';
+
+
+
+
+Setting the default value(s) for the Slider is done using the [`values` property](/en/options#values), which accepts an `Array[]`. 
+The `values` property can have any number of values, and the length directly corresponds to the number of handles on the Slider. 
+The `values` are limited to the given `min` and `max` range.
+
+## Simple Values
+
+<Demo name="Values Property" client:visible>
+  <RangeSlider values={[25]} client:visible />
+  <RangeSlider values={[50]} client:visible />
+  <RangeSlider values={[75]} client:visible />
+  <div slot="svelte">
+    ```svelte
+    <RangeSlider values={[25]} client:visible />
+    <RangeSlider values={[50]} client:visible />
+    <RangeSlider values={[75]} client:visible />
+    ```
+  </div>
+</Demo>
+
+## Binding
+The `values` property can also be bound with `bind:values`. This allows the Slider to save the current value(s) to a variable.
+
+<Demo name="Binding Values" client:visible>
+  <Binding client:visible />
+  <Code slot="svelte" code={cleanImport(BindingRaw)} lang="svelte" />
+</Demo>
+
+## Multiple Values
+The `values` property can also accept multiple values. This allows the Slider to have multiple handles.
+The values are stored in an array. The length of the array corresponds to the number of handles on the Slider.
+
+<Demo name="Multiple Values" client:visible>
+  <Multiple client:visible />
+  <Code slot="svelte" code={cleanImport(MultipleRaw)} lang="svelte" />
+</Demo>
+
+_No idea why anyone would ever want 9 handles on their Slider, but it's totally possible!_
