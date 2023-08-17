@@ -75,7 +75,11 @@ export const SIDEBAR: Sidebar = {
         { text: 'springValues', link: 'en/options#springValues' },
         { text: 'slider', link: 'en/options#slider' },
       ]},
-      { text: 'Styling', link: 'en/styling' },
+      { text: 'Styling', link: 'en/styling', children: [
+        { text: 'Color Variables', link: 'en/styling#colors' },
+        { text: 'Size', link: 'en/styling#size' },
+        { text: 'CSS Structure', link: 'en/styling#structure' }  
+      ]},
       { text: 'Examples', link: 'en/examples/values', children: [
         { text: 'Values & Binding', link: 'en/examples/values' },
         { text: 'Min & Max', link: 'en/examples/min-max' },
