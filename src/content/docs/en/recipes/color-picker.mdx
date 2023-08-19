@@ -1,0 +1,31 @@
+---
+title: 'Color Picker'
+description: 'El Classico, the color picker sliders'
+---
+import { Code } from 'astro/components';
+import { Icon } from 'astro-icon'
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import ColorPicker from '~demos/recipes/colorpicker/ColorPicker.svelte';
+import ColorPickerRaw from '~demos/recipes/colorpicker/ColorPicker.svelte?raw';
+import ColorPickerCss from '~demos/recipes/colorpicker/ColorPicker.css?raw';
+
+
+
+Here we are using 3 sliders for the _**hue**_, _**saturation**_ and _**lightness**_ values. 
+
+The color is then calculated using the [`hsl()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/hsl()) function and
+placed into the `style=""` property as a css variable.
+
+<Demo name="El Classico / Color Sliders" panel="css" client:visible>
+  <ColorPicker client:visible />
+</Demo>
+
+<Demo name="Demo of the Slider Styles" panel="css" client:visible>
+  <Code slot="svelte" code={cleanImport(ColorPickerRaw)} lang="svelte" />
+  <Code slot="css" code={ColorPickerCss} lang="css" />
+</Demo>

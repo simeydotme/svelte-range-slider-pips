@@ -7,6 +7,7 @@
 
   export let name: string = '';
   export let label: string = 'Example Svelte Range Slider demonstration';
+  export let panel: Panel = 'svelte';
 
   let displayName: string = '';
   
@@ -17,10 +18,11 @@
     displayName = name;
     name = safeId( name );
   }
-
+  
   type Panel = 'svelte' | 'css' | 'vanilla' | 'vue' | 'react';
   const panels: Panel[] = ['svelte', 'css', 'vanilla', 'vue', 'react'];
-  const panelMap: Record<Panel, string> = {
+  const defaultPanel: number = panels.indexOf( panel );
+  const iconMap: Record<Panel, string> = {
     svelte: 'svelte',
     css: 'css3',
     vanilla: 'javascript',
@@ -29,8 +31,8 @@
   };
 
   let tablist: HTMLDivElement;
-  let selected:number = 0;
-  let hasInteracted = false;
+  let selected: number = defaultPanel;
+  let hasInteracted: boolean = false;
   $: expanded = panels[selected];
 
   const nextPanel = () => {
@@ -78,7 +80,7 @@
                 if (e.key === 'ArrowLeft') prevPanel();
               }}
             >
-              <Icon icon="devicon:{panelMap[panel]}" />
+              <Icon icon="devicon:{iconMap[panel]}" />
               {panel}
             </button>
           {/if}
@@ -159,12 +161,14 @@
 
   {/if}
 
-  <form class="slider-container">
-    <fieldset>
-      <legend>{ displayName || 'Range Slider Demo' }</legend>
-      <slot></slot>
-    </fieldset>
-  </form>
+  {#if $$slots.default}
+    <form class="slider-container">
+      <fieldset>
+        <legend>{ displayName || 'Range Slider Demo' }</legend>
+        <slot></slot>
+      </fieldset>
+    </form>
+  {/if}
 
 </section>
 

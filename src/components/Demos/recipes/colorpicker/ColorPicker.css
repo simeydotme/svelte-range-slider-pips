@@ -1,0 +1,43 @@
+.color {
+  padding: 1em;
+  background-color: var(--color);
+  transition: all 0.5s ease;
+}
+
+.color-ui .rangeSlider.rangeSlider {
+  margin-block: 2em;
+  font-family: var(--font-mono);
+}
+
+.color-ui .rangeSlider.rangeSlider .rangeFloat,
+.color-ui .rangeSlider.rangeSlider.focus .rangeFloat,
+.color-ui .rangeSlider.rangeSlider:hover .rangeFloat {
+  opacity: 1;
+  top: -.25em;
+  translate: 0% 100%;
+  border-radius: 1em;
+  padding: .25em .75em;
+}
+
+/**
+ * Simple Styling
+ */
+.color-ui {
+  border-radius: 0.5rem;
+  border: 2px solid var(--color);
+  color: var(--color);
+  transition: all 0.5s ease;
+  user-select: none;
+}
+
+/**
+ * Advanced Styling for the Demo
+ */
+.color-ui {
+  color: hsla(var(--hue), calc( var(--saturation) / 2),calc( (var(--lightness ) - 50%) * -1 + 100% ), 1);
+  text-shadow: 0 1px 1px hsla(var(--hue), calc( var(--saturation) / 2),calc( var(--lightness ) - 50% ), 1);
+  box-shadow: 
+    0 1px 1px 2px hsla(var(--hue), calc( var(--saturation) / 2), max( calc( var(--lightness ) - 10% ), 30% ), 1),
+    0 4px 4px 1px hsla(var(--hue), calc( var(--saturation) / 2), max( calc( var(--lightness ) - 10% ), 30% ), .5),
+    0 8px 10px 5px hsla(var(--hue), calc( var(--saturation) / 2), max( calc( var(--lightness ) - 10% ), 30% ), .5);
+}

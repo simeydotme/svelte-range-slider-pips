@@ -1,0 +1,26 @@
+---
+title: 'Recipes'
+description: 'A bunch of recipes to help you get started with Svelte Range Slider Pips'
+---
+import { Code } from 'astro/components';
+import { Icon } from 'astro-icon'
+import RangeSlider from 'svelte-range-slider-pips';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import Useless from '~demos/basic/useless.svelte';
+import UselessRaw from '~demos/basic/useless.svelte?raw';
+
+
+## Minimal Configuration
+<Icon name="twemoji:fire" /> The most basic example is to provide a `min`, `max` and `value` prop. 
+This will render a Slider with a single handle.
+
+<Demo name="Default (useless) Slider" client:visible>
+  <RangeSlider min={0} max={100} values={[10]} client:visible />
+  <Code slot="svelte" code={UselessRaw} lang="svelte" />
+</Demo>
+
+But this is kind of useless! Unless you just want a pretty UI toy to play with! <Icon name="twemoji:face-with-tears-of-joy" />
+Because once rendered to the page, there's no feedback upon interaction.
