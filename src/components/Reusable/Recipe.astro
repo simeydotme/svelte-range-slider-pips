@@ -1,0 +1,58 @@
+---
+
+interface Props {
+  image: string;
+  link: string;
+  name: string;
+}
+
+const { image, link, name } = Astro.props
+
+---
+
+<li class="recipe">
+  <a href={link}>
+    <img src=`/public/recipes/${image}` alt={name} />
+    <h3>{name}</h3>
+  </a>
+</li>
+
+
+
+<style>
+  .recipe {
+    display: inline-block;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  .recipe a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .recipe img {
+    width: 100%;
+    height: auto;
+  }
+
+  .recipe h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    text-align: center;
+  }
+</style>

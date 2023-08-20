@@ -5,7 +5,6 @@
   import { debounce } from 'lodash-es';
 
   export let headings:MarkdownHeading[] = [];
-  
   type ItemOffsets = {
     id: string
     topOffset: number

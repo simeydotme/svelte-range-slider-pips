@@ -107,7 +107,6 @@ export const SIDEBAR: Sidebar = {
           { text: 'Color Picker', link: 'en/recipes/color-picker' },
         ]
       }
-    ],
-    'Another Section': [{ text: 'Page 4', link: 'en/page-4' }]
+    ]
   }
 }

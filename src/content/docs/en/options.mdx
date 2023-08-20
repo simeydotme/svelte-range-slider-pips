@@ -8,40 +8,40 @@ import Info from '~components/Reusable/Info.astro'
 Below you'll find a list of options (props) that you can pass to the component to
 configure it to your liking. There's a link to an example for each option.
 
-<Option propName="values" propType="Array" defaultValue="[50]" link="#">
+<Option propName="values" propType="Array" defaultValue="[50]" link="values">
   Array of values to apply on the Slider. If multiple values are provided, multiple handles will be rendered.  
   <Info>A Slider with `range` property set can only have two values max</Info>
 </Option>
 
-<Option propName="min" propType="Number" defaultValue="0" link="#">
+<Option propName="min" propType="Number" defaultValue="0" link="min-max">
   Minimum value for the Slider  
   should be set to lower than `max` property
 </Option>
 
-<Option propName="max" propType="Number" defaultValue="100" link="#">
+<Option propName="max" propType="Number" defaultValue="100" link="min-max">
   Maximum value for the Slider  
   should be set to higher than `min` property
 </Option>
 
-<Option propName="step" propType="Number" defaultValue="1" link="#">
+<Option propName="step" propType="Number" defaultValue="1" link="steps">
   Every `nth` **value to allow handle to stop at**. For example if the `step` is 
   `5`, then the handle will only stop at `5`, `10`, `15`, `20`, etc.  
   <Info>should be a positive value</Info>
 </Option>
 
-<Option propName="pips" propType="Boolean" defaultValue="false" link="#">
+<Option propName="pips" propType="Boolean" defaultValue="false" link="pips">
   Whether to show pips/notches on the Slider. The pips will be rendered at the
   `pipstep` value. Pips can be styled as necessary but by default sit below the
   Slider (Horizontal) like a gauge.
 </Option>
 
-<Option propName="pipstep" propType="Number" defaultValue="1" link="#">
+<Option propName="pipstep" propType="Number" defaultValue="1" link="pip-steps">
   Every `nth` **step to show a pip for**. This has multiple defaults depending on
   `min`, `max` and `step` properties. A sensible default is chosen, but can be overridden.
   <Info>should be a positive value</Info>
 </Option>
 
-<Option propName="range" propType={["Boolean","String"]} defaultValue="false" link="#">
+<Option propName="range" propType={["Boolean","String"]} defaultValue="false" link="range">
   Whether to style as a range picker. Possible values are: 
   - `false` no range styling
   - `true` styles like a range with a `min` and `max`
@@ -51,42 +51,42 @@ configure it to your liking. There's a link to an example for each option.
   <Info>A Slider with `range=min/max` or `range=true` only have one or two values respectively.</Info>
 </Option>
 
-<Option propName="pushy" propType="Boolean" defaultValue="false" link="#">
+<Option propName="pushy" propType="Boolean" defaultValue="false" link="range#pushy-range-handles">
   If `range` is `true`, then this decides if one handle will push the other along. By default, the handles 
   will not push each other along, they will block each other.
 </Option>
 
-<Option propName="float" propType="Boolean" defaultValue="false" link="#">
+<Option propName="float" propType="Boolean" defaultValue="false" link="float">
   Set true to add a floating label above focussed handles. This is good for displaying the
   current value of the Slider while interacting with it.
 </Option>
 
-<Option propName="vertical" propType="Boolean" defaultValue="false" link="#">
+<Option propName="vertical" propType="Boolean" defaultValue="false" link="vertical">
   Make the Slider render vertically (lower value on bottom)
 </Option>
 
-<Option propName="first" propType={["Boolean","String"]} defaultValue="false" link="#">
+<Option propName="first" propType={["Boolean","String"]} defaultValue="false" link="pips#control-the-display">
   Whether to show a pip or label **for the first value on Slider**. Possible values are:  
   - `false` the first value in the Slider will not have a pip or label
   - `pip` a pip (only) will be shown for the first value
   - `label` label (and pip) is shown on the first value
 </Option>
 
-<Option propName="last" propType={["Boolean","String"]} defaultValue="false" link="#">
+<Option propName="last" propType={["Boolean","String"]} defaultValue="false" link="pips#control-the-display">
   Whether to show a pip or label **for the last value on Slider**. Possible values are:  
   - `false` the last value in the Slider will not have a pip or label
   - `pip` a pip (only) will be shown for the last value
   - `label` label (and pip) is shown on the last value
 </Option>
 
-<Option propName="rest" propType={["Boolean","String"]} defaultValue="false" link="#">
+<Option propName="rest" propType={["Boolean","String"]} defaultValue="false" link="pips#control-the-display">
   Whether to show a pip or label **for all values except first & last**. Possible values are:  
   - `false` the middle values in the Slider will not have a pip or label
   - `pip` a pip (only) will be shown for the middle values
   - `label` label (and pip) is shown on the middle values
 </Option>
 
-<Option propName="all" propType={["Boolean","String"]} defaultValue="false" link="#">
+<Option propName="all" propType={["Boolean","String"]} defaultValue="false" link="pips#control-the-display">
   Whether to show a pip or label **for every value**.  Possible values are:  
   - `false` all values in the Slider will not have a pip or label
   - `pip` a pip (only) will be shown for all values
@@ -95,12 +95,12 @@ configure it to your liking. There's a link to an example for each option.
   <Info>The same as combining `first`, `last` and `rest`.</Info>
 </Option>
 
-<Option propName="prefix" propType="String" defaultValue="''" link="#">
+<Option propName="prefix" propType="String" defaultValue="''" link="prefix-suffix#simple--prefix">
   A simple string to prepend to all displayed values
   <Info>For more complex prefixes, use the `formatter` property</Info>
 </Option>
 
-<Option propName="suffix" propType="String" defaultValue="''" link="#">
+<Option propName="suffix" propType="String" defaultValue="''" link="prefix-suffix#simple--suffix">
   A simple string to append to all displayed values
   <Info>For more complex suffixes, use the `formatter` property</Info>
 </Option>
@@ -126,12 +126,12 @@ configure it to your liking. There's a link to an example for each option.
   <Info>The array should be the same length as the `values` array.</Info>
 </Option>
 
-<Option propName="formatter" propType="Function" defaultValue="(v,i,p) => v" link="#">
+<Option propName="formatter" propType="Function" defaultValue="(v,i,p) => v" link="formatter">
   A function to format the value of the Slider. Should return a String value.
   <Info>function arguments are: `v(value), i(handle index), p(percent)`</Info>
 </Option>
 
-<Option propName="handleFormatter" propType="Function" defaultValue="formatter()" link="#">
+<Option propName="handleFormatter" propType="Function" defaultValue="formatter()" link="formatter#multiple-formatters">
   A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property.
   <Info>function arguments are: `v(value), i(handle index), p(percent)`</Info>
 </Option>

@@ -17,6 +17,7 @@
   translate: 0% 100%;
   border-radius: 1em;
   padding: .25em .75em;
+  pointer-events: all;
 }
 
 /**

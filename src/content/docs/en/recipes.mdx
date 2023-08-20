@@ -4,23 +4,16 @@ description: 'A bunch of recipes to help you get started with Svelte Range Slide
 ---
 import { Code } from 'astro/components';
 import { Icon } from 'astro-icon'
-import RangeSlider from 'svelte-range-slider-pips';
-
-import Demo from '~components/Reusable/Demo.svelte';
-import Note from '~components/Reusable/Note.astro';
-
-import Useless from '~demos/basic/useless.svelte';
-import UselessRaw from '~demos/basic/useless.svelte?raw';
+import RecipeList from '~/components/Reusable/RecipeList.astro';
+import Recipe from '~/components/Reusable/Recipe.astro';
 
 
-## Minimal Configuration
-<Icon name="twemoji:fire" /> The most basic example is to provide a `min`, `max` and `value` prop. 
-This will render a Slider with a single handle.
+Here are a bunch of pre-made recipes to help give you some ideas on what you 
+can do with Svelte Range Slider Pips. I'll provide some code snippets, and
+demos with the code and css needed to make it work.
 
-<Demo name="Default (useless) Slider" client:visible>
-  <RangeSlider min={0} max={100} values={[10]} client:visible />
-  <Code slot="svelte" code={UselessRaw} lang="svelte" />
-</Demo>
 
-But this is kind of useless! Unless you just want a pretty UI toy to play with! <Icon name="twemoji:face-with-tears-of-joy" />
-Because once rendered to the page, there's no feedback upon interaction.
+<RecipeList>
+  <Recipe name="Color Picker UI" link="./color-picker" image="color-ui.png" />
+  <Recipe name="Daisy UI" link="./daisy-ui" image="daisy-ui.png" />
+</RecipeList>

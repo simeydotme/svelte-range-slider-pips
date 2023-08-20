@@ -71,6 +71,8 @@
   color-scheme: light;
   --theme-accent: hsla(var(--color-simey), 1);
   --theme-text-accent: hsla(var(--color-simey), 1);
+  --theme-button-bg: hsla(var(--color-simey), 1);
+  --theme-button-text: hsla(var(--color-base-white), 100%, 1);
   --theme-accent-opacity: 0.5;
   --theme-divider: hsla(var(--color-gray-95), 1);
   --theme-text: hsla(var(--color-gray-10), 1);
@@ -103,6 +105,8 @@ body {
   --theme-accent-opacity: 0.7;
   --theme-accent: hsla(var(--color-simey-dark), 1);
   --theme-text-accent: hsla(var(--color-simey-dark), 1);
+  --theme-button-bg: hsla(var(--color-base-simey-dark), 90%, 1);
+  --theme-button-text: hsla(var(--color-base-simey-dark), 20%, 1);
   --theme-divider: hsla(var(--color-gray-10), 1);
   --theme-text: hsla(var(--color-gray-90), 1);
   --theme-text-light: hsla(var(--color-gray-80), 1);
