@@ -1,0 +1,72 @@
+---
+title: 'Disabled'
+description: 'Set the interactivity of a Slider'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+import Info from '~components/Reusable/Info.astro'
+
+import Disabled from '~demos/examples/disabled/Disabled.svelte';
+import DisabledRaw from '~demos/examples/disabled/Disabled.svelte?raw';
+
+import DisabledBound from '~demos/examples/disabled/DisabledBound.svelte';
+import DisabledBoundRaw from '~demos/examples/disabled/DisabledBound.svelte?raw';
+
+
+
+
+
+The Slider accepts a `boolean` value for `disabled` and `hoverable`.
+
+### Disabled
+
+When the boolean for `disabled` is `true`, the Slider will be disabled and
+unresponsive to user input. This prop is reactive, so it can be toggled at any
+time.
+
+<Demo name="Disabled Slider" client:visible>
+  <RangeSlider disabled client:visible />
+  <div slot="svelte">
+    ```svelte
+    <RangeSlider disabled />
+    ```
+  </div>
+</Demo>
+
+
+
+
+
+### Toggled by a variable
+
+Here is an example of a Slider that is `disabled` by default, but can be toggled
+by a variable. You could imagine this being used in a form where the user must
+check a box before they can interact with the Slider.
+
+<Demo name="Disabled Toggle" client:visible>
+  <Disabled client:visible />
+  <Code slot="svelte" code={cleanImport(DisabledRaw)} lang="svelte" />
+</Demo>
+
+
+
+
+
+### Updating while disabled
+
+Here we update a `disabled` Slider's value.
+
+<Note type="alert" title="Binding a Value">
+  Be aware, if a slider is `disabled`, it will still **remain bound to a value**.
+  So if you need to stop the Slider from being updated, you will need to
+  unbind the value, or freeze the `<input>`s.
+</Note>
+
+<Demo name="Disabled While Bound" client:visible>
+  <DisabledBound client:visible />
+  <Code slot="svelte" code={cleanImport(DisabledBoundRaw)} lang="svelte" />
+</Demo>
