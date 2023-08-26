@@ -117,11 +117,11 @@ configure it to your liking. There's a link to an example for each option.
   Determine if the Slider is disabled, or enabled
 </Option>
 
-<Option propName="id" propType="String" defaultValue="''" link="#">
+<Option propName="id" propType="String" defaultValue="''">
   Give the Slider a unique ID for use in styling
 </Option>
 
-<Option propName="ariaLabels" propType="Array" defaultValue="[]" link="#">
+<Option propName="ariaLabels" propType="Array" defaultValue="[]">
   An array of strings to use for the `aria-label` attribute on the handles.  
   <Info>The array should be the same length as the `values` array.</Info>
 </Option>
@@ -136,12 +136,12 @@ configure it to your liking. There's a link to an example for each option.
   <Info>function arguments are: `v(value), i(handle index), p(percent)`</Info>
 </Option>
 
-<Option propName="springValues" propType="Object" defaultValue="{ stiffness: 0.15, damping: 0.4 }" link="#">
+<Option propName="springValues" propType="Object" defaultValue="{ stiffness: 0.15, damping: 0.4 }" link="springs">
   Svelte spring physics object to change the behaviour of the handle when moving.
   <Info>Set to both to 1 for basically no spring effect</Info>
 </Option>
 
-<Option propName="slider" propType="Element" defaultValue="undefined" link="#">
+<Option propName="slider" propType="Element" defaultValue="undefined">
   DOM reference for binding to the main `<div />` of the component.  
   e.g. `bind:slider='ref'`
   <Info>Useful for doing any kind of manipulation at mount time</Info>

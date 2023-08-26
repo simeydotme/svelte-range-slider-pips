@@ -99,6 +99,8 @@ export const SIDEBAR: Sidebar = {
           { text: 'Vertical', link: 'en/examples/vertical' },
           { text: 'Prefix & Suffix', link: 'en/examples/prefix-suffix' },
           { text: 'Formatter', link: 'en/examples/formatter' },
+          { text: 'Disabled', link: 'en/examples/disabled' },
+          { text: 'Easing', link: 'en/examples/easing' },
         ]
       },
       { text: 'Recipes', link: 'en/recipes', 

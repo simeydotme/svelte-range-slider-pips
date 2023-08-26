@@ -28,9 +28,11 @@ const isRender = propName && propType && defaultValue
       <slot />
     </div>
 
-    <a class="sliderProp__link" href=`./examples/${link}`>
-      See Example<Icon name="fluent:ios-chevron-right-20-filled" /> 
-    </a>
+    {link &&
+      <a class="sliderProp__link" href=`./examples/${link}`>
+        See Example<Icon name="fluent:ios-chevron-right-20-filled" /> 
+      </a>
+    }
 
   </section>  
 

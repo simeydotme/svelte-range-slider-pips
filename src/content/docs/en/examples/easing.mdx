@@ -1,0 +1,55 @@
+---
+title: 'Spring Easing'
+description: 'The easing function for slider movement animation'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import DefaultEasing from '~demos/examples/easing/DefaultEasing.svelte';
+import DefaultEasingRaw from '~demos/examples/easing/DefaultEasing.svelte?raw';
+
+import VariableEasing from '~demos/examples/easing/VariableEasing.svelte';
+
+
+
+
+The sliders come, by default with a Svelte Spring animation. This uses the internal
+`spring()` function from Svelte. The properties of the `spring()` (`stiffness`, `damping`)
+can be set with this `springValues` property.
+
+
+## Default Spring
+
+The default animation is **not especially noticeable when moving the handle** manually. But when
+clicking from one end to the other, the **large distance travelled is animated** and much
+more noticeable.
+
+<Demo name="The default spring" client:visible>
+  <DefaultEasing client:visible />
+  <Code slot="svelte" code={cleanImport(DefaultEasingRaw)} lang="svelte" />
+</Demo>
+
+
+
+
+
+
+## Custom Spring
+
+Here's a demonstration of the Slider with modified `springValues` property. 
+The `stiffness` and `damping` values have been bound to the inputs below the Slider.
+
+Move the easing/damping sliders to update the springy-ness of the first slider's
+animation.
+
+<Demo name="Customised Spring Easing" client:visible>
+  <VariableEasing client:visible />
+</Demo>
+
+<Demo name="Customised Spring Easing" client:visible>
+  <Code slot="svelte" code="<RangeSlider springValues={{ stiffness: 0.15, damping: 0.4 }} />" lang="svelte" />
+</Demo>
