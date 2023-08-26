@@ -1,0 +1,42 @@
+---
+title: 'Reversed'
+description: 'Should the min/max orientation be in the reverse orientation?'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+import Info from '~components/Reusable/Info.astro'
+
+import Reversed from '~demos/examples/reversed/Reversed.svelte';
+import ReversedRaw from '~demos/examples/reversed/Reversed.svelte?raw';
+
+import ReversedVertical from '~demos/examples/reversed/ReversedVertical.svelte';
+import ReversedVerticalRaw from '~demos/examples/reversed/ReversedVertical.svelte?raw';
+
+
+
+
+
+
+Setting `reversed` to `true` will reverse the orientation of the Slider so that
+the min and max values are swapped. This is useful for RTL languages.
+
+<Demo name="Reversing Values & Labels" client:visible>
+  <Reversed client:visible />
+  <Code slot="svelte" code={cleanImport(ReversedRaw)} lang="svelte" />
+</Demo>
+
+
+
+### Vertical
+
+Another use case for `reversed` is when doing a `vertical` slider 
+where you need the `min` value to be at the top.
+
+<Demo name="Vertical in Reverse" client:visible>
+  <ReversedVertical client:visible />
+  <Code slot="svelte" code={cleanImport(ReversedVerticalRaw)} lang="svelte" />
+</Demo>
