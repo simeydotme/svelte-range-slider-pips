@@ -1,17 +1,14 @@
 ---
 import { Icon } from 'astro-icon'
-type propType = "String" | "Number" | "Boolean" | "Object" | "Array" | "Function" | "Symbol" | "Node" | "Element" | "Element[]"
 
 interface Props {
   propName: string;
-  propType: propType | propType[];
-  defaultValue: string;
+  propType: "Function";
   link?: string;
 }
 
-const { propName, propType, defaultValue, link } = Astro.props
-const propTypeString = Array.isArray(propType) ? propType.join(" | ") : propType
-const isRender = propName && propType && defaultValue
+const { propName, propType, link } = Astro.props
+const isRender = propName && propType
 ---
 
 {isRender &&
@@ -19,12 +16,19 @@ const isRender = propName && propType && defaultValue
   <section class="sliderProp" id={propName}>
     <header class="sliderProp__header">
       <h2 title="The prop name"><a href={`#${propName}`}>{propName}</a></h2>
-      <code title="The type that the prop expects">{propTypeString}</code>
-      <code title="The default value for this prop (if not provided)">{defaultValue}</code>
+      <code title="The type that the prop expects">{propType}</code>
     </header>
+
+    <div class="sliderProp__example">
+      <slot name="example" />
+    </div>
 
     <div class="sliderProp__content">
       <slot />
+    </div>
+
+    <div class="sliderProp__detail">
+      <slot name="detail" />
     </div>
 
     {link &&
@@ -118,6 +122,10 @@ const isRender = propName && propType && defaultValue
     transition: all 0.2s ease-in-out;
   }
 
+  .sliderProp__content :global(p:not(:last-child)) {
+    margin-bottom: 1em;
+  }
+
   .sliderProp__link {
     display: inline-block;
     margin-left: auto;
@@ -125,6 +133,24 @@ const isRender = propName && propType && defaultValue
     border-radius: .25rem;
     text-decoration: none;
   }
+
+  .sliderProp__example :global( pre ),
+  .sliderProp__detail :global( pre ) {
+    border: none;
+    border-radius: 0.5em;
+    margin-block: 0.5em;
+  }
+
+  .sliderProp__detail :global( pre ) {
+    margin-block-end: 0;
+  }
+
+  .sliderProp__example :global( pre code ),
+  .sliderProp__detail :global( pre code ) {
+    background: transparent!important;
+  }
+
+
 
 /**
  * ----------------------------------------

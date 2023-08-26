@@ -77,6 +77,13 @@ export const SIDEBAR: Sidebar = {
           { text: 'slider', link: 'en/options#slider' },
         ]
       },
+      { text: 'Events', link: 'en/events', 
+        children: [
+          { text: 'start', link: 'en/events#start' },
+          { text: 'change', link: 'en/events#change' },
+          { text: 'stop', link: 'en/events#stop' },
+        ]
+      },
       { text: 'Styling', link: 'en/styling', 
         children: [
           { text: 'Color Variables', link: 'en/styling#colors' },

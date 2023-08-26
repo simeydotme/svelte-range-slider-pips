@@ -1,0 +1,65 @@
+---
+title: 'Events'
+description: 'List of events available for the RangeSlider'
+---
+import Event from '~components/Reusable/Event.astro'
+import Info from '~components/Reusable/Info.astro'
+import { Code } from 'astro/components';
+
+
+
+
+There's a few events which trigger at different times during the lifecycle of the RangeSlider.
+
+<Event propName="start" propType="Function">
+
+  <Code slot="example" code="on:start={(e) => { console.log(e.detail) }}" lang="svelte" />
+  
+  Event fired when the user begins interaction with the slider. This event fires as soon
+  as the user mouse/touch down on the slider handle.
+
+  <Code slot="detail" code="// e.detail
+    activeHandle: Integer; 
+    value: Float; 
+    values: Array;" lang="typescript" />
+
+</Event>
+
+<Event propName="change" propType="Function">
+
+  <Code slot="example" code="on:change={(e) => { console.log(e.detail) }}" lang="svelte" />
+  
+  Every time the value of the slider changes (either on a click, or by dragging the handle),
+  this event will fire with the corresponding values. This event contains the `startValue`
+  which is the value of the slider before the user started interacting, and the `previousValue`
+  which is immediately previous value.  
+  
+  `previousValue` will be the same as `startValue` on the
+  first change event, and using `previousValue` is useful for calculating which direction the
+  user is dragging the handle.
+
+  <Code slot="detail" code="// e.detail
+    activeHandle: Integer; 
+    startValue: Float; 
+    previousValue: Float;
+    value: Float; 
+    values: Array;" lang="typescript" />
+
+</Event>
+
+<Event propName="stop" propType="Function">
+
+  <Code slot="example" code="on:stop={(e) => { console.log(e.detail) }}" lang="svelte" />
+  
+  After the user has completed interacting (by releasing mouse/touch), this event will fire
+  with the final values. This event also includes the `startValue` which is the value of the
+  slider when the user first started interacting.
+
+  <Code slot="detail" code="// e.detail
+    activeHandle: Integer; 
+    startValue: Float; 
+    value: Float; 
+    values: Array;" lang="typescript" />
+
+</Event>
+
