@@ -1,0 +1,31 @@
+---
+title: 'Price Gradient'
+description: 'A simple(ish) price range slider with some nice styling'
+---
+import { Code } from 'astro/components';
+import { Icon } from 'astro-icon'
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import PriceGradient from '~demos/recipes/pricegradient/PriceGradient.svelte';
+import PriceGradientRaw from '~demos/recipes/pricegradient/PriceGradient.svelte?raw';
+import PriceGradientCss from '~demos/recipes/pricegradient/PriceGradient.css?raw';
+
+
+
+Here we are using 3 sliders for the _**hue**_, _**saturation**_ and _**lightness**_ values. 
+
+The color is then calculated using the [`hsl()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/hsl()) function and
+placed into the `style=""` property as a css variable.
+
+<Demo name="Price Range" panel="css" client:visible>
+  <PriceGradient client:visible />
+</Demo>
+
+{/* <Demo name="Demo of the Slider Styles" panel="css" client:visible>
+  <Code slot="svelte" code={cleanImport(ColorPickerRaw)} lang="svelte" />
+  <Code slot="css" code={ColorPickerCss} lang="css" />
+</Demo> */}

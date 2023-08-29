@@ -1,0 +1,84 @@
+
+
+#PriceGradient {
+
+  --color1: hsl(219, 73%, 65%);
+  --color2: hsl(283, 100%, 69%);
+  
+  --spring-easing: linear(
+    0, 0.576 4%, 0.79, 0.964, 1.102, 1.205, 1.275 13.6%, 1.298, 1.313, 1.32, 1.32,
+    1.313 19.3%, 1.299 20.7%, 1.256 23.4%, 1.111 30.5%, 1.047 34.2%, 1.018, 0.996,
+    0.979, 0.968 42.9%, 0.961 46.1%, 0.962 49.7%, 0.994 63.9%, 1.004 72%,
+    1.005 79.2%, 1
+  );
+  --spring-duration: 1.5s;
+
+  height: 14px;
+
+}
+
+#PriceGradient .rangeBar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color1), var(--color2));
+}
+
+#PriceGradient .rangeHandle {
+  --color: var(--color1);
+  --shadow-color: 0deg 0% 0%;
+  --shadow-elevation-medium:
+    0px 0.4px 0.4px hsl(var(--shadow-color) / 0.1),
+    0px 0.8px 0.8px -0.8px hsl(var(--shadow-color) / 0.09),
+    0px 1.6px 1.7px -1.5px hsl(var(--shadow-color) / 0.08),
+    0px 3.5px 3.6px -2.3px hsl(var(--shadow-color) / 0.08),
+    0px 6.9px 7.2px -3px hsl(var(--shadow-color) / 0.07);
+  width: 34px;
+  height: 34px;
+  top: calc( 50% - 1px );
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--color);
+  box-shadow: var(--shadow-elevation-medium);
+  perspective: 500px;
+}
+#PriceGradient .rangeHandle[data-handle="1"] {
+  --color: var(--color2);
+}
+#PriceGradient .rangeNub {
+  display: none;
+}
+
+
+#PriceGradient .rangeFloat {
+
+  border-radius: .5em;
+  padding: .3em .6em;
+  background: white;
+  color: black;
+  font-weight: bold;
+  border: 2px solid var(--color);
+  top: -1em;
+  transform-origin: bottom center;
+  transform: translate(-50%, -100%) rotateX(100deg) scaleY(0.75);
+  transition: all var(--spring-easing) var(--spring-duration);
+}
+
+#PriceGradient .rangeFloat:after {
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	left: 50%;
+	width: 9px;
+  height: 9px;
+  background: white;
+  transform: translate(-50%, 50%) rotate(45deg);
+  border-right: 2px solid var(--color);
+  border-bottom: 2px solid var(--color);
+}
+
+#PriceGradient .rangeHandle.active .rangeFloat, 
+#PriceGradient.hoverable .rangeHandle:hover .rangeFloat, 
+#PriceGradient.hoverable:hover .rangeFloat {
+  top: -1em;
+  transform: translate(-50%, -100%) rotateX(0deg);
+  opacity: 1;
+}

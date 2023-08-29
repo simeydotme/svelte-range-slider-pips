@@ -114,6 +114,7 @@ export const SIDEBAR: Sidebar = {
         children: [
           { text: 'DaisyUi', link: 'en/recipes/daisy-ui' },
           { text: 'Color Picker', link: 'en/recipes/color-picker' },
+          { text: 'Price Gradient', link: 'en/recipes/price-range' },
         ]
       }
     ]
