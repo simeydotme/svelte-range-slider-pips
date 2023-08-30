@@ -16,16 +16,26 @@ import PriceGradientCss from '~demos/recipes/pricegradient/PriceGradient.css?raw
 
 
 
-Here we are using 3 sliders for the _**hue**_, _**saturation**_ and _**lightness**_ values. 
+Here's a cute little slider with fun bubbles, inspired by [<Icon name="la:dribbble" /> this dribbble shot](https://dribbble.com/shots/2056202-Range-Selection-with-Frequency-Chart).
 
-The color is then calculated using the [`hsl()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/hsl()) function and
-placed into the `style=""` property as a css variable.
+We are using some advanced techniques here, let me break them down;
+- css gradient for the range-bar
+- css variables for the gradient and handle borders
+- pop-up both floats when the slider is interactive
+- international currency formatting
+- custom slide/stop event handling
+- psuedo-momentum animations for the float labels
+
+<Note type="ok">
+  check out the css code below, and the svelte code, to see how this is working!
+</Note>
 
 <Demo name="Price Range" panel="css" client:visible>
   <PriceGradient client:visible />
 </Demo>
 
-{/* <Demo name="Demo of the Slider Styles" panel="css" client:visible>
-  <Code slot="svelte" code={cleanImport(ColorPickerRaw)} lang="svelte" />
-  <Code slot="css" code={ColorPickerCss} lang="css" />
-</Demo> */}
+<Demo panel="css" client:visible>
+  <Code slot="svelte" code={cleanImport(PriceGradientRaw)} lang="svelte" />
+  <Code slot="css" code={PriceGradientCss} lang="css" />
+</Demo>
+
