@@ -1,0 +1,65 @@
+---
+title: 'Accessibility (a11y)'
+description: 'Information on the accessibility of this RangeSlider component'
+---
+
+import '~styles/steps-table.scss';
+import { Code } from 'astro/components';
+import Info from '~components/Reusable/Info.astro'
+import RangeSlider from 'svelte-range-slider-pips';
+import Demo from '~components/Reusable/Demo.svelte';
+
+This RangeSlider is built with accessibility in mind. **I've done my best to follow the guidelines
+set out by the [**W3C**](https://www.w3.org/WAI/ARIA/apg/patterns/slider-multithumb/)** and [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Slider_role). 
+and have done some testing myself with VoiceOver on macOS and screen readers.
+
+<Info>I am not a person with difficulties in accessibility, however, so I **can't really say with certainty** how well this
+component works for people with impairments. But I have followed guidelines to the best I know. 
+**If you are an accessible user, and would like to feedback, please do**!</Info>
+
+I am aiming for this to be _THE_ accessible RangeSlider
+component for the web, so if you have any feedback, please [open an issue](https://github.com/simeydotme/svelte-range-slider-pips/issues) or drop by the discussion
+on [GitHub Discussions](https://github.com/simeydotme/svelte-range-slider-pips/discussions) and let me know! If you are able to contribute in any way to make this the
+best it can be for people with impairments, I thank you so much!
+
+## Keyboard support
+
+
+
+<Demo name="Keyboard Support Tester" client:visible>
+  <RangeSlider id="a11y-slider" values={[-10,10]} range min={-20} max={20} pips all="label" pipstep={5} client:visible />
+</Demo>
+
+The RangeSlider supports the following keyboard shortcuts.  
+_(use the slider above to test them out)_
+
+- <kbd title="Tab key">Tab ⭲</kbd> Move focus to next handle
+- <kbd title="Left arrow">Left ←</kbd> Decrease value by `1`
+- <kbd title="Right arrow">Right →</kbd> Increase value by `1`
+- <kbd title="Shift">Shift</kbd><kbd title="Left arrow">Left ←</kbd> Decrease value by 10%
+- <kbd title="Shift">Shift</kbd><kbd title="Right arrow">Right →</kbd> Increase value by 10%
+- <kbd title="Page Up">Page Up</kbd> Increase value by 10%
+- <kbd title="Page Down">Page Dn</kbd> Decrease value by 10%
+- <kbd title="Home">Home</kbd> Set value to `min`
+- <kbd title="End">End</kbd> Set value to `max`
+
+
+## Aria Labels
+
+It's possible to provide a list of labels for the handles to be read out by screen readers.
+This is done by passing an array of strings to the `aria-labels` prop.
+
+Read [more about `aria-label` here](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-label) , and
+specifically for the [slider role here](https://www.w3.org/WAI/ARIA/apg/patterns/slider-multithumb/examples/slider-multithumb/#rps_label).
+
+Generally speaking, set the `ariaLabels` prop to a label **which describes the purpose of the handle**. For example, if the handle
+is controlling the volume of a video, you might set the `aria-label` to "Volume".
+
+eg; `ariaLabels={['Volume']}`
+### `ariaLabels` example
+
+<Demo name="Aria Label Example" client:visible>
+  <RangeSlider ariaLabels={['Volume']} client:visible />
+  <Code slot="svelte" code={'<RangeSlider ariaLabels={["Volume"]} />'} lang="svelte" />
+</Demo>
+

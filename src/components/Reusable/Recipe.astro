@@ -1,18 +1,20 @@
 ---
 
 interface Props {
-  image: string;
-  link: string;
   name: string;
+  link: string;
+  image?: string;
 }
 
-const { image, link, name } = Astro.props
+const { name, link, image } = Astro.props
 
 ---
 
 <li class="recipe">
   <a href={link}>
-    <img src=`/public/recipes/${image}` alt={name} />
+    {image &&
+      <img src=`/public/recipes/${image}` alt={name} />
+    }
     <h3>{name}</h3>
   </a>
 </li>
@@ -22,16 +24,21 @@ const { image, link, name } = Astro.props
 <style>
   .recipe {
     display: inline-block;
-    width: 100%;
-    max-width: 300px;
+    flex: 1 1 100%;
     box-sizing: border-box;
     margin: 0;
+  }
+
+  @media (min-width: 37.75em) {
+    .recipe {
+      flex: 1 0 45%;
+    }
   }
 
   .recipe a {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     text-decoration: none;
     width: 100%;
     height: 100%;

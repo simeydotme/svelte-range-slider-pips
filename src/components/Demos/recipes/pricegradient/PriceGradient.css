@@ -1,5 +1,5 @@
 #PriceGradient {
-
+  
   /** colors for the handles and range */
   --color1: hsl(219, 73%, 65%);
   --color2: hsl(283, 100%, 69%);
@@ -10,23 +10,23 @@
   /** linear springs from for easing nicely */
   --spring-duration: 1.5s;
   --spring-easing: linear(
-    0, 0.576 4%, 0.79, 0.964, 1.102, 1.205, 1.275 13.6%, 1.298, 1.313, 1.32, 1.32,
-    1.313 19.3%, 1.299 20.7%, 1.256 23.4%, 1.111 30.5%, 1.047 34.2%, 1.018, 0.996,
-    0.979, 0.968 42.9%, 0.961 46.1%, 0.962 49.7%, 0.994 63.9%, 1.004 72%,
-    1.005 79.2%, 1
+  0, 0.576 4%, 0.79, 0.964, 1.102, 1.205, 1.275 13.6%, 1.298, 1.313, 1.32, 1.32,
+  1.313 19.3%, 1.299 20.7%, 1.256 23.4%, 1.111 30.5%, 1.047 34.2%, 1.018, 0.996,
+  0.979, 0.968 42.9%, 0.961 46.1%, 0.962 49.7%, 0.994 63.9%, 1.004 72%,
+  1.005 79.2%, 1
   );
-
+  
   --color: var(--color1);
   --shadow-color: 0deg 0% 0%;
   --shadow-elevation-medium:
-    0px 0.4px 0.4px hsl(var(--shadow-color) / 0.1),
-    0px 0.8px 0.8px -0.8px hsl(var(--shadow-color) / 0.09),
-    0px 1.6px 1.7px -1.5px hsl(var(--shadow-color) / 0.08),
-    0px 3.5px 3.6px -2.3px hsl(var(--shadow-color) / 0.08),
-    0px 6.9px 7.2px -3px hsl(var(--shadow-color) / 0.07);
+  0px 0.4px 0.4px hsl(var(--shadow-color) / 0.1),
+  0px 0.8px 0.8px -0.8px hsl(var(--shadow-color) / 0.09),
+  0px 1.6px 1.7px -1.5px hsl(var(--shadow-color) / 0.08),
+  0px 3.5px 3.6px -2.3px hsl(var(--shadow-color) / 0.08),
+  0px 6.9px 7.2px -3px hsl(var(--shadow-color) / 0.07);
   
   height: 14px;
-
+  
 }
 
 #PriceGradient .rangeBar {
@@ -67,11 +67,11 @@
 }
 
 #PriceGradient .rangeFloat:after {
-	content: '';
-	position: absolute;
-	bottom: -2px;
-	left: 50%;
-	width: 9px;
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 9px;
   height: 9px;
   background: white;
   transform: translate(-50%, 50%) rotate(45deg);
@@ -104,7 +104,7 @@
 #PriceGradient.focus .pip.in-range {
   background: white;
   box-shadow: 
-    0 0 2px 1px var(--range-pip-in-range), 
-    0 0 5px 2px var(--range-pip-in-range), 
-    0 0 2px 0px var(--range-pip-in-range);
+  0 0 2px 1px var(--range-pip-in-range), 
+  0 0 5px 2px var(--range-pip-in-range), 
+  0 0 2px 0px var(--range-pip-in-range);
 }

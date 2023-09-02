@@ -9,9 +9,14 @@ interface Props {
   link?: string;
 }
 
-const { propName, propType, defaultValue, link } = Astro.props
-const propTypeString = Array.isArray(propType) ? propType.join(" | ") : propType
-const isRender = propName && propType && defaultValue
+const { propName, propType, defaultValue, link } = Astro.props;
+const propTypeString = Array.isArray(propType) ? propType.join(" | ") : propType;
+const isRender = propName && propType && defaultValue;
+
+let usableLink = link;
+if ( !link?.match(/^\.?\//) ) {
+  usableLink = `./examples/${link}`
+}
 ---
 
 {isRender &&
@@ -28,7 +33,7 @@ const isRender = propName && propType && defaultValue
     </div>
 
     {link &&
-      <a class="sliderProp__link" href=`./examples/${link}`>
+      <a class="sliderProp__link" href={usableLink}>
         See Example<Icon name="fluent:ios-chevron-right-20-filled" /> 
       </a>
     }
