@@ -13,6 +13,7 @@ export default defineConfig({
   integrations: [svelte(), mdx(), minifier(), sitemap()],
   base: `/`,
   site: `https://advanced-astro.dev`,
+  outDir: `./docs`,
   vite: {
     server: {
       watch: {
