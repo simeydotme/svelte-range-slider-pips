@@ -1,3 +1,5 @@
+export const REPOPATH = 'svelte-range-slider-pips';
+
 export const SITE = {
   title: 'Range Slider Pips',
   description: 'Documentation mini-site for using the Range Slider Pips component',
@@ -6,7 +8,7 @@ export const SITE = {
 
 export const OPEN_GRAPH = {
   image: {
-    src: 'https://github.com/simeydotme/svelte-range-slider-pips/blob/main/test/public/range-slider.png',
+    src: `https://github.com/simeydotme/${REPOPATH}/blob/main/test/public/range-slider.png`,
     alt:
       'Preview of the Range Slider with a few different features demonstrated'
   },
@@ -19,8 +21,8 @@ export const KNOWN_LANGUAGES = {
 } as const
 export const KNOWN_LANGUAGE_CODES = Object.values(KNOWN_LANGUAGES)
 
-export const EDIT_URL = `https://github.com/simeydotme/svelte-range-slider-pips/tree/astro-pages`
-export const COMMUNITY_INVITE_URL = `https://github.com/simeydotme/svelte-range-slider-pips/discussions`
+export const EDIT_URL = `https://github.com/simeydotme/${REPOPATH}/tree/astro-pages`
+export const COMMUNITY_INVITE_URL = `https://github.com/simeydotme/${REPOPATH}/discussions`
 
 // See "Algolia" section of the README for more information.
 export const ALGOLIA = {
@@ -43,77 +45,77 @@ export const SIDEBAR: Sidebar = {
   // },
   "en": {
     '': [
-      { text: 'Introduction', link: 'svelte-range-slider-pips/en/introduction' },
-      { text: 'Accessibility', link: 'svelte-range-slider-pips/en/a11y' },
-      { text: 'Getting Started', link: 'svelte-range-slider-pips/en/getting-started' },
-      { text: 'Basic Usage', link: 'svelte-range-slider-pips/en/basic-usage' },
-      { text: 'Options', link: 'svelte-range-slider-pips/en/options', 
+      { text: 'Introduction', link: `/en/introduction` },
+      { text: 'Accessibility', link: `/en/a11y` },
+      { text: 'Getting Started', link: `/en/getting-started` },
+      { text: 'Basic Usage', link: `/en/basic-usage` },
+      { text: 'Options', link: `/en/options`, 
         children: [
-          { text: 'values', link: 'svelte-range-slider-pips/en/options#values' },
-          { text: 'min', link: 'svelte-range-slider-pips/en/options#min' },
-          { text: 'max', link: 'svelte-range-slider-pips/en/options#max' },
-          { text: 'pips', link: 'svelte-range-slider-pips/en/options#pips' },
-          { text: 'step', link: 'svelte-range-slider-pips/en/options#step' },
-          { text: 'pipstep', link: 'svelte-range-slider-pips/en/options#pipstep' },
-          { text: 'range', link: 'svelte-range-slider-pips/en/options#range' },
-          { text: 'pushy', link: 'svelte-range-slider-pips/en/options#pushy' },
-          { text: 'float', link: 'svelte-range-slider-pips/en/options#float' },
-          { text: 'vertical', link: 'svelte-range-slider-pips/en/options#vertical' },
-          { text: 'first', link: 'svelte-range-slider-pips/en/options#first' },
-          { text: 'last', link: 'svelte-range-slider-pips/en/options#last' },
-          { text: 'rest', link: 'svelte-range-slider-pips/en/options#rest' },
-          { text: 'all', link: 'svelte-range-slider-pips/en/options#all' },
-          { text: 'prefix', link: 'svelte-range-slider-pips/en/options#prefix' },
-          { text: 'suffix', link: 'svelte-range-slider-pips/en/options#suffix' },
-          { text: 'reversed', link: 'svelte-range-slider-pips/en/options#reversed' },
-          { text: 'hoverable', link: 'svelte-range-slider-pips/en/options#hoverable' },
-          { text: 'disabled', link: 'svelte-range-slider-pips/en/options#disabled' },
-          { text: 'id', link: 'svelte-range-slider-pips/en/options#id' },
-          { text: 'ariaLabels', link: 'svelte-range-slider-pips/en/options#ariaLabels' },
-          { text: 'formatter', link: 'svelte-range-slider-pips/en/options#formatter' },
-          { text: 'handleFormatter', link: 'svelte-range-slider-pips/en/options#handleFormatter' },
-          { text: 'springValues', link: 'svelte-range-slider-pips/en/options#springValues' },
-          { text: 'slider', link: 'svelte-range-slider-pips/en/options#slider' },
+          { text: 'values', link: `/en/options#values` },
+          { text: 'min', link: `/en/options#min` },
+          { text: 'max', link: `/en/options#max` },
+          { text: 'pips', link: `/en/options#pips` },
+          { text: 'step', link: `/en/options#step` },
+          { text: 'pipstep', link: `/en/options#pipstep` },
+          { text: 'range', link: `/en/options#range` },
+          { text: 'pushy', link: `/en/options#pushy` },
+          { text: 'float', link: `/en/options#float` },
+          { text: 'vertical', link: `/en/options#vertical` },
+          { text: 'first', link: `/en/options#first` },
+          { text: 'last', link: `/en/options#last` },
+          { text: 'rest', link: `/en/options#rest` },
+          { text: 'all', link: `/en/options#all` },
+          { text: 'prefix', link: `/en/options#prefix` },
+          { text: 'suffix', link: `/en/options#suffix` },
+          { text: 'reversed', link: `/en/options#reversed` },
+          { text: 'hoverable', link: `/en/options#hoverable` },
+          { text: 'disabled', link: `/en/options#disabled` },
+          { text: 'id', link: `/en/options#id` },
+          { text: 'ariaLabels', link: `/en/options#ariaLabels` },
+          { text: 'formatter', link: `/en/options#formatter` },
+          { text: 'handleFormatter', link: `/en/options#handleFormatter` },
+          { text: 'springValues', link: `/en/options#springValues` },
+          { text: 'slider', link: `/en/options#slider` },
         ]
       },
-      { text: 'Events', link: 'svelte-range-slider-pips/en/events', 
+      { text: 'Events', link: `/en/events`, 
         children: [
-          { text: 'start', link: 'svelte-range-slider-pips/en/events#start' },
-          { text: 'change', link: 'svelte-range-slider-pips/en/events#change' },
-          { text: 'stop', link: 'svelte-range-slider-pips/en/events#stop' },
+          { text: 'start', link: `/en/events#start` },
+          { text: 'change', link: `/en/events#change` },
+          { text: 'stop', link: `/en/events#stop` },
         ]
       },
-      { text: 'Styling', link: 'svelte-range-slider-pips/en/styling', 
+      { text: 'Styling', link: `/en/styling`, 
         children: [
-          { text: 'Color Variables', link: 'svelte-range-slider-pips/en/styling#colors' },
-          { text: 'Size', link: 'svelte-range-slider-pips/en/styling#size' },
-          { text: 'CSS Structure', link: 'svelte-range-slider-pips/en/styling#structure' }  
+          { text: 'Color Variables', link: `/en/styling#colors` },
+          { text: 'Size', link: `/en/styling#size` },
+          { text: 'CSS Structure', link: `/en/styling#structure` }  
         ]
       },
-      { text: 'Examples', link: 'svelte-range-slider-pips/en/examples', 
+      { text: 'Examples', link: `/en/examples`, 
         children: [
-          { text: 'Values & Binding', link: 'svelte-range-slider-pips/en/examples/values' },
-          { text: 'Min & Max', link: 'svelte-range-slider-pips/en/examples/min-max' },
-          { text: 'Pips', link: 'svelte-range-slider-pips/en/examples/pips' },
-          { text: 'Pip Labels', link: 'svelte-range-slider-pips/en/examples/pip-labels' },
-          { text: 'Steps', link: 'svelte-range-slider-pips/en/examples/steps' },
-          { text: 'Pip Steps', link: 'svelte-range-slider-pips/en/examples/pip-steps' },
-          { text: 'Steps & Pip Steps', link: 'svelte-range-slider-pips/en/examples/steps-combined' },
-          { text: 'Ranges', link: 'svelte-range-slider-pips/en/examples/range' },
-          { text: 'Pushy', link: 'svelte-range-slider-pips/en/examples/range#pushy-range-handles' },
-          { text: 'Float', link: 'svelte-range-slider-pips/en/examples/float' },
-          { text: 'Vertical', link: 'svelte-range-slider-pips/en/examples/vertical' },
-          { text: 'Prefix & Suffix', link: 'svelte-range-slider-pips/en/examples/prefix-suffix' },
-          { text: 'Formatter', link: 'svelte-range-slider-pips/en/examples/formatter' },
-          { text: 'Disabled', link: 'svelte-range-slider-pips/en/examples/disabled' },
-          { text: 'Easing', link: 'svelte-range-slider-pips/en/examples/easing' },
+          { text: 'Values & Binding', link: `/en/examples/values` },
+          { text: 'Min & Max', link: `/en/examples/min-max` },
+          { text: 'Pips', link: `/en/examples/pips` },
+          { text: 'Pip Labels', link: `/en/examples/pip-labels` },
+          { text: 'Steps', link: `/en/examples/steps` },
+          { text: 'Pip Steps', link: `/en/examples/pip-steps` },
+          { text: 'Steps & Pip Steps', link: `/en/examples/steps-combined` },
+          { text: 'Ranges', link: `/en/examples/range` },
+          { text: 'Pushy', link: `/en/examples/range#pushy-range-handles` },
+          { text: 'Float', link: `/en/examples/float` },
+          { text: 'Vertical', link: `/en/examples/vertical` },
+          { text: 'Prefix & Suffix', link: `/en/examples/prefix-suffix` },
+          { text: 'Formatter', link: `/en/examples/formatter` },
+          { text: 'Disabled', link: `/en/examples/disabled` },
+          { text: 'Easing', link: `/en/examples/easing` },
         ]
       },
-      { text: 'Recipes', link: 'svelte-range-slider-pips/en/recipes', 
+      { text: 'Recipes', link: `/en/recipes`, 
         children: [
-          { text: 'DaisyUi', link: 'svelte-range-slider-pips/en/recipes/daisy-ui' },
-          { text: 'Color Picker', link: 'svelte-range-slider-pips/en/recipes/color-picker' },
-          { text: 'Price Gradient', link: 'svelte-range-slider-pips/en/recipes/price-range' },
+          { text: 'DaisyUi', link: `/en/recipes/daisy-ui` },
+          { text: 'Color Picker', link: `/en/recipes/color-picker` },
+          { text: 'Price Gradient', link: `/en/recipes/price-range` },
         ]
       }
     ]

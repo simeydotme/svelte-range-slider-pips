@@ -3,7 +3,7 @@
   import { KNOWN_LANGUAGES, langPathRegex } from '../../languages'
   
   export let lang = 'en'
-  let langEl;
+  let langEl: HTMLSelectElement;
 
   const changeLocation = () => {
     let actualDest = window.location.pathname.replace(langPathRegex, '/');
