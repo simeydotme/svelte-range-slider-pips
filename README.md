@@ -1,24 +1,35 @@
+<br>
 
-# Range Slider (with pips)
+<div align="center">
+<img src="test/public/svelte-slider%20logo.svg" alt="logo" width="130"/>
+</div>
 
-![Svelte Range Slider -- focussed, including some pips](test/public/slider.png)
+<h1 align="center">Svelte Range Slider</h1>
+
+<p align="center">
+<a href="https://www.npmjs.com/package/svelte-range-slider-pips"><img src="https://img.shields.io/npm/v/svelte-range-slider-pips?color=%234a40d4" alt="NPM version"></a>
+</p>
+
 
 A reactive, accessible, multi-thumb, range slider with the ability to display "pips" or "notches" along the range.  
 Importable as a ***svelte-component***, or **used directly in any javascript application**.
 
----
+<br>
 
-📔 | Docs | [Full Documentation & Examples](https://simeydotme.github.io/svelte-range-slider-pips/)
-:--: | -----: | :------
-📦 | **NPM** |[Node Module details](https://www.npmjs.com/package/svelte-range-slider-pips)
-📝 | **REPL** |[Svelte component demo](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43?version=3)
-❤ | **Codepen** |[Plain JS component demo](https://codepen.io/simeydotme/pen/KKNJdbK)
+<img src="test/public/svelte-slider-screenshot.png" alt="Svelte Range Slider -- focussed, including some pips"/>
 
 ---
 
-## features
+| 📔🔍 | Docs | [Full Documentation & Examples](https://simeydotme.github.io/svelte-range-slider-pips/) |
+| :--: | -----: | :------ |
+| 📝⚙ | **REPL** | **[Svelte component demo](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43?version=3)** |
+| ❤✒ | **Codepen** | **[Plain JS component demo](https://codepen.io/simeydotme/pen/KKNJdbK)** |
 
-![Features of the range slider plugin (written below)](test/public/range-slider.png)
+---
+
+## Features
+
+![Features of the range slider plugin (written below)](test/public/svelte-slider-features.png)
 
 - ✨ fully customisable, stylable & accessible
 - 👍🏽 multi-thumb
@@ -30,7 +41,7 @@ Importable as a ***svelte-component***, or **used directly in any javascript app
 - 🖍 formatter
 - 🎭 animated
 
-## install
+## Install
 
 Open your project and use the command line to install the package;
 
@@ -39,9 +50,9 @@ yarn add svelte-range-slider-pips --dev          # or
 npm install svelte-range-slider-pips --save-dev  # if you prefer npm
 ```
 
-## usage
+## Usage
 
-### in a svelte project
+### In a svelte project
 
 Assuming you have a Svelte app up and running;
 
@@ -53,7 +64,7 @@ Assuming you have a Svelte app up and running;
 <RangeSlider values={[50]} pips />
 ```
 
-### as a regular JS file
+### As a regular JS file
 
 If you're not building a svelte-app, you can use the [`/dist/`
 version of the script `/dist/svelte-range-slider-pips.js`](dist/svelte-range-slider-pips.js) and include it
@@ -72,7 +83,7 @@ with a regular `<script>` tag. This should even work with jQuery.
 </script>
 ```
 
-### as a JS module
+### As a JS module
 
 If you're building a bleeding-edge JS application (maybe Vue or React), you might
 want to use js imports (`import`)
@@ -88,9 +99,9 @@ var mySlider = new RangeSlider({
 
 ---
 
-## props (options)
+## Props (options)
 
-### slider props
+### Slider props
 
 prop | type | default | description
 -----|------|---------|-------------
@@ -120,7 +131,7 @@ prop | type | default | description
 **springValues** | `Object` | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving
 **slider** | `Element` | `undefined` | DOM reference for binding to the main `<div />` of the component (`bind:slider='ref'`)
 
-### slider events (dispatched)
+### Slider events (dispatched)
 
 event | example | `event.detail` | description
 ------|------------|--------|-------------
@@ -130,7 +141,7 @@ event | example | `event.detail` | description
 
 **[📔📘📖 _Full Documentation & Examples_](https://simeydotme.github.io/svelte-range-slider-pips/)**
 
-## styling
+## Styling
 
 **Styling should mostly be done with CSS.**  
 There's a [bunch of css variables for controlling the colors](https://simeydotme.github.io/svelte-range-slider-pips/#styling) of the elements. 
@@ -143,7 +154,7 @@ to give your slider a unique id.
 Values of labels can be styled with CSS, and the format can be modified with the `formatter()` function prop. And animation of the handles is
 controlled by the `springValues` object prop.
 
-## contribute
+## Contribute
 
 I am very happy to accept;
 
@@ -155,7 +166,7 @@ I am very happy to accept;
 
 ---
 
-## support / donate  
+## Support / Donate  
 I'd be super excited if you find this project useful and wish to donate a small amount for my efforts!
 
 |  |  |         |
