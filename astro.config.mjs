@@ -11,8 +11,8 @@ import svelte from "@astrojs/svelte";
 // https://astro.build/config
 export default defineConfig({
   integrations: [svelte(), mdx(), minifier(), sitemap()],
-  base: `/`,
-  site: `https://advanced-astro.dev`,
+  base: `/svelte-range-slider-pips/`,
+  site: `https://simeydotme.github.io`,
   outDir: `./docs`,
   vite: {
     server: {
