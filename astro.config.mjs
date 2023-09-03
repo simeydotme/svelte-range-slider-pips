@@ -13,7 +13,7 @@ export default defineConfig({
   integrations: [svelte(), mdx(), minifier(), sitemap()],
   base: `/svelte-range-slider-pips/`,
   site: `https://simeydotme.github.io`,
-  outDir: `./docs`,
+  outDir: `./dist`,
   vite: {
     server: {
       watch: {
