@@ -4,10 +4,9 @@ import { Icon } from 'astro-icon'
 interface Props {
   propName: string;
   propType: "Function";
-  link?: string;
 }
 
-const { propName, propType, link } = Astro.props
+const { propName, propType } = Astro.props
 const isRender = propName && propType
 ---
 
@@ -30,13 +29,6 @@ const isRender = propName && propType
     <div class="sliderProp__detail">
       <slot name="detail" />
     </div>
-
-    {link &&
-      <a class="sliderProp__link" href=`./examples/${link}`>
-        See Example<Icon name="fluent:ios-chevron-right-20-filled" /> 
-      </a>
-    }
-
   </section>  
 
 }

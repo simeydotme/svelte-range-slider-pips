@@ -6,7 +6,7 @@ type Props = {
 const { path } = Astro.props
 const resolvedPath = `${path}`
 const url = `https://api.github.com/repos/simeydotme/svelte-range-slider-pips/commits?path=${resolvedPath}`
-const commitsURL = `https://github.com/simeydotme/svelte-range-slider-pips/commits/gh-pages/${resolvedPath}`
+const commitsURL = `https://github.com/simeydotme/svelte-range-slider-pips/commits/astro-pages/${resolvedPath}`
 type Commit = {
   author: {
     id: string
