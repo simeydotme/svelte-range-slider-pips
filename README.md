@@ -1,32 +1,29 @@
 <div align="center">
 
 <img src="test/public/svelte-range-slider-logo.svg" 
-  alt="Svelte Range Slider Logo" width="33%">
+  alt="Svelte Range Slider Logo" width="20%">
 </div>
 
 <h1 align="center">
   Svelte Range Slider (with pips)
+
+  <p>
+    <a href="https://github.com/simeydotme/svelte-range-slider-pips/releases">
+      <img src="https://img.shields.io/github/package-json/v/simeydotme/svelte-range-slider-pips/main?label=&color=%234A40D4&logo=github" alt="Code Version">
+    </a>
+    <a href="https://www.npmjs.com/package/svelte-range-slider-pips">
+      <img src="https://img.shields.io/npm/v/svelte-range-slider-pips?color=%234A40D4&logo=npm&label=" alt="NPM version">
+      <img src="https://img.shields.io/npm/dm/svelte-range-slider-pips?label=&color=%234A40D4" alt="NPM Downloads / Month">
+    </a>
+  </p>
 </h1>
 
-<p align="center">
-  <a href="https://github.com/simeydotme/svelte-range-slider-pips/releases">
-    <img src="https://img.shields.io/github/package-json/v/simeydotme/svelte-range-slider-pips/main?label=&color=%234A40D4&logo=github" alt="Code Version">
-  </a>
-  <a href="https://www.npmjs.com/package/svelte-range-slider-pips">
-    <img src="https://img.shields.io/npm/v/svelte-range-slider-pips?color=%234A40D4&logo=npm&label=" alt="NPM version">
-    <img src="https://img.shields.io/npm/dm/svelte-range-slider-pips?label=&color=%234A40D4" alt="NPM Downloads / Month">
-  </a>
-</p>
-
----
-
-### A reactive, accessible, multi-thumb, range slider with the ability to display "pips" or "notches" along the range.  
+A reactive, accessible, multi-thumb, range slider with the ability to display "pips" or "notches" along the range.   
+Importable as a ***svelte-component***, or able to be **used directly in any javascript application / framework**.
 
 ![Svelte Range Slider; focussed with pips and labels prop set](test/public/svelte-range-slider-screenshot.png)
 
-Importable as a ***svelte-component***, or **used directly in any javascript application**.
 
----
 
 | 📔🔍 | Docs | [Full Documentation & Examples](https://simeydotme.github.io/svelte-range-slider-pips/) |
 | :--: | -----: | :------ |
@@ -35,8 +32,6 @@ Importable as a ***svelte-component***, or **used directly in any javascript app
 
 ---
 
-<br>
-<br>
 <br>
 
 ## Features
@@ -111,6 +106,8 @@ var mySlider = new RangeSlider({
 
 ---
 
+<br>
+
 ## Props (options)
 
 ### Slider props
@@ -143,7 +140,7 @@ prop | type | default | description
 **springValues** | `Object` | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving
 **slider** | `Element` | `undefined` | DOM reference for binding to the main `<div />` of the component (`bind:slider='ref'`)
 
-**[📔🔍 Documentation for Options](https://simeydotme.github.io/svelte-range-slider-pips/en/options/)**
+**[📔🔍 | Documentation for Options](https://simeydotme.github.io/svelte-range-slider-pips/en/options/)**
 <br>
 <br>
 
@@ -155,7 +152,7 @@ event | example | `event.detail` | description
 **change** | `on:change={(e) => { ... }}` | `{ activeHandle: Integer, startValue: Float, previousValue: Float, value: Float, values: Array }` | Event fired when the user changes the value; returns the previous value, also
 **stop** | `on:stop={(e) => { ... }}` | `{ activeHandle: Integer, startValue: Float, value: Float, values: Array }` | Event fired when the user stops interacting with slider; returns the beginning value, also
 
-**[📔🔍Documentation for Events](https://simeydotme.github.io/svelte-range-slider-pips/en/events/)**
+**[📔🔍 | Documentation for Events](https://simeydotme.github.io/svelte-range-slider-pips/en/events/)**
 
 <br>
 <br>
@@ -173,7 +170,7 @@ to give your slider a unique id.
 Values of labels can be styled with CSS, and the format can be modified with the `formatter()` function prop. And animation of the handles is
 controlled by the `springValues` object prop.
 
-**[📔🔍Documentation for Styling](https://simeydotme.github.io/svelte-range-slider-pips/en/styling/)**
+**[📔🔍 | Documentation for Styling](https://simeydotme.github.io/svelte-range-slider-pips/en/styling/)**
 
 <br>
 <br>
