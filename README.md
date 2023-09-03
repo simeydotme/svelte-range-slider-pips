@@ -1,22 +1,30 @@
-<br>
-
 <div align="center">
-<img src="test/public/svelte-slider%20logo.svg" alt="logo" width="130"/>
+
+<img src="test/public/svelte-range-slider-logo.svg" 
+  alt="Svelte Range Slider Logo" width="33%">
 </div>
 
-<h1 align="center">Svelte Range Slider</h1>
+<h1 align="center">
+  Svelte Range Slider (with pips)
+</h1>
 
 <p align="center">
-<a href="https://www.npmjs.com/package/svelte-range-slider-pips"><img src="https://img.shields.io/npm/v/svelte-range-slider-pips?color=%234a40d4" alt="NPM version"></a>
+  <a href="https://github.com/simeydotme/svelte-range-slider-pips/releases">
+    <img src="https://img.shields.io/github/package-json/v/simeydotme/svelte-range-slider-pips/main?label=&color=%234A40D4&logo=github" alt="Code Version">
+  </a>
+  <a href="https://www.npmjs.com/package/svelte-range-slider-pips">
+    <img src="https://img.shields.io/npm/v/svelte-range-slider-pips?color=%234A40D4&logo=npm&label=" alt="NPM version">
+    <img src="https://img.shields.io/npm/dm/svelte-range-slider-pips?label=&color=%234A40D4" alt="NPM Downloads / Month">
+  </a>
 </p>
 
+---
 
-A reactive, accessible, multi-thumb, range slider with the ability to display "pips" or "notches" along the range.  
+### A reactive, accessible, multi-thumb, range slider with the ability to display "pips" or "notches" along the range.  
+
+![Svelte Range Slider; focussed with pips and labels prop set](test/public/svelte-range-slider-screenshot.png)
+
 Importable as a ***svelte-component***, or **used directly in any javascript application**.
-
-<br>
-
-<img src="test/public/svelte-slider-screenshot.png" alt="Svelte Range Slider -- focussed, including some pips"/>
 
 ---
 
@@ -26,6 +34,10 @@ Importable as a ***svelte-component***, or **used directly in any javascript app
 | ❤✒ | **Codepen** | **[Plain JS component demo](https://codepen.io/simeydotme/pen/KKNJdbK)** |
 
 ---
+
+<br>
+<br>
+<br>
 
 ## Features
 
@@ -131,6 +143,10 @@ prop | type | default | description
 **springValues** | `Object` | `{ stiffness: 0.15, damping: 0.4 }` | Svelte spring physics object to change the behaviour of the handle when moving
 **slider** | `Element` | `undefined` | DOM reference for binding to the main `<div />` of the component (`bind:slider='ref'`)
 
+**[📔🔍 Documentation for Options](https://simeydotme.github.io/svelte-range-slider-pips/en/options/)**
+<br>
+<br>
+
 ### Slider events (dispatched)
 
 event | example | `event.detail` | description
@@ -139,7 +155,10 @@ event | example | `event.detail` | description
 **change** | `on:change={(e) => { ... }}` | `{ activeHandle: Integer, startValue: Float, previousValue: Float, value: Float, values: Array }` | Event fired when the user changes the value; returns the previous value, also
 **stop** | `on:stop={(e) => { ... }}` | `{ activeHandle: Integer, startValue: Float, value: Float, values: Array }` | Event fired when the user stops interacting with slider; returns the beginning value, also
 
-**[📔📘📖 _Full Documentation & Examples_](https://simeydotme.github.io/svelte-range-slider-pips/)**
+**[📔🔍Documentation for Events](https://simeydotme.github.io/svelte-range-slider-pips/en/events/)**
+
+<br>
+<br>
 
 ## Styling
 
@@ -153,6 +172,11 @@ to give your slider a unique id.
 
 Values of labels can be styled with CSS, and the format can be modified with the `formatter()` function prop. And animation of the handles is
 controlled by the `springValues` object prop.
+
+**[📔🔍Documentation for Styling](https://simeydotme.github.io/svelte-range-slider-pips/en/styling/)**
+
+<br>
+<br>
 
 ## Contribute
 
@@ -169,8 +193,7 @@ I am very happy to accept;
 ## Support / Donate  
 I'd be super excited if you find this project useful and wish to donate a small amount for my efforts!
 
-|  |  |         |
-|--|--:|---------|
 | <img src="https://user-images.githubusercontent.com/2817396/149629283-6002944f-9253-4e35-917d-89b476deae4e.png" width=20> | [![£1 One Pound Donation](https://user-images.githubusercontent.com/2817396/149629980-08b9a952-bd6a-4c23-be78-05e3fd534352.png)](https://www.paypal.com/paypalme/simey/1) | [£1 GBP donation](https://www.paypal.com/paypalme/simey/1) |
+|--|--:|---------|
 | <img src="https://user-images.githubusercontent.com/2817396/149629283-6002944f-9253-4e35-917d-89b476deae4e.png" width=20> | [![£5 Five Pounds Donation](https://user-images.githubusercontent.com/2817396/149629994-3a99770c-d333-46e7-9818-ab6b18ad0202.png)](https://www.paypal.com/paypalme/simey/5) | [£5 GBP donation](https://www.paypal.com/paypalme/simey/5) |
 | <img src="https://user-images.githubusercontent.com/2817396/149629283-6002944f-9253-4e35-917d-89b476deae4e.png" width=20> | [![£10 Ten Pounds Donation](https://user-images.githubusercontent.com/2817396/149630000-95aa4234-ff67-4e7c-a7f4-ffd52f25e6d8.png)](https://www.paypal.com/paypalme/simey/10) | [£10 GBP donation](https://www.paypal.com/paypalme/simey/10) |
