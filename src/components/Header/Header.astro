@@ -1,6 +1,6 @@
 ---
 import { getLanguageFromURL, KNOWN_LANGUAGE_CODES } from '../../languages'
-import { SITE } from '../../consts'
+import { SITE, REPOPATH } from '../../consts'
 
 import Logo from './Logo.astro'
 import SkipToContent from './SkipToContent.astro'
@@ -23,7 +23,7 @@ const lang = getLanguageFromURL(currentPage)
       <SidebarToggle client:idle />
     </div>
     <div class="logo flex">
-      <a href="/">
+      <a href={`/${REPOPATH}/`}>
         <Logo size={60} />
         <h1>{SITE.title ?? 'Documentation'}</h1>
       </a>
