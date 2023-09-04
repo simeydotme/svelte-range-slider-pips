@@ -13,9 +13,10 @@ const { propName, propType, defaultValue, link } = Astro.props;
 const propTypeString = Array.isArray(propType) ? propType.join(" | ") : propType;
 const isRender = propName && propType && defaultValue;
 
-let usableLink = link;
+// fix up relative links due to pathing issues in vite/astro
+let usableLink = link?.replace(/^\.?\//, "");
 if ( !link?.match(/^\.?\//) ) {
-  usableLink = `./examples/${link}`
+  usableLink = `examples/${link}`
 }
 ---
 
