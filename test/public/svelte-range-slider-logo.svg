@@ -13,7 +13,7 @@
     #handle2focus {
       fill: #4A40D4;
     }
-    #handl1focus, 
+    #handle1focus, 
     #handle2focus {
       opacity: 0.25;
     }
