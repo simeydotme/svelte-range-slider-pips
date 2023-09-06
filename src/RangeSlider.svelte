@@ -71,7 +71,10 @@
     }
     // trim the range so it remains as a min/max (only 2 handles)
     // and also align the handles to the steps
-    values = trimRange(values.map((v) => alignValueToStep(v)));
+    const trimmedAlignedValues = trimRange(values.map((v) => alignValueToStep(v)));
+    if ( !(values.length === trimmedAlignedValues.length) || !values.every((element, index) => element === trimmedAlignedValues[index]) ) {
+      values = trimmedAlignedValues;
+    }
 
     // check if the valueLength (length of values[]) has changed,
     // because if so we need to re-seed the spring function with the

@@ -1,6 +1,7 @@
 <script>
 
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
+  import { writable } from "svelte/store";
   import RangeSlider from "../../src/RangeSlider.svelte";
 
   let reversed = false;
@@ -59,6 +60,17 @@
 
   let decimals = [0.003, 0.123];
   let decimals2 = [-0.133, 0.444444444];
+
+  let value_store = writable({
+    first: [10, 20],
+    second: [30, 40]
+  });
+  let store_updates = 0;
+  const unsubscribe = value_store.subscribe(() => {
+    store_updates++;
+  })
+
+  onDestroy(unsubscribe);
 
 </script>
 
@@ -261,6 +273,11 @@
     <RangeSlider ariaLabels={["a", "b"]} values={[5,20]} {reversed} {hoverable} {disabled} />
     <RangeSlider ariaLabels={["a", "b"]} values={[5,20,40]} {reversed} {hoverable} {disabled} />
     <RangeSlider ariaLabels={["", "b"]} values={[5,20]} range {reversed} {hoverable} {disabled} />
+
+    <h2>Store updates</h2>
+    <RangeSlider bind:values={$value_store.first} {reversed} {hoverable} {disabled} />
+    <RangeSlider bind:values={$value_store.second} {reversed} {hoverable} {disabled} />
+    Number of store updates: {store_updates}<br>
 
   </div>
 
