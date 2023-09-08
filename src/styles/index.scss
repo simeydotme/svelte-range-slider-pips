@@ -23,7 +23,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  max-height: 100dvh;
+  min-height: 100dvh;
   font-family: var(--font-body);
   font-size: 1rem;
   font-size: clamp(0.9rem, 0.75rem + 0.375vw + var(--user-font-scale), 1rem);
