@@ -24,15 +24,17 @@ const editUrl = `${EDIT_URL}/${currentFile}`
 
 <html dir={data.dir} lang={data.lang} class="initial">
   <head>
+
     <HeadCommon />
     <HeadSEO {...data} canonicalUrl={canonicalURL} />
+
     <title>
       {`${data.title} | ${SITE.title}`}
     </title>
+
     <style>
       body {
         display: grid;
-        grid-template-rows: var(--theme-navbar-height) 1fr;
         --gutter: 0.5rem;
         --doc-padding: 2rem;
       }
@@ -47,7 +49,8 @@ const editUrl = `${EDIT_URL}/${currentFile}`
         display: grid;
         grid-auto-flow: column;
         grid-template-columns:
-          minmax(var(--gutter), 1fr) minmax(0, var(--max-width))
+          minmax(var(--gutter), 1fr) 
+          minmax(0, var(--max-width))
           minmax(var(--gutter), 1fr);
         overflow-x: hidden;
       }
@@ -79,6 +82,10 @@ const editUrl = `${EDIT_URL}/${currentFile}`
       }
 
       @media (min-width: 50em) {
+        body {
+          grid-template-rows: var(--theme-navbar-height) 1fr;
+        }
+
         .layout {
           overflow: initial;
           grid-template-columns: 20rem minmax(0, var(--max-width));
