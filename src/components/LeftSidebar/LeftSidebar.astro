@@ -91,6 +91,7 @@ const sidebar = SIDEBAR[langCode]
     overflow-x: visible;
     overflow-y: auto;
     max-height: 100vh;
+    max-height: 100dvh;
   }
 
   .nav-groups > li + li {
@@ -98,8 +99,7 @@ const sidebar = SIDEBAR[langCode]
   }
 
   .nav-groups > :last-child {
-    padding-bottom: 2rem;
-    margin-bottom: var(--theme-navbar-height);
+    padding-bottom: calc( 2rem + var(--theme-navbar-height) );
   }
 
   .nav-group-title {
