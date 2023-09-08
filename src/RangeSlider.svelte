@@ -59,7 +59,12 @@
 
   let springPositions;
 
-  const fixFloat = (v) => parseFloat(v.toFixed(precision));
+  /**
+   * make sure the value is coerced to a float value
+   * @param {number} v the value to fix
+   * @return {number} a float version of the input
+   **/
+  const fixFloat = (v) => parseFloat((+v).toFixed(precision));
 
   $: {
 
@@ -72,7 +77,7 @@
     // trim the range so it remains as a min/max (only 2 handles)
     // and also align the handles to the steps
     const trimmedAlignedValues = trimRange(values.map((v) => alignValueToStep(v)));
-    if ( !(values.length === trimmedAlignedValues.length) || !values.every((element, index) => element === trimmedAlignedValues[index]) ) {
+    if ( !(values.length === trimmedAlignedValues.length) || !values.every((element, index) => fixFloat(element) === trimmedAlignedValues[index]) ) {
       values = trimmedAlignedValues;
     }
 
@@ -132,12 +137,16 @@
    * @return {number} the value after it's been aligned
    **/
   $: alignValueToStep = function (val) {
+		
     // sanity check for performance
     if (val <= min) {
       return fixFloat(min);
     } else if (val >= max) {
       return fixFloat(max);
+    } else {
+      val = fixFloat(val);
     }
+		
     // find the middle-point between steps
     // and see if the value is closer to the
     // next step, or previous step
