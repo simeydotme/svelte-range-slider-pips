@@ -31,11 +31,16 @@ const editUrl = `${EDIT_URL}/${currentFile}`
     </title>
     <style>
       body {
-        width: 100%;
         display: grid;
         grid-template-rows: var(--theme-navbar-height) 1fr;
         --gutter: 0.5rem;
         --doc-padding: 2rem;
+      }
+      
+      @media (max-width: 49.999rem) {
+        body {
+          padding-bottom: var(--theme-navbar-height);
+        }
       }
 
       .layout {
@@ -62,7 +67,7 @@ const editUrl = `${EDIT_URL}/${currentFile}`
       }
 
       #grid-main {
-        padding: var(--doc-padding) var(--gutter);
+        padding: 1rem var(--gutter) var(--doc-padding) ;
         grid-column: 2;
         display: flex;
         flex-direction: column;
@@ -115,7 +120,24 @@ const editUrl = `${EDIT_URL}/${currentFile}`
 
       .mobile-sidebar-toggle #grid-left {
         display: block;
-        top: 2rem;
+        bottom: 2rem;
+        animation: menuSlideIn .5s linear(
+          0, 0.005, 0.02 2.3%, 0.082 5.1%, 0.462 16.8%, 0.557, 0.638, 0.707,
+          0.767 30.1%, 0.818, 0.861 37.4%, 0.9 41.9%, 0.931 46.8%, 0.954 52.3%,
+          0.972 58.6%, 0.984 65.6%, 0.992 74.2%, 0.997 85%, 0.999
+        ) 0s 1 both;
+      }
+    
+      @keyframes menuSlideIn {
+        from {
+          opacity: 0;
+          transform: translate3d(-20%, 0, 0);
+        }
+
+        to {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
       }
     </style>
 

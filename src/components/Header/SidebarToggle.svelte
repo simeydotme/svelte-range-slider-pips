@@ -35,4 +35,15 @@
 </button>
 
 <style>
+
+  #menu-toggle {
+    padding: 1rem;
+    margin-right: -1rem;
+    background: transparent;
+  }
+  #menu-toggle svg {
+    width: calc( var(--theme-navbar-height) / 2);
+    height: 100%;
+  }
+  
 </style>

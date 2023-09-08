@@ -6,6 +6,7 @@ description: 'Information on the accessibility of this RangeSlider component'
 import '~styles/steps-table.scss';
 import { Code } from 'astro/components';
 import Info from '~components/Reusable/Info.astro'
+import Note from '~components/Reusable/Note.astro'
 import RangeSlider from 'svelte-range-slider-pips';
 import Demo from '~components/Reusable/Demo.svelte';
 
@@ -62,4 +63,8 @@ eg; `ariaLabels={['Volume']}`
   <RangeSlider ariaLabels={['Volume']} client:visible />
   <Code slot="svelte" code={'<RangeSlider ariaLabels={["Volume"]} />'} lang="svelte" />
 </Demo>
+
+<Note type="info">
+  (inspect element to see the aria-label, or use a screen reader)
+</Note>
 

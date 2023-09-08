@@ -29,7 +29,7 @@
   --color-base-red:         351, 100%;
   --color-base-yellow:      41 , 100%;
 
-  --color-base-simey:       230, 15%;
+  --color-base-simey:       244, 63%;
   --color-base-simey-dark:  165, 92%;
   
   --color-base-code-block: 210, 12%;
@@ -61,7 +61,7 @@
   --color-red: var(--color-base-red), 54%;
   --color-yellow: var(--color-base-yellow), 59%;
 
-  --color-simey: var(--color-base-simey), 50%;
+  --color-simey: var(--color-base-simey), 56%; 
   --color-simey-dark: var(--color-base-simey-dark), 60%;
 
   --color-code-block: hsl(var(--color-base-code-block), 16%);
@@ -87,10 +87,16 @@
   --theme-code-inline-text: hsla(var(--color-base-simey-dark), 25%, 1);
   --theme-code-bg: hsla(217, 19%, 27%, 1);
   --theme-code-text: hsla(var(--color-gray-95), 1);
-  --theme-navbar-bg: hsla(var(--color-base-white), 100%, 1);
-  --theme-navbar-height: 6rem;
+  --theme-navbar-bg: hsla(var(--color-base-white), 100%, .7);
+  --theme-navbar-height: 4rem;
   --theme-selection-color: hsla(var(--color-simey), 1);
   --theme-selection-bg: hsla(var(--color-simey-dark), var(--theme-accent-opacity));
+}
+
+@media ( min-width: 50rem ) {
+  :root {
+    --theme-navbar-height: 6rem;
+  }
 }
 
 body {
@@ -121,7 +127,7 @@ body {
   --theme-code-inline-text: hsla(var(--color-base-white), 100%, 1);
   --theme-code-bg: hsla(var(--color-gray-5), 1);
   --theme-code-text: hsla(var(--color-base-white), 100%, 1);
-  --theme-navbar-bg: hsla(215, 28%, 17%, 1);
+  --theme-navbar-bg: hsla(215, 28%, 17%, .75);
   --theme-selection-color: hsla(var(--color-base-white), 100%, 1);
   --theme-selection-bg: hsla(var(--color-simey), var(--theme-accent-opacity));
 

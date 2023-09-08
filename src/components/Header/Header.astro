@@ -22,15 +22,15 @@ const lang = getLanguageFromURL(currentPage)
     <div class="menu-toggle">
       <SidebarToggle client:idle />
     </div>
+    <div style="flex-grow: 1;"></div>
+    <div class="search-item">
+      <!-- <Search client:idle /> -->
+    </div>
     <div class="logo flex">
       <a href={`/${REPOPATH}/`}>
         <Logo size={60} />
         <h1>{SITE.title ?? 'Documentation'}</h1>
       </a>
-    </div>
-    <!-- <div style="flex-grow: 1;"></div> -->
-    <div class="search-item">
-      <!-- <Search client:idle /> -->
     </div>
     {
       KNOWN_LANGUAGE_CODES.length > 1 && (
@@ -42,36 +42,47 @@ const lang = getLanguageFromURL(currentPage)
 
 <style>
   header {
+    
+    --shadow-elevation-high: 
+      0px -0.2px 0.2px hsl(var(--shadow-color) / 0.02),
+      0px -1.3px 1.6px -0.3px hsl(var(--shadow-color) / 0.03),
+      -0.1px -2.5px 3px -0.7px hsl(var(--shadow-color) / 0.04),
+      -0.1px -4.1px 4.9px -1px hsl(var(--shadow-color) / 0.05),
+      -0.1px -6.6px 7.9px -1.3px hsl(var(--shadow-color) / 0.06),
+      -0.4px -10.6px 12.7px -1.7px hsl(var(--shadow-color) / 0.07),
+      -0.6px -16.4px 19.7px -2px hsl(var(--shadow-color) / 0.07);
+
     z-index: 11;
     height: var(--theme-navbar-height);
     width: 100%;
     background-color: var(--theme-navbar-bg);
+    backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    position: sticky;
-    top: 0;
+    position: fixed;
+    bottom: 0;
+    box-shadow: var(--shadow-elevation-high);
   }
 
   .logo {
     flex: 1;
     display: flex;
     overflow: hidden;
-    width: 30px;
+    width: 3rem;
     font-size: 2rem;
     flex-shrink: 0;
     font-weight: 600;
     line-height: 1;
     color: hsla(var(--color-base-white), 100%, 1);
     gap: 0.25em;
-    z-index: -1;
   }
 
   .logo a {
     display: flex;
-    padding: 0.5em 0.25em;
-    margin: -0.5em -0.25em;
+    flex: 0 0 3rem;
+    max-width: 3rem;
     text-decoration: none;
     font-weight: bold;
     transition: color 100ms ease-out;
@@ -94,6 +105,7 @@ const lang = getLanguageFromURL(currentPage)
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    flex-direction: row-reverse;
     gap: 1em;
     width: 100%;
     max-width: 82em;
@@ -110,6 +122,15 @@ const lang = getLanguageFromURL(currentPage)
       width: auto;
       margin: 0;
       z-index: 0;
+    }
+
+    .logo a {
+      max-width: none;
+      flex: 1 0 0%;
+    }
+
+    .logo :global(svg) {
+      max-height: 4rem;
     }
 
     .logo h1 {

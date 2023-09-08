@@ -2,13 +2,14 @@
 title: 'Introduction'
 description: 'Range Slider introduction'
 ---
+import '~styles/intro.scss';
+import RangeSlider from 'svelte-range-slider-pips';
 import { Icon } from 'astro-icon'
 import Note from '~components/Reusable/Note.astro'
 
-
 **A Range Slider component, built with <Icon name="vscode-icons:file-type-svelte" />&nbsp;SvelteJs, that allows picking of values in a range, or on a scale.**
 
-![Range Slider Basic Example](https://raw.githubusercontent.com/simeydotme/svelte-range-slider-pips/main/test/public/svelte-range-slider-screenshot.png)
+<RangeSlider id="intro_slider" pips first='label' last='label' float client:visible />
 
 <Note type="alert" title="Dont Worry!">
   even though this is a Svelte component, you **can still use it in your <Icon name="vscode-icons:file-type-reactjs" />&nbsp;React, 
