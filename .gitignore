@@ -3,7 +3,6 @@
 node_modules
 /public/
 /test/public/build/
-/dist
 /docs
 
 yarn-error.log

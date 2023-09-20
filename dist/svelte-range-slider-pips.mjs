@@ -1,7 +1,7 @@
 /**
- * svelte-range-slider-pips ~ 2.2.2
+ * svelte-range-slider-pips ~ 2.2.3
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
- * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 28/7/2023
+ * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 20/9/2023
  */
 function noop() { }
 function run(fn) {
@@ -1555,7 +1555,7 @@ function get_each_context$1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (830:6) {#if float}
+// (842:6) {#if float}
 function create_if_block_2$1(ctx) {
 	let span;
 	let t_value = /*handleFormatter*/ ctx[21](/*value*/ ctx[65], /*index*/ ctx[67], /*percentOf*/ ctx[24](/*value*/ ctx[65])) + "";
@@ -1614,7 +1614,7 @@ function create_if_block_2$1(ctx) {
 	};
 }
 
-// (832:10) {#if prefix}
+// (844:10) {#if prefix}
 function create_if_block_4$1(ctx) {
 	let span;
 	let t;
@@ -1638,7 +1638,7 @@ function create_if_block_4$1(ctx) {
 	};
 }
 
-// (832:121) {#if suffix}
+// (844:121) {#if suffix}
 function create_if_block_3$1(ctx) {
 	let span;
 	let t;
@@ -1662,7 +1662,7 @@ function create_if_block_3$1(ctx) {
 	};
 }
 
-// (808:2) {#each values as value, index}
+// (820:2) {#each values as value, index}
 function create_each_block$1(ctx) {
 	let span1;
 	let span0;
@@ -1801,7 +1801,7 @@ function create_each_block$1(ctx) {
 	};
 }
 
-// (837:2) {#if range}
+// (849:2) {#if range}
 function create_if_block_1$1(ctx) {
 	let span;
 	let span_style_value;
@@ -1826,7 +1826,7 @@ function create_if_block_1$1(ctx) {
 	};
 }
 
-// (843:2) {#if pips}
+// (855:2) {#if pips}
 function create_if_block$1(ctx) {
 	let rangepips;
 	let current;
@@ -2187,7 +2187,12 @@ function instance$1($$self, $$props, $$invalidate) {
 	// will update every time the values array is modified
 	let springPositions;
 
-	const fixFloat = v => parseFloat(v.toFixed(precision));
+	/**
+ * make sure the value is coerced to a float value
+ * @param {number} v the value to fix
+ * @return {number} a float version of the input
+ **/
+	const fixFloat = v => parseFloat((+v).toFixed(precision));
 
 	/**
  * check if an element is a handle on the slider
@@ -2669,6 +2674,8 @@ function instance$1($$self, $$props, $$invalidate) {
 					return fixFloat(min);
 				} else if (val >= max) {
 					return fixFloat(max);
+				} else {
+					val = fixFloat(val);
 				}
 
 				// find the middle-point between steps
@@ -2723,7 +2730,11 @@ function instance$1($$self, $$props, $$invalidate) {
 
 				// trim the range so it remains as a min/max (only 2 handles)
 				// and also align the handles to the steps
-				$$invalidate(0, values = trimRange(values.map(v => alignValueToStep(v))));
+				const trimmedAlignedValues = trimRange(values.map(v => alignValueToStep(v)));
+
+				if (!(values.length === trimmedAlignedValues.length) || !values.every((element, index) => fixFloat(element) === trimmedAlignedValues[index])) {
+					$$invalidate(0, values = trimmedAlignedValues);
+				}
 
 				// check if the valueLength (length of values[]) has changed,
 				// because if so we need to re-seed the spring function with the
