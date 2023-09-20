@@ -137,7 +137,7 @@
    * @return {number} the value after it's been aligned
    **/
   $: alignValueToStep = function (val) {
-		
+	
     // sanity check for performance
     if (val <= min) {
       return fixFloat(min);
@@ -146,7 +146,7 @@
     } else {
       val = fixFloat(val);
     }
-		
+	
     // find the middle-point between steps
     // and see if the value is closer to the
     // next step, or previous step

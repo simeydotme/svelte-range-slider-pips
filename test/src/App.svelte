@@ -61,14 +61,11 @@
   let decimals = [0.003, 0.123];
   let decimals2 = [-0.133, 0.444444444];
 
-  let value_store = writable({
-    first: [10, 20],
-    second: [30, 40]
-  });
+  let boundStore = writable([5, 15]);
   let store_updates = 0;
-  const unsubscribe = value_store.subscribe(() => {
+  const unsubscribe = boundStore.subscribe(() => {
     store_updates++;
-  })
+  });
 
   onDestroy(unsubscribe);
 
@@ -267,6 +264,7 @@
     {decimals2}<br>
 
     <h2>Aria Labels</h2>
+    <p>Inspect the Dom to see the labels</p>
     <RangeSlider ariaLabels="ab" values={[5,20]} {reversed} {hoverable} {disabled} />
     <RangeSlider ariaLabels="{6}" {reversed} {hoverable} {disabled} />
     <RangeSlider ariaLabels="{{}}" {reversed} {hoverable} {disabled} />
@@ -275,8 +273,10 @@
     <RangeSlider ariaLabels={["", "b"]} values={[5,20]} range {reversed} {hoverable} {disabled} />
 
     <h2>Store updates</h2>
-    <RangeSlider bind:values={$value_store.first} {reversed} {hoverable} {disabled} />
-    <RangeSlider bind:values={$value_store.second} {reversed} {hoverable} {disabled} />
+    <p>Count how many times the store is modified for each change, should be once per single change event.</p>
+    <RangeSlider bind:values={$boundStore} pips all="label" max={20} {reversed} {hoverable} {disabled} />
+    <RangeSlider bind:values={$boundStore} pips all="label" max={20} {reversed} {hoverable} {disabled} />
+    <RangeSlider bind:values={$boundStore} pips all="label" max={20} {reversed} {hoverable} {disabled} />
     Number of store updates: {store_updates}<br>
 
   </div>
