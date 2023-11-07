@@ -13,7 +13,7 @@ const { name, link, image } = Astro.props
 <li class="recipe">
   <a href={link}>
     {image &&
-      <img src=`/public/recipes/${image}` alt={name} />
+      <img src=`/svelte-range-slider-pips/recipes/${image}.png` alt={name} />
     }
     <h3>{name}</h3>
   </a>
