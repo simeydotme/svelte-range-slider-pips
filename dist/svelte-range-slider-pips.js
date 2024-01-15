@@ -1,7 +1,7 @@
 /**
  * svelte-range-slider-pips ~ 2.2.3
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
- * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 20/9/2023
+ * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 14/1/2024
  */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -1386,7 +1386,7 @@
     	};
 
     	const pointerup_handler = e => {
-    		labelUp(pipVal(min), e);
+    		labelUp(pipVal(0), e);
     	};
 
     	const pointerdown_handler_1 = e => {
@@ -1402,7 +1402,7 @@
     	};
 
     	const pointerup_handler_2 = e => {
-    		labelUp(pipVal(max), e);
+    		labelUp(pipVal(pipCount), e);
     	};
 
     	$$self.$$set = $$props => {

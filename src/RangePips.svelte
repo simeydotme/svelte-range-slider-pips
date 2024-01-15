@@ -191,13 +191,13 @@
 </style>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div 
-  class="rangePips" 
+<div
+  class="rangePips"
   class:disabled
-  class:hoverable 
-  class:vertical 
-  class:reversed 
-  class:focus 
+  class:hoverable
+  class:vertical
+  class:reversed
+  class:focus
 >
   {#if ( all && first !== false ) || first }
     <span
@@ -206,7 +206,7 @@
       class:in-range={inRange(min)}
       style="{orientationStart}: 0%;"
       on:pointerdown={(e)=>{labelDown(e)}}
-      on:pointerup={(e)=>{labelUp(pipVal(min),e)}}
+      on:pointerup={(e)=>{labelUp(pipVal(0),e)}}
     >
       {#if all === 'label' || first === 'label'}
         <span class="pipVal">
@@ -244,7 +244,7 @@
       class:in-range={inRange(max)}
       style="{orientationStart}: 100%;"
       on:pointerdown={(e)=>{labelDown(e)}}
-      on:pointerup={(e)=>{labelUp(pipVal(max),e)}}
+      on:pointerup={(e)=>{labelUp(pipVal(pipCount),e)}}
     >
       {#if all === 'label' || last === 'label'}
         <span class="pipVal">
@@ -253,5 +253,5 @@
       {/if}
     </span>
   {/if}
-  
+
 </div>
