@@ -809,9 +809,11 @@
   }
 </style>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
   {id}
   bind:this={slider}
+  role="none"
   class="rangeSlider"
   class:range
   class:disabled
