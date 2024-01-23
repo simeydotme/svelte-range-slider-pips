@@ -388,6 +388,17 @@
   }
 
   /**
+   * helper to take a string of html and return only the text
+   * @param {string} possibleHtml the string that may contain html
+   * @return {string} the text from the input
+   */
+  function pureText(possibleHtml) {
+    const div = document.createElement("div");
+    div.innerHTML = possibleHtml;
+    return div.textContent || div.innerText || "";
+  }
+
+  /**
    * when the user has unfocussed (blurred) from the
    * slider, deactivate all handles
    * @param {event} e the event from browser
@@ -832,7 +843,7 @@
       aria-valuemin={range === true && index === 1 ? values[0] : min}
       aria-valuemax={range === true && index === 0 ? values[1] : max}
       aria-valuenow={value}
-      aria-valuetext="{prefix}{handleFormatter(value,index,percentOf(value))}{suffix}"
+      aria-valuetext="{prefix}{pureText(handleFormatter(value,index,percentOf(value)))}{suffix}"
       aria-orientation={vertical ? 'vertical' : 'horizontal'}
       aria-disabled={disabled}
       {disabled}
@@ -841,7 +852,7 @@
       <span class="rangeNub" />
       {#if float}
         <span class="rangeFloat">
-          {#if prefix}<span class="rangeFloat-prefix">{prefix}</span>{/if}{handleFormatter(value,index,percentOf(value))}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
+          {#if prefix}<span class="rangeFloat-prefix">{prefix}</span>{/if}{@html handleFormatter(value,index,percentOf(value))}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
         </span>
       {/if}
     </span>
