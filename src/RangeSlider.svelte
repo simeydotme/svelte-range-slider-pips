@@ -840,9 +840,12 @@
     >
       <span class="rangeNub" />
       {#if float}
-        <span class="rangeFloat">
-          {#if prefix}<span class="rangeFloat-prefix">{prefix}</span>{/if}{handleFormatter(value,index,percentOf(value))}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
-        </span>
+        {@const formattedValue = handleFormatter(value,index,percentOf(value))}
+        <slot name="float" value={formattedValue} prefix={prefix} suffix={suffix}>
+          <span class="rangeFloat">
+            {#if prefix}<span class="rangeFloat-prefix">{prefix}</span>{/if}{formattedValue}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
+          </span>
+        </slot>
       {/if}
     </span>
   {/each}
