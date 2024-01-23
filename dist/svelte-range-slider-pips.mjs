@@ -1,7 +1,7 @@
 /**
- * svelte-range-slider-pips ~ 2.2.3
+ * svelte-range-slider-pips ~ 2.3.0
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
- * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 20/9/2023
+ * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 24/1/2024
  */
 function noop() { }
 function run(fn) {
@@ -103,6 +103,9 @@ function destroy_each(iterations, detaching) {
 function element(name) {
     return document.createElement(name);
 }
+function svg_element(name) {
+    return document.createElementNS('http://www.w3.org/2000/svg', name);
+}
 function text(data) {
     return document.createTextNode(data);
 }
@@ -144,6 +147,44 @@ function custom_event(type, detail, { bubbles = false, cancelable = false } = {}
     const e = document.createEvent('CustomEvent');
     e.initCustomEvent(type, bubbles, cancelable, detail);
     return e;
+}
+class HtmlTag {
+    constructor(is_svg = false) {
+        this.is_svg = false;
+        this.is_svg = is_svg;
+        this.e = this.n = null;
+    }
+    c(html) {
+        this.h(html);
+    }
+    m(html, target, anchor = null) {
+        if (!this.e) {
+            if (this.is_svg)
+                this.e = svg_element(target.nodeName);
+            else
+                this.e = element(target.nodeName);
+            this.t = target;
+            this.c(html);
+        }
+        this.i(anchor);
+    }
+    h(html) {
+        this.e.innerHTML = html;
+        this.n = Array.from(this.e.childNodes);
+    }
+    i(anchor) {
+        for (let i = 0; i < this.n.length; i += 1) {
+            insert(this.t, this.n[i], anchor);
+        }
+    }
+    p(html) {
+        this.d();
+        this.h(html);
+        this.i(this.a);
+    }
+    d() {
+        this.n.forEach(detach);
+    }
 }
 
 let current_component;
@@ -662,8 +703,10 @@ function create_if_block_9(ctx) {
 // (211:6) {#if all === 'label' || first === 'label'}
 function create_if_block_10(ctx) {
 	let span;
-	let t_value = /*formatter*/ ctx[12](/*fixFloat*/ ctx[16](/*min*/ ctx[0]), 0, 0) + "";
-	let t;
+	let if_block0_anchor;
+	let html_tag;
+	let raw_value = /*formatter*/ ctx[12](/*fixFloat*/ ctx[16](/*min*/ ctx[0]), 0, 0) + "";
+	let html_anchor;
 	let if_block0 = /*prefix*/ ctx[10] && create_if_block_12(ctx);
 	let if_block1 = /*suffix*/ ctx[11] && create_if_block_11(ctx);
 
@@ -671,14 +714,19 @@ function create_if_block_10(ctx) {
 		c() {
 			span = element("span");
 			if (if_block0) if_block0.c();
-			t = text(t_value);
+			if_block0_anchor = empty();
+			html_tag = new HtmlTag(false);
+			html_anchor = empty();
 			if (if_block1) if_block1.c();
+			html_tag.a = html_anchor;
 			attr(span, "class", "pipVal");
 		},
 		m(target, anchor) {
 			insert(target, span, anchor);
 			if (if_block0) if_block0.m(span, null);
-			append(span, t);
+			append(span, if_block0_anchor);
+			html_tag.m(raw_value, span);
+			append(span, html_anchor);
 			if (if_block1) if_block1.m(span, null);
 		},
 		p(ctx, dirty) {
@@ -688,14 +736,14 @@ function create_if_block_10(ctx) {
 				} else {
 					if_block0 = create_if_block_12(ctx);
 					if_block0.c();
-					if_block0.m(span, t);
+					if_block0.m(span, if_block0_anchor);
 				}
 			} else if (if_block0) {
 				if_block0.d(1);
 				if_block0 = null;
 			}
 
-			if (dirty[0] & /*formatter, fixFloat, min*/ 69633 && t_value !== (t_value = /*formatter*/ ctx[12](/*fixFloat*/ ctx[16](/*min*/ ctx[0]), 0, 0) + "")) set_data(t, t_value);
+			if (dirty[0] & /*formatter, fixFloat, min*/ 69633 && raw_value !== (raw_value = /*formatter*/ ctx[12](/*fixFloat*/ ctx[16](/*min*/ ctx[0]), 0, 0) + "")) html_tag.p(raw_value);
 
 			if (/*suffix*/ ctx[11]) {
 				if (if_block1) {
@@ -742,7 +790,7 @@ function create_if_block_12(ctx) {
 	};
 }
 
-// (213:100) {#if suffix}
+// (213:106) {#if suffix}
 function create_if_block_11(ctx) {
 	let span;
 	let t;
@@ -899,8 +947,10 @@ function create_if_block_5(ctx) {
 // (230:10) {#if all === 'label' || rest === 'label'}
 function create_if_block_6(ctx) {
 	let span;
-	let t_value = /*formatter*/ ctx[12](/*pipVal*/ ctx[19](/*i*/ ctx[39]), /*i*/ ctx[39], /*percentOf*/ ctx[15](/*pipVal*/ ctx[19](/*i*/ ctx[39]))) + "";
-	let t;
+	let if_block0_anchor;
+	let html_tag;
+	let raw_value = /*formatter*/ ctx[12](/*pipVal*/ ctx[19](/*i*/ ctx[39]), /*i*/ ctx[39], /*percentOf*/ ctx[15](/*pipVal*/ ctx[19](/*i*/ ctx[39]))) + "";
+	let html_anchor;
 	let if_block0 = /*prefix*/ ctx[10] && create_if_block_8(ctx);
 	let if_block1 = /*suffix*/ ctx[11] && create_if_block_7(ctx);
 
@@ -908,14 +958,19 @@ function create_if_block_6(ctx) {
 		c() {
 			span = element("span");
 			if (if_block0) if_block0.c();
-			t = text(t_value);
+			if_block0_anchor = empty();
+			html_tag = new HtmlTag(false);
+			html_anchor = empty();
 			if (if_block1) if_block1.c();
+			html_tag.a = html_anchor;
 			attr(span, "class", "pipVal");
 		},
 		m(target, anchor) {
 			insert(target, span, anchor);
 			if (if_block0) if_block0.m(span, null);
-			append(span, t);
+			append(span, if_block0_anchor);
+			html_tag.m(raw_value, span);
+			append(span, html_anchor);
 			if (if_block1) if_block1.m(span, null);
 		},
 		p(ctx, dirty) {
@@ -925,14 +980,14 @@ function create_if_block_6(ctx) {
 				} else {
 					if_block0 = create_if_block_8(ctx);
 					if_block0.c();
-					if_block0.m(span, t);
+					if_block0.m(span, if_block0_anchor);
 				}
 			} else if (if_block0) {
 				if_block0.d(1);
 				if_block0 = null;
 			}
 
-			if (dirty[0] & /*formatter, pipVal, percentOf*/ 561152 && t_value !== (t_value = /*formatter*/ ctx[12](/*pipVal*/ ctx[19](/*i*/ ctx[39]), /*i*/ ctx[39], /*percentOf*/ ctx[15](/*pipVal*/ ctx[19](/*i*/ ctx[39]))) + "")) set_data(t, t_value);
+			if (dirty[0] & /*formatter, pipVal, percentOf*/ 561152 && raw_value !== (raw_value = /*formatter*/ ctx[12](/*pipVal*/ ctx[19](/*i*/ ctx[39]), /*i*/ ctx[39], /*percentOf*/ ctx[15](/*pipVal*/ ctx[19](/*i*/ ctx[39]))) + "")) html_tag.p(raw_value);
 
 			if (/*suffix*/ ctx[11]) {
 				if (if_block1) {
@@ -979,7 +1034,7 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (232:119) {#if suffix}
+// (232:125) {#if suffix}
 function create_if_block_7(ctx) {
 	let span;
 	let t;
@@ -1109,8 +1164,10 @@ function create_if_block(ctx) {
 // (249:6) {#if all === 'label' || last === 'label'}
 function create_if_block_1(ctx) {
 	let span;
-	let t_value = /*formatter*/ ctx[12](/*fixFloat*/ ctx[16](/*max*/ ctx[1]), /*pipCount*/ ctx[20], 100) + "";
-	let t;
+	let if_block0_anchor;
+	let html_tag;
+	let raw_value = /*formatter*/ ctx[12](/*fixFloat*/ ctx[16](/*max*/ ctx[1]), /*pipCount*/ ctx[20], 100) + "";
+	let html_anchor;
 	let if_block0 = /*prefix*/ ctx[10] && create_if_block_3(ctx);
 	let if_block1 = /*suffix*/ ctx[11] && create_if_block_2(ctx);
 
@@ -1118,14 +1175,19 @@ function create_if_block_1(ctx) {
 		c() {
 			span = element("span");
 			if (if_block0) if_block0.c();
-			t = text(t_value);
+			if_block0_anchor = empty();
+			html_tag = new HtmlTag(false);
+			html_anchor = empty();
 			if (if_block1) if_block1.c();
+			html_tag.a = html_anchor;
 			attr(span, "class", "pipVal");
 		},
 		m(target, anchor) {
 			insert(target, span, anchor);
 			if (if_block0) if_block0.m(span, null);
-			append(span, t);
+			append(span, if_block0_anchor);
+			html_tag.m(raw_value, span);
+			append(span, html_anchor);
 			if (if_block1) if_block1.m(span, null);
 		},
 		p(ctx, dirty) {
@@ -1135,14 +1197,14 @@ function create_if_block_1(ctx) {
 				} else {
 					if_block0 = create_if_block_3(ctx);
 					if_block0.c();
-					if_block0.m(span, t);
+					if_block0.m(span, if_block0_anchor);
 				}
 			} else if (if_block0) {
 				if_block0.d(1);
 				if_block0 = null;
 			}
 
-			if (dirty[0] & /*formatter, fixFloat, max, pipCount*/ 1118210 && t_value !== (t_value = /*formatter*/ ctx[12](/*fixFloat*/ ctx[16](/*max*/ ctx[1]), /*pipCount*/ ctx[20], 100) + "")) set_data(t, t_value);
+			if (dirty[0] & /*formatter, fixFloat, max, pipCount*/ 1118210 && raw_value !== (raw_value = /*formatter*/ ctx[12](/*fixFloat*/ ctx[16](/*max*/ ctx[1]), /*pipCount*/ ctx[20], 100) + "")) html_tag.p(raw_value);
 
 			if (/*suffix*/ ctx[11]) {
 				if (if_block1) {
@@ -1189,7 +1251,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (251:109) {#if suffix}
+// (251:115) {#if suffix}
 function create_if_block_2(ctx) {
 	let span;
 	let t;
@@ -1337,7 +1399,7 @@ function instance($$self, $$props, $$invalidate) {
 	let { rest = undefined } = $$props;
 	let { prefix = "" } = $$props;
 	let { suffix = "" } = $$props;
-	let { formatter = (v, i) => v } = $$props;
+	let { formatter = (v, i, p) => v } = $$props;
 	let { focus = undefined } = $$props;
 	let { orientationStart = undefined } = $$props;
 	let { percentOf = undefined } = $$props;
@@ -1380,7 +1442,7 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const pointerup_handler = e => {
-		labelUp(pipVal(min), e);
+		labelUp(min, e);
 	};
 
 	const pointerdown_handler_1 = e => {
@@ -1396,7 +1458,7 @@ function instance($$self, $$props, $$invalidate) {
 	};
 
 	const pointerup_handler_2 = e => {
-		labelUp(pipVal(max), e);
+		labelUp(max, e);
 	};
 
 	$$self.$$set = $$props => {
@@ -1555,11 +1617,13 @@ function get_each_context$1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (842:6) {#if float}
+// (855:6) {#if float}
 function create_if_block_2$1(ctx) {
 	let span;
-	let t_value = /*handleFormatter*/ ctx[21](/*value*/ ctx[65], /*index*/ ctx[67], /*percentOf*/ ctx[24](/*value*/ ctx[65])) + "";
-	let t;
+	let if_block0_anchor;
+	let html_tag;
+	let raw_value = /*handleFormatter*/ ctx[21](/*value*/ ctx[65], /*index*/ ctx[67], /*percentOf*/ ctx[24](/*value*/ ctx[65])) + "";
+	let html_anchor;
 	let if_block0 = /*prefix*/ ctx[18] && create_if_block_4$1(ctx);
 	let if_block1 = /*suffix*/ ctx[19] && create_if_block_3$1(ctx);
 
@@ -1567,14 +1631,19 @@ function create_if_block_2$1(ctx) {
 		c() {
 			span = element("span");
 			if (if_block0) if_block0.c();
-			t = text(t_value);
+			if_block0_anchor = empty();
+			html_tag = new HtmlTag(false);
+			html_anchor = empty();
 			if (if_block1) if_block1.c();
+			html_tag.a = html_anchor;
 			attr(span, "class", "rangeFloat");
 		},
 		m(target, anchor) {
 			insert(target, span, anchor);
 			if (if_block0) if_block0.m(span, null);
-			append(span, t);
+			append(span, if_block0_anchor);
+			html_tag.m(raw_value, span);
+			append(span, html_anchor);
 			if (if_block1) if_block1.m(span, null);
 		},
 		p(ctx, dirty) {
@@ -1584,14 +1653,14 @@ function create_if_block_2$1(ctx) {
 				} else {
 					if_block0 = create_if_block_4$1(ctx);
 					if_block0.c();
-					if_block0.m(span, t);
+					if_block0.m(span, if_block0_anchor);
 				}
 			} else if (if_block0) {
 				if_block0.d(1);
 				if_block0 = null;
 			}
 
-			if (dirty[0] & /*handleFormatter, values, percentOf*/ 18874369 && t_value !== (t_value = /*handleFormatter*/ ctx[21](/*value*/ ctx[65], /*index*/ ctx[67], /*percentOf*/ ctx[24](/*value*/ ctx[65])) + "")) set_data(t, t_value);
+			if (dirty[0] & /*handleFormatter, values, percentOf*/ 18874369 && raw_value !== (raw_value = /*handleFormatter*/ ctx[21](/*value*/ ctx[65], /*index*/ ctx[67], /*percentOf*/ ctx[24](/*value*/ ctx[65])) + "")) html_tag.p(raw_value);
 
 			if (/*suffix*/ ctx[19]) {
 				if (if_block1) {
@@ -1614,7 +1683,7 @@ function create_if_block_2$1(ctx) {
 	};
 }
 
-// (844:10) {#if prefix}
+// (857:10) {#if prefix}
 function create_if_block_4$1(ctx) {
 	let span;
 	let t;
@@ -1638,7 +1707,7 @@ function create_if_block_4$1(ctx) {
 	};
 }
 
-// (844:121) {#if suffix}
+// (857:127) {#if suffix}
 function create_if_block_3$1(ctx) {
 	let span;
 	let t;
@@ -1662,7 +1731,7 @@ function create_if_block_3$1(ctx) {
 	};
 }
 
-// (820:2) {#each values as value, index}
+// (833:2) {#each values as value, index}
 function create_each_block$1(ctx) {
 	let span1;
 	let span0;
@@ -1702,7 +1771,7 @@ function create_each_block$1(ctx) {
 			: /*max*/ ctx[4]);
 
 			attr(span1, "aria-valuenow", span1_aria_valuenow_value = /*value*/ ctx[65]);
-			attr(span1, "aria-valuetext", span1_aria_valuetext_value = "" + (/*prefix*/ ctx[18] + /*handleFormatter*/ ctx[21](/*value*/ ctx[65], /*index*/ ctx[67], /*percentOf*/ ctx[24](/*value*/ ctx[65])) + /*suffix*/ ctx[19]));
+			attr(span1, "aria-valuetext", span1_aria_valuetext_value = "" + (/*prefix*/ ctx[18] + pureText(/*handleFormatter*/ ctx[21](/*value*/ ctx[65], /*index*/ ctx[67], /*percentOf*/ ctx[24](/*value*/ ctx[65]))) + /*suffix*/ ctx[19]));
 			attr(span1, "aria-orientation", span1_aria_orientation_value = /*vertical*/ ctx[6] ? 'vertical' : 'horizontal');
 			attr(span1, "aria-disabled", /*disabled*/ ctx[10]);
 			attr(span1, "disabled", /*disabled*/ ctx[10]);
@@ -1764,7 +1833,7 @@ function create_each_block$1(ctx) {
 				attr(span1, "aria-valuenow", span1_aria_valuenow_value);
 			}
 
-			if (dirty[0] & /*prefix, handleFormatter, values, percentOf, suffix*/ 19660801 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = "" + (/*prefix*/ ctx[18] + /*handleFormatter*/ ctx[21](/*value*/ ctx[65], /*index*/ ctx[67], /*percentOf*/ ctx[24](/*value*/ ctx[65])) + /*suffix*/ ctx[19]))) {
+			if (dirty[0] & /*prefix, handleFormatter, values, percentOf, suffix*/ 19660801 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = "" + (/*prefix*/ ctx[18] + pureText(/*handleFormatter*/ ctx[21](/*value*/ ctx[65], /*index*/ ctx[67], /*percentOf*/ ctx[24](/*value*/ ctx[65]))) + /*suffix*/ ctx[19]))) {
 				attr(span1, "aria-valuetext", span1_aria_valuetext_value);
 			}
 
@@ -1801,7 +1870,7 @@ function create_each_block$1(ctx) {
 	};
 }
 
-// (849:2) {#if range}
+// (862:2) {#if range}
 function create_if_block_1$1(ctx) {
 	let span;
 	let span_style_value;
@@ -1826,7 +1895,7 @@ function create_if_block_1$1(ctx) {
 	};
 }
 
-// (855:2) {#if pips}
+// (868:2) {#if pips}
 function create_if_block$1(ctx) {
 	let rangepips;
 	let current;
@@ -1936,6 +2005,7 @@ function create_fragment$1(ctx) {
 			t1 = space();
 			if (if_block1) if_block1.c();
 			attr(div, "id", /*id*/ ctx[17]);
+			attr(div, "role", "none");
 			attr(div, "class", "rangeSlider");
 			toggle_class(div, "range", /*range*/ ctx[2]);
 			toggle_class(div, "disabled", /*disabled*/ ctx[10]);
@@ -2128,6 +2198,17 @@ function normalisedClient(e) {
 	} else {
 		return e;
 	}
+}
+
+/**
+ * helper to take a string of html and return only the text
+ * @param {string} possibleHtml the string that may contain html
+ * @return {string} the text from the input
+ */
+function pureText(possibleHtml) {
+	const div = document.createElement("div");
+	div.innerHTML = possibleHtml;
+	return div.textContent || div.innerText || "";
 }
 
 function instance$1($$self, $$props, $$invalidate) {

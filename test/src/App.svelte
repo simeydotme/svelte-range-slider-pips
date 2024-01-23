@@ -267,6 +267,14 @@
     <RangeSlider values={[30,130]} float pips all="label" hoverable range min={20} max={130} pipstep={3} step={5} />
     <RangeSlider values={[30,130]} float pips all="label" hoverable range min={30} max={130} pipstep={1} step={1} />
 
+    <h2>Custom HTML labels</h2>
+    <RangeSlider values={[30,130]} float pips all="label" hoverable range min={20} max={130} pipstep={3} step={5} formatter={(v,i,p)=>{
+      return `${v} ~ <span style="color: red;">this could be hidden</span>`
+    }} />
+    <RangeSlider values={[30,130]} float pips all="label" hoverable range min={30} max={130} pipstep={1} step={1} handleFormatter={(v,i,p)=>{
+      return `${v} ~ <span style="color: blue;">this could be hidden</span> ~ ${i} ~ ${p}`
+    }}  />
+
     <h2>Aria Labels</h2>
     <p>Inspect the Dom to see the labels</p>
     <RangeSlider ariaLabels="ab" values={[5,20]} {reversed} {hoverable} {disabled} />
