@@ -206,7 +206,7 @@
       class:in-range={inRange(min)}
       style="{orientationStart}: 0%;"
       on:pointerdown={(e)=>{labelDown(e)}}
-      on:pointerup={(e)=>{labelUp(pipVal(min),e)}}
+      on:pointerup={(e)=>{labelUp(min,e)}}
     >
       {#if all === 'label' || first === 'label'}
         <span class="pipVal">
@@ -244,7 +244,7 @@
       class:in-range={inRange(max)}
       style="{orientationStart}: 100%;"
       on:pointerdown={(e)=>{labelDown(e)}}
-      on:pointerup={(e)=>{labelUp(pipVal(max),e)}}
+      on:pointerup={(e)=>{labelUp(max,e)}}
     >
       {#if all === 'label' || last === 'label'}
         <span class="pipVal">

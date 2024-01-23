@@ -263,6 +263,10 @@
     <RangeSlider bind:values={decimals2} float pips all="label" min={-0.01} max={0.01} step={0.0005} precision={5} {reversed} {hoverable} {disabled} />
     {decimals2}<br>
 
+    <h2>Irregular start/end numbers</h2>
+    <RangeSlider values={[30,130]} float pips all="label" hoverable range min={20} max={130} pipstep={3} step={5} />
+    <RangeSlider values={[30,130]} float pips all="label" hoverable range min={30} max={130} pipstep={1} step={1} />
+
     <h2>Aria Labels</h2>
     <p>Inspect the Dom to see the labels</p>
     <RangeSlider ariaLabels="ab" values={[5,20]} {reversed} {hoverable} {disabled} />
