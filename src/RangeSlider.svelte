@@ -393,9 +393,7 @@
    * @return {string} the text from the input
    */
   function pureText(possibleHtml) {
-    const div = document.createElement("div");
-    div.innerHTML = possibleHtml;
-    return div.textContent || div.innerText || "";
+    return `${possibleHtml}`.replace(/<[^>]*>/g, '');
   }
 
   /**

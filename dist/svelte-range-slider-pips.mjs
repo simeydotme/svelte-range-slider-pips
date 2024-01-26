@@ -1,7 +1,7 @@
 /**
- * svelte-range-slider-pips ~ 2.3.0
+ * svelte-range-slider-pips ~ 2.3.1
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
- * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 24/1/2024
+ * © MPL-2.0 ~ Simon Goellner <simey.me@gmail.com> ~ 26/1/2024
  */
 function noop() { }
 function run(fn) {
@@ -1617,7 +1617,7 @@ function get_each_context$1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (855:6) {#if float}
+// (853:6) {#if float}
 function create_if_block_2$1(ctx) {
 	let span;
 	let if_block0_anchor;
@@ -1683,7 +1683,7 @@ function create_if_block_2$1(ctx) {
 	};
 }
 
-// (857:10) {#if prefix}
+// (855:10) {#if prefix}
 function create_if_block_4$1(ctx) {
 	let span;
 	let t;
@@ -1707,7 +1707,7 @@ function create_if_block_4$1(ctx) {
 	};
 }
 
-// (857:127) {#if suffix}
+// (855:127) {#if suffix}
 function create_if_block_3$1(ctx) {
 	let span;
 	let t;
@@ -1731,7 +1731,7 @@ function create_if_block_3$1(ctx) {
 	};
 }
 
-// (833:2) {#each values as value, index}
+// (831:2) {#each values as value, index}
 function create_each_block$1(ctx) {
 	let span1;
 	let span0;
@@ -1870,7 +1870,7 @@ function create_each_block$1(ctx) {
 	};
 }
 
-// (862:2) {#if range}
+// (860:2) {#if range}
 function create_if_block_1$1(ctx) {
 	let span;
 	let span_style_value;
@@ -1895,7 +1895,7 @@ function create_if_block_1$1(ctx) {
 	};
 }
 
-// (868:2) {#if pips}
+// (866:2) {#if pips}
 function create_if_block$1(ctx) {
 	let rangepips;
 	let current;
@@ -2206,9 +2206,7 @@ function normalisedClient(e) {
  * @return {string} the text from the input
  */
 function pureText(possibleHtml) {
-	const div = document.createElement("div");
-	div.innerHTML = possibleHtml;
-	return div.textContent || div.innerText || "";
+	return `${possibleHtml}`.replace(/<[^>]*>/g, '');
 }
 
 function instance$1($$self, $$props, $$invalidate) {
