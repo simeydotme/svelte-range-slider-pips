@@ -1,9 +1,18 @@
 .DS_Store
 .astro
 node_modules
-/public/
-/test/public/build/
+/build
+/dist
 /docs
+/tests/**/build
+/tests/**/dist
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
 
 yarn-error.log
 npm-error.log
