@@ -1,3 +1,6 @@
+
+import fs from 'fs';
+import del from 'rollup-plugin-delete'
 import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
@@ -7,17 +10,27 @@ import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
 
 import { globbySync } from 'globby';
-import pkg from './package.json' with { type: 'json' };
 
-const name = pkg.name
+const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+
+// for use with exports options
+const packageName = pkg.name
 	.replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3')
+
+// this is the name of the component when imported
+// like: import { Component } from 'package' or require('package').Component
+// and: const myComponent = new Component();
+const moduleName = packageName
 	.replace(/^\w/, (m) => m.toUpperCase())
 	.replace(/-\w/g, (m) => m[1].toUpperCase());
 
+	// banner to be added to the top of each generated file
 const banner = `/**
  * ${pkg.name} ~ ${pkg.version}
  * ${pkg.description || ''}
- * © MPL-2.0 ~ ${pkg.author} ~ ${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}
+ * ${pkg.homepage ? `Project home: ${pkg.homepage}` : ''}
+ * © ${new Date().getFullYear()} ${pkg.author} ~ ${pkg.license} License
+ * Published: ${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()} @ ${new Date().getHours()}:${new Date().getMinutes()}
  */`;
 
 const production = !process.env.ROLLUP_WATCH;
@@ -29,19 +42,20 @@ const exports = components.map((component) => ({
 	input: `src/lib/components/${component}.svelte`,
 	output: [
 		{
-			file: pkg.module,
+			file: pkg.exports['.'].import,
 			format: 'es',
-			name,
+			name: moduleName,
 			banner
 		},
 		{
-			file: pkg.main,
+			file: pkg.exports['.'].require,
 			format: 'umd',
-			name,
+			name: moduleName,
 			banner
 		}
 	],
 	plugins: [
+		del({ targets: 'dist/*' }),
 		svelte({
 			preprocess: autoPreprocess(),
 			compilerOptions: {
@@ -50,7 +64,7 @@ const exports = components.map((component) => ({
 			}
 		}),
 		typescript(),
-		css({ output: 'range-slider-pips.css' }),
+		css({ output: pkg.exports['.'].style.split('/').at(-1) }),
 		resolve({
 			browser: true,
 			dedupe: ['svelte']

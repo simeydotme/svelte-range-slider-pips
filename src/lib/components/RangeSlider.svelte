@@ -10,10 +10,12 @@
 		pureText,
 		normalisedClient,
 		elementIndex,
-		type NormalisedClient,
-		type Formatter,
-		type Pip
-	} from '$lib/index.js';
+	} from '$lib/utils.js';
+	import type { 
+		Pip, 
+		Formatter, 
+		NormalisedClient 
+	} from '$lib/types.js';
 
 	import RangePips from './RangePips.svelte';
 

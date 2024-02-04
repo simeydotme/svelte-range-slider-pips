@@ -6,10 +6,12 @@
 		isInRange,
 		isSelected,
 		getValueFromIndex,
-		type NormalisedClient,
-		type Formatter,
-		type Pip
-	} from '$lib/index.js';
+	} from '$lib/utils.js';
+	import type { 
+		Pip, 
+		Formatter, 
+		NormalisedClient 
+	} from '$lib/types.js';
 
 	// range slider props
 	export let range: boolean | 'min' | 'max' = false;

@@ -12,7 +12,7 @@
     "build:svelte": "svelte-kit sync && svelte-package -o dist/svelte && publint",
     "build:vanilla": "rollup -c",
     "preview": "vite preview",
-    "prepublishOnly": "npm run package",
+    "prepublishOnly": "npm run build",
     "test": "npm run test:integration && npm run test:unit",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -21,14 +21,24 @@
     "lint": "prettier --check .",
     "format": "prettier --write ."
   },
+  "type": "module",
+  "module": "./dist/range-slider-pips.mjs",
+  "main": "./dist/range-slider-pips.js",
+  "svelte": "./dist/svelte/index.js",
+  "types": "./dist/svelte/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/svelte/index.d.ts",
-      "svelte": "./dist/svelte/index.js"
+      "svelte": "./dist/svelte/index.js",
+      "import": "./dist/range-slider-pips.mjs",
+      "require": "./dist/range-slider-pips.js",
+      "style": "./dist/range-slider-pips.css"
+    },
+    "./dist/*.css": {
+      "import": "./dist/range-slider-pips.css",
+      "require": "./dist/range-slider-pips.css"
     }
   },
-  "module": "./dist/es/range-slider-pips.mjs",
-  "main": "./dist/umd/range-slider-pips.js",
   "files": [
     "dist",
     "!dist/**/*.test.*",
@@ -47,12 +57,14 @@
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/package": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "@types/node": "^20.11.16",
     "globby": "^14.0.0",
     "prettier": "^3.1.1",
     "prettier-plugin-svelte": "^3.1.2",
     "publint": "^0.1.9",
     "rollup": "^4.9.6",
     "rollup-plugin-css-only": "^4.5.2",
+    "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-filesize": "^10.0.0",
     "rollup-plugin-svelte": "^7.1.6",
     "svelte": "^4.2.7",
@@ -63,9 +75,6 @@
     "vite": "^5.0.11",
     "vitest": "^1.2.0"
   },
-  "svelte": "./dist/svelte/index.js",
-  "types": "./dist/svelte/index.d.ts",
-  "type": "module",
   "keywords": [
     "svelte",
     "component",
