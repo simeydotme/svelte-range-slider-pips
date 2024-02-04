@@ -28,7 +28,7 @@ const banner = `/**
  * ${pkg.description || ''}
  * ${pkg.homepage ? `Project home: ${pkg.homepage}` : ''}
  * © ${new Date().getFullYear()} ${pkg.author} ~ ${pkg.license} License
- * Published: ${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()} @ ${new Date().getHours()}:${new Date().getMinutes()}
+ * Published: ${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}
  */`;
 
 const production = !process.env.ROLLUP_WATCH;
