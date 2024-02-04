@@ -1,71 +1,71 @@
 {
   "name": "svelte-range-slider-pips",
-  "version": "3.0.0-next",
+  "version": "3.0.0-beta.0",
   "description": "Multi-Thumb, Accessible, Beautiful Range Slider with Pips",
   "repository": "https://github.com/simeydotme/svelte-range-slider-pips",
   "homepage": "https://simeydotme.github.io/svelte-range-slider-pips/",
   "author": "Simon Goellner <simey.me@gmail.com>",
   "license": "MPL-2.0",
-	"scripts": {
-		"dev": "vite dev",
-		"build": "npm run build:vanilla && vite build && npm run build:svelte",
-		"build:svelte": "svelte-kit sync && svelte-package -o dist/svelte && publint",
-		"build:vanilla": "rollup -c",
-		"preview": "vite preview",
-		"prepublishOnly": "npm run package",
-		"test": "npm run test:integration && npm run test:unit",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"test:integration": "playwright test",
-		"test:unit": "vitest",
-		"lint": "prettier --check .",
-		"format": "prettier --write ."
-	},
-	"exports": {
-		".": {
-			"types": "./dist/svelte/index.d.ts",
-			"svelte": "./dist/svelte/index.js"
-		}
-	},
-	"module": "./dist/es/range-slider-pips.mjs",
-	"main": "./dist/umd/range-slider-pips.js",
-	"files": [
-		"dist",
-		"!dist/**/*.test.*",
-		"!dist/**/*.spec.*"
-	],
-	"peerDependencies": {
-		"svelte": "^4.0.0"
-	},
-	"devDependencies": {
-		"@playwright/test": "^1.28.1",
-		"@rollup/plugin-commonjs": "^25.0.7",
-		"@rollup/plugin-node-resolve": "^15.2.3",
-		"@rollup/plugin-terser": "^0.4.4",
-		"@rollup/plugin-typescript": "^11.1.6",
-		"@sveltejs/adapter-auto": "^3.0.0",
-		"@sveltejs/kit": "^2.0.0",
-		"@sveltejs/package": "^2.0.0",
-		"@sveltejs/vite-plugin-svelte": "^3.0.0",
-		"globby": "^14.0.0",
-		"prettier": "^3.1.1",
-		"prettier-plugin-svelte": "^3.1.2",
-		"publint": "^0.1.9",
-		"rollup": "^4.9.6",
-		"rollup-plugin-css-only": "^4.5.2",
-		"rollup-plugin-filesize": "^10.0.0",
-		"rollup-plugin-svelte": "^7.1.6",
-		"svelte": "^4.2.7",
-		"svelte-check": "^3.6.0",
-		"svelte-preprocess": "^5.1.3",
-		"tslib": "^2.4.1",
-		"typescript": "^5.0.0",
-		"vite": "^5.0.11",
-		"vitest": "^1.2.0"
-	},
-	"svelte": "./dist/svelte/index.js",
-	"types": "./dist/svelte/index.d.ts",
-	"type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "npm run build:vanilla && vite build && npm run build:svelte",
+    "build:svelte": "svelte-kit sync && svelte-package -o dist/svelte && publint",
+    "build:vanilla": "rollup -c",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run package",
+    "test": "npm run test:integration && npm run test:unit",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "test:integration": "playwright test",
+    "test:unit": "vitest",
+    "lint": "prettier --check .",
+    "format": "prettier --write ."
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/svelte/index.d.ts",
+      "svelte": "./dist/svelte/index.js"
+    }
+  },
+  "module": "./dist/es/range-slider-pips.mjs",
+  "main": "./dist/umd/range-slider-pips.js",
+  "files": [
+    "dist",
+    "!dist/**/*.test.*",
+    "!dist/**/*.spec.*"
+  ],
+  "peerDependencies": {
+    "svelte": "^4.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.28.1",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@sveltejs/adapter-auto": "^3.0.0",
+    "@sveltejs/kit": "^2.0.0",
+    "@sveltejs/package": "^2.0.0",
+    "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "globby": "^14.0.0",
+    "prettier": "^3.1.1",
+    "prettier-plugin-svelte": "^3.1.2",
+    "publint": "^0.1.9",
+    "rollup": "^4.9.6",
+    "rollup-plugin-css-only": "^4.5.2",
+    "rollup-plugin-filesize": "^10.0.0",
+    "rollup-plugin-svelte": "^7.1.6",
+    "svelte": "^4.2.7",
+    "svelte-check": "^3.6.0",
+    "svelte-preprocess": "^5.1.3",
+    "tslib": "^2.4.1",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.11",
+    "vitest": "^1.2.0"
+  },
+  "svelte": "./dist/svelte/index.js",
+  "types": "./dist/svelte/index.d.ts",
+  "type": "module",
   "keywords": [
     "svelte",
     "component",
@@ -84,12 +84,12 @@
     "notch",
     "notches",
     "simey",
-		"simeydotme",
-		"react",
-		"reactjs",
-		"vue",
-		"vuejs",
-		"solid",
-		"solidjs"
+    "simeydotme",
+    "react",
+    "reactjs",
+    "vue",
+    "vuejs",
+    "solid",
+    "solidjs"
   ]
 }
