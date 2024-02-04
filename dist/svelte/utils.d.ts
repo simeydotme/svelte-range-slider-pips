@@ -1,4 +1,4 @@
-import type { NormalisedClient } from "./types.js";
+import type { NormalisedClient } from './types.js';
 /**
  * make sure the value is coerced to a float value
  * @param {number|string} value the value to fix

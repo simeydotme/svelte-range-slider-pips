@@ -1,1 +1,1 @@
-export { default as RangeSlider } from "./components/RangeSlider.svelte";
+export { default as RangeSlider } from './components/RangeSlider.svelte';

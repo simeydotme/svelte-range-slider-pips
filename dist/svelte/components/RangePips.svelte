@@ -86,25 +86,33 @@ function labelUp(pipValue, event) {
 
 	{#if (all && rest !== false) || rest}
 		{#each Array(pipCount + 1) as _, i}
-			{#if getValueFromIndex(i,min,max,pipStep,step) !== min && getValueFromIndex(i,min,max,pipStep,step) !== max}
+			{#if getValueFromIndex(i, min, max, pipStep, step) !== min && getValueFromIndex(i, min, max, pipStep, step) !== max}
 				<span
 					class="pip"
-					class:selected={isSelected(getValueFromIndex(i,min,max,pipStep,step), values, precision)}
-					class:in-range={isInRange(getValueFromIndex(i,min,max,pipStep,step), values, range)}
-					style="{orientationStart}: {valueAsPercent(getValueFromIndex(i,min,max,pipStep,step), min, max)}%;"
+					class:selected={isSelected(
+						getValueFromIndex(i, min, max, pipStep, step),
+						values,
+						precision
+					)}
+					class:in-range={isInRange(getValueFromIndex(i, min, max, pipStep, step), values, range)}
+					style="{orientationStart}: {valueAsPercent(
+						getValueFromIndex(i, min, max, pipStep, step),
+						min,
+						max
+					)}%;"
 					on:pointerdown={(e) => {
 						labelDown(e);
 					}}
 					on:pointerup={(e) => {
-						labelUp(getValueFromIndex(i,min,max,pipStep,step), e);
+						labelUp(getValueFromIndex(i, min, max, pipStep, step), e);
 					}}
 				>
 					{#if all === 'label' || rest === 'label'}
 						<span class="pipVal">
 							{#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{@html formatter(
-								getValueFromIndex(i,min,max,pipStep,step),
+								getValueFromIndex(i, min, max, pipStep, step),
 								i,
-								valueAsPercent(getValueFromIndex(i,min,max,pipStep,step), min, max, precision)
+								valueAsPercent(getValueFromIndex(i, min, max, pipStep, step), min, max, precision)
 							)}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
 						</span>
 					{/if}

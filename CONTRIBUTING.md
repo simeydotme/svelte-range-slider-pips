@@ -1,4 +1,3 @@
-
 # What can I contribute?
 
 ## 🌟 suggestions/requests for new features or changes
@@ -19,6 +18,6 @@ When making changes/edits to the code you should use the `/test/` folder and che
 
 ## 🧪 help with creating a proper test-suite
 
-I am considering how to add a test-suite as this component has a lot of different options and possible outcomes. I am not currently familiar with how to do this in Svelte, so any help/advice is appreciated. 
+I am considering how to add a test-suite as this component has a lot of different options and possible outcomes. I am not currently familiar with how to do this in Svelte, so any help/advice is appreciated.
 
 **The main goal would be to make it super simple to setup and run / expand for anyone contributing, and I wouldn't accept if it seems obtuse.**

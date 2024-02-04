@@ -1,10 +1,9 @@
 ---
 name: Feature Request
 about: Submit a request for a feature to be added
-title: "[feature] ..."
+title: '[feature] ...'
 labels: feature request, investigating
 assignees: ''
-
 ---
 
 **Describe the feature**

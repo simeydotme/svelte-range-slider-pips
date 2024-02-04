@@ -8,13 +8,13 @@ export default defineConfig({
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	},
 	server: {
-    fs: {
-      allow: [
-        // search up for workspace root
-        searchForWorkspaceRoot(process.cwd()),
-        // your custom rules
-        '/dist',
-      ],
-    },
-  }
+		fs: {
+			allow: [
+				// search up for workspace root
+				searchForWorkspaceRoot(process.cwd()),
+				// your custom rules
+				'/dist'
+			]
+		}
+	}
 });

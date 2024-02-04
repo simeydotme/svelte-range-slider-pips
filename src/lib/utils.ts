@@ -1,4 +1,4 @@
-import type { NormalisedClient } from "./types.js";
+import type { NormalisedClient } from './types.js';
 
 /**
  * make sure the value is coerced to a float value
@@ -132,27 +132,27 @@ export const elementIndex = (el: Element | null) => {
  * @returns {boolean} true if the value is in the range
  */
 export const isInRange = (value: number, range: number[], type: string | boolean) => {
-	if (type === "min") {
+	if (type === 'min') {
 		// if the range is 'min', then we're checking if the value is above the min value
 		return range[0] > value;
-	} else if (type === "max") {
+	} else if (type === 'max') {
 		// if the range is 'max', then we're checking if the value is below the max value
 		return range[0] < value;
 	} else if (type) {
 		// if the range is a boolean of true, then we're checking if the value is in the range
 		return range[0] < value && range[1] > value;
 	}
-}
+};
 
 /**
  * helper to check if the given value is selected
  * @param value the value to check if is selected
  * @param values the values to check against
- * @param precision the precision to check against 
+ * @param precision the precision to check against
  * @returns {boolean} true if the value is selected
  */
-export const isSelected = (value : number, values : number[], precision : number = 2) => {
-	return values.some((v) => coerceFloat(v, precision) === coerceFloat(value,precision));
+export const isSelected = (value: number, values: number[], precision: number = 2) => {
+	return values.some((v) => coerceFloat(v, precision) === coerceFloat(value, precision));
 };
 
 /**
@@ -160,11 +160,17 @@ export const isSelected = (value : number, values : number[], precision : number
  * and the step of the range slider
  * @param index  the index of the pip
  * @param min  the minimum value of the range slider
- * @param max the maximum value of the range slider 
- * @param pipStep the step of the pips 
- * @param step the step of the range slider 
- * @returns {number} the value of the pip 
+ * @param max the maximum value of the range slider
+ * @param pipStep the step of the pips
+ * @param step the step of the range slider
+ * @returns {number} the value of the pip
  */
-export const getValueFromIndex = (index: number, min: number, max: number, pipStep: number, step: number) => {
+export const getValueFromIndex = (
+	index: number,
+	min: number,
+	max: number,
+	pipStep: number,
+	step: number
+) => {
 	return coerceFloat(min + index * step * pipStep);
 };

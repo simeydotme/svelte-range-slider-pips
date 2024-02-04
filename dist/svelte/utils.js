@@ -116,11 +116,11 @@ export const elementIndex = (el) => {
  * @returns {boolean} true if the value is in the range
  */
 export const isInRange = (value, range, type) => {
-    if (type === "min") {
+    if (type === 'min') {
         // if the range is 'min', then we're checking if the value is above the min value
         return range[0] > value;
     }
-    else if (type === "max") {
+    else if (type === 'max') {
         // if the range is 'max', then we're checking if the value is below the max value
         return range[0] < value;
     }

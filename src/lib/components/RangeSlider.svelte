@@ -9,13 +9,9 @@
 		alignValueToStep,
 		pureText,
 		normalisedClient,
-		elementIndex,
+		elementIndex
 	} from '$lib/utils.js';
-	import type { 
-		Pip, 
-		Formatter, 
-		NormalisedClient 
-	} from '$lib/types.js';
+	import type { Pip, Formatter, NormalisedClient } from '$lib/types.js';
 
 	import RangePips from './RangePips.svelte';
 
