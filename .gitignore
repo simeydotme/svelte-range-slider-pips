@@ -2,7 +2,6 @@
 .astro
 node_modules
 /build
-/dist
 /docs
 /tests/**/build
 /tests/**/dist
