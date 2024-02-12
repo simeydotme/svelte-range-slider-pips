@@ -2,7 +2,7 @@
 	import svelteLogo from './assets/svelte.svg';
 	import viteLogo from '/vite.svg';
 	import Counter from './lib/Counter.svelte';
-	import { RangeSlider } from 'range-slider-pips';
+	import { RangeSlider } from 'svelte-range-slider-pips';
 
 	let value = 5;
 </script>

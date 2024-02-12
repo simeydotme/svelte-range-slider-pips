@@ -8,7 +8,7 @@
 		"start": "serve ."
 	},
 	"devDependencies": {
-		"range-slider-pips": "file:../..",
+		"svelte-range-slider-pips": "file:../..",
 		"serve": "^14.2.1"
 	}
 }
