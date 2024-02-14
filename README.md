@@ -64,7 +64,7 @@ Assuming you have a Svelte app up and running;
 
 ```html
 <script>
-	import RangeSlider from 'svelte-range-slider-pips';
+  import RangeSlider from 'svelte-range-slider-pips';
 </script>
 
 <RangeSlider values="{[50]}" pips />
@@ -82,10 +82,10 @@ with a regular `<script>` tag. This should even work with jQuery.
 <div id="my-slider"></div>
 
 <script>
-	var mySlider = new RangeSliderPips({
-		target: document.querySelector('#my-slider'),
-		props: { values: [50], pips: true }
-	});
+  var mySlider = new RangeSliderPips({
+    target: document.querySelector('#my-slider'),
+    props: { values: [50], pips: true }
+  });
 </script>
 ```
 
@@ -98,8 +98,8 @@ want to use js imports (`import`)
 import RangeSlider from './node_modules/svelte-range-slider-pips/dist/svelte-range-slider-pips.mjs';
 
 var mySlider = new RangeSlider({
-	target: node, // js reference to a DOM element
-	props: { values: [50], pips: true }
+  target: node, // js reference to a DOM element
+  props: { values: [50], pips: true }
 });
 ```
 

@@ -7,7 +7,7 @@ import type { NormalisedClient } from './types.js';
  * @return {number} a float version of the input
  **/
 export const coerceFloat = (value: number | string, precision: number = 2) => {
-	return parseFloat((+value).toFixed(precision));
+  return parseFloat((+value).toFixed(precision));
 };
 
 /**
@@ -19,8 +19,8 @@ export const coerceFloat = (value: number | string, precision: number = 2) => {
  * @return {number} the value after it's been clamped
  **/
 export const clampValue = function (value: number, min: number, max: number) {
-	// return the min/max if outside of that range
-	return value <= min ? min : value >= max ? max : value;
+  // return the min/max if outside of that range
+  return value <= min ? min : value >= max ? max : value;
 };
 
 /**
@@ -33,19 +33,19 @@ export const clampValue = function (value: number, min: number, max: number) {
  * @return {number} the percentage value
  **/
 export const valueAsPercent = function (
-	value: number,
-	min: number,
-	max: number,
-	precision: number = 2
+  value: number,
+  min: number,
+  max: number,
+  precision: number = 2
 ) {
-	let percent = ((value - min) / (max - min)) * 100;
-	if (isNaN(percent) || percent <= 0) {
-		return 0;
-	} else if (percent >= 100) {
-		return 100;
-	} else {
-		return coerceFloat(percent, precision);
-	}
+  let percent = ((value - min) / (max - min)) * 100;
+  if (isNaN(percent) || percent <= 0) {
+    return 0;
+  } else if (percent >= 100) {
+    return 100;
+  } else {
+    return coerceFloat(percent, precision);
+  }
 };
 
 /**
@@ -59,34 +59,34 @@ export const valueAsPercent = function (
  * @return {number} the value after it's been aligned
  **/
 export const alignValueToStep = function (
-	value: number,
-	min: number,
-	max: number,
-	step: number,
-	precision: number = 2
+  value: number,
+  min: number,
+  max: number,
+  step: number,
+  precision: number = 2
 ) {
-	// sanity check for performance
-	if (value <= min) {
-		return coerceFloat(min, precision);
-	} else if (value >= max) {
-		return coerceFloat(max, precision);
-	} else {
-		value = coerceFloat(value, precision);
-	}
-	// find the middle-point between steps
-	// and see if the value is closer to the
-	// next step, or previous step
-	let remainder = (value - min) % step;
-	let aligned = value - remainder;
-	if (Math.abs(remainder) * 2 >= step) {
-		aligned += remainder > 0 ? step : -step;
-	}
-	// make sure the value is within acceptable limits
-	aligned = clampValue(aligned, min, max);
-	// make sure the returned value is set to the precision desired
-	// this is also because javascript often returns weird floats
-	// when dealing with odd numbers and percentages
-	return coerceFloat(aligned, precision);
+  // sanity check for performance
+  if (value <= min) {
+    return coerceFloat(min, precision);
+  } else if (value >= max) {
+    return coerceFloat(max, precision);
+  } else {
+    value = coerceFloat(value, precision);
+  }
+  // find the middle-point between steps
+  // and see if the value is closer to the
+  // next step, or previous step
+  let remainder = (value - min) % step;
+  let aligned = value - remainder;
+  if (Math.abs(remainder) * 2 >= step) {
+    aligned += remainder > 0 ? step : -step;
+  }
+  // make sure the value is within acceptable limits
+  aligned = clampValue(aligned, min, max);
+  // make sure the returned value is set to the precision desired
+  // this is also because javascript often returns weird floats
+  // when dealing with odd numbers and percentages
+  return coerceFloat(aligned, precision);
 };
 
 /**
@@ -95,7 +95,7 @@ export const alignValueToStep = function (
  * @return {string} the text from the input
  */
 export const pureText = (possibleHtml: string = '') => {
-	return `${possibleHtml}`.replace(/<[^>]*>/g, '');
+  return `${possibleHtml}`.replace(/<[^>]*>/g, '');
 };
 
 /**
@@ -105,9 +105,9 @@ export const pureText = (possibleHtml: string = '') => {
  * @returns {object} normalised event client object (x,y)
  **/
 export const normalisedClient = (event: TouchEvent | MouseEvent) => {
-	const { clientX, clientY } =
-		'touches' in event ? event.touches[0] || event.changedTouches[0] : event;
-	return { x: clientX, y: clientY } as NormalisedClient;
+  const { clientX, clientY } =
+    'touches' in event ? event.touches[0] || event.changedTouches[0] : event;
+  return { x: clientX, y: clientY } as NormalisedClient;
 };
 
 /**
@@ -116,12 +116,12 @@ export const normalisedClient = (event: TouchEvent | MouseEvent) => {
  * @returns {number} the index of the input element
  **/
 export const elementIndex = (el: Element | null) => {
-	if (!el) return -1;
-	var i = 0;
-	while ((el = el.previousElementSibling)) {
-		i++;
-	}
-	return i;
+  if (!el) return -1;
+  var i = 0;
+  while ((el = el.previousElementSibling)) {
+    i++;
+  }
+  return i;
 };
 
 /**
@@ -132,16 +132,16 @@ export const elementIndex = (el: Element | null) => {
  * @returns {boolean} true if the value is in the range
  */
 export const isInRange = (value: number, range: number[], type: string | boolean) => {
-	if (type === 'min') {
-		// if the range is 'min', then we're checking if the value is above the min value
-		return range[0] > value;
-	} else if (type === 'max') {
-		// if the range is 'max', then we're checking if the value is below the max value
-		return range[0] < value;
-	} else if (type) {
-		// if the range is a boolean of true, then we're checking if the value is in the range
-		return range[0] < value && range[1] > value;
-	}
+  if (type === 'min') {
+    // if the range is 'min', then we're checking if the value is above the min value
+    return range[0] > value;
+  } else if (type === 'max') {
+    // if the range is 'max', then we're checking if the value is below the max value
+    return range[0] < value;
+  } else if (type) {
+    // if the range is a boolean of true, then we're checking if the value is in the range
+    return range[0] < value && range[1] > value;
+  }
 };
 
 /**
@@ -152,7 +152,7 @@ export const isInRange = (value: number, range: number[], type: string | boolean
  * @returns {boolean} true if the value is selected
  */
 export const isSelected = (value: number, values: number[], precision: number = 2) => {
-	return values.some((v) => coerceFloat(v, precision) === coerceFloat(value, precision));
+  return values.some((v) => coerceFloat(v, precision) === coerceFloat(value, precision));
 };
 
 /**
@@ -166,11 +166,11 @@ export const isSelected = (value: number, values: number[], precision: number = 
  * @returns {number} the value of the pip
  */
 export const getValueFromIndex = (
-	index: number,
-	min: number,
-	max: number,
-	pipStep: number,
-	step: number
+  index: number,
+  min: number,
+  max: number,
+  pipStep: number,
+  step: number
 ) => {
-	return coerceFloat(min + index * step * pipStep);
+  return coerceFloat(min + index * step * pipStep);
 };

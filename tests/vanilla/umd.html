@@ -1,32 +1,32 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>test</title>
-		<link
-			rel="stylesheet"
-			href="./node_modules/svelte-range-slider-pips/dist/range-slider-pips.css"
-		/>
-		<script src="./node_modules/svelte-range-slider-pips/dist/range-slider-pips.js"></script>
-		<script>
-			document.onreadystatechange = function () {
-				if (document.readyState === 'complete') {
-					const slider = document.querySelector('.my-slider');
-					const rangeSliderPips = new RangeSliderPips({
-						target: slider,
-						props: {
-							pips: true,
-							all: 'label',
-							float: true
-						}
-					});
-				}
-			};
-		</script>
-	</head>
-	<body>
-		<h1>Testing loading JS (umd) script</h1>
-		<div class="my-slider"></div>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test</title>
+    <link
+      rel="stylesheet"
+      href="./node_modules/svelte-range-slider-pips/dist/range-slider-pips.css"
+    />
+    <script src="./node_modules/svelte-range-slider-pips/dist/range-slider-pips.js"></script>
+    <script>
+      document.onreadystatechange = function () {
+        if (document.readyState === 'complete') {
+          const slider = document.querySelector('.my-slider');
+          const rangeSliderPips = new RangeSliderPips({
+            target: slider,
+            props: {
+              pips: true,
+              all: 'label',
+              float: true
+            }
+          });
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <h1>Testing loading JS (umd) script</h1>
+    <div class="my-slider"></div>
+  </body>
 </html>

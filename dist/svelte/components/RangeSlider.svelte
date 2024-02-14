@@ -386,99 +386,99 @@ function ariaLabelFormatter(value2, index) {
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-	{id}
-	bind:this={slider}
-	role="none"
-	class="rangeSlider"
-	class:range
-	class:disabled
-	class:hoverable
-	class:vertical
-	class:reversed
-	class:focus
-	class:min={range === 'min'}
-	class:max={range === 'max'}
-	class:pips
-	class:pip-labels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
-	on:mousedown={sliderInteractStart}
-	on:mouseup={sliderInteractEnd}
-	on:touchstart|preventDefault={sliderInteractStart}
-	on:touchend|preventDefault={sliderInteractEnd}
+  {id}
+  bind:this={slider}
+  role="none"
+  class="rangeSlider"
+  class:range
+  class:disabled
+  class:hoverable
+  class:vertical
+  class:reversed
+  class:focus
+  class:min={range === 'min'}
+  class:max={range === 'max'}
+  class:pips
+  class:pip-labels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
+  on:mousedown={sliderInteractStart}
+  on:mouseup={sliderInteractEnd}
+  on:touchstart|preventDefault={sliderInteractStart}
+  on:touchend|preventDefault={sliderInteractEnd}
 >
-	{#each values as value, index}
-		{@const zindex = `z-index: ${activeHandle === index ? 3 : 2};`}
-		{@const handlePos = `${orientationStart}: ${$springPositions[index]}%;`}
-		<span
-			role="slider"
-			class="rangeHandle"
-			class:active={focus && activeHandle === index}
-			class:press={handlePressed && activeHandle === index}
-			data-handle={index}
-			on:blur={sliderBlurHandle}
-			on:focus={sliderFocusHandle}
-			on:keydown={sliderKeydown}
-			style="{handlePos} {zindex}"
-			aria-label={ariaLabels[index]}
-			aria-valuemin={range === true && index === 1 ? values[0] : min}
-			aria-valuemax={range === true && index === 0 ? values[1] : max}
-			aria-valuenow={value}
-			aria-valuetext={ariaLabelFormatter(value, index)}
-			aria-orientation={vertical ? 'vertical' : 'horizontal'}
-			aria-disabled={disabled}
-			tabindex={disabled ? -1 : 0}
-		>
-			<span class="rangeNub" />
-			{#if float}
-				{@const percent = valueAsPercent(value, min, max, precision)}
-				{@const formattedValue = handleFormatter(value, index, percent)}
-				<span class="rangeFloat">
-					{#if prefix}<span class="rangeFloat-prefix">{prefix}</span
-						>{/if}{@html formattedValue}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span
-						>{/if}
-				</span>
-			{/if}
-		</span>
-	{/each}
-	{#if range}
-		<span
-			class="rangeBar"
-			style="{orientationStart}: {rangeStart($springPositions)}%; 
+  {#each values as value, index}
+    {@const zindex = `z-index: ${activeHandle === index ? 3 : 2};`}
+    {@const handlePos = `${orientationStart}: ${$springPositions[index]}%;`}
+    <span
+      role="slider"
+      class="rangeHandle"
+      class:active={focus && activeHandle === index}
+      class:press={handlePressed && activeHandle === index}
+      data-handle={index}
+      on:blur={sliderBlurHandle}
+      on:focus={sliderFocusHandle}
+      on:keydown={sliderKeydown}
+      style="{handlePos} {zindex}"
+      aria-label={ariaLabels[index]}
+      aria-valuemin={range === true && index === 1 ? values[0] : min}
+      aria-valuemax={range === true && index === 0 ? values[1] : max}
+      aria-valuenow={value}
+      aria-valuetext={ariaLabelFormatter(value, index)}
+      aria-orientation={vertical ? 'vertical' : 'horizontal'}
+      aria-disabled={disabled}
+      tabindex={disabled ? -1 : 0}
+    >
+      <span class="rangeNub" />
+      {#if float}
+        {@const percent = valueAsPercent(value, min, max, precision)}
+        {@const formattedValue = handleFormatter(value, index, percent)}
+        <span class="rangeFloat">
+          {#if prefix}<span class="rangeFloat-prefix">{prefix}</span
+            >{/if}{@html formattedValue}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span
+            >{/if}
+        </span>
+      {/if}
+    </span>
+  {/each}
+  {#if range}
+    <span
+      class="rangeBar"
+      style="{orientationStart}: {rangeStart($springPositions)}%; 
              {orientationEnd}: {rangeEnd($springPositions)}%;"
-		/>
-	{/if}
-	{#if pips}
-		<RangePips
-			{values}
-			{min}
-			{max}
-			{step}
-			{range}
-			{vertical}
-			{reversed}
-			{orientationStart}
-			{hoverable}
-			{disabled}
-			{all}
-			{first}
-			{last}
-			{rest}
-			{pipstep}
-			{prefix}
-			{suffix}
-			{formatter}
-			{precision}
-			{focus}
-			{moveHandle}
-		/>
-	{/if}
+    />
+  {/if}
+  {#if pips}
+    <RangePips
+      {values}
+      {min}
+      {max}
+      {step}
+      {range}
+      {vertical}
+      {reversed}
+      {orientationStart}
+      {hoverable}
+      {disabled}
+      {all}
+      {first}
+      {last}
+      {rest}
+      {pipstep}
+      {prefix}
+      {suffix}
+      {formatter}
+      {precision}
+      {focus}
+      {moveHandle}
+    />
+  {/if}
 </div>
 
 <svelte:window
-	on:mousedown={bodyInteractStart}
-	on:touchstart={bodyInteractStart}
-	on:mousemove={bodyInteract}
-	on:touchmove={bodyInteract}
-	on:mouseup={bodyMouseUp}
-	on:touchend={bodyTouchEnd}
-	on:keydown={bodyKeyDown}
+  on:mousedown={bodyInteractStart}
+  on:touchstart={bodyInteractStart}
+  on:mousemove={bodyInteract}
+  on:touchmove={bodyInteract}
+  on:mouseup={bodyMouseUp}
+  on:touchend={bodyTouchEnd}
+  on:keydown={bodyKeyDown}
 />

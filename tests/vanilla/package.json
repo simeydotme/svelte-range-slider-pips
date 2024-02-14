@@ -1,14 +1,14 @@
 {
-	"name": "vanilla-js-esm-test",
-	"private": true,
-	"version": "1.0.0",
-	"description": "Test of vanilla JS with ES modules",
-	"main": "index.html",
-	"scripts": {
-		"start": "serve ."
-	},
-	"devDependencies": {
-		"svelte-range-slider-pips": "file:../..",
-		"serve": "^14.2.1"
-	}
+  "name": "vanilla-js-esm-test",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Test of vanilla JS with ES modules",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve ."
+  },
+  "devDependencies": {
+    "svelte-range-slider-pips": "file:../..",
+    "serve": "^14.2.1"
+  }
 }

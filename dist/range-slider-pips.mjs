@@ -3,7 +3,7 @@
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * Project home: https://simeydotme.github.io/svelte-range-slider-pips/
  * © 2024 Simon Goellner <simey.me@gmail.com> ~ MPL-2.0 License
- * Published: 12/2/2024
+ * Published: 15/2/2024
  */
 /** @returns {void} */
 function noop() {}
@@ -1502,7 +1502,7 @@ function get_each_context$1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (64:1) {#if (all && first !== false) || first}
+// (64:2) {#if (all && first !== false) || first}
 function create_if_block_9(ctx) {
 	let span;
 	let span_style_value;
@@ -1570,7 +1570,7 @@ function create_if_block_9(ctx) {
 	};
 }
 
-// (77:3) {#if all === 'label' || first === 'label'}
+// (77:6) {#if all === 'label' || first === 'label'}
 function create_if_block_10(ctx) {
 	let span;
 	let if_block0_anchor;
@@ -1639,7 +1639,7 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (79:5) {#if prefix}
+// (79:10) {#if prefix}
 function create_if_block_12(ctx) {
 	let span;
 	let t;
@@ -1665,7 +1665,7 @@ function create_if_block_12(ctx) {
 	};
 }
 
-// (83:7) {#if suffix}
+// (83:12) {#if suffix}
 function create_if_block_11(ctx) {
 	let span;
 	let t;
@@ -1691,7 +1691,7 @@ function create_if_block_11(ctx) {
 	};
 }
 
-// (89:1) {#if (all && rest !== false) || rest}
+// (89:2) {#if (all && rest !== false) || rest}
 function create_if_block_4$1(ctx) {
 	let each_1_anchor;
 	let each_value = ensure_array_like(Array(/*pipCount*/ ctx[20] + 1));
@@ -1752,7 +1752,7 @@ function create_if_block_4$1(ctx) {
 	};
 }
 
-// (91:3) {#if getValueFromIndex(i, min, max, pipStep, step) !== min && getValueFromIndex(i, min, max, pipStep, step) !== max}
+// (91:6) {#if getValueFromIndex(i, min, max, pipStep, step) !== min && getValueFromIndex(i, min, max, pipStep, step) !== max}
 function create_if_block_5(ctx) {
 	let span;
 	let t;
@@ -1829,7 +1829,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (112:5) {#if all === 'label' || rest === 'label'}
+// (112:10) {#if all === 'label' || rest === 'label'}
 function create_if_block_6(ctx) {
 	let span;
 	let if_block0_anchor;
@@ -1898,7 +1898,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (114:7) {#if prefix}
+// (114:14) {#if prefix}
 function create_if_block_8(ctx) {
 	let span;
 	let t;
@@ -1924,7 +1924,7 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (118:9) {#if suffix}
+// (118:16) {#if suffix}
 function create_if_block_7(ctx) {
 	let span;
 	let t;
@@ -1950,7 +1950,7 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (90:2) {#each Array(pipCount + 1) as _, i}
+// (90:4) {#each Array(pipCount + 1) as _, i}
 function create_each_block$1(ctx) {
 	let show_if = getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]) !== /*min*/ ctx[1] && getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]) !== /*max*/ ctx[2];
 	let if_block_anchor;
@@ -1991,7 +1991,7 @@ function create_each_block$1(ctx) {
 	};
 }
 
-// (126:1) {#if (all && last !== false) || last}
+// (126:2) {#if (all && last !== false) || last}
 function create_if_block$1(ctx) {
 	let span;
 	let span_style_value;
@@ -2059,7 +2059,7 @@ function create_if_block$1(ctx) {
 	};
 }
 
-// (139:3) {#if all === 'label' || last === 'label'}
+// (139:6) {#if all === 'label' || last === 'label'}
 function create_if_block_1$1(ctx) {
 	let span;
 	let if_block0_anchor;
@@ -2128,7 +2128,7 @@ function create_if_block_1$1(ctx) {
 	};
 }
 
-// (141:5) {#if prefix}
+// (141:10) {#if prefix}
 function create_if_block_3$1(ctx) {
 	let span;
 	let t;
@@ -2154,7 +2154,7 @@ function create_if_block_3$1(ctx) {
 	};
 }
 
-// (145:7) {#if suffix}
+// (145:12) {#if suffix}
 function create_if_block_2$1(ctx) {
 	let span;
 	let t;
@@ -2727,7 +2727,7 @@ function get_if_ctx(ctx) {
 	return child_ctx;
 }
 
-// (565:3) {#if float}
+// (565:6) {#if float}
 function create_if_block_2(ctx) {
 	let span;
 	let if_block0_anchor;
@@ -2796,7 +2796,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (569:5) {#if prefix}
+// (569:10) {#if prefix}
 function create_if_block_4(ctx) {
 	let span;
 	let t;
@@ -2822,7 +2822,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (570:34) {#if suffix}
+// (570:40) {#if suffix}
 function create_if_block_3(ctx) {
 	let span;
 	let t;
@@ -2848,7 +2848,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (542:1) {#each values as value, index}
+// (542:2) {#each values as value, index}
 function create_each_block(ctx) {
 	let span1;
 	let span0;
@@ -2984,7 +2984,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (576:1) {#if range}
+// (576:2) {#if range}
 function create_if_block_1(ctx) {
 	let span;
 	let span_style_value;
@@ -3011,7 +3011,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (583:1) {#if pips}
+// (583:2) {#if pips}
 function create_if_block(ctx) {
 	let rangepips;
 	let current;

@@ -1,15 +1,15 @@
 {
-	"name": "jquery-test",
-	"private": true,
-	"version": "1.0.0",
-	"description": "Test of jQuery execution",
-	"main": "index.html",
-	"scripts": {
-		"start": "serve ."
-	},
-	"devDependencies": {
-		"jquery": "^3.7.1",
-		"range-slider-pips": "file:../..",
-		"serve": "^14.2.1"
-	}
+  "name": "jquery-test",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Test of jQuery execution",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve ."
+  },
+  "devDependencies": {
+    "jquery": "^3.7.1",
+    "range-slider-pips": "file:../..",
+    "serve": "^14.2.1"
+  }
 }

@@ -1,683 +1,683 @@
 <script lang="ts">
-	import './RangeSlider.css';
-	import { type SpringOpts, type Spring, spring } from 'svelte/motion';
-	import { createEventDispatcher } from 'svelte';
-	import {
-		coerceFloat,
-		valueAsPercent,
-		clampValue,
-		alignValueToStep,
-		pureText,
-		normalisedClient,
-		elementIndex
-	} from '$lib/utils.js';
-	import type { Pip, Formatter, NormalisedClient } from '$lib/types.js';
+  import './RangeSlider.css';
+  import { type SpringOpts, type Spring, spring } from 'svelte/motion';
+  import { createEventDispatcher } from 'svelte';
+  import {
+    coerceFloat,
+    valueAsPercent,
+    clampValue,
+    alignValueToStep,
+    pureText,
+    normalisedClient,
+    elementIndex
+  } from '$lib/utils.js';
+  import type { Pip, Formatter, NormalisedClient } from '$lib/types.js';
 
-	import RangePips from './RangePips.svelte';
+  import RangePips from './RangePips.svelte';
 
-	// dom references
-	export let slider: HTMLDivElement | undefined = undefined;
+  // dom references
+  export let slider: HTMLDivElement | undefined = undefined;
 
-	// range slider props
-	export let range: boolean | 'min' | 'max' = false;
-	export let pushy: boolean = false;
-	export let min: number = 0;
-	export let max: number = 100;
-	export let step: number = 1;
-	export let values: number[] = [(max + min) / 2];
-	export let value: number = values[0];
-	export let vertical: boolean = false;
-	export let float: boolean = false;
-	export let reversed: boolean = false;
-	export let hoverable: boolean = true;
-	export let disabled: boolean = false;
+  // range slider props
+  export let range: boolean | 'min' | 'max' = false;
+  export let pushy: boolean = false;
+  export let min: number = 0;
+  export let max: number = 100;
+  export let step: number = 1;
+  export let values: number[] = [(max + min) / 2];
+  export let value: number = values[0];
+  export let vertical: boolean = false;
+  export let float: boolean = false;
+  export let reversed: boolean = false;
+  export let hoverable: boolean = true;
+  export let disabled: boolean = false;
 
-	// range pips / values props
-	export let pips: boolean = false;
-	export let pipstep: number | undefined = undefined;
-	export let all: Pip = true;
-	export let first: Pip = undefined;
-	export let last: Pip = undefined;
-	export let rest: Pip = undefined;
+  // range pips / values props
+  export let pips: boolean = false;
+  export let pipstep: number | undefined = undefined;
+  export let all: Pip = true;
+  export let first: Pip = undefined;
+  export let last: Pip = undefined;
+  export let rest: Pip = undefined;
 
-	// formatting props
-	export let id: string | undefined = undefined;
-	export let prefix: string = '';
-	export let suffix: string = '';
-	export let formatter: Formatter = (v, i, p) => v;
-	export let handleFormatter = formatter;
-	export let ariaLabels: string[] = [];
+  // formatting props
+  export let id: string | undefined = undefined;
+  export let prefix: string = '';
+  export let suffix: string = '';
+  export let formatter: Formatter = (v, i, p) => v;
+  export let handleFormatter = formatter;
+  export let ariaLabels: string[] = [];
 
-	// stylistic props
-	export let precision: number = 2;
-	export let springValues: SpringOpts = { stiffness: 0.15, damping: 0.4 };
+  // stylistic props
+  export let precision: number = 2;
+  export let springValues: SpringOpts = { stiffness: 0.15, damping: 0.4 };
 
-	// prepare dispatched events
-	const dispatch = createEventDispatcher();
+  // prepare dispatched events
+  const dispatch = createEventDispatcher();
 
-	// state management
-	let valueLength = 0;
-	let focus = false;
-	let handleActivated = false;
-	let handlePressed = false;
-	let keyboardActive = false;
-	let activeHandle = values.length - 1;
-	let startValue: number;
-	let previousValue: number;
+  // state management
+  let valueLength = 0;
+  let focus = false;
+  let handleActivated = false;
+  let handlePressed = false;
+  let keyboardActive = false;
+  let activeHandle = values.length - 1;
+  let startValue: number;
+  let previousValue: number;
 
-	// copy the initial values in to a spring function which
-	// will update every time the values array is modified
-	let springPositions: Spring<number[]>;
+  // copy the initial values in to a spring function which
+  // will update every time the values array is modified
+  let springPositions: Spring<number[]>;
 
-	// check that "values" is an array, or set it as array
-	const updateValues = () => {
-		checkValuesIsArray();
-		// sync values with value
-		if (values[0] !== value) {
-			values[0] = value;
-		}
-	};
+  // check that "values" is an array, or set it as array
+  const updateValues = () => {
+    checkValuesIsArray();
+    // sync values with value
+    if (values[0] !== value) {
+      values[0] = value;
+    }
+  };
 
-	// check that "value" is a number, or set it as the average
-	const updateValue = () => {
-		checkValueIsNumber();
-		// sync value with values
-		if (value !== values[0]) {
-			value = values[0];
-		}
-	};
+  // check that "value" is a number, or set it as the average
+  const updateValue = () => {
+    checkValueIsNumber();
+    // sync value with values
+    if (value !== values[0]) {
+      value = values[0];
+    }
+  };
 
-	const checkValueIsNumber = () => {
-		if (typeof value !== 'number') {
-			value = (max + min) / 2;
-			console.error("'value' prop should be a Number");
-		}
-	};
+  const checkValueIsNumber = () => {
+    if (typeof value !== 'number') {
+      value = (max + min) / 2;
+      console.error("'value' prop should be a Number");
+    }
+  };
 
-	const checkValuesIsArray = () => {
-		if (!Array.isArray(values)) {
-			values = [value];
-			console.error("'values' prop should be an Array");
-		}
-	};
+  const checkValuesIsArray = () => {
+    if (!Array.isArray(values)) {
+      values = [value];
+      console.error("'values' prop should be an Array");
+    }
+  };
 
-	const checkAriaLabels = () => {
-		if (values.length > 1 && !Array.isArray(ariaLabels)) {
-			console.warn(`'ariaLabels' prop should be an Array`);
-		}
-	};
+  const checkAriaLabels = () => {
+    if (values.length > 1 && !Array.isArray(ariaLabels)) {
+      console.warn(`'ariaLabels' prop should be an Array`);
+    }
+  };
 
-	// fixup the value/values at render
-	checkValueIsNumber();
-	checkValuesIsArray();
+  // fixup the value/values at render
+  checkValueIsNumber();
+  checkValuesIsArray();
 
-	// keep value and values in sync with each other
-	$: value, updateValues();
-	$: values, updateValue();
-	$: ariaLabels, checkAriaLabels();
+  // keep value and values in sync with each other
+  $: value, updateValues();
+  $: values, updateValue();
+  $: ariaLabels, checkAriaLabels();
 
-	$: {
-		// trim the range so it remains as a min/max (only 2 handles)
-		// and also align the handles to the steps
-		const trimmedAlignedValues = trimRange(
-			values.map((v) => alignValueToStep(v, min, max, step, precision))
-		);
-		if (
-			!(values.length === trimmedAlignedValues.length) ||
-			!values.every(
-				(element, index) => coerceFloat(element, precision) === trimmedAlignedValues[index]
-			)
-		) {
-			values = trimmedAlignedValues;
-		}
+  $: {
+    // trim the range so it remains as a min/max (only 2 handles)
+    // and also align the handles to the steps
+    const trimmedAlignedValues = trimRange(
+      values.map((v) => alignValueToStep(v, min, max, step, precision))
+    );
+    if (
+      !(values.length === trimmedAlignedValues.length) ||
+      !values.every(
+        (element, index) => coerceFloat(element, precision) === trimmedAlignedValues[index]
+      )
+    ) {
+      values = trimmedAlignedValues;
+    }
 
-		// check if the valueLength (length of values[]) has changed,
-		// because if so we need to re-seed the spring function with the
-		// new values array.
-		if (valueLength !== values.length) {
-			// set the initial spring values when the slider initialises,
-			// or when values array length has changed
-			springPositions = spring(
-				values.map((v) => valueAsPercent(v, min, max)),
-				springValues
-			);
-		} else {
-			// update the value of the spring function for animated handles
-			// whenever the values has updated
-			springPositions.set(values.map((v) => valueAsPercent(v, min, max)));
-		}
-		// set the valueLength for the next check
-		valueLength = values.length;
-	}
+    // check if the valueLength (length of values[]) has changed,
+    // because if so we need to re-seed the spring function with the
+    // new values array.
+    if (valueLength !== values.length) {
+      // set the initial spring values when the slider initialises,
+      // or when values array length has changed
+      springPositions = spring(
+        values.map((v) => valueAsPercent(v, min, max)),
+        springValues
+      );
+    } else {
+      // update the value of the spring function for animated handles
+      // whenever the values has updated
+      springPositions.set(values.map((v) => valueAsPercent(v, min, max)));
+    }
+    // set the valueLength for the next check
+    valueLength = values.length;
+  }
 
-	/**
-	 * the orientation of the handles/pips based on the
-	 * input values of vertical and reversed
-	 **/
-	$: orientationStart = vertical ? (reversed ? 'top' : 'bottom') : reversed ? 'right' : 'left';
-	$: orientationEnd = vertical ? (reversed ? 'bottom' : 'top') : reversed ? 'left' : 'right';
+  /**
+   * the orientation of the handles/pips based on the
+   * input values of vertical and reversed
+   **/
+  $: orientationStart = vertical ? (reversed ? 'top' : 'bottom') : reversed ? 'right' : 'left';
+  $: orientationEnd = vertical ? (reversed ? 'bottom' : 'top') : reversed ? 'left' : 'right';
 
-	/**
-	 * check if an element is a handle on the slider
-	 * @param {object} el dom object reference we want to check
-	 * @returns {boolean}
-	 **/
-	function targetIsHandle(el: Element) {
-		if (!slider) return false;
-		const handles = slider.querySelectorAll('.handle');
-		const isHandle = Array.prototype.includes.call(handles, el);
-		const isChild = Array.prototype.some.call(handles, (e) => e.contains(el));
-		return isHandle || isChild;
-	}
+  /**
+   * check if an element is a handle on the slider
+   * @param {object} el dom object reference we want to check
+   * @returns {boolean}
+   **/
+  function targetIsHandle(el: Element) {
+    if (!slider) return false;
+    const handles = slider.querySelectorAll('.handle');
+    const isHandle = Array.prototype.includes.call(handles, el);
+    const isChild = Array.prototype.some.call(handles, (e) => e.contains(el));
+    return isHandle || isChild;
+  }
 
-	/**
-	 * trim the values array based on whether the property
-	 * for 'range' is 'min', 'max', or truthy. This is because we
-	 * do not want more than one handle for a min/max range, and we do
-	 * not want more than two handles for a true range.
-	 * @param {array} values the input values for the rangeSlider
-	 * @return {array} the range array for creating a rangeSlider
-	 **/
-	function trimRange(values: number[]) {
-		if (range === 'min' || range === 'max') {
-			return values.slice(0, 1);
-		} else if (range) {
-			return values.slice(0, 2);
-		} else {
-			return values;
-		}
-	}
+  /**
+   * trim the values array based on whether the property
+   * for 'range' is 'min', 'max', or truthy. This is because we
+   * do not want more than one handle for a min/max range, and we do
+   * not want more than two handles for a true range.
+   * @param {array} values the input values for the rangeSlider
+   * @return {array} the range array for creating a rangeSlider
+   **/
+  function trimRange(values: number[]) {
+    if (range === 'min' || range === 'max') {
+      return values.slice(0, 1);
+    } else if (range) {
+      return values.slice(0, 2);
+    } else {
+      return values;
+    }
+  }
 
-	/**
-	 * helper to return closest handle to user interaction
-	 * @param {object} clientPos the client {x,y} positions to check against
-	 * @return {number} the index of the closest handle to clientPos
-	 **/
-	function getClosestHandle(clientPos: NormalisedClient) {
-		if (!slider) return 0;
-		// first make sure we have the latest dimensions
-		// of the slider, as it may have changed size
-		const dims = slider.getBoundingClientRect();
-		// calculate the interaction position, percent and value
-		let handlePos = 0;
-		let handlePercent = 0;
-		let handleVal = 0;
-		if (vertical) {
-			handlePos = clientPos.y - dims.top;
-			handlePercent = (handlePos / dims.height) * 100;
-			handlePercent = reversed ? handlePercent : 100 - handlePercent;
-		} else {
-			handlePos = clientPos.x - dims.left;
-			handlePercent = (handlePos / dims.width) * 100;
-			handlePercent = reversed ? 100 - handlePercent : handlePercent;
-		}
-		handleVal = ((max - min) / 100) * handlePercent + min;
+  /**
+   * helper to return closest handle to user interaction
+   * @param {object} clientPos the client {x,y} positions to check against
+   * @return {number} the index of the closest handle to clientPos
+   **/
+  function getClosestHandle(clientPos: NormalisedClient) {
+    if (!slider) return 0;
+    // first make sure we have the latest dimensions
+    // of the slider, as it may have changed size
+    const dims = slider.getBoundingClientRect();
+    // calculate the interaction position, percent and value
+    let handlePos = 0;
+    let handlePercent = 0;
+    let handleVal = 0;
+    if (vertical) {
+      handlePos = clientPos.y - dims.top;
+      handlePercent = (handlePos / dims.height) * 100;
+      handlePercent = reversed ? handlePercent : 100 - handlePercent;
+    } else {
+      handlePos = clientPos.x - dims.left;
+      handlePercent = (handlePos / dims.width) * 100;
+      handlePercent = reversed ? 100 - handlePercent : handlePercent;
+    }
+    handleVal = ((max - min) / 100) * handlePercent + min;
 
-		let closest;
+    let closest;
 
-		// if we have a range, and the handles are at the same
-		// position, we want a simple check if the interaction
-		// value is greater than return the second handle
-		if (range === true && values[0] === values[1]) {
-			if (handleVal > values[1]) {
-				return 1;
-			} else {
-				return 0;
-			}
-			// if there are multiple handles, and not a range, then
-			// we sort the handles values, and return the first one closest
-			// to the interaction value
-		} else {
-			closest = values.indexOf(
-				[...values].sort((a, b) => Math.abs(handleVal - a) - Math.abs(handleVal - b))[0]
-			);
-		}
-		return closest;
-	}
+    // if we have a range, and the handles are at the same
+    // position, we want a simple check if the interaction
+    // value is greater than return the second handle
+    if (range === true && values[0] === values[1]) {
+      if (handleVal > values[1]) {
+        return 1;
+      } else {
+        return 0;
+      }
+      // if there are multiple handles, and not a range, then
+      // we sort the handles values, and return the first one closest
+      // to the interaction value
+    } else {
+      closest = values.indexOf(
+        [...values].sort((a, b) => Math.abs(handleVal - a) - Math.abs(handleVal - b))[0]
+      );
+    }
+    return closest;
+  }
 
-	/**
-	 * take the interaction position on the slider, convert
-	 * it to a value on the range, and then send that value
-	 * through to the moveHandle() method to set the active
-	 * handle's position
-	 * @param {object} clientPos the client {x,y} of the interaction
-	 **/
-	function handleInteract(clientPos: NormalisedClient) {
-		if (!slider) return;
-		// first make sure we have the latest dimensions
-		// of the slider, as it may have changed size
-		const dims = slider.getBoundingClientRect();
-		// calculate the interaction position, percent and value
-		let handlePos = 0;
-		let handlePercent = 0;
-		let handleVal = 0;
-		if (vertical) {
-			handlePos = clientPos.y - dims.top;
-			handlePercent = (handlePos / dims.height) * 100;
-			handlePercent = reversed ? handlePercent : 100 - handlePercent;
-		} else {
-			handlePos = clientPos.x - dims.left;
-			handlePercent = (handlePos / dims.width) * 100;
-			handlePercent = reversed ? 100 - handlePercent : handlePercent;
-		}
-		handleVal = ((max - min) / 100) * handlePercent + min;
-		// move handle to the value
-		moveHandle(activeHandle, handleVal);
-	}
+  /**
+   * take the interaction position on the slider, convert
+   * it to a value on the range, and then send that value
+   * through to the moveHandle() method to set the active
+   * handle's position
+   * @param {object} clientPos the client {x,y} of the interaction
+   **/
+  function handleInteract(clientPos: NormalisedClient) {
+    if (!slider) return;
+    // first make sure we have the latest dimensions
+    // of the slider, as it may have changed size
+    const dims = slider.getBoundingClientRect();
+    // calculate the interaction position, percent and value
+    let handlePos = 0;
+    let handlePercent = 0;
+    let handleVal = 0;
+    if (vertical) {
+      handlePos = clientPos.y - dims.top;
+      handlePercent = (handlePos / dims.height) * 100;
+      handlePercent = reversed ? handlePercent : 100 - handlePercent;
+    } else {
+      handlePos = clientPos.x - dims.left;
+      handlePercent = (handlePos / dims.width) * 100;
+      handlePercent = reversed ? 100 - handlePercent : handlePercent;
+    }
+    handleVal = ((max - min) / 100) * handlePercent + min;
+    // move handle to the value
+    moveHandle(activeHandle, handleVal);
+  }
 
-	/**
-	 * move a handle to a specific value, respecting the clamp/align rules
-	 * @param {number} index the index of the handle we want to move
-	 * @param {number} value the value to move the handle to
-	 * @return {number} the value that was moved to (after alignment/clamping)
-	 **/
-	function moveHandle(index: number | null, value: number) {
-		// align & clamp the value so we're not doing extra
-		// calculation on an out-of-range value down below
-		value = alignValueToStep(value, min, max, step, precision);
-		// use the active handle if handle index is not provided
-		if (index === null) {
-			index = activeHandle;
-		}
-		// if this is a range slider perform special checks
-		if (range) {
-			// restrict the handles of a range-slider from
-			// going past one-another unless "pushy" is true
-			if (index === 0 && value > values[1]) {
-				if (pushy) {
-					values[1] = value;
-				} else {
-					value = values[1];
-				}
-			} else if (index === 1 && value < values[0]) {
-				if (pushy) {
-					values[0] = value;
-				} else {
-					value = values[0];
-				}
-			}
-		}
+  /**
+   * move a handle to a specific value, respecting the clamp/align rules
+   * @param {number} index the index of the handle we want to move
+   * @param {number} value the value to move the handle to
+   * @return {number} the value that was moved to (after alignment/clamping)
+   **/
+  function moveHandle(index: number | null, value: number) {
+    // align & clamp the value so we're not doing extra
+    // calculation on an out-of-range value down below
+    value = alignValueToStep(value, min, max, step, precision);
+    // use the active handle if handle index is not provided
+    if (index === null) {
+      index = activeHandle;
+    }
+    // if this is a range slider perform special checks
+    if (range) {
+      // restrict the handles of a range-slider from
+      // going past one-another unless "pushy" is true
+      if (index === 0 && value > values[1]) {
+        if (pushy) {
+          values[1] = value;
+        } else {
+          value = values[1];
+        }
+      } else if (index === 1 && value < values[0]) {
+        if (pushy) {
+          values[0] = value;
+        } else {
+          value = values[0];
+        }
+      }
+    }
 
-		// if the value has changed, update it
-		if (values[index] !== value) {
-			values[index] = value;
-		}
+    // if the value has changed, update it
+    if (values[index] !== value) {
+      values[index] = value;
+    }
 
-		// fire the change event when the handle moves,
-		// and store the previous value for the next time
-		if (previousValue !== value) {
-			eChange();
-			previousValue = value;
-		}
-		return value;
-	}
+    // fire the change event when the handle moves,
+    // and store the previous value for the next time
+    if (previousValue !== value) {
+      eChange();
+      previousValue = value;
+    }
+    return value;
+  }
 
-	/**
-	 * helper to find the beginning range value for use with css style
-	 * @param {array} values the input values for the rangeSlider
-	 * @return {number} the beginning of the range
-	 **/
-	function rangeStart(values: number[]) {
-		if (range === 'min') {
-			return 0;
-		} else {
-			return values[0];
-		}
-	}
+  /**
+   * helper to find the beginning range value for use with css style
+   * @param {array} values the input values for the rangeSlider
+   * @return {number} the beginning of the range
+   **/
+  function rangeStart(values: number[]) {
+    if (range === 'min') {
+      return 0;
+    } else {
+      return values[0];
+    }
+  }
 
-	/**
-	 * helper to find the ending range value for use with css style
-	 * @param {array} values the input values for the rangeSlider
-	 * @return {number} the end of the range
-	 **/
-	function rangeEnd(values: number[]) {
-		if (range === 'max') {
-			return 0;
-		} else if (range === 'min') {
-			return 100 - values[0];
-		} else {
-			return 100 - values[1];
-		}
-	}
+  /**
+   * helper to find the ending range value for use with css style
+   * @param {array} values the input values for the rangeSlider
+   * @return {number} the end of the range
+   **/
+  function rangeEnd(values: number[]) {
+    if (range === 'max') {
+      return 0;
+    } else if (range === 'min') {
+      return 100 - values[0];
+    } else {
+      return 100 - values[1];
+    }
+  }
 
-	/**
-	 * when the user has unfocussed (blurred) from the
-	 * slider, deactivate all handles
-	 * @param {FocusEvent} event the event from browser
-	 **/
-	function sliderBlurHandle(event: FocusEvent) {
-		const target = event.target as HTMLSpanElement;
-		if (keyboardActive) {
-			focus = false;
-			handleActivated = false;
-			handlePressed = false;
-		}
-	}
+  /**
+   * when the user has unfocussed (blurred) from the
+   * slider, deactivate all handles
+   * @param {FocusEvent} event the event from browser
+   **/
+  function sliderBlurHandle(event: FocusEvent) {
+    const target = event.target as HTMLSpanElement;
+    if (keyboardActive) {
+      focus = false;
+      handleActivated = false;
+      handlePressed = false;
+    }
+  }
 
-	/**
-	 * when the user focusses the handle of a slider
-	 * set it to be active
-	 * @param {FocusEvent} event the event from browser
-	 **/
-	function sliderFocusHandle(event: FocusEvent) {
-		const target = event.target as HTMLSpanElement;
-		if (!disabled) {
-			activeHandle = elementIndex(target);
-			focus = true;
-		}
-	}
+  /**
+   * when the user focusses the handle of a slider
+   * set it to be active
+   * @param {FocusEvent} event the event from browser
+   **/
+  function sliderFocusHandle(event: FocusEvent) {
+    const target = event.target as HTMLSpanElement;
+    if (!disabled) {
+      activeHandle = elementIndex(target);
+      focus = true;
+    }
+  }
 
-	/**
-	 * handle the keyboard accessible features by checking the
-	 * input type, and modfier key then moving handle by appropriate amount
-	 * @param {KeyboardEvent} event the event from browser
-	 **/
-	function sliderKeydown(event: KeyboardEvent) {
-		if (!disabled) {
-			let prevent = false;
-			const handle = elementIndex(event.target as HTMLSpanElement);
-			let jump = step;
-			if (event.ctrlKey || event.metaKey) {
-				jump = clampValue(
-					(max - min) / step / 100,
-					coerceFloat(jump, precision),
-					coerceFloat((max - min) / 100, precision)
-				);
-				// ~ 1%
-			} else if (event.shiftKey) {
-				// ~ 10%
-				jump = clampValue(
-					(max - min) / step / 10,
-					coerceFloat(jump, precision),
-					coerceFloat((max - min) / 10, precision)
-				);
-			}
+  /**
+   * handle the keyboard accessible features by checking the
+   * input type, and modfier key then moving handle by appropriate amount
+   * @param {KeyboardEvent} event the event from browser
+   **/
+  function sliderKeydown(event: KeyboardEvent) {
+    if (!disabled) {
+      let prevent = false;
+      const handle = elementIndex(event.target as HTMLSpanElement);
+      let jump = step;
+      if (event.ctrlKey || event.metaKey) {
+        jump = clampValue(
+          (max - min) / step / 100,
+          coerceFloat(jump, precision),
+          coerceFloat((max - min) / 100, precision)
+        );
+        // ~ 1%
+      } else if (event.shiftKey) {
+        // ~ 10%
+        jump = clampValue(
+          (max - min) / step / 10,
+          coerceFloat(jump, precision),
+          coerceFloat((max - min) / 10, precision)
+        );
+      }
 
-			switch (event.key) {
-				case 'PageDown':
-					jump *= 10;
-				case 'ArrowRight':
-				case 'ArrowUp':
-					moveHandle(handle, values[handle] + coerceFloat(jump, precision));
-					prevent = true;
-					break;
-				case 'PageUp':
-					jump *= 10;
-				case 'ArrowLeft':
-				case 'ArrowDown':
-					moveHandle(handle, values[handle] - coerceFloat(jump, precision));
-					prevent = true;
-					break;
-				case 'Home':
-					moveHandle(handle, min);
-					prevent = true;
-					break;
-				case 'End':
-					moveHandle(handle, max);
-					prevent = true;
-					break;
-			}
-			if (prevent) {
-				event.preventDefault();
-				event.stopPropagation();
-			}
-		}
-	}
+      switch (event.key) {
+        case 'PageDown':
+          jump *= 10;
+        case 'ArrowRight':
+        case 'ArrowUp':
+          moveHandle(handle, values[handle] + coerceFloat(jump, precision));
+          prevent = true;
+          break;
+        case 'PageUp':
+          jump *= 10;
+        case 'ArrowLeft':
+        case 'ArrowDown':
+          moveHandle(handle, values[handle] - coerceFloat(jump, precision));
+          prevent = true;
+          break;
+        case 'Home':
+          moveHandle(handle, min);
+          prevent = true;
+          break;
+        case 'End':
+          moveHandle(handle, max);
+          prevent = true;
+          break;
+      }
+      if (prevent) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    }
+  }
 
-	/**
-	 * function to run when the user touches
-	 * down on the slider element anywhere
-	 * @param {MouseEvent | TouchEvent} event the event from browser
-	 **/
-	function sliderInteractStart(event: MouseEvent | TouchEvent) {
-		if (!disabled) {
-			const target = event.target as Element;
-			const clientPos = normalisedClient(event);
-			// set the closest handle as active
-			focus = true;
-			handleActivated = true;
-			handlePressed = true;
-			activeHandle = getClosestHandle(clientPos);
+  /**
+   * function to run when the user touches
+   * down on the slider element anywhere
+   * @param {MouseEvent | TouchEvent} event the event from browser
+   **/
+  function sliderInteractStart(event: MouseEvent | TouchEvent) {
+    if (!disabled) {
+      const target = event.target as Element;
+      const clientPos = normalisedClient(event);
+      // set the closest handle as active
+      focus = true;
+      handleActivated = true;
+      handlePressed = true;
+      activeHandle = getClosestHandle(clientPos);
 
-			// fire the start event
-			startValue = previousValue = alignValueToStep(
-				values[activeHandle],
-				min,
-				max,
-				step,
-				precision
-			);
-			eStart();
+      // fire the start event
+      startValue = previousValue = alignValueToStep(
+        values[activeHandle],
+        min,
+        max,
+        step,
+        precision
+      );
+      eStart();
 
-			// for touch devices we want the handle to instantly
-			// move to the position touched for more responsive feeling
-			if (event.type === 'touchstart' && !target.matches('.pipVal')) {
-				handleInteract(clientPos);
-			}
-		}
-	}
+      // for touch devices we want the handle to instantly
+      // move to the position touched for more responsive feeling
+      if (event.type === 'touchstart' && !target.matches('.pipVal')) {
+        handleInteract(clientPos);
+      }
+    }
+  }
 
-	/**
-	 * function to run when the user stops touching
-	 * down on the slider element anywhere
-	 * @param {event} e the event from browser
-	 **/
-	function sliderInteractEnd(event: MouseEvent | TouchEvent) {
-		// fire the stop event for touch devices
-		if (event.type === 'touchend') {
-			eStop();
-		}
-		handlePressed = false;
-	}
+  /**
+   * function to run when the user stops touching
+   * down on the slider element anywhere
+   * @param {event} e the event from browser
+   **/
+  function sliderInteractEnd(event: MouseEvent | TouchEvent) {
+    // fire the stop event for touch devices
+    if (event.type === 'touchend') {
+      eStop();
+    }
+    handlePressed = false;
+  }
 
-	/**
-	 * unfocus the slider if the user clicked off of
-	 * it, somewhere else on the screen
-	 * @param {MouseEvent | TouchEvent} event the event from browser
-	 **/
-	function bodyInteractStart(event: MouseEvent | TouchEvent) {
-		const target = event.target as Element;
-		keyboardActive = false;
-		if (slider && focus && target !== slider && !slider.contains(target)) {
-			focus = false;
-		}
-	}
+  /**
+   * unfocus the slider if the user clicked off of
+   * it, somewhere else on the screen
+   * @param {MouseEvent | TouchEvent} event the event from browser
+   **/
+  function bodyInteractStart(event: MouseEvent | TouchEvent) {
+    const target = event.target as Element;
+    keyboardActive = false;
+    if (slider && focus && target !== slider && !slider.contains(target)) {
+      focus = false;
+    }
+  }
 
-	/**
-	 * send the clientX through to handle the interaction
-	 * whenever the user moves acros screen while active
-	 * @param {MouseEvent | TouchEvent} event the event from browser
-	 **/
-	function bodyInteract(event: MouseEvent | TouchEvent) {
-		if (!disabled) {
-			if (handleActivated) {
-				handleInteract(normalisedClient(event));
-			}
-		}
-	}
+  /**
+   * send the clientX through to handle the interaction
+   * whenever the user moves acros screen while active
+   * @param {MouseEvent | TouchEvent} event the event from browser
+   **/
+  function bodyInteract(event: MouseEvent | TouchEvent) {
+    if (!disabled) {
+      if (handleActivated) {
+        handleInteract(normalisedClient(event));
+      }
+    }
+  }
 
-	/**
-	 * if user triggers mouseup on the body while
-	 * a handle is active (without moving) then we
-	 * trigger an interact event there
-	 * @param {event} event the event from browser
-	 **/
-	function bodyMouseUp(event: MouseEvent) {
-		if (!disabled) {
-			const target = event.target as Element;
-			// this only works if a handle is active, which can
-			// only happen if there was sliderInteractStart triggered
-			// on the slider, already
-			if (handleActivated) {
-				if (slider && (target === slider || slider.contains(target))) {
-					focus = true;
-					// don't trigger interact if the target is a handle (no need) or
-					// if the target is a label (we want to move to that value from rangePips)
-					if (!targetIsHandle(target) && !target.matches('.pipVal')) {
-						handleInteract(normalisedClient(event));
-					}
-				}
-				// fire the stop event for mouse device
-				// when the body is triggered with an active handle
-				eStop();
-			}
-		}
-		handleActivated = false;
-		handlePressed = false;
-	}
+  /**
+   * if user triggers mouseup on the body while
+   * a handle is active (without moving) then we
+   * trigger an interact event there
+   * @param {event} event the event from browser
+   **/
+  function bodyMouseUp(event: MouseEvent) {
+    if (!disabled) {
+      const target = event.target as Element;
+      // this only works if a handle is active, which can
+      // only happen if there was sliderInteractStart triggered
+      // on the slider, already
+      if (handleActivated) {
+        if (slider && (target === slider || slider.contains(target))) {
+          focus = true;
+          // don't trigger interact if the target is a handle (no need) or
+          // if the target is a label (we want to move to that value from rangePips)
+          if (!targetIsHandle(target) && !target.matches('.pipVal')) {
+            handleInteract(normalisedClient(event));
+          }
+        }
+        // fire the stop event for mouse device
+        // when the body is triggered with an active handle
+        eStop();
+      }
+    }
+    handleActivated = false;
+    handlePressed = false;
+  }
 
-	/**
-	 * if user triggers touchend on the body then we
-	 * defocus the slider completely
-	 * @param {event} event the event from browser
-	 **/
-	function bodyTouchEnd(event: TouchEvent) {
-		handleActivated = false;
-		handlePressed = false;
-	}
+  /**
+   * if user triggers touchend on the body then we
+   * defocus the slider completely
+   * @param {event} event the event from browser
+   **/
+  function bodyTouchEnd(event: TouchEvent) {
+    handleActivated = false;
+    handlePressed = false;
+  }
 
-	function bodyKeyDown(event: KeyboardEvent) {
-		const target = event.target as Element;
-		if (!disabled && slider) {
-			if (target === slider || slider.contains(target)) {
-				keyboardActive = true;
-			}
-		}
-	}
+  function bodyKeyDown(event: KeyboardEvent) {
+    const target = event.target as Element;
+    if (!disabled && slider) {
+      if (target === slider || slider.contains(target)) {
+        keyboardActive = true;
+      }
+    }
+  }
 
-	function eStart() {
-		!disabled &&
-			dispatch('start', {
-				activeHandle,
-				value: startValue,
-				values: values.map((v) => alignValueToStep(v, min, max, step, precision))
-			});
-	}
+  function eStart() {
+    !disabled &&
+      dispatch('start', {
+        activeHandle,
+        value: startValue,
+        values: values.map((v) => alignValueToStep(v, min, max, step, precision))
+      });
+  }
 
-	function eStop() {
-		!disabled &&
-			dispatch('stop', {
-				activeHandle,
-				startValue: startValue,
-				value: values[activeHandle],
-				values: values.map((v) => alignValueToStep(v, min, max, step, precision))
-			});
-	}
+  function eStop() {
+    !disabled &&
+      dispatch('stop', {
+        activeHandle,
+        startValue: startValue,
+        value: values[activeHandle],
+        values: values.map((v) => alignValueToStep(v, min, max, step, precision))
+      });
+  }
 
-	function eChange() {
-		!disabled &&
-			dispatch('change', {
-				activeHandle,
-				startValue: startValue,
-				previousValue: typeof previousValue === 'undefined' ? startValue : previousValue,
-				value: values[activeHandle],
-				values: values.map((v) => alignValueToStep(v, min, max, step, precision))
-			});
-	}
+  function eChange() {
+    !disabled &&
+      dispatch('change', {
+        activeHandle,
+        startValue: startValue,
+        previousValue: typeof previousValue === 'undefined' ? startValue : previousValue,
+        value: values[activeHandle],
+        values: values.map((v) => alignValueToStep(v, min, max, step, precision))
+      });
+  }
 
-	function ariaLabelFormatter(value: number, index: number) {
-		const percent = valueAsPercent(value, min, max, precision);
-		const formattedValue = handleFormatter(value, index, percent);
-		const textLabel = pureText(String(formattedValue));
-		return `${prefix}${textLabel}${suffix}`;
-	}
+  function ariaLabelFormatter(value: number, index: number) {
+    const percent = valueAsPercent(value, min, max, precision);
+    const formattedValue = handleFormatter(value, index, percent);
+    const textLabel = pureText(String(formattedValue));
+    return `${prefix}${textLabel}${suffix}`;
+  }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-	{id}
-	bind:this={slider}
-	role="none"
-	class="rangeSlider"
-	class:range
-	class:disabled
-	class:hoverable
-	class:vertical
-	class:reversed
-	class:focus
-	class:min={range === 'min'}
-	class:max={range === 'max'}
-	class:pips
-	class:pip-labels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
-	on:mousedown={sliderInteractStart}
-	on:mouseup={sliderInteractEnd}
-	on:touchstart|preventDefault={sliderInteractStart}
-	on:touchend|preventDefault={sliderInteractEnd}
+  {id}
+  bind:this={slider}
+  role="none"
+  class="rangeSlider"
+  class:range
+  class:disabled
+  class:hoverable
+  class:vertical
+  class:reversed
+  class:focus
+  class:min={range === 'min'}
+  class:max={range === 'max'}
+  class:pips
+  class:pip-labels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
+  on:mousedown={sliderInteractStart}
+  on:mouseup={sliderInteractEnd}
+  on:touchstart|preventDefault={sliderInteractStart}
+  on:touchend|preventDefault={sliderInteractEnd}
 >
-	{#each values as value, index}
-		{@const zindex = `z-index: ${activeHandle === index ? 3 : 2};`}
-		{@const handlePos = `${orientationStart}: ${$springPositions[index]}%;`}
-		<span
-			role="slider"
-			class="rangeHandle"
-			class:active={focus && activeHandle === index}
-			class:press={handlePressed && activeHandle === index}
-			data-handle={index}
-			on:blur={sliderBlurHandle}
-			on:focus={sliderFocusHandle}
-			on:keydown={sliderKeydown}
-			style="{handlePos} {zindex}"
-			aria-label={ariaLabels[index]}
-			aria-valuemin={range === true && index === 1 ? values[0] : min}
-			aria-valuemax={range === true && index === 0 ? values[1] : max}
-			aria-valuenow={value}
-			aria-valuetext={ariaLabelFormatter(value, index)}
-			aria-orientation={vertical ? 'vertical' : 'horizontal'}
-			aria-disabled={disabled}
-			tabindex={disabled ? -1 : 0}
-		>
-			<span class="rangeNub" />
-			{#if float}
-				{@const percent = valueAsPercent(value, min, max, precision)}
-				{@const formattedValue = handleFormatter(value, index, percent)}
-				<span class="rangeFloat">
-					{#if prefix}<span class="rangeFloat-prefix">{prefix}</span
-						>{/if}{@html formattedValue}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span
-						>{/if}
-				</span>
-			{/if}
-		</span>
-	{/each}
-	{#if range}
-		<span
-			class="rangeBar"
-			style="{orientationStart}: {rangeStart($springPositions)}%; 
+  {#each values as value, index}
+    {@const zindex = `z-index: ${activeHandle === index ? 3 : 2};`}
+    {@const handlePos = `${orientationStart}: ${$springPositions[index]}%;`}
+    <span
+      role="slider"
+      class="rangeHandle"
+      class:active={focus && activeHandle === index}
+      class:press={handlePressed && activeHandle === index}
+      data-handle={index}
+      on:blur={sliderBlurHandle}
+      on:focus={sliderFocusHandle}
+      on:keydown={sliderKeydown}
+      style="{handlePos} {zindex}"
+      aria-label={ariaLabels[index]}
+      aria-valuemin={range === true && index === 1 ? values[0] : min}
+      aria-valuemax={range === true && index === 0 ? values[1] : max}
+      aria-valuenow={value}
+      aria-valuetext={ariaLabelFormatter(value, index)}
+      aria-orientation={vertical ? 'vertical' : 'horizontal'}
+      aria-disabled={disabled}
+      tabindex={disabled ? -1 : 0}
+    >
+      <span class="rangeNub" />
+      {#if float}
+        {@const percent = valueAsPercent(value, min, max, precision)}
+        {@const formattedValue = handleFormatter(value, index, percent)}
+        <span class="rangeFloat">
+          {#if prefix}<span class="rangeFloat-prefix">{prefix}</span
+            >{/if}{@html formattedValue}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span
+            >{/if}
+        </span>
+      {/if}
+    </span>
+  {/each}
+  {#if range}
+    <span
+      class="rangeBar"
+      style="{orientationStart}: {rangeStart($springPositions)}%; 
              {orientationEnd}: {rangeEnd($springPositions)}%;"
-		/>
-	{/if}
-	{#if pips}
-		<RangePips
-			{values}
-			{min}
-			{max}
-			{step}
-			{range}
-			{vertical}
-			{reversed}
-			{orientationStart}
-			{hoverable}
-			{disabled}
-			{all}
-			{first}
-			{last}
-			{rest}
-			{pipstep}
-			{prefix}
-			{suffix}
-			{formatter}
-			{precision}
-			{focus}
-			{moveHandle}
-		/>
-	{/if}
+    />
+  {/if}
+  {#if pips}
+    <RangePips
+      {values}
+      {min}
+      {max}
+      {step}
+      {range}
+      {vertical}
+      {reversed}
+      {orientationStart}
+      {hoverable}
+      {disabled}
+      {all}
+      {first}
+      {last}
+      {rest}
+      {pipstep}
+      {prefix}
+      {suffix}
+      {formatter}
+      {precision}
+      {focus}
+      {moveHandle}
+    />
+  {/if}
 </div>
 
 <svelte:window
-	on:mousedown={bodyInteractStart}
-	on:touchstart={bodyInteractStart}
-	on:mousemove={bodyInteract}
-	on:touchmove={bodyInteract}
-	on:mouseup={bodyMouseUp}
-	on:touchend={bodyTouchEnd}
-	on:keydown={bodyKeyDown}
+  on:mousedown={bodyInteractStart}
+  on:touchstart={bodyInteractStart}
+  on:mousemove={bodyInteract}
+  on:touchmove={bodyInteract}
+  on:mouseup={bodyMouseUp}
+  on:touchend={bodyTouchEnd}
+  on:keydown={bodyKeyDown}
 />

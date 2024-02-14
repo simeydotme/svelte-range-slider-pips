@@ -19,8 +19,8 @@ const packageName = pkg.name.replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3');
 // like: import { Component } from 'package' or require('package').Component
 // and: const myComponent = new Component();
 const moduleName = packageName
-	.replace(/^\w/, (m) => m.toUpperCase())
-	.replace(/-\w/g, (m) => m[1].toUpperCase());
+  .replace(/^\w/, (m) => m.toUpperCase())
+  .replace(/-\w/g, (m) => m[1].toUpperCase());
 
 // banner to be added to the top of each generated file
 const banner = `/**
@@ -33,46 +33,48 @@ const banner = `/**
 
 const production = !process.env.ROLLUP_WATCH;
 const components = globbySync('src/lib/components/**/*.svelte').map((path) => {
-	return path.split('/').at(-1).replace('.svelte', '');
+  return path.split('/').at(-1).replace('.svelte', '');
 });
 
 const exports = components.map((component) => ({
-	input: `src/lib/components/${component}.svelte`,
-	output: [
-		{
-			file: pkg.exports['.'].import,
-			format: 'es',
-			name: moduleName,
-			banner
-		},
-		{
-			file: pkg.exports['.'].require,
-			format: 'umd',
-			name: moduleName,
-			banner
-		}
-	],
-	plugins: [
-		del({ targets: 'dist/*' }),
-		svelte({
-			preprocess: autoPreprocess(),
-			compilerOptions: {
-				dev: !production,
-				customElement: true
-			}
-		}),
-		typescript(),
-		css({ output: pkg.exports['.'].style.split('/').at(-1) }),
-		resolve({
-			browser: true,
-			dedupe: ['svelte']
-		}),
-		commonjs(),
-		filesize()
-	],
-	watch: {
-		clearScreen: false
-	}
+  input: `src/lib/components/${component}.svelte`,
+  output: [
+    {
+      file: pkg.exports['.'].import,
+      format: 'es',
+      name: moduleName,
+      banner
+    },
+    {
+      file: pkg.exports['.'].require,
+      format: 'umd',
+      name: moduleName,
+      banner
+    }
+  ],
+  plugins: [
+    del({ targets: 'dist/*' }),
+    svelte({
+      preprocess: autoPreprocess(),
+      compilerOptions: {
+        dev: !production,
+        customElement: true
+      }
+    }),
+    typescript({
+      exclude: ['node_modules/**', 'tests/**']
+    }),
+    css({ output: pkg.exports['.'].style.split('/').at(-1) }),
+    resolve({
+      browser: true,
+      dedupe: ['svelte']
+    }),
+    commonjs(),
+    filesize()
+  ],
+  watch: {
+    clearScreen: false
+  }
 }));
 
 export default exports;
