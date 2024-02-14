@@ -45,11 +45,13 @@
     "test:integration": "playwright test",
     "test:unit": "vitest",
     "lint": "prettier --check .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "add:dist": "git add dist"
   },
   "pre-commit": [
     "format",
-    "build"
+    "build",
+    "add:dist"
   ],
   "peerDependencies": {
     "svelte": "^4.0.0"
