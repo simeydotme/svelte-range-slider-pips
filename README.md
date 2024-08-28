@@ -4,7 +4,7 @@
     alt="Svelte Range Slider Logo" width="20%">
 
   <h1 align="center">
-    Svelte Range Slider (with pips)
+    Svelte Range Slider v3
   </h1>
 
   <p>
@@ -76,7 +76,7 @@ Assuming you have a Svelte app up and running;
 <RangeSlider values={[50]} pips />
 ```
 
-- 🆕 _see [test folder](./tests/) for examples of [usage with Svelte 4](./tests/svelte4/) or [Svelte 5](./tests/svelte5/)_
+- 🆕 _see [test folder](./tests/) for examples of [usage with Svelte 4](./tests/svelte4/src/App.svelte) or [Svelte 5](./tests/svelte5/src/routes/+page.svelte)_
 
 ---
 
