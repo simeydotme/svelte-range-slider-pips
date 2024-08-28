@@ -1,12 +1,11 @@
 <div align="center">
 
 <img src="public/svelte-range-slider-logo.svg" 
-  alt="Svelte Range Slider Logo" width="20%">
+    alt="Svelte Range Slider Logo" width="20%">
 
-</div>
-
-<h1 align="center">
-  Svelte Range Slider (with pips)
+  <h1 align="center">
+    Svelte Range Slider (with pips)
+  </h1>
 
   <p>
     <a href="https://github.com/simeydotme/svelte-range-slider-pips/releases">
@@ -17,10 +16,9 @@
       <img src="https://img.shields.io/npm/dm/svelte-range-slider-pips?label=&color=%234A40D4" alt="NPM Downloads / Month">
     </a>
   </p>
-</h1>
 
 A reactive, accessible, multi-thumb, range slider with the ability to display "pips" or "notches" along the range.  
-Importable as a **_svelte-component_**, or able to be **used directly in any javascript application / framework**.
+ Importable as a **_svelte-component_**, or able to be **used directly in any javascript application / framework**.
 
 ![Svelte Range Slider; focussed with pips and labels prop set](public/svelte-range-slider-screenshot.png)
 
@@ -28,6 +26,12 @@ Importable as a **_svelte-component_**, or able to be **used directly in any jav
 | :--: | ----------: | :---------------------------------------------------------------------------------------------- |
 | 📝⚙ |    **REPL** | **[Svelte component demo](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43?version=3)** |
 | ❤✒ | **Codepen** | **[Plain JS component demo](https://codepen.io/simeydotme/pen/KKNJdbK)**                        |
+
+  <br>
+
+</div>
+
+_🆕 = New/Changed in version 3.0.0_
 
 ---
 
@@ -37,15 +41,17 @@ Importable as a **_svelte-component_**, or able to be **used directly in any jav
 
 ![Features of the range slider plugin (written below)](public/svelte-range-slider-features.png)
 
-- ✨ fully customisable, stylable & accessible
+- ✨ fully customisable
+- ♿ accessible
 - 👍🏽 multi-thumb
-- 🎚 range (min/max)
+- 🎚 ranges
 - 🏷 floating labels
-- 📏 ruler notches
-- 🏷 labels for notches
+- 📏 ruler values (pips)
+- 🏷 labels for values
 - 🧮 step function
 - 🖍 formatter
 - 🎭 animated
+- 🖋 css variables
 
 ## Install
 
@@ -62,32 +68,53 @@ npm install svelte-range-slider-pips --save-dev  # if you prefer npm
 
 Assuming you have a Svelte app up and running;
 
-```html
+```svelte
 <script>
-  import RangeSlider from 'svelte-range-slider-pips';
+  import { RangeSlider } from 'svelte-range-slider-pips';
 </script>
 
-<RangeSlider values="{[50]}" pips />
+<RangeSlider values={[50]} pips />
 ```
+
+- 🆕 _see [test folder](./tests/) for examples of [usage with Svelte 4](./tests/svelte4/) or [Svelte 5](./tests/svelte5/)_
+
+---
 
 ### As a regular JS file
 
 If you're not building a svelte-app, you can use the [`/dist/`
 version of the script `/dist/svelte-range-slider-pips.js`](dist/svelte-range-slider-pips.js) and include it
-with a regular `<script>` tag. This should even work with jQuery.
+with a regular `<script>` tag.  
+This should even work with jQuery.
 
 ```html
+<!-- in the <head> of your html -->
+<link rel="stylesheet" href="./js/vendor/svelte-range-slider-pips.css" />
 <script src="./js/vendor/svelte-range-slider-pips.js" />
 
+<!-- in the <body> of your html -->
 <div id="my-slider"></div>
 
 <script>
-  var mySlider = new RangeSliderPips({
-    target: document.querySelector('#my-slider'),
-    props: { values: [50], pips: true }
+  // this script will be run when the DOM is ready
+  // and the slider is initialised
+  document.addEventListener('DOMContentLoaded', () => {
+    var mySlider = new RangeSliderPips({
+      target: document.querySelector('#my-slider'),
+      props: { values: [50], pips: true }
+    });
   });
 </script>
 ```
+
+<ul>
+  <li><img height="16" src="./public/icons/js-svgrepo-com.png" alt="JS Icon"> <em>see examples of <a href="./tests/vanilla/">usage with Vanilla JS </a></em>
+  </li>
+  <li><img height="16" src="./public/icons/jquery-svgrepo-com.png" alt="jQuery Icon"> <em>or <a href="./tests/jquery/index.jquery.js">running with jQuery </a></em>
+  </li>
+</ul>
+
+---
 
 ### As a JS module
 
@@ -102,6 +129,15 @@ var mySlider = new RangeSlider({
   props: { values: [50], pips: true }
 });
 ```
+
+<ul>
+  <li><img height="16" src="./public/icons/js-svgrepo-com.png" alt="JS Icon"> <em>see examples of <a href="./tests/vanilla/esm.html">usage with ES modules </a></em>
+  </li>
+  <li><img height="16" src="./public/icons/vuejs-svgrepo-com.png" alt="Vue Icon"> <em>or <a href="./tests/vuejs/src/App.vue">usage with VueJS </a></em>
+  </li>
+  <li><img height="16" src="./public/icons/react-svgrepo-com.png" alt="React Icon"> <em>or <a href="./tests/reactjs/src/App.js">importing with ReactJS </a></em>
+  </li>
+</ul>
 
 ---
 
