@@ -17,12 +17,12 @@
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
-		"svelte": "^5.0.0-next.1",
+		"svelte": "^5.0.0-next.240",
 		"svelte-check": "^3.6.0",
+		"svelte-range-slider-pips": "file:../..",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
-		"vite": "^5.0.3",
-		"svelte-range-slider-pips": "file:../.."
+		"vite": "^5.0.3"
 	},
 	"type": "module"
 }

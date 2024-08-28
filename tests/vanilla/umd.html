@@ -12,6 +12,7 @@
     <script>
       document.onreadystatechange = function () {
         if (document.readyState === 'complete') {
+          // create and initialise the slider
           const slider = document.querySelector('.my-slider');
           const rangeSliderPips = new RangeSliderPips({
             target: slider,
@@ -21,6 +22,12 @@
               float: true
             }
           });
+
+          // listen for changes to the slider and update the output
+          const output = document.querySelector('#value-output');
+          rangeSliderPips.$on('change', function (e) {
+            output.innerHTML = e.detail.value;
+          });
         }
       };
     </script>
@@ -28,5 +35,6 @@
   <body>
     <h1>Testing loading JS (umd) script</h1>
     <div class="my-slider"></div>
+    <span id="value-output">0</span>
   </body>
 </html>

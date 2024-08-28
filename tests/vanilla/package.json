@@ -5,7 +5,8 @@
   "description": "Test of vanilla JS with ES modules",
   "main": "index.html",
   "scripts": {
-    "start": "serve ."
+    "start": "serve .",
+    "dev": "serve ."
   },
   "devDependencies": {
     "svelte-range-slider-pips": "file:../..",
