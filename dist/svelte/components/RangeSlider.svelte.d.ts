@@ -1,5 +1,4 @@
 import { SvelteComponent } from "svelte";
-import './RangeSlider.css';
 import { type SpringOpts } from 'svelte/motion';
 import type { Pip, Formatter } from '../types.js';
 declare const __propDef: {

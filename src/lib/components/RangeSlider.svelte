@@ -1,5 +1,4 @@
 <script lang="ts">
-  import './RangeSlider.css';
   import { type SpringOpts, type Spring, spring } from 'svelte/motion';
   import { createEventDispatcher } from 'svelte';
   import {
@@ -681,3 +680,247 @@
   on:touchend={bodyTouchEnd}
   on:keydown={bodyKeyDown}
 />
+
+<style>
+  /**
+   * RangeSlider
+   */
+
+  :global(.rangeSlider) {
+    --slider: var(--range-slider, #d7dada);
+    --handle-inactive: var(--range-handle-inactive, #99a2a2);
+    --handle: var(--range-handle, #838de7);
+    --handle-focus: var(--range-handle-focus, #4a40d4);
+    --handle-border: var(--range-handle-border, var(--handle));
+    --range-inactive: var(--range-range-inactive, var(--handle-inactive));
+    --range: var(--range-range, var(--handle-focus));
+    --float-inactive: var(--range-float-inactive, var(--handle-inactive));
+    --float: var(--range-float, var(--handle-focus));
+    --float-text: var(--range-float-text, white);
+  }
+
+  :global(.rangeSlider) {
+    position: relative;
+    border-radius: 100px;
+    height: 0.5em;
+    margin: 1em;
+    transition: opacity 0.2s ease;
+    user-select: none;
+  }
+
+  :global(.rangeSlider *) {
+    user-select: none;
+  }
+
+  :global(.rangeSlider.pips) {
+    margin-bottom: 1.8em;
+  }
+
+  :global(.rangeSlider.pip-labels) {
+    margin-bottom: 2.8em;
+  }
+
+  :global(.rangeSlider.vertical) {
+    display: inline-block;
+    border-radius: 100px;
+    width: 0.5em;
+    min-height: 200px;
+  }
+
+  :global(.rangeSlider.vertical.pips) {
+    margin-right: 1.8em;
+    margin-bottom: 1em;
+  }
+
+  :global(.rangeSlider.vertical.pip-labels) {
+    margin-right: 2.8em;
+    margin-bottom: 1em;
+  }
+
+  :global(.rangeSlider .rangeHandle) {
+    position: absolute;
+    display: block;
+    height: 1.4em;
+    width: 1.4em;
+    top: 0.25em;
+    bottom: auto;
+    transform: translateY(-50%) translateX(-50%);
+    z-index: 2;
+  }
+
+  :global(.rangeSlider.reversed .rangeHandle) {
+    transform: translateY(-50%) translateX(50%);
+  }
+
+  :global(.rangeSlider.vertical .rangeHandle) {
+    left: 0.25em;
+    top: auto;
+    transform: translateY(50%) translateX(-50%);
+  }
+
+  :global(.rangeSlider.vertical.reversed .rangeHandle) {
+    transform: translateY(-50%) translateX(-50%);
+  }
+
+  :global(.rangeSlider .rangeNub),
+  :global(.rangeSlider .rangeHandle:before) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    border-radius: 10em;
+    height: 100%;
+    width: 100%;
+    transition: box-shadow 0.2s ease;
+  }
+
+  :global(.rangeSlider .rangeHandle:before) {
+    content: '';
+    left: 1px;
+    top: 1px;
+    bottom: 1px;
+    right: 1px;
+    height: auto;
+    width: auto;
+    box-shadow: 0 0 0 0px var(--handle-border);
+    opacity: 0;
+  }
+
+  :global(.rangeSlider.hoverable:not(.disabled) .rangeHandle:hover:before) {
+    box-shadow: 0 0 0 8px var(--handle-border);
+    opacity: 0.2;
+  }
+
+  :global(.rangeSlider.hoverable:not(.disabled) .rangeHandle.press:before),
+  :global(.rangeSlider.hoverable:not(.disabled) .rangeHandle.press:hover:before) {
+    box-shadow: 0 0 0 12px var(--handle-border);
+    opacity: 0.4;
+  }
+
+  :global(.rangeSlider.range:not(.min):not(.max) .rangeNub) {
+    border-radius: 10em 10em 10em 1.6em;
+  }
+
+  :global(.rangeSlider.range .rangeHandle:nth-of-type(1) .rangeNub) {
+    transform: rotate(-135deg);
+  }
+
+  :global(.rangeSlider.range .rangeHandle:nth-of-type(2) .rangeNub) {
+    transform: rotate(45deg);
+  }
+
+  :global(.rangeSlider.range.reversed .rangeHandle:nth-of-type(1) .rangeNub) {
+    transform: rotate(45deg);
+  }
+
+  :global(.rangeSlider.range.reversed .rangeHandle:nth-of-type(2) .rangeNub) {
+    transform: rotate(-135deg);
+  }
+
+  :global(.rangeSlider.range.vertical .rangeHandle:nth-of-type(1) .rangeNub) {
+    transform: rotate(135deg);
+  }
+
+  :global(.rangeSlider.range.vertical .rangeHandle:nth-of-type(2) .rangeNub) {
+    transform: rotate(-45deg);
+  }
+
+  :global(.rangeSlider.range.vertical.reversed .rangeHandle:nth-of-type(1) .rangeNub) {
+    transform: rotate(-45deg);
+  }
+
+  :global(.rangeSlider.range.vertical.reversed .rangeHandle:nth-of-type(2) .rangeNub) {
+    transform: rotate(135deg);
+  }
+
+  :global(.rangeSlider .rangeFloat) {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: -0.5em;
+    transform: translate(-50%, -100%);
+    font-size: 1em;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    font-size: 0.9em;
+    padding: 0.2em 0.4em;
+    border-radius: 0.2em;
+  }
+
+  :global(.rangeSlider .rangeHandle.active .rangeFloat),
+  :global(.rangeSlider.hoverable .rangeHandle:hover .rangeFloat) {
+    opacity: 1;
+    top: -0.2em;
+    transform: translate(-50%, -100%);
+  }
+
+  :global(.rangeSlider .rangeBar) {
+    position: absolute;
+    display: block;
+    transition: background 0.2s ease;
+    border-radius: 1em;
+    height: 0.5em;
+    top: 0;
+    user-select: none;
+    z-index: 1;
+  }
+
+  :global(.rangeSlider.vertical .rangeBar) {
+    width: 0.5em;
+    height: auto;
+  }
+
+  :global(.rangeSlider) {
+    background-color: #d7dada;
+    background-color: var(--slider);
+  }
+
+  :global(.rangeSlider .rangeBar) {
+    background-color: #99a2a2;
+    background-color: var(--range-inactive);
+  }
+
+  :global(.rangeSlider.focus .rangeBar) {
+    background-color: #838de7;
+    background-color: var(--range);
+  }
+
+  :global(.rangeSlider .rangeNub) {
+    background-color: #99a2a2;
+    background-color: var(--handle-inactive);
+  }
+
+  :global(.rangeSlider.focus .rangeNub) {
+    background-color: #838de7;
+    background-color: var(--handle);
+  }
+
+  :global(.rangeSlider .rangeHandle.active .rangeNub) {
+    background-color: #4a40d4;
+    background-color: var(--handle-focus);
+  }
+
+  :global(.rangeSlider .rangeFloat) {
+    color: white;
+    color: var(--float-text);
+    background-color: #99a2a2;
+    background-color: var(--float-inactive);
+  }
+
+  :global(.rangeSlider.focus .rangeFloat) {
+    background-color: #4a40d4;
+    background-color: var(--float);
+  }
+
+  :global(.rangeSlider.disabled) {
+    opacity: 0.5;
+  }
+
+  :global(.rangeSlider.disabled .rangeNub) {
+    background-color: #d7dada;
+    background-color: var(--slider);
+  }
+</style>

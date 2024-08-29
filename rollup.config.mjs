@@ -40,13 +40,13 @@ const exports = components.map((component) => ({
   input: `src/lib/components/${component}.svelte`,
   output: [
     {
-      file: pkg.exports['.'].import,
+      file: pkg.exports['.'][0].import,
       format: 'es',
       name: moduleName,
       banner
     },
     {
-      file: pkg.exports['.'].require,
+      file: pkg.exports['.'][0].require,
       format: 'umd',
       name: moduleName,
       banner
@@ -58,13 +58,14 @@ const exports = components.map((component) => ({
       preprocess: autoPreprocess(),
       compilerOptions: {
         dev: !production,
-        customElement: true
+        customElement: true,
+        immutable: false
       }
     }),
     typescript({
       exclude: ['node_modules/**', 'tests/**']
     }),
-    css({ output: pkg.exports['.'].style.split('/').at(-1) }),
+    css({ output: pkg.exports['.'][0].style.split('/').at(-1) }),
     resolve({
       browser: true,
       dedupe: ['svelte']

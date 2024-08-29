@@ -146,3 +146,133 @@ function labelUp(pipValue, event) {
     </span>
   {/if}
 </div>
+
+<style>
+  /**
+   * RangePips
+   */
+
+  :global(.rangePips) {
+    --pip: var(--range-pip, lightslategray);
+    --pip-text: var(--range-pip-text, var(--pip));
+    --pip-active: var(--range-pip-active, darkslategrey);
+    --pip-active-text: var(--range-pip-active-text, var(--pip-active));
+    --pip-hover: var(--range-pip-hover, darkslategrey);
+    --pip-hover-text: var(--range-pip-hover-text, var(--pip-hover));
+    --pip-in-range: var(--range-pip-in-range, var(--pip-active));
+    --pip-in-range-text: var(--range-pip-in-range-text, var(--pip-active-text));
+  }
+
+  :global(.rangePips) {
+    position: absolute;
+    height: 1em;
+    left: 0;
+    right: 0;
+    bottom: -1em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  :global(.rangePips.vertical) {
+    height: auto;
+    width: 1em;
+    left: 100%;
+    right: auto;
+    top: 0;
+    bottom: 0;
+  }
+
+  :global(.rangePips .pip) {
+    height: 0.4em;
+    position: absolute;
+    top: 0.25em;
+    width: 1px;
+    white-space: nowrap;
+  }
+
+  :global(.rangePips.vertical .pip) {
+    height: 1px;
+    width: 0.4em;
+    left: 0.25em;
+    top: auto;
+    bottom: auto;
+  }
+
+  :global(.rangePips .pipVal) {
+    position: absolute;
+    top: 0.4em;
+    transform: translate(-50%, 25%);
+  }
+
+  :global(.rangePips.vertical .pipVal) {
+    position: absolute;
+    top: 0;
+    left: 0.4em;
+    transform: translate(25%, -50%);
+  }
+
+  :global(.rangePips .pip) {
+    transition: all 0.15s ease;
+  }
+
+  :global(.rangePips .pipVal) {
+    transition:
+      all 0.15s ease,
+      font-weight 0s linear;
+  }
+
+  :global(.rangePips .pip) {
+    color: lightslategray;
+    color: var(--pip-text);
+    background-color: lightslategray;
+    background-color: var(--pip);
+  }
+
+  :global(.rangePips .pip.selected) {
+    color: darkslategrey;
+    color: var(--pip-active-text);
+    background-color: darkslategrey;
+    background-color: var(--pip-active);
+  }
+
+  :global(.rangePips.hoverable:not(.disabled) .pip:hover) {
+    color: darkslategrey;
+    color: var(--pip-hover-text);
+    background-color: darkslategrey;
+    background-color: var(--pip-hover);
+  }
+
+  :global(.rangePips .pip.in-range) {
+    color: darkslategrey;
+    color: var(--pip-in-range-text);
+    background-color: darkslategrey;
+    background-color: var(--pip-in-range);
+  }
+
+  :global(.rangePips .pip.selected) {
+    height: 0.75em;
+  }
+
+  :global(.rangePips.vertical .pip.selected) {
+    height: 1px;
+    width: 0.75em;
+  }
+
+  :global(.rangePips .pip.selected .pipVal) {
+    font-weight: bold;
+    top: 0.75em;
+  }
+
+  :global(.rangePips.vertical .pip.selected .pipVal) {
+    top: 0;
+    left: 0.75em;
+  }
+
+  :global(.rangePips.hoverable:not(.disabled) .pip:not(.selected):hover) {
+    transition: none;
+  }
+
+  :global(.rangePips.hoverable:not(.disabled) .pip:not(.selected):hover .pipVal) {
+    transition: none;
+    font-weight: bold;
+  }
+</style>

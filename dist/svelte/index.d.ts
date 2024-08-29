@@ -1,1 +1,3 @@
-export { default as RangeSlider } from './components/RangeSlider.svelte';
+import RangeSlider from './components/RangeSlider.svelte';
+export { RangeSlider };
+export default RangeSlider;

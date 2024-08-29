@@ -5,14 +5,14 @@
   import type { ComponentProps } from 'svelte';
   import type { RangeSlider as RangeSliderType } from 'svelte-range-slider-pips';
   import RangeSlider from 'svelte-range-slider-pips';
-  import 'svelte-range-slider-pips/dist/svelte-range-slider.css';
 
-  const value = ref(22); // values to bind to slider
+  const values = ref([22, 44]); // values to bind to slider
   const $node: Ref<HTMLElement | null> = ref(null); // dom reference for binding on mount
   let MyRangeSlider: RangeSliderType; // slider instance reference
   const sliderProps: ComponentProps<RangeSliderType> = {
-    value: value.value,
-    pips: true
+    values: values.value,
+    pips: true,
+    range: true
   };
 
   onMounted(() => {
@@ -21,9 +21,9 @@
         target: $node.value,
         props: sliderProps
       });
-      MyRangeSlider.$on('change', (e) => (value.value = e.detail.value));
-      watch(value, () => {
-        MyRangeSlider.$set({ value: value.value });
+      MyRangeSlider.$on('change', (e) => (values.value = e.detail.values));
+      watch(values, () => {
+        MyRangeSlider.$set({ values: values.value });
       });
     }
   });
@@ -38,8 +38,8 @@
   </header>
 
   <div id="my-slider" ref="$node"></div>
-  {{ value }}
-  <button @click="value += 10">Add 10</button>
+  {{ values }}
+  <button @click="() => (values = [...values.map((v) => v + 10)])">Add 10</button>
 </template>
 
 <style scoped>

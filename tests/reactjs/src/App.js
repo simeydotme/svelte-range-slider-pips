@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import RangeSlider from 'svelte-range-slider-pips';
-import 'svelte-range-slider-pips/dist/svelte-range-slider.css';
+// import type { ComponentProps } from 'svelte';
+// import type { RangeSlider as RangeSliderType } from 'svelte-range-slider-pips';
 
 export default function MyComponent() {
   const [values, setValues] = useState([33, 66]);

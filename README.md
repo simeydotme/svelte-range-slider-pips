@@ -27,15 +27,7 @@ A reactive, accessible, multi-thumb, range slider with the ability to display "p
 | 📝⚙ |    **REPL** | **[Svelte component demo](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43?version=3)** |
 | ❤✒ | **Codepen** | **[Plain JS component demo](https://codepen.io/simeydotme/pen/KKNJdbK)**                        |
 
-  <br>
-
 </div>
-
-_🆕 = New/Changed in version 3.0.0_
-
----
-
-<br>
 
 ## Features
 
@@ -70,13 +62,20 @@ Assuming you have a Svelte app up and running;
 
 ```svelte
 <script>
-  import { RangeSlider } from 'svelte-range-slider-pips';
+  import RangeSlider from 'svelte-range-slider-pips';
 </script>
 
 <RangeSlider values={[50]} pips />
 ```
 
-- 🆕 _see [test folder](./tests/) for examples of [usage with Svelte 4](./tests/svelte4/src/App.svelte) or [Svelte 5](./tests/svelte5/src/routes/+page.svelte)_
+<ul>
+  <li>
+    <img height="16" src="./public/icons/svelte-svgrepo-com.png" alt="Svelte Icon"> <em>see <a href="./tests/">test folder</a> for examples of <a href="./tests/svelte4/src/App.svelte">usage with Svelte 4</a></em>
+    </li>
+    <li>
+    <img height="16" src="./public/icons/svelte-svgrepo-com.png" alt="Svelte Icon"> <em>or <a href="./tests/svelte5/src/routes/+page.svelte">Svelte 5</em></a>
+  </li>
+</ul>
 
 ---
 
@@ -89,7 +88,6 @@ This should even work with jQuery.
 
 ```html
 <!-- in the <head> of your html -->
-<link rel="stylesheet" href="./js/vendor/svelte-range-slider-pips.css" />
 <script src="./js/vendor/svelte-range-slider-pips.js" />
 
 <!-- in the <body> of your html -->
