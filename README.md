@@ -20,6 +20,16 @@
 A reactive, accessible, multi-thumb, range slider with the ability to display "pips" or "notches" along the range.  
  Importable as a **_svelte-component_**, or able to be **used directly in any javascript application / framework**.
 
+<br>
+
+ <img height="32" src="./public/icons/svelte-svgrepo-com.png" alt="Svelte Icon">
+ <img height="32" src="./public/icons/vuejs-svgrepo-com.png" alt="Vue Icon">
+ <img height="32" src="./public/icons/react-svgrepo-com.png" alt="React Icon">
+ <img height="32" src="./public/icons/js-svgrepo-com.png" alt="JS Icon">
+ <img height="32" src="./public/icons/jquery-svgrepo-com.png" alt="JQUERY Icon">
+
+<br>
+
 ![Svelte Range Slider; focussed with pips and labels prop set](public/svelte-range-slider-screenshot.png)
 
 | 📔🔍 |        Docs | [Full Documentation & Examples](https://simeydotme.github.io/svelte-range-slider-pips/)         |
