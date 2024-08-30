@@ -1,3 +1,5 @@
+<svelte:options immutable={false} />
+
 <script>import { spring } from "svelte/motion";
 import { createEventDispatcher } from "svelte";
 import {
