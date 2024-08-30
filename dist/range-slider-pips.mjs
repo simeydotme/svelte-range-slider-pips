@@ -1,9 +1,9 @@
 /**
- * svelte-range-slider-pips ~ 3.1.0
+ * svelte-range-slider-pips ~ 3.1.1
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * Project home: https://simeydotme.github.io/svelte-range-slider-pips/
  * © 2024 Simon Goellner <simey.me@gmail.com> ~ MPL-2.0 License
- * Published: 30/8/2024
+ * Published: 31/8/2024
  */
 /** @returns {void} */
 function noop() {}
