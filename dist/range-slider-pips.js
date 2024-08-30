@@ -2780,7 +2780,7 @@
 		return child_ctx;
 	}
 
-	// (564:6) {#if float}
+	// (566:6) {#if float}
 	function create_if_block_2(ctx) {
 		let span;
 		let if_block0_anchor;
@@ -2849,7 +2849,7 @@
 		};
 	}
 
-	// (568:10) {#if prefix}
+	// (570:10) {#if prefix}
 	function create_if_block_4(ctx) {
 		let span;
 		let t;
@@ -2875,7 +2875,7 @@
 		};
 	}
 
-	// (569:40) {#if suffix}
+	// (571:40) {#if suffix}
 	function create_if_block_3(ctx) {
 		let span;
 		let t;
@@ -2901,7 +2901,7 @@
 		};
 	}
 
-	// (541:2) {#each values as value, index}
+	// (543:2) {#each values as value, index}
 	function create_each_block(ctx) {
 		let span1;
 		let span0;
@@ -3037,7 +3037,7 @@
 		};
 	}
 
-	// (575:2) {#if range}
+	// (577:2) {#if range}
 	function create_if_block_1(ctx) {
 		let span;
 		let span_style_value;
@@ -3064,7 +3064,7 @@
 		};
 	}
 
-	// (582:2) {#if pips}
+	// (584:2) {#if pips}
 	function create_if_block(ctx) {
 		let rangepips;
 		let current;
