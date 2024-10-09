@@ -34,7 +34,7 @@
   export let disabled: boolean = false;
 
   // range pips / values props
-  export let pips: boolean = false;
+  export let pips: boolean | number[] | Set<number> = false;
   export let pipstep: number | undefined = undefined;
   export let all: Pip = true;
   export let first: Pip = undefined;
@@ -642,12 +642,13 @@
   {#if range}
     <span
       class="rangeBar"
-      style="{orientationStart}: {rangeStart($springPositions)}%; 
+      style="{orientationStart}: {rangeStart($springPositions)}%;
              {orientationEnd}: {rangeEnd($springPositions)}%;"
     />
   {/if}
   {#if pips}
     <RangePips
+      {pips}
       {values}
       {min}
       {max}

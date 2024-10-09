@@ -3,7 +3,7 @@
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * Project home: https://simeydotme.github.io/svelte-range-slider-pips/
  * © 2024 Simon Goellner <simey.me@gmail.com> ~ MPL-2.0 License
- * Published: 31/8/2024
+ * Published: 9/10/2024
  */
 /** @returns {void} */
 function noop() {}
@@ -1540,12 +1540,14 @@ function add_css$1(target) {
 
 function get_each_context$1(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[37] = list[i];
-	child_ctx[39] = i;
+	child_ctx[40] = list[i];
+	child_ctx[43] = i;
+	const constants_0 = getValueFromIndex(/*i*/ child_ctx[43], /*min*/ child_ctx[1], /*max*/ child_ctx[2], /*pipStep*/ child_ctx[19], /*step*/ child_ctx[3]);
+	child_ctx[41] = constants_0;
 	return child_ctx;
 }
 
-// (64:2) {#if (all && first !== false) || first}
+// (67:2) {#if (all && first !== false) || first}
 function create_if_block_9(ctx) {
 	let span;
 	let span_style_value;
@@ -1561,6 +1563,7 @@ function create_if_block_9(ctx) {
 			attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[18] + ": 0%;"));
 			toggle_class(span, "selected", isSelected(/*min*/ ctx[1], /*values*/ ctx[4], /*precision*/ ctx[16]));
 			toggle_class(span, "in-range", isInRange(/*min*/ ctx[1], /*values*/ ctx[4], /*range*/ ctx[0]));
+			toggle_class(span, "hidden", /*pipsIsList*/ ctx[20] && !/*pipSet*/ ctx[22].has(/*min*/ ctx[1]));
 		},
 		m(target, anchor) {
 			insert(target, span, anchor);
@@ -1568,8 +1571,8 @@ function create_if_block_9(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(span, "pointerdown", /*pointerdown_handler*/ ctx[30]),
-					listen(span, "pointerup", /*pointerup_handler*/ ctx[31])
+					listen(span, "pointerdown", /*pointerdown_handler*/ ctx[33]),
+					listen(span, "pointerup", /*pointerup_handler*/ ctx[34])
 				];
 
 				mounted = true;
@@ -1600,6 +1603,10 @@ function create_if_block_9(ctx) {
 			if (dirty[0] & /*min, values, range*/ 19) {
 				toggle_class(span, "in-range", isInRange(/*min*/ ctx[1], /*values*/ ctx[4], /*range*/ ctx[0]));
 			}
+
+			if (dirty[0] & /*pipsIsList, pipSet, min*/ 5242882) {
+				toggle_class(span, "hidden", /*pipsIsList*/ ctx[20] && !/*pipSet*/ ctx[22].has(/*min*/ ctx[1]));
+			}
 		},
 		d(detaching) {
 			if (detaching) {
@@ -1613,7 +1620,7 @@ function create_if_block_9(ctx) {
 	};
 }
 
-// (77:6) {#if all === 'label' || first === 'label'}
+// (81:6) {#if all === 'label' || first === 'label'}
 function create_if_block_10(ctx) {
 	let span;
 	let if_block0_anchor;
@@ -1682,7 +1689,7 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (79:10) {#if prefix}
+// (83:10) {#if prefix}
 function create_if_block_12(ctx) {
 	let span;
 	let t;
@@ -1708,7 +1715,7 @@ function create_if_block_12(ctx) {
 	};
 }
 
-// (83:12) {#if suffix}
+// (87:12) {#if suffix}
 function create_if_block_11(ctx) {
 	let span;
 	let t;
@@ -1734,10 +1741,10 @@ function create_if_block_11(ctx) {
 	};
 }
 
-// (89:2) {#if (all && rest !== false) || rest}
+// (93:2) {#if (all && rest !== false) || rest}
 function create_if_block_4$1(ctx) {
 	let each_1_anchor;
-	let each_value = ensure_array_like(Array(/*pipCount*/ ctx[20] + 1));
+	let each_value = ensure_array_like(Array(/*pipCount*/ ctx[21] + 1));
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value.length; i += 1) {
@@ -1762,8 +1769,8 @@ function create_if_block_4$1(ctx) {
 			insert(target, each_1_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*orientationStart, min, max, pipStep, step, values, precision, range, labelDown, labelUp, suffix, formatter, prefix, all, rest, pipCount*/ 8253983) {
-				each_value = ensure_array_like(Array(/*pipCount*/ ctx[20] + 1));
+			if (dirty[0] & /*orientationStart, min, max, pipStep, step, values, precision, range, labelDown, labelUp, suffix, formatter, prefix, all, rest, pipsIsList, pipSet, pipCount*/ 33419807) {
+				each_value = ensure_array_like(Array(/*pipCount*/ ctx[21] + 1));
 				let i;
 
 				for (i = 0; i < each_value.length; i += 1) {
@@ -1795,7 +1802,7 @@ function create_if_block_4$1(ctx) {
 	};
 }
 
-// (91:6) {#if getValueFromIndex(i, min, max, pipStep, step) !== min && getValueFromIndex(i, min, max, pipStep, step) !== max}
+// (96:6) {#if val !== min && val !== max && (!pipsIsList || pipSet.has(val))}
 function create_if_block_5(ctx) {
 	let span;
 	let t;
@@ -1805,7 +1812,7 @@ function create_if_block_5(ctx) {
 	let if_block = (/*all*/ ctx[9] === 'label' || /*rest*/ ctx[12] === 'label') && create_if_block_6(ctx);
 
 	function pointerup_handler_1(...args) {
-		return /*pointerup_handler_1*/ ctx[33](/*i*/ ctx[39], ...args);
+		return /*pointerup_handler_1*/ ctx[36](/*val*/ ctx[41], ...args);
 	}
 
 	return {
@@ -1814,9 +1821,9 @@ function create_if_block_5(ctx) {
 			if (if_block) if_block.c();
 			t = space();
 			attr(span, "class", "pip");
-			attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[18] + ": " + valueAsPercent(getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]), /*min*/ ctx[1], /*max*/ ctx[2]) + "%;"));
-			toggle_class(span, "selected", isSelected(getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]), /*values*/ ctx[4], /*precision*/ ctx[16]));
-			toggle_class(span, "in-range", isInRange(getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]), /*values*/ ctx[4], /*range*/ ctx[0]));
+			attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[18] + ": " + valueAsPercent(/*val*/ ctx[41], /*min*/ ctx[1], /*max*/ ctx[2]) + "%;"));
+			toggle_class(span, "selected", isSelected(/*val*/ ctx[41], /*values*/ ctx[4], /*precision*/ ctx[16]));
+			toggle_class(span, "in-range", isInRange(/*val*/ ctx[41], /*values*/ ctx[4], /*range*/ ctx[0]));
 		},
 		m(target, anchor) {
 			insert(target, span, anchor);
@@ -1825,7 +1832,7 @@ function create_if_block_5(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(span, "pointerdown", /*pointerdown_handler_1*/ ctx[32]),
+					listen(span, "pointerdown", /*pointerdown_handler_1*/ ctx[35]),
 					listen(span, "pointerup", pointerup_handler_1)
 				];
 
@@ -1848,16 +1855,16 @@ function create_if_block_5(ctx) {
 				if_block = null;
 			}
 
-			if (dirty[0] & /*orientationStart, min, max, pipStep, step*/ 786446 && span_style_value !== (span_style_value = "" + (/*orientationStart*/ ctx[18] + ": " + valueAsPercent(getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]), /*min*/ ctx[1], /*max*/ ctx[2]) + "%;"))) {
+			if (dirty[0] & /*orientationStart, min, max, pipStep, step*/ 786446 && span_style_value !== (span_style_value = "" + (/*orientationStart*/ ctx[18] + ": " + valueAsPercent(/*val*/ ctx[41], /*min*/ ctx[1], /*max*/ ctx[2]) + "%;"))) {
 				attr(span, "style", span_style_value);
 			}
 
 			if (dirty[0] & /*min, max, pipStep, step, values, precision*/ 589854) {
-				toggle_class(span, "selected", isSelected(getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]), /*values*/ ctx[4], /*precision*/ ctx[16]));
+				toggle_class(span, "selected", isSelected(/*val*/ ctx[41], /*values*/ ctx[4], /*precision*/ ctx[16]));
 			}
 
 			if (dirty[0] & /*min, max, pipStep, step, values, range*/ 524319) {
-				toggle_class(span, "in-range", isInRange(getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]), /*values*/ ctx[4], /*range*/ ctx[0]));
+				toggle_class(span, "in-range", isInRange(/*val*/ ctx[41], /*values*/ ctx[4], /*range*/ ctx[0]));
 			}
 		},
 		d(detaching) {
@@ -1872,12 +1879,12 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (112:10) {#if all === 'label' || rest === 'label'}
+// (109:10) {#if all === 'label' || rest === 'label'}
 function create_if_block_6(ctx) {
 	let span;
 	let if_block0_anchor;
 	let html_tag;
-	let raw_value = /*formatter*/ ctx[15](getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]), /*i*/ ctx[39], valueAsPercent(getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]), /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[16])) + "";
+	let raw_value = /*formatter*/ ctx[15](/*val*/ ctx[41], /*i*/ ctx[43], valueAsPercent(/*val*/ ctx[41], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[16])) + "";
 	let html_anchor;
 	let if_block0 = /*prefix*/ ctx[13] && create_if_block_8(ctx);
 	let if_block1 = /*suffix*/ ctx[14] && create_if_block_7(ctx);
@@ -1915,7 +1922,7 @@ function create_if_block_6(ctx) {
 				if_block0 = null;
 			}
 
-			if (dirty[0] & /*formatter, min, max, pipStep, step, precision*/ 622606 && raw_value !== (raw_value = /*formatter*/ ctx[15](getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]), /*i*/ ctx[39], valueAsPercent(getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]), /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[16])) + "")) html_tag.p(raw_value);
+			if (dirty[0] & /*formatter, min, max, pipStep, step, precision*/ 622606 && raw_value !== (raw_value = /*formatter*/ ctx[15](/*val*/ ctx[41], /*i*/ ctx[43], valueAsPercent(/*val*/ ctx[41], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[16])) + "")) html_tag.p(raw_value);
 
 			if (/*suffix*/ ctx[14]) {
 				if (if_block1) {
@@ -1941,7 +1948,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (114:14) {#if prefix}
+// (111:14) {#if prefix}
 function create_if_block_8(ctx) {
 	let span;
 	let t;
@@ -1967,7 +1974,7 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (118:16) {#if suffix}
+// (115:16) {#if suffix}
 function create_if_block_7(ctx) {
 	let span;
 	let t;
@@ -1993,9 +2000,9 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (90:4) {#each Array(pipCount + 1) as _, i}
+// (94:4) {#each Array(pipCount + 1) as _, i}
 function create_each_block$1(ctx) {
-	let show_if = getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]) !== /*min*/ ctx[1] && getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]) !== /*max*/ ctx[2];
+	let show_if = /*val*/ ctx[41] !== /*min*/ ctx[1] && /*val*/ ctx[41] !== /*max*/ ctx[2] && (!/*pipsIsList*/ ctx[20] || /*pipSet*/ ctx[22].has(/*val*/ ctx[41]));
 	let if_block_anchor;
 	let if_block = show_if && create_if_block_5(ctx);
 
@@ -2009,7 +2016,7 @@ function create_each_block$1(ctx) {
 			insert(target, if_block_anchor, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*min, max, pipStep, step*/ 524302) show_if = getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]) !== /*min*/ ctx[1] && getValueFromIndex(/*i*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*pipStep*/ ctx[19], /*step*/ ctx[3]) !== /*max*/ ctx[2];
+			if (dirty[0] & /*min, max, pipStep, step, pipsIsList, pipSet*/ 5767182) show_if = /*val*/ ctx[41] !== /*min*/ ctx[1] && /*val*/ ctx[41] !== /*max*/ ctx[2] && (!/*pipsIsList*/ ctx[20] || /*pipSet*/ ctx[22].has(/*val*/ ctx[41]));
 
 			if (show_if) {
 				if (if_block) {
@@ -2034,7 +2041,7 @@ function create_each_block$1(ctx) {
 	};
 }
 
-// (126:2) {#if (all && last !== false) || last}
+// (123:2) {#if (all && last !== false) || last}
 function create_if_block$1(ctx) {
 	let span;
 	let span_style_value;
@@ -2057,8 +2064,8 @@ function create_if_block$1(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(span, "pointerdown", /*pointerdown_handler_2*/ ctx[34]),
-					listen(span, "pointerup", /*pointerup_handler_2*/ ctx[35])
+					listen(span, "pointerdown", /*pointerdown_handler_2*/ ctx[37]),
+					listen(span, "pointerup", /*pointerup_handler_2*/ ctx[38])
 				];
 
 				mounted = true;
@@ -2102,12 +2109,12 @@ function create_if_block$1(ctx) {
 	};
 }
 
-// (139:6) {#if all === 'label' || last === 'label'}
+// (136:6) {#if all === 'label' || last === 'label'}
 function create_if_block_1$1(ctx) {
 	let span;
 	let if_block0_anchor;
 	let html_tag;
-	let raw_value = /*formatter*/ ctx[15](coerceFloat(/*max*/ ctx[2]), /*pipCount*/ ctx[20], 100) + "";
+	let raw_value = /*formatter*/ ctx[15](coerceFloat(/*max*/ ctx[2]), /*pipCount*/ ctx[21], 100) + "";
 	let html_anchor;
 	let if_block0 = /*prefix*/ ctx[13] && create_if_block_3$1(ctx);
 	let if_block1 = /*suffix*/ ctx[14] && create_if_block_2$1(ctx);
@@ -2145,7 +2152,7 @@ function create_if_block_1$1(ctx) {
 				if_block0 = null;
 			}
 
-			if (dirty[0] & /*formatter, max, pipCount*/ 1081348 && raw_value !== (raw_value = /*formatter*/ ctx[15](coerceFloat(/*max*/ ctx[2]), /*pipCount*/ ctx[20], 100) + "")) html_tag.p(raw_value);
+			if (dirty[0] & /*formatter, max, pipCount*/ 2129924 && raw_value !== (raw_value = /*formatter*/ ctx[15](coerceFloat(/*max*/ ctx[2]), /*pipCount*/ ctx[21], 100) + "")) html_tag.p(raw_value);
 
 			if (/*suffix*/ ctx[14]) {
 				if (if_block1) {
@@ -2171,7 +2178,7 @@ function create_if_block_1$1(ctx) {
 	};
 }
 
-// (141:10) {#if prefix}
+// (138:10) {#if prefix}
 function create_if_block_3$1(ctx) {
 	let span;
 	let t;
@@ -2197,7 +2204,7 @@ function create_if_block_3$1(ctx) {
 	};
 }
 
-// (145:12) {#if suffix}
+// (142:12) {#if suffix}
 function create_if_block_2$1(ctx) {
 	let span;
 	let t;
@@ -2329,6 +2336,8 @@ function create_fragment$1(ctx) {
 }
 
 function instance$1($$self, $$props, $$invalidate) {
+	let pipsIsList;
+	let pipSet;
 	let stepMax;
 	let tooManyPips;
 	let stepDivisor;
@@ -2345,6 +2354,7 @@ function instance$1($$self, $$props, $$invalidate) {
 	let { reversed = false } = $$props;
 	let { hoverable = true } = $$props;
 	let { disabled = false } = $$props;
+	let { pips = [] } = $$props;
 	let { pipstep = undefined } = $$props;
 	let { all = true } = $$props;
 	let { first = undefined } = $$props;
@@ -2401,8 +2411,8 @@ function instance$1($$self, $$props, $$invalidate) {
 		labelDown(e);
 	};
 
-	const pointerup_handler_1 = (i, e) => {
-		labelUp(getValueFromIndex(i, min, max, pipStep, step), e);
+	const pointerup_handler_1 = (val, e) => {
+		labelUp(val, e);
 	};
 
 	const pointerdown_handler_2 = e => {
@@ -2418,13 +2428,14 @@ function instance$1($$self, $$props, $$invalidate) {
 		if ('min' in $$props) $$invalidate(1, min = $$props.min);
 		if ('max' in $$props) $$invalidate(2, max = $$props.max);
 		if ('step' in $$props) $$invalidate(3, step = $$props.step);
-		if ('value' in $$props) $$invalidate(23, value = $$props.value);
+		if ('value' in $$props) $$invalidate(25, value = $$props.value);
 		if ('values' in $$props) $$invalidate(4, values = $$props.values);
 		if ('vertical' in $$props) $$invalidate(5, vertical = $$props.vertical);
 		if ('reversed' in $$props) $$invalidate(6, reversed = $$props.reversed);
 		if ('hoverable' in $$props) $$invalidate(7, hoverable = $$props.hoverable);
 		if ('disabled' in $$props) $$invalidate(8, disabled = $$props.disabled);
-		if ('pipstep' in $$props) $$invalidate(24, pipstep = $$props.pipstep);
+		if ('pips' in $$props) $$invalidate(26, pips = $$props.pips);
+		if ('pipstep' in $$props) $$invalidate(27, pipstep = $$props.pipstep);
 		if ('all' in $$props) $$invalidate(9, all = $$props.all);
 		if ('first' in $$props) $$invalidate(10, first = $$props.first);
 		if ('last' in $$props) $$invalidate(11, last = $$props.last);
@@ -2435,32 +2446,40 @@ function instance$1($$self, $$props, $$invalidate) {
 		if ('precision' in $$props) $$invalidate(16, precision = $$props.precision);
 		if ('focus' in $$props) $$invalidate(17, focus = $$props.focus);
 		if ('orientationStart' in $$props) $$invalidate(18, orientationStart = $$props.orientationStart);
-		if ('moveHandle' in $$props) $$invalidate(25, moveHandle = $$props.moveHandle);
+		if ('moveHandle' in $$props) $$invalidate(28, moveHandle = $$props.moveHandle);
 	};
 
 	$$self.$$.update = () => {
+		if ($$self.$$.dirty[0] & /*pips*/ 67108864) {
+			$$invalidate(20, pipsIsList = Array.isArray(pips) || pips instanceof Set);
+		}
+
+		if ($$self.$$.dirty[0] & /*pipsIsList, pips*/ 68157440) {
+			$$invalidate(22, pipSet = new Set(pipsIsList ? pips : []));
+		}
+
 		if ($$self.$$.dirty[0] & /*vertical*/ 32) {
-			$$invalidate(29, stepMax = vertical ? 50 : 100);
+			$$invalidate(32, stepMax = vertical ? 50 : 100);
 		}
 
-		if ($$self.$$.dirty[0] & /*max, min, step, stepMax*/ 536870926) {
-			$$invalidate(27, tooManyPips = (max - min) / step >= stepMax);
+		if ($$self.$$.dirty[0] & /*max, min, step*/ 14 | $$self.$$.dirty[1] & /*stepMax*/ 2) {
+			$$invalidate(30, tooManyPips = (max - min) / step >= stepMax);
 		}
 
 		if ($$self.$$.dirty[0] & /*vertical*/ 32) {
-			$$invalidate(28, stepDivisor = vertical ? 10 : 20);
+			$$invalidate(31, stepDivisor = vertical ? 10 : 20);
 		}
 
-		if ($$self.$$.dirty[0] & /*max, min, stepDivisor*/ 268435462) {
-			$$invalidate(26, reducedSteps = (max - min) / stepDivisor);
+		if ($$self.$$.dirty[0] & /*max, min*/ 6 | $$self.$$.dirty[1] & /*stepDivisor*/ 1) {
+			$$invalidate(29, reducedSteps = (max - min) / stepDivisor);
 		}
 
-		if ($$self.$$.dirty[0] & /*pipstep, tooManyPips, reducedSteps*/ 218103808) {
+		if ($$self.$$.dirty[0] & /*pipstep, tooManyPips, reducedSteps*/ 1744830464) {
 			$$invalidate(19, pipStep = pipstep ?? (tooManyPips ? reducedSteps : 1));
 		}
 
 		if ($$self.$$.dirty[0] & /*max, min, step, pipStep*/ 524302) {
-			$$invalidate(20, pipCount = Math.floor((max - min) / (step * pipStep)));
+			$$invalidate(21, pipCount = Math.floor((max - min) / (step * pipStep)));
 		}
 	};
 
@@ -2485,10 +2504,13 @@ function instance$1($$self, $$props, $$invalidate) {
 		focus,
 		orientationStart,
 		pipStep,
+		pipsIsList,
 		pipCount,
+		pipSet,
 		labelDown,
 		labelUp,
 		value,
+		pips,
 		pipstep,
 		moveHandle,
 		reducedSteps,
@@ -2519,13 +2541,14 @@ class RangePips extends SvelteComponent {
 				min: 1,
 				max: 2,
 				step: 3,
-				value: 23,
+				value: 25,
 				values: 4,
 				vertical: 5,
 				reversed: 6,
 				hoverable: 7,
 				disabled: 8,
-				pipstep: 24,
+				pips: 26,
+				pipstep: 27,
 				all: 9,
 				first: 10,
 				last: 11,
@@ -2536,7 +2559,7 @@ class RangePips extends SvelteComponent {
 				precision: 16,
 				focus: 17,
 				orientationStart: 18,
-				moveHandle: 25
+				moveHandle: 28
 			},
 			add_css$1,
 			[-1, -1]
@@ -2580,7 +2603,7 @@ class RangePips extends SvelteComponent {
 	}
 
 	get value() {
-		return this.$$.ctx[23];
+		return this.$$.ctx[25];
 	}
 
 	set value(value) {
@@ -2633,8 +2656,17 @@ class RangePips extends SvelteComponent {
 		flush();
 	}
 
+	get pips() {
+		return this.$$.ctx[26];
+	}
+
+	set pips(pips) {
+		this.$$set({ pips });
+		flush();
+	}
+
 	get pipstep() {
-		return this.$$.ctx[24];
+		return this.$$.ctx[27];
 	}
 
 	set pipstep(pipstep) {
@@ -2733,7 +2765,7 @@ class RangePips extends SvelteComponent {
 	}
 
 	get moveHandle() {
-		return this.$$.ctx[25];
+		return this.$$.ctx[28];
 	}
 
 	set moveHandle(moveHandle) {
@@ -2742,7 +2774,7 @@ class RangePips extends SvelteComponent {
 	}
 }
 
-create_custom_element(RangePips, {"range":{"type":"Boolean"},"min":{},"max":{},"step":{},"value":{},"values":{},"vertical":{"type":"Boolean"},"reversed":{"type":"Boolean"},"hoverable":{"type":"Boolean"},"disabled":{"type":"Boolean"},"pipstep":{},"all":{"type":"Boolean"},"first":{},"last":{},"rest":{},"prefix":{},"suffix":{},"formatter":{},"precision":{},"focus":{},"orientationStart":{},"moveHandle":{}}, [], [], true);
+create_custom_element(RangePips, {"range":{"type":"Boolean"},"min":{},"max":{},"step":{},"value":{},"values":{},"vertical":{"type":"Boolean"},"reversed":{"type":"Boolean"},"hoverable":{"type":"Boolean"},"disabled":{"type":"Boolean"},"pips":{},"pipstep":{},"all":{"type":"Boolean"},"first":{},"last":{},"rest":{},"prefix":{},"suffix":{},"formatter":{},"precision":{},"focus":{},"orientationStart":{},"moveHandle":{}}, [], [], true);
 
 /* src/lib/components/RangeSlider.svelte generated by Svelte v4.2.9 */
 
@@ -3065,6 +3097,7 @@ function create_if_block(ctx) {
 
 	rangepips = new RangePips({
 			props: {
+				pips: /*pips*/ ctx[12],
 				values: /*values*/ ctx[0],
 				min: /*min*/ ctx[4],
 				max: /*max*/ ctx[5],
@@ -3099,6 +3132,7 @@ function create_if_block(ctx) {
 		},
 		p(ctx, dirty) {
 			const rangepips_changes = {};
+			if (dirty[0] & /*pips*/ 4096) rangepips_changes.pips = /*pips*/ ctx[12];
 			if (dirty[0] & /*values*/ 1) rangepips_changes.values = /*values*/ ctx[0];
 			if (dirty[0] & /*min*/ 16) rangepips_changes.min = /*min*/ ctx[4];
 			if (dirty[0] & /*max*/ 32) rangepips_changes.max = /*max*/ ctx[5];

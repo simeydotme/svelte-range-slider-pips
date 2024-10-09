@@ -241,7 +241,7 @@ I am very happy to accept;
 
 ### Svelte 3
 
-Because of the code in Range Slider Pips 3, it is now incompatible with Svelte version 3. 
+Because of the code in Range Slider Pips 3, it is now incompatible with Svelte version 3.
 
 If you are unable to upgrade your project, then I suggest looking for [Svelte-Range-Slider-Pips version `2.3.1`](https://github.com/simeydotme/svelte-range-slider-pips/tree/2.3.1) which
 will not be upgraded, but it's still pretty robust. You can install it like so;
@@ -261,8 +261,7 @@ npm install svelte-range-slider-pips@2.3.1 --save-dev  # if you prefer npm
 
 I'd be super excited if you find this project useful and wish to donate a small amount for my efforts!
 
-| <img src="https://user-images.githubusercontent.com/2817396/149629283-6002944f-9253-4e35-917d-89b476deae4e.png" width=30> |    [![£1 One Pound Tip](https://user-images.githubusercontent.com/2817396/149629980-08b9a952-bd6a-4c23-be78-05e3fd534352.png)](https://www.paypal.com/paypalme/simey/1) | [£1 GBP Tip](https://www.paypal.com/paypalme/simey/1)   |
-| ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------ |
+| <img src="https://user-images.githubusercontent.com/2817396/149629283-6002944f-9253-4e35-917d-89b476deae4e.png" width=30> |   [![£1 One Pound Tip](https://user-images.githubusercontent.com/2817396/149629980-08b9a952-bd6a-4c23-be78-05e3fd534352.png)](https://www.paypal.com/paypalme/simey/1) | [£1 GBP Tip](https://www.paypal.com/paypalme/simey/1)   |
+| ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------- |
 | <img src="https://user-images.githubusercontent.com/2817396/149629283-6002944f-9253-4e35-917d-89b476deae4e.png" width=30> |  [![£5 Five Pound Tip](https://user-images.githubusercontent.com/2817396/149629994-3a99770c-d333-46e7-9818-ab6b18ad0202.png)](https://www.paypal.com/paypalme/simey/5) | [£5 GBP Tip](https://www.paypal.com/paypalme/simey/5)   |
 | <img src="https://user-images.githubusercontent.com/2817396/149629283-6002944f-9253-4e35-917d-89b476deae4e.png" width=30> | [![£10 Ten Pound Tip](https://user-images.githubusercontent.com/2817396/149630000-95aa4234-ff67-4e7c-a7f4-ffd52f25e6d8.png)](https://www.paypal.com/paypalme/simey/10) | [£10 GBP Tip](https://www.paypal.com/paypalme/simey/10) |
-
