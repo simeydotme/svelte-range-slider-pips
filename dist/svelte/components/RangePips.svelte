@@ -16,6 +16,7 @@ export let vertical = false;
 export let reversed = false;
 export let hoverable = true;
 export let disabled = false;
+export let pips = [];
 export let pipstep = void 0;
 export let all = true;
 export let first = void 0;
@@ -29,6 +30,10 @@ export let focus;
 export let orientationStart;
 export let moveHandle;
 let clientStart = null;
+$:
+  pipsIsList = Array.isArray(pips) || pips instanceof Set;
+$:
+  pipSet = new Set(pipsIsList ? pips : []);
 $:
   stepMax = vertical ? 50 : 100;
 $:
@@ -64,6 +69,7 @@ function labelUp(pipValue, event) {
       class="pip first"
       class:selected={isSelected(min, values, precision)}
       class:in-range={isInRange(min, values, range)}
+      class:hidden={pipsIsList && !pipSet.has(min)}
       style="{orientationStart}: 0%;"
       on:pointerdown={(e) => {
         labelDown(e);
@@ -86,33 +92,26 @@ function labelUp(pipValue, event) {
 
   {#if (all && rest !== false) || rest}
     {#each Array(pipCount + 1) as _, i}
-      {#if getValueFromIndex(i, min, max, pipStep, step) !== min && getValueFromIndex(i, min, max, pipStep, step) !== max}
+      {@const val = getValueFromIndex(i, min, max, pipStep, step)}
+      {#if val !== min && val !== max && (!pipsIsList || pipSet.has(val))}
         <span
           class="pip"
-          class:selected={isSelected(
-            getValueFromIndex(i, min, max, pipStep, step),
-            values,
-            precision
-          )}
-          class:in-range={isInRange(getValueFromIndex(i, min, max, pipStep, step), values, range)}
-          style="{orientationStart}: {valueAsPercent(
-            getValueFromIndex(i, min, max, pipStep, step),
-            min,
-            max
-          )}%;"
+          class:selected={isSelected(val, values, precision)}
+          class:in-range={isInRange(val, values, range)}
+          style="{orientationStart}: {valueAsPercent(val, min, max)}%;"
           on:pointerdown={(e) => {
             labelDown(e);
           }}
           on:pointerup={(e) => {
-            labelUp(getValueFromIndex(i, min, max, pipStep, step), e);
+            labelUp(val, e);
           }}
         >
           {#if all === 'label' || rest === 'label'}
             <span class="pipVal">
               {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{@html formatter(
-                getValueFromIndex(i, min, max, pipStep, step),
+                val,
                 i,
-                valueAsPercent(getValueFromIndex(i, min, max, pipStep, step), min, max, precision)
+                valueAsPercent(val, min, max, precision)
               )}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
             </span>
           {/if}

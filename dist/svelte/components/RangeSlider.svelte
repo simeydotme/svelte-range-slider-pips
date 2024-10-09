@@ -443,12 +443,13 @@ function ariaLabelFormatter(value2, index) {
   {#if range}
     <span
       class="rangeBar"
-      style="{orientationStart}: {rangeStart($springPositions)}%; 
+      style="{orientationStart}: {rangeStart($springPositions)}%;
              {orientationEnd}: {rangeEnd($springPositions)}%;"
     />
   {/if}
   {#if pips}
     <RangePips
+      {pips}
       {values}
       {min}
       {max}
