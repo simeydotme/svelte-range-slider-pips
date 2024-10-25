@@ -170,7 +170,8 @@ export const getValueFromIndex = (
   min: number,
   max: number,
   pipStep: number,
-  step: number
+  step: number,
+  precision: number = 2
 ) => {
-  return coerceFloat(min + index * step * pipStep);
+  return coerceFloat(min + index * step * pipStep, precision);
 };

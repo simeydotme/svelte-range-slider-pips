@@ -155,8 +155,20 @@
    * the orientation of the handles/pips based on the
    * input values of vertical and reversed
    **/
-  $: orientationStart = vertical ? (reversed ? 'top' : 'bottom') : reversed ? 'right' : 'left';
-  $: orientationEnd = vertical ? (reversed ? 'bottom' : 'top') : reversed ? 'left' : 'right';
+  $: orientationStart = vertical
+    ? reversed
+      ? 'top'
+      : 'bottom'
+    : reversed
+      ? 'right'
+      : ('left' as 'left' | 'right' | 'top' | 'bottom');
+  $: orientationEnd = vertical
+    ? reversed
+      ? 'bottom'
+      : 'top'
+    : reversed
+      ? 'left'
+      : ('right' as 'left' | 'right' | 'top' | 'bottom');
 
   /**
    * check if an element is a handle on the slider

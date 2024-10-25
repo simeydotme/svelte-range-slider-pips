@@ -36,7 +36,7 @@
 
   // stylistic props
   export let focus: boolean;
-  export let orientationStart: string;
+  export let orientationStart: 'left' | 'right' | 'top' | 'bottom';
 
   // methods
   export let moveHandle: (index: number | null, value: number) => void;
@@ -87,6 +87,7 @@
       class:selected={isSelected(min, values, precision)}
       class:in-range={isInRange(min, values, range)}
       style="{orientationStart}: 0%;"
+      data-val={coerceFloat(min, precision)}
       on:pointerdown={(e) => {
         labelDown(e);
       }}
@@ -96,11 +97,9 @@
     >
       {#if all === 'label' || first === 'label'}
         <span class="pipVal">
-          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{@html formatter(
-            coerceFloat(min),
-            0,
-            0
-          )}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
+          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}
+          {@html formatter(coerceFloat(min, precision), 0, 0)}
+          {#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
         </span>
       {/if}
     </span>
@@ -108,34 +107,26 @@
 
   {#if (all && rest !== false) || rest}
     {#each Array(pipCount + 1) as _, i}
-      {#if getValueFromIndex(i, min, max, pipStep, step) !== min && getValueFromIndex(i, min, max, pipStep, step) !== max}
+      {@const val = getValueFromIndex(i, min, max, pipStep, step, precision)}
+      {#if val !== min && val !== max}
         <span
           class="pip"
-          class:selected={isSelected(
-            getValueFromIndex(i, min, max, pipStep, step),
-            values,
-            precision
-          )}
-          class:in-range={isInRange(getValueFromIndex(i, min, max, pipStep, step), values, range)}
-          style="{orientationStart}: {valueAsPercent(
-            getValueFromIndex(i, min, max, pipStep, step),
-            min,
-            max
-          )}%;"
+          class:selected={isSelected(val, values, precision)}
+          class:in-range={isInRange(val, values, range)}
+          style="{orientationStart}: {valueAsPercent(val, min, max, precision)}%;"
+          data-val={val}
           on:pointerdown={(e) => {
             labelDown(e);
           }}
           on:pointerup={(e) => {
-            labelUp(getValueFromIndex(i, min, max, pipStep, step), e);
+            labelUp(val, e);
           }}
         >
           {#if all === 'label' || rest === 'label'}
             <span class="pipVal">
-              {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{@html formatter(
-                getValueFromIndex(i, min, max, pipStep, step),
-                i,
-                valueAsPercent(getValueFromIndex(i, min, max, pipStep, step), min, max, precision)
-              )}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
+              {#if true || prefix}<span class="pipVal-prefix">{prefix}</span>{/if}
+              {@html formatter(val, i, valueAsPercent(val, min, max, precision))}
+              {#if true || suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
             </span>
           {/if}
         </span>
@@ -149,6 +140,7 @@
       class:selected={isSelected(max, values, precision)}
       class:in-range={isInRange(max, values, range)}
       style="{orientationStart}: 100%;"
+      data-val={coerceFloat(max, precision)}
       on:pointerdown={(e) => {
         labelDown(e);
       }}
@@ -158,11 +150,9 @@
     >
       {#if all === 'label' || last === 'label'}
         <span class="pipVal">
-          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}{@html formatter(
-            coerceFloat(max),
-            pipCount,
-            100
-          )}{#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
+          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}
+          {@html formatter(coerceFloat(max, precision), pipCount, 100)}
+          {#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
         </span>
       {/if}
     </span>
@@ -223,6 +213,7 @@
     position: absolute;
     top: 0.4em;
     transform: translate(-50%, 25%);
+    display: inline-flex;
   }
 
   :global(.rangePips.vertical .pipVal) {
