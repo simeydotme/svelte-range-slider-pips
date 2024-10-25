@@ -22,7 +22,7 @@ declare const __propDef: {
         formatter?: Formatter | undefined;
         precision?: number | undefined;
         focus: boolean;
-        orientationStart: string;
+        orientationStart: 'left' | 'right' | 'top' | 'bottom';
         moveHandle: (index: number | null, value: number) => void;
     };
     events: {

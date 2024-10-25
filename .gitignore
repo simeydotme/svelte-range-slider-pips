@@ -8,6 +8,7 @@ node_modules
 /tests/**/node_modules
 /.svelte-kit
 /package
+*/routes/isolate
 .env
 .env.*
 !.env.example

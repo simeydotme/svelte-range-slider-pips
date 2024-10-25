@@ -81,4 +81,4 @@ export declare const isSelected: (value: number, values: number[], precision?: n
  * @param step the step of the range slider
  * @returns {number} the value of the pip
  */
-export declare const getValueFromIndex: (index: number, min: number, max: number, pipStep: number, step: number) => number;
+export declare const getValueFromIndex: (index: number, min: number, max: number, pipStep: number, step: number, precision?: number) => number;

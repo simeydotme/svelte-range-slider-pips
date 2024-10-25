@@ -149,6 +149,6 @@ export const isSelected = (value, values, precision = 2) => {
  * @param step the step of the range slider
  * @returns {number} the value of the pip
  */
-export const getValueFromIndex = (index, min, max, pipStep, step) => {
-    return coerceFloat(min + index * step * pipStep);
+export const getValueFromIndex = (index, min, max, pipStep, step, precision = 2) => {
+    return coerceFloat(min + index * step * pipStep, precision);
 };
