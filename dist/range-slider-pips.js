@@ -1532,6 +1532,7 @@
 	 * @param max the maximum value of the range slider
 	 * @param pipStep the step of the pips
 	 * @param step the step of the range slider
+	 * @param precision the precision to check against
 	 * @returns {number} the value of the pip
 	 */
 	const getValueFromIndex = (index, min, max, pipStep, step, precision = 2) => {
