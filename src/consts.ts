@@ -21,7 +21,7 @@ export const KNOWN_LANGUAGES = {
 } as const
 export const KNOWN_LANGUAGE_CODES = Object.values(KNOWN_LANGUAGES)
 
-export const EDIT_URL = `https://github.com/simeydotme/${REPOPATH}/tree/astro-pages`
+export const EDIT_URL = `https://github.com/simeydotme/${REPOPATH}/blob/astro-pages`
 export const COMMUNITY_INVITE_URL = `https://github.com/simeydotme/${REPOPATH}/discussions`
 
 // See "Algolia" section of the README for more information.
@@ -51,6 +51,7 @@ export const SIDEBAR: Sidebar = {
       { text: 'Basic Usage', link: `${REPOPATH}/en/basic-usage` },
       { text: 'Options', link: `${REPOPATH}/en/options`, 
         children: [
+          { text: 'value', link: `${REPOPATH}/en/options#value` },
           { text: 'values', link: `${REPOPATH}/en/options#values` },
           { text: 'min', link: `${REPOPATH}/en/options#min` },
           { text: 'max', link: `${REPOPATH}/en/options#max` },
@@ -89,7 +90,8 @@ export const SIDEBAR: Sidebar = {
         children: [
           { text: 'Color Variables', link: `${REPOPATH}/en/styling#colors` },
           { text: 'Size', link: `${REPOPATH}/en/styling#size` },
-          { text: 'CSS Structure', link: `${REPOPATH}/en/styling#structure` }  
+          { text: 'CSS Structure', link: `${REPOPATH}/en/styling#structure` },
+          { text: 'Pips & Steps', link: `${REPOPATH}/en/styling/pips` },
         ]
       },
       { text: 'Examples', link: `${REPOPATH}/en/examples`, 
@@ -105,6 +107,7 @@ export const SIDEBAR: Sidebar = {
           { text: 'Pushy', link: `${REPOPATH}/en/examples/range#pushy-range-handles` },
           { text: 'Float', link: `${REPOPATH}/en/examples/float` },
           { text: 'Vertical', link: `${REPOPATH}/en/examples/vertical` },
+          { text: 'Reversed', link: `${REPOPATH}/en/examples/reversed` },
           { text: 'Prefix & Suffix', link: `${REPOPATH}/en/examples/prefix-suffix` },
           { text: 'Formatter', link: `${REPOPATH}/en/examples/formatter` },
           { text: 'Disabled', link: `${REPOPATH}/en/examples/disabled` },
@@ -113,6 +116,7 @@ export const SIDEBAR: Sidebar = {
       },
       { text: 'Recipes', link: `${REPOPATH}/en/recipes`, 
         children: [
+          { text: 'Label Inside Handle', link: `${REPOPATH}/en/recipes/month-picker` },
           { text: 'DaisyUi', link: `${REPOPATH}/en/recipes/daisy-ui` },
           { text: 'Color Picker', link: `${REPOPATH}/en/recipes/color-picker` },
           { text: 'Price Gradient', link: `${REPOPATH}/en/recipes/price-range` },

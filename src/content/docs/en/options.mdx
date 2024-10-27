@@ -8,6 +8,11 @@ import Info from '~components/Reusable/Info.astro'
 Below you'll find a list of options (props) that you can pass to the component to
 configure it to your liking. There's a link to an example for each option.
 
+<Option propName="value" propType="Number" defaultValue="50" link="values">  
+  A default value to apply to the Slider. 
+  <Info>A Slider with `range` property must use `values` instead</Info>
+</Option>
+
 <Option propName="values" propType="Array" defaultValue="[50]" link="values">
   Array of values to apply on the Slider. If multiple values are provided, multiple handles will be rendered.  
   <Info>A Slider with `range` property set can only have two values max</Info>

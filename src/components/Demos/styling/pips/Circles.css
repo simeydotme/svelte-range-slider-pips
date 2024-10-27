@@ -1,0 +1,55 @@
+
+/* styles for all pips */
+#circles .rangePips .pip {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--handle-focus);
+  transform: translate3d(-50%, 0, 0.1px) scale(0.1);
+  opacity: 0.9999;
+  will-change: transform opacity;
+}
+#circles .pipVal {
+  opacity: 0;
+}
+
+/* styles for the selected pip */
+#circles .rangePips .pip.selected {
+  transform: translate3d(-50%, 6px, 0.1px) scale(0.8);
+}
+#circles .pip.selected .pipVal {
+  opacity: 1;
+  transition-duration: 0s;
+}
+
+/* styles for the pips directly after the selected pip */
+#circles .rangePips .pip.selected + * {
+  transform: translate3d(calc(-50% + 2px), 4px, 0.1px) scale(0.6);
+}
+#circles .rangePips .pip.selected + * + * {
+  
+  transform: translate3d(calc(-50% + 2px), 2px, 0.1px) scale(0.4);
+}
+#circles .rangePips .pip.selected + * + * + * {
+  
+  transform: translate3d(calc(-50% + 1px), 1px, 0.1px) scale(0.2);
+}
+
+/* styles for the pips directly before the selected pip */
+#circles .rangePips .pip:has(+ .selected) {
+  transform: translate3d(calc(-50% - 2px), 4px, 0.1px) scale(0.6);
+}
+#circles .rangePips .pip:has(+ * + .selected) {
+  
+  transform: translate3d(calc(-50% - 2px), 2px, 0.1px) scale(0.4);
+}
+#circles .rangePips .pip:has(+ * + * + .selected) {
+  
+  transform: translate3d(calc(-50% - 1px), 1px, 0.1px) scale(0.2);
+}
+
+/* hide the focus ring when hovering */
+.rangeSlider.hoverable:not(.disabled) .rangeHandle::before {
+  display: none;
+  box-shadow: none;
+}

@@ -77,16 +77,29 @@ the `pipstep` is set to `3` but the `max` props are not multiples of `3`.</Info>
 
 ## Extreme values &amp; Labels
 Here we're demonstrating some very extreme `max` values that a Slider
-may encounter. At this extreme it would be unwise and impossible to show a
-pip for every value. So we use `pipstep` to limit the amount of pips shown.
+may encounter. At this extreme it would be unwise (and practically impossible) to show a
+pip for every value. So we use `pipstep` to limit the amount of pips that are shown while
+still allowing values in-between to be selected.
 
-You could imagine this setup for something like a Home selling website to
+You could imagine this setup for something like a Home selling website; to
 restrict the price range the user is looking to buy in.
 
 <Demo name="Labels on Extreme Ranges" client:visible>
   <PipStepsExtreme client:visible />
   <Code slot="svelte" code={cleanImport(PipStepsExtremeRaw)} lang="svelte" />
 </Demo>
+
+<Note title="Keyboard" type="info">
+  Hint: When values are this huge, it's difficult to select with a mouse/touch. So the
+  slider has the ability to move the handle with the keyboard. Try using the arrow keys.  
+  
+  - <kbd title="Ctrl">Ctrl</kbd><kbd title="Left arrow">←</kbd> Decrease value by 1%
+  - <kbd title="Ctrl">Ctrl</kbd><kbd title="Right arrow">→</kbd> Increase value by 1%
+  - <kbd title="Shift">Shift</kbd><kbd title="Left arrow">←</kbd> Decrease value by 10%
+  - <kbd title="Shift">Shift</kbd><kbd title="Right arrow">→</kbd> Increase value by 10%
+
+  
+</Note>
 
 <Note title="Performance" type="warning">
   It’d be quite bad for performance to display too many `pips`, as each one is an 
@@ -106,8 +119,9 @@ So far we've seen the use of `pipstep` to limit how many pips are rendered to th
 slider. But sometimes we don't want to only choose to show/hide, but also how to style them
 differently based on the `pip` position on the Slider.
 
-Unique styling can be achieved with css, and the
-css selector `nth-child()`. [See here for some examples](../styling/pip-step)
+Unique styling can be achieved with css, and the css selector `nth-child()`, or targeting
+the `[data-val]` attribute.   
+[See pip styling for examples](../styling/pip-step)
 
 
 
@@ -119,7 +133,7 @@ rendered on the Slider is fairly unreadable. And sometimes we don't even want to
 numbers at all. We might want to display a currency symbol, or a percentage, or just
 strings of text.
 
-Special formatting of `labels` can be done using the `formatter()` property. 
+Special formatting of `labels` can be done using the `formatter()` property.  
 [Read more about `formatter()`](./)
 
 

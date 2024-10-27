@@ -259,10 +259,10 @@ code {
 
 pre.astro-code {
   border-image: url(/public/frame3.png);
-  border-image-slice: 20 14 18 19;
+  border-image-slice: 20 14 18 19 fill;
   border-image-width: 20px 14px 18px 19px;
   border-image-outset: 10px 10px 10px 10px;
-  border-image-repeat: repeat repeat; 
+  border-image-repeat: repeat repeat;
   margin-block: 2rem;
   border-radius: 0;
   background-color: var(--color-code-block);
@@ -305,7 +305,8 @@ table {
 }
 
 /* Zebra striping */
-tr:nth-of-type(odd) {
+tbody tr:nth-of-type(odd) th,
+  tbody tr:nth-of-type(odd) td {
   background: var(--theme-bg-hover);
 }
 th {
@@ -315,8 +316,16 @@ th {
 }
 td,
 th {
-  padding: 6px;
+  padding: 0.5rem 0.25rem;
   text-align: left;
+}  
+tbody tr > th:first-child,
+tbody tr > td:first-child {
+  border-radius: 0.5rem 0 0 0.5rem ;
+}
+tbody tr > th:last-child,
+tbody tr > td:last-child {
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 
 pre {

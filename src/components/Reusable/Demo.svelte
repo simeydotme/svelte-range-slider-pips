@@ -63,7 +63,7 @@
     
     <div class="tabs">
 
-      <div role="tablist" aria-label={label} bind:this={tablist}>
+      <div class="tab-list" role="tablist" aria-label={label} bind:this={tablist}>
 
         {#each panels as panel, index}
           {#if $$slots[panel]}
@@ -217,17 +217,13 @@
   }
 
   .tabs {
-    border-image: url(/public/frame3.png);
-    border-image-slice: 20 14 0 19 fill;
-    border-image-width: 20px 14px 0px 19px;
-    border-image-outset: 10px 10px 0px 10px;
-    border-image-repeat: repeat repeat;
 
     --padding-block: 1rem;
     --padding-inline: 2rem;
     padding-inline: var(--padding-inline);
     padding-inline-end: calc(var(--padding-inline) * 2);
     margin-inline: calc(var(--padding-inline) * -1);
+    
   }
   
   @media (min-width: 37.75em) {
@@ -240,18 +236,27 @@
 
   .tabs [role="tablist"] {
 
+    border-image: url(/public/frame3.png);
+    border-image-slice: 20 14 0 19 fill;
+    border-image-width: 20px 14px 0px 19px;
+    border-image-outset: 10px 10px 0px 10px;
+    border-image-repeat: repeat repeat;
+    
     display: flex;
     gap: .5rem;
     padding-inline: .5rem;
-    padding-block-end: .5rem;
+    padding-block-end: 1rem;
     margin-inline: 0;
+    margin-block-end: 0rem;
     list-style: none;
     color: var(--theme-code-text);
     border-bottom: 1px solid hsla(var(--color-base-white), 30%, 1);
     position: relative;
     z-index: 2;
+ 
 
-  }
+  } 
+
 
   .tabs [role="tab"] {
     background: transparent;

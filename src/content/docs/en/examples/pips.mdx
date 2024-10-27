@@ -15,6 +15,10 @@ import PipsRaw from '~demos/examples/pips/Pips.svelte?raw';
 import PipDisplay from '~demos/examples/pips/PipDisplay.svelte';
 import PipDisplayRaw from '~demos/examples/pips/PipDisplay.svelte?raw';
 
+import PipExtreme from '~demos/examples/pips/PipExtreme.svelte';
+import PipExtremeRaw from '~demos/examples/pips/PipExtreme.svelte?raw';
+import PipExtremeCss from '~demos/examples/pips/PipExtreme.css?raw';
+
 
 
 
@@ -48,6 +52,21 @@ This is also true for `labels`. [See more here](./pip-labels)
     <RangeSlider pips bind:all bind:first bind:last bind:rest />
     ```
   </div>
+</Demo>
+
+
+
+
+## Extreme control with CSS
+
+There are scenarios whereby you may wish to only show a certain
+subset of pips on the slider, for this we should consider using
+css to hide the pips that we don't want to show.
+
+<Demo name="Only show a subset of pips" client:visible>
+  <PipExtreme client:visible />
+  <Code slot="svelte" code={cleanImport(PipExtremeRaw)} lang="svelte" />
+  <Code slot="css" code={PipExtremeCss} lang="css" />
 </Demo>
 
 

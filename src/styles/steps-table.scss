@@ -5,19 +5,23 @@
   padding-bottom: 2em;
   scrollbar-width: thin;
   scrollbar-color: hsla( var(--color-base-code-block), 70%, 1) hsla( var(--color-base-code-block), 90%, 1);
+  margin-block-start: 1em;
   
   td, th {
     text-align: center;
-    vertical-align: top;
     padding-top: .25rem;
   }
 
   td:nth-child(1),
   td:nth-child(2) {
-    min-width: 3em;
-    width: 3em;
-    font-size: 1.75em;
+    min-width: 2em;
+    font-size: 1.25em;
+    font-family: var(--font-body);
+    font-weight: 700;
     padding: .25rem 0 0;
+  }
+  thead code {
+    white-space: nowrap;
   }
 
   td:nth-last-child(2),
@@ -28,12 +32,28 @@
 
   td:nth-last-child(1),
   th:nth-last-child(1) {
-    min-width: 4em;
-    width: 4em;
+    min-width: 3em;
+    font-size: 1.5em;
   }
 
-  th {
-    background: hsla( var(--color-base-code-block), 70%, 1);
+  thead th:after {
+    content: '';
+    position: absolute;
+    inset: 0 0 0.5rem 0;
+    z-index: -1;
+    background: hsla( var(--color-base-code-block), 80%, 1);
+  }
+
+  thead  th {
+    position: relative;
+    padding-block-end: 1rem;
+    padding-block-start: 0.4rem;
+  }
+  thead tr > th:first-child:after {
+    border-radius: 2em 0 0 2em ;
+  }
+  thead tr > th:last-child:after {
+    border-radius: 0 2em 2em 0;
   }
 
 }

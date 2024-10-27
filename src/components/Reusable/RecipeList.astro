@@ -11,10 +11,14 @@
 
 
 <style>
+  .recipe-wrapper {
+    container: recipes / inline-size;
+
+  }
   .recipe-list {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
+    display: grid;
+    list-style: none;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
     gap: 1rem;
     width: 100%;
     padding: 0;

@@ -5,6 +5,7 @@
  */
 export const cleanImport = (code: string) => {
   code = code.replace(/import.*;?[\s\n]*/gi, "");
+  code = code.replace(/[\s]?<script hide>.*?<\/script>[\s\n\t]+?/gs, "");
   code = code.replace(/[\s]*?<pre>.*?<\/pre>/g, "");
   code = code.replace(/[\s]*?<code data-values.*?>.*?<\/code>/g, "");
   code = code.replace(/[\s]+?<\w*? hide>.*?<\/\w+?>/gs, "");

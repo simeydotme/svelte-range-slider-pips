@@ -20,11 +20,13 @@ import CombinedTableRaw from '~demos/examples/steps/CombinedTable.svelte?raw';
 Because we have two ways of determining how `pips` are rendered along the
 Slider, here's a breakdown of how they interact with each other.
 
-- **`step`**: determines how many _**points are selectable**_ along the Slider
-- **`pipstep`**:  determines how many _**points are visible**_ along the Slider
+- **`step`**: determines how many _**points are selectable**_ along the Slider.  
+  <small><em>This is for interaction. Non-selectable pips are not rendered at all.</em></small>
+- **`pipstep`**:  determines how many _**points are visible**_ along the Slider.  
+  <small><em>This is visual, pips that are not shown are still rendered.</em></small>
 
 ## Examples
 
-Here's a table demonstrating how the two interact with each other.
+Here's a table demonstrating how the two interact with each other.  
 
 <CombinedTable client:visible />

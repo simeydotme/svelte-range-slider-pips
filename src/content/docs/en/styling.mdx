@@ -6,8 +6,8 @@ description: 'How to style your Range Slider'
 import Info from "~components/Reusable/Info.astro";
 import Note from "~components/Reusable/Note.astro";
 import Demo from '~components/Reusable/Demo.svelte';
-import Variables from "~demos/styling/variables.svelte";
-import Sizing from "~demos/styling/sizing.svelte";
+import Variables from "~demos/styling/Variables.svelte";
+import Sizing from "~demos/styling/Sizing.svelte";
 
 
 ## Colors
@@ -76,6 +76,13 @@ of the Slider by changing the `font-size` of the base `.rangeSlider` element.
   <Sizing client:visible />
 </Demo>
 
+<Note title="Distinct Sizes" type="info">
+  Setting the font-size on the base element will scale every part of the
+  slider uniformly. But if you want to have different sizes for different
+  parts of the slider, you can adjust the sizes of each part independently
+  using [the css structure](#structure) as a reference.
+</Note>
+
 
 
 ## Structure
@@ -83,8 +90,8 @@ of the Slider by changing the `font-size` of the base `.rangeSlider` element.
 Below is a quick rundown of the main `<html>` elements that
 have classes applied, allowing them to be modified with css.
 
-<Note>There's a bunch of demos in the Examples section that show
-  how to style the Slider in different ways.</Note>
+<Note>Check out [the Recipes section](./recipes) for some examples of using 
+the css structure to style the Slider in different ways.</Note>
 
 ```css
 /* main slider element */
@@ -106,16 +113,17 @@ have classes applied, allowing them to be modified with css.
 /* slider range */
 .rangeSlider > .rangeBar {}                    /* the range between the two handles */
 /* slider pips */
-.rangeSlider > .rangePips {}                   /* the container element for the pips */
-.rangeSlider > .rangePips.focus {}             /* if slider is focussed */
-.rangeSlider > .rangePips.vertical {}          /* if slider is vertical */
-.rangeSlider > .rangePips.hoverable {}         /* if the pips allow hover effect */
-.rangeSlider > .rangePips > .pip {}            /* an individual pip */
-.rangeSlider > .rangePips > .pip.first {}      /* the first pip on the slider */
-.rangeSlider > .rangePips > .pip.last {}       /* the last pip on the slider */
-.rangeSlider > .rangePips > .pip.selected {}   /* if a pip is selected */
-.rangeSlider > .rangePips > .pip.in-range {}   /* if a pip is somewhere in the range */
-.rangeSlider > .rangePips > .pip > .pipVal {}   /* the label for the pip */
+.rangeSlider > .rangePips {}                      /* the container element for the pips */
+.rangeSlider > .rangePips.focus {}                /* if slider is focussed */
+.rangeSlider > .rangePips.vertical {}             /* if slider is vertical */
+.rangeSlider > .rangePips.hoverable {}            /* if the pips allow hover effect */
+.rangeSlider > .rangePips > .pip {}               /* an individual pip */
+.rangeSlider > .rangePips > .pip.first {}         /* the first pip on the slider */
+.rangeSlider > .rangePips > .pip.last {}          /* the last pip on the slider */
+.rangeSlider > .rangePips > .pip[data-val="0"] {} /* the pip with the value of 0 */
+.rangeSlider > .rangePips > .pip.selected {}      /* if a pip is currently selected */
+.rangeSlider > .rangePips > .pip.in-range {}      /* if a pip is between the min and max */
+.rangeSlider > .rangePips > .pip > .pipVal {}     /* the label for the pip */
 ```
 
 <Info>Additionally, if you supply and custom html to the `formatter()` function,

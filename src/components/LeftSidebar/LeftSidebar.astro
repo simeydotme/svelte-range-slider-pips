@@ -1,17 +1,15 @@
 ---
-import { getLanguageFromURL } from '../../languages'
-import { SIDEBAR } from '../../consts'
+import { getLanguageFromURL } from "../../languages";
+import { SIDEBAR } from "../../consts";
 
 type Props = {
-  currentPage: string
-}
+  currentPage: string;
+};
 
-const { currentPage } = Astro.props
-const currentPageMatch = currentPage.endsWith('/')
-  ? currentPage.slice(1, -1)
-  : currentPage.slice(1)
-const langCode = getLanguageFromURL(currentPage)
-const sidebar = SIDEBAR[langCode]
+const { currentPage } = Astro.props;
+const currentPageMatch = currentPage.endsWith("/") ? currentPage.slice(1, -1) : currentPage.slice(1);
+const langCode = getLanguageFromURL(currentPage);
+const sidebar = SIDEBAR[langCode];
 ---
 
 <nav aria-labelledby="grid-left">
@@ -23,36 +21,35 @@ const sidebar = SIDEBAR[langCode]
             <h2>{header}</h2>
             <ul>
               {children.map((child) => {
-                const url = Astro.site?.pathname + child.link
-                const ariaCurrent = currentPageMatch === child.link.split("#")[0] ? 'page' : false
-                if ( !child.children || child.children.length === 0 ) {
+                const url = Astro.site?.pathname + child.link;
+                if (!child.children || child.children.length === 0) {
+                  const ariaCurrent = child.link.endsWith(currentPageMatch) ? "page" : false;
                   return (
                     <li class="nav-link">
-                      <a href={url} aria-current={ ariaCurrent }>
+                      <a href={url} aria-current={ariaCurrent}>
                         {child.text}
                       </a>
                     </li>
-                  )
+                  );
                 } else {
+                  const ariaCurrent = currentPageMatch === child.link.split("#")[0] ? "page" : child.link.endsWith(currentPageMatch) ? "page" : false;
                   return (
                     <li class="nav-link">
-                      <a href={url} aria-current={ ariaCurrent }>
+                      <a href={url} aria-current={ariaCurrent}>
                         {child.text}
                       </a>
                       <ul>
                         {child.children.map((grandchild) => {
-                          const url = Astro.site?.pathname + grandchild.link
+                          const url = Astro.site?.pathname + grandchild.link;
                           return (
-                          <li class="nav-link nav-sublink">
-                            <a href={url}>
-                              {grandchild.text}
-                            </a>
-                          </li>
-                          )
+                            <li class="nav-link nav-sublink">
+                              <a href={url}>{grandchild.text}</a>
+                            </li>
+                          );
                         })}
                       </ul>
                     </li>
-                  )
+                  );
                 }
               })}
             </ul>
@@ -64,18 +61,18 @@ const sidebar = SIDEBAR[langCode]
 </nav>
 
 <script is:inline>
-  window.addEventListener('DOMContentLoaded', () => {
-    var target = document.querySelector('[aria-current="page"]')
+  window.addEventListener("DOMContentLoaded", () => {
+    var target = document.querySelector('[aria-current="page"]');
     if (target && target.offsetTop > window.innerHeight - 100) {
-      document.querySelector('.nav-groups').scrollTop = target.offsetTop
+      document.querySelector(".nav-groups").scrollTop = target.offsetTop;
     }
   });
   const focusSubLink = () => {
     const url = window.location.pathname + window.location.hash;
-    document.querySelectorAll(`.nav-sublink a`)?.forEach((el) => el.removeAttribute('aria-current'));
-    document.querySelector(`.nav-sublink a[href="${url}"]`)?.setAttribute('aria-current', 'page');
-  }
-  window.addEventListener('hashchange', focusSubLink);
+    document.querySelectorAll(`.nav-sublink a`)?.forEach((el) => el.removeAttribute("aria-current"));
+    document.querySelector(`.nav-sublink a[href="${url}"]`)?.setAttribute("aria-current", "page");
+  };
+  window.addEventListener("hashchange", focusSubLink);
   focusSubLink();
 </script>
 
@@ -90,8 +87,10 @@ const sidebar = SIDEBAR[langCode]
     padding: 0 1rem;
     overflow-x: visible;
     overflow-y: auto;
+    scrollbar-width: thin;
     max-height: 100vh;
     max-height: 100dvh;
+    scroll-padding-block: 2rem;
   }
 
   .nav-groups > li + li {
@@ -99,7 +98,7 @@ const sidebar = SIDEBAR[langCode]
   }
 
   .nav-groups > :last-child {
-    padding-bottom: calc( 2rem + var(--theme-navbar-height) );
+    padding-bottom: calc(2rem + var(--theme-navbar-height));
   }
 
   .nav-group-title {
@@ -113,7 +112,7 @@ const sidebar = SIDEBAR[langCode]
   .nav-link a {
     font-size: 1rem;
     margin: 1px;
-    padding: 0.3rem 1rem;
+    padding: 0.2rem 1rem 0.35rem;
     text-decoration: none;
     display: block;
     border-radius: 99em;
@@ -122,7 +121,7 @@ const sidebar = SIDEBAR[langCode]
   .nav-sublink a {
     margin-block: 0;
     margin-inline-start: 1rem;
-    padding-block: 0 .1rem;
+    padding-block: 0 0.1rem;
     padding-inline-start: 1rem;
     border-radius: 0;
     border-left: 2px solid var(--theme-bg-hover);
@@ -140,16 +139,17 @@ const sidebar = SIDEBAR[langCode]
     border-left: 2px solid hsla(var(--color-gray-70), 1);
   }
 
-.nav-link a[aria-current='page'] {
-  color: var(--theme-text-accent);
-  background-color: var(--theme-bg-accent);
-  font-weight: 600;
-}
+  .nav-link a[aria-current="page"],
+  .nav-link:not(.nav-sublink):has(a[aria-current="page"]) > a {
+    color: var(--theme-text-accent);
+    background-color: var(--theme-bg-accent);
+    font-weight: 600;
+  }
 
-.nav-sublink a[aria-current='page'] {
-  border-left: 2px solid var(--theme-accent);
-  background-color: transparent;
-}
+  .nav-sublink a[aria-current="page"] {
+    border-left: 2px solid var(--theme-accent);
+    background-color: transparent;
+  }
 
   @media (min-width: 50em) {
     .nav-groups {
@@ -160,7 +160,11 @@ const sidebar = SIDEBAR[langCode]
 </style>
 
 <style is:global>
-  :root.theme-dark .nav-link a[aria-current='page'] {
+  :root.theme-dark a[aria-current="page"] {
+    --theme-bg-accent: hsla(var(--color-base-simey), 70%, 0.25);
+  }
+  :root.theme-dark .nav-link a[aria-current="page"],
+  :root.theme-dark .nav-link:not(.nav-sublink):has(a[aria-current="page"]) > a {
     color: hsla(var(--color-base-white), 100%, 1);
   }
 </style>

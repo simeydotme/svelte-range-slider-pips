@@ -29,9 +29,9 @@ the values can be prefixed or suffixed with a string to add context to the value
 
 
 ## Simple _€_ Prefix
-Here we will add a simple _€_ prefix, this is a very common use-case, and demonstrates
+Here we will add a simple _€_ prefix, this is a common use-case, and demonstrates
 that the `prefix` is applied both to the handles and pips-labels, however you can see the
-actual output **value is still just a number**.
+actual **output-value is still just a number**.
 
 <Demo name="Prepend the '€' symbol" client:visible>
   <Prefix client:visible />
@@ -51,7 +51,11 @@ value in the UI. This is useful for adding a simple symbol to the end of values.
   <Code slot="svelte" code={cleanImport(SuffixRaw)} lang="svelte" />
 </Demo>
 
-
+<Note title="Formatting" type="info">
+  In this example the input is directly bound to the `values` prop, but [you can also
+  use the `formatter` prop](./formatter) to format the values as you wish. This allows
+  allow an input value of `0.1` to be displayed as `10%`, for example.
+</Note>
 
 
 

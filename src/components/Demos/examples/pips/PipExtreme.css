@@ -1,0 +1,14 @@
+/* hide all pips by default, we'll override this with JS */
+#testSlider .pip {
+  display: none;
+}
+/* always show the floating label */
+#testSlider .rangeFloat {
+  opacity: 1;
+} 
+/* special styling for when the slider is invalid */
+.invalid #testSlider {
+  --range-handle: hsl(352, 90%, 50%);
+  --range-handle-focus: hsl(352, 90%, 50%);
+  --range-handle-inactive: hsl(352, 80%, 70%);
+}

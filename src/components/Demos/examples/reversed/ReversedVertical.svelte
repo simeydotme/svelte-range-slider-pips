@@ -3,15 +3,15 @@
   let values = [0,60];
 </script>
 
-<div data-grid>
+<!-- hide --><div data-grid><!-- endhide -->
 
-  <p>Normal</p>
-  <RangeSlider vertical pips all="label" float range bind:values pipstep={20} />
+<p>Normal</p>
+<RangeSlider vertical pips all="label" float range bind:values pipstep={20} />
 
-  <p>Reversed</p>
-  <RangeSlider reversed vertical pips all="label" float range bind:values pipstep={20} />
+<p>Reversed</p>
+<RangeSlider reversed vertical pips all="label" float range bind:values pipstep={20} />
 
-</div>
+<!-- hide --></div><!-- endhide -->
 
 <code data-values title="The output slider values">{values}</code>
 

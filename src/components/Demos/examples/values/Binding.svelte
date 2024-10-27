@@ -1,10 +1,10 @@
 <script>
   import RangeSlider from 'svelte-range-slider-pips';
-  let values = [11];
-  let myValues = [69];
+  let value = 11;
+  let values = [69];
 </script>
 
+<RangeSlider bind:value />
+<pre class="astro-code"><code>bind:value</code> ( <code>{value}</code> )</pre>
 <RangeSlider bind:values />
-<pre><code>bind:values</code> ( <code>{values}</code> )</pre>
-<RangeSlider bind:values={myValues} />
-<pre><code>bind:values={'{myValues}'}</code> ( <code>{myValues}</code> )</pre>
+<pre class="astro-code"><code>bind:values={'{values}'}</code> ( <code>{values}</code> )</pre>

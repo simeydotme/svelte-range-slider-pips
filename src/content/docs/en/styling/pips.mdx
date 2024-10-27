@@ -1,0 +1,42 @@
+---
+title: 'Styling the Pips'
+description: 'How to style the pips/labels with css and the step/pipstep property'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import Circles from '~demos/styling/pips/Circles.svelte';
+import CirclesRaw from '~demos/styling/pips/Circles.svelte?raw';
+import CirclesCss from '~demos/styling/pips/Circles.css?raw';
+
+
+Because the pips are all rendered, it's possible to style them in unique ways to
+truly make the RangeSlider your own. 
+
+## Pips
+
+The pips are rendered in a `<div>` with the class `.rangePips`. Each individual 
+pip is rendered as `<span>` with the class `pip` and a unique `[data-val]` attribute.
+
+
+### Circles
+
+Here's an example of a pip that is rendered as a circle. We are setting every
+pip to be visible by passing `pipstep={1}` to the component. And after we have
+rendered every pip as a small dot, we make every 5th pip a bigger dot.
+
+<Demo name="Cute circular pips" client:visible>
+  <Circles client:visible />
+  <Code slot="svelte" code={cleanImport(CirclesRaw)} lang="svelte" />
+  <Code slot="css" code={CirclesCss} lang="css" />
+</Demo> 
+
+<Note type="warning">
+  This CSS is very performance intensive, and should be used with caution.
+  It's especially laggy on Firefox. It seems the `+` sibling selector, and `:has()`
+  are not very well optimized.
+</Note>

@@ -18,27 +18,28 @@ import MultipleRaw from '~demos/examples/values/Multiple.svelte?raw';
 
 
 
-Setting the default value(s) for the Slider is done using the [`values` property](/en/options#values), which accepts an `Array[]`. 
+Setting the default value(s) for the Slider is done using the [`value` property](/en/options#value) or 
+[`values` property](/en/options#values), which accepts a `number` or an `number[]` array respectively.  
+
 The `values` property can have any number of values, and the length directly corresponds to the number of handles on the Slider. 
-The `values` are limited to the given `min` and `max` range.
+All values are clamped to the given `min` and `max` range. 
 
 ## Simple Values
 
 <Demo name="Values Property" client:visible>
-  <RangeSlider values={[25]} client:visible />
-  <RangeSlider values={[50]} client:visible />
+  <RangeSlider value={25} client:visible />
   <RangeSlider values={[75]} client:visible />
   <div slot="svelte">
     ```svelte
-    <RangeSlider values={[25]} />
-    <RangeSlider values={[50]} />
-    <RangeSlider values={[75]} />
+    <RangeSlider value={25} /> <!-- value as a number -->
+    <RangeSlider values={[75]} /> <!-- values as an array -->
     ```
   </div>
 </Demo>
 
 ## Binding
-The `values` property can also be bound with `bind:values`. This allows the Slider to save the current value(s) to a variable.
+The `value`/`values` property can also be bound with the svelte `bind:` action.  
+This allows the Slider to read/write the current value(s) from a variable.
 
 <Demo name="Binding Values" client:visible>
   <Binding client:visible />
@@ -46,8 +47,11 @@ The `values` property can also be bound with `bind:values`. This allows the Slid
 </Demo>
 
 ## Multiple Values
-The `values` property can also accept multiple values. This allows the Slider to have multiple handles.
-The values are stored in an array. The length of the array corresponds to the number of handles on the Slider.
+The `values` property can also accept multiple values.  
+This allows the Slider to have multiple handles.  
+
+The values are stored in an array, and the length of the array corresponds 
+to the number of handles on the Slider.
 
 <Demo name="Multiple Values" client:visible>
   <Multiple client:visible />

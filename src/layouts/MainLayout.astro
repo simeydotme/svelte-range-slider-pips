@@ -18,8 +18,8 @@ type Props = CollectionEntry<'docs'>['data'] & {
 const { headings, ...data } = Astro.props
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const currentPage = Astro.url.pathname.replace(REPOPATH, '');
-const currentFile = `src/content/docs${currentPage.replace(/\/$/, '')}.mdx`
-const editUrl = `${EDIT_URL}/${currentFile}`
+const currentFile = `src/content/docs/${currentPage.replace(/^\/+/, '').replace(/\/$/, '')}.mdx`
+const editUrl = `${EDIT_URL}/${currentFile}?plain=1`
 ---
 
 <html dir={data.dir} lang={data.lang} class="initial">

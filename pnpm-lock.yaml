@@ -1,7 +1,7 @@
 lockfileVersion: '6.0'
 
 settings:
-  autoInstallPeers: false
+  autoInstallPeers: true
   excludeLinksFromLockfile: false
 
 dependencies:
@@ -75,8 +75,8 @@ dependencies:
     specifier: ^4.1.2
     version: 4.1.2
   svelte-range-slider-pips:
-    specifier: ^2.2.2
-    version: 2.2.2
+    specifier: ^3.1.2
+    version: 3.1.2(svelte@4.1.2)
   typescript:
     specifier: ^5.0.0
     version: 5.0.2
@@ -91,9 +91,6 @@ devDependencies:
   '@types/lodash-es':
     specifier: ^4.17.8
     version: 4.17.8
-  '@types/svelte-range-slider-pips':
-    specifier: ^2.0.0
-    version: 2.0.0
   astro-robots-txt:
     specifier: ^0.4.0
     version: 0.4.0
@@ -1768,12 +1765,6 @@ packages:
   /@types/scheduler@0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
     dev: false
-
-  /@types/svelte-range-slider-pips@2.0.0:
-    resolution: {integrity: sha512-+Yq3xwyI0ViGZKdrsNpM8Wqa0wCnSBKc8NcRfYGiu22kVJ3Xr0gfiZATWMzZ2mryt/tQR8QgH2B782ogrZS1aw==}
-    dependencies:
-      svelte: 3.59.2
-    dev: true
 
   /@types/unist@2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
@@ -5694,8 +5685,12 @@ packages:
       svelte: 4.1.2
     dev: false
 
-  /svelte-range-slider-pips@2.2.2:
-    resolution: {integrity: sha512-SsiIBpCkBnqvfaHLeIDolTfZlc8m7y93MhlxPKQ90YMZnE/rAxj+IoCrd7LTL/nXA2SCla4IJutSzfwdOtJddA==}
+  /svelte-range-slider-pips@3.1.2(svelte@4.1.2):
+    resolution: {integrity: sha512-pgbYeQ2ULtr01B0BoGL3+Mg0j9zbZab8MaFI0EESeiSP3vsKNwLAk29/14FBFJxryCkkmI69utVqsiOv/B15Nw==}
+    peerDependencies:
+      svelte: ^4.0.0
+    dependencies:
+      svelte: 4.1.2
     dev: false
 
   /svelte2tsx@0.6.19(svelte@4.1.2)(typescript@5.0.2):
@@ -5709,11 +5704,6 @@ packages:
       svelte: 4.1.2
       typescript: 5.0.2
     dev: false
-
-  /svelte@3.59.2:
-    resolution: {integrity: sha512-vzSyuGr3eEoAtT/A6bmajosJZIUWySzY2CzB3w2pgPvnkUjGqlDnsNnA0PMO+mMAhuyMul6C2uuZzY6ELSkzyA==}
-    engines: {node: '>= 8'}
-    dev: true
 
   /svelte@4.1.2:
     resolution: {integrity: sha512-/evA8U6CgOHe5ZD1C1W3va9iJG7mWflcCdghBORJaAhD2JzrVERJty/2gl0pIPrJYBGZwZycH6onYf+64XXF9g==}

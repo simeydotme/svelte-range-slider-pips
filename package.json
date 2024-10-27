@@ -37,14 +37,13 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "svelte": "^4.1.2",
-    "svelte-range-slider-pips": "^2.2.2",
+    "svelte-range-slider-pips": "^3.1.2",
     "typescript": "^5.0.0"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^1.1.0",
     "@iconify/svelte": "^3.1.4",
     "@types/lodash-es": "^4.17.8",
-    "@types/svelte-range-slider-pips": "^2.0.0",
     "astro-robots-txt": "^0.4.0",
     "html-escaper": "^3.0.3",
     "postcss": "^8.4.21",
