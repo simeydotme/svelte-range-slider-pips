@@ -1,7 +1,7 @@
 .DS_Store
 .astro
 node_modules
-/build
+build/
 /docs
 /tests/**/build
 /tests/**/dist

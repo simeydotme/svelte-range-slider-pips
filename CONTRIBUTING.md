@@ -8,7 +8,7 @@ At the core, though, this is a component with a purpose. I will be the final jud
 
 ## 🛠 pull-requests for bug fixes, or issue resolution
 
-- ⛔ **Use [this REPL as a reduced test case](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43)** for any bug/issue submissions!
+- ⛔ **Use [this REPL as a reduced test case](https://svelte.dev/playground/e29b748dade74d33a238eefab9a5ce72)** for any bug/issue submissions!
 
 If there are any open issues, or you find a valid bug, please feel free to open a pull-request for review. I won't accept pull-requests for dependency updates, but those can be requested as an issue.
 

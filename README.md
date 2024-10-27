@@ -31,10 +31,10 @@ A reactive, accessible, multi-thumb, range slider with the ability to display "p
 
 ![Svelte Range Slider; focussed with pips and labels prop set](public/svelte-range-slider-screenshot.png)
 
-| 📔🔍 |        Docs | [Full Documentation & Examples](https://simeydotme.github.io/svelte-range-slider-pips/)         |
-| :--: | ----------: | :---------------------------------------------------------------------------------------------- |
-| 📝⚙ |    **REPL** | **[Svelte component demo](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43?version=3)** |
-| ❤✒ | **Codepen** | **[Plain JS component demo](https://codepen.io/simeydotme/pen/KKNJdbK)**                        |
+| 📔🔍 |        Docs | [Full Documentation & Examples](https://simeydotme.github.io/svelte-range-slider-pips/)     |
+| :--: | ----------: | :------------------------------------------------------------------------------------------ |
+| 📝⚙ |    **REPL** | **[Svelte component demo](https://svelte.dev/playground/e29b748dade74d33a238eefab9a5ce72)** |
+| ❤✒ | **Codepen** | **[Plain JS component demo](https://codepen.io/simeydotme/pen/KKNJdbK)**                    |
 
 </div>
 
