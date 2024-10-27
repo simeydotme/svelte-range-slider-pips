@@ -15,35 +15,38 @@ const sidebar = SIDEBAR[langCode];
 <nav aria-labelledby="grid-left">
   <ul class="nav-groups">
     {
-      Object.entries(sidebar).map(([header, children]) => (
+      Object.entries(sidebar).map(([header, links]) => (
         <li>
           <div class="nav-group">
             <h2>{header}</h2>
             <ul>
-              {children.map((child) => {
-                const url = Astro.site?.pathname + child.link;
-                if (!child.children || child.children.length === 0) {
-                  const ariaCurrent = child.link.endsWith(currentPageMatch) ? "page" : false;
+              {links.map((link) => {
+                const url = Astro.site?.pathname + link.link;
+                if (!link.children || link.children.length === 0) {
+                  const ariaCurrent = url.endsWith(currentPageMatch) ? "page" : false;
                   return (
                     <li class="nav-link">
                       <a href={url} aria-current={ariaCurrent}>
-                        {child.text}
+                        {link.text}
                       </a>
                     </li>
                   );
                 } else {
-                  const ariaCurrent = currentPageMatch === child.link.split("#")[0] ? "page" : child.link.endsWith(currentPageMatch) ? "page" : false;
+                  const ariaChildCurrent = currentPageMatch === url.split("#")[0] ? "page" : url.endsWith(currentPageMatch) ? "page" : false;
                   return (
                     <li class="nav-link">
-                      <a href={url} aria-current={ariaCurrent}>
-                        {child.text}
+                      <a href={url} aria-current={ariaChildCurrent}>
+                        {link.text}
                       </a>
                       <ul>
-                        {child.children.map((grandchild) => {
-                          const url = Astro.site?.pathname + grandchild.link;
+                        {link.children.map((grandchild) => {
+                          const gurl = Astro.site?.pathname + grandchild.link;
+                          const ariaGrandchildCurrent = currentPageMatch === gurl.split("#")[0] ? "page" : gurl.endsWith(currentPageMatch) ? "page" : false;
                           return (
                             <li class="nav-link nav-sublink">
-                              <a href={url}>{grandchild.text}</a>
+                              <a href={gurl} aria-current={ariaGrandchildCurrent}>
+                                {grandchild.text}
+                              </a>
                             </li>
                           );
                         })}
@@ -61,19 +64,22 @@ const sidebar = SIDEBAR[langCode];
 </nav>
 
 <script is:inline>
-  window.addEventListener("DOMContentLoaded", () => {
+  const scrollToCurrentLink = () => {
     var target = document.querySelector('[aria-current="page"]');
     if (target && target.offsetTop > window.innerHeight - 100) {
       document.querySelector(".nav-groups").scrollTop = target.offsetTop;
     }
-  });
+  }
   const focusSubLink = () => {
-    const url = window.location.pathname + window.location.hash;
+    const currentPage = window.location.pathname;
+    const url = (currentPage.endsWith("/") ? currentPage.slice(0, -1) : currentPage) + window.location.hash;
     document.querySelectorAll(`.nav-sublink a`)?.forEach((el) => el.removeAttribute("aria-current"));
     document.querySelector(`.nav-sublink a[href="${url}"]`)?.setAttribute("aria-current", "page");
   };
   window.addEventListener("hashchange", focusSubLink);
+  window.addEventListener("DOMContentLoaded", scrollToCurrentLink);
   focusSubLink();
+  scrollToCurrentLink();
 </script>
 
 <style>
