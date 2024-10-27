@@ -31,6 +31,7 @@ const { name, link, image, span } = Astro.props
   .recipe a {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     text-decoration: none;
     width: 100%;
     height: 100%;
@@ -49,7 +50,7 @@ const { name, link, image, span } = Astro.props
   }
 
   .recipe h3 {
-    margin: 0;
+    margin: 0!important;
     padding: 0;
     font-size: 1.5rem;
     line-height: 1.2;
