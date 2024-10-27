@@ -18,6 +18,9 @@ import RangeMinMaxRaw from '~demos/examples/range/RangeMinMax.svelte?raw';
 import Pushy from '~demos/examples/range/Pushy.svelte';
 import PushyRaw from '~demos/examples/range/Pushy.svelte?raw';
 
+import PushyGap from '~demos/examples/range/PushyGap.svelte';
+import PushyGapRaw from '~demos/examples/range/PushyGap.svelte?raw';
+
 import InRangeCss from '~demos/examples/range/InRangeCss.svelte';
 import InRangeCssRaw from '~demos/examples/range/InRangeCss.svelte?raw';
 
@@ -71,6 +74,25 @@ But by applying the `pushy` property to the Slider, it will allow each handle to
 <Demo name="Pushy vs. Regular" client:visible>
   <Pushy client:visible />
   <Code slot="svelte" code={cleanImport(PushyRaw)} lang="svelte" />
+</Demo>
+
+
+
+
+
+
+## Pushy (with gap)
+
+Although it's not an official feature (yet?), it's possible to set a gap between the handles when
+the `pushy` property is set to `true`. This is done by updating the values of the slider when the
+user drags the handles.
+
+<Demo name="Pushy with min-gap" client:visible>
+  <PushyGap client:visible />
+</Demo>
+
+<Demo name="Pushy with min-gap" client:visible>
+  <Code slot="svelte" code={cleanImport(PushyGapRaw)} lang="svelte" />
 </Demo>
 
 

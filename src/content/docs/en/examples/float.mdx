@@ -16,6 +16,12 @@ import FloatRaw from '~demos/examples/float/Float.svelte?raw';
 import NoHover from '~demos/examples/float/NoHover.svelte';
 import NoHoverRaw from '~demos/examples/float/NoHover.svelte?raw';
 
+import Always from '~demos/examples/float/Always.svelte';
+import AlwaysRaw from '~demos/examples/float/Always.svelte?raw';
+
+import Focus from '~demos/examples/float/Focus.svelte';
+import FocusRaw from '~demos/examples/float/Focus.svelte?raw';
+
 
 
 
@@ -36,7 +42,7 @@ above the handle and shows the current value.
 
 <Note type="info">
   I manually set the above Slider to be focussed on load so that the float is
-  visible.
+  visible. [See below for how to do this](#onload).
 </Note>
 
 
@@ -53,6 +59,7 @@ the float from appearing on hover.
   <NoHover client:visible />
   <div slot="svelte">
     ```svelte
+    <RangeSlider float />
     <RangeSlider float hoverable={false} />
     ```
   </div>
@@ -62,3 +69,30 @@ the float from appearing on hover.
   This will also **prevent all other hover effects** on the Slider. If you wish
   only to hide the hover effect for floats, you may edit the CSS for more control.
 </Note>
+
+
+
+## Always show the floats
+
+We can set the floats to always be visible by modifying the css slightly.
+
+<Demo name="Always Shown Floats" client:visible>
+  <Always client:visible />
+  <Code slot="svelte" code={cleanImport(AlwaysRaw)} lang="svelte" />
+</Demo>
+
+<Note type="info">
+  I manually set the above Slider to be focussed on load so that the float is
+  visible.
+</Note>
+
+
+## Focus on load
+
+It's possible to focus the slider on load with a little bit of javascript.
+
+<Demo name="Focus on load" client:visible>
+  <Focus client:visible />
+  <Info>(refresh the page to see the focus effect in action)</Info>
+  <Code slot="svelte" code={cleanImport(FocusRaw)} lang="svelte" />
+</Demo>

@@ -15,10 +15,10 @@
 </script>
 
 <div class="daisy-ui" class:minFlip class:maxFlip class:rangeFlip>
-  <RangeSlider pips float bind:values />
-  <RangeSlider pips float range bind:values />
-  <RangeSlider pips float range="min" bind:values={minValues} step={5} />
-  <RangeSlider pips float range="max" bind:values={minValues} step={5} />
+  <RangeSlider pips float pushy values={[20,80]} />
+  <RangeSlider pips float pushy range bind:values />
+  <RangeSlider pips float pushy range="min" bind:values={minValues} step={5} />
+  <RangeSlider pips float pushy range="max" bind:values={minValues} step={5} />
 </div>
 
 <!-- hide -->

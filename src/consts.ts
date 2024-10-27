@@ -86,14 +86,6 @@ export const SIDEBAR: Sidebar = {
           { text: 'stop', link: `${REPOPATH}/en/events#stop` },
         ]
       },
-      { text: 'Styling', link: `${REPOPATH}/en/styling`, 
-        children: [
-          { text: 'Color Variables', link: `${REPOPATH}/en/styling#colors` },
-          { text: 'Size', link: `${REPOPATH}/en/styling#size` },
-          { text: 'CSS Structure', link: `${REPOPATH}/en/styling#structure` },
-          { text: 'Pips & Steps', link: `${REPOPATH}/en/styling/pips` },
-        ]
-      },
       { text: 'Examples', link: `${REPOPATH}/en/examples`, 
         children: [
           { text: 'Values & Binding', link: `${REPOPATH}/en/examples/values` },
@@ -112,6 +104,14 @@ export const SIDEBAR: Sidebar = {
           { text: 'Formatter', link: `${REPOPATH}/en/examples/formatter` },
           { text: 'Disabled', link: `${REPOPATH}/en/examples/disabled` },
           { text: 'Easing', link: `${REPOPATH}/en/examples/easing` },
+        ]
+      },
+      { text: 'Styling', link: `${REPOPATH}/en/styling`, 
+        children: [
+          { text: 'Color Variables', link: `${REPOPATH}/en/styling#colors` },
+          { text: 'Size', link: `${REPOPATH}/en/styling#size` },
+          { text: 'CSS Structure', link: `${REPOPATH}/en/styling#structure` },
+          { text: 'Pips & Steps', link: `${REPOPATH}/en/styling/pips` },
         ]
       },
       { text: 'Recipes', link: `${REPOPATH}/en/recipes`, 

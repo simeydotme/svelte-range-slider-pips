@@ -9,6 +9,6 @@
   };
 </script>
 
-<RangeSlider float range bind:values bind:slider={slider} />
+<RangeSlider float range bind:values bind:slider />
 
 <code data-values title="The output slider values">{values}</code>

@@ -1,0 +1,48 @@
+  /* general RangeSlider styling */
+  #label.rangeSlider {
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  #label.rangeSlider.focus .rangeBar {
+    background: linear-gradient(to left, var(--handle) 20%, var(--handle-focus));
+  }
+
+  #label.rangeSlider.focus:has([data-handle="1"].active) .rangeBar {
+    background: linear-gradient(to right, var(--handle) 20%, var(--handle-focus));
+  }
+
+  /* Move the floating label on top of the handle */
+  
+  #label.rangeSlider .rangeHandle {
+    width: 2.8em;
+    height: 2.8em;
+    background: none;
+  }
+
+  #label.rangeSlider .rangeFloat {
+    opacity: 1;
+    background: transparent;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Make the handles look like Squircles */
+
+  #label.rangeSlider .rangeHandle .rangeNub {
+    border-radius: 0;
+    transform: translate(0, 0);
+    mask-image: url("data:image/svg+xml;utf8, %3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E %3Cpath d=' M 100,0 C 22.460000000000008,0 0,22.460000000000008 0,100  0,177.54 22.460000000000008,200 100,200  177.54,200 200,177.54 200,100  200,22.460000000000008 177.54,0 100,0 ' style='fill: black;'%3E%3C/path%3E %3C/svg%3E");
+    mask-size: cover;
+  }
+
+  /* Hide the pips, and values when selected */
+  
+  #label.rangeSlider .pip {
+    background: transparent;
+  }
+
+  #label.rangeSlider .pip.selected .pipVal {
+    opacity: 0;
+    transition: all 0.25s ease;
+  }

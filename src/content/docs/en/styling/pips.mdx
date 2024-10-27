@@ -13,14 +13,25 @@ import Circles from '~demos/styling/pips/Circles.svelte';
 import CirclesRaw from '~demos/styling/pips/Circles.svelte?raw';
 import CirclesCss from '~demos/styling/pips/Circles.css?raw';
 
+import Future from '~demos/styling/pips/Future.svelte';
+import FutureRaw from '~demos/styling/pips/Future.svelte?raw';
+import FutureCss from '~demos/styling/pips/Future.css?raw';
+
+import PipExtreme from '~demos/examples/pips/PipExtreme.svelte';
+import PipExtremeRaw from '~demos/examples/pips/PipExtreme.svelte?raw';
+import PipExtremeCss from '~demos/examples/pips/PipExtreme.css?raw';
+
+
 
 Because the pips are all rendered, it's possible to style them in unique ways to
 truly make the RangeSlider your own. 
 
 ## Pips
 
-The pips are rendered in a `<div>` with the class `.rangePips`. Each individual 
-pip is rendered as `<span>` with the class `pip` and a unique `[data-val]` attribute.
+The pips are rendered in a container `<div>` with the class `.rangePips`. 
+
+Each individual pip is rendered as `<span>` with the class `.pip` 
+and a unique `[data-val]` attribute.
 
 
 ### Circles
@@ -40,3 +51,37 @@ rendered every pip as a small dot, we make every 5th pip a bigger dot.
   It's especially laggy on Firefox. It seems the `+` sibling selector, and `:has()`
   are not very well optimized.
 </Note>
+
+
+### Futuristic Pips
+
+Normally the `step` and `pipstep` only allow a regular interval of
+pips to be shown/hidden based on the multipliers set (`step` and `pipstep`).
+
+But here we are demonstrating the complete control of individual pips and labels
+by modifying the `pipstep` and then targeting specific pips with CSS by
+utilizing the `[data-val]` attribute.
+
+Check out the CSS tab in the code block to see how we achieve this.
+
+<Demo name="Futuristic Pips & Labels" client:visible>
+  <Future client:visible />
+  <Code slot="svelte" code={cleanImport(FutureRaw)} lang="svelte" />
+  <Code slot="css" code={cleanImport(FutureCss)} lang="css" />
+</Demo> 
+
+
+### Extreme control with JS
+
+The previous example demonstrated how to only show a subset of pips
+by using CSS. But what if we wanted the display values to be
+dynamic?
+
+In this case, we could use Javascript to dynamically
+set the CSS values;
+
+<Demo name="Only show a subset of pips" client:visible>
+  <PipExtreme client:visible />
+  <Code slot="svelte" code={cleanImport(PipExtremeRaw)} lang="svelte" />
+  <Code slot="css" code={PipExtremeCss} lang="css" />
+</Demo>

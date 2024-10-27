@@ -2,3 +2,39 @@
 title: 'Month Picker'
 description: 'A simple month picker slider with labels inside the handles'
 ---
+import { Code } from 'astro/components';
+import { Icon } from 'astro-icon'
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import MonthPicker from '~demos/recipes/monthpicker/MonthPicker.svelte';
+import MonthPickerRaw from '~demos/recipes/monthpicker/MonthPicker.svelte?raw';
+import MonthPickerCss from '~demos/recipes/monthpicker/MonthPicker.css?raw';
+
+
+
+Here's an example of a nice looking month picker slider with labels inside the handles.
+There's two key parts to this example;
+- Set the `formatter` function to format the values as a month name
+- Use the `css` to move the `.rangeFloat` label on top of the `.rangeHandle`
+
+Of course, the normal options to enable `floats` and the `range` are required.
+
+
+<Demo name="Price Range" panel="css" client:visible>
+  <MonthPicker client:visible />
+</Demo>
+
+<Demo panel="css" client:visible>
+  <Code slot="svelte" code={cleanImport(MonthPickerRaw)} lang="svelte" />
+  <Code slot="css" code={MonthPickerCss} lang="css" />
+</Demo>
+
+
+### Arbitary Labels
+
+The `formatter` function can be used to format the values as any arbitrary string.
+See the [Formatter example](../examples/formatter#multiple-formatters) for more information.

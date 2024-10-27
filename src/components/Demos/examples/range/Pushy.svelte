@@ -6,7 +6,7 @@
 <div data-grid>
   <span hide>Pushy</span>
   <RangeSlider range pushy pips bind:values />
-  <span hide>Regular</span>
+  <span hide>Not Pushy</span>
   <RangeSlider range pips bind:values />
 </div>
 

@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Mohave:ital,wght@0,300..700;1,300..700&display=swap');
+
+/* Here we target specific pips and show them,
+  which was the imaginary requirement of the slider design */
+  
+  #future .pip[data-val="75000"],
+  #future .pip[data-val="250000"],
+  #future .pip[data-val="750000"],
+  #future .pip[data-val="925000"] {
+    display: block;
+  }
+  
+  #future .pip[data-val="75000"] .pipVal,
+  #future .pip[data-val="925000"] .pipVal {
+    top: -2.25em;
+    transform: translateX(-20%);
+  }
+  
+  #future .pip[data-val="925000"] .pipVal {
+    transform: translateX(-80%);
+  }
+
+/* Range Slider / Bar customization */
+
+#future.rangeSlider {
+  font-family: "Mohave", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  margin-inline: 100px;
+  --handle-focus: limegreen;
+  --float-text: black;
+  height: 3px;
+  background: black;
+}
+
+#future .rangeBar {
+  height: 5px;
+  top: -1px;
+  background: limegreen;
+}
+
+/* Pips customization */
+
+#future .pip {
+  display: none;
+}
+
+#future .pip {
+  background: none;
+  top: 0;
+  height: 1px;
+}
+
+#future .pip::before {
+  content: "";
+  position: absolute;
+  background: black;
+  height: 1em;
+  width: 1px;
+  top: -0.5em;
+  transform: translateY(-2px) translateX(-1px) rotate(10deg);
+}
+
+#future .pip.first,
+#future .pip.last {
+  display: block;
+  top: 0;
+  background: transparent;
+}
+
+#future .pipVal {
+  font-size: 14px;
+}
+
+#future .pip.first .pipVal {
+  top: 0;
+  left: -1em;
+  transform: translateX(-100%) translateY(-50%);
+  text-align: right;
+}
+
+#future .pip.last .pipVal {
+  top: 0;
+  right: -1em;
+  transform: translateX(100%) translateY(-50%);
+  text-align: left;
+}
+
+#future .pip.selected .pipVal {
+  opacity: 0;
+}
+
+/* Floats / Handles customization */
+
+#future .rangeHandle {
+  height: 7px;
+  top: 1px;
+}
+
+#future .rangeNub {
+  transform: none;
+  background: lime;
+  box-shadow: 0 0 0px 2px black;
+}
+
+#future .rangeFloat {
+  background: linear-gradient(to right, rgb(240, 241, 245, 0.25), rgb(240, 241, 245, 1) 20% 80%, rgb(240, 241, 245, 0.25));
+  top: -0.4em;
+  padding: 0.1em 1em;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.25em;
+}
