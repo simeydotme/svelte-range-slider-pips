@@ -1,0 +1,82 @@
+---
+title: 'Limits'
+description: 'Limiting the handles to a smaller range than the min/max'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import Limits from '~demos/examples/limits/Limits.svelte';
+import LimitsRaw from '~demos/examples/limits/Limits.svelte?raw';
+
+import LimitsMinMax from '~demos/examples/limits/LimitsMinMax.svelte';
+import LimitsMinMaxRaw from '~demos/examples/limits/LimitsMinMax.svelte?raw';
+
+import OutOfLimitCss from '~demos/examples/limits/OutOfLimitCss.svelte';
+import OutOfLimitCssRaw from '~demos/examples/limits/OutOfLimitCss.svelte?raw';
+
+
+
+
+
+Sometimes it may be desired to show a range from (let's say) `0-100`, but only allow the user to select a range from `20-80`.
+This can be achieved by setting the `limits` property to an array of `[20, 80]`.
+
+<Demo name="Limit the draggable range" client:visible>
+  <Limits client:visible />
+  <Code slot="svelte" code={cleanImport(LimitsRaw)} lang="svelte" />
+</Demo>
+
+<Note type="info">
+  Observe how the handles are limited to the `20-80` range, and you cannot drag them outside of this range.
+</Note>
+
+
+
+
+
+
+## Limits with Min and Max
+
+It's possible to use the `limits` property alongside a 'min' or 'max' range, too!
+
+<Demo name="min/max range limits" client:visible>
+  <LimitsMinMax client:visible />
+  <Code slot="svelte" code={cleanImport(LimitsMinMaxRaw)} lang="svelte" />
+</Demo>
+
+
+
+
+
+## Styling Outside of the Limits
+
+Any pip that falls outside of the limits will be given the `pip-out-of-limit` class.
+This can be used to style the pips differently when they are outside of the limits.
+
+<Demo name="Out-Of-Limit css style" client:visible>
+  <OutOfLimitCss client:visible />
+  <Code slot="svelte" code={cleanImport(OutOfLimitCssRaw)} lang="svelte" />
+  <div slot="css">
+  ```css
+    /* Customize the slider's colors using the variables */
+    #sliderLimits {
+      --range-slider: #d096a6;
+      --range-range-limit: rgb(0, 30, 56);
+      --handle: #2ad872df;
+      --handle-focus: #2ad872df;
+      --handle-inactive: #2ad872df;
+      --range-range-inactive: #2ad872df;
+    }
+
+    #sliderLimits .rangeBar {
+      border-radius: 0;
+      height: 22px;
+      top: -7px;
+    }
+  ```
+  </div>
+</Demo>

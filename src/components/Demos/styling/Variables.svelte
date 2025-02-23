@@ -9,6 +9,7 @@
   let clrHandleBorder = "#838de7";
   let clrRangeInactive = "#99a2a2";
   let clrRange = "#4a40d4";
+  let clrLimit = "#b9c2c2";
   let clrFloatInactive = "#99a2a2";
   let clrFloat = "#4a40d4";
   let clrFloatText = "#ffffff";
@@ -21,6 +22,8 @@
   let clrPipHoverText = "#2f4f4f";
   let clrPipInRange = "#2f4f4f";
   let clrPipInRangeText = "#2f4f4f";
+  let clrPipOutOfLimit = "#aebecf";
+  let clrPipOutOfLimitText = "#aebecf";
 
   $: variablesStyle = `<style>
   :root {
@@ -31,6 +34,7 @@
     --range-handle-border:     ${hexToHSLString(clrHandleBorder)};
     --range-range-inactive:    ${hexToHSLString(clrRangeInactive)};
     --range-range:             ${hexToHSLString(clrRange)};
+    --range-range-limit:       ${hexToHSLString(clrLimit)};
     --range-float-inactive:    ${hexToHSLString(clrFloatInactive)};
     --range-float:             ${hexToHSLString(clrFloat)};
     --range-float-text:        ${hexToHSLString(clrFloatText)};
@@ -43,6 +47,8 @@
     --range-pip-hover-text:    ${hexToHSLString(clrPipHoverText)};
     --range-pip-in-range:      ${hexToHSLString(clrPipInRange)};
     --range-pip-in-range-text: ${hexToHSLString(clrPipInRangeText)};
+    --range-pip-out-of-limit:      ${hexToHSLString(clrPipOutOfLimit)};
+    --range-pip-out-of-limit-text: ${hexToHSLString(clrPipOutOfLimitText)};
   }
 </style>`;
 </script>
@@ -51,10 +57,11 @@
   <RangeSlider
     min={0}
     max={100}
-    values={[70]}
+    values={[60]}
     step={10}
     pipstep={2}
     range="min"
+    limits={[20,80]}
     pips
     first={false}
     rest="label"
@@ -73,6 +80,7 @@
       title="--range-range-inactive"
     />
     <input type="color" name="clrRange" id="clrRange" bind:value={clrRange} title="--range-range" />
+    <input type="color" name="clrLimit" id="clrLimit" bind:value={clrLimit} title="--range-limit" />
   </div>
 
   <div class="inputs">
@@ -158,6 +166,25 @@
     />
   </div>
 
+
+  <div class="inputs">
+    <span>Pips & Labels Out of Limit</span>
+    <input
+      type="color"
+      name="clrPipOutOfLimit"
+      id="clrPipOutOfLimit"
+      bind:value={clrPipOutOfLimit}
+      title="--range-pip-out-of-limit"
+    />
+    <input
+      type="color"
+      name="clrPipOutOfLimitText"
+      id="clrPipOutOfLimitText"
+      bind:value={clrPipOutOfLimitText}
+      title="--range-pip-out-of-limit-text"
+    />
+  </div>
+
   {@html variablesStyle}
 
   <pre class="output-css"><code>{variablesStyle.replace(/\s\*{}/, "")}</code></pre>
@@ -172,7 +199,7 @@
   }
 
   .inputs span {
-    min-width: 180px;
+    min-width: 200px;
     grid-column: 1/-1;
   }
 

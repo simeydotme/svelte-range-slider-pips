@@ -22,16 +22,18 @@ own color setup.
 /* Slider Ranges, Handles and Floats colors */
 
 :root {
-  --range-slider:          #d7dada; /* slider main background color */
-  --range-handle-inactive: #99a2a2; /* inactive handle color */
-  --range-handle:          #838de7; /* non-focussed handle color */
-  --range-handle-focus:    #4a40d4; /* focussed handle color */
-  --range-handle-border:   var(--range-handle); /* handle border color */
-  --range-range-inactive:  var(--range-handle-inactive); /* inactive range bar background color */
-  --range-range:           var(--range-handle-focus); /* active range background color */
-  --range-float-inactive:  var(--range-handle-inactive); /* inactive floating label background color */
-  --range-float:           var(--range-handle-focus); /* floating label background color */
-  --range-float-text:      white; /* text color on floating label */
+  --range-slider:           #d7dada; /* slider main background color */
+  --range-handle-inactive:  #99a2a2; /* inactive handle color */
+  --range-handle:           #838de7; /* non-focussed handle color */
+  --range-handle-focus:     #4a40d4; /* focussed handle color */
+  --range-handle-border:    var(--range-handle); /* handle border color */
+  --range-range-inactive:   var(--range-handle-inactive); /* inactive range bar background color */
+  --range-range:            var(--range-handle-focus); /* active range background color */
+  --range-limit:            #99a2a280; /* limit range background color */
+  --range-float-inactive:   var(--range-handle-inactive); /* inactive floating label background color */
+  --range-float:            var(--range-handle-focus); /* floating label background color */
+  --range-float-text:       white; /* text color on floating label */
+
 }
 ```
 
@@ -39,14 +41,16 @@ own color setup.
 /* Slider Pips and Labels colors */
 
 :root {
-  --range-pip:                lightslategray; /* color of the base pips */
-  --range-pip-text:           var(--range-pip); /* color of the base labels */
-  --range-pip-active:         darkslategrey; /* active pips (when handle is on a slider-stop) */
-  --range-pip-active-text:    var(--range-pip-active); /* active labels (when handle is on a slider-stop) */
-  --range-pip-hover:          darkslategrey; /* when a slider-stop is hovered */
-  --range-pip-hover-text:     var(--range-pip-hover); /* when a slider-stop is hovered */
-  --range-pip-in-range:       var(--range-pip-active); /* pips inside the range */
-  --range-pip-in-range-text:  var(--range-pip-active-text); /* labels inside the range */
+  --range-pip:                   lightslategray; /* color of the base pips */
+  --range-pip-text:              var(--range-pip); /* color of the base labels */
+  --range-pip-active:            darkslategrey; /* active pips (when handle is on a slider-stop) */
+  --range-pip-active-text:       var(--range-pip-active); /* active labels (when handle is on a slider-stop) */
+  --range-pip-hover:             darkslategrey; /* when a slider-stop is hovered */
+  --range-pip-hover-text:        var(--range-pip-hover); /* when a slider-stop is hovered */
+  --range-pip-in-range:          var(--range-pip-active); /* pips inside the range */
+  --range-pip-in-range-text:     var(--range-pip-active-text); /* labels inside the range */
+  --range-pip-out-of-limit:      #aebecf; /* pip color outside of limit */
+  --range-pip-out-of-limit-text: var(--range-pip-out-of-limit); /* text color on pip outside of limit */
 }
 ```
 
@@ -112,6 +116,8 @@ the css structure to style the Slider in different ways.</Note>
 .rangeSlider > .rangeHandle > .rangeFloat {}   /* the floating value above the handle */
 /* slider range */
 .rangeSlider > .rangeBar {}                    /* the range between the two handles */
+/* slider limits */
+.rangeSlider > .rangeLimit {}                  /* the limited area that can be selected */
 /* slider pips */
 .rangeSlider > .rangePips {}                      /* the container element for the pips */
 .rangeSlider > .rangePips.focus {}                /* if slider is focussed */
@@ -123,6 +129,7 @@ the css structure to style the Slider in different ways.</Note>
 .rangeSlider > .rangePips > .pip[data-val="0"] {} /* the pip with the value of 0 */
 .rangeSlider > .rangePips > .pip.selected {}      /* if a pip is currently selected */
 .rangeSlider > .rangePips > .pip.in-range {}      /* if a pip is between the min and max */
+.rangeSlider > .rangePips > .pip.out-of-limit {}  /* if a pip is outside of the limit */
 .rangeSlider > .rangePips > .pip > .pipVal {}     /* the label for the pip */
 ```
 
