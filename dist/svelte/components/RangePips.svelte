@@ -156,8 +156,8 @@ function labelUp(pipValue, event) {
     --pip-hover-text: var(--range-pip-hover-text, var(--pip-hover));
     --pip-in-range: var(--range-pip-in-range, var(--pip-active));
     --pip-in-range-text: var(--range-pip-in-range-text, var(--pip-active-text));
-    --pip-out-of-range: var(--range-pip-out-of-range, #aebecf);
-    --pip-out-of-range-text: var(--range-pip-out-of-range-text, var(--pip-out-of-range));
+    --pip-out-of-limit: var(--range-pip-out-of-limit, #aebecf);
+    --pip-out-of-limit-text: var(--range-pip-out-of-limit-text, var(--pip-out-of-limit));
   }
 
   :global(.rangePips) {
@@ -248,9 +248,9 @@ function labelUp(pipValue, event) {
 
   :global(.rangePips .pip.out-of-limit) {
     color: #aebecf;
-    color: var(--pip-out-of-range-text);
+    color: var(--pip-out-of-limit-text);
     background-color: #aebecf;
-    background-color: var(--pip-out-of-range);
+    background-color: var(--pip-out-of-limit);
   }
 
   :global(.rangePips .pip.selected) {

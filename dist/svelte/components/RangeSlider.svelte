@@ -507,7 +507,7 @@ function ariaLabelFormatter(value2, index) {
     --handle-border: var(--range-handle-border, var(--handle));
     --range-inactive: var(--range-range-inactive, var(--handle-inactive));
     --range: var(--range-range, var(--handle-focus));
-    --range-limit: var(--range-range-limit, #99a2a280);
+    --range-limit: var(--range-range-limit, #b9c2c2);
     --float-inactive: var(--range-float-inactive, var(--handle-inactive));
     --float: var(--range-float, var(--handle-focus));
     --float-text: var(--range-float-text, white);
