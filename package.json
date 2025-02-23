@@ -1,7 +1,7 @@
 {
   "name": "svelte-range-slider-pips-docs",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "packageManager": "pnpm@8.6.10",
   "scripts": {
@@ -37,8 +37,8 @@
     "pretty-bytes": "^6.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "svelte": "^4.1.2",
-    "svelte-range-slider-pips": "^3.1.2",
+    "svelte": "^4.2.7",
+    "svelte-range-slider-pips": "^3.2.2",
     "typescript": "^5.0.0"
   },
   "devDependencies": {

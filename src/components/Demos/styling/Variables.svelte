@@ -72,6 +72,7 @@
   <div class="inputs">
     <span>Slider Range</span>
     <input type="color" name="clrSlider" id="clrSlider" bind:value={clrSlider} title="--range-slider" />
+    <input type="color" name="clrLimit" id="clrLimit" bind:value={clrLimit} title="--range-limit" />
     <input
       type="color"
       name="clrRangeInactive"
@@ -80,7 +81,6 @@
       title="--range-range-inactive"
     />
     <input type="color" name="clrRange" id="clrRange" bind:value={clrRange} title="--range-range" />
-    <input type="color" name="clrLimit" id="clrLimit" bind:value={clrLimit} title="--range-limit" />
   </div>
 
   <div class="inputs">
