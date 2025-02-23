@@ -122,6 +122,11 @@ export const isInRange = (value, range, type) => {
         return range[0] < value && range[1] > value;
     }
 };
+export const isOutOfLimit = (value, limits) => {
+    if (!limits)
+        return false;
+    return value < limits[0] || value > limits[1];
+};
 /**
  * helper to check if the given value is selected
  * @param value the value to check if is selected

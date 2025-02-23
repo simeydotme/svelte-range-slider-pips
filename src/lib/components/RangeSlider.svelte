@@ -679,6 +679,7 @@
       {orientationStart}
       {hoverable}
       {disabled}
+      {limits}
       {all}
       {first}
       {last}

@@ -4,7 +4,8 @@
   normalisedClient,
   isInRange,
   isSelected,
-  getValueFromIndex
+  getValueFromIndex,
+  isOutOfLimit
 } from "../utils.js";
 export let range = false;
 export let min = 0;
@@ -16,6 +17,7 @@ export let vertical = false;
 export let reversed = false;
 export let hoverable = true;
 export let disabled = false;
+export let limits = null;
 export let pipstep = void 0;
 export let all = true;
 export let first = void 0;
@@ -64,6 +66,7 @@ function labelUp(pipValue, event) {
       class="pip first"
       class:selected={isSelected(min, values, precision)}
       class:in-range={isInRange(min, values, range)}
+      class:out-of-limit={isOutOfLimit(min, limits)}
       style="{orientationStart}: 0%;"
       data-val={coerceFloat(min, precision)}
       on:pointerdown={(e) => {
@@ -91,6 +94,7 @@ function labelUp(pipValue, event) {
           class="pip"
           class:selected={isSelected(val, values, precision)}
           class:in-range={isInRange(val, values, range)}
+          class:out-of-limit={isOutOfLimit(val, limits)}
           style="{orientationStart}: {valueAsPercent(val, min, max, precision)}%;"
           data-val={val}
           on:pointerdown={(e) => {
@@ -117,6 +121,7 @@ function labelUp(pipValue, event) {
       class="pip last"
       class:selected={isSelected(max, values, precision)}
       class:in-range={isInRange(max, values, range)}
+      class:out-of-limit={isOutOfLimit(max, limits)}
       style="{orientationStart}: 100%;"
       data-val={coerceFloat(max, precision)}
       on:pointerdown={(e) => {
@@ -151,6 +156,8 @@ function labelUp(pipValue, event) {
     --pip-hover-text: var(--range-pip-hover-text, var(--pip-hover));
     --pip-in-range: var(--range-pip-in-range, var(--pip-active));
     --pip-in-range-text: var(--range-pip-in-range-text, var(--pip-active-text));
+    --pip-out-of-range: var(--range-pip-out-of-range, #aebecf);
+    --pip-out-of-range-text: var(--range-pip-out-of-range-text, var(--pip-out-of-range));
   }
 
   :global(.rangePips) {
@@ -225,7 +232,7 @@ function labelUp(pipValue, event) {
     background-color: var(--pip-active);
   }
 
-  :global(.rangePips.hoverable:not(.disabled) .pip:hover) {
+  :global(.rangePips.hoverable:not(.disabled) .pip:not(.out-of-limit):hover) {
     color: darkslategrey;
     color: var(--pip-hover-text);
     background-color: darkslategrey;
@@ -237,6 +244,13 @@ function labelUp(pipValue, event) {
     color: var(--pip-in-range-text);
     background-color: darkslategrey;
     background-color: var(--pip-in-range);
+  }
+
+  :global(.rangePips .pip.out-of-limit) {
+    color: #aebecf;
+    color: var(--pip-out-of-range-text);
+    background-color: #aebecf;
+    background-color: var(--pip-out-of-range);
   }
 
   :global(.rangePips .pip.selected) {
@@ -258,11 +272,13 @@ function labelUp(pipValue, event) {
     left: 0.75em;
   }
 
-  :global(.rangePips.hoverable:not(.disabled) .pip:not(.selected):hover) {
+  :global(.rangePips.hoverable:not(.disabled) .pip:not(.selected):not(.out-of-limit):hover) {
     transition: none;
   }
 
-  :global(.rangePips.hoverable:not(.disabled) .pip:not(.selected):hover .pipVal) {
+  :global(
+      .rangePips.hoverable:not(.disabled) .pip:not(.selected):not(.out-of-limit):hover .pipVal
+    ) {
     transition: none;
     font-weight: bold;
   }

@@ -66,7 +66,6 @@ export const alignValueToStep = function (
   precision: number = 2,
   limits: [number, number] | null = null
 ) {
-
   // if limits are provided, clamp the value between the limits
   // if no limits are provided, clamp the value between the min and max
   value = clampValue(value, limits?.[0] ?? min, limits?.[1] ?? max);
@@ -140,6 +139,11 @@ export const isInRange = (value: number, range: number[], type: string | boolean
     // if the range is a boolean of true, then we're checking if the value is in the range
     return range[0] < value && range[1] > value;
   }
+};
+
+export const isOutOfLimit = (value: number, limits: number[] | null) => {
+  if (!limits) return false;
+  return value < limits[0] || value > limits[1];
 };
 
 /**

@@ -63,6 +63,7 @@ export declare const elementIndex: (el: Element | null) => number;
  * @returns {boolean} true if the value is in the range
  */
 export declare const isInRange: (value: number, range: number[], type: string | boolean) => boolean | undefined;
+export declare const isOutOfLimit: (value: number, limits: number[] | null) => boolean;
 /**
  * helper to check if the given value is selected
  * @param value the value to check if is selected

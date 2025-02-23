@@ -318,6 +318,8 @@
             bind:values={limitBind}
             range
             limits={null}
+            pips
+            all="label"
             pushy
             float
             {reversed}
@@ -336,6 +338,8 @@
           <RangeSlider
             bind:values={limitBind2}
             limits={[20, 80]}
+            pips
+            all="label"
             pushy
             float
             {reversed}
@@ -356,6 +360,8 @@
             bind:values={limitBind2}
             range
             limits={[20, 80]}
+            pips
+            all="label"
             pushy
             float
             {reversed}
@@ -375,6 +381,8 @@
             bind:values={limitBind3}
             range="min"
             limits={[20, 80]}
+            pips
+            all="label"
             pushy
             float
             {reversed}

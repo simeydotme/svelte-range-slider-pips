@@ -468,6 +468,7 @@ function ariaLabelFormatter(value2, index) {
       {orientationStart}
       {hoverable}
       {disabled}
+      {limits}
       {all}
       {first}
       {last}

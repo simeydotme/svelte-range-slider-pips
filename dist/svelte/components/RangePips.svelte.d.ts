@@ -12,6 +12,7 @@ declare const __propDef: {
         reversed?: boolean | undefined;
         hoverable?: boolean | undefined;
         disabled?: boolean | undefined;
+        limits?: [number, number] | null | undefined;
         pipstep?: number | undefined;
         all?: Pip;
         first?: Pip;
