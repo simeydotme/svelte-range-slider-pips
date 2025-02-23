@@ -81,9 +81,12 @@ const checkAriaLabels = () => {
 };
 checkValueIsNumber();
 checkValuesIsArray();
-$: value, updateValues();
-$: values, updateValue();
-$: ariaLabels, checkAriaLabels();
+$:
+  value, updateValues();
+$:
+  values, updateValue();
+$:
+  ariaLabels, checkAriaLabels();
 $: {
   const trimmedAlignedValues = trimRange(
     values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
@@ -103,10 +106,13 @@ $: {
   }
   valueLength = values.length;
 }
-$: orientationStart = vertical ? reversed ? "top" : "bottom" : reversed ? "right" : "left";
-$: orientationEnd = vertical ? reversed ? "bottom" : "top" : reversed ? "left" : "right";
+$:
+  orientationStart = vertical ? reversed ? "top" : "bottom" : reversed ? "right" : "left";
+$:
+  orientationEnd = vertical ? reversed ? "bottom" : "top" : reversed ? "left" : "right";
 function targetIsHandle(el) {
-  if (!slider) return false;
+  if (!slider)
+    return false;
   const handles = slider.querySelectorAll(".handle");
   const isHandle = Array.prototype.includes.call(handles, el);
   const isChild = Array.prototype.some.call(handles, (e) => e.contains(el));
@@ -122,7 +128,8 @@ function trimRange(values2) {
   }
 }
 function getClosestHandle(clientPos) {
-  if (!slider) return 0;
+  if (!slider)
+    return 0;
   const dims = slider.getBoundingClientRect();
   let handlePos = 0;
   let handlePercent = 0;
@@ -152,7 +159,8 @@ function getClosestHandle(clientPos) {
   return closest;
 }
 function handleInteract(clientPos) {
-  if (!slider) return;
+  if (!slider)
+    return;
   const dims = slider.getBoundingClientRect();
   let handlePos = 0;
   let handlePercent = 0;
