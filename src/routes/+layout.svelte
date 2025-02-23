@@ -35,6 +35,9 @@
       --pip-active: black;
       --pip-active-text: darkcyan;
     }
+    #limit-test {
+      --range-range-limit: red;
+    }
     table {
       width: 100%;
     }
@@ -54,6 +57,10 @@
     h5 {
       margin-top: 1em;
       font-weight: 400;
+    }
+    h4 {
+      margin-top: 2em;
+      font-weight: 600;
     }
     main {
       display: flex;

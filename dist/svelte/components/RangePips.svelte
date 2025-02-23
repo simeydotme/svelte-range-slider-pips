@@ -29,18 +29,12 @@ export let focus;
 export let orientationStart;
 export let moveHandle;
 let clientStart = null;
-$:
-  stepMax = vertical ? 50 : 100;
-$:
-  tooManyPips = (max - min) / step >= stepMax;
-$:
-  stepDivisor = vertical ? 10 : 20;
-$:
-  reducedSteps = (max - min) / stepDivisor;
-$:
-  pipStep = pipstep ?? (tooManyPips ? reducedSteps : 1);
-$:
-  pipCount = Math.floor((max - min) / (step * pipStep));
+$: stepMax = vertical ? 50 : 100;
+$: tooManyPips = (max - min) / step >= stepMax;
+$: stepDivisor = vertical ? 10 : 20;
+$: reducedSteps = (max - min) / stepDivisor;
+$: pipStep = pipstep ?? (tooManyPips ? reducedSteps : 1);
+$: pipCount = Math.floor((max - min) / (step * pipStep));
 function labelDown(event) {
   clientStart = normalisedClient(event);
 }

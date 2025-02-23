@@ -10,6 +10,7 @@
   --handle-border: var(--range-handle-border, var(--handle));
   --range-inactive: var(--range-range-inactive, var(--handle-inactive));
   --range: var(--range-range, var(--handle-focus));
+  --range-limit: var(--range-range-limit, #99a2a280);
   --float-inactive: var(--range-float-inactive, var(--handle-inactive));
   --float: var(--range-float, var(--handle-focus));
   --float-text: var(--range-float-text, white);
@@ -173,7 +174,8 @@
   transform: translate(-50%, -100%);
 }
 
-.rangeSlider .rangeBar {
+.rangeSlider .rangeBar,
+.rangeSlider .rangeLimit {
   position: absolute;
   display: block;
   transition: background 0.2s ease;
@@ -184,7 +186,8 @@
   z-index: 1;
 }
 
-.rangeSlider.vertical .rangeBar {
+.rangeSlider.vertical .rangeBar,
+.rangeSlider.vertical .rangeLimit {
   width: 0.5em;
   height: auto;
 }
@@ -202,6 +205,11 @@
 .rangeSlider.focus .rangeBar {
   background-color: #838de7;
   background-color: var(--range);
+}
+
+.rangeSlider .rangeLimit {
+  background-color: #99a2a280;
+  background-color: var(--range-limit);
 }
 
 .rangeSlider .rangeNub {

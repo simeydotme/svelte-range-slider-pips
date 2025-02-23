@@ -35,7 +35,7 @@ export declare const valueAsPercent: (value: number, min: number, max: number, p
  * @param {number} precision the number of decimal places to fix to
  * @return {number} the value after it's been aligned
  **/
-export declare const alignValueToStep: (value: number, min: number, max: number, step: number, precision?: number) => number;
+export declare const alignValueToStep: (value: number, min: number, max: number, step: number, precision?: number, limits?: [number, number] | null) => number;
 /**
  * helper to take a string of html and return only the text
  * @param {string} possibleHtml the string that may contain html

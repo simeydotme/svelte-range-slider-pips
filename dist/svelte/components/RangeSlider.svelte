@@ -25,6 +25,7 @@ export let float = false;
 export let reversed = false;
 export let hoverable = true;
 export let disabled = false;
+export let limits = null;
 export let pips = false;
 export let pipstep = void 0;
 export let all = true;
@@ -80,15 +81,12 @@ const checkAriaLabels = () => {
 };
 checkValueIsNumber();
 checkValuesIsArray();
-$:
-  value, updateValues();
-$:
-  values, updateValue();
-$:
-  ariaLabels, checkAriaLabels();
+$: value, updateValues();
+$: values, updateValue();
+$: ariaLabels, checkAriaLabels();
 $: {
   const trimmedAlignedValues = trimRange(
-    values.map((v) => alignValueToStep(v, min, max, step, precision))
+    values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
   );
   if (!(values.length === trimmedAlignedValues.length) || !values.every(
     (element, index) => coerceFloat(element, precision) === trimmedAlignedValues[index]
@@ -105,13 +103,10 @@ $: {
   }
   valueLength = values.length;
 }
-$:
-  orientationStart = vertical ? reversed ? "top" : "bottom" : reversed ? "right" : "left";
-$:
-  orientationEnd = vertical ? reversed ? "bottom" : "top" : reversed ? "left" : "right";
+$: orientationStart = vertical ? reversed ? "top" : "bottom" : reversed ? "right" : "left";
+$: orientationEnd = vertical ? reversed ? "bottom" : "top" : reversed ? "left" : "right";
 function targetIsHandle(el) {
-  if (!slider)
-    return false;
+  if (!slider) return false;
   const handles = slider.querySelectorAll(".handle");
   const isHandle = Array.prototype.includes.call(handles, el);
   const isChild = Array.prototype.some.call(handles, (e) => e.contains(el));
@@ -127,8 +122,7 @@ function trimRange(values2) {
   }
 }
 function getClosestHandle(clientPos) {
-  if (!slider)
-    return 0;
+  if (!slider) return 0;
   const dims = slider.getBoundingClientRect();
   let handlePos = 0;
   let handlePercent = 0;
@@ -158,8 +152,7 @@ function getClosestHandle(clientPos) {
   return closest;
 }
 function handleInteract(clientPos) {
-  if (!slider)
-    return;
+  if (!slider) return;
   const dims = slider.getBoundingClientRect();
   let handlePos = 0;
   let handlePercent = 0;
@@ -177,7 +170,7 @@ function handleInteract(clientPos) {
   moveHandle(activeHandle, handleVal);
 }
 function moveHandle(index, value2) {
-  value2 = alignValueToStep(value2, min, max, step, precision);
+  value2 = alignValueToStep(value2, min, max, step, precision, limits);
   if (index === null) {
     index = activeHandle;
   }
@@ -297,7 +290,8 @@ function sliderInteractStart(event) {
       min,
       max,
       step,
-      precision
+      precision,
+      limits
     );
     eStart();
     if (event.type === "touchstart" && !target.matches(".pipVal")) {
@@ -357,7 +351,7 @@ function eStart() {
   !disabled && dispatch("start", {
     activeHandle,
     value: startValue,
-    values: values.map((v) => alignValueToStep(v, min, max, step, precision))
+    values: values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
   });
 }
 function eStop() {
@@ -365,7 +359,7 @@ function eStop() {
     activeHandle,
     startValue,
     value: values[activeHandle],
-    values: values.map((v) => alignValueToStep(v, min, max, step, precision))
+    values: values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
   });
 }
 function eChange() {
@@ -374,7 +368,7 @@ function eChange() {
     startValue,
     previousValue: typeof previousValue === "undefined" ? startValue : previousValue,
     value: values[activeHandle],
-    values: values.map((v) => alignValueToStep(v, min, max, step, precision))
+    values: values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
   });
 }
 function ariaLabelFormatter(value2, index) {
@@ -440,6 +434,13 @@ function ariaLabelFormatter(value2, index) {
       {/if}
     </span>
   {/each}
+  {#if limits}
+    <span
+      class="rangeLimit"
+      style="{orientationStart}: {valueAsPercent(limits[0], min, max, precision)}%;
+             {orientationEnd}: {100 - valueAsPercent(limits[1], min, max, precision)}%;"
+    />
+  {/if}
   {#if range}
     <span
       class="rangeBar"
@@ -497,6 +498,7 @@ function ariaLabelFormatter(value2, index) {
     --handle-border: var(--range-handle-border, var(--handle));
     --range-inactive: var(--range-range-inactive, var(--handle-inactive));
     --range: var(--range-range, var(--handle-focus));
+    --range-limit: var(--range-range-limit, #99a2a280);
     --float-inactive: var(--range-float-inactive, var(--handle-inactive));
     --float: var(--range-float, var(--handle-focus));
     --float-text: var(--range-float-text, white);
@@ -660,7 +662,8 @@ function ariaLabelFormatter(value2, index) {
     transform: translate(-50%, -100%);
   }
 
-  :global(.rangeSlider .rangeBar) {
+  :global(.rangeSlider .rangeBar),
+  :global(.rangeSlider .rangeLimit) {
     position: absolute;
     display: block;
     transition: background 0.2s ease;
@@ -671,7 +674,8 @@ function ariaLabelFormatter(value2, index) {
     z-index: 1;
   }
 
-  :global(.rangeSlider.vertical .rangeBar) {
+  :global(.rangeSlider.vertical .rangeBar),
+  :global(.rangeSlider.vertical .rangeLimit) {
     width: 0.5em;
     height: auto;
   }
@@ -689,6 +693,11 @@ function ariaLabelFormatter(value2, index) {
   :global(.rangeSlider.focus .rangeBar) {
     background-color: #838de7;
     background-color: var(--range);
+  }
+
+  :global(.rangeSlider .rangeLimit) {
+    background-color: #99a2a280;
+    background-color: var(--range-limit);
   }
 
   :global(.rangeSlider .rangeNub) {

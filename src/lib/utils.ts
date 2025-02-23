@@ -63,16 +63,14 @@ export const alignValueToStep = function (
   min: number,
   max: number,
   step: number,
-  precision: number = 2
+  precision: number = 2,
+  limits: [number, number] | null = null
 ) {
-  // sanity check for performance
-  if (value <= min) {
-    return coerceFloat(min, precision);
-  } else if (value >= max) {
-    return coerceFloat(max, precision);
-  } else {
-    value = coerceFloat(value, precision);
-  }
+
+  // if limits are provided, clamp the value between the limits
+  // if no limits are provided, clamp the value between the min and max
+  value = clampValue(value, limits?.[0] ?? min, limits?.[1] ?? max);
+
   // find the middle-point between steps
   // and see if the value is closer to the
   // next step, or previous step
@@ -82,7 +80,7 @@ export const alignValueToStep = function (
     aligned += remainder > 0 ? step : -step;
   }
   // make sure the value is within acceptable limits
-  aligned = clampValue(aligned, min, max);
+  aligned = clampValue(aligned, limits?.[0] ?? min, limits?.[1] ?? max);
   // make sure the returned value is set to the precision desired
   // this is also because javascript often returns weird floats
   // when dealing with odd numbers and percentages

@@ -32,6 +32,7 @@
   export let reversed: boolean = false;
   export let hoverable: boolean = true;
   export let disabled: boolean = false;
+  export let limits: null | [number, number] = null;
 
   // range pips / values props
   export let pips: boolean = false;
@@ -121,7 +122,7 @@
     // trim the range so it remains as a min/max (only 2 handles)
     // and also align the handles to the steps
     const trimmedAlignedValues = trimRange(
-      values.map((v) => alignValueToStep(v, min, max, step, precision))
+      values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
     );
     if (
       !(values.length === trimmedAlignedValues.length) ||
@@ -287,7 +288,7 @@
   function moveHandle(index: number | null, value: number) {
     // align & clamp the value so we're not doing extra
     // calculation on an out-of-range value down below
-    value = alignValueToStep(value, min, max, step, precision);
+    value = alignValueToStep(value, min, max, step, precision, limits);
     // use the active handle if handle index is not provided
     if (index === null) {
       index = activeHandle;
@@ -458,7 +459,8 @@
         min,
         max,
         step,
-        precision
+        precision,
+        limits
       );
       eStart();
 
@@ -563,7 +565,7 @@
       dispatch('start', {
         activeHandle,
         value: startValue,
-        values: values.map((v) => alignValueToStep(v, min, max, step, precision))
+        values: values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
       });
   }
 
@@ -573,7 +575,7 @@
         activeHandle,
         startValue: startValue,
         value: values[activeHandle],
-        values: values.map((v) => alignValueToStep(v, min, max, step, precision))
+        values: values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
       });
   }
 
@@ -584,7 +586,7 @@
         startValue: startValue,
         previousValue: typeof previousValue === 'undefined' ? startValue : previousValue,
         value: values[activeHandle],
-        values: values.map((v) => alignValueToStep(v, min, max, step, precision))
+        values: values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
       });
   }
 
@@ -651,6 +653,13 @@
       {/if}
     </span>
   {/each}
+  {#if limits}
+    <span
+      class="rangeLimit"
+      style="{orientationStart}: {valueAsPercent(limits[0], min, max, precision)}%;
+             {orientationEnd}: {100 - valueAsPercent(limits[1], min, max, precision)}%;"
+    />
+  {/if}
   {#if range}
     <span
       class="rangeBar"
@@ -708,6 +717,7 @@
     --handle-border: var(--range-handle-border, var(--handle));
     --range-inactive: var(--range-range-inactive, var(--handle-inactive));
     --range: var(--range-range, var(--handle-focus));
+    --range-limit: var(--range-range-limit, #99a2a280);
     --float-inactive: var(--range-float-inactive, var(--handle-inactive));
     --float: var(--range-float, var(--handle-focus));
     --float-text: var(--range-float-text, white);
@@ -871,7 +881,8 @@
     transform: translate(-50%, -100%);
   }
 
-  :global(.rangeSlider .rangeBar) {
+  :global(.rangeSlider .rangeBar),
+  :global(.rangeSlider .rangeLimit) {
     position: absolute;
     display: block;
     transition: background 0.2s ease;
@@ -882,7 +893,8 @@
     z-index: 1;
   }
 
-  :global(.rangeSlider.vertical .rangeBar) {
+  :global(.rangeSlider.vertical .rangeBar),
+  :global(.rangeSlider.vertical .rangeLimit) {
     width: 0.5em;
     height: auto;
   }
@@ -900,6 +912,11 @@
   :global(.rangeSlider.focus .rangeBar) {
     background-color: #838de7;
     background-color: var(--range);
+  }
+
+  :global(.rangeSlider .rangeLimit) {
+    background-color: #99a2a280;
+    background-color: var(--range-limit);
   }
 
   :global(.rangeSlider .rangeNub) {

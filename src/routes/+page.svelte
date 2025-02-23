@@ -95,6 +95,10 @@
   let errorValuesBooleanBind = true;
 
   let valueBind = 20;
+  let limitBind = [10, 30];
+  let limitBind2 = [10, 30];
+  let limitBind3 = [10, 30];
+  let limitBind4 = [10, 30];
 </script>
 
 <header>
@@ -298,6 +302,112 @@
       {disabled}
     />
 
+    <h4>limits</h4>
+    <table>
+      <tr>
+        <th width="50">range</th>
+        <th width="50">limits</th>
+        <th>slider</th>
+        <th width="50">values</th>
+      </tr>
+      <tr>
+        <td><code>true</code></td>
+        <td><code>false</code></td>
+        <td>
+          <RangeSlider
+            bind:values={limitBind}
+            range
+            limits={null}
+            pushy
+            float
+            {reversed}
+            {hoverable}
+            {disabled}
+          />
+        </td>
+        <td>
+          {limitBind}
+        </td>
+      </tr>
+      <tr>
+        <td><code>false</code></td>
+        <td><code>[20,80]</code></td>
+        <td>
+          <RangeSlider
+            bind:values={limitBind2}
+            limits={[20, 80]}
+            pushy
+            float
+            {reversed}
+            {hoverable}
+            {disabled}
+          />
+        </td>
+        <td>
+          {limitBind}
+        </td>
+      </tr>
+      <tr>
+        <td><code>true</code></td>
+        <td><code>[20, 80]</code></td>
+        <td>
+          <RangeSlider
+            id="limit-test"
+            bind:values={limitBind2}
+            range
+            limits={[20, 80]}
+            pushy
+            float
+            {reversed}
+            {hoverable}
+            {disabled}
+          />
+        </td>
+        <td>
+          {limitBind2}
+        </td>
+      </tr>
+      <tr>
+        <td><code>min</code></td>
+        <td><code>[20, 80]</code></td>
+        <td>
+          <RangeSlider
+            bind:values={limitBind3}
+            range="min"
+            limits={[20, 80]}
+            pushy
+            float
+            {reversed}
+            {hoverable}
+            {disabled}
+          />
+        </td>
+        <td>
+          {limitBind3}
+        </td>
+      </tr>
+      <tr>
+        <td><code>max</code></td>
+        <td><code>[20, 80]</code></td>
+        <td>
+          <RangeSlider
+            bind:values={limitBind4}
+            range="max"
+            limits={[20, 80]}
+            pushy
+            float
+            {reversed}
+            {hoverable}
+            {disabled}
+          />
+        </td>
+        <td>
+          {limitBind4}
+        </td>
+      </tr>
+    </table>
+
+    <h4>step & pipstep</h4>
     <RangeSlider float pips step={10} pipstep={1} {reversed} {hoverable} {disabled} />
     <RangeSlider float pips step={10} pipstep={2} {reversed} {hoverable} {disabled} />
     <RangeSlider float pips step={10} pipstep={0.25} {reversed} {hoverable} {disabled} />
