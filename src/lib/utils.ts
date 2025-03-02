@@ -56,9 +56,10 @@ export const valueAsPercent = function (
  * @param {number} max the maximum value
  * @param {number} step the step value
  * @param {number} precision the number of decimal places to fix to
+ * @param {number[]} limits the limits to check against
  * @return {number} the value after it's been aligned
  **/
-export const alignValueToStep = function (
+export const constrainAndAlignValue = function (
   value: number,
   min: number,
   max: number,
@@ -123,7 +124,7 @@ export const elementIndex = (el: Element | null) => {
 
 /**
  * helper to check if the given value is inside the range
- * @param value the value to check if is in the range
+ * @param value the value to check 
  * @param range the range of values to check against
  * @param type the type of range to check against
  * @returns {boolean} true if the value is in the range
@@ -141,6 +142,12 @@ export const isInRange = (value: number, range: number[], type: string | boolean
   }
 };
 
+/**
+ * helper to check if the given value is outside of the limits
+ * @param value the value to check 
+ * @param limits the limits to check against
+ * @returns {boolean} true if the value is out of the limits
+ */
 export const isOutOfLimit = (value: number, limits: number[] | null) => {
   if (!limits) return false;
   return value < limits[0] || value > limits[1];

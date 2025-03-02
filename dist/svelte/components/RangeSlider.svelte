@@ -22,10 +22,13 @@ export let values = [(max + min) / 2];
 export let value = values[0];
 export let vertical = false;
 export let float = false;
+export let rangeFloat = false;
 export let reversed = false;
 export let hoverable = true;
 export let disabled = false;
 export let limits = null;
+export let rangeGapMin = 0;
+export let rangeGapMax = Infinity;
 export let pips = false;
 export let pipstep = void 0;
 export let all = true;
@@ -37,6 +40,7 @@ export let prefix = "";
 export let suffix = "";
 export let formatter = (v, i, p) => v;
 export let handleFormatter = formatter;
+export let rangeFormatter = null;
 export let ariaLabels = [];
 export let precision = 2;
 export let springValues = { stiffness: 0.15, damping: 0.4 };
@@ -182,23 +186,39 @@ function moveHandle(index, value2) {
   if (index === null) {
     index = activeHandle;
   }
-  if (range) {
-    if (index === 0 && value2 > values[1]) {
-      if (pushy) {
-        values[1] = value2;
-      } else {
-        value2 = values[1];
+  if (range === true) {
+    if (index === 0) {
+      if (value2 > values[1] - rangeGapMin) {
+        if (pushy && value2 < (limits?.[1] ?? max) - rangeGapMin) {
+          values[1] = value2 + rangeGapMin;
+        } else {
+          value2 = values[1] - rangeGapMin;
+        }
+      } else if (value2 < values[1] - rangeGapMax) {
+        if (pushy) {
+          values[1] = value2 + rangeGapMax;
+        } else {
+          value2 = values[1] - rangeGapMax;
+        }
       }
-    } else if (index === 1 && value2 < values[0]) {
-      if (pushy) {
-        values[0] = value2;
-      } else {
-        value2 = values[0];
+    } else if (index === 1) {
+      if (value2 < values[0] + rangeGapMin) {
+        if (pushy && value2 > (limits?.[0] ?? min) + rangeGapMin) {
+          values[0] = value2 - rangeGapMin;
+        } else {
+          value2 = values[0] + rangeGapMin;
+        }
+      } else if (value2 > values[0] + rangeGapMax) {
+        if (pushy) {
+          values[0] = value2 - rangeGapMax;
+        } else {
+          value2 = values[0] + rangeGapMax;
+        }
       }
     }
   }
   if (values[index] !== value2) {
-    values[index] = value2;
+    alignValueToStep(values[index] = value2, min, max, step, precision, limits);
   }
   if (previousValue !== value2) {
     eChange();
@@ -452,9 +472,31 @@ function ariaLabelFormatter(value2, index) {
   {#if range}
     <span
       class="rangeBar"
+      class:rangeMax={range === true && values[1] - values[0] >= rangeGapMax}
+      class:rangeMin={range === true && values[1] - values[0] <= rangeGapMin}
       style="{orientationStart}: {rangeStart($springPositions)}%; 
              {orientationEnd}: {rangeEnd($springPositions)}%;"
-    />
+    >
+      {#if rangeFloat}
+        <span class="rangeFloat">
+          {#if rangeFormatter}
+            {@html rangeFormatter(
+              values[0],
+              values[1],
+              valueAsPercent(values[0], min, max, precision),
+              valueAsPercent(values[1], min, max, precision)
+            )}
+          {:else}
+            {@const [first, second] = reversed ? [values[1], values[0]] : [values[0], values[1]]}
+            {#if prefix}<span class="rangeFloat-prefix">{prefix}</span
+              >{/if}{@html first}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
+            {' '}-{' '}
+            {#if prefix}<span class="rangeFloat-prefix">{prefix}</span
+              >{/if}{@html second}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
+          {/if}
+        </span>
+      {/if}
+    </span>
   {/if}
   {#if pips}
     <RangePips
@@ -665,7 +707,9 @@ function ariaLabelFormatter(value2, index) {
   }
 
   :global(.rangeSlider .rangeHandle.active .rangeFloat),
-  :global(.rangeSlider.hoverable .rangeHandle:hover .rangeFloat) {
+  :global(.rangeSlider.hoverable .rangeHandle:hover .rangeFloat),
+  :global(.rangeSlider.hoverable:hover .rangeBar .rangeFloat),
+  :global(.rangeSlider.focus .rangeBar .rangeFloat) {
     opacity: 1;
     top: -0.2em;
     transform: translate(-50%, -100%);

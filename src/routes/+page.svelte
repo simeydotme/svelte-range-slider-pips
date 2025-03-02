@@ -11,7 +11,13 @@
 
   let values = [21.3, 40, 60, 80];
   let dynamic = [0, 50];
-  let pushy = [30, 60];
+  let pushy = [-20, 20];
+  let pushy2 = [-20, 20];
+  let pushy3 = [-5, 5];
+  let pushy4 = [-20, 20];
+  let pushy5 = [-20, 20];
+  let pushy6 = [-40, 40];
+
   let vrange = [20, 80];
 
   const num = new Intl.NumberFormat('en-US');
@@ -266,12 +272,101 @@
 
     <h4>range</h4>
     <h5>Handles block each other</h5>
-    <RangeSlider range bind:values={pushy} float {reversed} {hoverable} {disabled} />
+    <RangeSlider
+      range
+      min={-50}
+      max={50}
+      bind:values={pushy}
+      float
+      rangeFloat
+      pips
+      all="label"
+      {reversed}
+      {hoverable}
+      {disabled}
+    />
+    {pushy}
+    <RangeSlider
+      range
+      min={-50}
+      max={50}
+      bind:values={pushy2}
+      rangeGapMin={10}
+      rangeGapMax={30}
+      float
+      rangeFloat
+      pips
+      all="label"
+      {reversed}
+      {hoverable}
+      {disabled}
+    />
+    {pushy2}
+    <RangeSlider
+      range
+      min={-50}
+      max={50}
+      bind:values={pushy3}
+      rangeGapMin={15}
+      step={1.5}
+      rangeGapMax={22}
+      limits={[-30, 30]}
+      float
+      rangeFloat
+      pips
+      all="label"
+      {reversed}
+      {hoverable}
+      {disabled}
+    />
+    {pushy3}
     <h5>Handles push each other</h5>
     <RangeSlider
       range
+      min={-50}
+      max={50}
       pushy
-      bind:values={pushy}
+      bind:values={pushy4}
+      pips
+      all="label"
+      float
+      rangeFloat
+      rangeFormatter={(v1, v2, p1, p2) => v1 + ' ~ ' + v2 + '  (' + p1 + '% ~ ' + p2 + '%)'}
+      {reversed}
+      {hoverable}
+      {disabled}
+    />
+    {pushy4}
+    <RangeSlider
+      range
+      min={-50}
+      max={50}
+      pushy
+      bind:values={pushy5}
+      rangeGapMax={30}
+      rangeGapMin={7}
+      pips
+      step={1}
+      all="label"
+      float
+      rangeFloat
+      prefix="$"
+      suffix=".00"
+      {reversed}
+      {hoverable}
+      {disabled}
+    />
+    {pushy5}
+    <RangeSlider
+      range
+      min={-50}
+      max={50}
+      step={1.8}
+      pushy
+      bind:values={pushy6}
+      limits={[-20, 20]}
+      rangeGapMax={7}
+      rangeGapMin={7}
       pips
       all="label"
       float
@@ -279,6 +374,7 @@
       {hoverable}
       {disabled}
     />
+    {pushy6}
     <h4>min range</h4>
     <RangeSlider
       range="min"
@@ -312,7 +408,7 @@
       </tr>
       <tr>
         <td><code>true</code></td>
-        <td><code>false</code></td>
+        <td><code>null</code></td>
         <td>
           <RangeSlider
             bind:values={limitBind}
@@ -348,7 +444,7 @@
           />
         </td>
         <td>
-          {limitBind}
+          {limitBind2}
         </td>
       </tr>
       <tr>

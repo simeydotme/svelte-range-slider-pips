@@ -1,6 +1,6 @@
 import { SvelteComponent } from "svelte";
 import { type SpringOpts } from 'svelte/motion';
-import type { Pip, Formatter } from '../types.js';
+import type { Pip, Formatter, RangeFormatter } from '../types.js';
 declare const __propDef: {
     props: {
         slider?: HTMLDivElement | undefined;
@@ -13,10 +13,13 @@ declare const __propDef: {
         value?: number | undefined;
         vertical?: boolean | undefined;
         float?: boolean | undefined;
+        rangeFloat?: boolean | undefined;
         reversed?: boolean | undefined;
         hoverable?: boolean | undefined;
         disabled?: boolean | undefined;
         limits?: [number, number] | null | undefined;
+        rangeGapMin?: number | undefined;
+        rangeGapMax?: number | undefined;
         pips?: boolean | undefined;
         pipstep?: number | undefined;
         all?: Pip;
@@ -28,6 +31,7 @@ declare const __propDef: {
         suffix?: string | undefined;
         formatter?: Formatter | undefined;
         handleFormatter?: Formatter | undefined;
+        rangeFormatter?: RangeFormatter | null | undefined;
         ariaLabels?: string[] | undefined;
         precision?: number | undefined;
         springValues?: SpringOpts | undefined;

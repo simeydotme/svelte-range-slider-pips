@@ -7,12 +7,12 @@
     coerceFloat,
     valueAsPercent,
     clampValue,
-    alignValueToStep,
+    constrainAndAlignValue,
     pureText,
     normalisedClient,
     elementIndex
   } from '$lib/utils.js';
-  import type { Pip, Formatter, NormalisedClient } from '$lib/types.js';
+  import type { Pip, Formatter, NormalisedClient, RangeFormatter } from '$lib/types.js';
 
   import RangePips from './RangePips.svelte';
 
@@ -29,10 +29,13 @@
   export let value: number = values[0];
   export let vertical: boolean = false;
   export let float: boolean = false;
+  export let rangeFloat: boolean = false;
   export let reversed: boolean = false;
   export let hoverable: boolean = true;
   export let disabled: boolean = false;
   export let limits: null | [number, number] = null;
+  export let rangeGapMin: number = 0;
+  export let rangeGapMax: number = Infinity;
 
   // range pips / values props
   export let pips: boolean = false;
@@ -47,7 +50,8 @@
   export let prefix: string = '';
   export let suffix: string = '';
   export let formatter: Formatter = (v, i, p) => v;
-  export let handleFormatter = formatter;
+  export let handleFormatter: Formatter = formatter;
+  export let rangeFormatter: RangeFormatter | null = null;
   export let ariaLabels: string[] = [];
 
   // stylistic props
@@ -109,9 +113,28 @@
     }
   };
 
+  const checkValuesAgainstRangeGaps = () => {
+    // first, align the values to the step
+    values = values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
+    // then, check the values against the range gaps
+    if (rangeGapMax < Infinity) {
+      const gapMax = constrainAndAlignValue(values[0] + rangeGapMax, min, max, step, precision, limits);
+      if (values[1] > gapMax) {
+        values[1] = gapMax;
+      }
+    }
+    if (rangeGapMin > 0) {
+      const gapMin = constrainAndAlignValue(values[0] + rangeGapMin, min, max, step, precision, limits);
+      if (values[1] < gapMin) {
+        values[1] = gapMin;
+      }
+    }
+  };
+
   // fixup the value/values at render
   checkValueIsNumber();
   checkValuesIsArray();
+  checkValuesAgainstRangeGaps();
 
   // keep value and values in sync with each other
   $: value, updateValues();
@@ -122,7 +145,7 @@
     // trim the range so it remains as a min/max (only 2 handles)
     // and also align the handles to the steps
     const trimmedAlignedValues = trimRange(
-      values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
+      values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
     );
     if (
       !(values.length === trimmedAlignedValues.length) ||
@@ -151,6 +174,8 @@
     // set the valueLength for the next check
     valueLength = values.length;
   }
+
+  
 
   /**
    * the orientation of the handles/pips based on the
@@ -288,33 +313,49 @@
   function moveHandle(index: number | null, value: number) {
     // align & clamp the value so we're not doing extra
     // calculation on an out-of-range value down below
-    value = alignValueToStep(value, min, max, step, precision, limits);
+    value = constrainAndAlignValue(value, min, max, step, precision, limits);
     // use the active handle if handle index is not provided
     if (index === null) {
       index = activeHandle;
     }
     // if this is a range slider perform special checks
-    if (range) {
+    if (range === true) {
       // restrict the handles of a range-slider from
       // going past one-another unless "pushy" is true
-      if (index === 0 && value > values[1]) {
-        if (pushy) {
-          values[1] = value;
-        } else {
-          value = values[1];
+      if (index === 0) {
+        if (value > values[1] - rangeGapMin) {
+          if (pushy && value < (limits?.[1] ?? max) - rangeGapMin) {
+            values[1] = value + rangeGapMin;
+          } else {
+            value = values[1] - rangeGapMin;
+          }
+        } else if (value < values[1] - rangeGapMax) {
+          if (pushy) {
+            values[1] = value + rangeGapMax;
+          } else {
+            value = values[1] - rangeGapMax;
+          }
         }
-      } else if (index === 1 && value < values[0]) {
-        if (pushy) {
-          values[0] = value;
-        } else {
-          value = values[0];
+      } else if (index === 1) {
+        if (value < values[0] + rangeGapMin) {
+          if (pushy && value > (limits?.[0] ?? min) + rangeGapMin) {
+            values[0] = value - rangeGapMin;
+          } else {
+            value = values[0] + rangeGapMin;
+          }
+        } else if (value > values[0] + rangeGapMax) {
+          if (pushy) {
+            values[0] = value - rangeGapMax;
+          } else {
+            value = values[0] + rangeGapMax;
+          }
         }
       }
     }
 
     // if the value has changed, update it
     if (values[index] !== value) {
-      values[index] = value;
+      constrainAndAlignValue((values[index] = value), min, max, step, precision, limits);
     }
 
     // fire the change event when the handle moves,
@@ -454,7 +495,7 @@
       activeHandle = getClosestHandle(clientPos);
 
       // fire the start event
-      startValue = previousValue = alignValueToStep(
+      startValue = previousValue = constrainAndAlignValue(
         values[activeHandle],
         min,
         max,
@@ -565,7 +606,7 @@
       dispatch('start', {
         activeHandle,
         value: startValue,
-        values: values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
+        values: values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
       });
   }
 
@@ -575,7 +616,7 @@
         activeHandle,
         startValue: startValue,
         value: values[activeHandle],
-        values: values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
+        values: values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
       });
   }
 
@@ -586,7 +627,7 @@
         startValue: startValue,
         previousValue: typeof previousValue === 'undefined' ? startValue : previousValue,
         value: values[activeHandle],
-        values: values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
+        values: values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
       });
   }
 
@@ -663,9 +704,31 @@
   {#if range}
     <span
       class="rangeBar"
+      class:rangeMax={range === true && values[1] - values[0] >= rangeGapMax}
+      class:rangeMin={range === true && values[1] - values[0] <= rangeGapMin}
       style="{orientationStart}: {rangeStart($springPositions)}%; 
              {orientationEnd}: {rangeEnd($springPositions)}%;"
-    />
+    >
+      {#if rangeFloat}
+        <span class="rangeFloat">
+          {#if rangeFormatter}
+            {@html rangeFormatter(
+              values[0],
+              values[1],
+              valueAsPercent(values[0], min, max, precision),
+              valueAsPercent(values[1], min, max, precision)
+            )}
+          {:else}
+            {@const [first, second] = reversed ? [values[1], values[0]] : [values[0], values[1]]}
+            {#if prefix}<span class="rangeFloat-prefix">{prefix}</span
+              >{/if}{@html first}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
+            {' '}-{' '}
+            {#if prefix}<span class="rangeFloat-prefix">{prefix}</span
+              >{/if}{@html second}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
+          {/if}
+        </span>
+      {/if}
+    </span>
   {/if}
   {#if pips}
     <RangePips
@@ -876,7 +939,9 @@
   }
 
   :global(.rangeSlider .rangeHandle.active .rangeFloat),
-  :global(.rangeSlider.hoverable .rangeHandle:hover .rangeFloat) {
+  :global(.rangeSlider.hoverable .rangeHandle:hover .rangeFloat),
+  :global(.rangeSlider.hoverable:hover .rangeBar .rangeFloat),
+  :global(.rangeSlider.focus .rangeBar .rangeFloat) {
     opacity: 1;
     top: -0.2em;
     transform: translate(-50%, -100%);
