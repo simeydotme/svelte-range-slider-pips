@@ -6,6 +6,7 @@ declare const __propDef: {
         slider?: HTMLDivElement | undefined;
         range?: boolean | "min" | "max" | undefined;
         pushy?: boolean | undefined;
+        draggy?: boolean | undefined;
         min?: number | undefined;
         max?: number | undefined;
         step?: number | undefined;

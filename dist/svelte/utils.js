@@ -48,9 +48,10 @@ export const valueAsPercent = function (value, min, max, precision = 2) {
  * @param {number} max the maximum value
  * @param {number} step the step value
  * @param {number} precision the number of decimal places to fix to
+ * @param {number[]} limits the limits to check against
  * @return {number} the value after it's been aligned
  **/
-export const alignValueToStep = function (value, min, max, step, precision = 2, limits = null) {
+export const constrainAndAlignValue = function (value, min, max, step, precision = 2, limits = null) {
     // if limits are provided, clamp the value between the limits
     // if no limits are provided, clamp the value between the min and max
     value = clampValue(value, limits?.[0] ?? min, limits?.[1] ?? max);
@@ -103,7 +104,7 @@ export const elementIndex = (el) => {
 };
 /**
  * helper to check if the given value is inside the range
- * @param value the value to check if is in the range
+ * @param value the value to check
  * @param range the range of values to check against
  * @param type the type of range to check against
  * @returns {boolean} true if the value is in the range
@@ -122,6 +123,12 @@ export const isInRange = (value, range, type) => {
         return range[0] < value && range[1] > value;
     }
 };
+/**
+ * helper to check if the given value is outside of the limits
+ * @param value the value to check
+ * @param limits the limits to check against
+ * @returns {boolean} true if the value is out of the limits
+ */
 export const isOutOfLimit = (value, limits) => {
     if (!limits)
         return false;

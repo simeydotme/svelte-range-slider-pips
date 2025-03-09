@@ -124,7 +124,7 @@ export const elementIndex = (el: Element | null) => {
 
 /**
  * helper to check if the given value is inside the range
- * @param value the value to check 
+ * @param value the value to check
  * @param range the range of values to check against
  * @param type the type of range to check against
  * @returns {boolean} true if the value is in the range
@@ -144,7 +144,7 @@ export const isInRange = (value: number, range: number[], type: string | boolean
 
 /**
  * helper to check if the given value is outside of the limits
- * @param value the value to check 
+ * @param value the value to check
  * @param limits the limits to check against
  * @returns {boolean} true if the value is out of the limits
  */

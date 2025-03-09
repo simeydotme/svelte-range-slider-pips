@@ -33,9 +33,10 @@ export declare const valueAsPercent: (value: number, min: number, max: number, p
  * @param {number} max the maximum value
  * @param {number} step the step value
  * @param {number} precision the number of decimal places to fix to
+ * @param {number[]} limits the limits to check against
  * @return {number} the value after it's been aligned
  **/
-export declare const alignValueToStep: (value: number, min: number, max: number, step: number, precision?: number, limits?: [number, number] | null) => number;
+export declare const constrainAndAlignValue: (value: number, min: number, max: number, step: number, precision?: number, limits?: [number, number] | null) => number;
 /**
  * helper to take a string of html and return only the text
  * @param {string} possibleHtml the string that may contain html
@@ -57,12 +58,18 @@ export declare const normalisedClient: (event: TouchEvent | MouseEvent) => Norma
 export declare const elementIndex: (el: Element | null) => number;
 /**
  * helper to check if the given value is inside the range
- * @param value the value to check if is in the range
+ * @param value the value to check
  * @param range the range of values to check against
  * @param type the type of range to check against
  * @returns {boolean} true if the value is in the range
  */
 export declare const isInRange: (value: number, range: number[], type: string | boolean) => boolean | undefined;
+/**
+ * helper to check if the given value is outside of the limits
+ * @param value the value to check
+ * @param limits the limits to check against
+ * @returns {boolean} true if the value is out of the limits
+ */
 export declare const isOutOfLimit: (value: number, limits: number[] | null) => boolean;
 /**
  * helper to check if the given value is selected

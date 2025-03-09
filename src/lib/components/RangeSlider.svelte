@@ -22,6 +22,7 @@
   // range slider props
   export let range: boolean | 'min' | 'max' = false;
   export let pushy: boolean = false;
+  export let draggy: boolean = false;
   export let min: number = 0;
   export let max: number = 100;
   export let step: number = 1;
@@ -66,10 +67,13 @@
   let focus = false;
   let handleActivated = false;
   let handlePressed = false;
+  let rangeActivated = false;
+  let rangePressed = false;
+  let activeRangeGaps = [1, 1];
   let keyboardActive = false;
-  let activeHandle = values.length - 1;
-  let startValue: number;
-  let previousValue: number;
+  let activeHandle = -1;
+  let startValues: (number | undefined)[] = [];
+  let previousValues: (number | undefined)[] = [];
 
   // copy the initial values in to a spring function which
   // will update every time the values array is modified
@@ -118,13 +122,27 @@
     values = values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
     // then, check the values against the range gaps
     if (rangeGapMax < Infinity) {
-      const gapMax = constrainAndAlignValue(values[0] + rangeGapMax, min, max, step, precision, limits);
+      const gapMax = constrainAndAlignValue(
+        values[0] + rangeGapMax,
+        min,
+        max,
+        step,
+        precision,
+        limits
+      );
       if (values[1] > gapMax) {
         values[1] = gapMax;
       }
     }
     if (rangeGapMin > 0) {
-      const gapMin = constrainAndAlignValue(values[0] + rangeGapMin, min, max, step, precision, limits);
+      const gapMin = constrainAndAlignValue(
+        values[0] + rangeGapMin,
+        min,
+        max,
+        step,
+        precision,
+        limits
+      );
       if (values[1] < gapMin) {
         values[1] = gapMin;
       }
@@ -174,8 +192,6 @@
     // set the valueLength for the next check
     valueLength = values.length;
   }
-
-  
 
   /**
    * the orientation of the handles/pips based on the
@@ -282,7 +298,7 @@
    * @param {object} clientPos the client {x,y} of the interaction
    **/
   function handleInteract(clientPos: NormalisedClient) {
-    if (!slider) return;
+    if (!slider || !handleActivated) return;
     // first make sure we have the latest dimensions
     // of the slider, as it may have changed size
     const dims = slider.getBoundingClientRect();
@@ -304,13 +320,64 @@
     moveHandle(activeHandle, handleVal);
   }
 
+  function getRangeGapsOnInteractionStart(clientPos: NormalisedClient) {
+    if (!slider || !draggy || !rangeActivated || range === 'min' || range === 'max') return;
+    const dims = slider.getBoundingClientRect();
+    let pointerPos = 0;
+    let pointerPercent = 0;
+    let pointerVal = 0;
+    if (vertical) {
+      pointerPos = clientPos.y - dims.top;
+      pointerPercent = (pointerPos / dims.height) * 100;
+      pointerPercent = reversed ? pointerPercent : 100 - pointerPercent;
+    } else {
+      pointerPos = clientPos.x - dims.left;
+      pointerPercent = (pointerPos / dims.width) * 100;
+      pointerPercent = reversed ? 100 - pointerPercent : pointerPercent;
+    }
+    pointerVal = ((max - min) / 100) * pointerPercent + min;
+    activeRangeGaps = [values[0] - pointerVal, values[1] - pointerVal];
+  }
+
+  /**
+   * take the interaction position on the slider, get the values of each handle
+   * then calculate the distance between the handles and the interaction position
+   * so when the user moves the range, each handle moves in the corresponding direction
+   * at the original distance from the interaction position
+   * @param {object} clientPos the client {x,y} of the interaction
+   */
+  function rangeInteract(clientPos: NormalisedClient) {
+    if (!slider || !draggy || !rangeActivated || range === 'min' || range === 'max') return;
+    // first make sure we have the latest dimensions
+    // of the slider, as it may have changed size
+    const dims = slider.getBoundingClientRect();
+    // calculate the interaction position, percent and value
+    let pointerPos = 0;
+    let pointerPercent = 0;
+    let pointerVal = 0;
+    if (vertical) {
+      pointerPos = clientPos.y - dims.top;
+      pointerPercent = (pointerPos / dims.height) * 100;
+      pointerPercent = reversed ? pointerPercent : 100 - pointerPercent;
+    } else {
+      pointerPos = clientPos.x - dims.left;
+      pointerPercent = (pointerPos / dims.width) * 100;
+      pointerPercent = reversed ? 100 - pointerPercent : pointerPercent;
+    }
+    pointerVal = ((max - min) / 100) * pointerPercent + min;
+    activeHandle = -1;
+    moveHandle(0, pointerVal + activeRangeGaps[0], false);
+    moveHandle(1, pointerVal + activeRangeGaps[1], true);
+  }
+
   /**
    * move a handle to a specific value, respecting the clamp/align rules
    * @param {number} index the index of the handle we want to move
    * @param {number} value the value to move the handle to
+   * @param {boolean} fireEvent whether to fire the change event
    * @return {number} the value that was moved to (after alignment/clamping)
    **/
-  function moveHandle(index: number | null, value: number) {
+  function moveHandle(index: number | null, value: number, fireEvent: boolean = true) {
     // align & clamp the value so we're not doing extra
     // calculation on an out-of-range value down below
     value = constrainAndAlignValue(value, min, max, step, precision, limits);
@@ -357,14 +424,25 @@
     if (values[index] !== value) {
       constrainAndAlignValue((values[index] = value), min, max, step, precision, limits);
     }
-
-    // fire the change event when the handle moves,
-    // and store the previous value for the next time
-    if (previousValue !== value) {
-      eChange();
-      previousValue = value;
+    if (fireEvent) {
+      fireChangeEvent(values);
     }
     return value;
+  }
+
+  /**
+   *
+   */
+  function fireChangeEvent(values: number[]) {
+    // Check if any value has changed by comparing each element
+    const hasChanged = previousValues.some((prev, index) => {
+      return prev !== values[index];
+    });
+
+    if (hasChanged) {
+      eChange();
+      previousValues = [...values];
+    }
   }
 
   /**
@@ -406,6 +484,8 @@
       focus = false;
       handleActivated = false;
       handlePressed = false;
+      rangeActivated = false;
+      rangePressed = false;
     }
   }
 
@@ -490,26 +570,28 @@
       const clientPos = normalisedClient(event);
       // set the closest handle as active
       focus = true;
-      handleActivated = true;
-      handlePressed = true;
-      activeHandle = getClosestHandle(clientPos);
 
-      // fire the start event
-      startValue = previousValue = constrainAndAlignValue(
-        values[activeHandle],
-        min,
-        max,
-        step,
-        precision,
-        limits
-      );
-      eStart();
-
-      // for touch devices we want the handle to instantly
-      // move to the position touched for more responsive feeling
-      if (event.type === 'touchstart' && !target.matches('.pipVal')) {
-        handleInteract(clientPos);
+      if (target.matches('.rangeBar') && range === true && draggy) {
+        handleActivated = false;
+        handlePressed = false;
+        activeHandle = -1;
+        rangeActivated = true;
+        rangePressed = true;
+        getRangeGapsOnInteractionStart(clientPos);
+      } else {
+        handleActivated = true;
+        handlePressed = true;
+        activeHandle = getClosestHandle(clientPos);
+        // for touch devices we want the handle to instantly
+        // move to the position touched for more responsive feeling
+        if (event.type === 'touchstart' && !target.matches('.pipVal')) {
+          handleInteract(clientPos);
+        }
       }
+      // fire the start event
+      startValues = values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
+      previousValues = [...startValues];
+      eStart();
     }
   }
 
@@ -524,6 +606,7 @@
       eStop();
     }
     handlePressed = false;
+    rangePressed = false;
   }
 
   /**
@@ -548,6 +631,8 @@
     if (!disabled) {
       if (handleActivated) {
         handleInteract(normalisedClient(event));
+      } else if (rangeActivated) {
+        rangeInteract(normalisedClient(event));
       }
     }
   }
@@ -573,13 +658,17 @@
             handleInteract(normalisedClient(event));
           }
         }
+      }
+      if (handleActivated || rangeActivated) {
         // fire the stop event for mouse device
-        // when the body is triggered with an active handle
+        // when the body is triggered with an active handle/range
         eStop();
       }
     }
     handleActivated = false;
     handlePressed = false;
+    rangeActivated = false;
+    rangePressed = false;
   }
 
   /**
@@ -590,6 +679,8 @@
   function bodyTouchEnd(event: TouchEvent) {
     handleActivated = false;
     handlePressed = false;
+    rangeActivated = false;
+    rangePressed = false;
   }
 
   function bodyKeyDown(event: KeyboardEvent) {
@@ -602,33 +693,41 @@
   }
 
   function eStart() {
-    !disabled &&
-      dispatch('start', {
-        activeHandle,
-        value: startValue,
-        values: values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
-      });
+    if (disabled) return;
+    dispatch('start', {
+      activeHandle,
+      value: startValues[activeHandle],
+      values: startValues
+    });
   }
 
   function eStop() {
-    !disabled &&
-      dispatch('stop', {
-        activeHandle,
-        startValue: startValue,
-        value: values[activeHandle],
-        values: values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
-      });
+    if (disabled) return;
+    const startValue = rangeActivated ? startValues : startValues[activeHandle];
+    dispatch('stop', {
+      activeHandle,
+      startValue,
+      value: values[activeHandle],
+      values: values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
+    });
   }
 
   function eChange() {
-    !disabled &&
-      dispatch('change', {
-        activeHandle,
-        startValue: startValue,
-        previousValue: typeof previousValue === 'undefined' ? startValue : previousValue,
-        value: values[activeHandle],
-        values: values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
-      });
+    if (disabled) return;
+    const startValue = rangeActivated ? startValues : startValues[activeHandle];
+    const previousValue =
+      typeof previousValues === 'undefined'
+        ? startValue
+        : rangeActivated
+          ? previousValues
+          : previousValues[activeHandle];
+    dispatch('change', {
+      activeHandle,
+      startValue,
+      previousValue,
+      value: values[activeHandle],
+      values: values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
+    });
   }
 
   function ariaLabelFormatter(value: number, index: number) {
@@ -704,8 +803,9 @@
   {#if range}
     <span
       class="rangeBar"
-      class:rangeMax={range === true && values[1] - values[0] >= rangeGapMax}
-      class:rangeMin={range === true && values[1] - values[0] <= rangeGapMin}
+      class:rangeDrag={draggy}
+      class:press={rangePressed}
+      class:range
       style="{orientationStart}: {rangeStart($springPositions)}%; 
              {orientationEnd}: {rangeEnd($springPositions)}%;"
     >
@@ -782,6 +882,8 @@
     --range-inactive: var(--range-range-inactive, var(--handle-inactive));
     --range: var(--range-range, var(--handle-focus));
     --range-limit: var(--range-range-limit, #b9c2c2);
+    --range-hover: var(--range-range-hover, var(--handle-border));
+    --range-press: var(--range-range-press, var(--handle-border));
     --float-inactive: var(--range-float-inactive, var(--handle-inactive));
     --float: var(--range-float, var(--handle-focus));
     --float-text: var(--range-float-text, white);
@@ -948,6 +1050,7 @@
   }
 
   :global(.rangeSlider .rangeBar),
+  :global(.rangeSlider .rangeBar.rangeDrag::before),
   :global(.rangeSlider .rangeLimit) {
     position: absolute;
     display: block;
@@ -960,9 +1063,32 @@
   }
 
   :global(.rangeSlider.vertical .rangeBar),
+  :global(.rangeSlider.vertical .rangeBar.rangeDrag::before),
   :global(.rangeSlider.vertical .rangeLimit) {
     width: 0.5em;
     height: auto;
+  }
+
+  :global(.rangeSlider .rangeBar.rangeDrag::before) {
+    content: '';
+    inset: 0;
+    top: -0.5em;
+    bottom: -0.5em;
+    height: auto;
+    background-color: var(--range-hover);
+    opacity: 0;
+    transition:
+      opacity 0.2s ease,
+      scale 0.2s ease;
+  }
+
+  :global(.rangeSlider .rangeBar.rangeDrag:hover::before) {
+    opacity: 0.2;
+  }
+
+  :global(.rangeSlider .rangeBar.rangeDrag.press::before) {
+    opacity: 0.4;
+    scale: 1 1.25;
   }
 
   :global(.rangeSlider) {

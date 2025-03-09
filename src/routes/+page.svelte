@@ -17,6 +17,9 @@
   let pushy4 = [-20, 20];
   let pushy5 = [-20, 20];
   let pushy6 = [-40, 40];
+  let draggy4 = [-20, 20];
+  let draggy5 = [-20, 20];
+  let draggy6 = [-40, 40];
 
   let vrange = [20, 80];
 
@@ -375,6 +378,79 @@
       {disabled}
     />
     {pushy6}
+    <h5>Range is Draggy</h5>
+    <RangeSlider
+      range
+      draggy
+      min={-50}
+      max={50}
+      pushy
+      bind:values={draggy4}
+      pips
+      rangeFloat
+      rangeFormatter={(v1, v2, p1, p2) => v1 + ' ~ ' + v2 + '  (' + p1 + '% ~ ' + p2 + '%)'}
+      {reversed}
+      {hoverable}
+      {disabled}
+    />
+    {draggy4}
+    <RangeSlider
+      range
+      draggy
+      min={-50}
+      max={50}
+      step={2.7}
+      pipstep={2.5}
+      pushy
+      bind:values={draggy5}
+      rangeGapMin={10}
+      rangeGapMax={20}
+      pips
+      all="label"
+      rangeFloat
+      {reversed}
+      {hoverable}
+      {disabled}
+      on:start={(e) => {
+        console.log('start', e.detail);
+      }}
+      on:stop={(e) => {
+        console.log('stop', e.detail);
+      }}
+      on:change={(e) => {
+        console.log('change', e.detail);
+      }}
+    />
+    {draggy5}
+    <RangeSlider
+      range
+      min={-50}
+      max={50}
+      step={2}
+      pushy
+      draggy
+      bind:values={draggy6}
+      limits={[-20, 20]}
+      rangeGapMin={8}
+      rangeGapMax={8}
+      pips
+      all="label"
+      float
+      {reversed}
+      {hoverable}
+      {disabled}
+      on:start={(e) => {
+        console.log('start', e.detail);
+      }}
+      on:stop={(e) => {
+        console.log('stop', e.detail);
+      }}
+      on:change={(e) => {
+        console.log('change', e.detail);
+      }}
+    />
+    {draggy6}
+
     <h4>min range</h4>
     <RangeSlider
       range="min"

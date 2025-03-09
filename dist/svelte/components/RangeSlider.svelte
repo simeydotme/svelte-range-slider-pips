@@ -6,7 +6,7 @@ import {
   coerceFloat,
   valueAsPercent,
   clampValue,
-  alignValueToStep,
+  constrainAndAlignValue,
   pureText,
   normalisedClient,
   elementIndex
@@ -15,6 +15,7 @@ import RangePips from "./RangePips.svelte";
 export let slider = void 0;
 export let range = false;
 export let pushy = false;
+export let draggy = false;
 export let min = 0;
 export let max = 100;
 export let step = 1;
@@ -49,10 +50,13 @@ let valueLength = 0;
 let focus = false;
 let handleActivated = false;
 let handlePressed = false;
+let rangeActivated = false;
+let rangePressed = false;
+let activeRangeGaps = [1, 1];
 let keyboardActive = false;
-let activeHandle = values.length - 1;
-let startValue;
-let previousValue;
+let activeHandle = -1;
+let startValues = [];
+let previousValues = [];
 let springPositions;
 const updateValues = () => {
   checkValuesIsArray();
@@ -83,8 +87,38 @@ const checkAriaLabels = () => {
     console.warn(`'ariaLabels' prop should be an Array`);
   }
 };
+const checkValuesAgainstRangeGaps = () => {
+  values = values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
+  if (rangeGapMax < Infinity) {
+    const gapMax = constrainAndAlignValue(
+      values[0] + rangeGapMax,
+      min,
+      max,
+      step,
+      precision,
+      limits
+    );
+    if (values[1] > gapMax) {
+      values[1] = gapMax;
+    }
+  }
+  if (rangeGapMin > 0) {
+    const gapMin = constrainAndAlignValue(
+      values[0] + rangeGapMin,
+      min,
+      max,
+      step,
+      precision,
+      limits
+    );
+    if (values[1] < gapMin) {
+      values[1] = gapMin;
+    }
+  }
+};
 checkValueIsNumber();
 checkValuesIsArray();
+checkValuesAgainstRangeGaps();
 $:
   value, updateValues();
 $:
@@ -93,7 +127,7 @@ $:
   ariaLabels, checkAriaLabels();
 $: {
   const trimmedAlignedValues = trimRange(
-    values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
+    values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
   );
   if (!(values.length === trimmedAlignedValues.length) || !values.every(
     (element, index) => coerceFloat(element, precision) === trimmedAlignedValues[index]
@@ -163,7 +197,7 @@ function getClosestHandle(clientPos) {
   return closest;
 }
 function handleInteract(clientPos) {
-  if (!slider)
+  if (!slider || !handleActivated)
     return;
   const dims = slider.getBoundingClientRect();
   let handlePos = 0;
@@ -181,8 +215,48 @@ function handleInteract(clientPos) {
   handleVal = (max - min) / 100 * handlePercent + min;
   moveHandle(activeHandle, handleVal);
 }
-function moveHandle(index, value2) {
-  value2 = alignValueToStep(value2, min, max, step, precision, limits);
+function getRangeGapsOnInteractionStart(clientPos) {
+  if (!slider || !draggy || !rangeActivated || range === "min" || range === "max")
+    return;
+  const dims = slider.getBoundingClientRect();
+  let pointerPos = 0;
+  let pointerPercent = 0;
+  let pointerVal = 0;
+  if (vertical) {
+    pointerPos = clientPos.y - dims.top;
+    pointerPercent = pointerPos / dims.height * 100;
+    pointerPercent = reversed ? pointerPercent : 100 - pointerPercent;
+  } else {
+    pointerPos = clientPos.x - dims.left;
+    pointerPercent = pointerPos / dims.width * 100;
+    pointerPercent = reversed ? 100 - pointerPercent : pointerPercent;
+  }
+  pointerVal = (max - min) / 100 * pointerPercent + min;
+  activeRangeGaps = [values[0] - pointerVal, values[1] - pointerVal];
+}
+function rangeInteract(clientPos) {
+  if (!slider || !draggy || !rangeActivated || range === "min" || range === "max")
+    return;
+  const dims = slider.getBoundingClientRect();
+  let pointerPos = 0;
+  let pointerPercent = 0;
+  let pointerVal = 0;
+  if (vertical) {
+    pointerPos = clientPos.y - dims.top;
+    pointerPercent = pointerPos / dims.height * 100;
+    pointerPercent = reversed ? pointerPercent : 100 - pointerPercent;
+  } else {
+    pointerPos = clientPos.x - dims.left;
+    pointerPercent = pointerPos / dims.width * 100;
+    pointerPercent = reversed ? 100 - pointerPercent : pointerPercent;
+  }
+  pointerVal = (max - min) / 100 * pointerPercent + min;
+  activeHandle = -1;
+  moveHandle(0, pointerVal + activeRangeGaps[0], false);
+  moveHandle(1, pointerVal + activeRangeGaps[1], true);
+}
+function moveHandle(index, value2, fireEvent = true) {
+  value2 = constrainAndAlignValue(value2, min, max, step, precision, limits);
   if (index === null) {
     index = activeHandle;
   }
@@ -218,13 +292,21 @@ function moveHandle(index, value2) {
     }
   }
   if (values[index] !== value2) {
-    alignValueToStep(values[index] = value2, min, max, step, precision, limits);
+    constrainAndAlignValue(values[index] = value2, min, max, step, precision, limits);
   }
-  if (previousValue !== value2) {
-    eChange();
-    previousValue = value2;
+  if (fireEvent) {
+    fireChangeEvent(values);
   }
   return value2;
+}
+function fireChangeEvent(values2) {
+  const hasChanged = previousValues.some((prev, index) => {
+    return prev !== values2[index];
+  });
+  if (hasChanged) {
+    eChange();
+    previousValues = [...values2];
+  }
 }
 function rangeStart(values2) {
   if (range === "min") {
@@ -248,6 +330,8 @@ function sliderBlurHandle(event) {
     focus = false;
     handleActivated = false;
     handlePressed = false;
+    rangeActivated = false;
+    rangePressed = false;
   }
 }
 function sliderFocusHandle(event) {
@@ -310,21 +394,24 @@ function sliderInteractStart(event) {
     const target = event.target;
     const clientPos = normalisedClient(event);
     focus = true;
-    handleActivated = true;
-    handlePressed = true;
-    activeHandle = getClosestHandle(clientPos);
-    startValue = previousValue = alignValueToStep(
-      values[activeHandle],
-      min,
-      max,
-      step,
-      precision,
-      limits
-    );
-    eStart();
-    if (event.type === "touchstart" && !target.matches(".pipVal")) {
-      handleInteract(clientPos);
+    if (target.matches(".rangeBar") && range === true && draggy) {
+      handleActivated = false;
+      handlePressed = false;
+      activeHandle = -1;
+      rangeActivated = true;
+      rangePressed = true;
+      getRangeGapsOnInteractionStart(clientPos);
+    } else {
+      handleActivated = true;
+      handlePressed = true;
+      activeHandle = getClosestHandle(clientPos);
+      if (event.type === "touchstart" && !target.matches(".pipVal")) {
+        handleInteract(clientPos);
+      }
     }
+    startValues = values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
+    previousValues = [...startValues];
+    eStart();
   }
 }
 function sliderInteractEnd(event) {
@@ -332,6 +419,7 @@ function sliderInteractEnd(event) {
     eStop();
   }
   handlePressed = false;
+  rangePressed = false;
 }
 function bodyInteractStart(event) {
   const target = event.target;
@@ -344,6 +432,8 @@ function bodyInteract(event) {
   if (!disabled) {
     if (handleActivated) {
       handleInteract(normalisedClient(event));
+    } else if (rangeActivated) {
+      rangeInteract(normalisedClient(event));
     }
   }
 }
@@ -357,15 +447,21 @@ function bodyMouseUp(event) {
           handleInteract(normalisedClient(event));
         }
       }
+    }
+    if (handleActivated || rangeActivated) {
       eStop();
     }
   }
   handleActivated = false;
   handlePressed = false;
+  rangeActivated = false;
+  rangePressed = false;
 }
 function bodyTouchEnd(event) {
   handleActivated = false;
   handlePressed = false;
+  rangeActivated = false;
+  rangePressed = false;
 }
 function bodyKeyDown(event) {
   const target = event.target;
@@ -376,27 +472,36 @@ function bodyKeyDown(event) {
   }
 }
 function eStart() {
-  !disabled && dispatch("start", {
+  if (disabled)
+    return;
+  dispatch("start", {
     activeHandle,
-    value: startValue,
-    values: values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
+    value: startValues[activeHandle],
+    values: startValues
   });
 }
 function eStop() {
-  !disabled && dispatch("stop", {
+  if (disabled)
+    return;
+  const startValue = rangeActivated ? startValues : startValues[activeHandle];
+  dispatch("stop", {
     activeHandle,
     startValue,
     value: values[activeHandle],
-    values: values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
+    values: values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
   });
 }
 function eChange() {
-  !disabled && dispatch("change", {
+  if (disabled)
+    return;
+  const startValue = rangeActivated ? startValues : startValues[activeHandle];
+  const previousValue = typeof previousValues === "undefined" ? startValue : rangeActivated ? previousValues : previousValues[activeHandle];
+  dispatch("change", {
     activeHandle,
     startValue,
-    previousValue: typeof previousValue === "undefined" ? startValue : previousValue,
+    previousValue,
     value: values[activeHandle],
-    values: values.map((v) => alignValueToStep(v, min, max, step, precision, limits))
+    values: values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
   });
 }
 function ariaLabelFormatter(value2, index) {
@@ -472,8 +577,9 @@ function ariaLabelFormatter(value2, index) {
   {#if range}
     <span
       class="rangeBar"
-      class:rangeMax={range === true && values[1] - values[0] >= rangeGapMax}
-      class:rangeMin={range === true && values[1] - values[0] <= rangeGapMin}
+      class:rangeDrag={draggy}
+      class:press={rangePressed}
+      class:range
       style="{orientationStart}: {rangeStart($springPositions)}%; 
              {orientationEnd}: {rangeEnd($springPositions)}%;"
     >
@@ -550,6 +656,8 @@ function ariaLabelFormatter(value2, index) {
     --range-inactive: var(--range-range-inactive, var(--handle-inactive));
     --range: var(--range-range, var(--handle-focus));
     --range-limit: var(--range-range-limit, #b9c2c2);
+    --range-hover: var(--range-range-hover, var(--handle-border));
+    --range-press: var(--range-range-press, var(--handle-border));
     --float-inactive: var(--range-float-inactive, var(--handle-inactive));
     --float: var(--range-float, var(--handle-focus));
     --float-text: var(--range-float-text, white);
@@ -716,6 +824,7 @@ function ariaLabelFormatter(value2, index) {
   }
 
   :global(.rangeSlider .rangeBar),
+  :global(.rangeSlider .rangeBar.rangeDrag::before),
   :global(.rangeSlider .rangeLimit) {
     position: absolute;
     display: block;
@@ -728,9 +837,32 @@ function ariaLabelFormatter(value2, index) {
   }
 
   :global(.rangeSlider.vertical .rangeBar),
+  :global(.rangeSlider.vertical .rangeBar.rangeDrag::before),
   :global(.rangeSlider.vertical .rangeLimit) {
     width: 0.5em;
     height: auto;
+  }
+
+  :global(.rangeSlider .rangeBar.rangeDrag::before) {
+    content: '';
+    inset: 0;
+    top: -0.5em;
+    bottom: -0.5em;
+    height: auto;
+    background-color: var(--range-hover);
+    opacity: 0;
+    transition:
+      opacity 0.2s ease,
+      scale 0.2s ease;
+  }
+
+  :global(.rangeSlider .rangeBar.rangeDrag:hover::before) {
+    opacity: 0.2;
+  }
+
+  :global(.rangeSlider .rangeBar.rangeDrag.press::before) {
+    opacity: 0.4;
+    scale: 1 1.25;
   }
 
   :global(.rangeSlider) {
