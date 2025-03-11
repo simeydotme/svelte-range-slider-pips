@@ -15,5 +15,7 @@ build/
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
+PENDING_CHANGES.md
+CHANGELOG.md
 yarn-error.log
 npm-error.log
