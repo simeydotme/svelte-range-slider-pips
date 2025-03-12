@@ -43,7 +43,7 @@
     "!dist/**/*.spec.*"
   ],
   "scripts": {
-    "dev": "vite dev",
+    "dev": "vite dev --host",
     "build": "npm run build:vanilla && vite build && npm run build:svelte",
     "build:svelte": "svelte-kit sync && svelte-package -o dist/svelte && publint",
     "build:vanilla": "rollup -c",
@@ -53,7 +53,7 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "test:integration": "playwright test",
-    "test:unit": "vitest",
+    "test:unit": "vitest --reporter=verbose",
     "lint": "prettier --check .",
     "format": "prettier --write .",
     "add:dist": "git add dist"
@@ -76,8 +76,12 @@
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/package": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/svelte": "^5.2.7",
     "@types/node": "^20.11.16",
+    "@types/testing-library__jest-dom": "^5.14.9",
     "globby": "^14.0.0",
+    "jsdom": "^26.0.0",
     "pre-commit": "^1.2.2",
     "prettier": "^3.1.1",
     "prettier-plugin-svelte": "^3.1.2",

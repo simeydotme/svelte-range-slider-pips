@@ -4,6 +4,7 @@ import type { Pip, Formatter, RangeFormatter } from '../types.js';
 declare const __propDef: {
     props: {
         slider?: HTMLDivElement | undefined;
+        precision?: number | undefined;
         range?: boolean | "min" | "max" | undefined;
         pushy?: boolean | undefined;
         draggy?: boolean | undefined;
@@ -34,7 +35,6 @@ declare const __propDef: {
         handleFormatter?: Formatter | undefined;
         rangeFormatter?: RangeFormatter | null | undefined;
         ariaLabels?: string[] | undefined;
-        precision?: number | undefined;
         springValues?: SpringOpts | undefined;
     };
     events: {

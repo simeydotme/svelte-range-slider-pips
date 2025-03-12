@@ -13,13 +13,14 @@ import {
 } from "../utils.js";
 import RangePips from "./RangePips.svelte";
 export let slider = void 0;
+export let precision = 2;
 export let range = false;
 export let pushy = false;
 export let draggy = false;
 export let min = 0;
 export let max = 100;
 export let step = 1;
-export let values = [(max + min) / 2];
+export let values = [coerceFloat((max + min) / 2, precision)];
 export let value = values[0];
 export let vertical = false;
 export let float = false;
@@ -43,7 +44,6 @@ export let formatter = (v, i, p) => v;
 export let handleFormatter = formatter;
 export let rangeFormatter = null;
 export let ariaLabels = [];
-export let precision = 2;
 export let springValues = { stiffness: 0.15, damping: 0.4 };
 const dispatch = createEventDispatcher();
 let valueLength = 0;
@@ -82,8 +82,16 @@ const checkValuesIsArray = () => {
     console.error("'values' prop should be an Array");
   }
 };
+const checkMinMax = () => {
+  if (min >= max) {
+    min = 0;
+    max = 100;
+    console.error("'min' prop should be less than 'max'");
+  }
+};
 const checkAriaLabels = () => {
   if (values.length > 1 && !Array.isArray(ariaLabels)) {
+    ariaLabels = [];
     console.warn(`'ariaLabels' prop should be an Array`);
   }
 };
@@ -119,12 +127,17 @@ const checkValuesAgainstRangeGaps = () => {
 checkValueIsNumber();
 checkValuesIsArray();
 checkValuesAgainstRangeGaps();
+checkMinMax();
 $:
   value, updateValues();
 $:
   values, updateValue();
 $:
   ariaLabels, checkAriaLabels();
+$:
+  min, checkMinMax();
+$:
+  max, checkMinMax();
 $: {
   const trimmedAlignedValues = trimRange(
     values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
@@ -347,28 +360,20 @@ function sliderKeydown(event) {
     const handle = elementIndex(event.target);
     let jump = step;
     if (event.ctrlKey || event.metaKey) {
-      jump = clampValue(
-        (max - min) / step / 100,
-        coerceFloat(jump, precision),
-        coerceFloat((max - min) / 100, precision)
-      );
-    } else if (event.shiftKey) {
-      jump = clampValue(
-        (max - min) / step / 10,
-        coerceFloat(jump, precision),
-        coerceFloat((max - min) / 10, precision)
-      );
+      const onePercent = (max - min) / 100;
+      jump = Math.max(step, Math.round(onePercent / step) * step);
+    } else if (event.shiftKey || event.key === "PageUp" || event.key === "PageDown") {
+      const tenPercent = (max - min) / 10;
+      jump = Math.max(step, Math.round(tenPercent / step) * step);
     }
     switch (event.key) {
-      case "PageDown":
-        jump *= 10;
+      case "PageUp":
       case "ArrowRight":
       case "ArrowUp":
         moveHandle(handle, values[handle] + coerceFloat(jump, precision));
         prevent = true;
         break;
-      case "PageUp":
-        jump *= 10;
+      case "PageDown":
       case "ArrowLeft":
       case "ArrowDown":
         moveHandle(handle, values[handle] - coerceFloat(jump, precision));

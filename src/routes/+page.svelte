@@ -2,7 +2,6 @@
   import { onMount, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
   import RangeSlider from '$lib/components/RangeSlider.svelte';
-  import './barebones.css';
   import type { Formatter } from '$lib/types.js';
 
   let reversed = false;
