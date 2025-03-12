@@ -19,6 +19,9 @@
   // dom references
   export let slider: HTMLDivElement | undefined = undefined;
 
+  // precision prop
+  export let precision: number = 2;
+
   // range slider props
   export let range: boolean | 'min' | 'max' = false;
   export let pushy: boolean = false;
@@ -26,7 +29,7 @@
   export let min: number = 0;
   export let max: number = 100;
   export let step: number = 1;
-  export let values: number[] = [(max + min) / 2];
+  export let values: number[] = [coerceFloat((max + min) / 2, precision)];
   export let value: number = values[0];
   export let vertical: boolean = false;
   export let float: boolean = false;
@@ -56,7 +59,6 @@
   export let ariaLabels: string[] = [];
 
   // stylistic props
-  export let precision: number = 2;
   export let springValues: SpringOpts = { stiffness: 0.15, damping: 0.4 };
 
   // prepare dispatched events
@@ -111,8 +113,17 @@
     }
   };
 
+  const checkMinMax = () => {
+    if (min >= max) {
+      min = 0;
+      max = 100;
+      console.error("'min' prop should be less than 'max'");
+    }
+  };
+
   const checkAriaLabels = () => {
     if (values.length > 1 && !Array.isArray(ariaLabels)) {
+      ariaLabels = [];
       console.warn(`'ariaLabels' prop should be an Array`);
     }
   };
@@ -153,11 +164,14 @@
   checkValueIsNumber();
   checkValuesIsArray();
   checkValuesAgainstRangeGaps();
+  checkMinMax();
 
   // keep value and values in sync with each other
   $: value, updateValues();
   $: values, updateValue();
   $: ariaLabels, checkAriaLabels();
+  $: min, checkMinMax();
+  $: max, checkMinMax();
 
   $: {
     // trim the range so it remains as a min/max (only 2 handles)
