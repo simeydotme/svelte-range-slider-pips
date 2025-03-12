@@ -513,31 +513,23 @@
       const handle = elementIndex(event.target as HTMLSpanElement);
       let jump = step;
       if (event.ctrlKey || event.metaKey) {
-        jump = clampValue(
-          (max - min) / step / 100,
-          coerceFloat(jump, precision),
-          coerceFloat((max - min) / 100, precision)
-        );
-        // ~ 1%
-      } else if (event.shiftKey) {
-        // ~ 10%
-        jump = clampValue(
-          (max - min) / step / 10,
-          coerceFloat(jump, precision),
-          coerceFloat((max - min) / 10, precision)
-        );
+        // Move by 1% of the total range, but ensure it's aligned to step
+        const onePercent = (max - min) / 100;
+        jump = Math.max(step, Math.round(onePercent / step) * step);
+      } else if (event.shiftKey || event.key === 'PageUp' || event.key === 'PageDown') {
+        // Move by 10% of the total range, but ensure it's aligned to step
+        const tenPercent = (max - min) / 10;
+        jump = Math.max(step, Math.round(tenPercent / step) * step);
       }
 
       switch (event.key) {
-        case 'PageDown':
-          jump *= 10;
+        case 'PageUp':
         case 'ArrowRight':
         case 'ArrowUp':
           moveHandle(handle, values[handle] + coerceFloat(jump, precision));
           prevent = true;
           break;
-        case 'PageUp':
-          jump *= 10;
+        case 'PageDown':
         case 'ArrowLeft':
         case 'ArrowDown':
           moveHandle(handle, values[handle] - coerceFloat(jump, precision));
