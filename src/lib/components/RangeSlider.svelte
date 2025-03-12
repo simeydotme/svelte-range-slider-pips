@@ -1044,6 +1044,7 @@
     font-size: 0.9em;
     padding: 0.2em 0.4em;
     border-radius: 0.2em;
+    z-index: 3;
   }
 
   :global(.rangeSlider .rangeHandle.active .rangeFloat),
@@ -1088,11 +1089,11 @@
       scale 0.2s ease;
   }
 
-  :global(.rangeSlider .rangeBar.rangeDrag:hover::before) {
+  :global(.rangeSlider.hoverable:not(.disabled) .rangeDrag:hover::before) {
     opacity: 0.2;
   }
 
-  :global(.rangeSlider .rangeBar.rangeDrag.press::before) {
+  :global(.rangeSlider.hoverable:not(.disabled) .rangeDrag.press::before) {
     opacity: 0.4;
     scale: 1 1.25;
   }
