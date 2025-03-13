@@ -172,6 +172,9 @@
   $: ariaLabels, checkAriaLabels();
   $: min, checkMinMax();
   $: max, checkMinMax();
+  $: hasRange =
+    (range === true && values.length === 2) ||
+    ((range === 'min' || range === 'max') && values.length === 1);
 
   $: {
     // trim the range so it remains as a min/max (only 2 handles)
@@ -750,7 +753,7 @@
   bind:this={slider}
   role="none"
   class="rangeSlider"
-  class:range
+  class:range={hasRange}
   class:disabled
   class:hoverable
   class:vertical
@@ -806,7 +809,7 @@
              {orientationEnd}: {100 - valueAsPercent(limits[1], min, max, precision)}%;"
     />
   {/if}
-  {#if range}
+  {#if hasRange}
     <span
       class="rangeBar"
       class:rangeDrag={draggy}

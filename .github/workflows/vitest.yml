@@ -1,0 +1,20 @@
+name: Unit Tests
+on:
+  push:
+    branches: [main, next]
+  pull_request:
+    branches: [main, next]
+jobs:
+  test:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm install
+      - name: Run Unit tests
+        run: npm run test:unit

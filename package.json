@@ -43,17 +43,18 @@
     "!dist/**/*.spec.*"
   ],
   "scripts": {
-    "dev": "vite dev --host",
+    "dev": "vite dev --port 5173",
     "build": "npm run build:vanilla && vite build && npm run build:svelte",
     "build:svelte": "svelte-kit sync && svelte-package -o dist/svelte && publint",
     "build:vanilla": "rollup -c",
-    "preview": "vite preview",
+    "preview": "vite preview --port 5173",
     "prepublishOnly": "npm run build",
-    "test": "npm run test:integration && npm run test:unit",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "vitest --reporter=verbose --watch=false",
+    "test:unit:watch": "vitest --reporter=verbose --watch",
     "test:integration": "playwright test",
-    "test:unit": "vitest --reporter=verbose",
     "lint": "prettier --check .",
     "format": "prettier --write .",
     "add:dist": "git add dist"

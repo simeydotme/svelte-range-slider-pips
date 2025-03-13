@@ -4,7 +4,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 export default defineConfig({
   plugins: [sveltekit()],
   test: {
-    include: ['tests/*.{test,spec}.{js,ts}'],
+    include: ['tests/vitest/*.{test,spec}.{js,ts}'],
     exclude: ['node_modules', 'dist', 'tests'],
     environment: 'jsdom',
     setupFiles: ['./setupTest.js']

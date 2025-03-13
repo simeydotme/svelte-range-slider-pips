@@ -15,9 +15,12 @@
       main {
         display: flex;
         justify-content: center;
-        max-width: calc(100% - 40px);
+        max-width: calc(100% - 60px);
         width: 1024px;
-        margin: 100px auto;
+        margin: 3rem auto;
+      }
+      main > * {
+        width: 100%;
       }
       .content {
         display: flex;
@@ -26,13 +29,13 @@
         width: 100%;
       }
       header {
-        position: sticky;
-        top: 0;
-        padding: 20px;
+        position: fixed;
+        inset: 0;
+        bottom: auto;
+        padding: 1rem;
         background: white;
         z-index: 100;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
       }
       h1,
       h2,
@@ -88,4 +91,6 @@
   </style>
 </svelte:head>
 
-<slot />
+<main>
+  <slot />
+</main>
