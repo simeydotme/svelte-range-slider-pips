@@ -51,7 +51,7 @@
     "prepublishOnly": "npm run build",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "test": "npm run test:unit && npm run test:integration",
+    "test": "npm run preview && npm run test:unit && npm run test:integration",
     "test:unit": "vitest --reporter=verbose --watch=false",
     "test:unit:watch": "vitest --reporter=verbose --watch",
     "test:integration": "playwright test",
@@ -60,7 +60,7 @@
     "add:dist": "git add dist"
   },
   "pre-commit": [
-    "format",
+    "lint",
     "build",
     "add:dist"
   ],
@@ -68,7 +68,7 @@
     "svelte": "^4.2.7 || ^5.0.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.28.1",
+    "@playwright/test": "^1.51.0",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",

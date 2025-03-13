@@ -19,3 +19,9 @@ PENDING_CHANGES.md
 CHANGELOG.md
 yarn-error.log
 npm-error.log
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
