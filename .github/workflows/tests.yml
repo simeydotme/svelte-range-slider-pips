@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: lts/*
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Run Unit tests
         run: npm run test:unit
 
@@ -32,9 +32,11 @@ jobs:
           node-version: lts/*
       - name: Install dependencies
         run: npm ci
+      - name: Build Components
+        run: npm run build
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Run Playwright tests
+      - name: Run Component tests
         run: npx playwright test
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
