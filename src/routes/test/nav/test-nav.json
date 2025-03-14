@@ -1,0 +1,103 @@
+[
+  {
+    "name": "base",
+    "path": "/test/range-slider/base"
+  },
+  {
+    "name": "minmax",
+    "children": [
+      {
+        "name": "custom-min-max",
+        "path": "/test/range-slider/minmax/custom-min-max"
+      },
+      {
+        "name": "decimal-min-max",
+        "path": "/test/range-slider/minmax/decimal-min-max"
+      },
+      {
+        "name": "explicit-value",
+        "path": "/test/range-slider/minmax/explicit-value"
+      },
+      {
+        "name": "invalid-min-max",
+        "path": "/test/range-slider/minmax/invalid-min-max"
+      },
+      {
+        "name": "negative-min-max",
+        "path": "/test/range-slider/minmax/negative-min-max"
+      }
+    ]
+  },
+  {
+    "name": "range",
+    "children": [
+      {
+        "name": "false",
+        "path": "/test/range-slider/range/false"
+      },
+      {
+        "name": "max",
+        "path": "/test/range-slider/range/max"
+      },
+      {
+        "name": "min",
+        "path": "/test/range-slider/range/min"
+      },
+      {
+        "name": "true",
+        "path": "/test/range-slider/range/true"
+      }
+    ]
+  },
+  {
+    "name": "states",
+    "children": [
+      {
+        "name": "reversed",
+        "path": "/test/range-slider/states/reversed"
+      }
+    ]
+  },
+  {
+    "name": "values",
+    "children": [
+      {
+        "name": "binding",
+        "children": [
+          {
+            "name": "multiple",
+            "path": "/test/range-slider/values/binding/multiple"
+          },
+          {
+            "name": "single",
+            "path": "/test/range-slider/values/binding/single"
+          }
+        ]
+      },
+      {
+        "name": "constrained-values",
+        "path": "/test/range-slider/values/constrained-values"
+      },
+      {
+        "name": "explicit-value",
+        "path": "/test/range-slider/values/explicit-value"
+      },
+      {
+        "name": "multiple-values",
+        "path": "/test/range-slider/values/multiple-values"
+      },
+      {
+        "name": "seven-values",
+        "path": "/test/range-slider/values/seven-values"
+      },
+      {
+        "name": "single-value",
+        "path": "/test/range-slider/values/single-value"
+      },
+      {
+        "name": "value-values",
+        "path": "/test/range-slider/values/value-values"
+      }
+    ]
+  }
+]

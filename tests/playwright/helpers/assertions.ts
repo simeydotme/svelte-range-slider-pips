@@ -9,7 +9,9 @@ export const expect = baseExpect.extend({
     expectedValue: string,
     options?: { timeout?: number }
   ) {
-    const actualValue = await locator.evaluate((el, prop) => el.style[prop as any], property);
+    const actualValue = await locator.evaluate((el, prop) => el.style[prop as any], property, {
+      timeout: options?.timeout
+    });
 
     return {
       pass: actualValue === expectedValue,

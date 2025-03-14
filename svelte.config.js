@@ -14,7 +14,7 @@ const config = {
     adapter: adapter(),
     alias: {
       $components: './src/lib/components',
-      $tests: './tests'
+      $test: './src/routes/test/range-slider'
     }
   },
   compilerOptions: {

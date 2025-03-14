@@ -1,37 +1,52 @@
-// import { expect, test } from '@playwright/test';
+import { expect, test } from './helpers/assertions.js';
+import { springSettleTime, waitTime } from './utils.js';
 
-// test.describe('Interactions', () => {
-//   test('should update value when clicking on slider', async ({ page }) => {
-//     await page.goto('/test/range-slider/interaction');
-//     const slider = page.locator('.rangeSlider');
-//     const handle = page.locator('.rangeHandle');
+test.describe('Interactions', () => {
+  test('should handle mouse interactions correctly', async ({ page }) => {
+    await page.goto('/test/range-slider/values/single-value');
+    await page.waitForLoadState('networkidle');
+    const slider = page.locator('.rangeSlider').nth(0);
+    const handle = slider.getByRole('slider');
 
-//     // Click at 75% of the slider width
-//     const box = await slider.boundingBox();
-//     if (box) {
-//       await page.mouse.click(box.x + box.width * 0.75, box.y + box.height / 2);
-//       await expect(handle).toHaveAttribute('aria-valuenow', '75');
-//       await expect(handle).toHaveStyleValue('left', '75%');
-//     }
-//   });
+    await slider.isVisible();
+    const sliderBounds = await slider.boundingBox();
+    if (!sliderBounds) throw new Error('Could not get slider bounds');
 
-//   test('should handle drag operations', async ({ page }) => {
-//     await page.goto('/test/range-slider/interaction');
-//     const handle = page.locator('.rangeHandle');
-//     const slider = page.locator('.rangeSlider');
+    await page.mouse.click(
+      sliderBounds.x + sliderBounds.width * 0.1, // Click at 10% from left
+      sliderBounds.y + sliderBounds.height / 2
+    );
 
-//     // Get initial position
-//     const box = await slider.boundingBox();
-//     if (box) {
-//       // Start drag from center (50%)
-//       await page.mouse.move(box.x + box.width * 0.5, box.y + box.height / 2);
-//       await page.mouse.down();
+    await expect(handle).toHaveAttribute('aria-valuenow', '10');
+    await expect(handle).toHaveStyle('left', '10%');
+  });
 
-//       // Drag to 75%
-//       await page.mouse.move(box.x + box.width * 0.75, box.y + box.height / 2);
-//       await expect(handle).toHaveStyleValue('left', '75%');
+  test('should handle drag operations', async ({ page }) => {
+    await page.goto('/test/range-slider/values/binding/single');
+    await page.waitForLoadState('networkidle');
+    const slider = page.locator('.rangeSlider').nth(0);
+    const handle = slider.getByRole('slider');
+    const input = page.getByLabel('Current value:');
 
-//       await page.mouse.up();
-//     }
-//   });
-// });
+    await slider.isVisible();
+    const sliderBounds = await slider.boundingBox();
+    if (!sliderBounds) throw new Error('Could not get slider bounds');
+
+    // Start drag from center (50%)
+    await page.mouse.move(
+      sliderBounds.x + sliderBounds.width * 0.5,
+      sliderBounds.y + sliderBounds.height / 2
+    );
+    await page.mouse.down();
+    // Drag to 75%
+    await page.mouse.move(
+      sliderBounds.x + sliderBounds.width * 0.75,
+      sliderBounds.y + sliderBounds.height / 2
+    );
+    await page.mouse.up();
+
+    // Verify the handle and input value
+    await expect(handle).toHaveStyle('left', '75%');
+    await expect(input).toHaveValue('75');
+  });
+});

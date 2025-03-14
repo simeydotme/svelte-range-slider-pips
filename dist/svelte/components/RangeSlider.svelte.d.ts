@@ -28,14 +28,16 @@ declare const __propDef: {
         first?: Pip;
         last?: Pip;
         rest?: Pip;
-        id?: string | undefined;
         prefix?: string | undefined;
         suffix?: string | undefined;
         formatter?: Formatter | undefined;
         handleFormatter?: Formatter | undefined;
         rangeFormatter?: RangeFormatter | null | undefined;
         ariaLabels?: string[] | undefined;
+        id?: string | undefined;
+        class?: string | undefined;
         springValues?: SpringOpts | undefined;
+        spring?: boolean | undefined;
     };
     events: {
         start: CustomEvent<any>;

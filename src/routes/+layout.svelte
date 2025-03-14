@@ -14,6 +14,7 @@
     @layer ui {
       main {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         max-width: calc(100% - 60px);
         width: 1024px;

@@ -1,6 +1,6 @@
 <svelte:options immutable={false} />
 
-<script>import { spring } from "svelte/motion";
+<script>import { spring as springStore } from "svelte/motion";
 import { createEventDispatcher } from "svelte";
 import {
   coerceFloat,
@@ -37,14 +37,17 @@ export let all = true;
 export let first = void 0;
 export let last = void 0;
 export let rest = void 0;
-export let id = void 0;
 export let prefix = "";
 export let suffix = "";
 export let formatter = (v, i, p) => v;
 export let handleFormatter = formatter;
 export let rangeFormatter = null;
 export let ariaLabels = [];
+export let id = void 0;
+let classes = "";
+export { classes as class };
 export let springValues = { stiffness: 0.15, damping: 0.4 };
+export let spring = true;
 const dispatch = createEventDispatcher();
 let valueLength = 0;
 let focus = false;
@@ -150,12 +153,17 @@ $: {
     values = trimmedAlignedValues;
   }
   if (valueLength !== values.length) {
-    springPositions = spring(
+    springPositions = springStore(
       values.map((v) => valueAsPercent(v, min, max)),
       springValues
     );
   } else {
-    springPositions.set(values.map((v) => valueAsPercent(v, min, max)));
+    requestAnimationFrame(() => {
+      springPositions.set(
+        values.map((v) => valueAsPercent(v, min, max)),
+        { hard: !spring }
+      );
+    });
   }
   valueLength = values.length;
 }
@@ -524,15 +532,15 @@ function ariaLabelFormatter(value2, index) {
   {id}
   bind:this={slider}
   role="none"
-  class="rangeSlider"
+  class="rangeSlider {classes}"
   class:range={hasRange}
+  class:min={range === 'min'}
+  class:max={range === 'max'}
   class:disabled
   class:hoverable
   class:vertical
   class:reversed
   class:focus
-  class:min={range === 'min'}
-  class:max={range === 'max'}
   class:pips
   class:pip-labels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
   on:mousedown={sliderInteractStart}

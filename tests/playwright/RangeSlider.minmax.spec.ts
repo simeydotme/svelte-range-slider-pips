@@ -3,6 +3,7 @@ import { expect, test } from './helpers/assertions.js';
 test.describe('Min/Max Tests', () => {
   test('custom min/max values', async ({ page }) => {
     await page.goto('/test/range-slider/minmax/custom-min-max');
+    await page.waitForLoadState('networkidle');
     const handle = page.locator('.rangeHandle');
 
     await expect(handle).toHaveAttribute('aria-valuemin', '-50');
@@ -13,6 +14,7 @@ test.describe('Min/Max Tests', () => {
 
   test('negative min/max', async ({ page }) => {
     await page.goto('/test/range-slider/minmax/negative-min-max');
+    await page.waitForLoadState('networkidle');
     const handle = page.locator('.rangeHandle');
 
     await expect(handle).toHaveAttribute('aria-valuemin', '-100');
@@ -23,6 +25,7 @@ test.describe('Min/Max Tests', () => {
 
   test('decimal min/max', async ({ page }) => {
     await page.goto('/test/range-slider/minmax/decimal-min-max');
+    await page.waitForLoadState('networkidle');
     const handle = page.locator('.rangeHandle');
 
     await expect(handle).toHaveAttribute('aria-valuemin', '0.5');
@@ -33,6 +36,7 @@ test.describe('Min/Max Tests', () => {
 
   test('explicit value within min/max', async ({ page }) => {
     await page.goto('/test/range-slider/minmax/explicit-value');
+    await page.waitForLoadState('networkidle');
     const handle = page.locator('.rangeHandle');
 
     await expect(handle).toHaveAttribute('aria-valuemin', '0');
@@ -43,6 +47,7 @@ test.describe('Min/Max Tests', () => {
 
   test('invalid min/max resets to default', async ({ page }) => {
     await page.goto('/test/range-slider/minmax/invalid-min-max');
+    await page.waitForLoadState('networkidle');
     const handle = page.locator('.rangeHandle');
 
     await expect(handle).toHaveAttribute('aria-valuemin', '0');

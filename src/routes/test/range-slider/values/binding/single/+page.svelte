@@ -3,18 +3,23 @@
   let value = 50;
 </script>
 
-<RangeSlider bind:value />
+<RangeSlider bind:value spring={false} />
 
 <div class="value-display">
-  <label for="value-input">Current value:</label>
-  <input type="number" id="value-input" bind:value />
+  <div>
+    <label for="value-input">Current value:</label>
+    <input type="number" id="value-input" bind:value />
+  </div>
 
   {value}
 </div>
 
 <style>
   .value-display {
-    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
     font-family: monospace;
   }
 </style>

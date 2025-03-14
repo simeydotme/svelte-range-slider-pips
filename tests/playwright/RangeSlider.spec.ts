@@ -4,6 +4,7 @@ test.describe('Deafult Tests', () => {
   test.describe('no props', () => {
     test('should render correctly', async ({ page }) => {
       await page.goto('/test/range-slider/base');
+      await page.waitForLoadState('networkidle');
 
       // Check component exists
       await expect(page.locator('.rangeSlider')).toBeVisible();
@@ -13,6 +14,7 @@ test.describe('Deafult Tests', () => {
 
     test('should have correct attributes', async ({ page }) => {
       await page.goto('/test/range-slider/base');
+      await page.waitForLoadState('networkidle');
       const handle = page.locator('.rangeHandle');
 
       // Check role

@@ -2,4 +2,4 @@
   import RangeSlider from '$lib/components/RangeSlider.svelte';
 </script>
 
-<RangeSlider value={75} />
+<RangeSlider value={75} spring={false} />

@@ -51,13 +51,14 @@
     "prepublishOnly": "npm run build",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "test": "npm run preview && npm run test:unit && npm run test:integration",
+    "test": "npm run test:unit && npm run test:component",
     "test:unit": "vitest --reporter=verbose --watch=false",
     "test:unit:watch": "vitest --reporter=verbose --watch",
-    "test:integration": "playwright test",
+    "test:component": "playwright test",
     "lint": "prettier --check .",
     "format": "prettier --write .",
-    "add:dist": "git add dist"
+    "add:dist": "git add dist",
+    "gen:nav": "node src/routes/test/range-slider/gen-nav.js"
   },
   "pre-commit": [
     "lint",
@@ -81,6 +82,7 @@
     "@testing-library/svelte": "^5.2.7",
     "@types/node": "^20.11.16",
     "@types/testing-library__jest-dom": "^5.14.9",
+    "feather-icons": "^4.29.2",
     "globby": "^14.0.0",
     "jsdom": "^26.0.0",
     "pre-commit": "^1.2.2",

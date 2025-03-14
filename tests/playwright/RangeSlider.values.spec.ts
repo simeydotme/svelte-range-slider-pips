@@ -1,8 +1,10 @@
 import { expect, test } from './helpers/assertions.js';
+import { waitTime } from './utils.js';
 
 test.describe('Values Tests', () => {
   test('single value set to: 75', async ({ page }) => {
     await page.goto('/test/range-slider/values/single-value');
+    await page.waitForLoadState('networkidle');
     const handle = page.getByRole('slider');
 
     await expect(handle).toHaveAttribute('aria-valuenow', '75');
@@ -12,6 +14,7 @@ test.describe('Values Tests', () => {
 
   test('multiple handles set to: [25, 125]', async ({ page }) => {
     await page.goto('/test/range-slider/values/multiple-values');
+    await page.waitForLoadState('networkidle');
     const handles = page.getByRole('slider');
 
     // Check count of handles
@@ -29,6 +32,7 @@ test.describe('Values Tests', () => {
 
   test('seven handles set to: [10, 20, 30, 40, 60, 80, 90]', async ({ page }) => {
     await page.goto('/test/range-slider/values/seven-values');
+    await page.waitForLoadState('networkidle');
     const handles = page.getByRole('slider');
 
     const expectedValues = [10, 20, 30, 40, 60, 80, 90];
@@ -50,6 +54,7 @@ test.describe('Values Tests', () => {
     page
   }) => {
     await page.goto('/test/range-slider/values/constrained-values');
+    await page.waitForLoadState('networkidle');
     const handles = page.getByRole('slider');
 
     // Check count of handles
@@ -68,6 +73,7 @@ test.describe('Values Tests', () => {
     page
   }) => {
     await page.goto('/test/range-slider/values/value-values');
+    await page.waitForLoadState('networkidle');
     const handles = page.getByRole('slider');
 
     // Should have two handles since both value and values props are provided
@@ -84,17 +90,15 @@ test.describe('Values Tests', () => {
 
   test('two-way binding works between slider and number input', async ({ page }) => {
     await page.goto('/test/range-slider/values/binding/single');
+    await page.waitForLoadState('networkidle');
     const handle = page.getByRole('slider');
     const input = page.getByLabel('Current value:');
     const v = '55';
 
     // Test input -> slider binding
     await input.focus();
-    await page.waitForTimeout(500); // need to wait for the input to be focused
     await input.fill(v);
-    await page.waitForTimeout(500); // need to wait for the input to be filled
     await input.blur();
-    await page.waitForTimeout(500); // need to wait for slider animation to complete
     await expect(input).toHaveValue(v);
     await expect(handle).toHaveAttribute('aria-valuenow', v);
     await expect(handle, 'handle should be positioned at 55%').toHaveStyle('left', '55%');
@@ -103,5 +107,72 @@ test.describe('Values Tests', () => {
     await handle.focus();
     await page.keyboard.press('ArrowRight'); // Move to 56
     await expect(input).toHaveValue((parseInt(v) + 1).toString());
+  });
+
+  test('input values are constrained to min/max bounds', async ({ page }) => {
+    await page.goto('/test/range-slider/values/binding/single');
+    await page.waitForLoadState('networkidle');
+    const handle = page.getByRole('slider');
+    const input = page.getByLabel('Current value:');
+
+    // Test value below minimum
+    await input.focus();
+    await input.fill('-10');
+    await input.blur();
+    await expect(input).toHaveValue('0');
+    await expect(handle).toHaveAttribute('aria-valuenow', '0');
+    await expect(handle, 'handle should be positioned at 0%').toHaveStyle('left', '0%');
+
+    // Test value above maximum
+    await input.focus();
+    await input.fill('150');
+    await input.blur();
+    await expect(input).toHaveValue('100');
+    await expect(handle).toHaveAttribute('aria-valuenow', '100');
+    await expect(handle, 'handle should be positioned at 100%').toHaveStyle('left', '100%');
+  });
+
+  test('two-way binding works between slider and number inputs (multiple values)', async ({
+    page
+  }) => {
+    await page.goto('/test/range-slider/values/binding/multiple');
+    await page.waitForLoadState('networkidle');
+    const handles = page.getByRole('slider');
+    const input1 = page.getByLabel('First value:');
+    const input2 = page.getByLabel('Second value:');
+
+    // Test inputs -> slider binding
+    // Update first handle
+    await input1.focus();
+    await input1.fill('30');
+    await input1.blur();
+    await expect(input1).toHaveValue('30');
+    await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '30');
+    await expect(handles.nth(0), 'first handle should be positioned at 30%').toHaveStyle(
+      'left',
+      '30%'
+    );
+
+    // Update second handle
+    await input2.focus();
+    await input2.fill('80');
+    await input2.blur();
+    await expect(input2).toHaveValue('80');
+    await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '80');
+    await expect(handles.nth(1), 'second handle should be positioned at 80%').toHaveStyle(
+      'left',
+      '80%'
+    );
+
+    // Test slider -> inputs binding
+    // Move first handle
+    await handles.nth(0).focus();
+    await page.keyboard.press('ArrowRight'); // Move to 31
+    await expect(input1).toHaveValue('31');
+
+    // Move second handle
+    await handles.nth(1).focus();
+    await page.keyboard.press('ArrowLeft'); // Move to 79
+    await expect(input2).toHaveValue('79');
   });
 });
