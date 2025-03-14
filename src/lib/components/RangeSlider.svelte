@@ -1,7 +1,7 @@
 <svelte:options immutable={false} />
 
 <script lang="ts">
-  import { type SpringOpts, type Spring, spring } from 'svelte/motion';
+  import { type SpringOpts, type Spring, spring as springStore } from 'svelte/motion';
   import { createEventDispatcher } from 'svelte';
   import {
     coerceFloat,
@@ -50,7 +50,6 @@
   export let rest: Pip = undefined;
 
   // formatting props
-  export let id: string | undefined = undefined;
   export let prefix: string = '';
   export let suffix: string = '';
   export let formatter: Formatter = (v, i, p) => v;
@@ -59,7 +58,11 @@
   export let ariaLabels: string[] = [];
 
   // stylistic props
+  export let id: string | undefined = undefined;
+  let classes = '';
+  export { classes as class };
   export let springValues: SpringOpts = { stiffness: 0.15, damping: 0.4 };
+  export let spring = true;
 
   // prepare dispatched events
   const dispatch = createEventDispatcher();
@@ -197,14 +200,19 @@
     if (valueLength !== values.length) {
       // set the initial spring values when the slider initialises,
       // or when values array length has changed
-      springPositions = spring(
+      springPositions = springStore(
         values.map((v) => valueAsPercent(v, min, max)),
         springValues
       );
     } else {
       // update the value of the spring function for animated handles
       // whenever the values has updated
-      springPositions.set(values.map((v) => valueAsPercent(v, min, max)));
+      requestAnimationFrame(() => {
+        springPositions.set(
+          values.map((v) => valueAsPercent(v, min, max)),
+          { hard: !spring }
+        );
+      });
     }
     // set the valueLength for the next check
     valueLength = values.length;
@@ -752,15 +760,15 @@
   {id}
   bind:this={slider}
   role="none"
-  class="rangeSlider"
+  class="rangeSlider {classes}"
   class:range={hasRange}
+  class:min={range === 'min'}
+  class:max={range === 'max'}
   class:disabled
   class:hoverable
   class:vertical
   class:reversed
   class:focus
-  class:min={range === 'min'}
-  class:max={range === 'max'}
   class:pips
   class:pip-labels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
   on:mousedown={sliderInteractStart}
