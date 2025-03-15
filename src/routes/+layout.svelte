@@ -4,10 +4,7 @@
 
 <svelte:head>
   <link rel="preconnect" href="https://fonts.bunny.net" />
-  <link
-    href="https://fonts.bunny.net/css?family=palanquin:100,200,300,400,500,600,700"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.bunny.net/css?family=palanquin:100,200,300,400,500,600,700" rel="stylesheet" />
   <style>
     @layer barebones, ui, sliders;
 
@@ -17,8 +14,9 @@
         flex-direction: column;
         justify-content: center;
         max-width: calc(100% - 60px);
-        width: 1024px;
+        width: 1000px;
         margin: 3rem auto;
+        padding: 0;
       }
       main > * {
         width: 100%;

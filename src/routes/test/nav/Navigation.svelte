@@ -35,10 +35,7 @@
   }
 
   // Deep clone the nav data and add matched property
-  function processNavWithMatches(
-    items: NavItem[],
-    matchPaths: Set<string>
-  ): (NavItem & { matched?: boolean })[] {
+  function processNavWithMatches(items: NavItem[], matchPaths: Set<string>): (NavItem & { matched?: boolean })[] {
     return items.map((item) => {
       // Only consider everything matched when there's no search term
       const matched = (searchTerm === '' && matchPaths.size === 0) || isMatch(item);

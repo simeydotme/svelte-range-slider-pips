@@ -396,34 +396,18 @@ html {
   --accent-hue: 194; /* blue */
 
   --text-color-richer: hsl(var(--theme-hue), 0%, 5%); /* #0d0d0d		*/
-  --text-color-normal: hsl(
-    var(--theme-hue),
-    0%,
-    13%
-  ); /* #222222 		text color; button:hover:focus color */
-  --text-color-softer: hsl(
-    var(--theme-hue),
-    0%,
-    33%
-  ); /* #555555 		button color; button:hover border */
+  --text-color-normal: hsl(var(--theme-hue), 0%, 13%); /* #222222 		text color; button:hover:focus color */
+  --text-color-softer: hsl(var(--theme-hue), 0%, 33%); /* #555555 		button color; button:hover border */
 
   --accent-color: hsl(
     var(--accent-hue),
     86%,
     57%
   ); /* #33C3F0 		link; button-primary bg+border; textarea,select:focus border */
-  --accent-color-hover: hsl(
-    var(--accent-hue),
-    76%,
-    49%
-  ); /* #1EAEDB 		link hover; button-primary:hover:focus bg+border */
+  --accent-color-hover: hsl(var(--accent-hue), 76%, 49%); /* #1EAEDB 		link hover; button-primary:hover:focus bg+border */
 
   --border-color: hsl(var(--theme-hue), 0%, 73%); /* #bbbbbb		button border */
-  --border-color-softer: hsl(
-    var(--theme-hue),
-    0%,
-    82%
-  ); /* #d1d1d1		textarea,select,code,td,hr border	 */
+  --border-color-softer: hsl(var(--theme-hue), 0%, 82%); /* #d1d1d1		textarea,select,code,td,hr border	 */
 
   --background-color: white; /* transparent body background; textarea,select background */
   --background-color-softer: hsl(var(--theme-hue), 0%, 95%);
@@ -453,25 +437,13 @@ html {
     --text-color-normal: hsl(var(--theme-hue), 0%, 80%); /* text color; button:hover:focus color */
     --text-color-softer: hsl(var(--theme-hue), 0%, 67%); /* button color; button:hover border */
 
-    --accent-color: hsl(
-      var(--accent-hue),
-      76%,
-      49%
-    ); /* link; button-primary bg+border; textarea,select:focus border */
-    --accent-color-hover: hsl(
-      var(--accent-hue),
-      86%,
-      57%
-    ); /* link hover; button-primary:hover:focus bg+border */
+    --accent-color: hsl(var(--accent-hue), 76%, 49%); /* link; button-primary bg+border; textarea,select:focus border */
+    --accent-color-hover: hsl(var(--accent-hue), 86%, 57%); /* link hover; button-primary:hover:focus bg+border */
 
     --border-color: hsl(var(--theme-hue), 0%, 27%); /* button border */
     --border-color-softer: hsl(var(--theme-hue), 0%, 20%); /* textarea,select,code,td,hr border	 */
 
-    --background-color: hsl(
-      var(--theme-hue),
-      0%,
-      12%
-    ); /* body background; textarea,select background */
+    --background-color: hsl(var(--theme-hue), 0%, 12%); /* body background; textarea,select background */
     --background-color-softer: hsl(var(--theme-hue), 0%, 18%);
     --code-background: hsl(var(--theme-hue), 0%, 5%); /* code background*/
 

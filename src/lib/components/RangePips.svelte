@@ -298,9 +298,7 @@
     transition: none;
   }
 
-  :global(
-      .rangePips.hoverable:not(.disabled) .pip:not(.selected):not(.out-of-limit):hover .pipVal
-    ) {
+  :global(.rangePips.hoverable:not(.disabled) .pip:not(.selected):not(.out-of-limit):hover .pipVal) {
     transition: none;
     font-weight: bold;
   }

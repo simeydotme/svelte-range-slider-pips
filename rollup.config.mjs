@@ -18,9 +18,7 @@ const packageName = pkg.name.replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3');
 // this is the name of the component when imported
 // like: import { Component } from 'package' or require('package').Component
 // and: const myComponent = new Component();
-const moduleName = packageName
-  .replace(/^\w/, (m) => m.toUpperCase())
-  .replace(/-\w/g, (m) => m[1].toUpperCase());
+const moduleName = packageName.replace(/^\w/, (m) => m.toUpperCase()).replace(/-\w/g, (m) => m[1].toUpperCase());
 
 // banner to be added to the top of each generated file
 const banner = `/**

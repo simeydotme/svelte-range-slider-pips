@@ -9,11 +9,7 @@
 
 <li class:active={item.path && $page.url.pathname === item.path}>
   {#if item.path}
-    <a
-      href={item.path}
-      class:faded={searchTerm && !item.matched}
-      class:match={item.matched && searchTerm}
-    >
+    <a href={item.path} class:faded={searchTerm && !item.matched} class:match={item.matched && searchTerm}>
       {#if item.children?.length}
         {@html feather.icons.folder.toSvg()}
       {:else}

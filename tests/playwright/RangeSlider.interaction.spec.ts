@@ -18,7 +18,7 @@ test.describe('Interactions', () => {
     );
 
     await expect(handle).toHaveAttribute('aria-valuenow', '10');
-    await expect(handle).toHaveStyle('left', '10%');
+    await expect(handle).toHaveCSS('left', '100px');
   });
 
   test('should handle drag operations', async ({ page }) => {
@@ -33,20 +33,14 @@ test.describe('Interactions', () => {
     if (!sliderBounds) throw new Error('Could not get slider bounds');
 
     // Start drag from center (50%)
-    await page.mouse.move(
-      sliderBounds.x + sliderBounds.width * 0.5,
-      sliderBounds.y + sliderBounds.height / 2
-    );
+    await page.mouse.move(sliderBounds.x + sliderBounds.width * 0.5, sliderBounds.y + sliderBounds.height / 2);
     await page.mouse.down();
     // Drag to 75%
-    await page.mouse.move(
-      sliderBounds.x + sliderBounds.width * 0.75,
-      sliderBounds.y + sliderBounds.height / 2
-    );
+    await page.mouse.move(sliderBounds.x + sliderBounds.width * 0.75, sliderBounds.y + sliderBounds.height / 2);
     await page.mouse.up();
 
     // Verify the handle and input value
-    await expect(handle).toHaveStyle('left', '75%');
+    await expect(handle).toHaveCSS('left', '750px');
     await expect(input).toHaveValue('75');
   });
 });

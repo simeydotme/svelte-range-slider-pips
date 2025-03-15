@@ -3,12 +3,7 @@ export { test } from '@playwright/test';
 
 // Extend the built-in expect matchers
 export const expect = baseExpect.extend({
-  async toHaveStyle(
-    locator: Locator,
-    property: string,
-    expectedValue: string,
-    options?: { timeout?: number }
-  ) {
+  async toHaveStyle(locator: Locator, property: string, expectedValue: string, options?: { timeout?: number }) {
     const actualValue = await locator.evaluate((el, prop) => el.style[prop as any], property, {
       timeout: options?.timeout
     });
@@ -18,8 +13,7 @@ export const expect = baseExpect.extend({
       name: 'toHaveStyle',
       expected: expectedValue,
       actual: actualValue,
-      message: () =>
-        `Expected element to have style: ${property}="${expectedValue}" but found "${actualValue}"`
+      message: () => `Expected element to have style: ${property}="${expectedValue}" but found "${actualValue}"`
     };
   }
 });
@@ -28,11 +22,7 @@ export const expect = baseExpect.extend({
 declare global {
   namespace PlaywrightTest {
     interface Matchers<R> {
-      toHaveStyle(
-        property: string,
-        expectedValue: string,
-        options?: { timeout?: number }
-      ): Promise<R>;
+      toHaveStyle(property: string, expectedValue: string, options?: { timeout?: number }): Promise<R>;
     }
   }
 }

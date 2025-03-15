@@ -101,27 +101,13 @@ const checkAriaLabels = () => {
 const checkValuesAgainstRangeGaps = () => {
   values = values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
   if (rangeGapMax < Infinity) {
-    const gapMax = constrainAndAlignValue(
-      values[0] + rangeGapMax,
-      min,
-      max,
-      step,
-      precision,
-      limits
-    );
+    const gapMax = constrainAndAlignValue(values[0] + rangeGapMax, min, max, step, precision, limits);
     if (values[1] > gapMax) {
       values[1] = gapMax;
     }
   }
   if (rangeGapMin > 0) {
-    const gapMin = constrainAndAlignValue(
-      values[0] + rangeGapMin,
-      min,
-      max,
-      step,
-      precision,
-      limits
-    );
+    const gapMin = constrainAndAlignValue(values[0] + rangeGapMin, min, max, step, precision, limits);
     if (values[1] < gapMin) {
       values[1] = gapMin;
     }
@@ -147,9 +133,7 @@ $: {
   const trimmedAlignedValues = trimRange(
     values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
   );
-  if (!(values.length === trimmedAlignedValues.length) || !values.every(
-    (element, index) => coerceFloat(element, precision) === trimmedAlignedValues[index]
-  )) {
+  if (!(values.length === trimmedAlignedValues.length) || !values.every((element, index) => coerceFloat(element, precision) === trimmedAlignedValues[index])) {
     values = trimmedAlignedValues;
   }
   if (valueLength !== values.length) {
@@ -213,9 +197,7 @@ function getClosestHandle(clientPos) {
       return 0;
     }
   } else {
-    closest = values.indexOf(
-      [...values].sort((a, b) => Math.abs(handleVal - a) - Math.abs(handleVal - b))[0]
-    );
+    closest = values.indexOf([...values].sort((a, b) => Math.abs(handleVal - a) - Math.abs(handleVal - b))[0]);
   }
   return closest;
 }
@@ -575,8 +557,8 @@ function ariaLabelFormatter(value2, index) {
         {@const percent = valueAsPercent(value, min, max, precision)}
         {@const formattedValue = handleFormatter(value, index, percent)}
         <span class="rangeFloat">
-          {#if prefix}<span class="rangeFloat-prefix">{prefix}</span
-            >{/if}{@html formattedValue}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span
+          {#if prefix}<span class="rangeFloat-prefix">{prefix}</span>{/if}{@html formattedValue}{#if suffix}<span
+              class="rangeFloat-suffix">{suffix}</span
             >{/if}
         </span>
       {/if}
@@ -609,11 +591,13 @@ function ariaLabelFormatter(value2, index) {
             )}
           {:else}
             {@const [first, second] = reversed ? [values[1], values[0]] : [values[0], values[1]]}
-            {#if prefix}<span class="rangeFloat-prefix">{prefix}</span
-              >{/if}{@html first}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
+            {#if prefix}<span class="rangeFloat-prefix">{prefix}</span>{/if}{@html first}{#if suffix}<span
+                class="rangeFloat-suffix">{suffix}</span
+              >{/if}
             {' '}-{' '}
-            {#if prefix}<span class="rangeFloat-prefix">{prefix}</span
-              >{/if}{@html second}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
+            {#if prefix}<span class="rangeFloat-prefix">{prefix}</span>{/if}{@html second}{#if suffix}<span
+                class="rangeFloat-suffix">{suffix}</span
+              >{/if}
           {/if}
         </span>
       {/if}

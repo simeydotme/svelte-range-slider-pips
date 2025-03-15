@@ -24,7 +24,7 @@ test.describe('Deafult Tests', () => {
       await expect(handle, 'to have min of 0').toHaveAttribute('aria-valuemin', '0');
       await expect(handle, 'to have max of 100').toHaveAttribute('aria-valuemax', '100');
       await expect(handle, 'to have value of 50').toHaveAttribute('aria-valuenow', '50');
-      await expect(handle, 'to be positioned at 50%').toHaveStyle('left', '50%');
+      await expect(handle, 'to be positioned at 50%').toHaveCSS('left', '500px');
 
       // Check orientation and disabled state
       await expect(handle).toHaveAttribute('aria-orientation', 'horizontal');

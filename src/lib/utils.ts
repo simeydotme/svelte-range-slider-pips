@@ -32,12 +32,7 @@ export const clampValue = function (value: number, min: number, max: number) {
  * @param {number} precision the number of decimal places to fix to (default 2)
  * @return {number} the percentage value
  **/
-export const valueAsPercent = function (
-  value: number,
-  min: number,
-  max: number,
-  precision: number = 2
-) {
+export const valueAsPercent = function (value: number, min: number, max: number, precision: number = 2) {
   let percent = ((value - min) / (max - min)) * 100;
   if (isNaN(percent) || percent <= 0) {
     return 0;
@@ -103,8 +98,7 @@ export const pureText = (possibleHtml: string = '') => {
  * @returns {object} normalised event client object (x,y)
  **/
 export const normalisedClient = (event: TouchEvent | MouseEvent) => {
-  const { clientX, clientY } =
-    'touches' in event ? event.touches[0] || event.changedTouches[0] : event;
+  const { clientX, clientY } = 'touches' in event ? event.touches[0] || event.changedTouches[0] : event;
   return { x: clientX, y: clientY } as NormalisedClient;
 };
 

@@ -71,4 +71,16 @@
     border: none;
     backdrop-filter: inherit;
   }
+
+  :global(main) {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 100px 0;
+  }
+
+  :global(main .rangeSlider) {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
 </style>

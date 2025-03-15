@@ -133,41 +133,12 @@
   <section style="display: flex; justify-content: space-evenly;">
     <RangeSlider vertical pips all="label" {reversed} {hoverable} {disabled} />
     <div>
-      <RangeSlider
-        bind:values={vrange}
-        vertical
-        pips
-        all="label"
-        float
-        {reversed}
-        {hoverable}
-        {disabled}
-      />
-      <RangeSlider
-        bind:values={vrange}
-        vertical
-        range
-        pips
-        all="label"
-        float
-        {reversed}
-        {hoverable}
-        {disabled}
-      />
+      <RangeSlider bind:values={vrange} vertical pips all="label" float {reversed} {hoverable} {disabled} />
+      <RangeSlider bind:values={vrange} vertical range pips all="label" float {reversed} {hoverable} {disabled} />
 
       {vrange}
     </div>
-    <RangeSlider
-      vertical
-      range="min"
-      values={[10]}
-      pips
-      all
-      float
-      {reversed}
-      {hoverable}
-      {disabled}
-    />
+    <RangeSlider vertical range="min" values={[10]} pips all float {reversed} {hoverable} {disabled} />
     <RangeSlider vertical range="max" values={[30]} pips float {reversed} {hoverable} {disabled} />
   </section>
 
@@ -231,16 +202,7 @@
   <RangeSlider float pips all="label" {reversed} {hoverable} {disabled} />
   <RangeSlider float pips first="label" last="label" {reversed} {hoverable} {disabled} />
   <h4>trim/align</h4>
-  <RangeSlider
-    values={[-10, 12, 103]}
-    float
-    pips
-    step={5}
-    all="label"
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
+  <RangeSlider values={[-10, 12, 103]} float pips step={5} all="label" {reversed} {hoverable} {disabled} />
   <h4>events</h4>
   <RangeSlider
     float
@@ -696,28 +658,8 @@
     {disabled}
   />
 
-  <RangeSlider
-    bind:values={perc1}
-    min={0}
-    max={50}
-    pips
-    all="label"
-    float
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
-  <RangeSlider
-    bind:values={perc2}
-    min={0}
-    max={perc2max}
-    pips
-    all="label"
-    float
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
+  <RangeSlider bind:values={perc1} min={0} max={50} pips all="label" float {reversed} {hoverable} {disabled} />
+  <RangeSlider bind:values={perc2} min={0} max={perc2max} pips all="label" float {reversed} {hoverable} {disabled} />
   <hr />
   {perc1} / {perc2}
 
@@ -782,16 +724,7 @@
   - {zero}
 
   <h4>push & pop values</h4>
-  <RangeSlider
-    bind:values
-    float
-    pips
-    all="label"
-    {reversed}
-    {hoverable}
-    {disabled}
-    ariaLabels="x"
-  />
+  <RangeSlider bind:values float pips all="label" {reversed} {hoverable} {disabled} ariaLabels="x" />
   <button on:click={pushValues}>push</button>
   <button on:click={popValues}>pop</button>
   ({values})
@@ -850,30 +783,8 @@
   {decimals2}
 
   <h4>Irregular start/end numbers</h4>
-  <RangeSlider
-    values={[30, 130]}
-    float
-    pips
-    all="label"
-    hoverable
-    range
-    min={20}
-    max={130}
-    pipstep={3}
-    step={5}
-  />
-  <RangeSlider
-    values={[30, 130]}
-    float
-    pips
-    all="label"
-    hoverable
-    range
-    min={30}
-    max={130}
-    pipstep={1}
-    step={1}
-  />
+  <RangeSlider values={[30, 130]} float pips all="label" hoverable range min={20} max={130} pipstep={3} step={5} />
+  <RangeSlider values={[30, 130]} float pips all="label" hoverable range min={30} max={130} pipstep={1} step={1} />
 
   <h4>Custom HTML labels</h4>
   <RangeSlider
@@ -917,57 +828,16 @@
   <RangeSlider ariaLabels={['', 'b']} values={[5, 20]} range {reversed} {hoverable} {disabled} />
 
   <h4>Store updates</h4>
-  <p>
-    Count how many times the store is modified for each change, should be once per single change
-    event.
-  </p>
-  <RangeSlider
-    bind:values={$boundStore}
-    pips
-    all="label"
-    max={20}
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
-  <RangeSlider
-    bind:values={$boundStore}
-    pips
-    all="label"
-    max={20}
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
-  <RangeSlider
-    bind:values={$boundStore}
-    pips
-    all="label"
-    max={20}
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
+  <p>Count how many times the store is modified for each change, should be once per single change event.</p>
+  <RangeSlider bind:values={$boundStore} pips all="label" max={20} {reversed} {hoverable} {disabled} />
+  <RangeSlider bind:values={$boundStore} pips all="label" max={20} {reversed} {hoverable} {disabled} />
+  <RangeSlider bind:values={$boundStore} pips all="label" max={20} {reversed} {hoverable} {disabled} />
   Number of store updates: {store_updates}
 
   <h4>Object Values</h4>
-  <RangeSlider
-    bind:value={objectValueBind.value}
-    pips
-    all="label"
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
+  <RangeSlider bind:value={objectValueBind.value} pips all="label" {reversed} {hoverable} {disabled} />
   {objectValueBind.value}
-  <RangeSlider
-    bind:values={objectValuesBind.values}
-    pips
-    all="label"
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
+  <RangeSlider bind:values={objectValuesBind.values} pips all="label" {reversed} {hoverable} {disabled} />
   {objectValuesBind.values}
 
   <h4>Value(s) Errors</h4>
@@ -975,56 +845,14 @@
   <RangeSlider bind:values={errorValuesBind} pips all="label" {reversed} {hoverable} {disabled} />
   {errorValueBind} / {errorValuesBind}
 
-  <RangeSlider
-    bind:values={errorValuesObjectBind}
-    pips
-    all="label"
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
-  <RangeSlider
-    bind:values={errorValuesStringBind}
-    pips
-    all="label"
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
-  <RangeSlider
-    bind:values={errorValuesBooleanBind}
-    pips
-    all="label"
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
+  <RangeSlider bind:values={errorValuesObjectBind} pips all="label" {reversed} {hoverable} {disabled} />
+  <RangeSlider bind:values={errorValuesStringBind} pips all="label" {reversed} {hoverable} {disabled} />
+  <RangeSlider bind:values={errorValuesBooleanBind} pips all="label" {reversed} {hoverable} {disabled} />
   values error; {errorValuesObjectBind} / {errorValuesStringBind} / {errorValuesBooleanBind}
 
-  <RangeSlider
-    bind:value={errorValueObjectBind}
-    pips
-    all="label"
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
-  <RangeSlider
-    bind:value={errorValueStringBind}
-    pips
-    all="label"
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
-  <RangeSlider
-    bind:value={errorValueBooleanBind}
-    pips
-    all="label"
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
+  <RangeSlider bind:value={errorValueObjectBind} pips all="label" {reversed} {hoverable} {disabled} />
+  <RangeSlider bind:value={errorValueStringBind} pips all="label" {reversed} {hoverable} {disabled} />
+  <RangeSlider bind:value={errorValueBooleanBind} pips all="label" {reversed} {hoverable} {disabled} />
   value error; {errorValueObjectBind} / {errorValueStringBind} / {errorValueBooleanBind}
 
   <h4>Value as Input</h4>

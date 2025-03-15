@@ -136,27 +136,13 @@
     values = values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
     // then, check the values against the range gaps
     if (rangeGapMax < Infinity) {
-      const gapMax = constrainAndAlignValue(
-        values[0] + rangeGapMax,
-        min,
-        max,
-        step,
-        precision,
-        limits
-      );
+      const gapMax = constrainAndAlignValue(values[0] + rangeGapMax, min, max, step, precision, limits);
       if (values[1] > gapMax) {
         values[1] = gapMax;
       }
     }
     if (rangeGapMin > 0) {
-      const gapMin = constrainAndAlignValue(
-        values[0] + rangeGapMin,
-        min,
-        max,
-        step,
-        precision,
-        limits
-      );
+      const gapMin = constrainAndAlignValue(values[0] + rangeGapMin, min, max, step, precision, limits);
       if (values[1] < gapMin) {
         values[1] = gapMin;
       }
@@ -176,8 +162,7 @@
   $: min, checkMinMax();
   $: max, checkMinMax();
   $: hasRange =
-    (range === true && values.length === 2) ||
-    ((range === 'min' || range === 'max') && values.length === 1);
+    (range === true && values.length === 2) || ((range === 'min' || range === 'max') && values.length === 1);
 
   $: {
     // trim the range so it remains as a min/max (only 2 handles)
@@ -187,9 +172,7 @@
     );
     if (
       !(values.length === trimmedAlignedValues.length) ||
-      !values.every(
-        (element, index) => coerceFloat(element, precision) === trimmedAlignedValues[index]
-      )
+      !values.every((element, index) => coerceFloat(element, precision) === trimmedAlignedValues[index])
     ) {
       values = trimmedAlignedValues;
     }
@@ -308,9 +291,7 @@
       // we sort the handles values, and return the first one closest
       // to the interaction value
     } else {
-      closest = values.indexOf(
-        [...values].sort((a, b) => Math.abs(handleVal - a) - Math.abs(handleVal - b))[0]
-      );
+      closest = values.indexOf([...values].sort((a, b) => Math.abs(handleVal - a) - Math.abs(handleVal - b))[0]);
     }
     return closest;
   }
@@ -803,8 +784,8 @@
         {@const percent = valueAsPercent(value, min, max, precision)}
         {@const formattedValue = handleFormatter(value, index, percent)}
         <span class="rangeFloat">
-          {#if prefix}<span class="rangeFloat-prefix">{prefix}</span
-            >{/if}{@html formattedValue}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span
+          {#if prefix}<span class="rangeFloat-prefix">{prefix}</span>{/if}{@html formattedValue}{#if suffix}<span
+              class="rangeFloat-suffix">{suffix}</span
             >{/if}
         </span>
       {/if}
@@ -837,11 +818,13 @@
             )}
           {:else}
             {@const [first, second] = reversed ? [values[1], values[0]] : [values[0], values[1]]}
-            {#if prefix}<span class="rangeFloat-prefix">{prefix}</span
-              >{/if}{@html first}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
+            {#if prefix}<span class="rangeFloat-prefix">{prefix}</span>{/if}{@html first}{#if suffix}<span
+                class="rangeFloat-suffix">{suffix}</span
+              >{/if}
             {' '}-{' '}
-            {#if prefix}<span class="rangeFloat-prefix">{prefix}</span
-              >{/if}{@html second}{#if suffix}<span class="rangeFloat-suffix">{suffix}</span>{/if}
+            {#if prefix}<span class="rangeFloat-prefix">{prefix}</span>{/if}{@html second}{#if suffix}<span
+                class="rangeFloat-suffix">{suffix}</span
+              >{/if}
           {/if}
         </span>
       {/if}
