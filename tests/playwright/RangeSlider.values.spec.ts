@@ -1,5 +1,5 @@
-import { expect, test } from './helpers/assertions.js';
-import { waitTime } from './utils.js';
+import { expect, test } from '@playwright/test';
+import { waitTime } from './helpers/utils.js';
 
 test.describe('Values Tests', () => {
   test('single value set to: 75', async ({ page }) => {

@@ -1,4 +1,4 @@
-import { expect, test } from './helpers/assertions.js';
+import { expect, test } from '@playwright/test';
 
 test.describe('Basic Tests', () => {
   test.describe('no props', () => {

@@ -1,8 +1,7 @@
-import { expect, test } from './helpers/assertions.js';
-import { springSettleTime, waitTime } from './utils.js';
+import { expect, test } from '@playwright/test';
+import { dragHandleTo } from './helpers/tools.js';
 
 test.describe('Interactions', () => {
-
   test('has focus when clicked', async ({ page }) => {
     await page.goto('/test/range-slider/values/single-value');
     await page.waitForLoadState('networkidle');
@@ -46,12 +45,8 @@ test.describe('Interactions', () => {
     const sliderBounds = await slider.boundingBox();
     if (!sliderBounds) throw new Error('Could not get slider bounds');
 
-    // Start drag from center (50%)
-    await page.mouse.move(sliderBounds.x + sliderBounds.width * 0.5, sliderBounds.y + sliderBounds.height / 2);
-    await page.mouse.down();
-    // Drag to 75%
-    await page.mouse.move(sliderBounds.x + sliderBounds.width * 0.75, sliderBounds.y + sliderBounds.height / 2);
-    await page.mouse.up();
+    // Drag the handle to 75%
+    await dragHandleTo(page, slider, handle, 0.75);
 
     // Verify the handle and input value
     await expect(handle).toHaveCSS('left', '750px');

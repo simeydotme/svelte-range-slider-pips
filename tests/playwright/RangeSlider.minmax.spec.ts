@@ -1,4 +1,4 @@
-import { expect, test } from './helpers/assertions.js';
+import { expect, test } from '@playwright/test';
 
 test.describe('Min/Max Tests', () => {
   test('custom min/max values', async ({ page }) => {

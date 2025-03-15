@@ -1,5 +1,4 @@
-import { expect, test } from './helpers/assertions.js';
-import { springSettleTime, waitTime } from './utils.js';
+import { expect, test } from '@playwright/test';
 
 test.describe('Reversed Slider Tests', () => {
   test.describe('single handle', () => {

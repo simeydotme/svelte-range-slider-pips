@@ -46,6 +46,10 @@
         "path": "/test/range-slider/range/min"
       },
       {
+        "name": "pushy",
+        "path": "/test/range-slider/range/pushy"
+      },
+      {
         "name": "true",
         "path": "/test/range-slider/range/true"
       }

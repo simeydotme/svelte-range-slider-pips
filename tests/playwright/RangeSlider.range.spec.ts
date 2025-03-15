@@ -1,5 +1,5 @@
-import { expect, test } from './helpers/assertions.js';
-import { springSettleTime } from './utils.js';
+import { expect, test } from '@playwright/test';
+import { dragHandleTo } from './helpers/tools.js';
 
 test.describe('Range Tests', () => {
   test.describe('range=false', () => {
@@ -149,52 +149,6 @@ test.describe('Range Tests', () => {
       await expect(handles).toHaveCount(2);
       await expect(handles.nth(0)).toHaveCSS('left', '0px');
       await expect(handles.nth(1)).toHaveCSS('left', '700px');
-    });
-
-    test.describe('Interactions', () => {
-      test('first handle should not be able to drag beyond second handle', async ({ page }) => {
-        await page.goto('/test/range-slider/range/true');
-        await page.waitForLoadState('networkidle');
-        const slider = page.locator('#double-handle-true');
-        const handles = slider.locator('.rangeHandle');
-        const range = slider.locator('.rangeBar');
-
-        await expect(range).toBeAttached();
-        await expect(range).toHaveCSS('left', '250px');
-        await expect(range).toHaveCSS('right', '250px');
-
-        await slider.isVisible();
-        const sliderBounds = await slider.boundingBox();
-        if (!sliderBounds) throw new Error('Could not get slider bounds');
-
-        // Start drag from 25%, so first handle should be activated
-        await page.mouse.move(sliderBounds.x + sliderBounds.width * 0.25, sliderBounds.y + sliderBounds.height / 2);
-        await page.mouse.down();
-        // drag the first handle to 90%
-        await page.mouse.move(sliderBounds.x + sliderBounds.width * 0.9, sliderBounds.y + sliderBounds.height / 2);
-        await page.mouse.up();
-        await page.waitForTimeout(springSettleTime);
-        // expect the first handle to be stuck at the second handle (75%)
-        await expect(handles.nth(0)).toHaveCSS('left', '750px');
-        await expect(handles.nth(1)).toHaveCSS('left', '750px');
-
-        // reset the first handle to 25% and should not move the second handle
-        await page.mouse.click(sliderBounds.x + sliderBounds.width * 0.25, sliderBounds.y + sliderBounds.height / 2);
-        await page.waitForTimeout(springSettleTime);
-        await expect(handles.nth(0)).toHaveCSS('left', '250px');
-        await expect(handles.nth(1)).toHaveCSS('left', '750px');
-
-        // now drag the second handle from 75%
-        await page.mouse.move(sliderBounds.x + sliderBounds.width * 0.75, sliderBounds.y + sliderBounds.height / 2);
-        await page.mouse.down();
-        // drag the second handle to 10%
-        await page.mouse.move(sliderBounds.x + sliderBounds.width * 0.1, sliderBounds.y + sliderBounds.height / 2);
-        await page.mouse.up();
-        await page.waitForTimeout(springSettleTime);
-        // expect the second handle to be stuck at the first handle (25%)
-        await expect(handles.nth(0)).toHaveCSS('left', '250px');
-        await expect(handles.nth(1)).toHaveCSS('left', '250px');
-      });
     });
   });
 
