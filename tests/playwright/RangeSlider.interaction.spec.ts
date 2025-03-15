@@ -2,6 +2,20 @@ import { expect, test } from './helpers/assertions.js';
 import { springSettleTime, waitTime } from './utils.js';
 
 test.describe('Interactions', () => {
+
+  test('has focus when clicked', async ({ page }) => {
+    await page.goto('/test/range-slider/values/single-value');
+    await page.waitForLoadState('networkidle');
+    const slider = page.locator('.rangeSlider').nth(0);
+    const handle = slider.getByRole('slider');
+
+    await slider.isVisible();
+    await handle.isVisible();
+    await handle.focus();
+    await expect(slider).toHaveClass(/\bfocus\b/);
+    await expect(handle).toHaveClass(/\bactive\b/);
+  });
+
   test('should handle mouse interactions correctly', async ({ page }) => {
     await page.goto('/test/range-slider/values/single-value');
     await page.waitForLoadState('networkidle');

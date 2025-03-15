@@ -5,6 +5,7 @@
   },
   {
     "name": "minmax",
+    "path": "",
     "children": [
       {
         "name": "custom-min-max",
@@ -30,6 +31,7 @@
   },
   {
     "name": "range",
+    "path": "",
     "children": [
       {
         "name": "false",
@@ -51,6 +53,7 @@
   },
   {
     "name": "states",
+    "path": "",
     "children": [
       {
         "name": "reversed",
@@ -60,9 +63,11 @@
   },
   {
     "name": "values",
+    "path": "",
     "children": [
       {
         "name": "binding",
+        "path": "",
         "children": [
           {
             "name": "multiple",

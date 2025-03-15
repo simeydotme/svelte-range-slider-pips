@@ -58,7 +58,7 @@
     "lint": "prettier --check .",
     "format": "prettier --write .",
     "add:dist": "git add dist",
-    "gen:nav": "node src/routes/test/range-slider/gen-nav.js"
+    "gen:nav": "node src/routes/test/nav/gen-nav.js"
   },
   "pre-commit": [
     "lint",

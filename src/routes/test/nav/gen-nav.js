@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const routesDir = __dirname;
+const routesDir = path.join(__dirname, '..', 'range-slider');
 const outputFile = path.join(__dirname, 'test-nav.json');
 
 /**
@@ -21,6 +21,7 @@ const outputFile = path.join(__dirname, 'test-nav.json');
 async function scanDirectory(dir, basePath = '') {
   const entries = await fs.readdir(dir, { withFileTypes: true });
 
+  /** @type {NavItem[]} */
   const result = [];
 
   for (const entry of entries) {
@@ -41,19 +42,12 @@ async function scanDirectory(dir, basePath = '') {
 
       // Only add directory if it has children or contains a +page.svelte
       if (children.length > 0 || hasPage) {
+        /** @type {NavItem} */
         const navItem = {
-          name: entry.name
+          name: entry.name,
+          path: hasPage ? `/test/range-slider/${relativePath}` : '',
+          ...(children.length > 0 ? { children } : {})
         };
-
-        // Only add path if directory has a +page.svelte
-        if (hasPage) {
-          navItem.path = `/test/range-slider/${relativePath}`;
-        }
-
-        // Add children if they exist
-        if (children.length > 0) {
-          navItem.children = children;
-        }
 
         result.push(navItem);
       }
