@@ -4,6 +4,24 @@
     "path": "/test/range-slider/base"
   },
   {
+    "name": "floats",
+    "path": "/test/range-slider/floats"
+  },
+  {
+    "name": "formatters",
+    "path": "",
+    "children": [
+      {
+        "name": "handle",
+        "path": "/test/range-slider/formatters/handle"
+      },
+      {
+        "name": "range",
+        "path": "/test/range-slider/formatters/range"
+      }
+    ]
+  },
+  {
     "name": "minmax",
     "path": "",
     "children": [

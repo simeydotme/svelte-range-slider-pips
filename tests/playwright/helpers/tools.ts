@@ -23,6 +23,6 @@ export const dragHandleTo = async (page: Page, slider: Locator, handle: Locator,
   await page.mouse.down();
 
   // Ensure we end exactly at target position
-  await page.mouse.move(sbox.x + sbox.width * x, sbox.y + sbox.height / 2, { steps: 5 });
+  await page.mouse.move(sbox.x + sbox.width * x, sbox.y + sbox.height / 2, { steps: 10 });
   await page.mouse.up();
 };

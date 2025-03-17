@@ -4,7 +4,7 @@
 </script>
 
 <h5>Range slider with two-way binding on multiple values</h5>
-<RangeSlider bind:values range  />
+<RangeSlider bind:values range />
 
 <div class="value-display">
   <div>

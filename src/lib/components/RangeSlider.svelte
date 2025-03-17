@@ -149,11 +149,23 @@
     }
   };
 
+  const checkFormatters = () => {
+    if (formatter === null || formatter === undefined) {
+      console.error('formatter must be a function');
+      formatter = (v, i, p) => v;
+    }
+    if (handleFormatter === null || handleFormatter === undefined) {
+      console.error('handleFormatter must be a function');
+      handleFormatter = formatter;
+    }
+  };
+
   // fixup the value/values at render
   checkValueIsNumber();
   checkValuesIsArray();
   checkValuesAgainstRangeGaps();
   checkMinMax();
+  checkFormatters();
 
   // keep value and values in sync with each other
   $: value, updateValues();
@@ -161,6 +173,8 @@
   $: ariaLabels, checkAriaLabels();
   $: min, checkMinMax();
   $: max, checkMinMax();
+  $: formatter, checkFormatters();
+  $: handleFormatter, checkFormatters();
   $: hasRange =
     (range === true && values.length === 2) || ((range === 'min' || range === 'max') && values.length === 1);
 
@@ -1027,8 +1041,8 @@
     display: block;
     position: absolute;
     left: 50%;
-    top: -0.5em;
-    transform: translate(-50%, -100%);
+    bottom: 1.75em;
+    transform: translate(-50%, -50%);
     font-size: 1em;
     text-align: center;
     opacity: 0;
@@ -1043,11 +1057,34 @@
 
   :global(.rangeSlider .rangeHandle.active .rangeFloat),
   :global(.rangeSlider.hoverable .rangeHandle:hover .rangeFloat),
-  :global(.rangeSlider.hoverable:hover .rangeBar .rangeFloat),
+  :global(.rangeSlider.hoverable .rangeBar:hover .rangeFloat),
   :global(.rangeSlider.focus .rangeBar .rangeFloat) {
     opacity: 1;
-    top: -0.2em;
-    transform: translate(-50%, -100%);
+    transform: translate(-50%, 0%);
+  }
+
+  :global(.rangeSlider .rangeBar .rangeFloat) {
+    bottom: 0.875em;
+    z-index: 2;
+  }
+
+  :global(.rangeSlider.vertical .rangeFloat) {
+    top: 50%;
+    bottom: auto;
+    left: auto;
+    right: 1.75em;
+    transform: translate(-50%, -50%);
+  }
+
+  :global(.rangeSlider.vertical .rangeHandle.active .rangeFloat),
+  :global(.rangeSlider.vertical.hoverable .rangeHandle:hover .rangeFloat),
+  :global(.rangeSlider.vertical.hoverable .rangeBar:hover .rangeFloat),
+  :global(.rangeSlider.vertical.focus .rangeBar .rangeFloat) {
+    transform: translate(0%, -50%);
+  }
+
+  :global(.rangeSlider.vertical .rangeBar .rangeFloat) {
+    right: 0.875em;
   }
 
   :global(.rangeSlider .rangeBar),
@@ -1083,6 +1120,13 @@
       scale 0.2s ease;
   }
 
+  :global(.rangeSlider.vertical .rangeBar.rangeDrag::before) {
+    inset: 0;
+    left: -0.5em;
+    right: -0.5em;
+    width: auto;
+  }
+
   :global(.rangeSlider.hoverable:not(.disabled) .rangeDrag:hover::before) {
     opacity: 0.2;
   }
@@ -1090,6 +1134,10 @@
   :global(.rangeSlider.hoverable:not(.disabled) .rangeDrag.press::before) {
     opacity: 0.4;
     scale: 1 1.25;
+  }
+
+  :global(.rangeSlider.vertical.hoverable:not(.disabled) .rangeDrag.press::before) {
+    scale: 1.25 1;
   }
 
   :global(.rangeSlider) {

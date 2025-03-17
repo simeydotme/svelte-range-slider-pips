@@ -40,22 +40,22 @@
       h2,
       h3,
       h4,
-      h5 {
+      h5,
+      h6 {
         font-family: 'Palanquin', sans-serif;
         margin-block: 3rem;
-        font-weight: 500;
-      }
-      h4 {
         font-weight: 600;
-      }
-      h1,
-      h2,
-      h3,
-      h4,
-      h5 {
         & em {
           font-weight: 300;
         }
+      }
+      h4 {
+        font-weight: 800;
+      }
+      h6 {
+        font-size: 2rem;
+        margin-block: 0;
+        font-weight: 500;
       }
       table {
         width: 100%;

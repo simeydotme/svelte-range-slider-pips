@@ -4,7 +4,7 @@
 </script>
 
 <h5>Slider with two-way binding on single value</h5>
-<RangeSlider bind:value  />
+<RangeSlider bind:value />
 
 <div class="value-display">
   <div>
