@@ -74,7 +74,7 @@
   let handlePressed = false;
   let rangeActivated = false;
   let rangePressed = false;
-  let activeRangeGaps = [1, 1];
+  let rangeDistancesFromPointer = [1, 1];
   let keyboardActive = false;
   let activeHandle = -1;
   let startValues: (number | undefined)[] = [];
@@ -326,7 +326,7 @@
     moveHandle(activeHandle, handleVal);
   }
 
-  function getRangeGapsOnInteractionStart(clientPos: NormalisedClient) {
+  function getRangedistancesOnInteractionStart(clientPos: NormalisedClient) {
     if (!slider || !draggy || !rangeActivated || range === 'min' || range === 'max') return;
     const dims = slider.getBoundingClientRect();
     let pointerPos = 0;
@@ -342,7 +342,7 @@
       pointerPercent = reversed ? 100 - pointerPercent : pointerPercent;
     }
     pointerVal = ((max - min) / 100) * pointerPercent + min;
-    activeRangeGaps = [values[0] - pointerVal, values[1] - pointerVal];
+    rangeDistancesFromPointer = [values[0] - pointerVal, values[1] - pointerVal];
   }
 
   /**
@@ -372,8 +372,8 @@
     }
     pointerVal = ((max - min) / 100) * pointerPercent + min;
     activeHandle = -1;
-    moveHandle(0, pointerVal + activeRangeGaps[0], false);
-    moveHandle(1, pointerVal + activeRangeGaps[1], true);
+    moveHandle(0, pointerVal + rangeDistancesFromPointer[0], false);
+    moveHandle(1, pointerVal + rangeDistancesFromPointer[1], true);
   }
 
   /**
@@ -575,7 +575,7 @@
         activeHandle = -1;
         rangeActivated = true;
         rangePressed = true;
-        getRangeGapsOnInteractionStart(clientPos);
+        getRangedistancesOnInteractionStart(clientPos);
       } else {
         handleActivated = true;
         handlePressed = true;
