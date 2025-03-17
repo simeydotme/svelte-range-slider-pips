@@ -3,7 +3,7 @@
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * Project home: https://simeydotme.github.io/svelte-range-slider-pips/
  * © 2025 Simon Goellner <simey.me@gmail.com> ~ MPL-2.0 License
- * Published: 16/3/2025
+ * Published: 17/3/2025
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -3873,7 +3873,7 @@
 		let handlePressed = false;
 		let rangeActivated = false;
 		let rangePressed = false;
-		let activeRangeGaps = [1, 1];
+		let rangeDistancesFromPointer = [1, 1];
 		let keyboardActive = false;
 		let activeHandle = -1;
 		let startValues = [];
@@ -4079,7 +4079,7 @@
 			moveHandle(activeHandle, handleVal);
 		}
 
-		function getRangeGapsOnInteractionStart(clientPos) {
+		function getRangedistancesOnInteractionStart(clientPos) {
 			if (!slider || !draggy || !rangeActivated || range === 'min' || range === 'max') return;
 			const dims = slider.getBoundingClientRect();
 			let pointerPos = 0;
@@ -4097,7 +4097,7 @@
 			}
 
 			pointerVal = (max - min) / 100 * pointerPercent + min;
-			activeRangeGaps = [values[0] - pointerVal, values[1] - pointerVal];
+			rangeDistancesFromPointer = [values[0] - pointerVal, values[1] - pointerVal];
 		}
 
 		/**
@@ -4132,8 +4132,8 @@
 
 			pointerVal = (max - min) / 100 * pointerPercent + min;
 			$$invalidate(34, activeHandle = -1);
-			moveHandle(0, pointerVal + activeRangeGaps[0], false);
-			moveHandle(1, pointerVal + activeRangeGaps[1], true);
+			moveHandle(0, pointerVal + rangeDistancesFromPointer[0], false);
+			moveHandle(1, pointerVal + rangeDistancesFromPointer[1], true);
 		}
 
 		/**
@@ -4346,7 +4346,7 @@
 					$$invalidate(34, activeHandle = -1);
 					rangeActivated = true;
 					$$invalidate(33, rangePressed = true);
-					getRangeGapsOnInteractionStart(clientPos);
+					getRangedistancesOnInteractionStart(clientPos);
 				} else {
 					handleActivated = true;
 					$$invalidate(32, handlePressed = true);

@@ -34,6 +34,10 @@
     "path": "",
     "children": [
       {
+        "name": "draggy",
+        "path": "/test/range-slider/range/draggy"
+      },
+      {
         "name": "false",
         "path": "/test/range-slider/range/false"
       },

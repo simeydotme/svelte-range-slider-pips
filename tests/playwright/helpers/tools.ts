@@ -22,8 +22,14 @@ export const dragHandleTo = async (page: Page, slider: Locator, handle: Locator,
   const sliderBox = await slider.boundingBox();
   if (!sliderBox) throw new Error('Could not get slider bounds');
 
+  // Calculate current x position as percentage
+  const currentX = (handleCenter.x - sliderBox.x) / sliderBox.width;
+
+  // Move mouse to handle center and press down
   await page.mouse.move(handleCenter.x, handleCenter.y);
   await page.mouse.down();
-  await page.mouse.move(sliderBox.x + sliderBox.width * x, sliderBox.y + sliderBox.height / 2);
+
+  // Ensure we end exactly at target position
+  await page.mouse.move(sliderBox.x + sliderBox.width * x, sliderBox.y + sliderBox.height / 2, { steps: 5 });
   await page.mouse.up();
 };
