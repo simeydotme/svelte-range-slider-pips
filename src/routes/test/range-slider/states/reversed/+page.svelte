@@ -3,8 +3,12 @@
 </script>
 
 <div class="slider-list">
-  <RangeSlider value={75} reversed spring={false} />
-  <RangeSlider value={125} reversed min={-100} max={150} spring={false} />
+  <h5>Single handle reversed slider</h5>
+  <RangeSlider value={75} reversed  />
 
-  <RangeSlider values={[0, 100]} range reversed spring={false} />
+  <h5>Single handle reversed slider with custom range</h5>
+  <RangeSlider value={125} reversed min={-100} max={150}  />
+
+  <h5>Double handle reversed range slider</h5>
+  <RangeSlider values={[0, 100]} range reversed  />
 </div>

@@ -48,6 +48,15 @@
       h4 {
         font-weight: 600;
       }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        & em {
+          font-weight: 300;
+        }
+      }
       table {
         width: 100%;
       }

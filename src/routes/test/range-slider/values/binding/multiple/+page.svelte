@@ -3,7 +3,8 @@
   let values = [25, 75];
 </script>
 
-<RangeSlider bind:values range spring={false} />
+<h5>Range slider with two-way binding on multiple values</h5>
+<RangeSlider bind:values range  />
 
 <div class="value-display">
   <div>

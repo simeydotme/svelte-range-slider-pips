@@ -2,4 +2,5 @@
   import RangeSlider from '$lib/components/RangeSlider.svelte';
 </script>
 
-<RangeSlider value={75} spring={false} />
+<h5>Basic slider with single value</h5>
+<RangeSlider value={75} />

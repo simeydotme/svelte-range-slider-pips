@@ -3,7 +3,8 @@
   let value = 50;
 </script>
 
-<RangeSlider bind:value spring={false} />
+<h5>Slider with two-way binding on single value</h5>
+<RangeSlider bind:value  />
 
 <div class="value-display">
   <div>
