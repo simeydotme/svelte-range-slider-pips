@@ -14,7 +14,7 @@
   <RangeSlider id="draggy" range values={draggyValues} draggy={true} />
 
   <h5>Range slider with fixed 10% gap and pushy behavior</h5>
-  <RangeSlider id="draggy-gaps" range values={draggyValues} draggy={true} rangeGapMin={10} rangeGapMax={10} pushy />
+  <RangeSlider id="draggy-gaps" range values={draggyValues} draggy={true} rangeGapMin={10} pushy />
 
   <div class="toggle-container slider-list">
     <h5>Range slider with toggleable draggy behavior ({draggyToggle ? 'true' : 'false'})</h5>
