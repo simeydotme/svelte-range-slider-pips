@@ -82,13 +82,20 @@
   }
 </script>
 
-<div class="rangePips" class:disabled class:hoverable class:vertical class:reversed class:focus>
+<div
+  class="rangePips"
+  class:rsDisabled={disabled}
+  class:rsHoverable={hoverable}
+  class:rsVertical={vertical}
+  class:rsReversed={reversed}
+  class:rsFocus={focus}
+>
   {#if (all && first !== false) || first}
     <span
-      class="pip first"
-      class:selected={isSelected(min, values, precision)}
-      class:in-range={isInRange(min, values, range)}
-      class:out-of-limit={isOutOfLimit(min, limits)}
+      class="rsPip rsPip--first"
+      class:rsSelected={isSelected(min, values, precision)}
+      class:rsInRange={isInRange(min, values, range)}
+      class:rsOutOfLimit={isOutOfLimit(min, limits)}
       style="{orientationStart}: 0%;"
       data-val={coerceFloat(min, precision)}
       on:pointerdown={(e) => {
@@ -99,10 +106,10 @@
       }}
     >
       {#if all === 'label' || first === 'label'}
-        <span class="pipVal">
-          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}
+        <span class="rsPipVal">
+          {#if prefix}<span class="rsPipValPrefix">{prefix}</span>{/if}
           {@html formatter(coerceFloat(min, precision), 0, 0)}
-          {#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
+          {#if suffix}<span class="rsPipValSuffix">{suffix}</span>{/if}
         </span>
       {/if}
     </span>
@@ -113,10 +120,10 @@
       {@const val = getValueFromIndex(i, min, max, pipStep, step, precision)}
       {#if val !== min && val !== max}
         <span
-          class="pip"
-          class:selected={isSelected(val, values, precision)}
-          class:in-range={isInRange(val, values, range)}
-          class:out-of-limit={isOutOfLimit(val, limits)}
+          class="rsPip"
+          class:rsSelected={isSelected(val, values, precision)}
+          class:rsInRange={isInRange(val, values, range)}
+          class:rsOutOfLimit={isOutOfLimit(val, limits)}
           style="{orientationStart}: {valueAsPercent(val, min, max, precision)}%;"
           data-val={val}
           on:pointerdown={(e) => {
@@ -127,10 +134,10 @@
           }}
         >
           {#if all === 'label' || rest === 'label'}
-            <span class="pipVal">
-              {#if true || prefix}<span class="pipVal-prefix">{prefix}</span>{/if}
+            <span class="rsPipVal">
+              {#if true || prefix}<span class="rsPipValPrefix">{prefix}</span>{/if}
               {@html formatter(val, i, valueAsPercent(val, min, max, precision))}
-              {#if true || suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
+              {#if true || suffix}<span class="rsPipValSuffix">{suffix}</span>{/if}
             </span>
           {/if}
         </span>
@@ -140,10 +147,10 @@
 
   {#if (all && last !== false) || last}
     <span
-      class="pip last"
-      class:selected={isSelected(max, values, precision)}
-      class:in-range={isInRange(max, values, range)}
-      class:out-of-limit={isOutOfLimit(max, limits)}
+      class="rsPip rsPip--last"
+      class:rsSelected={isSelected(max, values, precision)}
+      class:rsInRange={isInRange(max, values, range)}
+      class:rsOutOfLimit={isOutOfLimit(max, limits)}
       style="{orientationStart}: 100%;"
       data-val={coerceFloat(max, precision)}
       on:pointerdown={(e) => {
@@ -154,10 +161,10 @@
       }}
     >
       {#if all === 'label' || last === 'label'}
-        <span class="pipVal">
-          {#if prefix}<span class="pipVal-prefix">{prefix}</span>{/if}
+        <span class="rsPipVal">
+          {#if prefix}<span class="rsPipValPrefix">{prefix}</span>{/if}
           {@html formatter(coerceFloat(max, precision), pipCount, 100)}
-          {#if suffix}<span class="pipVal-suffix">{suffix}</span>{/if}
+          {#if suffix}<span class="rsPipValSuffix">{suffix}</span>{/if}
         </span>
       {/if}
     </span>
@@ -191,7 +198,7 @@
     font-variant-numeric: tabular-nums;
   }
 
-  :global(.rangePips.vertical) {
+  :global(.rangePips.rsVertical) {
     height: auto;
     width: 1em;
     left: 100%;
@@ -200,7 +207,7 @@
     bottom: 0;
   }
 
-  :global(.rangePips .pip) {
+  :global(.rangePips .rsPip) {
     height: 0.4em;
     position: absolute;
     top: 0.25em;
@@ -208,7 +215,7 @@
     white-space: nowrap;
   }
 
-  :global(.rangePips.vertical .pip) {
+  :global(.rangePips.rsVertical .rsPip) {
     height: 1px;
     width: 0.4em;
     left: 0.25em;
@@ -216,89 +223,89 @@
     bottom: auto;
   }
 
-  :global(.rangePips .pipVal) {
+  :global(.rangePips .rsPipVal) {
     position: absolute;
     top: 0.4em;
     transform: translate(-50%, 25%);
     display: inline-flex;
   }
 
-  :global(.rangePips.vertical .pipVal) {
+  :global(.rangePips.rsVertical .rsPipVal) {
     position: absolute;
     top: 0;
     left: 0.4em;
     transform: translate(25%, -50%);
   }
 
-  :global(.rangePips .pip) {
+  :global(.rangePips .rsPip) {
     transition: all 0.15s ease;
   }
 
-  :global(.rangePips .pipVal) {
+  :global(.rangePips .rsPipVal) {
     transition:
       all 0.15s ease,
       font-weight 0s linear;
   }
 
-  :global(.rangePips .pip) {
+  :global(.rangePips .rsPip) {
     color: lightslategray;
     color: var(--pip-text);
     background-color: lightslategray;
     background-color: var(--pip);
   }
 
-  :global(.rangePips .pip.selected) {
+  :global(.rangePips .rsPip.rsSelected) {
     color: darkslategrey;
     color: var(--pip-active-text);
     background-color: darkslategrey;
     background-color: var(--pip-active);
   }
 
-  :global(.rangePips.hoverable:not(.disabled) .pip:not(.out-of-limit):hover) {
+  :global(.rangePips.rsHoverable:not(.rsDisabled) .rsPip:not(.rsOutOfLimit):hover) {
     color: darkslategrey;
     color: var(--pip-hover-text);
     background-color: darkslategrey;
     background-color: var(--pip-hover);
   }
 
-  :global(.rangePips .pip.in-range) {
+  :global(.rangePips .rsPip.rsInRange) {
     color: darkslategrey;
     color: var(--pip-in-range-text);
     background-color: darkslategrey;
     background-color: var(--pip-in-range);
   }
 
-  :global(.rangePips .pip.out-of-limit) {
+  :global(.rangePips .rsPip.rsOutOfLimit) {
     color: #aebecf;
     color: var(--pip-out-of-limit-text);
     background-color: #aebecf;
     background-color: var(--pip-out-of-limit);
   }
 
-  :global(.rangePips .pip.selected) {
+  :global(.rangePips .rsPip.rsSelected) {
     height: 0.75em;
   }
 
-  :global(.rangePips.vertical .pip.selected) {
+  :global(.rangePips.rsVertical .rsPip.rsSelected) {
     height: 1px;
     width: 0.75em;
   }
 
-  :global(.rangePips .pip.selected .pipVal) {
+  :global(.rangePips .rsPip.rsSelected .rsPipVal) {
     font-weight: bold;
     top: 0.75em;
   }
 
-  :global(.rangePips.vertical .pip.selected .pipVal) {
+  :global(.rangePips.rsVertical .rsPip.rsSelected .rsPipVal) {
     top: 0;
     left: 0.75em;
   }
 
-  :global(.rangePips.hoverable:not(.disabled) .pip:not(.selected):not(.out-of-limit):hover) {
+  :global(.rangePips.rsHoverable:not(.rsDisabled) .rsPip:not(.rsSelected):not(.rsOutOfLimit):hover) {
     transition: none;
   }
 
-  :global(.rangePips.hoverable:not(.disabled) .pip:not(.selected):not(.out-of-limit):hover .pipVal) {
+  :global(.rangePips.rsHoverable:not(.rsDisabled) .rsPip:not(.rsSelected):not(.rsOutOfLimit):hover .rsPipVal) {
     transition: none;
     font-weight: bold;
   }

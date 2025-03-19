@@ -2,7 +2,6 @@
 .astro
 node_modules
 build/
-/docs
 /tests/**/build
 /tests/**/dist
 /tests/**/node_modules
@@ -19,6 +18,8 @@ PENDING_CHANGES.md
 CHANGELOG.md
 yarn-error.log
 npm-error.log
+
+*.patch
 
 # Playwright
 /test-results/

@@ -4,7 +4,7 @@
     alt="Svelte Range Slider Logo" width="20%">
 
   <h1 align="center">
-    Svelte Range Slider v3
+    Svelte Range Slider v4
   </h1>
 
   <p>
@@ -219,6 +219,8 @@ Values of labels can be styled with CSS, and the format can be modified with the
 controlled by the `springValues` object prop.
 
 **[📔🔍 | Documentation for Styling](https://simeydotme.github.io/svelte-range-slider-pips/en/styling/)**
+
+> **Note:** In `v4`, most CSS class names have been prefixed with `rs` to prevent conflicts with generic CSS frameworks like DaisyUI or UnoCSS. See the [upgrade guide](./docs/upgrade.md) for details.
 
 <br>
 <br>
