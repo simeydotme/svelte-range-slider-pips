@@ -61,6 +61,7 @@
   export let id: string | undefined = undefined;
   let classes = '';
   export { classes as class };
+  export let style: string | undefined = undefined;
   export let springValues: SpringOpts = { stiffness: 0.15, damping: 0.4 };
   export let spring = true;
 
@@ -767,6 +768,7 @@
   class:rsFocus={focus}
   class:rsPips={pips}
   class:rsPipLabels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
+  {style}
   on:mousedown={sliderInteractStart}
   on:mouseup={sliderInteractEnd}
   on:touchstart|preventDefault={sliderInteractStart}
@@ -886,51 +888,41 @@
    * RangeSlider
    */
 
-  :global(.rangeSlider) {
-
-    --slider-accent: #4a40d4;
-    --slider-accent-100: #838de7;
-    --slider-base: #99a2a2;
-    --slider-base-100: #aebecf;
-    --slider-base-200: #b9c2c2;
-    --slider-bg: #d7dada;
-    --slider-fg: #3f3e4f;
-
-    --slider-dark-accent: #6070fc;
-    --slider-dark-accent-100: #7a7fab;
-    --slider-dark-base: #82809f;
-    --slider-dark-base-100: #595970;
-    --slider-dark-base-200: #454454;
-    --slider-dark-bg: #3f3e4f;
-    --slider-dark-fg: #d7dada;
-
-    --slider: var(--range-slider, var(--slider-bg));
-    --handle-inactive: var(--range-handle-inactive, var(--slider-base));
-    --handle: var(--range-handle, var(--slider-accent-100));
-    --handle-focus: var(--range-handle-focus, var(--slider-accent));
-    --handle-border: var(--range-handle-border, var(--handle));
-    --range-inactive: var(--range-range-inactive, var(--handle-inactive));
-    --range: var(--range-range, var(--handle-focus));
-    --range-limit: var(--range-range-limit, var(--slider-base-200));
-    --range-hover: var(--range-range-hover, var(--handle-border));
-    --range-press: var(--range-range-press, var(--handle-border));
-    --float-inactive: var(--range-float-inactive, var(--handle-inactive));
-    --float: var(--range-float, var(--handle-focus));
-    --float-text: var(--range-float-text, white);
-  }
-
-  :global(.rangeSlider.dark) {
-    --slider-accent: var(--slider-dark-accent);
-    --slider-accent-100: var(--slider-dark-accent-100);
-    --slider-base: var(--slider-dark-base);
-    --slider-base-100: var(--slider-dark-base-100);
-    --slider-base-200: var(--slider-dark-base-200);
-    --slider-bg: var(--slider-dark-bg);
-    --slider-fg: var(--slider-dark-fg);
-  }
-
-  @media (prefers-color-scheme: dark) {
+   @layer base {
     :global(.rangeSlider) {
+
+      --slider-accent: #4a40d4;
+      --slider-accent-100: #838de7;
+      --slider-base: #99a2a2;
+      --slider-base-100: #aebecf;
+      --slider-base-200: #b9c2c2;
+      --slider-bg: #d7dada;
+      --slider-fg: #3f3e4f;
+
+      --slider-dark-accent: #6070fc;
+      --slider-dark-accent-100: #7a7fab;
+      --slider-dark-base: #82809f;
+      --slider-dark-base-100: #595970;
+      --slider-dark-base-200: #454454;
+      --slider-dark-bg: #3f3e4f;
+      --slider-dark-fg: #d7dada;
+
+      --slider: var(--range-slider, var(--slider-bg));
+      --handle-inactive: var(--range-handle-inactive, var(--slider-base));
+      --handle: var(--range-handle, var(--slider-accent-100));
+      --handle-focus: var(--range-handle-focus, var(--slider-accent));
+      --handle-border: var(--range-handle-border, var(--handle));
+      --range-inactive: var(--range-range-inactive, var(--handle-inactive));
+      --range: var(--range-range, var(--handle-focus));
+      --range-limit: var(--range-range-limit, var(--slider-base-200));
+      --range-hover: var(--range-range-hover, var(--handle-border));
+      --range-press: var(--range-range-press, var(--handle-border));
+      --float-inactive: var(--range-float-inactive, var(--handle-inactive));
+      --float: var(--range-float, var(--handle-focus));
+      --float-text: var(--range-float-text, white);
+    }
+
+    :global(.rangeSlider.dark) {
       --slider-accent: var(--slider-dark-accent);
       --slider-accent-100: var(--slider-dark-accent-100);
       --slider-base: var(--slider-dark-base);
@@ -938,6 +930,18 @@
       --slider-base-200: var(--slider-dark-base-200);
       --slider-bg: var(--slider-dark-bg);
       --slider-fg: var(--slider-dark-fg);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :global(.rangeSlider) {
+        --slider-accent: var(--slider-dark-accent);
+        --slider-accent-100: var(--slider-dark-accent-100);
+        --slider-base: var(--slider-dark-base);
+        --slider-base-100: var(--slider-dark-base-100);
+        --slider-base-200: var(--slider-dark-base-200);
+        --slider-bg: var(--slider-dark-bg);
+        --slider-fg: var(--slider-dark-fg);
+      }
     }
   }
 
@@ -1006,7 +1010,7 @@
   }
 
   :global(.rangeSlider .rangeNub),
-  :global(.rangeSlider .rangeHandle:before) {
+  :global(.rangeSlider .rangeHandle::before) {
     position: absolute;
     left: 0;
     top: 0;
@@ -1014,10 +1018,10 @@
     border-radius: 10em;
     height: 100%;
     width: 100%;
-    transition: box-shadow 0.2s ease;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
   }
 
-  :global(.rangeSlider .rangeHandle:before) {
+  :global(.rangeSlider .rangeHandle::before) {
     content: '';
     left: 1px;
     top: 1px;
@@ -1027,15 +1031,16 @@
     width: auto;
     box-shadow: 0 0 0 0px var(--handle-border);
     opacity: 0;
+    transition: opacity 0.2s ease, box-shadow 0.2s ease;
   }
 
-  :global(.rangeSlider.rsHoverable:not(.rsDisabled) .rangeHandle:hover:before) {
+  :global(.rangeSlider.rsHoverable:not(.rsDisabled) .rangeHandle:hover::before) {
     box-shadow: 0 0 0 8px var(--handle-border);
     opacity: 0.2;
   }
 
-  :global(.rangeSlider.rsHoverable:not(.rsDisabled) .rangeHandle.rsPress:before),
-  :global(.rangeSlider.rsHoverable:not(.rsDisabled) .rangeHandle.rsPress:hover:before) {
+  :global(.rangeSlider.rsHoverable:not(.rsDisabled) .rangeHandle.rsPress::before),
+  :global(.rangeSlider.rsHoverable:not(.rsDisabled) .rangeHandle.rsPress:hover::before) {
     box-shadow: 0 0 0 12px var(--handle-border);
     opacity: 0.4;
   }
@@ -1155,6 +1160,7 @@
     height: auto;
     background-color: var(--range-hover);
     opacity: 0;
+    scale: 1 0.5;
     transition:
       opacity 0.2s ease,
       scale 0.2s ease;
@@ -1169,6 +1175,7 @@
 
   :global(.rangeSlider.rsHoverable:not(.rsDisabled).rsDrag .rangeBar:hover::before) {
     opacity: 0.2;
+    scale: 1 1;
   }
 
   :global(.rangeSlider.rsHoverable:not(.rsDisabled).rsDrag .rangeBar.rsPress::before) {
