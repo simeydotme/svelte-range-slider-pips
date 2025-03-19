@@ -596,7 +596,7 @@
         activeHandle = getClosestHandle(clientPos);
         // for touch devices we want the handle to instantly
         // move to the position touched for more responsive feeling
-        if (event.type === 'touchstart' && !target.matches('.pipVal')) {
+        if (event.type === 'touchstart' && !target.matches('.rsPipVal')) {
           handleInteract(clientPos);
         }
       }
@@ -666,7 +666,7 @@
           focus = true;
           // don't trigger interact if the target is a handle (no need) or
           // if the target is a label (we want to move to that value from rangePips)
-          if (!targetIsHandle(target) && !target.matches('.pipVal')) {
+          if (!targetIsHandle(target) && !target.matches('.rsPipVal')) {
             handleInteract(normalisedClient(event));
           }
         }
@@ -887,19 +887,58 @@
    */
 
   :global(.rangeSlider) {
-    --slider: var(--range-slider, #d7dada);
-    --handle-inactive: var(--range-handle-inactive, #99a2a2);
-    --handle: var(--range-handle, #838de7);
-    --handle-focus: var(--range-handle-focus, #4a40d4);
+
+    --slider-accent: #4a40d4;
+    --slider-accent-100: #838de7;
+    --slider-base: #99a2a2;
+    --slider-base-100: #aebecf;
+    --slider-base-200: #b9c2c2;
+    --slider-bg: #d7dada;
+    --slider-fg: #3f3e4f;
+
+    --slider-dark-accent: #6070fc;
+    --slider-dark-accent-100: #7a7fab;
+    --slider-dark-base: #82809f;
+    --slider-dark-base-100: #595970;
+    --slider-dark-base-200: #454454;
+    --slider-dark-bg: #3f3e4f;
+    --slider-dark-fg: #d7dada;
+
+    --slider: var(--range-slider, var(--slider-bg));
+    --handle-inactive: var(--range-handle-inactive, var(--slider-base));
+    --handle: var(--range-handle, var(--slider-accent-100));
+    --handle-focus: var(--range-handle-focus, var(--slider-accent));
     --handle-border: var(--range-handle-border, var(--handle));
     --range-inactive: var(--range-range-inactive, var(--handle-inactive));
     --range: var(--range-range, var(--handle-focus));
-    --range-limit: var(--range-range-limit, #b9c2c2);
+    --range-limit: var(--range-range-limit, var(--slider-base-200));
     --range-hover: var(--range-range-hover, var(--handle-border));
     --range-press: var(--range-range-press, var(--handle-border));
     --float-inactive: var(--range-float-inactive, var(--handle-inactive));
     --float: var(--range-float, var(--handle-focus));
     --float-text: var(--range-float-text, white);
+  }
+
+  :global(.rangeSlider.dark) {
+    --slider-accent: var(--slider-dark-accent);
+    --slider-accent-100: var(--slider-dark-accent-100);
+    --slider-base: var(--slider-dark-base);
+    --slider-base-100: var(--slider-dark-base-100);
+    --slider-base-200: var(--slider-dark-base-200);
+    --slider-bg: var(--slider-dark-bg);
+    --slider-fg: var(--slider-dark-fg);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(.rangeSlider) {
+      --slider-accent: var(--slider-dark-accent);
+      --slider-accent-100: var(--slider-dark-accent-100);
+      --slider-base: var(--slider-dark-base);
+      --slider-base-100: var(--slider-dark-base-100);
+      --slider-base-200: var(--slider-dark-base-200);
+      --slider-bg: var(--slider-dark-bg);
+      --slider-fg: var(--slider-dark-fg);
+    }
   }
 
   :global(.rangeSlider) {
@@ -1050,7 +1089,8 @@
     white-space: nowrap;
     transition: all 0.2s ease;
     font-size: 0.9em;
-    padding: 0.2em 0.4em;
+    line-height: 1;
+    padding: 0.33em 0.5em 0.5em;
     border-radius: 0.2em;
     z-index: 3;
   }
@@ -1141,49 +1181,39 @@
   }
 
   :global(.rangeSlider) {
-    background-color: #d7dada;
     background-color: var(--slider);
   }
 
   :global(.rangeSlider .rangeBar) {
-    background-color: #99a2a2;
     background-color: var(--range-inactive);
   }
 
   :global(.rangeSlider.rsFocus .rangeBar) {
-    background-color: #838de7;
     background-color: var(--range);
   }
 
   :global(.rangeSlider .rangeLimit) {
-    background-color: #99a2a280;
     background-color: var(--range-limit);
   }
 
   :global(.rangeSlider .rangeNub) {
-    background-color: #99a2a2;
     background-color: var(--handle-inactive);
   }
 
   :global(.rangeSlider.rsFocus .rangeNub) {
-    background-color: #838de7;
     background-color: var(--handle);
   }
 
   :global(.rangeSlider .rangeHandle.rsActive .rangeNub) {
-    background-color: #4a40d4;
     background-color: var(--handle-focus);
   }
 
   :global(.rangeSlider .rangeFloat) {
-    color: white;
     color: var(--float-text);
-    background-color: #99a2a2;
     background-color: var(--float-inactive);
   }
 
   :global(.rangeSlider.rsFocus .rangeFloat) {
-    background-color: #4a40d4;
     background-color: var(--float);
   }
 
@@ -1192,7 +1222,6 @@
   }
 
   :global(.rangeSlider.rsDisabled .rangeNub) {
-    background-color: #d7dada;
-    background-color: var(--slider);
+    background-color: var(--handle-inactive);
   }
 </style>

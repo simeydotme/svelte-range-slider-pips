@@ -177,15 +177,15 @@
    */
 
   :global(.rangePips) {
-    --pip: var(--range-pip, lightslategray);
+    --pip: var(--range-pip, var(--slider-base));
     --pip-text: var(--range-pip-text, var(--pip));
-    --pip-active: var(--range-pip-active, darkslategrey);
+    --pip-active: var(--range-pip-active, var(--slider-fg));
     --pip-active-text: var(--range-pip-active-text, var(--pip-active));
-    --pip-hover: var(--range-pip-hover, darkslategrey);
+    --pip-hover: var(--range-pip-hover, var(--slider-fg));
     --pip-hover-text: var(--range-pip-hover-text, var(--pip-hover));
     --pip-in-range: var(--range-pip-in-range, var(--pip-active));
     --pip-in-range-text: var(--range-pip-in-range-text, var(--pip-active-text));
-    --pip-out-of-limit: var(--range-pip-out-of-limit, #aebecf);
+    --pip-out-of-limit: var(--range-pip-out-of-limit, var(--slider-base-100));
     --pip-out-of-limit-text: var(--range-pip-out-of-limit-text, var(--pip-out-of-limit));
   }
 
@@ -248,37 +248,27 @@
   }
 
   :global(.rangePips .rsPip) {
-    color: lightslategray;
     color: var(--pip-text);
-    background-color: lightslategray;
     background-color: var(--pip);
   }
 
   :global(.rangePips .rsPip.rsSelected) {
-    color: darkslategrey;
     color: var(--pip-active-text);
-    background-color: darkslategrey;
     background-color: var(--pip-active);
   }
 
   :global(.rangePips.rsHoverable:not(.rsDisabled) .rsPip:not(.rsOutOfLimit):hover) {
-    color: darkslategrey;
     color: var(--pip-hover-text);
-    background-color: darkslategrey;
     background-color: var(--pip-hover);
   }
 
   :global(.rangePips .rsPip.rsInRange) {
-    color: darkslategrey;
     color: var(--pip-in-range-text);
-    background-color: darkslategrey;
     background-color: var(--pip-in-range);
   }
 
   :global(.rangePips .rsPip.rsOutOfLimit) {
-    color: #aebecf;
     color: var(--pip-out-of-limit-text);
-    background-color: #aebecf;
     background-color: var(--pip-out-of-limit);
   }
 
