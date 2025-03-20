@@ -135,6 +135,11 @@
   const checkValuesAgainstRangeGaps = () => {
     // first, align the values to the step
     values = values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
+    // rangeGaps should be positive
+    if (rangeGapMin < 0) rangeGapMin = 0;
+    if (rangeGapMax < 0) rangeGapMax = Infinity;
+    // rangeGapMin must be less than rangeGapMax
+    if (rangeGapMin > rangeGapMax) rangeGapMin = rangeGapMax;
     // then, check the values against the range gaps
     if (rangeGapMax < Infinity) {
       const gapMax = constrainAndAlignValue(values[0] + rangeGapMax, min, max, step, precision, limits);
