@@ -234,7 +234,7 @@
     <p>Current formatter: {formatters[currentFormatter].name}</p>
     <div class="controls">
       <button id="btn_cycle" on:click={cycleFormatter}>Change Formatter</button>
-      <button id="btn_toggle" on:click={toggleFormatter}>
+      <button id="btn_toggle" class:btn-primary={formatterEnabled} on:click={toggleFormatter}>
         {formatterEnabled ? 'Disable' : 'Enable'} Formatter
       </button>
       <div class="value-inputs">
@@ -257,10 +257,10 @@
       draggy
     />
     <div class="controls">
-      <button id="btn_prefix" on:click={togglePrefix}>
+      <button id="btn_prefix" class:btn-primary={currentPrefix} on:click={togglePrefix}>
         {currentPrefix ? 'Remove' : 'Add'} Prefix
       </button>
-      <button id="btn_suffix" on:click={toggleSuffix}>
+      <button id="btn_suffix" class:btn-primary={currentSuffix} on:click={toggleSuffix}>
         {currentSuffix ? 'Remove' : 'Add'} Suffix
       </button>
     </div>
@@ -324,23 +324,11 @@
 </div>
 
 <style>
-  .slider-list {
-    padding: 1em;
-  }
   .dynamic-container {
     margin: 2em 0;
-  }
-  .controls {
-    margin-top: 1em;
-    display: flex;
-    gap: 1em;
-    align-items: center;
   }
   .value-inputs {
     display: flex;
     gap: 1em;
-  }
-  :global(.rangeSlider) {
-    margin: 2em 0;
   }
 </style>

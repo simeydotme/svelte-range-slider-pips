@@ -46,6 +46,7 @@ export let ariaLabels = [];
 export let id = void 0;
 let classes = "";
 export { classes as class };
+export let style = void 0;
 export let springValues = { stiffness: 0.15, damping: 0.4 };
 export let spring = true;
 const dispatch = createEventDispatcher();
@@ -100,6 +101,9 @@ const checkAriaLabels = () => {
 };
 const checkValuesAgainstRangeGaps = () => {
   values = values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
+  if (rangeGapMin < 0) rangeGapMin = 0;
+  if (rangeGapMax < 0) rangeGapMax = Infinity;
+  if (rangeGapMin > rangeGapMax) rangeGapMin = rangeGapMax;
   if (rangeGapMax < Infinity) {
     const gapMax = constrainAndAlignValue(values[0] + rangeGapMax, min, max, step, precision, limits);
     if (values[1] > gapMax) {
@@ -281,13 +285,13 @@ function moveHandle(index, value2, fireEvent = true) {
         }
       }
     } else if (index === 1) {
-      if (value2 < values[0] + rangeGapMin) {
+      if (value2 < coerceFloat(values[0] + rangeGapMin, precision)) {
         if (pushy && value2 > (limits?.[0] ?? min) + rangeGapMin) {
           values[0] = value2 - rangeGapMin;
         } else {
           value2 = values[0] + rangeGapMin;
         }
-      } else if (value2 > values[0] + rangeGapMax) {
+      } else if (value2 > coerceFloat(values[0] + rangeGapMax, precision)) {
         if (pushy) {
           values[0] = value2 - rangeGapMax;
         } else {
@@ -297,7 +301,7 @@ function moveHandle(index, value2, fireEvent = true) {
     }
   }
   if (values[index] !== value2) {
-    constrainAndAlignValue(values[index] = value2, min, max, step, precision, limits);
+    values[index] = constrainAndAlignValue(value2, min, max, step, precision, limits);
   }
   if (fireEvent) {
     fireChangeEvent(values);
@@ -362,13 +366,13 @@ function sliderKeydown(event) {
       case "PageUp":
       case "ArrowRight":
       case "ArrowUp":
-        moveHandle(handle, values[handle] + coerceFloat(jump, precision));
+        moveHandle(handle, values[handle] + jump);
         prevent = true;
         break;
       case "PageDown":
       case "ArrowLeft":
       case "ArrowDown":
-        moveHandle(handle, values[handle] - coerceFloat(jump, precision));
+        moveHandle(handle, values[handle] - jump);
         prevent = true;
         break;
       case "Home":
@@ -402,7 +406,7 @@ function sliderInteractStart(event) {
       handleActivated = true;
       handlePressed = true;
       activeHandle = getClosestHandle(clientPos);
-      if (event.type === "touchstart" && !target.matches(".pipVal")) {
+      if (event.type === "touchstart" && !target.matches(".rsPipVal")) {
         handleInteract(clientPos);
       }
     }
@@ -440,7 +444,7 @@ function bodyMouseUp(event) {
     if (handleActivated) {
       if (slider && (target === slider || slider.contains(target))) {
         focus = true;
-        if (!targetIsHandle(target) && !target.matches(".pipVal")) {
+        if (!targetIsHandle(target) && !target.matches(".rsPipVal")) {
           handleInteract(normalisedClient(event));
         }
       }
@@ -523,6 +527,7 @@ function ariaLabelFormatter(value2, index) {
   class:rsFocus={focus}
   class:rsPips={pips}
   class:rsPipLabels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
+  {style}
   on:mousedown={sliderInteractStart}
   on:mouseup={sliderInteractEnd}
   on:touchstart|preventDefault={sliderInteractStart}
@@ -642,20 +647,60 @@ function ariaLabelFormatter(value2, index) {
    * RangeSlider
    */
 
-  :global(.rangeSlider) {
-    --slider: var(--range-slider, #d7dada);
-    --handle-inactive: var(--range-handle-inactive, #99a2a2);
-    --handle: var(--range-handle, #838de7);
-    --handle-focus: var(--range-handle-focus, #4a40d4);
-    --handle-border: var(--range-handle-border, var(--handle));
-    --range-inactive: var(--range-range-inactive, var(--handle-inactive));
-    --range: var(--range-range, var(--handle-focus));
-    --range-limit: var(--range-range-limit, #b9c2c2);
-    --range-hover: var(--range-range-hover, var(--handle-border));
-    --range-press: var(--range-range-press, var(--handle-border));
-    --float-inactive: var(--range-float-inactive, var(--handle-inactive));
-    --float: var(--range-float, var(--handle-focus));
-    --float-text: var(--range-float-text, white);
+  @layer base {
+    :global(.rangeSlider) {
+      --slider-accent: #4a40d4;
+      --slider-accent-100: #838de7;
+      --slider-base: #99a2a2;
+      --slider-base-100: #aebecf;
+      --slider-base-200: #b9c2c2;
+      --slider-bg: #d7dada;
+      --slider-fg: #3f3e4f;
+
+      --slider-dark-accent: #6070fc;
+      --slider-dark-accent-100: #7a7fab;
+      --slider-dark-base: #82809f;
+      --slider-dark-base-100: #595970;
+      --slider-dark-base-200: #454454;
+      --slider-dark-bg: #3f3e4f;
+      --slider-dark-fg: #d7dada;
+
+      --slider: var(--range-slider, var(--slider-bg));
+      --handle-inactive: var(--range-handle-inactive, var(--slider-base));
+      --handle: var(--range-handle, var(--slider-accent-100));
+      --handle-focus: var(--range-handle-focus, var(--slider-accent));
+      --handle-border: var(--range-handle-border, var(--handle));
+      --range-inactive: var(--range-range-inactive, var(--handle-inactive));
+      --range: var(--range-range, var(--handle-focus));
+      --range-limit: var(--range-range-limit, var(--slider-base-200));
+      --range-hover: var(--range-range-hover, var(--handle-border));
+      --range-press: var(--range-range-press, var(--handle-border));
+      --float-inactive: var(--range-float-inactive, var(--handle-inactive));
+      --float: var(--range-float, var(--handle-focus));
+      --float-text: var(--range-float-text, white);
+    }
+
+    :global(.rangeSlider.dark) {
+      --slider-accent: var(--slider-dark-accent);
+      --slider-accent-100: var(--slider-dark-accent-100);
+      --slider-base: var(--slider-dark-base);
+      --slider-base-100: var(--slider-dark-base-100);
+      --slider-base-200: var(--slider-dark-base-200);
+      --slider-bg: var(--slider-dark-bg);
+      --slider-fg: var(--slider-dark-fg);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :global(.rangeSlider) {
+        --slider-accent: var(--slider-dark-accent);
+        --slider-accent-100: var(--slider-dark-accent-100);
+        --slider-base: var(--slider-dark-base);
+        --slider-base-100: var(--slider-dark-base-100);
+        --slider-base-200: var(--slider-dark-base-200);
+        --slider-bg: var(--slider-dark-bg);
+        --slider-fg: var(--slider-dark-fg);
+      }
+    }
   }
 
   :global(.rangeSlider) {
@@ -723,7 +768,7 @@ function ariaLabelFormatter(value2, index) {
   }
 
   :global(.rangeSlider .rangeNub),
-  :global(.rangeSlider .rangeHandle:before) {
+  :global(.rangeSlider .rangeHandle::before) {
     position: absolute;
     left: 0;
     top: 0;
@@ -731,10 +776,12 @@ function ariaLabelFormatter(value2, index) {
     border-radius: 10em;
     height: 100%;
     width: 100%;
-    transition: box-shadow 0.2s ease;
+    transition:
+      background 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
-  :global(.rangeSlider .rangeHandle:before) {
+  :global(.rangeSlider .rangeHandle::before) {
     content: '';
     left: 1px;
     top: 1px;
@@ -744,15 +791,18 @@ function ariaLabelFormatter(value2, index) {
     width: auto;
     box-shadow: 0 0 0 0px var(--handle-border);
     opacity: 0;
+    transition:
+      opacity 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
-  :global(.rangeSlider.rsHoverable:not(.rsDisabled) .rangeHandle:hover:before) {
+  :global(.rangeSlider.rsHoverable:not(.rsDisabled) .rangeHandle:hover::before) {
     box-shadow: 0 0 0 8px var(--handle-border);
     opacity: 0.2;
   }
 
-  :global(.rangeSlider.rsHoverable:not(.rsDisabled) .rangeHandle.rsPress:before),
-  :global(.rangeSlider.rsHoverable:not(.rsDisabled) .rangeHandle.rsPress:hover:before) {
+  :global(.rangeSlider.rsHoverable:not(.rsDisabled) .rangeHandle.rsPress::before),
+  :global(.rangeSlider.rsHoverable:not(.rsDisabled) .rangeHandle.rsPress:hover::before) {
     box-shadow: 0 0 0 12px var(--handle-border);
     opacity: 0.4;
   }
@@ -806,7 +856,8 @@ function ariaLabelFormatter(value2, index) {
     white-space: nowrap;
     transition: all 0.2s ease;
     font-size: 0.9em;
-    padding: 0.2em 0.4em;
+    line-height: 1;
+    padding: 0.33em 0.5em 0.5em;
     border-radius: 0.2em;
     z-index: 3;
   }
@@ -871,6 +922,7 @@ function ariaLabelFormatter(value2, index) {
     height: auto;
     background-color: var(--range-hover);
     opacity: 0;
+    scale: 1 0.5;
     transition:
       opacity 0.2s ease,
       scale 0.2s ease;
@@ -885,6 +937,7 @@ function ariaLabelFormatter(value2, index) {
 
   :global(.rangeSlider.rsHoverable:not(.rsDisabled).rsDrag .rangeBar:hover::before) {
     opacity: 0.2;
+    scale: 1 1;
   }
 
   :global(.rangeSlider.rsHoverable:not(.rsDisabled).rsDrag .rangeBar.rsPress::before) {
@@ -897,49 +950,39 @@ function ariaLabelFormatter(value2, index) {
   }
 
   :global(.rangeSlider) {
-    background-color: #d7dada;
     background-color: var(--slider);
   }
 
   :global(.rangeSlider .rangeBar) {
-    background-color: #99a2a2;
     background-color: var(--range-inactive);
   }
 
   :global(.rangeSlider.rsFocus .rangeBar) {
-    background-color: #838de7;
     background-color: var(--range);
   }
 
   :global(.rangeSlider .rangeLimit) {
-    background-color: #99a2a280;
     background-color: var(--range-limit);
   }
 
   :global(.rangeSlider .rangeNub) {
-    background-color: #99a2a2;
     background-color: var(--handle-inactive);
   }
 
   :global(.rangeSlider.rsFocus .rangeNub) {
-    background-color: #838de7;
     background-color: var(--handle);
   }
 
   :global(.rangeSlider .rangeHandle.rsActive .rangeNub) {
-    background-color: #4a40d4;
     background-color: var(--handle-focus);
   }
 
   :global(.rangeSlider .rangeFloat) {
-    color: white;
     color: var(--float-text);
-    background-color: #99a2a2;
     background-color: var(--float-inactive);
   }
 
   :global(.rangeSlider.rsFocus .rangeFloat) {
-    background-color: #4a40d4;
     background-color: var(--float);
   }
 
@@ -948,7 +991,6 @@ function ariaLabelFormatter(value2, index) {
   }
 
   :global(.rangeSlider.rsDisabled .rangeNub) {
-    background-color: #d7dada;
-    background-color: var(--slider);
+    background-color: var(--handle-inactive);
   }
 </style>

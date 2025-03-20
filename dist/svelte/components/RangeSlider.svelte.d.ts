@@ -36,6 +36,7 @@ declare const __propDef: {
         ariaLabels?: string[] | undefined;
         id?: string | undefined;
         class?: string | undefined;
+        style?: string | undefined;
         springValues?: SpringOpts | undefined;
         spring?: boolean | undefined;
     };

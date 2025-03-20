@@ -11,11 +11,11 @@ test.describe('Interactions', () => {
     await slider.isVisible();
     await handle.isVisible();
     await handle.focus();
-    await expect(slider).toHaveClass(/\bfocus\b/);
-    await expect(handle).toHaveClass(/\bactive\b/);
+    await expect(slider).toHaveClass(/\brsFocus\b/);
+    await expect(handle).toHaveClass(/\brsActive\b/);
   });
 
-  test('should handle mouse interactions correctly', async ({ page }) => {
+  test('should handle mouse clicks on range', async ({ page }) => {
     await page.goto('/test/range-slider/values/single-value');
     await page.waitForLoadState('networkidle');
     const slider = page.locator('.rangeSlider').nth(0);
@@ -34,7 +34,7 @@ test.describe('Interactions', () => {
     await expect(handle).toHaveCSS('left', '100px');
   });
 
-  test('should handle drag operations', async ({ page }) => {
+  test('should handle drag handle operations', async ({ page }) => {
     await page.goto('/test/range-slider/values/binding/single');
     await page.waitForLoadState('networkidle');
     const slider = page.locator('.rangeSlider').nth(0);

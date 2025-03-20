@@ -3,14 +3,14 @@ import { dragHandleTo } from './helpers/tools.js';
 
 test.describe('Range Tests', () => {
   test.describe('range=false', () => {
-    test('should not have .range class', async ({ page }) => {
+    test('should not have .rsRange class', async ({ page }) => {
       await page.goto('/test/range-slider/range/false');
       await page.waitForLoadState('networkidle');
       const slider = page.locator('#single-handle-false');
-      await expect(slider).not.toHaveClass(/\brange\b/);
+      await expect(slider).not.toHaveClass(/\brsRange\b/);
     });
 
-    test('should show no range with single handle', async ({ page }) => {
+    test('should not show range, and single handle', async ({ page }) => {
       await page.goto('/test/range-slider/range/false');
       await page.waitForLoadState('networkidle');
       const slider = page.locator('#single-handle-false');
@@ -18,11 +18,12 @@ test.describe('Range Tests', () => {
       const handles = slider.locator('.rangeHandle');
 
       await expect(range).not.toBeAttached();
+      await expect(slider).not.toHaveClass(/\brsRange\b/);
       await expect(handles).toHaveCount(1);
       await expect(handles.nth(0)).toHaveCSS('left', '600px');
     });
 
-    test('should show no range with two handles', async ({ page }) => {
+    test('should not show range, and two handles', async ({ page }) => {
       await page.goto('/test/range-slider/range/false');
       await page.waitForLoadState('networkidle');
       const slider = page.locator('#double-handle-false');
@@ -30,12 +31,13 @@ test.describe('Range Tests', () => {
       const handles = slider.locator('.rangeHandle');
 
       await expect(range).not.toBeAttached();
+      await expect(slider).not.toHaveClass(/\brsRange\b/);
       await expect(handles).toHaveCount(2);
       await expect(handles.nth(0)).toHaveCSS('left', '350px');
       await expect(handles.nth(1)).toHaveCSS('left', '850px');
     });
 
-    test('should show no range with three handles (sliced to two)', async ({ page }) => {
+    test('should not show range, and three handles are sliced to two', async ({ page }) => {
       await page.goto('/test/range-slider/range/false');
       await page.waitForLoadState('networkidle');
       const slider = page.locator('#triple-handle-false');
@@ -43,6 +45,7 @@ test.describe('Range Tests', () => {
       const handles = slider.locator('.rangeHandle');
 
       await expect(range).not.toBeAttached();
+      await expect(slider).not.toHaveClass(/\brsRange\b/);
       // When false, all handles are rendered
       await expect(handles).toHaveCount(3);
       await expect(handles.nth(0)).toHaveCSS('left', '200px');
@@ -52,43 +55,48 @@ test.describe('Range Tests', () => {
   });
 
   test.describe('range=true', () => {
-    test('should not have .range class', async ({ page }) => {
-      await page.goto('/test/range-slider/range/true');
-      await page.waitForLoadState('networkidle');
-      const slider = page.locator('#single-handle-true');
-      await expect(slider).not.toHaveClass(/\brange\b/);
-    });
+    test.describe('with a single handle', () => {
+      test('should not have .rsRange class', async ({ page }) => {
+        await page.goto('/test/range-slider/range');
+        await page.waitForLoadState('networkidle');
+        const slider = page.locator('#single-handle-true');
+        await expect(slider).not.toHaveClass(/\brsRange\b/);
+      });
 
-    test('no range with single handle (values=[40])', async ({ page }) => {
-      await page.goto('/test/range-slider/range/true');
-      await page.waitForLoadState('networkidle');
-      const slider = page.locator('#single-handle-true');
-      const range = slider.locator('.rangeBar');
-      const handles = slider.locator('.rangeHandle');
+      test('no range with values=[40]', async ({ page }) => {
+        await page.goto('/test/range-slider/range');
+        await page.waitForLoadState('networkidle');
+        const slider = page.locator('#single-handle-true');
+        const range = slider.locator('.rangeBar');
+        const handles = slider.locator('.rangeHandle');
 
-      await expect(range).not.toBeAttached();
-      await expect(handles).toHaveCount(1);
-      await expect(handles.nth(0)).toHaveCSS('left', '400px');
-    });
+        await expect(slider).not.toHaveClass(/\brsRange\b/);
+        await expect(range).not.toBeAttached();
+        await expect(handles).toHaveCount(1);
+        await expect(handles.nth(0)).toHaveCSS('left', '400px');
+      });
 
-    test('no range with single handle (value=40)', async ({ page }) => {
-      await page.goto('/test/range-slider/range/true');
-      await page.waitForLoadState('networkidle');
-      const slider = page.locator('#single-handle-true-value');
-      const range = slider.locator('.rangeBar');
-      const handles = slider.locator('.rangeHandle');
+      test('no range with value=40', async ({ page }) => {
+        await page.goto('/test/range-slider/range');
+        await page.waitForLoadState('networkidle');
+        const slider = page.locator('#single-handle-true-value');
+        const range = slider.locator('.rangeBar');
+        const handles = slider.locator('.rangeHandle');
 
-      await expect(range).not.toBeAttached();
-      await expect(handles).toHaveCount(1);
-      await expect(handles.nth(0)).toHaveCSS('left', '400px');
+        await expect(slider).not.toHaveClass(/\brsRange\b/);
+        await expect(range).not.toBeAttached();
+        await expect(handles).toHaveCount(1);
+        await expect(handles.nth(0)).toHaveCSS('left', '400px');
+      });
     });
 
     test('range between handles (values=[25, 75])', async ({ page }) => {
-      await page.goto('/test/range-slider/range/true');
+      await page.goto('/test/range-slider/range');
       await page.waitForLoadState('networkidle');
       const slider = page.locator('#double-handle-true');
       const range = slider.locator('.rangeBar');
 
+      await expect(slider).toHaveClass(/\brsRange\b/);
       await expect(range).toBeAttached();
       await expect(range).toHaveCSS('left', '250px');
       await expect(range).toHaveCSS('right', '250px');
@@ -100,7 +108,7 @@ test.describe('Range Tests', () => {
     });
 
     test('range between handles (values=[25, 75]) with negative values', async ({ page }) => {
-      await page.goto('/test/range-slider/range/true');
+      await page.goto('/test/range-slider/range');
       await page.waitForLoadState('networkidle');
       const slider = page.locator('#double-handle-true-negative');
       const range = slider.locator('.rangeBar');
@@ -116,7 +124,7 @@ test.describe('Range Tests', () => {
     });
 
     test('range between first two handles (values=[15, 45]) slice off last handle', async ({ page }) => {
-      await page.goto('/test/range-slider/range/true');
+      await page.goto('/test/range-slider/range');
       await page.waitForLoadState('networkidle');
       const slider = page.locator('#triple-handle-true');
       const range = slider.locator('.rangeBar');
@@ -135,7 +143,7 @@ test.describe('Range Tests', () => {
     test('range between first two handles negative values (values=[-75, 45]) slice off last handle', async ({
       page
     }) => {
-      await page.goto('/test/range-slider/range/true');
+      await page.goto('/test/range-slider/range');
       await page.waitForLoadState('networkidle');
       const slider = page.locator('#triple-handle-true-negative');
       const range = slider.locator('.rangeBar');
@@ -153,12 +161,12 @@ test.describe('Range Tests', () => {
   });
 
   test.describe('range="min"', () => {
-    test('should have .range & .min class', async ({ page }) => {
+    test('should have .rsRange & .rsMin class', async ({ page }) => {
       await page.goto('/test/range-slider/range/min');
       await page.waitForLoadState('networkidle');
       const slider = page.locator('#single-handle-min');
-      await expect(slider).toHaveClass(/\brange\b/);
-      await expect(slider).toHaveClass(/\bmin\b/);
+      await expect(slider).toHaveClass(/\brsRange\b/);
+      await expect(slider).toHaveClass(/\brsMin\b/);
     });
 
     test.describe('given min is default (0), and value is 30', () => {
@@ -226,12 +234,12 @@ test.describe('Range Tests', () => {
   });
 
   test.describe('range="max"', () => {
-    test('should have .range & .max class', async ({ page }) => {
+    test('should have .rsRange & .rsMax class', async ({ page }) => {
       await page.goto('/test/range-slider/range/max');
       await page.waitForLoadState('networkidle');
       const slider = page.locator('#single-handle-max');
-      await expect(slider).toHaveClass(/\brange\b/);
-      await expect(slider).toHaveClass(/\bmax\b/);
+      await expect(slider).toHaveClass(/\brsRange\b/);
+      await expect(slider).toHaveClass(/\brsMax\b/);
     });
 
     test.describe('given max is default (100), and value is 70', () => {

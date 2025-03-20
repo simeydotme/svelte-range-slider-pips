@@ -205,24 +205,24 @@ test.describe('Float Tests', () => {
 
       // Focus first handle
       await handles.nth(0).click();
-      await expect(slider).toHaveClass(/focus/);
-      await expect(handles.nth(0)).toHaveClass(/active/);
+      await expect(slider).toHaveClass(/\brsFocus\b/);
+      await expect(handles.nth(0)).toHaveClass(/\brsActive\b/);
       await expect(floats.nth(0)).toHaveCSS('opacity', '1');
       await expect(floats.nth(1)).toHaveCSS('opacity', '0');
       await expect(rangeFloat).toHaveCSS('opacity', '1');
 
       // Focus second handle
       await handles.nth(1).click();
-      await expect(slider).toHaveClass(/focus/);
-      await expect(handles.nth(0)).not.toHaveClass(/active/);
-      await expect(handles.nth(1)).toHaveClass(/active/);
+      await expect(slider).toHaveClass(/\brsFocus\b/);
+      await expect(handles.nth(0)).not.toHaveClass(/\brsActive\b/);
+      await expect(handles.nth(1)).toHaveClass(/\brsActive\b/);
       await expect(floats.nth(0)).toHaveCSS('opacity', '0');
       await expect(floats.nth(1)).toHaveCSS('opacity', '1');
       await expect(rangeFloat).toHaveCSS('opacity', '1');
 
       // Focus range bar
       await rangeBar.click();
-      await expect(slider).toHaveClass(/focus/);
+      await expect(slider).toHaveClass(/\brsFocus\b/);
       await expect(floats.nth(0)).toHaveCSS('opacity', '0');
       await expect(floats.nth(1)).toHaveCSS('opacity', '0');
       await expect(rangeFloat).toHaveCSS('opacity', '1');

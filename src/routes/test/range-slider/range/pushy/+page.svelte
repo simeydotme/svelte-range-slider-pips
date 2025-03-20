@@ -16,6 +16,8 @@
   <div class="toggle-container slider-list">
     <h5>Range slider with toggleable pushy behavior ({pushyToggle ? 'true' : 'false'})</h5>
     <RangeSlider id="pushy-toggle" range values={pushyValues} pushy={pushyToggle} />
-    <button on:click={() => (pushyToggle = !pushyToggle)}>Toggle Pushy</button>
+    <button class:btn-primary={pushyToggle} on:click={() => (pushyToggle = !pushyToggle)}
+      >Toggle Pushy ({pushyToggle ? 'true' : 'false'})</button
+    >
   </div>
 </div>

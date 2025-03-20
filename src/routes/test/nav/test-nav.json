@@ -49,7 +49,7 @@
   },
   {
     "name": "range",
-    "path": "",
+    "path": "/test/range-slider/range",
     "children": [
       {
         "name": "draggy",
@@ -58,6 +58,10 @@
       {
         "name": "false",
         "path": "/test/range-slider/range/false"
+      },
+      {
+        "name": "gaps",
+        "path": "/test/range-slider/range/gaps"
       },
       {
         "name": "max",
@@ -70,10 +74,6 @@
       {
         "name": "pushy",
         "path": "/test/range-slider/range/pushy"
-      },
-      {
-        "name": "true",
-        "path": "/test/range-slider/range/true"
       }
     ]
   },

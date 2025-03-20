@@ -127,28 +127,27 @@
   >
 </header>
 
-<div class="content" style="--range-handle-focus: {color}; --range-handle: {lightColor}">
-  <h4>Vertical Tests</h4>
+<div class="content">
+  <h2>Vertical Tests</h2>
 
-  <section style="display: flex; justify-content: space-evenly;">
+  <section class="flex justify-between">
     <RangeSlider vertical pips all="label" {reversed} {hoverable} {disabled} />
+    <RangeSlider bind:values={vrange} vertical pips all="label" float {reversed} {hoverable} {disabled} />
     <div>
-      <RangeSlider bind:values={vrange} vertical pips all="label" float {reversed} {hoverable} {disabled} />
       <RangeSlider bind:values={vrange} vertical range pips all="label" float {reversed} {hoverable} {disabled} />
-
       {vrange}
     </div>
     <RangeSlider vertical range="min" values={[10]} pips all float {reversed} {hoverable} {disabled} />
     <RangeSlider vertical range="max" values={[30]} pips float {reversed} {hoverable} {disabled} />
   </section>
 
-  <h4>Spring & Colors Test</h4>
+  <h2>Spring & Colors Test</h2>
 
   <table>
     <tr>
-      <th width="50">stiffness</th>
-      <th width="50">damping</th>
-      <th>result</th>
+      <th class="p-1 w-16">stiffness</th>
+      <th class="p-1 w-16">damping</th>
+      <th class="text-center">result</th>
     </tr>
     <tr>
       <td><code>0.75</code></td>
@@ -157,7 +156,7 @@
         ><RangeSlider
           id="test-id3"
           springValues={{ stiffness: 0.75, damping: 1 }}
-          bind:values
+          values={[20, 40, 60, 80]}
           {reversed}
           {hoverable}
           {disabled}
@@ -171,7 +170,7 @@
         ><RangeSlider
           id="test-id2"
           springValues={{ stiffness: 0.1, damping: 0.857 }}
-          bind:values
+          values={[20, 40, 60, 80]}
           {reversed}
           {hoverable}
           {disabled}
@@ -185,7 +184,7 @@
         ><RangeSlider
           id="test-id"
           springValues={{ stiffness: 0.05, damping: 0.05 }}
-          bind:values
+          values={[20, 40, 60, 80]}
           {reversed}
           {hoverable}
           {disabled}
@@ -194,16 +193,16 @@
     </tr>
   </table>
 
-  <h4>Default with float</h4>
+  <h2>Default with float</h2>
   <RangeSlider float {reversed} {hoverable} {disabled} />
   <RangeSlider float {reversed} {hoverable} {disabled} bind:slider={boundSlider} />
 
-  <h4>Pips & Floats</h4>
+  <h2>Pips & Floats</h2>
   <RangeSlider float pips all="label" {reversed} {hoverable} {disabled} />
   <RangeSlider float pips first="label" last="label" {reversed} {hoverable} {disabled} />
-  <h4>trim/align</h4>
+  <h2>trim/align</h2>
   <RangeSlider values={[-10, 12, 103]} float pips step={5} all="label" {reversed} {hoverable} {disabled} />
-  <h4>events</h4>
+  <h2>events</h2>
   <RangeSlider
     float
     pips
@@ -224,8 +223,8 @@
     {disabled}
   />
 
-  <h4>range</h4>
-  <h5>Handles block each other</h5>
+  <h2>range</h2>
+  <h3>Handles block each other</h3>
   <RangeSlider
     range
     min={-50}
@@ -274,7 +273,7 @@
     {disabled}
   />
   {pushy3}
-  <h5>Handles push each other</h5>
+  <h3>Handles push each other</h3>
   <RangeSlider
     range
     min={-50}
@@ -329,7 +328,7 @@
     {disabled}
   />
   {pushy6}
-  <h5>Range is Draggy</h5>
+  <h3>Range is Draggy</h3>
   <RangeSlider
     range
     draggy
@@ -402,12 +401,12 @@
   />
   {draggy6}
 
-  <h4>min range</h4>
+  <h2>min range</h2>
   <RangeSlider range="min" values={[65]} pips all="label" float {reversed} {hoverable} {disabled} />
-  <h4>max range</h4>
+  <h2>max range</h2>
   <RangeSlider range="max" values={[35]} pips all="label" float {reversed} {hoverable} {disabled} />
 
-  <h4>limits</h4>
+  <h2>limits</h2>
   <table>
     <tr>
       <th width="50">range</th>
@@ -520,7 +519,7 @@
     </tr>
   </table>
 
-  <h4>step & pipstep</h4>
+  <h2>step & pipstep</h2>
   <RangeSlider float pips step={10} pipstep={1} {reversed} {hoverable} {disabled} />
   <RangeSlider float pips step={10} pipstep={2} {reversed} {hoverable} {disabled} />
   <RangeSlider float pips step={10} pipstep={0.25} {reversed} {hoverable} {disabled} />
@@ -558,7 +557,7 @@
     {disabled}
   />
 
-  <h4>Prefix</h4>
+  <h2>Prefix</h2>
   <RangeSlider
     prefix="$"
     range
@@ -571,7 +570,7 @@
     {hoverable}
     {disabled}
   />
-  <h4>Prefix & Suffix, color</h4>
+  <h2>Prefix & Suffix, color</h2>
   <RangeSlider
     id="clr-test"
     prefix="~"
@@ -589,81 +588,83 @@
     {hoverable}
     {disabled}
   />
-  <h4>Formatters</h4>
-  <RangeSlider
-    handleFormatter={(v, i) => `${v}% O²`}
-    formatter={(v, i) => `${v}% O²`}
-    step={1}
-    float
-    pips
-    first="label"
-    last="label"
-    values={[25, 50, 75]}
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
-  <RangeSlider
-    handleFormatter={(v, i) => `v: ${v}, i: ${i}`}
-    formatter={(v, i) => `v: ${v}, i: ${i}`}
-    step={10}
-    float
-    pips
-    all="label"
-    values={[25, 50, 75]}
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
+  <div class="contents" style="--range-handle-focus: {color}; --range-handle: {lightColor}">
+    <h2>Formatters</h2>
+    <RangeSlider
+      handleFormatter={(v, i) => `${v}% O²`}
+      formatter={(v, i) => `${v}% O²`}
+      step={1}
+      float
+      pips
+      first="label"
+      last="label"
+      values={[25, 50, 75]}
+      {reversed}
+      {hoverable}
+      {disabled}
+    />
+    <RangeSlider
+      handleFormatter={(v, i) => `v: ${v}, i: ${i}`}
+      formatter={(v, i) => `v: ${v}, i: ${i}`}
+      step={10}
+      float
+      pips
+      all="label"
+      values={[25, 50, 75]}
+      {reversed}
+      {hoverable}
+      {disabled}
+    />
 
-  <RangeSlider
-    bind:values={day}
-    min={0}
-    max={6}
-    formatter={dayFormat}
-    float
-    pips
-    first="label"
-    last="label"
-    rest="label"
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
-  <RangeSlider
-    bind:values={day}
-    min={0}
-    max={6}
-    formatter={dayFormatCn}
-    float
-    pips
-    first="label"
-    last="label"
-    rest="label"
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
+    <RangeSlider
+      bind:values={day}
+      min={0}
+      max={6}
+      formatter={dayFormat}
+      float
+      pips
+      first="label"
+      last="label"
+      rest="label"
+      {reversed}
+      {hoverable}
+      {disabled}
+    />
+    <RangeSlider
+      bind:values={day}
+      min={0}
+      max={6}
+      formatter={dayFormatCn}
+      float
+      pips
+      first="label"
+      last="label"
+      rest="label"
+      {reversed}
+      {hoverable}
+      {disabled}
+    />
 
-  {dayFormatCn(day[0])} | {dayFormat(day[0])}
+    {dayFormatCn(day[0])} | {dayFormat(day[0])}
 
-  <RangeSlider
-    bind:values={hue}
-    max={360}
-    range="min"
-    float
-    formatter={(v) => color}
-    {reversed}
-    {hoverable}
-    {disabled}
-  />
+    <RangeSlider
+      bind:values={hue}
+      max={360}
+      range="min"
+      float
+      formatter={(v) => color}
+      {reversed}
+      {hoverable}
+      {disabled}
+    />
 
-  <RangeSlider bind:values={perc1} min={0} max={50} pips all="label" float {reversed} {hoverable} {disabled} />
-  <RangeSlider bind:values={perc2} min={0} max={perc2max} pips all="label" float {reversed} {hoverable} {disabled} />
-  <hr />
-  {perc1} / {perc2}
+    <RangeSlider bind:values={perc1} min={0} max={50} pips all="label" float {reversed} {hoverable} {disabled} />
+    <RangeSlider bind:values={perc2} min={0} max={perc2max} pips all="label" float {reversed} {hoverable} {disabled} />
+    <hr />
+    {perc1} / {perc2}
+  </div>
 
-  <h4>BIG, ramped value</h4>
+  <h2>BIG, ramped value</h2>
   <RangeSlider
     bind:values={big}
     min={0}
@@ -723,13 +724,13 @@
   >
   - {zero}
 
-  <h4>push & pop values</h4>
+  <h2>push & pop values</h2>
   <RangeSlider bind:values float pips all="label" {reversed} {hoverable} {disabled} ariaLabels="x" />
   <button on:click={pushValues}>push</button>
   <button on:click={popValues}>pop</button>
   ({values})
 
-  <h4>Binding to inputs</h4>
+  <h2>Binding to inputs</h2>
   <RangeSlider
     bind:values
     on:start={(e) => {
@@ -750,7 +751,7 @@
   {/each}
   <hr />
 
-  <h4>Decimal / Float Values</h4>
+  <h2>Decimal / Float Values</h2>
   <RangeSlider
     bind:values={decimals}
     float
@@ -782,11 +783,11 @@
   />
   {decimals2}
 
-  <h4>Irregular start/end numbers</h4>
+  <h2>Irregular start/end numbers</h2>
   <RangeSlider values={[30, 130]} float pips all="label" hoverable range min={20} max={130} pipstep={3} step={5} />
   <RangeSlider values={[30, 130]} float pips all="label" hoverable range min={30} max={130} pipstep={1} step={1} />
 
-  <h4>Custom HTML labels</h4>
+  <h2>Custom HTML labels</h2>
   <RangeSlider
     values={[30, 130]}
     float
@@ -818,7 +819,7 @@
     }}
   />
 
-  <h4>Aria Labels</h4>
+  <h2>Aria Labels</h2>
   <p>Inspect the Dom to see the labels</p>
   <RangeSlider ariaLabels="ab" values={[5, 20]} {reversed} {hoverable} {disabled} />
   <RangeSlider ariaLabels={6} {reversed} {hoverable} {disabled} />
@@ -827,20 +828,20 @@
   <RangeSlider ariaLabels={['a', 'b']} values={[5, 20, 40]} {reversed} {hoverable} {disabled} />
   <RangeSlider ariaLabels={['', 'b']} values={[5, 20]} range {reversed} {hoverable} {disabled} />
 
-  <h4>Store updates</h4>
+  <h2>Store updates</h2>
   <p>Count how many times the store is modified for each change, should be once per single change event.</p>
   <RangeSlider bind:values={$boundStore} pips all="label" max={20} {reversed} {hoverable} {disabled} />
   <RangeSlider bind:values={$boundStore} pips all="label" max={20} {reversed} {hoverable} {disabled} />
   <RangeSlider bind:values={$boundStore} pips all="label" max={20} {reversed} {hoverable} {disabled} />
   Number of store updates: {store_updates}
 
-  <h4>Object Values</h4>
+  <h2>Object Values</h2>
   <RangeSlider bind:value={objectValueBind.value} pips all="label" {reversed} {hoverable} {disabled} />
   {objectValueBind.value}
   <RangeSlider bind:values={objectValuesBind.values} pips all="label" {reversed} {hoverable} {disabled} />
   {objectValuesBind.values}
 
-  <h4>Value(s) Errors</h4>
+  <h2>Value(s) Errors</h2>
   <RangeSlider bind:value={errorValueBind} pips all="label" {reversed} {hoverable} {disabled} />
   <RangeSlider bind:values={errorValuesBind} pips all="label" {reversed} {hoverable} {disabled} />
   {errorValueBind} / {errorValuesBind}
@@ -855,7 +856,7 @@
   <RangeSlider bind:value={errorValueBooleanBind} pips all="label" {reversed} {hoverable} {disabled} />
   value error; {errorValueObjectBind} / {errorValueStringBind} / {errorValueBooleanBind}
 
-  <h4>Value as Input</h4>
+  <h2>Value as Input</h2>
   <RangeSlider bind:value={valueBind} pips all="label" {reversed} {hoverable} {disabled} />
   {valueBind}
   <div style="display: flex; gap: 1em;">

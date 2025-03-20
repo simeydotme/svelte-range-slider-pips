@@ -88,27 +88,22 @@
   <div class="toggle-container">
     <RangeSlider id="dynamic-float" range {values} {float} {rangeFloat} {vertical} {reversed} />
     <div class="controls">
-      <button on:click={() => (float = !float)}>Toggle float ({float ? 'on' : 'off'})</button>
-      <button on:click={() => (rangeFloat = !rangeFloat)}>Toggle rangeFloat ({rangeFloat ? 'on' : 'off'})</button>
-      <button on:click={() => (vertical = !vertical)}>Toggle vertical ({vertical ? 'on' : 'off'})</button>
-      <button on:click={() => (reversed = !reversed)}>Toggle reversed ({reversed ? 'on' : 'off'})</button>
+      <button class:btn-primary={float} on:click={() => (float = !float)}>Toggle float ({float ? 'on' : 'off'})</button>
+      <button class:btn-primary={rangeFloat} on:click={() => (rangeFloat = !rangeFloat)}
+        >Toggle rangeFloat ({rangeFloat ? 'on' : 'off'})</button
+      >
+      <button class:btn-primary={vertical} on:click={() => (vertical = !vertical)}
+        >Toggle vertical ({vertical ? 'on' : 'off'})</button
+      >
+      <button class:btn-primary={reversed} on:click={() => (reversed = !reversed)}
+        >Toggle reversed ({reversed ? 'on' : 'off'})</button
+      >
     </div>
   </div>
 </div>
 
 <style>
-  .toggle-container {
-    margin: 2em 0;
-  }
-  .controls {
-    margin-top: 1em;
-    display: flex;
-    gap: 1em;
-  }
   :global(.vertical) {
     height: 200px;
-  }
-  :global(.rangeSlider) {
-    margin: 2em;
   }
 </style>

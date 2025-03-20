@@ -1,12 +1,12 @@
 <script>
-  import './barebones.css';
+  import './app.css';
 </script>
 
 <svelte:head>
   <link rel="preconnect" href="https://fonts.bunny.net" />
   <link href="https://fonts.bunny.net/css?family=palanquin:100,200,300,400,500,600,700" rel="stylesheet" />
   <style>
-    @layer barebones, ui, sliders;
+    @layer base, utilities, ui, sliders;
 
     @layer ui {
       main {
@@ -43,19 +43,6 @@
       h5,
       h6 {
         font-family: 'Palanquin', sans-serif;
-        margin-block: 3rem;
-        font-weight: 600;
-        & em {
-          font-weight: 300;
-        }
-      }
-      h4 {
-        font-weight: 800;
-      }
-      h6 {
-        font-size: 2rem;
-        margin-block: 0;
-        font-weight: 500;
       }
       table {
         width: 100%;
@@ -99,6 +86,6 @@
   </style>
 </svelte:head>
 
-<main>
+<main class="prose">
   <slot />
 </main>

@@ -79,13 +79,13 @@
   }
 </script>
 
-<div class="test-navigation">
+<div class="test-navigation p-4 bg-(--nav-bg,#f5f5f5) rounded-4xl">
   <div class="search">
-    <input type="text" placeholder="Search tests..." bind:value={searchTerm} />
+    <input type="search" placeholder="Search tests..." bind:value={searchTerm} class="input rounded-full w-full mb-4" />
   </div>
 
   <nav>
-    <ul>
+    <ul class="pl-0 pb-4">
       {#each processedNav as item}
         <NavItem {item} {searchTerm} />
       {/each}
@@ -94,31 +94,12 @@
 </div>
 
 <style>
-  .test-navigation {
-    padding: 1rem;
-    background: var(--navbg, #f5f5f5);
-    border-radius: 0.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .search {
-    margin-bottom: 1rem;
-  }
-
-  input {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 0.25rem;
-  }
-
   nav {
     font-size: 14px;
   }
 
   nav :global(ul) {
     list-style: none;
-    padding-left: 1rem;
     margin: 0;
   }
 

@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { dragHandleTo } from './helpers/tools.js';
 
 test.describe('Min/Max Tests', () => {
   test('custom min/max values', async ({ page }) => {
@@ -54,5 +55,66 @@ test.describe('Min/Max Tests', () => {
     await expect(handle).toHaveAttribute('aria-valuemax', '100');
     await expect(handle).toHaveAttribute('aria-valuenow', '50');
     await expect(handle, 'to be positioned at 50%').toHaveCSS('left', '500px');
+  });
+
+  test('dragging handle below min value', async ({ page }) => {
+    await page.goto('/test/range-slider/minmax/custom-min-max');
+    await page.waitForLoadState('networkidle');
+    const handle = page.locator('.rangeHandle');
+    const slider = page.locator('.rangeSlider');
+
+    // Get the slider dimensions
+    const sliderBox = await slider.boundingBox();
+    if (!sliderBox) throw new Error('Could not get slider dimensions');
+
+    // Drag handle to the far left (beyond min)
+    await dragHandleTo(page, slider, handle, -100);
+
+    // Verify the handle is clamped to min value
+    await expect(handle).toHaveAttribute('aria-valuenow', '-50');
+    await expect(handle, 'to be positioned at 0%').toHaveCSS('left', '0px');
+  });
+
+  test('dragging handle above max value', async ({ page }) => {
+    await page.goto('/test/range-slider/minmax/custom-min-max');
+    await page.waitForLoadState('networkidle');
+    const handle = page.locator('.rangeHandle');
+    const slider = page.locator('.rangeSlider');
+
+    // Get the slider dimensions
+    const sliderBox = await slider.boundingBox();
+    if (!sliderBox) throw new Error('Could not get slider dimensions');
+
+    // Drag handle to the far right (beyond max)
+    await dragHandleTo(page, slider, handle, 2000);
+
+    // Verify the handle is clamped to max value
+    await expect(handle).toHaveAttribute('aria-valuenow', '50');
+    await expect(handle, 'to be positioned at 100%').toHaveCSS('left', '1000px');
+  });
+
+  test('dragging handle with negative min/max', async ({ page }) => {
+    await page.goto('/test/range-slider/minmax/negative-min-max');
+    await page.waitForLoadState('networkidle');
+    const handle = page.locator('.rangeHandle');
+    const slider = page.locator('.rangeSlider');
+
+    // Get the slider dimensions
+    const sliderBox = await slider.boundingBox();
+    if (!sliderBox) throw new Error('Could not get slider dimensions');
+
+    // Drag handle to the far left (beyond min)
+    await dragHandleTo(page, slider, handle, -100);
+
+    // Verify the handle is clamped to min value
+    await expect(handle).toHaveAttribute('aria-valuenow', '-100');
+    await expect(handle, 'to be positioned at 0%').toHaveCSS('left', '0px');
+
+    // Drag handle to the far right (beyond max)
+    await dragHandleTo(page, slider, handle, 2000);
+
+    // Verify the handle is clamped to max value
+    await expect(handle).toHaveAttribute('aria-valuenow', '-50');
+    await expect(handle, 'to be positioned at 100%').toHaveCSS('left', '1000px');
   });
 });

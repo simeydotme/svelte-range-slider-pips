@@ -1,0 +1,19 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+@plugin "daisyui" {
+  themes:
+    emerald --default,
+    dracula --prefersdark;
+}
+
+@source "./isolate/+page.svelte";
+
+@layer base {
+  button:not(.open-nav) {
+    @apply btn;
+  }
+  input[type='number'],
+  input[type='text'] {
+    @apply input;
+  }
+}

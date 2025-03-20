@@ -19,6 +19,8 @@
   <div class="toggle-container slider-list">
     <h5>Range slider with toggleable draggy behavior ({draggyToggle ? 'true' : 'false'})</h5>
     <RangeSlider id="draggy-toggle" range values={draggyValues} draggy={draggyToggle} />
-    <button on:click={() => (draggyToggle = !draggyToggle)}>Toggle draggy</button>
+    <button class:btn-primary={draggyToggle} on:click={() => (draggyToggle = !draggyToggle)}
+      >Toggle draggy ({draggyToggle ? 'true' : 'false'})</button
+    >
   </div>
 </div>

@@ -893,9 +893,8 @@
    * RangeSlider
    */
 
-   @layer base {
+  @layer base {
     :global(.rangeSlider) {
-
       --slider-accent: #4a40d4;
       --slider-accent-100: #838de7;
       --slider-base: #99a2a2;
@@ -1023,7 +1022,9 @@
     border-radius: 10em;
     height: 100%;
     width: 100%;
-    transition: background 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      background 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
   :global(.rangeSlider .rangeHandle::before) {
@@ -1036,7 +1037,9 @@
     width: auto;
     box-shadow: 0 0 0 0px var(--handle-border);
     opacity: 0;
-    transition: opacity 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      opacity 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
   :global(.rangeSlider.rsHoverable:not(.rsDisabled) .rangeHandle:hover::before) {

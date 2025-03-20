@@ -15,7 +15,7 @@
 >
   <Navigation />
 
-  <button on:click={() => ($isNavVisible = !$isNavVisible)}>
+  <button class="open-nav" on:click={() => ($isNavVisible = !$isNavVisible)}>
     {@html feather.icons.menu.toSvg()}
   </button>
 </div>
@@ -23,10 +23,33 @@
 <slot />
 
 <style>
+  :global(main) {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 100px 0;
+  }
+
+  :global(main .rangeSlider) {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
   :global(.slider-list) {
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 2rem;
+  }
+
+  :global(.toggle-container) {
+    margin: 2em 0;
+  }
+
+  :global(.controls) {
+    display: flex;
+    gap: 1rem;
+    margin-block: 2rem;
+    align-items: center;
   }
 
   .panel {
@@ -52,7 +75,7 @@
     translate: 0 0;
   }
 
-  button {
+  .open-nav {
     position: absolute;
     top: 20px;
     right: 0;
@@ -70,17 +93,5 @@
     background: inherit;
     border: none;
     backdrop-filter: inherit;
-  }
-
-  :global(main) {
-    width: 1000px;
-    margin: 0 auto;
-    padding: 100px 0;
-  }
-
-  :global(main .rangeSlider) {
-    width: 100%;
-    padding: 0;
-    margin: 0;
   }
 </style>

@@ -10,6 +10,7 @@ test.describe('Range Tests', () => {
       const handles = slider.locator('.rangeHandle');
       const range = slider.locator('.rangeBar');
 
+      await expect(slider).not.toHaveClass(/\brsDrag\b/);
       await expect(range).toBeAttached();
       await expect(range).toHaveCSS('left', '400px');
       await expect(range).toHaveCSS('right', '400px');
@@ -37,6 +38,7 @@ test.describe('Range Tests', () => {
       const handles = slider.locator('.rangeHandle');
       const range = slider.locator('.rangeBar');
 
+      await expect(slider).toHaveClass(/\brsDrag\b/);
       await expect(range).toBeAttached();
       await expect(range).toHaveCSS('left', '400px');
       await expect(range).toHaveCSS('right', '400px');

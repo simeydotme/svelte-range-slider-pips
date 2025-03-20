@@ -36,12 +36,16 @@ test.describe('Basic Tests', () => {
       await expect(handle).toHaveAttribute('tabindex', '0');
 
       // check classes
-      await expect(slider).toHaveClass(/\bhoverable\b/);
-      await expect(slider).not.toHaveClass(/\bdisabled\b/);
-      await expect(slider).not.toHaveClass(/\bvertical\b/);
-      await expect(slider).not.toHaveClass(/\breversed\b/);
-      await expect(slider).not.toHaveClass(/\bfocus\b/);
-      await expect(slider).not.toHaveClass(/\bpips\b/);
+      await expect(slider).toHaveClass(/\brsHoverable\b/);
+      await expect(slider).not.toHaveClass(/\brsMin\b/);
+      await expect(slider).not.toHaveClass(/\brsMax\b/);
+      await expect(slider).not.toHaveClass(/\brsRange\b/);
+      await expect(slider).not.toHaveClass(/\brsDrag\b/);
+      await expect(slider).not.toHaveClass(/\brsDisabled\b/);
+      await expect(slider).not.toHaveClass(/\brsVertical\b/);
+      await expect(slider).not.toHaveClass(/\brsReversed\b/);
+      await expect(slider).not.toHaveClass(/\brsFocus\b/);
+      await expect(slider).not.toHaveClass(/\brsPips\b/);
     });
   });
 });

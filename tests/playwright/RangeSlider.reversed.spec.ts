@@ -11,7 +11,7 @@ test.describe('Reversed Slider Tests', () => {
       // Check component exists
       await expect(slider).toBeAttached();
       await expect(handle).toBeAttached();
-      await expect(slider).toHaveClass(/reversed/);
+      await expect(slider).toHaveClass(/\brsReversed\b/);
 
       // Value of 75 on reversed slider should position from right
       await expect(handle).toHaveAttribute('aria-valuenow', '75');
