@@ -430,13 +430,13 @@
           }
         }
       } else if (index === 1) {
-        if (value < values[0] + rangeGapMin) {
+        if (value < coerceFloat(values[0] + rangeGapMin, precision)) {
           if (pushy && value > (limits?.[0] ?? min) + rangeGapMin) {
             values[0] = value - rangeGapMin;
           } else {
             value = values[0] + rangeGapMin;
           }
-        } else if (value > values[0] + rangeGapMax) {
+        } else if (value > coerceFloat(values[0] + rangeGapMax, precision)) {
           if (pushy) {
             values[0] = value - rangeGapMax;
           } else {
@@ -448,7 +448,7 @@
 
     // if the value has changed, update it
     if (values[index] !== value) {
-      constrainAndAlignValue((values[index] = value), min, max, step, precision, limits);
+      values[index] = constrainAndAlignValue(value, min, max, step, precision, limits);
     }
     if (fireEvent) {
       fireChangeEvent(values);
@@ -552,13 +552,13 @@
         case 'PageUp':
         case 'ArrowRight':
         case 'ArrowUp':
-          moveHandle(handle, values[handle] + coerceFloat(jump, precision));
+          moveHandle(handle, values[handle] + jump);
           prevent = true;
           break;
         case 'PageDown':
         case 'ArrowLeft':
         case 'ArrowDown':
-          moveHandle(handle, values[handle] - coerceFloat(jump, precision));
+          moveHandle(handle, values[handle] - jump);
           prevent = true;
           break;
         case 'Home':
