@@ -40,7 +40,7 @@ test.describe('Basic Pips Tests', () => {
     // Click a pip value and verify the handle moves
     await page.locator('.rsPip[data-val="75"]').click();
     await expect(handle).toHaveAttribute('aria-valuenow', '75');
-    await expect(handle, 'to be positioned at 75%').toHaveCSS('left', '750px');
+    await expect(handle, 'to be positioned at 75%').toHaveCSS('translate', '750px');
 
     // Verify the selected pip updates
     await expect(selectedPip).toHaveAttribute('data-val', '75');

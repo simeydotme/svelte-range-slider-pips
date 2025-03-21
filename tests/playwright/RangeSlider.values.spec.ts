@@ -8,7 +8,7 @@ test.describe('Values Tests', () => {
     const handle = page.getByRole('slider');
 
     await expect(handle).toHaveAttribute('aria-valuenow', '75');
-    await expect(handle, 'to be positioned at 75%').toHaveCSS('left', '750px');
+    await expect(handle, 'to be positioned at 75%').toHaveCSS('translate', '750px');
   });
 
   test('multiple handles set to: [25, 125]', async ({ page }) => {
@@ -21,12 +21,12 @@ test.describe('Values Tests', () => {
 
     // First handle: 25
     await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '25');
-    await expect(handles.nth(0), 'handle should be positioned at 25%').toHaveCSS('left', '250px');
+    await expect(handles.nth(0), 'handle should be positioned at 25%').toHaveCSS('translate', '250px');
 
     // Second handle: 125
     // should be constrained to max=100
     await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '100');
-    await expect(handles.nth(1), 'handle should be positioned at 100%').toHaveCSS('left', '1000px');
+    await expect(handles.nth(1), 'handle should be positioned at 100%').toHaveCSS('translate', '1000px');
   });
 
   test('seven handles set to: [10, 20, 30, 40, 60, 80, 90]', async ({ page }) => {
@@ -43,7 +43,7 @@ test.describe('Values Tests', () => {
     for (let i = 0; i < expectedValues.length; i++) {
       await expect(handles.nth(i)).toHaveAttribute('aria-valuenow', expectedValues[i].toString());
       await expect(handles.nth(i), `handle ${i} should be positioned at ${expectedValues[i]}%`).toHaveCSS(
-        'left',
+        'translate',
         `${expectedValues[i] * 10}px`
       );
     }
@@ -59,11 +59,11 @@ test.describe('Values Tests', () => {
 
     // First handle should be constrained to min=0
     await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '0');
-    await expect(handles.nth(0), 'handle should be positioned at 0%').toHaveCSS('left', '0px');
+    await expect(handles.nth(0), 'handle should be positioned at 0%').toHaveCSS('translate', '0px');
 
     // Second handle should be constrained to max=100
     await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '100');
-    await expect(handles.nth(1), 'handle should be positioned at 100%').toHaveCSS('left', '1000px');
+    await expect(handles.nth(1), 'handle should be positioned at 100%').toHaveCSS('translate', '1000px');
   });
 
   test('when both value/values props provided, value[0] = value, value[1] = values[1]', async ({ page }) => {
@@ -76,11 +76,11 @@ test.describe('Values Tests', () => {
 
     // Handle 1 should be set to value (75)
     await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '75');
-    await expect(handles.nth(0), 'handle should be positioned at 75%').toHaveCSS('left', '750px');
+    await expect(handles.nth(0), 'handle should be positioned at 75%').toHaveCSS('translate', '750px');
 
     // Handle 2 should be set to values[1] (90)
     await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '90');
-    await expect(handles.nth(1), 'handle should be positioned at 90%').toHaveCSS('left', '900px');
+    await expect(handles.nth(1), 'handle should be positioned at 90%').toHaveCSS('translate', '900px');
   });
 
   test('two-way binding works between slider and number input', async ({ page }) => {
@@ -96,7 +96,7 @@ test.describe('Values Tests', () => {
     await input.blur();
     await expect(input).toHaveValue(v);
     await expect(handle).toHaveAttribute('aria-valuenow', v);
-    await expect(handle, 'handle should be positioned at 55%').toHaveCSS('left', '550px');
+    await expect(handle, 'handle should be positioned at 55%').toHaveCSS('translate', '550px');
 
     // Test slider -> input binding
     await handle.focus();
@@ -116,7 +116,7 @@ test.describe('Values Tests', () => {
     await input.blur();
     await expect(input).toHaveValue('0');
     await expect(handle).toHaveAttribute('aria-valuenow', '0');
-    await expect(handle, 'handle should be positioned at 0%').toHaveCSS('left', '0px');
+    await expect(handle, 'handle should be positioned at 0%').toHaveCSS('translate', '0px');
 
     // Test value above maximum
     await input.focus();
@@ -124,7 +124,7 @@ test.describe('Values Tests', () => {
     await input.blur();
     await expect(input).toHaveValue('100');
     await expect(handle).toHaveAttribute('aria-valuenow', '100');
-    await expect(handle, 'handle should be positioned at 100%').toHaveCSS('left', '1000px');
+    await expect(handle, 'handle should be positioned at 100%').toHaveCSS('translate', '1000px');
   });
 
   test('two-way binding works between slider and number inputs (multiple values)', async ({ page }) => {
@@ -141,7 +141,7 @@ test.describe('Values Tests', () => {
     await input1.blur();
     await expect(input1).toHaveValue('30');
     await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '30');
-    await expect(handles.nth(0), 'first handle should be positioned at 30%').toHaveCSS('left', '300px');
+    await expect(handles.nth(0), 'first handle should be positioned at 30%').toHaveCSS('translate', '300px');
 
     // Update second handle
     await input2.focus();
@@ -149,7 +149,7 @@ test.describe('Values Tests', () => {
     await input2.blur();
     await expect(input2).toHaveValue('80');
     await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '80');
-    await expect(handles.nth(1), 'second handle should be positioned at 80%').toHaveCSS('left', '800px');
+    await expect(handles.nth(1), 'second handle should be positioned at 80%').toHaveCSS('translate', '800px');
 
     // Test slider -> inputs binding
     // Move first handle

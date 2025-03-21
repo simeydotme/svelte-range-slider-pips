@@ -63,10 +63,10 @@ test.describe('Range Gap Tests', () => {
       if (!sliderBounds) throw new Error('Could not get slider bounds');
 
       await page.mouse.click(sliderBounds.x + sliderBounds.width * 0.4, sliderBounds.y + sliderBounds.height / 2);
-      await expect(handle1).toHaveCSS('left', '400px');
+      await expect(handle1).toHaveCSS('translate', '400px');
 
       await page.mouse.click(sliderBounds.x + sliderBounds.width * 0.55, sliderBounds.y + sliderBounds.height / 2);
-      await expect(handle2).toHaveCSS('left', '600px');
+      await expect(handle2).toHaveCSS('translate', '600px');
     });
 
     test('should enforce maximum gap between handles', async ({ page }) => {

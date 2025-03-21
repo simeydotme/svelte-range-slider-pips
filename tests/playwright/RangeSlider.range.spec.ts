@@ -20,7 +20,7 @@ test.describe('Range Tests', () => {
       await expect(range).not.toBeAttached();
       await expect(slider).not.toHaveClass(/\brsRange\b/);
       await expect(handles).toHaveCount(1);
-      await expect(handles.nth(0)).toHaveCSS('left', '600px');
+      await expect(handles.nth(0)).toHaveCSS('translate', '600px');
     });
 
     test('should not show range, and two handles', async ({ page }) => {
@@ -33,8 +33,8 @@ test.describe('Range Tests', () => {
       await expect(range).not.toBeAttached();
       await expect(slider).not.toHaveClass(/\brsRange\b/);
       await expect(handles).toHaveCount(2);
-      await expect(handles.nth(0)).toHaveCSS('left', '350px');
-      await expect(handles.nth(1)).toHaveCSS('left', '850px');
+      await expect(handles.nth(0)).toHaveCSS('translate', '350px');
+      await expect(handles.nth(1)).toHaveCSS('translate', '850px');
     });
 
     test('should not show range, and three handles are sliced to two', async ({ page }) => {
@@ -48,9 +48,9 @@ test.describe('Range Tests', () => {
       await expect(slider).not.toHaveClass(/\brsRange\b/);
       // When false, all handles are rendered
       await expect(handles).toHaveCount(3);
-      await expect(handles.nth(0)).toHaveCSS('left', '200px');
-      await expect(handles.nth(1)).toHaveCSS('left', '500px');
-      await expect(handles.nth(2)).toHaveCSS('left', '800px');
+      await expect(handles.nth(0)).toHaveCSS('translate', '200px');
+      await expect(handles.nth(1)).toHaveCSS('translate', '500px');
+      await expect(handles.nth(2)).toHaveCSS('translate', '800px');
     });
   });
 
@@ -73,7 +73,7 @@ test.describe('Range Tests', () => {
         await expect(slider).not.toHaveClass(/\brsRange\b/);
         await expect(range).not.toBeAttached();
         await expect(handles).toHaveCount(1);
-        await expect(handles.nth(0)).toHaveCSS('left', '400px');
+        await expect(handles.nth(0)).toHaveCSS('translate', '400px');
       });
 
       test('no range with value=40', async ({ page }) => {
@@ -86,7 +86,7 @@ test.describe('Range Tests', () => {
         await expect(slider).not.toHaveClass(/\brsRange\b/);
         await expect(range).not.toBeAttached();
         await expect(handles).toHaveCount(1);
-        await expect(handles.nth(0)).toHaveCSS('left', '400px');
+        await expect(handles.nth(0)).toHaveCSS('translate', '400px');
       });
     });
 
@@ -98,13 +98,13 @@ test.describe('Range Tests', () => {
 
       await expect(slider).toHaveClass(/\brsRange\b/);
       await expect(range).toBeAttached();
-      await expect(range).toHaveCSS('left', '250px');
-      await expect(range).toHaveCSS('right', '250px');
+      await expect(range).toHaveCSS('translate', '250px');
+      await expect(range).toHaveCSS('width', '500px');
 
       // Verify handle positions
       const handles = slider.locator('.rangeHandle');
-      await expect(handles.nth(0)).toHaveCSS('left', '250px');
-      await expect(handles.nth(1)).toHaveCSS('left', '750px');
+      await expect(handles.nth(0)).toHaveCSS('translate', '250px');
+      await expect(handles.nth(1)).toHaveCSS('translate', '750px');
     });
 
     test('range between handles (values=[25, 75]) with negative values', async ({ page }) => {
@@ -115,12 +115,12 @@ test.describe('Range Tests', () => {
       const handles = slider.locator('.rangeHandle');
 
       await expect(range).toBeAttached();
-      await expect(range).toHaveCSS('left', '125px');
-      await expect(range).toHaveCSS('right', '375px');
+      await expect(range).toHaveCSS('translate', '125px');
+      await expect(range).toHaveCSS('width', '500px');
 
       // Verify handle positions
-      await expect(handles.nth(0)).toHaveCSS('left', '125px');
-      await expect(handles.nth(1)).toHaveCSS('left', '625px');
+      await expect(handles.nth(0)).toHaveCSS('translate', '125px');
+      await expect(handles.nth(1)).toHaveCSS('translate', '625px');
     });
 
     test('range between first two handles (values=[15, 45]) slice off last handle', async ({ page }) => {
@@ -131,13 +131,13 @@ test.describe('Range Tests', () => {
       const handles = slider.locator('.rangeHandle');
 
       await expect(range).toBeAttached();
-      await expect(range).toHaveCSS('left', '150px');
-      await expect(range).toHaveCSS('right', '550px');
+      await expect(range).toHaveCSS('translate', '150px');
+      await expect(range).toHaveCSS('width', '300px');
 
       // Verify only two handles are rendered
       await expect(handles).toHaveCount(2);
-      await expect(handles.nth(0)).toHaveCSS('left', '150px');
-      await expect(handles.nth(1)).toHaveCSS('left', '450px');
+      await expect(handles.nth(0)).toHaveCSS('translate', '150px');
+      await expect(handles.nth(1)).toHaveCSS('translate', '450px');
     });
 
     test('range between first two handles negative values (values=[-75, 45]) slice off last handle', async ({
@@ -150,13 +150,13 @@ test.describe('Range Tests', () => {
       const handles = slider.locator('.rangeHandle');
 
       await expect(range).toBeAttached();
-      await expect(range).toHaveCSS('left', '0px');
-      await expect(range).toHaveCSS('right', '300px');
+      await expect(range).toHaveCSS('translate', '0px');
+      await expect(range).toHaveCSS('width', '700px');
 
       // Verify only two handles are rendered
       await expect(handles).toHaveCount(2);
-      await expect(handles.nth(0)).toHaveCSS('left', '0px');
-      await expect(handles.nth(1)).toHaveCSS('left', '700px');
+      await expect(handles.nth(0)).toHaveCSS('translate', '0px');
+      await expect(handles.nth(1)).toHaveCSS('translate', '700px');
     });
   });
 
@@ -178,12 +178,12 @@ test.describe('Range Tests', () => {
         const range = slider.locator('.rangeBar');
 
         await expect(range).toBeAttached();
-        await expect(range).toHaveCSS('left', '0px');
+        await expect(range).toHaveCSS('translate', '0px');
         await expect(range).toHaveCSS('right', '700px');
 
         // Verify only one handle is rendered
         await expect(handles).toHaveCount(1);
-        await expect(handles.nth(0)).toHaveCSS('left', '300px');
+        await expect(handles.nth(0)).toHaveCSS('translate', '300px');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuemin', '0');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuemax', '100');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '30');
@@ -199,12 +199,12 @@ test.describe('Range Tests', () => {
         const range = slider.locator('.rangeBar');
 
         await expect(range).toBeAttached();
-        await expect(range).toHaveCSS('left', '0px');
+        await expect(range).toHaveCSS('translate', '0px');
         await expect(range).toHaveCSS('right', '800px');
 
         // Verify only one handle is rendered
         await expect(handles).toHaveCount(1);
-        await expect(handles.nth(0)).toHaveCSS('left', '200px');
+        await expect(handles.nth(0)).toHaveCSS('translate', '200px');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuemin', '0');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuemax', '100');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '20');
@@ -220,12 +220,12 @@ test.describe('Range Tests', () => {
         const range = slider.locator('.rangeBar');
 
         await expect(range).toBeAttached();
-        await expect(range).toHaveCSS('left', '0px');
+        await expect(range).toHaveCSS('translate', '0px');
         await expect(range).toHaveCSS('right', '750px');
 
         // Verify only one handle is rendered
         await expect(handles).toHaveCount(1);
-        await expect(handles.nth(0)).toHaveCSS('left', '250px');
+        await expect(handles.nth(0)).toHaveCSS('translate', '250px');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuemin', '20');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuemax', '100');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '40');
@@ -251,12 +251,12 @@ test.describe('Range Tests', () => {
         const range = slider.locator('.rangeBar');
 
         await expect(range).toBeAttached();
-        await expect(range).toHaveCSS('left', '700px');
-        await expect(range).toHaveCSS('right', '0px');
+        await expect(range).toHaveCSS('translate', '700px');
+        await expect(range).toHaveCSS('width', '300px');
 
         // Verify only one handle is rendered
         await expect(handles).toHaveCount(1);
-        await expect(handles.nth(0)).toHaveCSS('left', '700px');
+        await expect(handles.nth(0)).toHaveCSS('translate', '700px');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuemin', '0');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuemax', '100');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '70');
@@ -272,12 +272,12 @@ test.describe('Range Tests', () => {
         const range = slider.locator('.rangeBar');
 
         await expect(range).toBeAttached();
-        await expect(range).toHaveCSS('left', '200px');
-        await expect(range).toHaveCSS('right', '0px');
+        await expect(range).toHaveCSS('translate', '200px');
+        await expect(range).toHaveCSS('width', '800px');
 
         // Verify only one handle is rendered
         await expect(handles).toHaveCount(1);
-        await expect(handles.nth(0)).toHaveCSS('left', '200px');
+        await expect(handles.nth(0)).toHaveCSS('translate', '200px');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuemin', '0');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuemax', '100');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '20');
@@ -293,12 +293,12 @@ test.describe('Range Tests', () => {
         const range = slider.locator('.rangeBar');
 
         await expect(range).toBeAttached();
-        await expect(range).toHaveCSS('left', '250px');
-        await expect(range).toHaveCSS('right', '0px');
+        await expect(range).toHaveCSS('translate', '250px');
+        await expect(range).toHaveCSS('width', '750px');
 
         // Verify only one handle is rendered
         await expect(handles).toHaveCount(1);
-        await expect(handles.nth(0)).toHaveCSS('left', '250px');
+        await expect(handles.nth(0)).toHaveCSS('translate', '250px');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuemin', '0');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuemax', '80');
         await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '20');

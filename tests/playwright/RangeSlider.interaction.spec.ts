@@ -31,7 +31,7 @@ test.describe('Interactions', () => {
     );
 
     await expect(handle).toHaveAttribute('aria-valuenow', '10');
-    await expect(handle).toHaveCSS('left', '100px');
+    await expect(handle, 'to be positioned at 10%').toHaveCSS('translate', '100px');
   });
 
   test('should handle drag handle operations', async ({ page }) => {
@@ -49,7 +49,28 @@ test.describe('Interactions', () => {
     await dragHandleTo(page, slider, handle, 0.75);
 
     // Verify the handle and input value
-    await expect(handle).toHaveCSS('left', '750px');
+    await expect(handle).toHaveAttribute('aria-valuenow', '75');
+    await expect(handle, 'to be positioned at 75%').toHaveCSS('translate', '750px');
     await expect(input).toHaveValue('75');
+  });
+
+  test('should update handle position when dragging', async ({ page }) => {
+    await page.goto('/test/range-slider/values/binding/single');
+    await page.waitForLoadState('networkidle');
+    const slider = page.locator('.rangeSlider').nth(0);
+    const handle = slider.getByRole('slider');
+    const input = page.getByLabel('Current value:');
+
+    await slider.isVisible();
+    const sliderBounds = await slider.boundingBox();
+    if (!sliderBounds) throw new Error('Could not get slider bounds');
+
+    // Drag the handle to 50%
+    await dragHandleTo(page, slider, handle, 0.5);
+
+    // Verify the handle and input value
+    await expect(handle).toHaveAttribute('aria-valuenow', '50');
+    await expect(handle, 'to be positioned at 50%').toHaveCSS('translate', '500px');
+    await expect(input).toHaveValue('50');
   });
 });

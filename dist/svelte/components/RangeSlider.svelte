@@ -304,7 +304,7 @@ function rangeStartPercent(values2) {
 }
 function rangeEndPercent(values2) {
   if (range === "max") {
-    return 0;
+    return 100;
   } else if (range === "min") {
     return values2[0];
   } else {

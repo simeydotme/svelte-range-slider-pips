@@ -15,7 +15,7 @@ test.describe('Reversed Slider Tests', () => {
 
       // Value of 75 on reversed slider should position from right
       await expect(handle).toHaveAttribute('aria-valuenow', '75');
-      await expect(handle).toHaveCSS('right', '750px');
+      await expect(handle).toHaveCSS('translate', '250px');
     });
 
     test('should handle custom min/max values', async ({ page }) => {
@@ -30,7 +30,7 @@ test.describe('Reversed Slider Tests', () => {
       await expect(handle).toHaveAttribute('aria-valuenow', '125');
 
       // 125 on -100 to 150 range is 90% from right
-      await expect(handle).toHaveCSS('right', '900px');
+      await expect(handle).toHaveCSS('translate', '100px');
     });
 
     test('should handle mouse interactions correctly', async ({ page }) => {
@@ -50,7 +50,7 @@ test.describe('Reversed Slider Tests', () => {
       );
       // Verify the handle and input value
       await expect(handle).toHaveAttribute('aria-valuenow', '90');
-      await expect(handle).toHaveCSS('right', '900px');
+      await expect(handle).toHaveCSS('translate', '100px');
     });
   });
 
@@ -65,14 +65,14 @@ test.describe('Reversed Slider Tests', () => {
 
       // First handle should be at 25% from right
       await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '0');
-      await expect(handles.nth(0)).toHaveCSS('right', '0px');
+      await expect(handles.nth(0)).toHaveCSS('translate', '1000px');
       // Second handle should be at 75% from right
       await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '100');
-      await expect(handles.nth(1)).toHaveCSS('right', '1000px');
+      await expect(handles.nth(1)).toHaveCSS('translate', '0px');
       // Range bar should span between handles
       const rangeBar = page.locator('.rangeBar');
-      await expect(rangeBar).toHaveCSS('right', '0px');
-      await expect(rangeBar).toHaveCSS('left', '0px');
+      await expect(rangeBar).toHaveCSS('translate', '0px');
+      await expect(rangeBar).toHaveCSS('width', '1000px');
     });
 
     test('click at 10% should move the second handle to 90', async ({ page }) => {
@@ -85,10 +85,10 @@ test.describe('Reversed Slider Tests', () => {
 
       // First handle should be at 25% from right
       await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '0');
-      await expect(handles.nth(0)).toHaveCSS('right', '0px');
+      await expect(handles.nth(0)).toHaveCSS('translate', '1000px');
       // Second handle should be at 75% from right
       await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '100');
-      await expect(handles.nth(1)).toHaveCSS('right', '1000px');
+      await expect(handles.nth(1)).toHaveCSS('translate', '0px');
 
       // First handle should not be able to go beyond second handle
       const sliderBounds = await slider.boundingBox();
@@ -103,8 +103,12 @@ test.describe('Reversed Slider Tests', () => {
       // Handles should maintain their order
       await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '10');
       await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '90');
-      await expect(handles.nth(0)).toHaveCSS('right', '100px');
-      await expect(handles.nth(1)).toHaveCSS('right', '900px');
+      await expect(handles.nth(0)).toHaveCSS('translate', '900px');
+      await expect(handles.nth(1)).toHaveCSS('translate', '100px');
+      // Range bar should span between handles
+      const rangeBar = page.locator('.rangeBar');
+      await expect(rangeBar).toHaveCSS('translate', '100px');
+      await expect(rangeBar).toHaveCSS('width', '800px');
     });
   });
 

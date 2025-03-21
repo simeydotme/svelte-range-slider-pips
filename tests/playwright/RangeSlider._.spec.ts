@@ -27,7 +27,7 @@ test.describe('Basic Tests', () => {
       await expect(handle, 'to have max of 100').toHaveAttribute('aria-valuemax', '100');
       await expect(handle, 'to have value of 50').toHaveAttribute('aria-valuenow', '50');
       await expect(handle, 'to have value of 50').toHaveAttribute('aria-valuetext', '50');
-      await expect(handle, 'to be positioned at 50%').toHaveCSS('left', '500px');
+      await expect(handle, 'to be positioned at 50%').toHaveCSS('translate', '500px');
 
       // Check orientation and disabled state
       await expect(handle).toHaveAttribute('data-handle', '0');

@@ -10,7 +10,7 @@ test.describe('Min/Max Tests', () => {
     await expect(handle).toHaveAttribute('aria-valuemin', '-50');
     await expect(handle).toHaveAttribute('aria-valuemax', '50');
     await expect(handle).toHaveAttribute('aria-valuenow', '0');
-    await expect(handle, 'to be positioned at 50%').toHaveCSS('left', '500px');
+    await expect(handle, 'to be positioned at 50%').toHaveCSS('translate', '500px');
   });
 
   test('negative min/max', async ({ page }) => {
@@ -21,7 +21,7 @@ test.describe('Min/Max Tests', () => {
     await expect(handle).toHaveAttribute('aria-valuemin', '-100');
     await expect(handle).toHaveAttribute('aria-valuemax', '-50');
     await expect(handle).toHaveAttribute('aria-valuenow', '-75');
-    await expect(handle, 'to be positioned at 50%').toHaveCSS('left', '500px');
+    await expect(handle, 'to be positioned at 50%').toHaveCSS('translate', '500px');
   });
 
   test('decimal min/max', async ({ page }) => {
@@ -32,7 +32,7 @@ test.describe('Min/Max Tests', () => {
     await expect(handle).toHaveAttribute('aria-valuemin', '0.5');
     await expect(handle).toHaveAttribute('aria-valuemax', '2.5');
     await expect(handle).toHaveAttribute('aria-valuenow', '1.5');
-    await expect(handle, 'to be positioned at 50%').toHaveCSS('left', '500px');
+    await expect(handle, 'to be positioned at 50%').toHaveCSS('translate', '500px');
   });
 
   test('explicit value within min/max', async ({ page }) => {
@@ -43,7 +43,7 @@ test.describe('Min/Max Tests', () => {
     await expect(handle).toHaveAttribute('aria-valuemin', '0');
     await expect(handle).toHaveAttribute('aria-valuemax', '200');
     await expect(handle).toHaveAttribute('aria-valuenow', '90');
-    await expect(handle, 'to be positioned at 45%').toHaveCSS('left', '450px');
+    await expect(handle, 'to be positioned at 45%').toHaveCSS('translate', '450px');
   });
 
   test('invalid min/max resets to default', async ({ page }) => {
@@ -54,7 +54,7 @@ test.describe('Min/Max Tests', () => {
     await expect(handle).toHaveAttribute('aria-valuemin', '0');
     await expect(handle).toHaveAttribute('aria-valuemax', '100');
     await expect(handle).toHaveAttribute('aria-valuenow', '50');
-    await expect(handle, 'to be positioned at 50%').toHaveCSS('left', '500px');
+    await expect(handle, 'to be positioned at 50%').toHaveCSS('translate', '500px');
   });
 
   test('dragging handle below min value', async ({ page }) => {
@@ -72,7 +72,7 @@ test.describe('Min/Max Tests', () => {
 
     // Verify the handle is clamped to min value
     await expect(handle).toHaveAttribute('aria-valuenow', '-50');
-    await expect(handle, 'to be positioned at 0%').toHaveCSS('left', '0px');
+    await expect(handle, 'to be positioned at 0%').toHaveCSS('translate', '0px');
   });
 
   test('dragging handle above max value', async ({ page }) => {
@@ -90,7 +90,7 @@ test.describe('Min/Max Tests', () => {
 
     // Verify the handle is clamped to max value
     await expect(handle).toHaveAttribute('aria-valuenow', '50');
-    await expect(handle, 'to be positioned at 100%').toHaveCSS('left', '1000px');
+    await expect(handle, 'to be positioned at 100%').toHaveCSS('translate', '1000px');
   });
 
   test('dragging handle with negative min/max', async ({ page }) => {
@@ -115,6 +115,6 @@ test.describe('Min/Max Tests', () => {
 
     // Verify the handle is clamped to max value
     await expect(handle).toHaveAttribute('aria-valuenow', '-50');
-    await expect(handle, 'to be positioned at 100%').toHaveCSS('left', '1000px');
+    await expect(handle, 'to be positioned at 100%').toHaveCSS('translate', '1000px');
   });
 });
