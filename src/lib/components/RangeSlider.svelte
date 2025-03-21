@@ -479,7 +479,7 @@
    **/
   function rangeEndPercent(values: number[]) {
     if (range === 'max') {
-      return 0;
+      return 100;
     } else if (range === 'min') {
       return values[0];
     } else {
