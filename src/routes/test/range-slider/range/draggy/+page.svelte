@@ -8,7 +8,7 @@
 
 <div class="slider-list">
   <h5>Basic range slider with draggy disabled</h5>
-  <RangeSlider id="not-draggy" range {values} draggy={false} />
+  <RangeSlider id="not-draggy" range bind:values draggy={false} />
 
   <h5>Range slider with draggy enabled</h5>
   <RangeSlider id="draggy" range values={draggyValues} draggy={true} />

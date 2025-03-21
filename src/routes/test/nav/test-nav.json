@@ -48,6 +48,16 @@
     ]
   },
   {
+    "name": "pips",
+    "path": "/test/range-slider/pips",
+    "children": [
+      {
+        "name": "labels",
+        "path": "/test/range-slider/pips/labels"
+      }
+    ]
+  },
+  {
     "name": "range",
     "path": "/test/range-slider/range",
     "children": [
