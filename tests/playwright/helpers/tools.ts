@@ -5,9 +5,16 @@ import type { Locator, Page } from '@playwright/test';
  * @param page - The page object
  * @param slider - The slider locator
  * @param handle - The handle locator
- * @param x - The x position (0-1) to drag the handle to
+ * @param pos - The position (0-1) to drag the handle to
+ * @param vertical - Whether to use y-coordinates (true) or x-coordinates (false)
  */
-export const dragHandleTo = async (page: Page, slider: Locator, handle: Locator, x: number) => {
+export const dragHandleTo = async (
+  page: Page,
+  slider: Locator,
+  handle: Locator,
+  pos: number,
+  vertical: boolean = false
+) => {
   await slider.scrollIntoViewIfNeeded();
 
   const sbox = await slider.boundingBox();
@@ -22,7 +29,11 @@ export const dragHandleTo = async (page: Page, slider: Locator, handle: Locator,
   await page.mouse.move(handleCenter.x, handleCenter.y);
   await page.mouse.down();
 
+  // Calculate target position based on orientation
+  const targetX = vertical ? sbox.x + sbox.width / 2 : sbox.x + sbox.width * pos;
+  const targetY = vertical ? sbox.y + sbox.height * pos : sbox.y + sbox.height / 2;
+
   // Ensure we end exactly at target position
-  await page.mouse.move(sbox.x + sbox.width * x, sbox.y + sbox.height / 2, { steps: 10 });
+  await page.mouse.move(targetX, targetY, { steps: 10 });
   await page.mouse.up();
 };

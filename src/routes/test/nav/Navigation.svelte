@@ -79,12 +79,12 @@
   }
 </script>
 
-<div class="test-navigation p-4 bg-(--nav-bg,#f5f5f5) rounded-4xl">
+<div class="test-navigation p-4 bg-(--nav-bg,#f5f5f5) rounded-4xl grid grid-rows-[auto_1fr] max-h-[100vh]">
   <div class="search">
     <input type="search" placeholder="Search tests..." bind:value={searchTerm} class="input rounded-full w-full mb-4" />
   </div>
 
-  <nav>
+  <nav class="h-full overflow-y-auto">
     <ul class="pl-0 pb-4">
       {#each processedNav as item}
         <NavItem {item} {searchTerm} />

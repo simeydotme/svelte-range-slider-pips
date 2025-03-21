@@ -83,7 +83,13 @@
       },
       {
         "name": "pushy",
-        "path": "/test/range-slider/range/pushy"
+        "path": "/test/range-slider/range/pushy",
+        "children": [
+          {
+            "name": "comprehensive",
+            "path": "/test/range-slider/range/pushy/comprehensive"
+          }
+        ]
       }
     ]
   },
