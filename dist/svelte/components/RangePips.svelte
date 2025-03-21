@@ -163,6 +163,7 @@ function labelUp(pipValue, event) {
 
   :global(.rangePips) {
     position: absolute;
+    transform: translate3d(0, 0, 0.001px);
     height: 1em;
     left: 0;
     right: 0;
@@ -185,6 +186,7 @@ function labelUp(pipValue, event) {
     top: 0.25em;
     width: 1px;
     white-space: nowrap;
+    transform: translate3d(0, 0, 0.001px);
   }
 
   :global(.rangePips.rsVertical .rsPip) {

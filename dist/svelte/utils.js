@@ -41,6 +41,16 @@ export const valueAsPercent = function (value, min, max, precision = 2) {
     }
 };
 /**
+ * convert a percentage to a value
+ * @param {number} percent the percentage to convert
+ * @param {number} min the minimum value
+ * @param {number} max the maximum value
+ * @return {number} the value after it's been converted
+ **/
+export const percentAsValue = function (percent, min, max) {
+    return ((max - min) / 100) * percent + min;
+};
+/**
  * align the value with the steps so that it
  * always sits on the closest (above/below) step
  * @param {number} value the value to align
@@ -157,4 +167,35 @@ export const isSelected = (value, values, precision = 2) => {
  */
 export const getValueFromIndex = (index, min, max, pipStep, step, precision = 2) => {
     return coerceFloat(min + index * step * pipStep, precision);
+};
+/**
+ * Calculate pointer position, percentage and value for a slider interaction
+ * @param clientPos The normalized client position (x,y)
+ * @param dims The slider's bounding rectangle dimensions
+ * @param vertical Whether the slider is vertical
+ * @param reversed Whether the slider is reversed
+ * @param min The minimum value of the slider
+ * @param max The maximum value of the slider
+ * @returns Object containing pointer position, percentage and value
+ */
+export const calculatePointerValues = (slider, clientPos, vertical, reversed, min, max) => {
+    // first make sure we have the latest dimensions
+    // of the slider, as it may have changed size
+    const dims = slider.getBoundingClientRect();
+    // calculate the interaction position, percent and value
+    let pointerPos = 0;
+    let pointerPercent = 0;
+    let pointerVal = 0;
+    if (vertical) {
+        pointerPos = clientPos.y - dims.top;
+        pointerPercent = (pointerPos / dims.height) * 100;
+        pointerPercent = reversed ? pointerPercent : 100 - pointerPercent;
+    }
+    else {
+        pointerPos = clientPos.x - dims.left;
+        pointerPercent = (pointerPos / dims.width) * 100;
+        pointerPercent = reversed ? 100 - pointerPercent : pointerPercent;
+    }
+    pointerVal = percentAsValue(pointerPercent, min, max);
+    return { pointerVal, pointerPercent };
 };

@@ -1,7 +1,7 @@
 <svelte:options immutable={false} />
 
 <script>import { spring as springStore } from "svelte/motion";
-import { createEventDispatcher } from "svelte";
+import { createEventDispatcher, onMount } from "svelte";
 import {
   coerceFloat,
   valueAsPercent,
@@ -9,7 +9,9 @@ import {
   constrainAndAlignValue,
   pureText,
   normalisedClient,
-  elementIndex
+  elementIndex,
+  percentAsValue,
+  calculatePointerValues
 } from "../utils.js";
 import RangePips from "./RangePips.svelte";
 export let slider = void 0;
@@ -61,6 +63,9 @@ let keyboardActive = false;
 let activeHandle = -1;
 let startValues = [];
 let previousValues = [];
+let sliderSize = 0;
+let rangeSize = 0;
+let rangeStart = 0;
 let springPositions;
 const updateValues = () => {
   checkValuesIsArray();
@@ -164,6 +169,31 @@ $: {
 }
 $: orientationStart = vertical ? reversed ? "top" : "bottom" : reversed ? "right" : "left";
 $: orientationEnd = vertical ? reversed ? "bottom" : "top" : reversed ? "left" : "right";
+function updateSliderSize(slider2) {
+  return requestAnimationFrame(() => {
+    if (slider2) {
+      const dims = slider2.getBoundingClientRect();
+      sliderSize = vertical ? dims.height : dims.width;
+    }
+  });
+}
+let resizeObserver;
+let rafId;
+onMount(() => {
+  if (slider) {
+    resizeObserver = new ResizeObserver((entries) => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+      rafId = updateSliderSize(entries[0].target);
+    });
+    resizeObserver.observe(slider);
+  }
+  return () => {
+    if (rafId) cancelAnimationFrame(rafId);
+    resizeObserver?.disconnect?.();
+  };
+});
 function targetIsHandle(el) {
   if (!slider) return false;
   const handles = slider.querySelectorAll(".handle");
@@ -182,84 +212,32 @@ function trimRange(values2) {
 }
 function getClosestHandle(clientPos) {
   if (!slider) return 0;
-  const dims = slider.getBoundingClientRect();
-  let handlePos = 0;
-  let handlePercent = 0;
-  let handleVal = 0;
-  if (vertical) {
-    handlePos = clientPos.y - dims.top;
-    handlePercent = handlePos / dims.height * 100;
-    handlePercent = reversed ? handlePercent : 100 - handlePercent;
-  } else {
-    handlePos = clientPos.x - dims.left;
-    handlePercent = handlePos / dims.width * 100;
-    handlePercent = reversed ? 100 - handlePercent : handlePercent;
-  }
-  handleVal = (max - min) / 100 * handlePercent + min;
-  let closest;
+  const { pointerVal: clickedVal } = calculatePointerValues(slider, clientPos, vertical, reversed, min, max);
+  let closest = 0;
   if (range === true && values[0] === values[1]) {
-    if (handleVal > values[1]) {
-      return 1;
+    if (clickedVal > values[1]) {
+      closest = 1;
     } else {
-      return 0;
+      closest = 0;
     }
   } else {
-    closest = values.indexOf([...values].sort((a, b) => Math.abs(handleVal - a) - Math.abs(handleVal - b))[0]);
+    closest = values.indexOf([...values].sort((a, b) => Math.abs(clickedVal - a) - Math.abs(clickedVal - b))[0]);
   }
   return closest;
 }
 function handleInteract(clientPos) {
   if (!slider || !handleActivated) return;
-  const dims = slider.getBoundingClientRect();
-  let handlePos = 0;
-  let handlePercent = 0;
-  let handleVal = 0;
-  if (vertical) {
-    handlePos = clientPos.y - dims.top;
-    handlePercent = handlePos / dims.height * 100;
-    handlePercent = reversed ? handlePercent : 100 - handlePercent;
-  } else {
-    handlePos = clientPos.x - dims.left;
-    handlePercent = handlePos / dims.width * 100;
-    handlePercent = reversed ? 100 - handlePercent : handlePercent;
-  }
-  handleVal = (max - min) / 100 * handlePercent + min;
+  const { pointerVal: handleVal } = calculatePointerValues(slider, clientPos, vertical, reversed, min, max);
   moveHandle(activeHandle, handleVal);
 }
-function getRangedistancesOnInteractionStart(clientPos) {
+function getRangeDistancesOnInteractionStart(clientPos) {
   if (!slider || !draggy || !rangeActivated || range === "min" || range === "max") return;
-  const dims = slider.getBoundingClientRect();
-  let pointerPos = 0;
-  let pointerPercent = 0;
-  let pointerVal = 0;
-  if (vertical) {
-    pointerPos = clientPos.y - dims.top;
-    pointerPercent = pointerPos / dims.height * 100;
-    pointerPercent = reversed ? pointerPercent : 100 - pointerPercent;
-  } else {
-    pointerPos = clientPos.x - dims.left;
-    pointerPercent = pointerPos / dims.width * 100;
-    pointerPercent = reversed ? 100 - pointerPercent : pointerPercent;
-  }
-  pointerVal = (max - min) / 100 * pointerPercent + min;
+  const { pointerVal } = calculatePointerValues(slider, clientPos, vertical, reversed, min, max);
   rangeDistancesFromPointer = [values[0] - pointerVal, values[1] - pointerVal];
 }
 function rangeInteract(clientPos) {
   if (!slider || !draggy || !rangeActivated || range === "min" || range === "max") return;
-  const dims = slider.getBoundingClientRect();
-  let pointerPos = 0;
-  let pointerPercent = 0;
-  let pointerVal = 0;
-  if (vertical) {
-    pointerPos = clientPos.y - dims.top;
-    pointerPercent = pointerPos / dims.height * 100;
-    pointerPercent = reversed ? pointerPercent : 100 - pointerPercent;
-  } else {
-    pointerPos = clientPos.x - dims.left;
-    pointerPercent = pointerPos / dims.width * 100;
-    pointerPercent = reversed ? 100 - pointerPercent : pointerPercent;
-  }
-  pointerVal = (max - min) / 100 * pointerPercent + min;
+  const { pointerVal } = calculatePointerValues(slider, clientPos, vertical, reversed, min, max);
   activeHandle = -1;
   moveHandle(0, pointerVal + rangeDistancesFromPointer[0], false);
   moveHandle(1, pointerVal + rangeDistancesFromPointer[1], true);
@@ -272,7 +250,7 @@ function moveHandle(index, value2, fireEvent = true) {
   if (range === true) {
     if (index === 0) {
       if (value2 > values[1] - rangeGapMin) {
-        if (pushy && value2 < (limits?.[1] ?? max) - rangeGapMin) {
+        if (pushy && value2 <= (limits?.[1] ?? max) - rangeGapMin) {
           values[1] = value2 + rangeGapMin;
         } else {
           value2 = values[1] - rangeGapMin;
@@ -285,13 +263,13 @@ function moveHandle(index, value2, fireEvent = true) {
         }
       }
     } else if (index === 1) {
-      if (value2 < coerceFloat(values[0] + rangeGapMin, precision)) {
-        if (pushy && value2 > (limits?.[0] ?? min) + rangeGapMin) {
+      if (value2 < values[0] + rangeGapMin) {
+        if (pushy && value2 >= (limits?.[0] ?? min) + rangeGapMin) {
           values[0] = value2 - rangeGapMin;
         } else {
           value2 = values[0] + rangeGapMin;
         }
-      } else if (value2 > coerceFloat(values[0] + rangeGapMax, precision)) {
+      } else if (value2 > values[0] + rangeGapMax) {
         if (pushy) {
           values[0] = value2 - rangeGapMax;
         } else {
@@ -317,20 +295,20 @@ function fireChangeEvent(values2) {
     previousValues = [...values2];
   }
 }
-function rangeStart(values2) {
+function rangeStartPercent(values2) {
   if (range === "min") {
     return 0;
   } else {
     return values2[0];
   }
 }
-function rangeEnd(values2) {
+function rangeEndPercent(values2) {
   if (range === "max") {
     return 0;
   } else if (range === "min") {
-    return 100 - values2[0];
+    return values2[0];
   } else {
-    return 100 - values2[1];
+    return values2[1];
   }
 }
 function sliderBlurHandle(event) {
@@ -401,7 +379,7 @@ function sliderInteractStart(event) {
       activeHandle = -1;
       rangeActivated = true;
       rangePressed = true;
-      getRangedistancesOnInteractionStart(clientPos);
+      getRangeDistancesOnInteractionStart(clientPos);
     } else {
       handleActivated = true;
       handlePressed = true;
@@ -527,6 +505,7 @@ function ariaLabelFormatter(value2, index) {
   class:rsFocus={focus}
   class:rsPips={pips}
   class:rsPipLabels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
+  style:--slider-length={sliderSize}
   {style}
   on:mousedown={sliderInteractStart}
   on:mouseup={sliderInteractEnd}
@@ -534,8 +513,8 @@ function ariaLabelFormatter(value2, index) {
   on:touchend|preventDefault={sliderInteractEnd}
 >
   {#each values as value, index}
-    {@const zindex = `z-index: ${activeHandle === index ? 3 : 2};`}
-    {@const handlePos = `${orientationStart}: ${$springPositions[index]}%;`}
+    {@const zindex = `${focus && activeHandle === index ? 3 : ''}`}
+    {@const translate = `calc((${sliderSize}px * ${$springPositions[index] / 100}))`}
     <span
       role="slider"
       class="rangeHandle"
@@ -545,7 +524,8 @@ function ariaLabelFormatter(value2, index) {
       on:blur={sliderBlurHandle}
       on:focus={sliderFocusHandle}
       on:keydown={sliderKeydown}
-      style="{handlePos} {zindex}"
+      style:z-index={zindex}
+      style:--handle-pos={$springPositions[index]}
       aria-label={ariaLabels[index]}
       aria-valuemin={range === true && index === 1 ? values[0] : min}
       aria-valuemax={range === true && index === 0 ? values[1] : max}
@@ -578,8 +558,9 @@ function ariaLabelFormatter(value2, index) {
     <span
       class="rangeBar"
       class:rsPress={rangePressed}
-      style="{orientationStart}: {rangeStart($springPositions)}%; 
-             {orientationEnd}: {rangeEnd($springPositions)}%;"
+      style:--range-start={rangeStartPercent($springPositions)}
+      style:--range-end={rangeEndPercent($springPositions)}
+      style:--range-size={rangeEndPercent($springPositions) - rangeStartPercent($springPositions)}
     >
       {#if rangeFloat}
         <span class="rangeFloat">
@@ -750,21 +731,25 @@ function ariaLabelFormatter(value2, index) {
     top: 0.25em;
     bottom: auto;
     transform: translateY(-50%) translateX(-50%);
+    translate: calc(var(--slider-length) * (var(--handle-pos) / 100) * 1px) 0;
     z-index: 2;
   }
 
   :global(.rangeSlider.rsReversed .rangeHandle) {
-    transform: translateY(-50%) translateX(50%);
+    transform: translateY(-50%) translateX(-50%);
+    translate: calc((var(--slider-length) * 1px) - (var(--slider-length) * (var(--handle-pos) / 100) * 1px)) 0;
   }
 
   :global(.rangeSlider.rsVertical .rangeHandle) {
     left: 0.25em;
     top: auto;
-    transform: translateY(50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+    translate: 0 calc(var(--slider-length) * (1 - var(--handle-pos) / 100) * 1px);
   }
 
   :global(.rangeSlider.rsVertical.rsReversed .rangeHandle) {
     transform: translateY(-50%) translateX(-50%);
+    translate: 0 calc((var(--slider-length) * 1px) - (var(--slider-length) * (1 - var(--handle-pos) / 100) * 1px));
   }
 
   :global(.rangeSlider .rangeNub),
@@ -912,6 +897,23 @@ function ariaLabelFormatter(value2, index) {
   :global(.rangeSlider.rsVertical.rsDrag .rangeBar::before) {
     width: 0.5em;
     height: auto;
+  }
+
+  :global(.rangeSlider .rangeBar) {
+    translate: calc((var(--slider-length) * (var(--range-start) / 100) * 1px)) 0;
+    width: calc(var(--slider-length) * (var(--range-size) / 100 * 1px));
+  }
+  :global(.rangeSlider.rsReversed .rangeBar) {
+    translate: calc((var(--slider-length) * 1px) - (var(--slider-length) * (var(--range-end) / 100) * 1px)) 0;
+  }
+
+  :global(.rangeSlider.rsVertical .rangeBar) {
+    translate: 0 calc((var(--slider-length) * 1px) - (var(--slider-length) * (var(--range-end) / 100) * 1px));
+    height: calc(var(--slider-length) * (var(--range-size) / 100 * 1px));
+  }
+
+  :global(.rangeSlider.rsVertical.rsReversed .rangeBar) {
+    translate: 0 calc((var(--slider-length) * (var(--range-start) / 100) * 1px));
   }
 
   :global(.rangeSlider.rsDrag .rangeBar::before) {

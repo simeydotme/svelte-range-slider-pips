@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import { type SpringOpts, type Spring, spring as springStore } from 'svelte/motion';
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   import {
     coerceFloat,
     valueAsPercent,
@@ -10,7 +10,9 @@
     constrainAndAlignValue,
     pureText,
     normalisedClient,
-    elementIndex
+    elementIndex,
+    percentAsValue,
+    calculatePointerValues
   } from '$lib/utils.js';
   import type { Pip, Formatter, NormalisedClient, RangeFormatter } from '$lib/types.js';
 
@@ -80,6 +82,9 @@
   let activeHandle = -1;
   let startValues: (number | undefined)[] = [];
   let previousValues: (number | undefined)[] = [];
+  let sliderSize = 0;
+  let rangeSize = 0;
+  let rangeStart = 0;
 
   // copy the initial values in to a spring function which
   // will update every time the values array is modified
@@ -241,6 +246,38 @@
       : ('right' as 'left' | 'right' | 'top' | 'bottom');
 
   /**
+   * observe slider element size changes using ResizeObserver
+   * to update dimensions and recalculate handle positions
+   **/
+  function updateSliderSize(slider: HTMLDivElement | undefined) {
+    return requestAnimationFrame(() => {
+      if (slider) {
+        const dims = slider.getBoundingClientRect();
+        sliderSize = vertical ? dims.height : dims.width;
+      }
+    });
+  }
+
+  let resizeObserver: ResizeObserver;
+  let rafId: number;
+
+  onMount(() => {
+    if (slider) {
+      resizeObserver = new ResizeObserver((entries) => {
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+        }
+        rafId = updateSliderSize(entries[0].target as HTMLDivElement);
+      }) as ResizeObserver;
+      resizeObserver.observe(slider);
+    }
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      resizeObserver?.disconnect?.();
+    };
+  });
+
+  /**
    * check if an element is a handle on the slider
    * @param {object} el dom object reference we want to check
    * @returns {boolean}
@@ -278,40 +315,25 @@
    **/
   function getClosestHandle(clientPos: NormalisedClient) {
     if (!slider) return 0;
-    // first make sure we have the latest dimensions
-    // of the slider, as it may have changed size
-    const dims = slider.getBoundingClientRect();
-    // calculate the interaction position, percent and value
-    let handlePos = 0;
-    let handlePercent = 0;
-    let handleVal = 0;
-    if (vertical) {
-      handlePos = clientPos.y - dims.top;
-      handlePercent = (handlePos / dims.height) * 100;
-      handlePercent = reversed ? handlePercent : 100 - handlePercent;
-    } else {
-      handlePos = clientPos.x - dims.left;
-      handlePercent = (handlePos / dims.width) * 100;
-      handlePercent = reversed ? 100 - handlePercent : handlePercent;
-    }
-    handleVal = ((max - min) / 100) * handlePercent + min;
 
-    let closest;
+    // get the location of the interaction on the slider as a value
+    const { pointerVal: clickedVal } = calculatePointerValues(slider, clientPos, vertical, reversed, min, max);
 
-    // if we have a range, and the handles are at the same
-    // position, we want a simple check if the interaction
-    // value is greater than return the second handle
+    let closest = 0;
     if (range === true && values[0] === values[1]) {
-      if (handleVal > values[1]) {
-        return 1;
+      // if we have a range, and the handles are at the same
+      // position, we want a simple check if the interaction
+      // value is greater than return the second handle
+      if (clickedVal > values[1]) {
+        closest = 1;
       } else {
-        return 0;
+        closest = 0;
       }
+    } else {
       // if there are multiple handles, and not a range, then
       // we sort the handles values, and return the first one closest
       // to the interaction value
-    } else {
-      closest = values.indexOf([...values].sort((a, b) => Math.abs(handleVal - a) - Math.abs(handleVal - b))[0]);
+      closest = values.indexOf([...values].sort((a, b) => Math.abs(clickedVal - a) - Math.abs(clickedVal - b))[0]);
     }
     return closest;
   }
@@ -325,43 +347,22 @@
    **/
   function handleInteract(clientPos: NormalisedClient) {
     if (!slider || !handleActivated) return;
-    // first make sure we have the latest dimensions
-    // of the slider, as it may have changed size
-    const dims = slider.getBoundingClientRect();
-    // calculate the interaction position, percent and value
-    let handlePos = 0;
-    let handlePercent = 0;
-    let handleVal = 0;
-    if (vertical) {
-      handlePos = clientPos.y - dims.top;
-      handlePercent = (handlePos / dims.height) * 100;
-      handlePercent = reversed ? handlePercent : 100 - handlePercent;
-    } else {
-      handlePos = clientPos.x - dims.left;
-      handlePercent = (handlePos / dims.width) * 100;
-      handlePercent = reversed ? 100 - handlePercent : handlePercent;
-    }
-    handleVal = ((max - min) / 100) * handlePercent + min;
+    // get the location of the interaction on the slider as a value
+    const { pointerVal: handleVal } = calculatePointerValues(slider, clientPos, vertical, reversed, min, max);
     // move handle to the value
     moveHandle(activeHandle, handleVal);
   }
 
-  function getRangedistancesOnInteractionStart(clientPos: NormalisedClient) {
+  /**
+   * save the distance between the handles and the interaction position
+   * when the user first starts dragging the range
+   * @param {object} clientPos the client {x,y} of the interaction
+   */
+  function getRangeDistancesOnInteractionStart(clientPos: NormalisedClient) {
     if (!slider || !draggy || !rangeActivated || range === 'min' || range === 'max') return;
-    const dims = slider.getBoundingClientRect();
-    let pointerPos = 0;
-    let pointerPercent = 0;
-    let pointerVal = 0;
-    if (vertical) {
-      pointerPos = clientPos.y - dims.top;
-      pointerPercent = (pointerPos / dims.height) * 100;
-      pointerPercent = reversed ? pointerPercent : 100 - pointerPercent;
-    } else {
-      pointerPos = clientPos.x - dims.left;
-      pointerPercent = (pointerPos / dims.width) * 100;
-      pointerPercent = reversed ? 100 - pointerPercent : pointerPercent;
-    }
-    pointerVal = ((max - min) / 100) * pointerPercent + min;
+    // get the location of the interaction on the slider as a value
+    const { pointerVal } = calculatePointerValues(slider, clientPos, vertical, reversed, min, max);
+    // store the distances for later use
     rangeDistancesFromPointer = [values[0] - pointerVal, values[1] - pointerVal];
   }
 
@@ -374,24 +375,11 @@
    */
   function rangeInteract(clientPos: NormalisedClient) {
     if (!slider || !draggy || !rangeActivated || range === 'min' || range === 'max') return;
-    // first make sure we have the latest dimensions
-    // of the slider, as it may have changed size
-    const dims = slider.getBoundingClientRect();
-    // calculate the interaction position, percent and value
-    let pointerPos = 0;
-    let pointerPercent = 0;
-    let pointerVal = 0;
-    if (vertical) {
-      pointerPos = clientPos.y - dims.top;
-      pointerPercent = (pointerPos / dims.height) * 100;
-      pointerPercent = reversed ? pointerPercent : 100 - pointerPercent;
-    } else {
-      pointerPos = clientPos.x - dims.left;
-      pointerPercent = (pointerPos / dims.width) * 100;
-      pointerPercent = reversed ? 100 - pointerPercent : pointerPercent;
-    }
-    pointerVal = ((max - min) / 100) * pointerPercent + min;
+    // get the location of the interaction on the slider as a value
+    const { pointerVal } = calculatePointerValues(slider, clientPos, vertical, reversed, min, max);
+    // if dragging the range, we dont want to 'activate' a handle
     activeHandle = -1;
+    // move the handles
     moveHandle(0, pointerVal + rangeDistancesFromPointer[0], false);
     moveHandle(1, pointerVal + rangeDistancesFromPointer[1], true);
   }
@@ -417,7 +405,7 @@
       // going past one-another unless "pushy" is true
       if (index === 0) {
         if (value > values[1] - rangeGapMin) {
-          if (pushy && value < (limits?.[1] ?? max) - rangeGapMin) {
+          if (pushy && value <= (limits?.[1] ?? max) - rangeGapMin) {
             values[1] = value + rangeGapMin;
           } else {
             value = values[1] - rangeGapMin;
@@ -430,13 +418,13 @@
           }
         }
       } else if (index === 1) {
-        if (value < coerceFloat(values[0] + rangeGapMin, precision)) {
-          if (pushy && value > (limits?.[0] ?? min) + rangeGapMin) {
+        if (value < values[0] + rangeGapMin) {
+          if (pushy && value >= (limits?.[0] ?? min) + rangeGapMin) {
             values[0] = value - rangeGapMin;
           } else {
             value = values[0] + rangeGapMin;
           }
-        } else if (value > coerceFloat(values[0] + rangeGapMax, precision)) {
+        } else if (value > values[0] + rangeGapMax) {
           if (pushy) {
             values[0] = value - rangeGapMax;
           } else {
@@ -474,9 +462,9 @@
   /**
    * helper to find the beginning range value for use with css style
    * @param {array} values the input values for the rangeSlider
-   * @return {number} the beginning of the range
+   * @return {number} the beginning of the range as a percentage of the total range
    **/
-  function rangeStart(values: number[]) {
+  function rangeStartPercent(values: number[]) {
     if (range === 'min') {
       return 0;
     } else {
@@ -487,15 +475,15 @@
   /**
    * helper to find the ending range value for use with css style
    * @param {array} values the input values for the rangeSlider
-   * @return {number} the end of the range
+   * @return {number} the end of the range as a percentage of the total range
    **/
-  function rangeEnd(values: number[]) {
+  function rangeEndPercent(values: number[]) {
     if (range === 'max') {
       return 0;
     } else if (range === 'min') {
-      return 100 - values[0];
+      return values[0];
     } else {
-      return 100 - values[1];
+      return values[1];
     }
   }
 
@@ -595,7 +583,7 @@
         activeHandle = -1;
         rangeActivated = true;
         rangePressed = true;
-        getRangedistancesOnInteractionStart(clientPos);
+        getRangeDistancesOnInteractionStart(clientPos);
       } else {
         handleActivated = true;
         handlePressed = true;
@@ -773,6 +761,7 @@
   class:rsFocus={focus}
   class:rsPips={pips}
   class:rsPipLabels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
+  style:--slider-length={sliderSize}
   {style}
   on:mousedown={sliderInteractStart}
   on:mouseup={sliderInteractEnd}
@@ -780,8 +769,8 @@
   on:touchend|preventDefault={sliderInteractEnd}
 >
   {#each values as value, index}
-    {@const zindex = `z-index: ${activeHandle === index ? 3 : 2};`}
-    {@const handlePos = `${orientationStart}: ${$springPositions[index]}%;`}
+    {@const zindex = `${focus && activeHandle === index ? 3 : ''}`}
+    {@const translate = `calc((${sliderSize}px * ${$springPositions[index] / 100}))`}
     <span
       role="slider"
       class="rangeHandle"
@@ -791,7 +780,8 @@
       on:blur={sliderBlurHandle}
       on:focus={sliderFocusHandle}
       on:keydown={sliderKeydown}
-      style="{handlePos} {zindex}"
+      style:z-index={zindex}
+      style:--handle-pos={$springPositions[index]}
       aria-label={ariaLabels[index]}
       aria-valuemin={range === true && index === 1 ? values[0] : min}
       aria-valuemax={range === true && index === 0 ? values[1] : max}
@@ -824,8 +814,9 @@
     <span
       class="rangeBar"
       class:rsPress={rangePressed}
-      style="{orientationStart}: {rangeStart($springPositions)}%; 
-             {orientationEnd}: {rangeEnd($springPositions)}%;"
+      style:--range-start={rangeStartPercent($springPositions)}
+      style:--range-end={rangeEndPercent($springPositions)}
+      style:--range-size={rangeEndPercent($springPositions) - rangeStartPercent($springPositions)}
     >
       {#if rangeFloat}
         <span class="rangeFloat">
@@ -996,21 +987,25 @@
     top: 0.25em;
     bottom: auto;
     transform: translateY(-50%) translateX(-50%);
+    translate: calc(var(--slider-length) * (var(--handle-pos) / 100) * 1px) 0;
     z-index: 2;
   }
 
   :global(.rangeSlider.rsReversed .rangeHandle) {
-    transform: translateY(-50%) translateX(50%);
+    transform: translateY(-50%) translateX(-50%);
+    translate: calc((var(--slider-length) * 1px) - (var(--slider-length) * (var(--handle-pos) / 100) * 1px)) 0;
   }
 
   :global(.rangeSlider.rsVertical .rangeHandle) {
     left: 0.25em;
     top: auto;
-    transform: translateY(50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+    translate: 0 calc(var(--slider-length) * (1 - var(--handle-pos) / 100) * 1px);
   }
 
   :global(.rangeSlider.rsVertical.rsReversed .rangeHandle) {
     transform: translateY(-50%) translateX(-50%);
+    translate: 0 calc((var(--slider-length) * 1px) - (var(--slider-length) * (1 - var(--handle-pos) / 100) * 1px));
   }
 
   :global(.rangeSlider .rangeNub),
@@ -1158,6 +1153,23 @@
   :global(.rangeSlider.rsVertical.rsDrag .rangeBar::before) {
     width: 0.5em;
     height: auto;
+  }
+
+  :global(.rangeSlider .rangeBar) {
+    translate: calc((var(--slider-length) * (var(--range-start) / 100) * 1px)) 0;
+    width: calc(var(--slider-length) * (var(--range-size) / 100 * 1px));
+  }
+  :global(.rangeSlider.rsReversed .rangeBar) {
+    translate: calc((var(--slider-length) * 1px) - (var(--slider-length) * (var(--range-end) / 100) * 1px)) 0;
+  }
+
+  :global(.rangeSlider.rsVertical .rangeBar) {
+    translate: 0 calc((var(--slider-length) * 1px) - (var(--slider-length) * (var(--range-end) / 100) * 1px));
+    height: calc(var(--slider-length) * (var(--range-size) / 100 * 1px));
+  }
+
+  :global(.rangeSlider.rsVertical.rsReversed .rangeBar) {
+    translate: 0 calc((var(--slider-length) * (var(--range-start) / 100) * 1px));
   }
 
   :global(.rangeSlider.rsDrag .rangeBar::before) {

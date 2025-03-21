@@ -26,6 +26,14 @@ export declare const clampValue: (value: number, min: number, max: number) => nu
  **/
 export declare const valueAsPercent: (value: number, min: number, max: number, precision?: number) => number;
 /**
+ * convert a percentage to a value
+ * @param {number} percent the percentage to convert
+ * @param {number} min the minimum value
+ * @param {number} max the maximum value
+ * @return {number} the value after it's been converted
+ **/
+export declare const percentAsValue: (percent: number, min: number, max: number) => number;
+/**
  * align the value with the steps so that it
  * always sits on the closest (above/below) step
  * @param {number} value the value to align
@@ -91,3 +99,17 @@ export declare const isSelected: (value: number, values: number[], precision?: n
  * @returns {number} the value of the pip
  */
 export declare const getValueFromIndex: (index: number, min: number, max: number, pipStep: number, step: number, precision?: number) => number;
+/**
+ * Calculate pointer position, percentage and value for a slider interaction
+ * @param clientPos The normalized client position (x,y)
+ * @param dims The slider's bounding rectangle dimensions
+ * @param vertical Whether the slider is vertical
+ * @param reversed Whether the slider is reversed
+ * @param min The minimum value of the slider
+ * @param max The maximum value of the slider
+ * @returns Object containing pointer position, percentage and value
+ */
+export declare const calculatePointerValues: (slider: HTMLElement, clientPos: NormalisedClient, vertical: boolean, reversed: boolean, min: number, max: number) => {
+    pointerVal: number;
+    pointerPercent: number;
+};
