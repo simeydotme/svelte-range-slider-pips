@@ -29,4 +29,4 @@
 
   <h5>No pips visible (first=false, last=false, rest=false)</h5>
   <RangeSlider pips first={false} last={false} rest={false} />
-</div> 
+</div>

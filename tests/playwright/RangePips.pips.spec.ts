@@ -97,4 +97,4 @@ test.describe('Pip Visibility Tests', () => {
     // No pips should be visible
     await expect(pips).toHaveCount(0);
   });
-}); 
+});

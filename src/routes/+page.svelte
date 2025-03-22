@@ -287,7 +287,7 @@
     float={peoFloat}
     rangeFloat={peoRangeFloat}
     on:change={(e) => {
-      if( e.detail.values[1] - e.detail.values[0] < 15) {
+      if (e.detail.values[1] - e.detail.values[0] < 15) {
         peoFloat = false;
         peoRangeFloat = true;
       } else {
@@ -860,12 +860,14 @@
   <RangeSlider bind:values={errorValuesObjectBind} pips all="label" {reversed} {hoverable} {disabled} />
   <RangeSlider bind:values={errorValuesStringBind} pips all="label" {reversed} {hoverable} {disabled} />
   <RangeSlider bind:values={errorValuesBooleanBind} pips all="label" {reversed} {hoverable} {disabled} />
-  values error; <span class="transform-gpu">{errorValuesObjectBind} / {errorValuesStringBind} / {errorValuesBooleanBind}</span>
+  values error;
+  <span class="transform-gpu">{errorValuesObjectBind} / {errorValuesStringBind} / {errorValuesBooleanBind}</span>
 
   <RangeSlider bind:value={errorValueObjectBind} pips all="label" {reversed} {hoverable} {disabled} />
   <RangeSlider bind:value={errorValueStringBind} pips all="label" {reversed} {hoverable} {disabled} />
   <RangeSlider bind:value={errorValueBooleanBind} pips all="label" {reversed} {hoverable} {disabled} />
-  value error; <span class="transform-gpu">{errorValueObjectBind} / {errorValueStringBind} / {errorValueBooleanBind}</span>
+  value error;
+  <span class="transform-gpu">{errorValueObjectBind} / {errorValueStringBind} / {errorValueBooleanBind}</span>
 
   <h2>Value as Input</h2>
   <RangeSlider bind:value={valueBind} pips all="label" {reversed} {hoverable} {disabled} />

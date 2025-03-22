@@ -22,8 +22,8 @@ test.describe('Range and Limits Tests', () => {
     const pips = secondSlider.locator('.rsPip');
 
     // Pips between 0 and value should have rsInRange class
-    for (let i = 0; i < await pips.count(); i++) {
-      if ( i < 10 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i < 10) {
         await expect(pips.nth(i)).toHaveClass(/rsInRange/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsInRange/);
@@ -36,8 +36,8 @@ test.describe('Range and Limits Tests', () => {
     const pips = thirdSlider.locator('.rsPip');
 
     // Pips between value and 100 should have rsInRange class
-    for (let i = 0; i < await pips.count(); i++) {
-      if ( i > 10 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i > 10) {
         await expect(pips.nth(i)).toHaveClass(/rsInRange/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsInRange/);
@@ -50,8 +50,8 @@ test.describe('Range and Limits Tests', () => {
     const pips = fourthSlider.locator('.rsPip');
 
     // Pips between values 40 and 60 should have rsInRange class
-    for (let i = 0; i < await pips.count(); i++) {
-      if ( i > 8 && i < 12 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i > 8 && i < 12) {
         await expect(pips.nth(i)).toHaveClass(/rsInRange/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsInRange/);
@@ -64,8 +64,8 @@ test.describe('Range and Limits Tests', () => {
     const pips = fifthSlider.locator('.rsPip');
 
     // Pips outside limits should have rsOutOfLimit class
-    for( let i = 0; i < await pips.count(); i++) {
-      if( i < 4 || i > 16 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i < 4 || i > 16) {
         await expect(pips.nth(i)).toHaveClass(/rsOutOfLimit/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsOutOfLimit/);
@@ -78,8 +78,8 @@ test.describe('Range and Limits Tests', () => {
     const pips = sixthSlider.locator('.rsPip');
 
     // Pips between 0 and value should have rsInRange class
-    for (let i = 0; i < await pips.count(); i++) {
-      if ( i < 10 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i < 10) {
         await expect(pips.nth(i)).toHaveClass(/rsInRange/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsInRange/);
@@ -87,8 +87,8 @@ test.describe('Range and Limits Tests', () => {
     }
 
     // Pips outside limits should have rsOutOfLimit class
-    for( let i = 0; i < await pips.count(); i++) {
-      if( i < 4 || i > 16 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i < 4 || i > 16) {
         await expect(pips.nth(i)).toHaveClass(/rsOutOfLimit/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsOutOfLimit/);
@@ -99,10 +99,10 @@ test.describe('Range and Limits Tests', () => {
   test('range="max" with limits should apply both rsInRange and rsOutOfLimit classes correctly', async ({ page }) => {
     const seventhSlider = page.locator('.rangeSlider').nth(6);
     const pips = seventhSlider.locator('.rsPip');
-    
+
     // Pips between value and 100 should have rsInRange class
-    for (let i = 0; i < await pips.count(); i++) {
-      if ( i > 10 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i > 10) {
         await expect(pips.nth(i)).toHaveClass(/rsInRange/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsInRange/);
@@ -110,8 +110,8 @@ test.describe('Range and Limits Tests', () => {
     }
 
     // Pips outside limits should have rsOutOfLimit class
-    for( let i = 0; i < await pips.count(); i++) {
-      if( i < 4 || i > 16 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i < 4 || i > 16) {
         await expect(pips.nth(i)).toHaveClass(/rsOutOfLimit/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsOutOfLimit/);
@@ -124,8 +124,8 @@ test.describe('Range and Limits Tests', () => {
     const pips = eighthSlider.locator('.rsPip');
 
     // Pips between handles should have rsInRange class
-    for (let i = 0; i < await pips.count(); i++) {
-      if ( i > 8 && i < 12 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i > 8 && i < 12) {
         await expect(pips.nth(i)).toHaveClass(/rsInRange/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsInRange/);
@@ -133,8 +133,8 @@ test.describe('Range and Limits Tests', () => {
     }
 
     // Pips outside limits should have rsOutOfLimit class
-    for( let i = 0; i < await pips.count(); i++) {
-      if( i < 4 || i > 16 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i < 4 || i > 16) {
         await expect(pips.nth(i)).toHaveClass(/rsOutOfLimit/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsOutOfLimit/);
@@ -149,8 +149,8 @@ test.describe('Range and Limits Tests', () => {
 
     // Initial state
     // Pips between handles should have rsInRange class
-    for (let i = 0; i < await pips.count(); i++) {
-      if ( i > 8 && i < 12 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i > 8 && i < 12) {
         await expect(pips.nth(i)).toHaveClass(/rsInRange/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsInRange/);
@@ -164,8 +164,8 @@ test.describe('Range and Limits Tests', () => {
     await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '100');
 
     // Pips between handles should have rsInRange class
-    for (let i = 0; i < await pips.count(); i++) {
-      if ( i > 4 && i < 20 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i > 4 && i < 20) {
         await expect(pips.nth(i)).toHaveClass(/rsInRange/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsInRange/);
@@ -193,8 +193,8 @@ test.describe('Range and Limits Tests', () => {
     await expect(toggleRangeButton).toHaveText('Remove Range');
 
     // After adding range
-    for (let i = 0; i < await pips.count(); i++) {
-      if ( i > 8 && i < 12 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i > 8 && i < 12) {
         await expect(pips.nth(i)).toHaveClass(/rsInRange/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsInRange/);
@@ -206,8 +206,8 @@ test.describe('Range and Limits Tests', () => {
     await expect(toggleLimitsButton).toHaveText('Remove Limits');
 
     // After adding limits
-    for( let i = 0; i < await pips.count(); i++) {
-      if( i < 4 || i > 16 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i < 4 || i > 16) {
         await expect(pips.nth(i)).toHaveClass(/rsOutOfLimit/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsOutOfLimit/);
@@ -221,8 +221,8 @@ test.describe('Range and Limits Tests', () => {
     await maxInput.press('Enter');
 
     // After updating limits
-    for( let i = 0; i < await pips.count(); i++) {
-      if( i < 6 || i > 14 ) {
+    for (let i = 0; i < (await pips.count()); i++) {
+      if (i < 6 || i > 14) {
         await expect(pips.nth(i)).toHaveClass(/rsOutOfLimit/);
       } else {
         await expect(pips.nth(i)).not.toHaveClass(/rsOutOfLimit/);
@@ -242,8 +242,8 @@ test.describe('Range and Limits Tests', () => {
     await expect(toggleLimitsButton).toHaveText('Add Limits');
 
     // After removing limits
-    for( let i = 0; i < await pips.count(); i++) {
+    for (let i = 0; i < (await pips.count()); i++) {
       await expect(pips.nth(i)).not.toHaveClass(/rsOutOfLimit/);
     }
   });
-}); 
+});

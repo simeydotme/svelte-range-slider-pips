@@ -54,25 +54,11 @@
   <div class="flex gap-4 items-center">
     <div class="flex items-center flex-row gap-2">
       <label for="min-limit" class="whitespace-nowrap">Min Limit:</label>
-      <input
-        type="number"
-        id="min-limit"
-        bind:value={minLimit}
-        min="0"
-        max="100"
-        on:change={updateLimits}
-      />
+      <input type="number" id="min-limit" bind:value={minLimit} min="0" max="100" on:change={updateLimits} />
     </div>
     <div class="flex items-center flex-row gap-2">
       <label for="max-limit" class="whitespace-nowrap">Max Limit:</label>
-      <input
-        type="number"
-        id="max-limit"
-        bind:value={maxLimit}
-        min="0"
-        max="100"
-        on:change={updateLimits}
-      />
+      <input type="number" id="max-limit" bind:value={maxLimit} min="0" max="100" on:change={updateLimits} />
     </div>
     <button id="toggle-limits" class:btn-primary={hasLimits} on:click={toggleLimits}>
       {hasLimits ? 'Remove Limits' : 'Add Limits'}
@@ -81,14 +67,14 @@
       {hasRange ? 'Remove Range' : 'Add Range'}
     </button>
   </div>
-  <RangeSlider 
-    pips 
-    all="label" 
-    limits={hasLimits ? [minLimit, maxLimit] : null} 
+  <RangeSlider
+    pips
+    all="label"
+    limits={hasLimits ? [minLimit, maxLimit] : null}
     range={hasRange ? true : false}
     values={hasRange ? [40, 60] : [50]}
   />
 </div>
 
 <style>
-</style> 
+</style>
