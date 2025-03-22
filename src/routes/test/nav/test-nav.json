@@ -58,6 +58,10 @@
       {
         "name": "pips",
         "path": "/test/range-slider/pips/pips"
+      },
+      {
+        "name": "range-limits",
+        "path": "/test/range-slider/pips/range-limits"
       }
     ]
   },
