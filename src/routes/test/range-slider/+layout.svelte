@@ -13,7 +13,7 @@
   use:clickOutside={{ enabled: $isNavVisible }}
   on:clickOutside={() => ($isNavVisible = false)}
 >
-  <Navigation />
+  <Navigation isPanel />
 
   <button class="open-nav" on:click={() => ($isNavVisible = !$isNavVisible)}>
     {@html feather.icons.menu.toSvg()}

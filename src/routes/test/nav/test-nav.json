@@ -54,6 +54,10 @@
       {
         "name": "labels",
         "path": "/test/range-slider/pips/labels"
+      },
+      {
+        "name": "pips",
+        "path": "/test/range-slider/pips/pips"
       }
     ]
   },
@@ -83,13 +87,7 @@
       },
       {
         "name": "pushy",
-        "path": "/test/range-slider/range/pushy",
-        "children": [
-          {
-            "name": "comprehensive",
-            "path": "/test/range-slider/range/pushy/comprehensive"
-          }
-        ]
+        "path": "/test/range-slider/range/pushy"
       }
     ]
   },

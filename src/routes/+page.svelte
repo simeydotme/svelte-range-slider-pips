@@ -19,6 +19,8 @@
   let draggy4 = [-20, 20];
   let draggy5 = [-20, 20];
   let draggy6 = [-40, 40];
+  let peoFloat = true;
+  let peoRangeFloat = false;
 
   let vrange = [20, 80];
 
@@ -135,7 +137,7 @@
     <RangeSlider bind:values={vrange} vertical pips all="label" float {reversed} {hoverable} {disabled} />
     <div>
       <RangeSlider bind:values={vrange} vertical range pips all="label" float {reversed} {hoverable} {disabled} />
-      {vrange}
+      <span class="transform-gpu">{vrange}</span>
     </div>
     <RangeSlider vertical range="min" values={[10]} pips all float {reversed} {hoverable} {disabled} />
     <RangeSlider vertical range="max" values={[30]} pips float {reversed} {hoverable} {disabled} />
@@ -238,7 +240,7 @@
     {hoverable}
     {disabled}
   />
-  {pushy}
+  <span class="transform-gpu">{pushy}</span>
   <RangeSlider
     range
     min={-50}
@@ -254,7 +256,7 @@
     {hoverable}
     {disabled}
   />
-  {pushy2}
+  <span class="transform-gpu">{pushy2}</span>
   <RangeSlider
     range
     min={-50}
@@ -272,7 +274,7 @@
     {hoverable}
     {disabled}
   />
-  {pushy3}
+  <span class="transform-gpu">{pushy3}</span>
   <h3>Handles push each other</h3>
   <RangeSlider
     range
@@ -282,14 +284,23 @@
     bind:values={pushy4}
     pips
     all="label"
-    float
-    rangeFloat
+    float={peoFloat}
+    rangeFloat={peoRangeFloat}
+    on:change={(e) => {
+      if( e.detail.values[1] - e.detail.values[0] < 15) {
+        peoFloat = false;
+        peoRangeFloat = true;
+      } else {
+        peoFloat = true;
+        peoRangeFloat = false;
+      }
+    }}
     rangeFormatter={(v1, v2, p1, p2) => v1 + ' ~ ' + v2 + '  (' + p1 + '% ~ ' + p2 + '%)'}
     {reversed}
     {hoverable}
     {disabled}
   />
-  {pushy4}
+  <span class="transform-gpu">{pushy4}</span>
   <RangeSlider
     range
     min={-50}
@@ -309,7 +320,7 @@
     {hoverable}
     {disabled}
   />
-  {pushy5}
+  <span class="transform-gpu">{pushy5}</span>
   <RangeSlider
     range
     min={-50}
@@ -327,7 +338,7 @@
     {hoverable}
     {disabled}
   />
-  {pushy6}
+  <span class="transform-gpu">{pushy6}</span>
   <h3>Range is Draggy</h3>
   <RangeSlider
     range
@@ -343,7 +354,7 @@
     {hoverable}
     {disabled}
   />
-  {draggy4}
+  <span class="transform-gpu">{draggy4}</span>
   <RangeSlider
     range
     draggy
@@ -371,7 +382,7 @@
       console.log('change', e.detail);
     }}
   />
-  {draggy5}
+  <span class="transform-gpu">{draggy5}</span>
   <RangeSlider
     range
     min={-50}
@@ -399,7 +410,7 @@
       console.log('change', e.detail);
     }}
   />
-  {draggy6}
+  <span class="transform-gpu">{draggy6}</span>
 
   <h2>min range</h2>
   <RangeSlider range="min" values={[65]} pips all="label" float {reversed} {hoverable} {disabled} />
@@ -645,7 +656,7 @@
       {disabled}
     />
 
-    {dayFormatCn(day[0])} | {dayFormat(day[0])}
+    <span class="transform-gpu">{dayFormatCn(day[0])} | {dayFormat(day[0])}</span>
 
     <RangeSlider
       bind:values={hue}
@@ -661,7 +672,7 @@
     <RangeSlider bind:values={perc1} min={0} max={50} pips all="label" float {reversed} {hoverable} {disabled} />
     <RangeSlider bind:values={perc2} min={0} max={perc2max} pips all="label" float {reversed} {hoverable} {disabled} />
     <hr />
-    {perc1} / {perc2}
+    <span class="transform-gpu">{perc1} / {perc2}</span>
   </div>
 
   <h2>BIG, ramped value</h2>
@@ -684,7 +695,7 @@
       <th>real value</th><th>formatted (ramp(v,i,p))</th>
     </tr>
     <tr>
-      <td>{big}</td><td
+      <td><span class="transform-gpu">{big}</span></td><td
         >{[
           ramp(big[0], 0, parseFloat(((big[0] / 10000) * 100).toFixed(1))),
           ramp(big[1], 0, parseFloat(((big[1] / 10000) * 100).toFixed(1)))
@@ -722,13 +733,13 @@
       zero = [3, 70];
     }}>increase min/max</button
   >
-  - {zero}
+  - <span class="transform-gpu">{zero}</span>
 
   <h2>push & pop values</h2>
   <RangeSlider bind:values float pips all="label" {reversed} {hoverable} {disabled} ariaLabels="x" />
   <button on:click={pushValues}>push</button>
   <button on:click={popValues}>pop</button>
-  ({values})
+  <span class="transform-gpu">({values})</span>
 
   <h2>Binding to inputs</h2>
   <RangeSlider
@@ -765,7 +776,7 @@
     {hoverable}
     {disabled}
   />
-  {decimals}
+  <span class="transform-gpu">{decimals}</span>
 
   <RangeSlider
     bind:values={decimals2}
@@ -781,7 +792,7 @@
     {hoverable}
     {disabled}
   />
-  {decimals2}
+  <span class="transform-gpu">{decimals2}</span>
 
   <h2>Irregular start/end numbers</h2>
   <RangeSlider values={[30, 130]} float pips all="label" hoverable range min={20} max={130} pipstep={3} step={5} />
@@ -837,28 +848,28 @@
 
   <h2>Object Values</h2>
   <RangeSlider bind:value={objectValueBind.value} pips all="label" {reversed} {hoverable} {disabled} />
-  {objectValueBind.value}
+  <span class="transform-gpu">{objectValueBind.value}</span>
   <RangeSlider bind:values={objectValuesBind.values} pips all="label" {reversed} {hoverable} {disabled} />
-  {objectValuesBind.values}
+  <span class="transform-gpu">{objectValuesBind.values}</span>
 
   <h2>Value(s) Errors</h2>
   <RangeSlider bind:value={errorValueBind} pips all="label" {reversed} {hoverable} {disabled} />
   <RangeSlider bind:values={errorValuesBind} pips all="label" {reversed} {hoverable} {disabled} />
-  {errorValueBind} / {errorValuesBind}
+  <span class="transform-gpu">{errorValueBind} / {errorValuesBind}</span>
 
   <RangeSlider bind:values={errorValuesObjectBind} pips all="label" {reversed} {hoverable} {disabled} />
   <RangeSlider bind:values={errorValuesStringBind} pips all="label" {reversed} {hoverable} {disabled} />
   <RangeSlider bind:values={errorValuesBooleanBind} pips all="label" {reversed} {hoverable} {disabled} />
-  values error; {errorValuesObjectBind} / {errorValuesStringBind} / {errorValuesBooleanBind}
+  values error; <span class="transform-gpu">{errorValuesObjectBind} / {errorValuesStringBind} / {errorValuesBooleanBind}</span>
 
   <RangeSlider bind:value={errorValueObjectBind} pips all="label" {reversed} {hoverable} {disabled} />
   <RangeSlider bind:value={errorValueStringBind} pips all="label" {reversed} {hoverable} {disabled} />
   <RangeSlider bind:value={errorValueBooleanBind} pips all="label" {reversed} {hoverable} {disabled} />
-  value error; {errorValueObjectBind} / {errorValueStringBind} / {errorValueBooleanBind}
+  value error; <span class="transform-gpu">{errorValueObjectBind} / {errorValueStringBind} / {errorValueBooleanBind}</span>
 
   <h2>Value as Input</h2>
   <RangeSlider bind:value={valueBind} pips all="label" {reversed} {hoverable} {disabled} />
-  {valueBind}
+  <span class="transform-gpu">{valueBind}</span>
   <div style="display: flex; gap: 1em;">
     <button
       on:click={() => {
