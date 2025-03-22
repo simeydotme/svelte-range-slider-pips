@@ -1089,18 +1089,20 @@
     position: absolute;
     left: 50%;
     bottom: 1.75em;
-    transform: translate(-50%, -50%);
     font-size: 1em;
     text-align: center;
-    opacity: 0;
     pointer-events: none;
     white-space: nowrap;
-    transition: all 0.2s ease;
     font-size: 0.9em;
     line-height: 1;
     padding: 0.33em 0.5em 0.5em;
-    border-radius: 0.2em;
+    border-radius: 0.5em;
     z-index: 3;
+    opacity: 0;
+    translate: -50% -50% 0.01px;
+    scale: 1;
+    transform-origin: center;
+    transition: all 0.22s cubic-bezier(0.33, 1, 0.68, 1);
   }
 
   :global(.rangeSlider .rangeHandle.rsActive .rangeFloat),
@@ -1108,7 +1110,8 @@
   :global(.rangeSlider.rsHoverable .rangeBar:hover .rangeFloat),
   :global(.rangeSlider.rsFocus .rangeBar .rangeFloat) {
     opacity: 1;
-    transform: translate(-50%, 0%);
+    scale: 1;
+    translate: -50% 0% 0.01px;
   }
 
   :global(.rangeSlider .rangeBar .rangeFloat) {
