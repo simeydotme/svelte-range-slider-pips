@@ -3,7 +3,7 @@
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * Project home: https://simeydotme.github.io/svelte-range-slider-pips/
  * © 2025 Simon Goellner <simey.me@gmail.com> ~ MPL-2.0 License
- * Published: 22/3/2025
+ * Published: 1/4/2025
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -1617,14 +1617,14 @@
 
 	function get_each_context$1(ctx, list, i) {
 		const child_ctx = ctx.slice();
-		child_ctx[38] = list[i];
-		child_ctx[41] = i;
-		const constants_0 = getValueFromIndex(/*i*/ child_ctx[41], /*min*/ child_ctx[1], /*max*/ child_ctx[2], /*pipStep*/ child_ctx[20], /*step*/ child_ctx[3], /*precision*/ child_ctx[17]);
-		child_ctx[39] = constants_0;
+		child_ctx[36] = list[i];
+		child_ctx[39] = i;
+		const constants_0 = getValueFromIndex(/*i*/ child_ctx[39], /*min*/ child_ctx[1], /*max*/ child_ctx[2], /*finalPipStep*/ child_ctx[21], /*step*/ child_ctx[3], /*precision*/ child_ctx[17]);
+		child_ctx[37] = constants_0;
 		return child_ctx;
 	}
 
-	// (72:2) {#if (all && first !== false) || first}
+	// (89:2) {#if (all && first !== false) || first}
 	function create_if_block_9$1(ctx) {
 		let span;
 		let span_style_value;
@@ -1640,6 +1640,7 @@
 				attr(span, "class", "rsPip rsPip--first");
 				attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[19] + ": 0%;"));
 				attr(span, "data-val", span_data_val_value = coerceFloat(/*min*/ ctx[1], /*precision*/ ctx[17]));
+				attr(span, "data-index", 0);
 				toggle_class(span, "rsSelected", isSelected(/*min*/ ctx[1], /*values*/ ctx[4], /*precision*/ ctx[17]));
 				toggle_class(span, "rsInRange", isInRange(/*min*/ ctx[1], /*values*/ ctx[4], /*range*/ ctx[0]));
 				toggle_class(span, "rsOutOfLimit", isOutOfLimit(/*min*/ ctx[1], /*limits*/ ctx[9]));
@@ -1650,8 +1651,8 @@
 
 				if (!mounted) {
 					dispose = [
-						listen(span, "pointerdown", /*pointerdown_handler*/ ctx[31]),
-						listen(span, "pointerup", /*pointerup_handler*/ ctx[32])
+						listen(span, "pointerdown", /*pointerdown_handler*/ ctx[29]),
+						listen(span, "pointerup", /*pointerup_handler*/ ctx[30])
 					];
 
 					mounted = true;
@@ -1703,7 +1704,7 @@
 		};
 	}
 
-	// (87:6) {#if all === 'label' || first === 'label'}
+	// (105:6) {#if all === 'label' || first === 'label'}
 	function create_if_block_10$1(ctx) {
 		let span;
 		let t0;
@@ -1772,7 +1773,7 @@
 		};
 	}
 
-	// (89:10) {#if prefix}
+	// (107:10) {#if prefix}
 	function create_if_block_12(ctx) {
 		let span;
 		let t;
@@ -1798,7 +1799,7 @@
 		};
 	}
 
-	// (91:10) {#if suffix}
+	// (109:10) {#if suffix}
 	function create_if_block_11$1(ctx) {
 		let span;
 		let t;
@@ -1824,10 +1825,10 @@
 		};
 	}
 
-	// (97:2) {#if (all && rest !== false) || rest}
+	// (115:2) {#if (all && rest !== false) || rest}
 	function create_if_block_4$1(ctx) {
 		let each_1_anchor;
-		let each_value = ensure_array_like(Array(/*pipCount*/ ctx[21] + 1));
+		let each_value = ensure_array_like(Array(/*pipCount*/ ctx[20]));
 		let each_blocks = [];
 
 		for (let i = 0; i < each_value.length; i += 1) {
@@ -1852,8 +1853,8 @@
 				insert(target, each_1_anchor, anchor);
 			},
 			p(ctx, dirty) {
-				if (dirty[0] & /*orientationStart, min, max, pipStep, step, precision, values, range, limits, labelDown, labelUp, suffix, formatter, prefix, all, rest, pipCount*/ 16508447) {
-					each_value = ensure_array_like(Array(/*pipCount*/ ctx[21] + 1));
+				if (dirty[0] & /*orientationStart, min, max, finalPipStep, step, precision, values, range, limits, labelDown, labelUp, suffix, formatter, prefix, all, rest, pipCount*/ 16508447) {
+					each_value = ensure_array_like(Array(/*pipCount*/ ctx[20]));
 					let i;
 
 					for (i = 0; i < each_value.length; i += 1) {
@@ -1885,7 +1886,7 @@
 		};
 	}
 
-	// (100:6) {#if val !== min && val !== max}
+	// (118:6) {#if val > min && val < max}
 	function create_if_block_5$1(ctx) {
 		let span;
 		let t;
@@ -1896,7 +1897,7 @@
 		let if_block = (/*all*/ ctx[10] === 'label' || /*rest*/ ctx[13] === 'label') && create_if_block_6$1(ctx);
 
 		function pointerup_handler_1(...args) {
-			return /*pointerup_handler_1*/ ctx[34](/*val*/ ctx[39], ...args);
+			return /*pointerup_handler_1*/ ctx[32](/*val*/ ctx[37], ...args);
 		}
 
 		return {
@@ -1905,11 +1906,12 @@
 				if (if_block) if_block.c();
 				t = space();
 				attr(span, "class", "rsPip");
-				attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[19] + ": " + valueAsPercent(/*val*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[17]) + "%;"));
-				attr(span, "data-val", span_data_val_value = /*val*/ ctx[39]);
-				toggle_class(span, "rsSelected", isSelected(/*val*/ ctx[39], /*values*/ ctx[4], /*precision*/ ctx[17]));
-				toggle_class(span, "rsInRange", isInRange(/*val*/ ctx[39], /*values*/ ctx[4], /*range*/ ctx[0]));
-				toggle_class(span, "rsOutOfLimit", isOutOfLimit(/*val*/ ctx[39], /*limits*/ ctx[9]));
+				attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[19] + ": " + valueAsPercent(/*val*/ ctx[37], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[17]) + "%;"));
+				attr(span, "data-val", span_data_val_value = /*val*/ ctx[37]);
+				attr(span, "data-index", /*i*/ ctx[39]);
+				toggle_class(span, "rsSelected", isSelected(/*val*/ ctx[37], /*values*/ ctx[4], /*precision*/ ctx[17]));
+				toggle_class(span, "rsInRange", isInRange(/*val*/ ctx[37], /*values*/ ctx[4], /*range*/ ctx[0]));
+				toggle_class(span, "rsOutOfLimit", isOutOfLimit(/*val*/ ctx[37], /*limits*/ ctx[9]));
 			},
 			m(target, anchor) {
 				insert(target, span, anchor);
@@ -1918,7 +1920,7 @@
 
 				if (!mounted) {
 					dispose = [
-						listen(span, "pointerdown", /*pointerdown_handler_1*/ ctx[33]),
+						listen(span, "pointerdown", /*pointerdown_handler_1*/ ctx[31]),
 						listen(span, "pointerup", pointerup_handler_1)
 					];
 
@@ -1941,24 +1943,24 @@
 					if_block = null;
 				}
 
-				if (dirty[0] & /*orientationStart, min, max, pipStep, step, precision*/ 1703950 && span_style_value !== (span_style_value = "" + (/*orientationStart*/ ctx[19] + ": " + valueAsPercent(/*val*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[17]) + "%;"))) {
+				if (dirty[0] & /*orientationStart, min, max, finalPipStep, step, precision*/ 2752526 && span_style_value !== (span_style_value = "" + (/*orientationStart*/ ctx[19] + ": " + valueAsPercent(/*val*/ ctx[37], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[17]) + "%;"))) {
 					attr(span, "style", span_style_value);
 				}
 
-				if (dirty[0] & /*min, max, pipStep, step, precision*/ 1179662 && span_data_val_value !== (span_data_val_value = /*val*/ ctx[39])) {
+				if (dirty[0] & /*min, max, finalPipStep, step, precision*/ 2228238 && span_data_val_value !== (span_data_val_value = /*val*/ ctx[37])) {
 					attr(span, "data-val", span_data_val_value);
 				}
 
-				if (dirty[0] & /*min, max, pipStep, step, precision, values*/ 1179678) {
-					toggle_class(span, "rsSelected", isSelected(/*val*/ ctx[39], /*values*/ ctx[4], /*precision*/ ctx[17]));
+				if (dirty[0] & /*min, max, finalPipStep, step, precision, values*/ 2228254) {
+					toggle_class(span, "rsSelected", isSelected(/*val*/ ctx[37], /*values*/ ctx[4], /*precision*/ ctx[17]));
 				}
 
-				if (dirty[0] & /*min, max, pipStep, step, precision, values, range*/ 1179679) {
-					toggle_class(span, "rsInRange", isInRange(/*val*/ ctx[39], /*values*/ ctx[4], /*range*/ ctx[0]));
+				if (dirty[0] & /*min, max, finalPipStep, step, precision, values, range*/ 2228255) {
+					toggle_class(span, "rsInRange", isInRange(/*val*/ ctx[37], /*values*/ ctx[4], /*range*/ ctx[0]));
 				}
 
-				if (dirty[0] & /*min, max, pipStep, step, precision, limits*/ 1180174) {
-					toggle_class(span, "rsOutOfLimit", isOutOfLimit(/*val*/ ctx[39], /*limits*/ ctx[9]));
+				if (dirty[0] & /*min, max, finalPipStep, step, precision, limits*/ 2228750) {
+					toggle_class(span, "rsOutOfLimit", isOutOfLimit(/*val*/ ctx[37], /*limits*/ ctx[9]));
 				}
 			},
 			d(detaching) {
@@ -1973,12 +1975,12 @@
 		};
 	}
 
-	// (115:10) {#if all === 'label' || rest === 'label'}
+	// (134:10) {#if all === 'label' || rest === 'label'}
 	function create_if_block_6$1(ctx) {
 		let span;
 		let t0;
 		let html_tag;
-		let raw_value = /*formatter*/ ctx[16](/*val*/ ctx[39], /*i*/ ctx[41], valueAsPercent(/*val*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[17])) + "";
+		let raw_value = /*formatter*/ ctx[16](/*val*/ ctx[37], /*i*/ ctx[39], valueAsPercent(/*val*/ ctx[37], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[17])) + "";
 		let t1;
 		let if_block0 = create_if_block_8$1(ctx);
 		let if_block1 = create_if_block_7$1(ctx);
@@ -2013,7 +2015,7 @@
 					}
 				}
 
-				if (dirty[0] & /*formatter, min, max, pipStep, step, precision*/ 1245198 && raw_value !== (raw_value = /*formatter*/ ctx[16](/*val*/ ctx[39], /*i*/ ctx[41], valueAsPercent(/*val*/ ctx[39], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[17])) + "")) html_tag.p(raw_value);
+				if (dirty[0] & /*formatter, min, max, finalPipStep, step, precision*/ 2293774 && raw_value !== (raw_value = /*formatter*/ ctx[16](/*val*/ ctx[37], /*i*/ ctx[39], valueAsPercent(/*val*/ ctx[37], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[17])) + "")) html_tag.p(raw_value);
 
 				{
 					if (if_block1) {
@@ -2036,7 +2038,7 @@
 		};
 	}
 
-	// (117:14) {#if true || prefix}
+	// (136:14) {#if true || prefix}
 	function create_if_block_8$1(ctx) {
 		let span;
 		let t;
@@ -2062,7 +2064,7 @@
 		};
 	}
 
-	// (119:14) {#if true || suffix}
+	// (138:14) {#if true || suffix}
 	function create_if_block_7$1(ctx) {
 		let span;
 		let t;
@@ -2088,10 +2090,10 @@
 		};
 	}
 
-	// (98:4) {#each Array(pipCount + 1) as _, i}
+	// (116:4) {#each Array(pipCount) as _, i}
 	function create_each_block$1(ctx) {
 		let if_block_anchor;
-		let if_block = /*val*/ ctx[39] !== /*min*/ ctx[1] && /*val*/ ctx[39] !== /*max*/ ctx[2] && create_if_block_5$1(ctx);
+		let if_block = /*val*/ ctx[37] > /*min*/ ctx[1] && /*val*/ ctx[37] < /*max*/ ctx[2] && create_if_block_5$1(ctx);
 
 		return {
 			c() {
@@ -2103,7 +2105,7 @@
 				insert(target, if_block_anchor, anchor);
 			},
 			p(ctx, dirty) {
-				if (/*val*/ ctx[39] !== /*min*/ ctx[1] && /*val*/ ctx[39] !== /*max*/ ctx[2]) {
+				if (/*val*/ ctx[37] > /*min*/ ctx[1] && /*val*/ ctx[37] < /*max*/ ctx[2]) {
 					if (if_block) {
 						if_block.p(ctx, dirty);
 					} else {
@@ -2126,7 +2128,7 @@
 		};
 	}
 
-	// (127:2) {#if (all && last !== false) || last}
+	// (146:2) {#if (all && last !== false) || last}
 	function create_if_block$1(ctx) {
 		let span;
 		let span_style_value;
@@ -2142,6 +2144,7 @@
 				attr(span, "class", "rsPip rsPip--last");
 				attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[19] + ": 100%;"));
 				attr(span, "data-val", span_data_val_value = coerceFloat(/*max*/ ctx[2], /*precision*/ ctx[17]));
+				attr(span, "data-index", /*pipCount*/ ctx[20]);
 				toggle_class(span, "rsSelected", isSelected(/*max*/ ctx[2], /*values*/ ctx[4], /*precision*/ ctx[17]));
 				toggle_class(span, "rsInRange", isInRange(/*max*/ ctx[2], /*values*/ ctx[4], /*range*/ ctx[0]));
 				toggle_class(span, "rsOutOfLimit", isOutOfLimit(/*max*/ ctx[2], /*limits*/ ctx[9]));
@@ -2152,8 +2155,8 @@
 
 				if (!mounted) {
 					dispose = [
-						listen(span, "pointerdown", /*pointerdown_handler_2*/ ctx[35]),
-						listen(span, "pointerup", /*pointerup_handler_2*/ ctx[36])
+						listen(span, "pointerdown", /*pointerdown_handler_2*/ ctx[33]),
+						listen(span, "pointerup", /*pointerup_handler_2*/ ctx[34])
 					];
 
 					mounted = true;
@@ -2181,6 +2184,10 @@
 					attr(span, "data-val", span_data_val_value);
 				}
 
+				if (dirty[0] & /*pipCount*/ 1048576) {
+					attr(span, "data-index", /*pipCount*/ ctx[20]);
+				}
+
 				if (dirty[0] & /*max, values, precision*/ 131092) {
 					toggle_class(span, "rsSelected", isSelected(/*max*/ ctx[2], /*values*/ ctx[4], /*precision*/ ctx[17]));
 				}
@@ -2205,12 +2212,12 @@
 		};
 	}
 
-	// (142:6) {#if all === 'label' || last === 'label'}
+	// (162:6) {#if all === 'label' || last === 'label'}
 	function create_if_block_1$1(ctx) {
 		let span;
 		let t0;
 		let html_tag;
-		let raw_value = /*formatter*/ ctx[16](coerceFloat(/*max*/ ctx[2], /*precision*/ ctx[17]), /*pipCount*/ ctx[21], 100) + "";
+		let raw_value = /*formatter*/ ctx[16](coerceFloat(/*max*/ ctx[2], /*precision*/ ctx[17]), /*pipCount*/ ctx[20], 100) + "";
 		let t1;
 		let if_block0 = /*prefix*/ ctx[14] && create_if_block_3$1(ctx);
 		let if_block1 = /*suffix*/ ctx[15] && create_if_block_2$1(ctx);
@@ -2248,7 +2255,7 @@
 					if_block0 = null;
 				}
 
-				if (dirty[0] & /*formatter, max, precision, pipCount*/ 2293764 && raw_value !== (raw_value = /*formatter*/ ctx[16](coerceFloat(/*max*/ ctx[2], /*precision*/ ctx[17]), /*pipCount*/ ctx[21], 100) + "")) html_tag.p(raw_value);
+				if (dirty[0] & /*formatter, max, precision, pipCount*/ 1245188 && raw_value !== (raw_value = /*formatter*/ ctx[16](coerceFloat(/*max*/ ctx[2], /*precision*/ ctx[17]), /*pipCount*/ ctx[20], 100) + "")) html_tag.p(raw_value);
 
 				if (/*suffix*/ ctx[15]) {
 					if (if_block1) {
@@ -2274,7 +2281,7 @@
 		};
 	}
 
-	// (144:10) {#if prefix}
+	// (164:10) {#if prefix}
 	function create_if_block_3$1(ctx) {
 		let span;
 		let t;
@@ -2300,7 +2307,7 @@
 		};
 	}
 
-	// (146:10) {#if suffix}
+	// (166:10) {#if suffix}
 	function create_if_block_2$1(ctx) {
 		let span;
 		let t;
@@ -2433,11 +2440,7 @@
 
 	function instance$1($$self, $$props, $$invalidate) {
 		let stepMax;
-		let tooManyPips;
-		let stepDivisor;
-		let reducedSteps;
-		let pipStep;
-		let pipCount;
+		let tooManySteps;
 		let { range = false } = $$props;
 		let { min = 0 } = $$props;
 		let { max = 100 } = $$props;
@@ -2462,6 +2465,12 @@
 		let { orientationStart } = $$props;
 		let { moveHandle } = $$props;
 		let clientStart = null;
+
+		// track the number of pips we're actually going to render
+		let pipCount = 0;
+
+		// track the final pipstep we're going to use
+		let finalPipStep = 1;
 
 		/**
 	 * function to run when the user clicks on a label
@@ -2545,27 +2554,34 @@
 
 		$$self.$$.update = () => {
 			if ($$self.$$.dirty[0] & /*vertical*/ 32) {
-				$$invalidate(30, stepMax = vertical ? 50 : 100);
+				// by default we would like to show maximum of 50 pips vertically and 100 horizontally
+				$$invalidate(27, stepMax = vertical ? 50 : 100);
 			}
 
-			if ($$self.$$.dirty[0] & /*max, min, step, stepMax*/ 1073741838) {
-				$$invalidate(28, tooManyPips = (max - min) / step >= stepMax);
+			if ($$self.$$.dirty[0] & /*max, min, step, stepMax*/ 134217742) {
+				// track if the amount of steps calculated is greater than the max we'd like to show
+				$$invalidate(28, tooManySteps = (max - min) / step >= stepMax);
 			}
 
-			if ($$self.$$.dirty[0] & /*vertical*/ 32) {
-				$$invalidate(29, stepDivisor = vertical ? 10 : 20);
-			}
+			if ($$self.$$.dirty[0] & /*pipstep, tooManySteps, max, min, stepMax, step, finalPipStep, pipCount*/ 439353358) {
+				{
+					// if no pipstep is provided, we use a sensible default (respecting the stepMax check)
+					$$invalidate(21, finalPipStep = pipstep ?? (tooManySteps ? (max - min) / (stepMax / 5) : 1));
 
-			if ($$self.$$.dirty[0] & /*max, min, stepDivisor*/ 536870918) {
-				$$invalidate(27, reducedSteps = (max - min) / stepDivisor);
-			}
+					$$invalidate(20, pipCount = Math.ceil((max - min) / (step * finalPipStep)));
 
-			if ($$self.$$.dirty[0] & /*pipstep, tooManyPips, reducedSteps*/ 436207616) {
-				$$invalidate(20, pipStep = pipstep ?? (tooManyPips ? reducedSteps : 1));
-			}
+					// there's no way a browser can render over 1000 pips without performance issues,
+					// so we should limit and warn the user if they're trying to render too many
+					if (pipCount > 1000) {
+						console.warn('RangePips: You are trying to render too many pips. This will cause performance issues. Try increasing the "pipstep" prop to reduce the number of pips shown.');
 
-			if ($$self.$$.dirty[0] & /*max, min, step, pipStep*/ 1048590) {
-				$$invalidate(21, pipCount = Math.floor((max - min) / (step * pipStep)));
+						// start increasing the finalPipStep until we get a pipCountbelow 1000
+						while (pipCount >= 1000) {
+							$$invalidate(21, finalPipStep = finalPipStep + finalPipStep);
+							$$invalidate(20, pipCount = Math.ceil((max - min) / (step * finalPipStep)));
+						}
+					}
+				}
 			}
 		};
 
@@ -2590,17 +2606,15 @@
 			precision,
 			focus,
 			orientationStart,
-			pipStep,
 			pipCount,
+			finalPipStep,
 			labelDown,
 			labelUp,
 			value,
 			pipstep,
 			moveHandle,
-			reducedSteps,
-			tooManyPips,
-			stepDivisor,
 			stepMax,
+			tooManySteps,
 			pointerdown_handler,
 			pointerup_handler,
 			pointerdown_handler_1,

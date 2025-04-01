@@ -45,12 +45,33 @@
 
   let clientStart: null | NormalisedClient = null;
 
+  // by default we would like to show maximum of 50 pips vertically and 100 horizontally
   $: stepMax = vertical ? 50 : 100;
-  $: tooManyPips = (max - min) / step >= stepMax;
-  $: stepDivisor = vertical ? 10 : 20;
-  $: reducedSteps = (max - min) / stepDivisor;
-  $: pipStep = pipstep ?? (tooManyPips ? reducedSteps : 1);
-  $: pipCount = Math.floor((max - min) / (step * pipStep));
+  // track if the amount of steps calculated is greater than the max we'd like to show
+  $: tooManySteps = (max - min) / step >= stepMax;
+
+  // track the number of pips we're actually going to render
+  let pipCount = 0;
+  // track the final pipstep we're going to use
+  let finalPipStep = 1;
+
+  $: {
+    // if no pipstep is provided, we use a sensible default (respecting the stepMax check)
+    finalPipStep = pipstep ?? (tooManySteps ? (max - min) / (stepMax / 5) : 1);
+    pipCount = Math.ceil((max - min) / (step * finalPipStep));
+    // there's no way a browser can render over 1000 pips without performance issues,
+    // so we should limit and warn the user if they're trying to render too many
+    if (pipCount > 1000) {
+      console.warn(
+        'RangePips: You are trying to render too many pips. This will cause performance issues. Try increasing the "pipstep" prop to reduce the number of pips shown.'
+      );
+      // start increasing the finalPipStep until we get a pipCountbelow 1000
+      while (pipCount >= 1000) {
+        finalPipStep = finalPipStep + finalPipStep;
+        pipCount = Math.ceil((max - min) / (step * finalPipStep));
+      }
+    }
+  }
 
   /**
    * function to run when the user clicks on a label
@@ -98,6 +119,7 @@
       class:rsOutOfLimit={isOutOfLimit(min, limits)}
       style="{orientationStart}: 0%;"
       data-val={coerceFloat(min, precision)}
+      data-index={0}
       on:pointerdown={(e) => {
         labelDown(e);
       }}
@@ -116,9 +138,9 @@
   {/if}
 
   {#if (all && rest !== false) || rest}
-    {#each Array(pipCount + 1) as _, i}
-      {@const val = getValueFromIndex(i, min, max, pipStep, step, precision)}
-      {#if val !== min && val !== max}
+    {#each Array(pipCount) as _, i}
+      {@const val = getValueFromIndex(i, min, max, finalPipStep, step, precision)}
+      {#if val > min && val < max}
         <span
           class="rsPip"
           class:rsSelected={isSelected(val, values, precision)}
@@ -126,6 +148,7 @@
           class:rsOutOfLimit={isOutOfLimit(val, limits)}
           style="{orientationStart}: {valueAsPercent(val, min, max, precision)}%;"
           data-val={val}
+          data-index={i}
           on:pointerdown={(e) => {
             labelDown(e);
           }}
@@ -153,6 +176,7 @@
       class:rsOutOfLimit={isOutOfLimit(max, limits)}
       style="{orientationStart}: 100%;"
       data-val={coerceFloat(max, precision)}
+      data-index={pipCount}
       on:pointerdown={(e) => {
         labelDown(e);
       }}

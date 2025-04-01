@@ -32,11 +32,22 @@ export let orientationStart;
 export let moveHandle;
 let clientStart = null;
 $: stepMax = vertical ? 50 : 100;
-$: tooManyPips = (max - min) / step >= stepMax;
-$: stepDivisor = vertical ? 10 : 20;
-$: reducedSteps = (max - min) / stepDivisor;
-$: pipStep = pipstep ?? (tooManyPips ? reducedSteps : 1);
-$: pipCount = Math.floor((max - min) / (step * pipStep));
+$: tooManySteps = (max - min) / step >= stepMax;
+let pipCount = 0;
+let finalPipStep = 1;
+$: {
+  finalPipStep = pipstep ?? (tooManySteps ? (max - min) / (stepMax / 5) : 1);
+  pipCount = Math.ceil((max - min) / (step * finalPipStep));
+  if (pipCount > 1e3) {
+    console.warn(
+      'RangePips: You are trying to render too many pips. This will cause performance issues. Try increasing the "pipstep" prop to reduce the number of pips shown.'
+    );
+    while (pipCount >= 1e3) {
+      finalPipStep = finalPipStep + finalPipStep;
+      pipCount = Math.ceil((max - min) / (step * finalPipStep));
+    }
+  }
+}
 function labelDown(event) {
   clientStart = normalisedClient(event);
 }
@@ -70,6 +81,7 @@ function labelUp(pipValue, event) {
       class:rsOutOfLimit={isOutOfLimit(min, limits)}
       style="{orientationStart}: 0%;"
       data-val={coerceFloat(min, precision)}
+      data-index={0}
       on:pointerdown={(e) => {
         labelDown(e);
       }}
@@ -88,9 +100,9 @@ function labelUp(pipValue, event) {
   {/if}
 
   {#if (all && rest !== false) || rest}
-    {#each Array(pipCount + 1) as _, i}
-      {@const val = getValueFromIndex(i, min, max, pipStep, step, precision)}
-      {#if val !== min && val !== max}
+    {#each Array(pipCount) as _, i}
+      {@const val = getValueFromIndex(i, min, max, finalPipStep, step, precision)}
+      {#if val > min && val < max}
         <span
           class="rsPip"
           class:rsSelected={isSelected(val, values, precision)}
@@ -98,6 +110,7 @@ function labelUp(pipValue, event) {
           class:rsOutOfLimit={isOutOfLimit(val, limits)}
           style="{orientationStart}: {valueAsPercent(val, min, max, precision)}%;"
           data-val={val}
+          data-index={i}
           on:pointerdown={(e) => {
             labelDown(e);
           }}
@@ -125,6 +138,7 @@ function labelUp(pipValue, event) {
       class:rsOutOfLimit={isOutOfLimit(max, limits)}
       style="{orientationStart}: 100%;"
       data-val={coerceFloat(max, precision)}
+      data-index={pipCount}
       on:pointerdown={(e) => {
         labelDown(e);
       }}

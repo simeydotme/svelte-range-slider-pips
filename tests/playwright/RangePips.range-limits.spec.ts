@@ -8,8 +8,8 @@ test.describe('Range and Limits Tests', () => {
   });
 
   test('default range mode should not apply rsInRange class', async ({ page }) => {
-    const firstSlider = page.locator('.rangeSlider').first();
-    const pips = firstSlider.locator('.rsPip');
+    const slider = page.locator('#default-range');
+    const pips = slider.locator('.rsPip');
 
     // No pips should have rsInRange class
     await expect(pips).toHaveCount(21);
@@ -18,8 +18,8 @@ test.describe('Range and Limits Tests', () => {
   });
 
   test('range="min" should apply rsInRange class to pips between 0 and value', async ({ page }) => {
-    const secondSlider = page.locator('.rangeSlider').nth(1);
-    const pips = secondSlider.locator('.rsPip');
+    const slider = page.locator('#range-min');
+    const pips = slider.locator('.rsPip');
 
     // Pips between 0 and value should have rsInRange class
     for (let i = 0; i < (await pips.count()); i++) {
@@ -32,8 +32,8 @@ test.describe('Range and Limits Tests', () => {
   });
 
   test('range="max" should apply rsInRange class to pips between value and 100', async ({ page }) => {
-    const thirdSlider = page.locator('.rangeSlider').nth(2);
-    const pips = thirdSlider.locator('.rsPip');
+    const slider = page.locator('#range-max');
+    const pips = slider.locator('.rsPip');
 
     // Pips between value and 100 should have rsInRange class
     for (let i = 0; i < (await pips.count()); i++) {
@@ -46,8 +46,8 @@ test.describe('Range and Limits Tests', () => {
   });
 
   test('range={true} should apply rsInRange class to pips between handles', async ({ page }) => {
-    const fourthSlider = page.locator('.rangeSlider').nth(3);
-    const pips = fourthSlider.locator('.rsPip');
+    const slider = page.locator('#range-true');
+    const pips = slider.locator('.rsPip');
 
     // Pips between values 40 and 60 should have rsInRange class
     for (let i = 0; i < (await pips.count()); i++) {
@@ -60,8 +60,8 @@ test.describe('Range and Limits Tests', () => {
   });
 
   test('limits should apply rsOutOfLimit class to pips outside limits', async ({ page }) => {
-    const fifthSlider = page.locator('.rangeSlider').nth(4);
-    const pips = fifthSlider.locator('.rsPip');
+    const slider = page.locator('#limits');
+    const pips = slider.locator('.rsPip');
 
     // Pips outside limits should have rsOutOfLimit class
     for (let i = 0; i < (await pips.count()); i++) {
@@ -74,8 +74,8 @@ test.describe('Range and Limits Tests', () => {
   });
 
   test('range="min" with limits should apply both rsInRange and rsOutOfLimit classes correctly', async ({ page }) => {
-    const sixthSlider = page.locator('.rangeSlider').nth(5);
-    const pips = sixthSlider.locator('.rsPip');
+    const slider = page.locator('#range-min-limits');
+    const pips = slider.locator('.rsPip');
 
     // Pips between 0 and value should have rsInRange class
     for (let i = 0; i < (await pips.count()); i++) {
@@ -97,8 +97,8 @@ test.describe('Range and Limits Tests', () => {
   });
 
   test('range="max" with limits should apply both rsInRange and rsOutOfLimit classes correctly', async ({ page }) => {
-    const seventhSlider = page.locator('.rangeSlider').nth(6);
-    const pips = seventhSlider.locator('.rsPip');
+    const slider = page.locator('#range-max-limits');
+    const pips = slider.locator('.rsPip');
 
     // Pips between value and 100 should have rsInRange class
     for (let i = 0; i < (await pips.count()); i++) {
@@ -120,8 +120,8 @@ test.describe('Range and Limits Tests', () => {
   });
 
   test('range={true} with limits should apply both rsInRange and rsOutOfLimit classes correctly', async ({ page }) => {
-    const eighthSlider = page.locator('.rangeSlider').nth(7);
-    const pips = eighthSlider.locator('.rsPip');
+    const slider = page.locator('#range-true-limits');
+    const pips = slider.locator('.rsPip');
 
     // Pips between handles should have rsInRange class
     for (let i = 0; i < (await pips.count()); i++) {
@@ -143,9 +143,9 @@ test.describe('Range and Limits Tests', () => {
   });
 
   test('moving handles should update rsInRange class correctly', async ({ page }) => {
-    const fourthSlider = page.locator('.rangeSlider').nth(3);
-    const pips = fourthSlider.locator('.rsPip');
-    const handles = fourthSlider.locator('.rangeHandle');
+    const slider = page.locator('#range-true');
+    const pips = slider.locator('.rsPip');
+    const handles = slider.locator('.rangeHandle');
 
     // Initial state
     // Pips between handles should have rsInRange class
@@ -158,9 +158,9 @@ test.describe('Range and Limits Tests', () => {
     }
 
     // Move min handle to 40
-    await dragHandleTo(page, fourthSlider, handles.nth(0), 0.2);
+    await dragHandleTo(page, slider, handles.nth(0), 0.2);
     await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '20');
-    await dragHandleTo(page, fourthSlider, handles.nth(1), 1);
+    await dragHandleTo(page, slider, handles.nth(1), 1);
     await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '100');
 
     // Pips between handles should have rsInRange class
@@ -174,8 +174,8 @@ test.describe('Range and Limits Tests', () => {
   });
 
   test('dynamic range and limits controls should work correctly', async ({ page }) => {
-    const ninthSlider = page.locator('.rangeSlider').nth(8);
-    const pips = ninthSlider.locator('.rsPip');
+    const slider = page.locator('#dynamic-controls');
+    const pips = slider.locator('.rsPip');
     const toggleLimitsButton = page.locator('#toggle-limits');
     const toggleRangeButton = page.locator('#toggle-range');
     const minInput = page.locator('#min-limit');
