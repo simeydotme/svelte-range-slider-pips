@@ -60,6 +60,10 @@
         "path": "/test/range-slider/pips/pips"
       },
       {
+        "name": "pipsteps",
+        "path": "/test/range-slider/pips/pipsteps"
+      },
+      {
         "name": "range-limits",
         "path": "/test/range-slider/pips/range-limits"
       },

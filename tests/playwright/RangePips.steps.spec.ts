@@ -43,7 +43,7 @@ test.describe('Step Property Tests', () => {
     const pips = slider.locator('.rsPip');
     const pipValues = slider.locator('.rsPipVal');
 
-    // Should show pips at 0, 4.5, 9, ..., 85.5, 90
+    // Should show pips at 0, 1, 2, ..., 89, 90
     await expect(pips).toHaveCount(91);
     await expect(pipValues).toHaveText([
       '0',
@@ -145,7 +145,7 @@ test.describe('Step Property Tests', () => {
     const pips = slider.locator('.rsPip');
     const pipValues = slider.locator('.rsPipVal');
 
-    // Should show pips at 20, 24, 28, ..., 96, 100
+    // Should show pips at 20, 21, 22, ..., 99, 100
     await expect(pips).toHaveCount(81);
     await expect(pipValues).toHaveText([
       '20',
@@ -237,7 +237,7 @@ test.describe('Step Property Tests', () => {
     const pips = slider.locator('.rsPip');
     const pipValues = slider.locator('.rsPipVal');
 
-    // Should show pips at -20, -15, -10, ..., 45, 50
+    // Should show pips at -20, -19, -18, ..., 49, 50
     await expect(pips).toHaveCount(71);
     await expect(pipValues).toHaveText([
       '-20',
