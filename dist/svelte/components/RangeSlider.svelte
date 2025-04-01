@@ -868,14 +868,14 @@ function ariaLabelFormatter(value2, index) {
     bottom: auto;
     left: auto;
     right: 1.75em;
-    transform: translate(-50%, -50%);
+    translate: -50% -50% 0.01px;
   }
 
   :global(.rangeSlider.rsVertical .rangeHandle.rsActive .rangeFloat),
   :global(.rangeSlider.rsVertical.rsHoverable .rangeHandle:hover .rangeFloat),
   :global(.rangeSlider.rsVertical.rsHoverable .rangeBar:hover .rangeFloat),
   :global(.rangeSlider.rsVertical.rsFocus .rangeBar .rangeFloat) {
-    transform: translate(0%, -50%);
+    translate: 0% -50% 0.01px;
   }
 
   :global(.rangeSlider.rsVertical .rangeBar .rangeFloat) {
