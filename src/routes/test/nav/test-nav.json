@@ -16,6 +16,10 @@
         "path": "/test/range-slider/formatters/handle"
       },
       {
+        "name": "pips",
+        "path": "/test/range-slider/formatters/pips"
+      },
+      {
         "name": "range",
         "path": "/test/range-slider/formatters/range"
       }
