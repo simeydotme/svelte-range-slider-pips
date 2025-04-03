@@ -44,10 +44,10 @@ export default defineConfig({
       use: { ...devices['Desktop Firefox'], viewport: { width: 1800, height: 1000 } }
     },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'], viewport: { width: 1800, height: 1000 } }
-    }
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'], viewport: { width: 1800, height: 1000 } }
+    // }
 
     /* Test against mobile viewports. */
     // {

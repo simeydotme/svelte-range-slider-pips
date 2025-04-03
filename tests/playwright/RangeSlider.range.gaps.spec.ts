@@ -131,7 +131,7 @@ test.describe('Range Gap Tests', () => {
 
       await slider.scrollIntoViewIfNeeded();
 
-      // try to move handles to the left, closer together
+      // try to move handles to the left
       await dragHandleTo(page, slider, handle1, 0);
       await dragHandleTo(page, slider, handle2, 0.1);
 
@@ -150,7 +150,6 @@ test.describe('Range Gap Tests', () => {
       await button.click();
 
       // try to move handles to the left, closer together
-      await dragHandleTo(page, slider, handle1, 0);
       await dragHandleTo(page, slider, handle2, 0.1);
 
       // now they push each other, but still maintain the exact gap

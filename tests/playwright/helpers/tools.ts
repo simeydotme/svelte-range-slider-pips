@@ -34,6 +34,7 @@ export const dragHandleTo = async (
   const targetY = vertical ? sbox.y + sbox.height * pos : sbox.y + sbox.height / 2;
 
   // Ensure we end exactly at target position
-  await page.mouse.move(targetX, targetY, { steps: 10 });
+  await page.mouse.move(targetX, targetY, { steps: 50 });
+  await page.waitForTimeout(100);
   await page.mouse.up();
 };
