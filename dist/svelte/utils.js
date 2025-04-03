@@ -1,4 +1,12 @@
 /**
+ * check if the value is a finite number
+ * @param value the value to check
+ * @returns true if the value is a finite number
+ */
+export function isFiniteNumber(value) {
+    return typeof value === 'number' && !isNaN(value) && isFinite(value);
+}
+/**
  * make sure the value is coerced to a float value
  * @param {number|string} value the value to fix
  * @param {number} precision the number of decimal places to fix to

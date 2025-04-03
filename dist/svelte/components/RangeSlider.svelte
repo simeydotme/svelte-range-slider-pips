@@ -3,6 +3,7 @@
 <script>import { spring as springStore } from "svelte/motion";
 import { createEventDispatcher, onMount } from "svelte";
 import {
+  isFiniteNumber,
   coerceFloat,
   valueAsPercent,
   clampValue,
@@ -79,6 +80,23 @@ const updateValue = () => {
     value = values[0];
   }
 };
+const checkMinMax = () => {
+  if (!isFiniteNumber(min)) {
+    min = 0;
+    console.error("'min' prop must be a valid finite number");
+  }
+  if (!isFiniteNumber(max)) {
+    max = 100;
+    console.error("'max' prop must be a valid finite number");
+  }
+  if (min >= max) {
+    min = 0;
+    max = 100;
+    console.error("'min' prop should be less than 'max'");
+  }
+  min = coerceFloat(min, precision);
+  max = coerceFloat(max, precision);
+};
 const checkValueIsNumber = () => {
   if (typeof value !== "number") {
     value = (max + min) / 2;
@@ -89,13 +107,6 @@ const checkValuesIsArray = () => {
   if (!Array.isArray(values)) {
     values = [value];
     console.error("'values' prop should be an Array");
-  }
-};
-const checkMinMax = () => {
-  if (min >= max) {
-    min = 0;
-    max = 100;
-    console.error("'min' prop should be less than 'max'");
   }
 };
 const checkAriaLabels = () => {
@@ -132,10 +143,10 @@ const checkFormatters = () => {
     handleFormatter = formatter;
   }
 };
+checkMinMax();
 checkValueIsNumber();
 checkValuesIsArray();
 checkValuesAgainstRangeGaps();
-checkMinMax();
 checkFormatters();
 $: value, updateValues();
 $: values, updateValue();

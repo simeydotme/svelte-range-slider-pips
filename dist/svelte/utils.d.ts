@@ -1,5 +1,11 @@
 import type { NormalisedClient } from './types.js';
 /**
+ * check if the value is a finite number
+ * @param value the value to check
+ * @returns true if the value is a finite number
+ */
+export declare function isFiniteNumber(value: number): value is number;
+/**
  * make sure the value is coerced to a float value
  * @param {number|string} value the value to fix
  * @param {number} precision the number of decimal places to fix to

@@ -3,7 +3,7 @@
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * Project home: https://simeydotme.github.io/svelte-range-slider-pips/
  * © 2025 Simon Goellner <simey.me@gmail.com> ~ MPL-2.0 License
- * Published: 2/4/2025
+ * Published: 4/4/2025
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -1407,6 +1407,14 @@
 		return spring;
 	}
 
+	/**
+	 * check if the value is a finite number
+	 * @param value the value to check
+	 * @returns true if the value is a finite number
+	 */
+	function isFiniteNumber(value) {
+	    return typeof value === 'number' && !isNaN(value) && isFinite(value);
+	}
 	/**
 	 * make sure the value is coerced to a float value
 	 * @param {number|string} value the value to fix
@@ -2916,7 +2924,7 @@
 		return child_ctx;
 	}
 
-	// (746:6) {#if float}
+	// (756:6) {#if float}
 	function create_if_block_9(ctx) {
 		let span;
 		let if_block0_anchor;
@@ -2985,7 +2993,7 @@
 		};
 	}
 
-	// (750:10) {#if prefix}
+	// (760:10) {#if prefix}
 	function create_if_block_11(ctx) {
 		let span;
 		let t;
@@ -3011,7 +3019,7 @@
 		};
 	}
 
-	// (750:95) {#if suffix}
+	// (760:95) {#if suffix}
 	function create_if_block_10(ctx) {
 		let span;
 		let t;
@@ -3037,7 +3045,7 @@
 		};
 	}
 
-	// (722:2) {#each values as value, index}
+	// (732:2) {#each values as value, index}
 	function create_each_block(ctx) {
 		let span1;
 		let span0;
@@ -3177,7 +3185,7 @@
 		};
 	}
 
-	// (757:2) {#if limits}
+	// (767:2) {#if limits}
 	function create_if_block_8(ctx) {
 		let span;
 		let span_style_value;
@@ -3204,7 +3212,7 @@
 		};
 	}
 
-	// (764:2) {#if hasRange}
+	// (774:2) {#if hasRange}
 	function create_if_block_1(ctx) {
 		let span;
 		let if_block = /*rangeFloat*/ ctx[14] && create_if_block_2(ctx);
@@ -3263,7 +3271,7 @@
 		};
 	}
 
-	// (772:6) {#if rangeFloat}
+	// (782:6) {#if rangeFloat}
 	function create_if_block_2(ctx) {
 		let span;
 
@@ -3313,7 +3321,7 @@
 		};
 	}
 
-	// (781:10) {:else}
+	// (791:10) {:else}
 	function create_else_block(ctx) {
 		let if_block0_anchor;
 		let html_tag;
@@ -3456,7 +3464,7 @@
 		};
 	}
 
-	// (774:10) {#if rangeFormatter}
+	// (784:10) {#if rangeFormatter}
 	function create_if_block_3(ctx) {
 		let html_tag;
 		let raw_value = /*rangeFormatter*/ ctx[26](/*values*/ ctx[2][0], /*values*/ ctx[2][1], valueAsPercent(/*values*/ ctx[2][0], /*min*/ ctx[0], /*max*/ ctx[1], /*precision*/ ctx[8]), valueAsPercent(/*values*/ ctx[2][1], /*min*/ ctx[0], /*max*/ ctx[1], /*precision*/ ctx[8])) + "";
@@ -3484,7 +3492,7 @@
 		};
 	}
 
-	// (783:12) {#if prefix}
+	// (793:12) {#if prefix}
 	function create_if_block_7(ctx) {
 		let span;
 		let t;
@@ -3510,7 +3518,7 @@
 		};
 	}
 
-	// (783:88) {#if suffix}
+	// (793:88) {#if suffix}
 	function create_if_block_6(ctx) {
 		let span;
 		let t;
@@ -3536,7 +3544,7 @@
 		};
 	}
 
-	// (787:12) {#if prefix}
+	// (797:12) {#if prefix}
 	function create_if_block_5(ctx) {
 		let span;
 		let t;
@@ -3562,7 +3570,7 @@
 		};
 	}
 
-	// (787:89) {#if suffix}
+	// (797:89) {#if suffix}
 	function create_if_block_4(ctx) {
 		let span;
 		let t;
@@ -3588,7 +3596,7 @@
 		};
 	}
 
-	// (795:2) {#if pips}
+	// (805:2) {#if pips}
 	function create_if_block(ctx) {
 		let rangepips;
 		let current;
@@ -4004,6 +4012,27 @@
 			}
 		};
 
+		const checkMinMax = () => {
+			if (!isFiniteNumber(min)) {
+				$$invalidate(0, min = 0);
+				console.error("'min' prop must be a valid finite number");
+			}
+
+			if (!isFiniteNumber(max)) {
+				$$invalidate(1, max = 100);
+				console.error("'max' prop must be a valid finite number");
+			}
+
+			if (min >= max) {
+				$$invalidate(0, min = 0);
+				$$invalidate(1, max = 100);
+				console.error("'min' prop should be less than 'max'");
+			}
+
+			$$invalidate(0, min = coerceFloat(min, precision));
+			$$invalidate(1, max = coerceFloat(max, precision));
+		};
+
 		const checkValueIsNumber = () => {
 			if (typeof value !== 'number') {
 				$$invalidate(6, value = (max + min) / 2);
@@ -4015,14 +4044,6 @@
 			if (!Array.isArray(values)) {
 				$$invalidate(2, values = [value]);
 				console.error("'values' prop should be an Array");
-			}
-		};
-
-		const checkMinMax = () => {
-			if (min >= max) {
-				$$invalidate(0, min = 0);
-				$$invalidate(1, max = 100);
-				console.error("'min' prop should be less than 'max'");
 			}
 		};
 
@@ -4076,11 +4097,11 @@
 		};
 
 		// fixup the value/values at render
-		checkValueIsNumber();
+		checkMinMax();
 
+		checkValueIsNumber();
 		checkValuesIsArray();
 		checkValuesAgainstRangeGaps();
-		checkMinMax();
 		checkFormatters();
 
 		/**
