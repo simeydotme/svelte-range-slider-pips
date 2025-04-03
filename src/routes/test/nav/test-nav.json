@@ -27,7 +27,7 @@
   },
   {
     "name": "minmax",
-    "path": "",
+    "path": "/test/range-slider/minmax",
     "children": [
       {
         "name": "custom-min-max",

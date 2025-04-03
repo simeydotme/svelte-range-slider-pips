@@ -29,15 +29,15 @@
 
   // Event handling
   function handleChange(event: CustomEvent) {
-    console.log('Change event:', event.detail.values);
+    console.log(`Change event: [${event.detail.values[0]}, ${event.detail.values[1]}]`);
   }
 
   function handleStart(event: CustomEvent) {
-    console.log('Start event:', event.detail.values);
+    console.log(`Start event: [${event.detail.values[0]}, ${event.detail.values[1]}]`);
   }
 
   function handleStop(event: CustomEvent) {
-    console.log('Stop event:', event.detail.values);
+    console.log(`Stop event: [${event.detail.values[0]}, ${event.detail.values[1]}]`);
   }
 </script>
 
