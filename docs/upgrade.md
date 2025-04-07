@@ -352,6 +352,78 @@ The new `class` property allows you to add custom CSS classes to the slider:
 - These changes are compatible with both single and range sliders
 - This feature was added to address the "gliding" effect during continuous sliding, making the slider feel more responsive and precise
 
+## Float Positioning Changes [dd7847f](https://github.com/simeydotme/svelte-range-slider-pips/commit/dd7847f528cef2de50f75985ac9fab4f76fa6d6a) [b5b54ac](https://github.com/simeydotme/svelte-range-slider-pips/commit/b5b54ac98968724efe1f68fbde503bebe8566305) [improvement]
+
+In v4, the positioning of float elements has been updated to improve performance and fix visual glitches:
+
+### CSS Transforms Update
+
+The component now uses the modern `translate` property instead of `transform: translate()`:
+
+- Changed `transform: translate(-50%, -50%)` to `translate: -50% -50% 0.01px`
+- Added hardware acceleration via 3D transforms for better performance
+- Improved animation easing with `cubic-bezier` timing
+
+### Float Visual Improvements
+
+- Refined padding and border radius for better appearance
+- Added subtle scale animations for a more polished feel
+- Fixed positioning issues in vertical mode
+
+### Impact on Custom CSS
+
+If you've written custom CSS targeting the float elements, you may need to update:
+
+1. **Custom positioning**: If overriding the position of floats, use the `translate` property instead of `transform`
+2. **Animations**: If customizing float animations, update to match the new properties
+3. **Z-index handling**: The component now uses 3D transforms which create a new stacking context
+
+### Example of Updated Custom CSS
+
+```css
+/* Before (v3) */
+.rangeSlider .rangeHandle.active .rangeFloat {
+  transform: translate(-50%, -10px);
+}
+
+/* After (v4) */
+.rangeSlider .rangeHandle.rsActive .rangeFloat {
+  translate: -50% -10px 0.01px;
+}
+```
+
+### Important Notes
+
+- These changes improve rendering on high-DPI displays
+- The visual appearance of floats should be preserved by default
+- Only users with custom float positioning CSS need to make updates
+- The changes affect both handle floats and range floats
+
+## CSS Positioning Changes [0ef2b0e](https://github.com/simeydotme/svelte-range-slider-pips/commit/0ef2b0e2c599242f4a4282c90b4b4471f4b8f168) [improvement]
+
+We've completely changed how handles and range bars are positioned in v4. This is a significant improvement, but might need your attention if you've written custom CSS.
+
+### What Changed
+
+- Handles and range bar now use CSS `translate` instead of `left`/`right` positioning
+- Added GPU acceleration with 3D transforms for smoother animations
+- Better pip rendering that won't kill your browser when you have tons of them
+
+### If You've Written Custom CSS
+
+If you've styled the slider positions with custom CSS, you might need to update your code.
+The component now uses CSS custom properties internally to control positions. 
+The handles use `--handle-pos` and the range uses `--range-start`, `--range-end` and `--range-size`.
+
+### Performance Boost
+
+These changes make a big difference in how smoothly the slider runs:
+- Much smoother animations, especially on mobile
+- Better performance with lots of pips
+- No more janky movements when dragging quickly
+
+You don't need to do anything to get these benefits unless you had custom positioning CSS.
+
 ## CSS Class Name Changes [2343440f](https://github.com/simeydotme/svelte-range-slider-pips/commit/2343440fb1fb8d233345e7684fa9d4198fd19774) [breaking-change]
 
 In v4, CSS class names have been prefixed with `rs` to prevent conflicts with generic CSS frameworks like DaisyUI or UnoCSS. This change affects state and modifier classes used in the component.
@@ -517,8 +589,6 @@ The component's CSS variables are @layered:
 - Wrapped in `@layer base` to prevent conflicts with Tailwind CSS
 - this shouldnt affect existing users
 
-```
-
 ## Migration Steps
 
 1. Update any custom CSS selectors that target the component's state or modifier classes to use the new prefixed names
@@ -540,4 +610,4 @@ After (v4):
 .rangeSlider .rsPip.rsSelected {
   background-color: blue;
 }
-``` 
+```

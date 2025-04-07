@@ -16,8 +16,7 @@ If there are any open issues, or you find a valid bug, please feel free to open 
 
 When making changes/edits to the code you should use the `/test/` folder and check the [README.md](test/README.md) in there to help with testing all the functionality.
 
-## 🧪 help with creating a proper test-suite
+## 🧪 filling in gaps in the test-suite
 
-I am considering how to add a test-suite as this component has a lot of different options and possible outcomes. I am not currently familiar with how to do this in Svelte, so any help/advice is appreciated.
-
-**The main goal would be to make it super simple to setup and run / expand for anyone contributing, and I wouldn't accept if it seems obtuse.**
+The test-suite is written in playwright, I've covered a large amount of the functionality, **but there are still some gaps**. Especially with edge cases, RTL Support, and interaction of different props with each other. _Any help to fill in some of these gaps would be greatly appreciated_. And
+it would be a **_great way for a junior automation / QA engineer to get some open-source experience_**. 
