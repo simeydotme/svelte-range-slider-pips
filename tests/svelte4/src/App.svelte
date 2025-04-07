@@ -4,7 +4,7 @@
   import Counter from './lib/Counter.svelte';
   import { RangeSlider } from 'svelte-range-slider-pips';
 
-  let value = 5;
+  let values = [-7,7];
 </script>
 
 <main>
@@ -19,12 +19,12 @@
   <h1>Vite + Svelte</h1>
 
   <div class="card">
-    <Counter bind:count={value} />
+    <Counter bind:values />
   </div>
 
-  <RangeSlider bind:value min={-10} max={10} pips first="label" last="label" />
+  <RangeSlider bind:values min={-10} max={10} pips first="label" last="label" />
 
-  {value}
+  {values}
 </main>
 
 <style>

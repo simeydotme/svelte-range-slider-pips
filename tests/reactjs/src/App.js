@@ -4,7 +4,7 @@ import RangeSlider from 'svelte-range-slider-pips';
 // import type { RangeSlider as RangeSliderType } from 'svelte-range-slider-pips';
 
 export default function MyComponent() {
-  const [values, setValues] = useState([33, 66]);
+  const [values, setValues] = useState([-7, 7]);
   const MySlider = useRef();
   const $node = useRef();
 
@@ -12,7 +12,14 @@ export default function MyComponent() {
     if (!MySlider.current) {
       MySlider.current = new RangeSlider({
         target: $node.current,
-        props: { values: values, range: true }
+        props: { 
+          values: values, 
+          pips: true,
+          first: "label",
+          last: "label",
+          range: true,
+          min: -10,
+          max: 10 }
       });
       MySlider.current.$on('change', (e) => {
         setValues(e.detail.values);

@@ -8,7 +8,7 @@
 
 <h1>With Runes</h1>
 
-<button on:click={() => value++}> add value </button>
+<button onclick={() => value++}> add value </button>
 
 {value}
 <RangeSlider bind:value pips first="label" last="label" rest="pip" />

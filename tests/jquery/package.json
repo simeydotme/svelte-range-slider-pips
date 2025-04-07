@@ -5,6 +5,7 @@
   "description": "Test of jQuery execution",
   "main": "index.html",
   "scripts": {
+    "dev": "serve .",
     "start": "serve ."
   },
   "devDependencies": {

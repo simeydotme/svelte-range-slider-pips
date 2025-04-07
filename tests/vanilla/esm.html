@@ -14,16 +14,20 @@
           const rangeSliderPips = new RangeSliderPips({
             target: slider,
             props: {
+              values: [-7,7],
               pips: true,
-              all: 'label',
-              float: true
+              first: "label",
+              last: "label",
+              range: true,
+              min: -10,
+              max: 10
             }
           });
 
           // listen for changes to the slider and update the output
           const output = document.querySelector('#value-output');
           rangeSliderPips.$on('change', function (e) {
-            output.innerHTML = e.detail.value;
+            output.innerHTML = e.detail.values;
           });
         }
       };
@@ -32,6 +36,6 @@
   <body style="padding: 30px">
     <h1>Testing loading JS (esm) script</h1>
     <div class="my-slider"></div>
-    <h3 id="value-output">0</h3>
+    <h3 id="value-output">-7,7</h3>
   </body>
 </html>

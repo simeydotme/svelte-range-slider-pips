@@ -6,13 +6,17 @@
   import type { RangeSlider as RangeSliderType } from 'svelte-range-slider-pips';
   import RangeSlider from 'svelte-range-slider-pips';
 
-  const values = ref([22, 44]); // values to bind to slider
+  const values = ref([-7, 7]); // values to bind to slider
   const $node: Ref<HTMLElement | null> = ref(null); // dom reference for binding on mount
   let MyRangeSlider: RangeSliderType; // slider instance reference
   const sliderProps: ComponentProps<RangeSliderType> = {
     values: values.value,
     pips: true,
-    range: true
+    first: "label",
+    last: "label",
+    range: true,
+    min: -10,
+    max: 10
   };
 
   onMounted(() => {
