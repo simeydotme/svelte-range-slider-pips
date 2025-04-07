@@ -50,21 +50,6 @@
   <h5>Range={true} with limits</h5>
   <RangeSlider id="range-true-limits" pips all="label" range={true} values={[40, 60]} limits={[20, 80]} />
 
-  <h5>Dynamic range and limits controls</h5>
-  <div class="controls">
-    <button id="toggle-range" on:click={toggleRange}>
-      {hasRange ? 'Remove Range' : 'Add Range'}
-    </button>
-    <button id="toggle-limits" on:click={toggleLimits}>
-      {hasLimits ? 'Remove Limits' : 'Add Limits'}
-    </button>
-    <div class="limit-inputs">
-      <label for="min-limit">Min Limit:</label>
-      <input id="min-limit" type="number" bind:value={minLimit} min="0" max="100" on:change={updateLimits} />
-      <label for="max-limit">Max Limit:</label>
-      <input id="max-limit" type="number" bind:value={maxLimit} min="0" max="100" on:change={updateLimits} />
-    </div>
-  </div>
   <RangeSlider
     id="dynamic-controls"
     pips
@@ -73,4 +58,21 @@
     limits={hasLimits ? [minLimit, maxLimit] : null}
     values={hasRange ? [40, 60] : [50]}
   />
+  <h5>Dynamic range and limits controls</h5>
+  <div class="controls !items-end">
+    <div>
+      <label for="min-limit">Min Limit:</label>
+      <input id="min-limit" type="number" bind:value={minLimit} min="0" max="100" on:change={updateLimits} />
+    </div>
+    <div>
+      <label for="max-limit">Max Limit:</label>
+      <input id="max-limit" type="number" bind:value={maxLimit} min="0" max="100" on:change={updateLimits} />
+    </div>
+    <button id="toggle-range" on:click={toggleRange}>
+      {hasRange ? 'Remove Range' : 'Add Range'}
+    </button>
+    <button id="toggle-limits" on:click={toggleLimits}>
+      {hasLimits ? 'Remove Limits' : 'Add Limits'}
+    </button>
+  </div>
 </div>

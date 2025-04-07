@@ -26,6 +26,10 @@
     ]
   },
   {
+    "name": "limits",
+    "path": "/test/range-slider/limits"
+  },
+  {
     "name": "minmax",
     "path": "/test/range-slider/minmax",
     "children": [
@@ -60,16 +64,16 @@
         "path": "/test/range-slider/pips/labels"
       },
       {
+        "name": "limits",
+        "path": "/test/range-slider/pips/limits"
+      },
+      {
         "name": "pips",
         "path": "/test/range-slider/pips/pips"
       },
       {
         "name": "pipsteps",
         "path": "/test/range-slider/pips/pipsteps"
-      },
-      {
-        "name": "range-limits",
-        "path": "/test/range-slider/pips/range-limits"
       },
       {
         "name": "steps",
@@ -111,6 +115,14 @@
     "name": "states",
     "path": "",
     "children": [
+      {
+        "name": "disabled",
+        "path": "/test/range-slider/states/disabled"
+      },
+      {
+        "name": "hoverable",
+        "path": "/test/range-slider/states/hoverable"
+      },
       {
         "name": "reversed",
         "path": "/test/range-slider/states/reversed"

@@ -3,7 +3,7 @@ import { dragHandleTo } from './helpers/tools.js';
 
 test.describe('Range and Limits Tests', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/test/range-slider/pips/range-limits');
+    await page.goto('/test/range-slider/pips/limits');
     await page.waitForLoadState('networkidle');
   });
 
