@@ -1,5 +1,5 @@
 <script>
-  export let values = [0,0];
+  export let values = [0, 0];
   const increment = () => {
     values[0] -= 1;
     values[1] += 1;

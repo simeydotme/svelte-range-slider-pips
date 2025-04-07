@@ -12,7 +12,7 @@ describe('isFiniteNumber', () => {
   it('should return false for non-numbers', () => {
     // Test with type assertions to properly test the type guard
     const testValues: unknown[] = ['42', null, undefined, {}, []];
-    testValues.forEach(value => {
+    testValues.forEach((value) => {
       expect(isFiniteNumber(value as number)).toBe(false);
     });
   });
@@ -25,4 +25,4 @@ describe('isFiniteNumber', () => {
     expect(isFiniteNumber(Infinity)).toBe(false);
     expect(isFiniteNumber(-Infinity)).toBe(false);
   });
-}); 
+});

@@ -47,11 +47,11 @@
   <RangeSlider id="range-limits-pushy" range={true} values={[30, 50]} limits={[10, 70]} pushy={true} />
 
   <h5>Range slider with limits and rangeGap</h5>
-  <RangeSlider 
-    id="range-limits-gap" 
-    range={true} 
-    values={[20, 30]} 
-    limits={[10, 70]} 
+  <RangeSlider
+    id="range-limits-gap"
+    range={true}
+    values={[20, 30]}
+    limits={[10, 70]}
     rangeGapMin={10}
     rangeGapMax={30}
   />
@@ -60,7 +60,16 @@
   <RangeSlider id="vertical-limits" vertical={true} limits={[10, 70]} pips float first="label" last="label" />
 
   <h5>Reversed vertical slider with limits</h5>
-  <RangeSlider id="reversed-vertical-limits" vertical={true} reversed={true} limits={[10, 70]} pips float first="label" last="label" />
+  <RangeSlider
+    id="reversed-vertical-limits"
+    vertical={true}
+    reversed={true}
+    limits={[10, 70]}
+    pips
+    float
+    first="label"
+    last="label"
+  />
 
   <h5>Dynamic controls</h5>
   <div class="controls !items-end">
@@ -95,9 +104,9 @@
     range={hasRange}
     limits={hasLimits ? [minLimit, maxLimit] : null}
     values={hasRange ? [30, 50] : [40]}
-    pushy={pushy}
-    rangeGapMin={rangeGapMin}
-    rangeGapMax={rangeGapMax}
+    {pushy}
+    {rangeGapMin}
+    {rangeGapMax}
   />
 </div>
 

@@ -72,7 +72,7 @@ test.describe('RangeSlider Limits Tests', () => {
     // Try to drag min handle below min limit
     await dragHandleTo(page, slider, handles.nth(0), 0);
     await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '10'); // constrained by limits min
-    await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '30'); // doesn't move 
+    await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '30'); // doesn't move
 
     // Try to drag max handle above max limit
     await dragHandleTo(page, slider, handles.nth(1), 1);
@@ -91,7 +91,7 @@ test.describe('RangeSlider Limits Tests', () => {
     // Try to drag handle to bottom (1) should hit min limit
     await dragHandleTo(page, slider, handle, 1, true);
     await expect(handle).toHaveAttribute('aria-valuenow', '10');
-    await expect(handle).toHaveCSS('translate', '0px 180px'); // vertical sliders are 200px tall and go from bottom->top, so 10% from the bottom 
+    await expect(handle).toHaveCSS('translate', '0px 180px'); // vertical sliders are 200px tall and go from bottom->top, so 10% from the bottom
 
     // Try to drag handle to top (0) should hit max limit
     await dragHandleTo(page, slider, handle, 0, true);
@@ -111,7 +111,7 @@ test.describe('RangeSlider Limits Tests', () => {
     // In reversed vertical mode, dragging to top (0) should hit min limit
     await dragHandleTo(page, slider, handle, 0, true);
     await expect(handle).toHaveAttribute('aria-valuenow', '10');
-    await expect(handle).toHaveCSS('translate', '0px 20px'); // vertical reversed sliders go from top->bottom, so 10% from the top 
+    await expect(handle).toHaveCSS('translate', '0px 20px'); // vertical reversed sliders go from top->bottom, so 10% from the top
   });
 
   test('dynamic controls should update limits correctly', async ({ page }) => {
@@ -234,6 +234,5 @@ test.describe('RangeSlider Limits Tests', () => {
     // should push the first handle to the min limit
     await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '10');
     await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '10');
-
   });
-}); 
+});

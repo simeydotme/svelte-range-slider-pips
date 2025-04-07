@@ -4,7 +4,7 @@
   import Counter from './lib/Counter.svelte';
   import { RangeSlider } from 'svelte-range-slider-pips';
 
-  let values = [-7,7];
+  let values = [-7, 7];
 </script>
 
 <main>

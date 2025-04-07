@@ -3,10 +3,10 @@ $(function () {
   const rangeSliderPips = new RangeSliderPips({
     target: slider,
     props: {
-      values: [-7,7],
+      values: [-7, 7],
       pips: true,
-      first: "label",
-      last: "label",
+      first: 'label',
+      last: 'label',
       range: true,
       min: -10,
       max: 10

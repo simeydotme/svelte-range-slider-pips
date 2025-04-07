@@ -12,14 +12,15 @@ export default function MyComponent() {
     if (!MySlider.current) {
       MySlider.current = new RangeSlider({
         target: $node.current,
-        props: { 
-          values: values, 
+        props: {
+          values: values,
           pips: true,
-          first: "label",
-          last: "label",
+          first: 'label',
+          last: 'label',
           range: true,
           min: -10,
-          max: 10 }
+          max: 10
+        }
       });
       MySlider.current.$on('change', (e) => {
         setValues(e.detail.values);

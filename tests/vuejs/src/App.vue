@@ -12,8 +12,8 @@
   const sliderProps: ComponentProps<RangeSliderType> = {
     values: values.value,
     pips: true,
-    first: "label",
-    last: "label",
+    first: 'label',
+    last: 'label',
     range: true,
     min: -10,
     max: 10

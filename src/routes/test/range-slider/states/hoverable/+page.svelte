@@ -35,11 +35,7 @@
   />
 
   <h5>Dynamic Hoverable State</h5>
-  <button 
-    id="toggle-hoverable-btn"
-    on:click={() => isHoverable = !isHoverable} 
-    class:btn-primary={isHoverable}
-  >
+  <button id="toggle-hoverable-btn" on:click={() => (isHoverable = !isHoverable)} class:btn-primary={isHoverable}>
     Toggle Hoverable ({isHoverable ? 'On' : 'Off'})
   </button>
   <RangeSlider
