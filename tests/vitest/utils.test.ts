@@ -10,7 +10,8 @@ import {
   isInRange,
   isOutOfLimit,
   isSelected,
-  getValueFromIndex
+  getValueFromIndex,
+  isFiniteNumber
 } from '../../src/lib/utils.js';
 
 describe('coerceFloat()', () => {
@@ -263,5 +264,31 @@ describe('getValueFromIndex()', () => {
 
   it('should respect precision', () => {
     expect(getValueFromIndex(1, 0, 100, 1, 10.123, 3)).toBeCloseTo(10.123);
+  });
+});
+
+describe('isFiniteNumber', () => {
+  it('should return true for finite numbers', () => {
+    expect(isFiniteNumber(42)).toBe(true);
+    expect(isFiniteNumber(0)).toBe(true);
+    expect(isFiniteNumber(-42)).toBe(true);
+    expect(isFiniteNumber(3.14)).toBe(true);
+  });
+
+  it('should return false for non-numbers', () => {
+    // Test with type assertions to properly test the type guard
+    const testValues: unknown[] = ['42', null, undefined, {}, []];
+    testValues.forEach(value => {
+      expect(isFiniteNumber(value as number)).toBe(false);
+    });
+  });
+
+  it('should return false for NaN', () => {
+    expect(isFiniteNumber(NaN)).toBe(false);
+  });
+
+  it('should return false for Infinity', () => {
+    expect(isFiniteNumber(Infinity)).toBe(false);
+    expect(isFiniteNumber(-Infinity)).toBe(false);
   });
 });
