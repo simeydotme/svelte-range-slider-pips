@@ -65,10 +65,10 @@
   <RangeSlider id="step-23-minmax" pips all="label" step={23} min={23} max={99} />
 
   <h5>Step of 0.1 (1000 steps)</h5>
-  <RangeSlider id="step-0-1" pips all="label" step={0.1} />
+  <RangeSlider id="step-0-1" pips all="label" step={0.1} float />
 
   <h5>Step of 0.01 (10000 steps)</h5>
-  <RangeSlider id="step-0-01" pips all="label" step={0.01} />
+  <RangeSlider id="step-0-01" pips all="label" step={0.01} float />
 
   <h5>Step of 100 (only 1 & 100 selectable)</h5>
   <RangeSlider id="step-100" pips all="label" step={100} />

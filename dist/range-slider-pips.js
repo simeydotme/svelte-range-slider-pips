@@ -1649,7 +1649,7 @@
 		return child_ctx;
 	}
 
-	// (89:2) {#if (all && first !== false) || first}
+	// (90:2) {#if (all && first !== false) || first}
 	function create_if_block_9$1(ctx) {
 		let span;
 		let span_style_value;
@@ -1729,7 +1729,7 @@
 		};
 	}
 
-	// (105:6) {#if all === 'label' || first === 'label'}
+	// (106:6) {#if all === 'label' || first === 'label'}
 	function create_if_block_10$1(ctx) {
 		let span;
 		let t0;
@@ -1798,7 +1798,7 @@
 		};
 	}
 
-	// (107:10) {#if prefix}
+	// (108:10) {#if prefix}
 	function create_if_block_12(ctx) {
 		let span;
 		let t;
@@ -1824,7 +1824,7 @@
 		};
 	}
 
-	// (109:10) {#if suffix}
+	// (110:10) {#if suffix}
 	function create_if_block_11$1(ctx) {
 		let span;
 		let t;
@@ -1850,7 +1850,7 @@
 		};
 	}
 
-	// (115:2) {#if (all && rest !== false) || rest}
+	// (116:2) {#if (all && rest !== false) || rest}
 	function create_if_block_4$1(ctx) {
 		let each_1_anchor;
 		let each_value = ensure_array_like(Array(/*pipCount*/ ctx[20]));
@@ -1911,7 +1911,7 @@
 		};
 	}
 
-	// (118:6) {#if val > min && val < max}
+	// (119:6) {#if val > min && val < max}
 	function create_if_block_5$1(ctx) {
 		let span;
 		let t;
@@ -2000,7 +2000,7 @@
 		};
 	}
 
-	// (134:10) {#if all === 'label' || rest === 'label'}
+	// (135:10) {#if all === 'label' || rest === 'label'}
 	function create_if_block_6$1(ctx) {
 		let span;
 		let t0;
@@ -2063,7 +2063,7 @@
 		};
 	}
 
-	// (136:14) {#if true || prefix}
+	// (137:14) {#if true || prefix}
 	function create_if_block_8$1(ctx) {
 		let span;
 		let t;
@@ -2089,7 +2089,7 @@
 		};
 	}
 
-	// (138:14) {#if true || suffix}
+	// (139:14) {#if true || suffix}
 	function create_if_block_7$1(ctx) {
 		let span;
 		let t;
@@ -2115,7 +2115,7 @@
 		};
 	}
 
-	// (116:4) {#each Array(pipCount) as _, i}
+	// (117:4) {#each Array(pipCount) as _, i}
 	function create_each_block$1(ctx) {
 		let if_block_anchor;
 		let if_block = /*val*/ ctx[37] > /*min*/ ctx[1] && /*val*/ ctx[37] < /*max*/ ctx[2] && create_if_block_5$1(ctx);
@@ -2153,7 +2153,7 @@
 		};
 	}
 
-	// (146:2) {#if (all && last !== false) || last}
+	// (147:2) {#if (all && last !== false) || last}
 	function create_if_block$1(ctx) {
 		let span;
 		let span_style_value;
@@ -2237,7 +2237,7 @@
 		};
 	}
 
-	// (162:6) {#if all === 'label' || last === 'label'}
+	// (163:6) {#if all === 'label' || last === 'label'}
 	function create_if_block_1$1(ctx) {
 		let span;
 		let t0;
@@ -2306,7 +2306,7 @@
 		};
 	}
 
-	// (164:10) {#if prefix}
+	// (165:10) {#if prefix}
 	function create_if_block_3$1(ctx) {
 		let span;
 		let t;
@@ -2332,7 +2332,7 @@
 		};
 	}
 
-	// (166:10) {#if suffix}
+	// (167:10) {#if suffix}
 	function create_if_block_2$1(ctx) {
 		let span;
 		let t;
@@ -2462,6 +2462,8 @@
 			}
 		};
 	}
+
+	const limitPipCount = 1000;
 
 	function instance$1($$self, $$props, $$invalidate) {
 		let stepMax;
@@ -2595,13 +2597,13 @@
 
 					$$invalidate(20, pipCount = Math.ceil((max - min) / (step * finalPipStep)));
 
-					// there's no way a browser can render over 1000 pips without performance issues,
+					// there's no way a browser can render over thousands of pips without performance issues,
 					// so we should limit and warn the user if they're trying to render too many
-					if (pipCount > 1000) {
+					if (pipCount > limitPipCount) {
 						console.warn('RangePips: You are trying to render too many pips. This will cause performance issues. Try increasing the "pipstep" prop to reduce the number of pips shown.');
 
-						// start increasing the finalPipStep until we get a pipCountbelow 1000
-						while (pipCount >= 1000) {
+						// start increasing the finalPipStep until we get a pipCount below limitPipCount
+						while (pipCount >= limitPipCount) {
 							$$invalidate(21, finalPipStep = finalPipStep + finalPipStep);
 							$$invalidate(20, pipCount = Math.ceil((max - min) / (step * finalPipStep)));
 						}

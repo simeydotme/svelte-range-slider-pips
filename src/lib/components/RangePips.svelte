@@ -52,6 +52,7 @@
 
   // track the number of pips we're actually going to render
   let pipCount = 0;
+  const limitPipCount = 1000;
   // track the final pipstep we're going to use
   let finalPipStep = 1;
 
@@ -59,14 +60,14 @@
     // if no pipstep is provided, we use a sensible default (respecting the stepMax check)
     finalPipStep = pipstep ?? (tooManySteps ? (max - min) / (stepMax / 5) : 1);
     pipCount = Math.ceil((max - min) / (step * finalPipStep));
-    // there's no way a browser can render over 1000 pips without performance issues,
+    // there's no way a browser can render over thousands of pips without performance issues,
     // so we should limit and warn the user if they're trying to render too many
-    if (pipCount > 1000) {
+    if (pipCount > limitPipCount) {
       console.warn(
         'RangePips: You are trying to render too many pips. This will cause performance issues. Try increasing the "pipstep" prop to reduce the number of pips shown.'
       );
-      // start increasing the finalPipStep until we get a pipCountbelow 1000
-      while (pipCount >= 1000) {
+      // start increasing the finalPipStep until we get a pipCount below limitPipCount
+      while (pipCount >= limitPipCount) {
         finalPipStep = finalPipStep + finalPipStep;
         pipCount = Math.ceil((max - min) / (step * finalPipStep));
       }

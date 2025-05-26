@@ -34,15 +34,16 @@ let clientStart = null;
 $: stepMax = vertical ? 50 : 100;
 $: tooManySteps = (max - min) / step >= stepMax;
 let pipCount = 0;
+const limitPipCount = 1e3;
 let finalPipStep = 1;
 $: {
   finalPipStep = pipstep ?? (tooManySteps ? (max - min) / (stepMax / 5) : 1);
   pipCount = Math.ceil((max - min) / (step * finalPipStep));
-  if (pipCount > 1e3) {
+  if (pipCount > limitPipCount) {
     console.warn(
       'RangePips: You are trying to render too many pips. This will cause performance issues. Try increasing the "pipstep" prop to reduce the number of pips shown.'
     );
-    while (pipCount >= 1e3) {
+    while (pipCount >= limitPipCount) {
       finalPipStep = finalPipStep + finalPipStep;
       pipCount = Math.ceil((max - min) / (step * finalPipStep));
     }
