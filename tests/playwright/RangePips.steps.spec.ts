@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { dragHandleTo } from './helpers/tools.js';
 
 test.describe('Step Property Tests', () => {
   test.beforeEach(async ({ page }) => {
@@ -619,6 +620,22 @@ test.describe('Step Property Tests', () => {
     // Range is 69 (92-23), which is not wholly divisible by 23
     await expect(pips).toHaveCount(5);
     await expect(pipValues).toHaveText(['23', '46', '69', '92', '99']);
+  });
+
+  test('step of 23 with custom min/max should allow selecting final value of 99', async ({ page }) => {
+    const slider = page.locator('#step-23-minmax');
+    const pips = slider.locator('.rsPip');
+    const pipValues = slider.locator('.rsPipVal');
+    const handle = slider.locator('.rangeHandle');
+
+    // Verify the final pip value is 99
+    await expect(pipValues.last()).toHaveText('99');
+
+    // drag handle to end, to select value 99
+    await dragHandleTo(page, slider, handle, 1);
+
+    // Verify the handle moved to the correct position
+    await expect(handle).toHaveAttribute('aria-valuenow', '99');
   });
 
   test('step of 0.1 should reduce number of pips due to stepMax limit', async ({ page }) => {

@@ -3,7 +3,7 @@
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * Project home: https://simeydotme.github.io/svelte-range-slider-pips/
  * © 2025 Simon Goellner <simey.me@gmail.com> ~ MPL-2.0 License
- * Published: 7/4/2025
+ * Published: 26/5/2025
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -1481,7 +1481,21 @@
 	const constrainAndAlignValue = function (value, min, max, step, precision = 2, limits = null) {
 	    // if limits are provided, clamp the value between the limits
 	    // if no limits are provided, clamp the value between the min and max
+	    // before we start aligning the value
 	    value = clampValue(value, limits?.[0] ?? min, limits?.[1] ?? max);
+	    // escape early if the value is at/beyond the known limits
+	    if (limits?.[0] && value <= limits[0]) {
+	        return limits?.[0];
+	    }
+	    else if (limits?.[1] && value >= limits[1]) {
+	        return limits?.[1];
+	    }
+	    else if (max && value >= max) {
+	        return max;
+	    }
+	    else if (min && value <= min) {
+	        return min;
+	    }
 	    // find the middle-point between steps
 	    // and see if the value is closer to the
 	    // next step, or previous step
@@ -1489,6 +1503,9 @@
 	    let aligned = value - remainder;
 	    if (Math.abs(remainder) * 2 >= step) {
 	        aligned += remainder > 0 ? step : -step;
+	    }
+	    else if (value >= max - remainder) {
+	        aligned = max;
 	    }
 	    // make sure the value is within acceptable limits
 	    aligned = clampValue(aligned, limits?.[0] ?? min, limits?.[1] ?? max);
