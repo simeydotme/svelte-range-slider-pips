@@ -546,7 +546,7 @@ function ariaLabelFormatter(value2, index) {
       aria-disabled={disabled}
       tabindex={disabled ? -1 : 0}
     >
-      <span class="rangeNub" />
+      <span class="rangeNub"></span>
       {#if float}
         {@const percent = valueAsPercent(value, min, max, precision)}
         {@const formattedValue = handleFormatter(value, index, percent)}
@@ -563,7 +563,7 @@ function ariaLabelFormatter(value2, index) {
       class="rangeLimit"
       style="{orientationStart}: {valueAsPercent(limits[0], min, max, precision)}%;
              {orientationEnd}: {100 - valueAsPercent(limits[1], min, max, precision)}%;"
-    />
+    ></span>
   {/if}
   {#if hasRange}
     <span

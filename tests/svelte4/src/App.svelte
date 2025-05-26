@@ -22,7 +22,17 @@
     <Counter bind:values />
   </div>
 
-  <RangeSlider bind:values min={-10} max={10} pips first="label" last="label" />
+  <RangeSlider
+    bind:values
+    min={-10}
+    max={10}
+    pips
+    first="label"
+    last="label"
+    on:start={() => console.log('start')}
+    on:stop={() => console.log('stop')}
+    on:change={({ detail }) => console.log('change', detail)}
+  />
 
   {values}
 </main>

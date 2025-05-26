@@ -11,7 +11,16 @@
 <button on:click={() => value++}> add value </button>
 
 {value}
-<RangeSlider bind:value pips first="label" last="label" rest="pip" />
+<RangeSlider
+	bind:value
+	pips
+	first="label"
+	last="label"
+	rest="pip"
+	on:start={() => console.log('start')}
+	on:stop={() => console.log('stop')}
+	on:change={({ detail }) => console.log('change', detail)}
+/>
 
 {values}
 <RangeSlider bind:values pips first="label" last="label" rest="pip" />
