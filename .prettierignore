@@ -10,12 +10,12 @@ node_modules
 .DS_Store
 .astro
 dist/
-/build
+**/build
 /docs
 /tests/**/build
 /tests/**/dist
-/.svelte-kit
-/package
+**/.svelte-kit
+**/package
 .env
 .env.*
 !.env.example

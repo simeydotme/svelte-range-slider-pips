@@ -252,9 +252,9 @@ I am very happy to accept;
 
 ### Svelte 3
 
-Because of the code in Range Slider Pips 3, it is now incompatible with Svelte version 3.
+⚠ Because of new code added in Range Slider v3, it is incompatible with Svelte version 3.
 
-If you are unable to upgrade your project, then I suggest looking for [Svelte-Range-Slider-Pips version `2.3.1`](https://github.com/simeydotme/svelte-range-slider-pips/tree/2.3.1) which
+If you are unable to upgrade your project to Svelte4/Svelte5, then I suggest looking for [Svelte-Range-Slider-Pips version `2.3.1`](https://github.com/simeydotme/svelte-range-slider-pips/tree/2.3.1) which
 will not be upgraded, but it's still pretty robust. You can install it like so;
 
 ```bash
