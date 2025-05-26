@@ -163,20 +163,20 @@ When dragging the range area, the event payloads are slightly different from han
 
 - `start` event:
   - `activeHandle: number` is set to `-1` (indicating range drag)
-  - `value: number[]` is an array of both handle values
+  - ~~`value: number[]` is an array of both handle values~~ _(not in the payload for dragging ranges)_
   - `values: number[]` contains the initial positions of both handles
 
 - `stop` event:
   - `activeHandle: number` is set to `-1`
   - `startValue: number[]` is an array of initial handle positions
-  - `value: number` is the current position of the active handle
+  - ~~`value: number` is the current position of the active handle~~ _(not in the payload for dragging ranges)_
   - `values: number[]` contains the final positions of both handles
 
 - `change` event:
   - `activeHandle: number` is set to `-1`
   - `startValue: number[]` is an array of initial handle positions
   - `previousValue: number[]` is an array of previous handle positions
-  - `value: number` is the current position of the active handle
+  - ~~`value: number` is the current position of the active handle~~ _(not in the payload for dragging ranges)_
   - `values: number[]` contains the current positions of both handles
 
 ### Example Usage

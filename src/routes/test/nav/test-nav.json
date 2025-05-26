@@ -4,6 +4,10 @@
     "path": "/test/range-slider/base"
   },
   {
+    "name": "events",
+    "path": "/test/range-slider/events"
+  },
+  {
     "name": "floats",
     "path": "/test/range-slider/floats"
   },
