@@ -1,6 +1,6 @@
 {
   "name": "svelte-range-slider-pips",
-  "version": "4.0.0",
+  "version": "4.0.0-beta.2",
   "description": "Multi-Thumb, Accessible, Beautiful Range Slider with Pips",
   "repository": {
     "type": "git",

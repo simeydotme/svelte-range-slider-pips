@@ -8,7 +8,7 @@ export default defineConfig({
     include: ['tests/vitest/*.{test,spec}.{js,ts}'],
     exclude: ['node_modules', 'dist', 'tests'],
     environment: 'jsdom',
-    setupFiles: ['./setupTest.js']
+    setupFiles: ['./tests/setupTest.js']
   },
   server: {
     fs: {
