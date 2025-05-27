@@ -17,4 +17,4 @@ Some justification of why you think this feature would be valuable, either to yo
 #### Additional context
 
 If you have any use cases to describe, or demo (with image/link) please share
-Screenshots are very appreciated!
+Screenshots/Diagrams are very appreciated!

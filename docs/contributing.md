@@ -14,7 +14,7 @@ If there are any open issues, or you find a valid bug, please feel free to open 
 
 **Please stick to the code formatting and style already in place.**
 
-When making changes/edits to the code you should use the `/test/` folder and check the [README.md](test/README.md) in there to help with testing all the functionality.
+When making changes/edits to the code you should use the `/tests/playwright` folder for testing all the functionality.
 
 ## 🧪 filling in gaps in the test-suite
 

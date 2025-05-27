@@ -18,6 +18,11 @@ A clear and concise description of what the bug is.
   Then paste the link here, and I'll take a look.
 -->
 
+#### Versions
+
+- svelte: v4.2.10
+- svelte-range-slider-pips: v3.2.1
+
 #### Steps to reproduce the behavior:
 
 1. Go to '...'

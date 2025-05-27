@@ -239,9 +239,10 @@ I am very happy to accept;
 
 - 🌟 suggestions/requests for new features or changes
 - 🛠 pull-requests for bug fixes, or issue resolution
-- 🧪 help with creating a proper test-suite
+- 📝 new recipes/examples for the docs site
+- 🧪 help with adding more tests
 
-[Read the CONTRIBUTING.md](./CONTRIBUTING.md)
+But please [read the CONTRIBUTING.md](./docs/contributing.md) first.
 
 <br>
 <br>
