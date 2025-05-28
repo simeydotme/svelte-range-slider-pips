@@ -1,0 +1,8 @@
+html.theme-dark .rangeSlider#toggled {
+  --slider-accent: var(--slider-dark-accent);
+  --slider-accent-100: var(--slider-dark-accent-100);
+  --slider-base: var(--slider-dark-base);
+  --slider-base-100: var(--slider-dark-base-100);
+  --slider-bg: var(--slider-dark-bg);
+  --slider-fg: var(--slider-dark-fg);
+}

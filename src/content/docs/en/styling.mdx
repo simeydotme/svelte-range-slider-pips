@@ -17,7 +17,9 @@ import DarkModeManual from "~demos/styling/DarkModeManual.svelte";
 import DarkModeManualRaw from "~demos/styling/DarkModeManual.svelte?raw";
 import DarkModeAuto from "~demos/styling/DarkModeAuto.svelte";
 import DarkModeAutoRaw from "~demos/styling/DarkModeAuto.svelte?raw";
-
+import DarkModeToggle from "~demos/styling/DarkModeToggle.svelte";
+import DarkModeToggleRaw from "~demos/styling/DarkModeToggle.svelte?raw";
+import DarkModeToggleCss from "~demos/styling/DarkModeToggle.css?raw";
 
 ## Colors
 The Range Slider comes out of the box with a set style, and it's
@@ -79,7 +81,7 @@ If `--range-range` is not set, it will fall back to `--handle-focus` color (see 
   --range-range: #000;
 }
 @media (prefers-color-scheme: dark) {
-  .rangeSlider {
+  .rangeSlider.rsAutoDark {
     --range-range: #FFF;
   }
 }
@@ -96,48 +98,78 @@ But if I wanted to modify the accent color only, I would change the `--slider-ac
 
 ### Dark Mode Support
 
-The slider supports dark mode in two ways. Either by adding the `.dark` class to the slider element, 
-or by the user to set `prefers-color-scheme: dark` in their browser settings.
+The slider now supports dark mode by adding the `darkmode` prop to the component.
+
+  ```svelte
+  <RangeSlider darkmode="force" />
+  <!-- The slider always uses the dark color scheme, 
+  regardless of system settings. -->
+  ```
 
 ```css
 
 /* this css is extracted from the slider component for reference */
 
-:global(.rangeSlider.dark) {
+/* darkmode="force" */
+:global(.rangeSlider.rsDark) {
   --slider-accent: var(--slider-dark-accent);
   --slider-accent-100: var(--slider-dark-accent-100);
   --slider-base: var(--slider-dark-base);
   --slider-base-100: var(--slider-dark-base-100);
-  --slider-base-200: var(--slider-dark-base-200);
   --slider-bg: var(--slider-dark-bg);
   --slider-fg: var(--slider-dark-fg);
 }
 
 @media (prefers-color-scheme: dark) {
-  :global(.rangeSlider) {
+  /* darkmode="auto" */
+  :global(.rangeSlider.rsAutoDark) {
     --slider-accent: var(--slider-dark-accent);
     --slider-accent-100: var(--slider-dark-accent-100);
     --slider-base: var(--slider-dark-base);
     --slider-base-100: var(--slider-dark-base-100);
-    --slider-base-200: var(--slider-dark-base-200);
     --slider-bg: var(--slider-dark-bg);
     --slider-fg: var(--slider-dark-fg);
   }
 }
+
+/* If you have a custom darkmode toggle on your website, you might want
+ * to copy the properties above into your custom darkmode css.
+ * 
+ * For example:
+ * 
+ * body.dark .rangeSlider {
+ *   --slider-accent: var(--slider-dark-accent);
+ *   ...
+ * }
+ */
 ```
 
-1. **Manual Dark Mode**: Add the `.dark` class to the slider element:
+#### Explicit Dark Mode 
+***Set the `darkmode` prop to `force`***  
+This will force the slider to use the dark color scheme, regardless of system settings.
 
-<Demo name="Dark Mode Support" client:visible dark={true}>
+<Demo name="Dark Mode Forced" client:visible dark={true}>
   <DarkModeManual client:visible />
   <Code slot="svelte" lang="svelte" code={cleanImport(DarkModeManualRaw)} />
 </Demo>
 
-2. **Automatic Dark Mode**: The slider will automatically switch to dark mode based on system preferences:
+#### Automatic Dark Mode 
+***Set the `darkmode` prop to `auto`***   
+This will make the slider automatically switch to dark mode based on system preferences.
 
-<Demo name="Dark Mode Support" client:visible>
+<Demo name="Browser Dark Mode" client:visible dark="auto">
   <DarkModeAuto client:visible />
   <Code slot="svelte" lang="svelte" code={cleanImport(DarkModeAutoRaw)} />
+</Demo>
+
+#### Website Toggled Dark Mode 
+***Set the `darkmode` prop to `auto`, and add some custom css for the application***   
+This will make the slider automatically switch to dark mode based on your websites settings.
+
+<Demo name="Website Toggled Dark Mode" client:visible dark="auto" panel="css">
+  <DarkModeToggle client:visible />
+  <Code slot="svelte" lang="svelte" code={cleanImport(DarkModeToggleRaw)} />
+  <Code slot="css" lang="css" code={cleanImport(DarkModeToggleCss)} />
 </Demo>
 
 
@@ -251,7 +283,7 @@ The new `class` prop allows you to add custom CSS classes to the slider:
 ```
 
 
-<Note title="CSS Class Name Changes" type="info">
+<Note title="CSS Class Name Changes" type="alert">
 In v4, almost all CSS class names have been prefixed with `rs` to prevent conflicts with other frameworks.
 For example, `.active` is now `.rsActive`, `.pip` is now `.rsPip`, etc. See the [structure section](#structure)
 for the complete list of updated class names.

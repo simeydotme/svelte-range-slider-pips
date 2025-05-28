@@ -161,6 +161,13 @@ configure it to your liking. There's a link to an example for each option.
   <Info>Works alongside the existing `class` prop</Info>
 </Option>
 
+<Option propName="darkmode" propType={["Boolean","String"]} defaultValue="false" link="styling/darkmode" new={true}>
+  Control the dark mode of the slider. Possible values are:
+  - `false` light mode (default)
+  - `'force'` dark mode
+  - `'auto'` system preference
+</Option>
+
 <Option propName="ariaLabels" propType="Array" defaultValue="[]" link="./a11y#aria-labels">
   An array of strings to use for the `aria-label` attribute on the handles.  
   <Info>The array should be the same length as the `values` array.</Info>

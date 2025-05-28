@@ -1,6 +1,5 @@
-
 /* styles for all pips */
-#circles .rangePips .pip {
+#circles .rangePips .rsPip {
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -9,47 +8,49 @@
   opacity: 0.9999;
   will-change: transform opacity;
 }
-#circles .pipVal {
+
+#circles .rsPipVal {
   opacity: 0;
 }
 
 /* styles for the selected pip */
-#circles .rangePips .pip.selected {
+#circles .rangePips .rsPip.rsSelected {
   transform: translate3d(-50%, 6px, 0.1px) scale(0.8);
 }
-#circles .pip.selected .pipVal {
+
+#circles .rsPip.rsSelected .rsPipVal {
   opacity: 1;
   transition-duration: 0s;
 }
 
 /* styles for the pips directly after the selected pip */
-#circles .rangePips .pip.selected + * {
+#circles .rangePips .rsPip.rsSelected+* {
   transform: translate3d(calc(-50% + 2px), 4px, 0.1px) scale(0.6);
 }
-#circles .rangePips .pip.selected + * + * {
-  
+
+#circles .rangePips .rsPip.rsSelected+*+* {
   transform: translate3d(calc(-50% + 2px), 2px, 0.1px) scale(0.4);
 }
-#circles .rangePips .pip.selected + * + * + * {
-  
+
+#circles .rangePips .rsPip.rsSelected+*+*+* {
   transform: translate3d(calc(-50% + 1px), 1px, 0.1px) scale(0.2);
 }
 
 /* styles for the pips directly before the selected pip */
-#circles .rangePips .pip:has(+ .selected) {
+#circles .rangePips .rsPip:has(+ .rsSelected) {
   transform: translate3d(calc(-50% - 2px), 4px, 0.1px) scale(0.6);
 }
-#circles .rangePips .pip:has(+ * + .selected) {
-  
+
+#circles .rangePips .rsPip:has(+ * + .rsSelected) {
   transform: translate3d(calc(-50% - 2px), 2px, 0.1px) scale(0.4);
 }
-#circles .rangePips .pip:has(+ * + * + .selected) {
-  
+
+#circles .rangePips .rsPip:has(+ * + * + .rsSelected) {
   transform: translate3d(calc(-50% - 1px), 1px, 0.1px) scale(0.2);
 }
 
 /* hide the focus ring when hovering */
-.rangeSlider.hoverable:not(.disabled) .rangeHandle::before {
+.rangeSlider.rsHoverable:not(.rsDisabled) .rangeHandle::before {
   display: none;
   box-shadow: none;
 }

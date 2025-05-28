@@ -80,6 +80,7 @@ export const SIDEBAR: Sidebar = {
           { text: 'id', link: `${REPOPATH}/en/options#id` },
           { text: 'class', link: `${REPOPATH}/en/options#class`, new: true },
           { text: 'style', link: `${REPOPATH}/en/options#style`, new: true },
+          { text: 'darkmode', link: `${REPOPATH}/en/options#darkmode`, new: true },
           { text: 'ariaLabels', link: `${REPOPATH}/en/options#ariaLabels` },
           { text: 'formatter', link: `${REPOPATH}/en/options#formatter` },
           { text: 'handleFormatter', link: `${REPOPATH}/en/options#handleFormatter` },
@@ -123,6 +124,7 @@ export const SIDEBAR: Sidebar = {
       { text: 'Styling', link: `${REPOPATH}/en/styling`, 
         children: [
           { text: 'Color Variables', link: `${REPOPATH}/en/styling#colors` },
+          { text: 'Dark Mode', link: `${REPOPATH}/en/styling/#dark-mode-support`, new: true },
           { text: 'Size', link: `${REPOPATH}/en/styling#size` },
           { text: 'CSS Structure', link: `${REPOPATH}/en/styling#structure` },
           { text: 'Pips & Steps', link: `${REPOPATH}/en/styling/pips` },

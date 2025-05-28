@@ -8,7 +8,7 @@
   export let name: string = '';
   export let label: string = 'Example Svelte Range Slider demonstration';
   export let panel: Panel = 'svelte';
-  export let dark: boolean = false;
+  export let dark: boolean | string = false;
 
   let displayName: string = '';
   
@@ -162,7 +162,7 @@
   {/if}
 
   {#if $$slots.default}
-    <form class="slider-container {dark ? 'dark' : ''}">
+    <form class="slider-container {dark === true ? 'dark' : dark === 'auto' ? 'auto-dark' : ''}">
       <fieldset>
         <legend>{ displayName || 'Range Slider Demo' }</legend>
         <slot></slot>
@@ -223,6 +223,13 @@
   .slider-container.dark {
     --bg: hsla( var(--color-gray-20), 1);
     --fg: hsla( var(--color-gray-80), 1);
+  }
+
+  @media (prefers-color-scheme: dark) {
+  .slider-container.auto-dark {
+      --bg: hsla( var(--color-gray-20), 1);
+      --fg: hsla( var(--color-gray-80), 1);
+    }
   }
 
   .tabs {
