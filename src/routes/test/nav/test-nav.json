@@ -134,6 +134,16 @@
     ]
   },
   {
+    "name": "styles",
+    "path": "",
+    "children": [
+      {
+        "name": "darkmode",
+        "path": "/test/range-slider/styles/darkmode"
+      }
+    ]
+  },
+  {
     "name": "values",
     "path": "",
     "children": [

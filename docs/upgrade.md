@@ -486,12 +486,36 @@ The CSS variables remain unchanged as they were already prefixed with `--` and a
 ## Dark Mode and Color System [1047235e](https://github.com/simeydotme/svelte-range-slider-pips/commit/1047235e64e210a395c0c3b4c75144cdfba4ae62) [change]
 
 In v4, the color system has been completely revamped to support dark mode and provide a more flexible theming system.
+But overall the colours should remain almost identical to `v3`.
 
 ### Dark Mode Support
 
 The slider now supports dark mode in two ways:
 1. Using the `.dark` class on the slider element
-2. Automatically via the `prefers-color-scheme: dark` media query
+2. Using the `darkmode` prop
+
+#### How to Enable Dark Mode
+
+- **Default (Light mode):**
+  ```svelte
+  <RangeSlider darkmode={false} />
+  ```
+  The slider always uses the light color scheme, regardless of system settings.
+  This is the same as v3.
+
+- **Automatic (Match system):**
+  ```svelte
+  <RangeSlider darkmode="auto" />
+  ```
+  The slider will use dark colors if the user's system prefers dark mode, and light colors otherwise.  
+  This is the best option if your website has a dark mode toggle.
+
+- **Force Dark Mode:**
+  ```svelte
+  <RangeSlider darkmode="force" />
+  ```
+  The slider always uses the dark color scheme, regardless of system settings.
+  This is the best option if your website is just dark.
 
 ### New Color System
 
@@ -502,8 +526,7 @@ The component now uses a comprehensive set of CSS variables for theming:
 --slider-accent: #4a40d4;
 --slider-accent-100: #838de7;
 --slider-base: #99a2a2;
---slider-base-100: #aebecf;
---slider-base-200: #b9c2c2;
+--slider-base-100: #b9c2c2;
 --slider-bg: #d7dada;
 --slider-fg: #3f3e4f;
 ```
@@ -513,8 +536,7 @@ The component now uses a comprehensive set of CSS variables for theming:
 --slider-dark-accent: #6070fc;
 --slider-dark-accent-100: #7a7fab;
 --slider-dark-base: #82809f;
---slider-dark-base-100: #595970;
---slider-dark-base-200: #454454;
+--slider-dark-base-100: #595868;
 --slider-dark-bg: #3f3e4f;
 --slider-dark-fg: #d7dada;
 ```
@@ -532,36 +554,30 @@ The new system makes it easier to customize the slider's appearance:
    - All previous CSS variable names remain valid
 
 3. **Style Prop Support**:
-   - New `style` prop for directly passing CSS variables
+   - New `style` prop allows you to directly pass CSS declarations / variables
    - Works alongside the existing `class` prop
    - Perfect for dynamic theme changes
 
-### Example Usage
+#### Example Usage
 
 ```svelte
-<!-- Automatic dark mode -->
-<!-- Will automatically switch based on system preferences -->
-<RangeSlider />
-
-<!-- Forcing dark mode with the '.dark' css class -->
-<RangeSlider class="dark" />
-
 <!-- Custom theme colors can be supplied as a css string -->
 <RangeSlider
+  darkmode="force"
   style="
     --slider-accent: #0ea5e9;
-    --slider-bg: #e2e8f0;
+    --slider-bg: #222;
   "
 />
 
 <!-- Custom theme colors using Tailwind classes -->
 <RangeSlider
+  darkmode="auto"
   class="
     [--slider-accent:var(--color-sky-500)]
     [--slider-accent-100:var(--color-sky-300)]
     [--slider-base:var(--color-slate-500)]
     [--slider-base-100:var(--color-slate-300)]
-    [--slider-base-200:var(--color-slate-300)]
     [--slider-bg:var(--color-slate-200)]
   "
 />
@@ -570,7 +586,9 @@ The new system makes it easier to customize the slider's appearance:
 ### Important Notes
 
 - Legacy fallback colors have been removed as all modern browsers support CSS variables
-- The component will automatically adapt to system dark mode preferences
+- The component is light-mode by default
+- Dark mode can be enabled by setting `darkmode="force"`
+- The component will follow the system color scheme if `darkmode="auto"` is set.
 - Custom themes can be applied by overriding the base theme variables
 - All existing CSS variable overrides remain supported for backward compatibility
 - The new system provides better color consistency and easier theme management

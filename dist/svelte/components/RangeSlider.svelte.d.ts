@@ -37,6 +37,7 @@ declare const __propDef: {
         id?: string | undefined;
         class?: string | undefined;
         style?: string | undefined;
+        darkmode?: false | "auto" | "force" | undefined;
         springValues?: SpringOpts | undefined;
         spring?: boolean | undefined;
     };

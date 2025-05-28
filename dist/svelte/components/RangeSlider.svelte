@@ -50,6 +50,7 @@ export let id = void 0;
 let classes = "";
 export { classes as class };
 export let style = void 0;
+export let darkmode = false;
 export let springValues = { stiffness: 0.15, damping: 0.4 };
 export let spring = true;
 const dispatch = createEventDispatcher();
@@ -505,6 +506,8 @@ function ariaLabelFormatter(value2, index) {
   bind:this={slider}
   role="none"
   class="rangeSlider {classes}"
+  class:rsDark={darkmode === 'force'}
+  class:rsAutoDark={darkmode === 'auto'}
   class:rsRange={hasRange}
   class:rsDrag={hasRange && draggy}
   class:rsMin={hasRange && range === 'min'}
@@ -644,16 +647,14 @@ function ariaLabelFormatter(value2, index) {
       --slider-accent: #4a40d4;
       --slider-accent-100: #838de7;
       --slider-base: #99a2a2;
-      --slider-base-100: #aebecf;
-      --slider-base-200: #b9c2c2;
+      --slider-base-100: #b9c2c2;
       --slider-bg: #d7dada;
       --slider-fg: #3f3e4f;
 
       --slider-dark-accent: #6070fc;
       --slider-dark-accent-100: #7a7fab;
       --slider-dark-base: #82809f;
-      --slider-dark-base-100: #595970;
-      --slider-dark-base-200: #454454;
+      --slider-dark-base-100: #595868;
       --slider-dark-bg: #3f3e4f;
       --slider-dark-fg: #d7dada;
 
@@ -664,7 +665,7 @@ function ariaLabelFormatter(value2, index) {
       --handle-border: var(--range-handle-border, var(--handle));
       --range-inactive: var(--range-range-inactive, var(--handle-inactive));
       --range: var(--range-range, var(--handle-focus));
-      --range-limit: var(--range-range-limit, var(--slider-base-200));
+      --range-limit: var(--range-range-limit, var(--slider-base-100));
       --range-hover: var(--range-range-hover, var(--handle-border));
       --range-press: var(--range-range-press, var(--handle-border));
       --float-inactive: var(--range-float-inactive, var(--handle-inactive));
@@ -672,23 +673,21 @@ function ariaLabelFormatter(value2, index) {
       --float-text: var(--range-float-text, white);
     }
 
-    :global(.rangeSlider.dark) {
+    :global(.rangeSlider.rsDark) {
       --slider-accent: var(--slider-dark-accent);
       --slider-accent-100: var(--slider-dark-accent-100);
       --slider-base: var(--slider-dark-base);
       --slider-base-100: var(--slider-dark-base-100);
-      --slider-base-200: var(--slider-dark-base-200);
       --slider-bg: var(--slider-dark-bg);
       --slider-fg: var(--slider-dark-fg);
     }
 
     @media (prefers-color-scheme: dark) {
-      :global(.rangeSlider) {
+      :global(.rangeSlider.rsAutoDark) {
         --slider-accent: var(--slider-dark-accent);
         --slider-accent-100: var(--slider-dark-accent-100);
         --slider-base: var(--slider-dark-base);
         --slider-base-100: var(--slider-dark-base-100);
-        --slider-base-200: var(--slider-dark-base-200);
         --slider-bg: var(--slider-dark-bg);
         --slider-fg: var(--slider-dark-fg);
       }
