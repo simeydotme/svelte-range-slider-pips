@@ -1,5 +1,5 @@
 /* hide all pips by default, we'll override this with JS */
-#testSlider .pip {
+#testSlider .rsPip {
   display: none;
 }
 /* always show the floating label */

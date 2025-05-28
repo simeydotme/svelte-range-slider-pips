@@ -25,7 +25,7 @@ npm install svelte-range-slider-pips --save-dev
 The following instructions assume you have your environment setup in a fairly typical/traditional way.
 </Note>
 
-### <Icon name="vscode-icons:file-type-svelte" /> In a typical Svelte Project
+### <Icon name="vscode-icons:file-type-svelte" /> In a typical Svelte 3/4 Project
 
 Assuming you have your svelte project up and running, to include a range Slider
 component into your page, use the following code;
@@ -34,16 +34,36 @@ component into your page, use the following code;
 <script>
   import RangeSlider from 'svelte-range-slider-pips'
   // ----
-  let values = [50];
+  let value = 50;
+  let values = [20,60];
 </script>
 
+<RangeSlider bind:value />
 <RangeSlider bind:values />
 ```
-[<Icon name="tabler:external-link" /> see Svelte example running at svelte.dev](https://svelte.dev/repl/030797781fd64ad88302d1343f5b2c43)
+[<Icon name="tabler:external-link" /> see Svelte example running at svelte.dev](https://svelte.dev/playground/58f1da9cf0dd467f897294715c6e50ae?version=4.2.20)
 
 This is a very basic example, and probably not useful. You'll probably want to
 add some more options to the component. See the [Options](./options) page for
 more information.
+
+### <Icon name="vscode-icons:file-type-svelte" /> In a Svelte 5 Project
+
+The component is built with Svelte 4, but you can use it in a Svelte 5 project, both 
+in runes and non-runes mode.
+
+```svelte 
+<script>
+  import RangeSlider from 'svelte-range-slider-pips'
+  // ----
+  let value = $state(50);
+  let values = $state([20,60]);
+</script>
+
+<RangeSlider bind:value />
+<RangeSlider bind:values />
+```
+[<Icon name="tabler:external-link" /> see Svelte example running at svelte.dev](https://svelte.dev/playground/3d1e3fb5d5e84b2d9df3488034104805?version=5.33.3)
 
 ### <Icon name="vscode-icons:file-type-vue" /> for use in a VueJS Project
 
@@ -62,12 +82,13 @@ should get you started.
   const MyRangeSlider = ref(null);   // slider instance reference
 
   onMounted(() => {
-    MyRangeSlider = 
+    MyRangeSlider.value = 
       new RangeSlider({ 
         target: $node.value, 
         props: { values: values.value } 
       })
       .$on( 'change', (e) => values.value = e.detail.values );
+    // the .$on will relay the changed values back to the VueJS ref()
   });
 </script>
 

@@ -1,0 +1,71 @@
+---
+title: 'Range Gaps (min/max)'
+description: 'Setting a minimum or maximum distance between the handles'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+import Info from '~components/Reusable/Info.astro';
+
+import RangeGaps from '~demos/examples/range/RangeGaps.svelte';
+import RangeGapsRaw from '~demos/examples/range/RangeGaps.svelte?raw';
+
+import PushyGap from '~demos/examples/range/PushyGap.svelte';
+import PushyGapRaw from '~demos/examples/range/PushyGap.svelte?raw';
+
+import FixedRangeGap from '~demos/examples/range/FixedRangeGap.svelte';
+import FixedRangeGapRaw from '~demos/examples/range/FixedRangeGap.svelte?raw';
+
+
+
+
+As of version `4.0.0`, it is now possible to set a minimum or maximum distance between the handles.
+This is done by setting the `rangeGapMin` and `rangeGapMax` properties.
+
+<Demo name="Range Gaps set" client:visible>
+  <RangeGaps client:visible />
+  <Code slot="svelte" code={cleanImport(RangeGapsRaw)} lang="svelte" />
+</Demo>
+
+<Note type="alert">
+  Notice how the handles have an invisible constraint. One handle cannot be moved
+  more than 50 from the other handle, and neither can come within 10 of each other.
+</Note>
+
+
+## Pushy (with gap)
+
+The example above ***doesn't really feel good***. The user might need to move the handles
+multiple times to get the range to the desired position.
+
+So I would advise to almost always set the `pushy` property to `true` when using `rangeGapMin` or `rangeGapMax`.
+
+<Demo name="Pushy with min/max gap" client:visible>
+  <PushyGap client:visible />
+  <Code slot="svelte" code={cleanImport(PushyGapRaw)} lang="svelte" />
+</Demo>
+
+<Note type="ok">
+  In this example, when the min/max gap is reached, the handles will push/pull
+  each other, allowing the user to move the handles to the desired position freely.
+</Note>
+
+
+## Fixed range gap
+
+Another use-case may be to make a fixed-size range which can be moved along the slider,
+but without allowing the user to change the size of the range.
+
+To enable this we will also need to turn on `draggy` to allow user to drag the range, and
+`pushy` to allow each handle to push/pull the other handle.
+
+<Info>To make this example even nicer, there's a new `rangeFloat` property which allows 
+combining the `float` values from both handles into a single float over the range.</Info>
+
+<Demo name="Fixed range gap" client:visible>
+  <FixedRangeGap client:visible />
+  <Code slot="svelte" code={cleanImport(FixedRangeGapRaw)} lang="svelte" />
+</Demo>

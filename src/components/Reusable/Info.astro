@@ -1,9 +1,21 @@
 ---
 import { Icon } from 'astro-icon'
+
+interface Props {
+  type?: 'info' | 'warning';
+}
+
+const { type = 'info' } = Astro.props;
 ---
 
-<p class="note"><Icon name="fluent:info-24-filled" /><slot /></p>
-
+<p class="note" data-type={type}>
+  {type === 'info' ? (
+    <Icon name="fluent:info-24-filled" />
+  ) : (
+    <Icon name="fluent:warning-24-filled" />
+  )}
+  <slot />
+</p>
 
 <style>
   .note {
@@ -13,8 +25,19 @@ import { Icon } from 'astro-icon'
     margin: 1rem -.5rem 0;
   }
 
+  .note + .note {
+    margin-top: 0;
+  }
+
   [astro-icon] {
     margin-right: .5em;
+  }
+
+  .note[data-type="info"] [astro-icon] {
     color: hsla(var(--color-base-simey-dark), 40%, 1);
+  }
+
+  .note[data-type="warning"] [astro-icon] {
+    color: hsla(var(--color-base-red), 40%, 1);
   }
 </style>

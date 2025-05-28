@@ -152,8 +152,7 @@
   <RangeSlider pips bind:values />
 {/if}
 
-
-<pre>
+<pre class="astro-code">
 {#if all && first && last && rest}
 {`<RangeSlider pips all=${propValue(grp_all)} first=${propValue(grp_first)} last=${propValue(grp_last)} rest=${propValue(grp_rest)} />`}
 {:else if all && first && last}

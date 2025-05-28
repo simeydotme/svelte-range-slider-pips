@@ -1,37 +1,32 @@
 <script>
   import RangeSlider from 'svelte-range-slider-pips';
   let values = [40,60];
-  let min = 0;
-  let max = 100;
-  let gap = 15;
-
-  /**
-   * maintain a distance of 1 between the handles when
-   * the user is dragging the handle
-   */
-   const slide = ({ detail }) => {
-    if (detail.activeHandle === 0 && values[1] < detail.value + gap) {
-      values[1] = detail.value + gap;
-    }
-    if (detail.activeHandle === 1 && values[0] > detail.value - gap) {
-      values[0] = detail.value - gap;
-    }
-  };
-
-  /**
-   * enforce the gap between the handles when the user
-   * stops dragging the handle
-   */
-  const stop = ({ detail }) => {
-    if (detail.activeHandle === 0 && detail.value >= max - gap) {
-      values[0] = max - gap;
-    }
-    if (detail.activeHandle === 1 && detail.value <= min + gap) {
-      values[1] = min + gap;
-    }
-  };
 </script>
 
-<RangeSlider range pushy pips bind:values on:change={slide} on:stop={stop} {min } {max} />
+<div data-grid>
+  <span hide>Min Gap = 10</span>
+  <RangeSlider range rangeGapMin={10} pushy pips bind:values />
+  <span hide>Max Gap = 50</span>
+  <RangeSlider range rangeGapMax={50} pushy pips bind:values />
+  <span hide>Min & Max Gap</span>
+  <RangeSlider range rangeGapMin={10} rangeGapMax={50} pushy pips bind:values />
+</div>
+
+<style hide>
+  [data-grid] {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-gap: 10px;
+    align-items: center;
+    margin: 2rem;
+  }
+  [data-grid] span {
+    display: block;
+    justify-self: right;
+  }
+  [data-grid] span + :global(.rangeSlider) {
+    margin: 1rem;
+  }
+</style>
 
 <code data-values title="The output slider values">{values}</code>

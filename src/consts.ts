@@ -35,7 +35,7 @@ export type Sidebar = Record<
   (typeof KNOWN_LANGUAGE_CODES)[number],
   Record<string, { text: string; link: string, children?: SubLinks[] }[]>
 >
-interface SubLinks { text: string; link: string }
+interface SubLinks { text: string; link: string, new?: boolean }
 
 export const SIDEBAR: Sidebar = {
   // "de": {
@@ -48,6 +48,7 @@ export const SIDEBAR: Sidebar = {
       { text: 'Introduction', link: `${REPOPATH}/en/introduction` },
       { text: 'Accessibility', link: `${REPOPATH}/en/a11y` },
       { text: 'Getting Started', link: `${REPOPATH}/en/getting-started` },
+      { text: 'Upgrade to 4.0.0', link: `${REPOPATH}/en/upgrade` },
       { text: 'Basic Usage', link: `${REPOPATH}/en/basic-usage` },
       { text: 'Options', link: `${REPOPATH}/en/options`, 
         children: [
@@ -60,7 +61,11 @@ export const SIDEBAR: Sidebar = {
           { text: 'pipstep', link: `${REPOPATH}/en/options#pipstep` },
           { text: 'range', link: `${REPOPATH}/en/options#range` },
           { text: 'pushy', link: `${REPOPATH}/en/options#pushy` },
+          { text: 'rangeGapMin', link: `${REPOPATH}/en/options#rangeGapMin`, new: true },
+          { text: 'rangeGapMax', link: `${REPOPATH}/en/options#rangeGapMax`, new: true },
+          { text: 'draggy', link: `${REPOPATH}/en/options#draggy`, new: true },
           { text: 'float', link: `${REPOPATH}/en/options#float` },
+          { text: 'rangeFloat', link: `${REPOPATH}/en/options#rangeFloat`, new: true },
           { text: 'vertical', link: `${REPOPATH}/en/options#vertical` },
           { text: 'first', link: `${REPOPATH}/en/options#first` },
           { text: 'last', link: `${REPOPATH}/en/options#last` },
@@ -73,10 +78,15 @@ export const SIDEBAR: Sidebar = {
           { text: 'hoverable', link: `${REPOPATH}/en/options#hoverable` },
           { text: 'disabled', link: `${REPOPATH}/en/options#disabled` },
           { text: 'id', link: `${REPOPATH}/en/options#id` },
+          { text: 'class', link: `${REPOPATH}/en/options#class`, new: true },
+          { text: 'style', link: `${REPOPATH}/en/options#style`, new: true },
           { text: 'ariaLabels', link: `${REPOPATH}/en/options#ariaLabels` },
           { text: 'formatter', link: `${REPOPATH}/en/options#formatter` },
           { text: 'handleFormatter', link: `${REPOPATH}/en/options#handleFormatter` },
+          { text: 'rangeFormatter', link: `${REPOPATH}/en/options#rangeFormatter`, new: true },
+          { text: 'spring', link: `${REPOPATH}/en/options#spring`, new: true },
           { text: 'springValues', link: `${REPOPATH}/en/options#springValues` },
+          { text: 'precision', link: `${REPOPATH}/en/options#precision`, new: true },
           { text: 'slider', link: `${REPOPATH}/en/options#slider` },
         ]
       },
@@ -98,6 +108,8 @@ export const SIDEBAR: Sidebar = {
           { text: 'Steps & Pip Steps', link: `${REPOPATH}/en/examples/steps-combined` },
           { text: 'Ranges', link: `${REPOPATH}/en/examples/range` },
           { text: 'Pushy', link: `${REPOPATH}/en/examples/range#pushy-range-handles` },
+          { text: 'Draggy', link: `${REPOPATH}/en/examples/range#draggy-ranges`, new: true },
+          { text: 'Range Gaps', link: `${REPOPATH}/en/examples/range-gaps`, new: true },
           { text: 'Float', link: `${REPOPATH}/en/examples/float` },
           { text: 'Vertical', link: `${REPOPATH}/en/examples/vertical` },
           { text: 'Reversed', link: `${REPOPATH}/en/examples/reversed` },

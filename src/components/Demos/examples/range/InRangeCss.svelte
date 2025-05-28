@@ -6,7 +6,7 @@
 <RangeSlider id="sliderInRange" range pips bind:values />
 
 <style hide>
-  :global(#sliderInRange .rangePips :is(.in-range, .selected)) {
+  :global(#sliderInRange .rangePips :is(.rsInRange, .rsSelected)) {
     background: #f00;
     width: 2px;
   }

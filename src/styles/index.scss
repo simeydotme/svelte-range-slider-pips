@@ -120,6 +120,10 @@ p {
   line-height: 1.1em;
 }
 
+.content :is(ul,ol,dl) li > :is(ul,ol,dl) {
+  margin-top: 0.5em;
+}
+
 p,
 .content ul {
   color: var(--theme-text-light);
@@ -469,6 +473,10 @@ h2.heading {
   scroll-margin: calc(var(--theme-sidebar-offset, 5rem) + 2rem) 0 2rem;
 }
 
+.content :target:is(h2, h3, h4) {
+  animation: target-highlight 1s ease-in-out;
+}
+
 /* Highlight TOC header link matching the current scroll position */
 .current-header-link {
   background-color: var(--theme-bg-accent);
@@ -496,4 +504,33 @@ details.sliderProps ul {
 }
 details.sliderProps li {
   margin-block: .25rem;
+}
+
+ @keyframes target-highlight {
+  0% {
+    transform: translateX(0);
+    background-color: transparent;
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60% {
+    transform: translateX(10px);
+  }
+  80% {
+    transform: translateX(8px);
+    background-color: var(--theme-bg-accent);
+  }
+  90% {
+    transform: translateX(-8px);
+  }
+  100% {
+    transform: translateX(0);
+    background-color: transparent;
+  }
 }

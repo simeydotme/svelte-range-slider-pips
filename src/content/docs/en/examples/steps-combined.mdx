@@ -25,6 +25,12 @@ Slider, here's a breakdown of how they interact with each other.
 - **`pipstep`**:  determines how many _**points are visible**_ along the Slider.  
   <small><em>This is visual, pips that are not shown are still rendered.</em></small>
 
+---
+
+`step` is multiplied by `pipstep` to determine the number of pips that are rendered. This can lead 
+to some rather extreme numbers depending on the `min`, `max`, `step` and `pipstep` values. _See
+the [Pip Steps](./pip-steps) page for more details._
+
 ## Examples
 
 Here's a table demonstrating how the two interact with each other.  

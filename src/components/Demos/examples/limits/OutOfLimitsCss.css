@@ -1,0 +1,27 @@
+#sliderLimits {
+  /* Customize the slider's colors using the variables */
+  --range-slider: #d096a655;
+  --range-range-limit: rgb(0, 30, 56);
+  --handle: #2ad872;
+  --handle-focus: #2ad872;
+  --handle-inactive: #2ad872;
+  --range-range-inactive: #2ad872;
+}
+
+#sliderLimits .rsOutOfLimit {
+  /* Hide the pips that are outside of the limits */
+  opacity: 0;
+}
+
+#sliderLimits .rangeLimit {
+  /* Customize the range limit */
+  height: 16px;
+  top: -4px;
+}
+
+#sliderLimits .rangeBar {
+  /* Customize the range bar */
+  border-radius: 0;
+  height: 22px;
+  top: -7px;
+}

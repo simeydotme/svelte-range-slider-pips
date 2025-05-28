@@ -15,6 +15,9 @@ import FormatterRaw from '~demos/examples/formatting/Formatter.svelte?raw';
 import HandleFormatter from '~demos/examples/formatting/HandleFormatter.svelte';
 import HandleFormatterRaw from '~demos/examples/formatting/HandleFormatter.svelte?raw';
 
+import RangeFormatter from '~demos/examples/formatting/RangeFormatter.svelte';
+import RangeFormatterRaw from '~demos/examples/formatting/RangeFormatter.svelte?raw';
+
 import FunFormatter from '~demos/examples/formatting/FunFormatter.svelte';
 import FunFormatterRaw from '~demos/examples/formatting/FunFormatter.svelte?raw';
 
@@ -28,8 +31,8 @@ import SquaredRaw from '~demos/examples/formatting/Squared.svelte?raw';
 
 
 
-So although we used `prefix` and `suffix` to add some formatting before and
-after the `values`, we can also use the `formatter` function to format the
+So although [we've used `prefix` and `suffix` to add some formatting](./prefix-suffix) before and
+after the `values` in the previous examples, we can also use the `formatter` function to format the
 values in any way we like.
 
 The formatter function is passed the `value`, `index` and `percent` of the pip/handle
@@ -39,13 +42,23 @@ to allow us to modify the display.
 <RangeSlider formatter={(value, index, percent) => { return value }} />
 ```
 
+<Note type="warning">
+  Be aware that **all `formatter` functions use `@html` to render**.  
+
+  This is generally fine if you're writing the formatter yourself, but if you take any
+  kind of user-input or URL params in the `formatter` function, it is possible to introduce
+  XSS vulnerabilities. [Read more about @html here.](https://svelte.dev/docs/svelte/@html)
+</Note>
 
 
 
 ## Pips and Floats
-There are two properties that deal with formatting; `formatter` and `handleFormatter`. These
-are for the pips and handles respectively. If the `handleFormatter` is not set, then the
-`formatter` will be used for both.
+There are three properties that deal with formatting; `formatter`, `handleFormatter` & `rangeFormatter`. These
+are for the pips, handles and ranges respectively. 
+
+- If the `handleFormatter` is not set, then the `formatter` will be inherited for it 
+  - _as long as the `formatter` is already set_
+- But `rangeFormatter` is not inherited as the function parameters are different
 
 
 
@@ -81,6 +94,19 @@ formatters for each.
   This patterns allows us to show approximate and stylised values on the pips, but
   show the exact value on the handle to allow for more precise control.
 </Note>
+
+
+
+## Formatting the `rangeFloat`
+Above we demonstrated how to format the `float` using the `handleFormatter` property, 
+but we can also format the `rangeFloat` separately using the `rangeFormatter` property.
+This has a slightly different signature to the `formatter` & `handleFormatter` properties, 
+as we need to pass in both the first and second handle values.
+
+<Demo name="Formatting the rangeFloat" client:visible>
+  <RangeFormatter client:visible />
+  <Code slot="svelte" code={cleanImport(RangeFormatterRaw)} lang="svelte" />
+</Demo>
 
 
 

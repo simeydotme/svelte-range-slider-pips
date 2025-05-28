@@ -6,5 +6,5 @@
   const max = 24;
 </script>
 
-<RangeSlider {step} {min} {max} pips bind:values />
+<RangeSlider {step} {min} {max} pips all="label" bind:values />
 <code data-values title="The output slider values">{values}</code>

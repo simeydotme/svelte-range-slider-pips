@@ -17,6 +17,7 @@ import LimitsMinMaxRaw from '~demos/examples/limits/LimitsMinMax.svelte?raw';
 
 import OutOfLimitCss from '~demos/examples/limits/OutOfLimitCss.svelte';
 import OutOfLimitCssRaw from '~demos/examples/limits/OutOfLimitCss.svelte?raw';
+import OutOfLimitCssCssRaw from '~demos/examples/limits/OutOfLimitsCss.css?raw';
 
 
 
@@ -54,29 +55,14 @@ It's possible to use the `limits` property alongside a 'min' or 'max' range, too
 
 ## Styling Outside of the Limits
 
-Any pip that falls outside of the limits will be given the `pip-out-of-limit` class.
+Any pip that falls outside of the limits will be given the `rsOutOfLimit` class.
 This can be used to style the pips differently when they are outside of the limits.
 
-<Demo name="Out-Of-Limit css style" client:visible>
+Alternatively, if you only want to modify the colours; then you can use the
+slider's CSS variables to change the colours of the pips, range, handles, etc.
+
+<Demo name="Out-Of-Limit css style" panel="css"  client:visible>
   <OutOfLimitCss client:visible />
   <Code slot="svelte" code={cleanImport(OutOfLimitCssRaw)} lang="svelte" />
-  <div slot="css">
-  ```css
-    /* Customize the slider's colors using the variables */
-    #sliderLimits {
-      --range-slider: #d096a6;
-      --range-range-limit: rgb(0, 30, 56);
-      --handle: #2ad872df;
-      --handle-focus: #2ad872df;
-      --handle-inactive: #2ad872df;
-      --range-range-inactive: #2ad872df;
-    }
-
-    #sliderLimits .rangeBar {
-      border-radius: 0;
-      height: 22px;
-      top: -7px;
-    }
-  ```
-  </div>
+  <Code slot="css" code={cleanImport(OutOfLimitCssCssRaw)} lang="css" />
 </Demo>

@@ -8,6 +8,7 @@
   export let name: string = '';
   export let label: string = 'Example Svelte Range Slider demonstration';
   export let panel: Panel = 'svelte';
+  export let dark: boolean = false;
 
   let displayName: string = '';
   
@@ -52,7 +53,6 @@
 
   $: if ( hasInteracted ) {
     document.getElementById( `${ name }-${ panels[ selected ] }-tab` )?.focus();
-    console.log( "focus", `${ name }-${ panels[ selected ] }-tab`, document.getElementById( `${ name }-${ panels[ selected ] }-tab` ) )
   }
 
 </script>
@@ -162,7 +162,7 @@
   {/if}
 
   {#if $$slots.default}
-    <form class="slider-container">
+    <form class="slider-container {dark ? 'dark' : ''}">
       <fieldset>
         <legend>{ displayName || 'Range Slider Demo' }</legend>
         <slot></slot>
@@ -179,6 +179,7 @@
   .slider-demo {
     margin-block: 2rem;
   }
+
   .slider-container {
     text-align: center;
     margin-block: 2rem;
@@ -186,6 +187,7 @@
     border-radius: 0;
     position: relative;
   }
+
   @media (min-width: 37.75em) {
     .slider-container {
       margin-inline: -.5rem;
@@ -193,9 +195,11 @@
       border-radius: 1rem;
     }
   }
+
   .slider-container :global( fieldset ) {
     border: none;
   }
+
   .slider-container :global( legend ) {
     margin-left: -1rem;
   }
@@ -214,6 +218,11 @@
     right: 0.5rem;
     border-radius: 1rem;
     padding: .25rem .5rem;
+  }
+
+  .slider-container.dark {
+    --bg: hsla( var(--color-gray-20), 1);
+    --fg: hsla( var(--color-gray-80), 1);
   }
 
   .tabs {

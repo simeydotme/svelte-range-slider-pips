@@ -1,0 +1,28 @@
+<script defer src="svelte-range-slider-pips.min.js"></script>
+
+<div id="binding-slider"></div>
+<input type="number" id="binding-input" value="10" />
+
+<script defer>
+  let value = 10;
+  const slider = new RangeSlider({
+    target: document.querySelector("#binding-slider"),
+    props: {
+      min: 0,
+      max: 100,
+      value: value
+    }
+  });
+
+  const input = document.querySelector("#binding-input");
+
+  slider.$on('change', (e) => {
+    value = e.detail.value;
+    input.value = value;
+  });
+
+  input.addEventListener('change', (e) => {
+    value = e.target.valueAsNumber;
+    slider.$set({ value: value });
+  });
+</script>

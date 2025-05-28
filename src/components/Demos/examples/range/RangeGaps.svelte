@@ -1,0 +1,32 @@
+<script>
+  import RangeSlider from 'svelte-range-slider-pips';
+  let values = [30,70];
+</script>
+
+<div data-grid>
+  <span hide>Min Gap = 10</span>
+  <RangeSlider range rangeGapMin={10} pips bind:values />
+  <span hide>Max Gap = 50</span>
+  <RangeSlider range rangeGapMax={50} pips bind:values />
+  <span hide>Min & Max Gap</span>
+  <RangeSlider range rangeGapMin={10} rangeGapMax={50} pips bind:values />
+</div>
+
+<style hide>
+  [data-grid] {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-gap: 10px;
+    align-items: center;
+    margin: 2rem;
+  }
+  [data-grid] span {
+    display: block;
+    justify-self: right;
+  }
+  [data-grid] span + :global(.rangeSlider) {
+    margin: 1rem;
+  }
+</style>
+
+<code data-values title="The output slider values">{values}</code>

@@ -13,6 +13,9 @@ import Info from '~components/Reusable/Info.astro'
 import Float from '~demos/examples/float/Float.svelte';
 import FloatRaw from '~demos/examples/float/Float.svelte?raw';
 
+import RangeFloat from '~demos/examples/float/RangeFloat.svelte';
+import RangeFloatRaw from '~demos/examples/float/RangeFloat.svelte?raw';
+
 import NoHover from '~demos/examples/float/NoHover.svelte';
 import NoHoverRaw from '~demos/examples/float/NoHover.svelte?raw';
 
@@ -22,6 +25,8 @@ import AlwaysRaw from '~demos/examples/float/Always.svelte?raw';
 import Focus from '~demos/examples/float/Focus.svelte';
 import FocusRaw from '~demos/examples/float/Focus.svelte?raw';
 
+import ToggleRangeFloat from '~demos/examples/float/ToggleRangeFloat.svelte';
+import ToggleRangeFloatRaw from '~demos/examples/float/ToggleRangeFloat.svelte?raw';
 
 
 
@@ -29,7 +34,7 @@ import FocusRaw from '~demos/examples/float/Focus.svelte?raw';
 By passing the float prop to the component, we can have a nice label which floats 
 above the handle and shows the current value.
 
-<Info>Hover/Drag the Slider handles below to see the float</Info>
+<Info>Floats can be formatted separately to the pips by using [custom `handleFormatter` functions](../options#handleFormatter).</Info>
 
 <Demo name="Floating Labels" client:visible>
   <Float client:visible />
@@ -41,12 +46,9 @@ above the handle and shows the current value.
 </Demo>
 
 <Note type="info">
-  I manually set the above Slider to be focussed on load so that the float is
-  visible. [See below for how to do this](#onload).
+  I've manually set the above Slider to be focussed on load for this demo, so that the float is
+  visible and obvious. [See below for how to do this](#focus-on-load).
 </Note>
-
-
-
 
 
 
@@ -55,7 +57,7 @@ above the handle and shows the current value.
 The Slider can be initialised with `hoverable` set `false` which will prevent
 the float from appearing on hover.
 
-<Demo name="Floating Labels" client:visible>
+<Demo name="Floating only on focus" client:visible>
   <NoHover client:visible />
   <div slot="svelte">
     ```svelte
@@ -72,19 +74,43 @@ the float from appearing on hover.
 
 
 
-## Always show the floats
+## Floats on the Range
 
-We can set the floats to always be visible by modifying the css slightly.
+In version `4.0.0` we added the ability to have a float on the range _(area between handles)_. This is useful for
+when you want to show the current value of the range.
 
-<Demo name="Always Shown Floats" client:visible>
-  <Always client:visible />
-  <Code slot="svelte" code={cleanImport(AlwaysRaw)} lang="svelte" />
+<Info>Hover/Drag the Slider handles below to see the float</Info>
+
+<Demo name="Floating Labels" client:visible>
+  <RangeFloat client:visible />
+  <div slot="svelte">
+    ```svelte
+    <RangeSlider rangeFloat float />
+    ```
+  </div>
 </Demo>
 
 <Note type="info">
-  I manually set the above Slider to be focussed on load so that the float is
-  visible.
+  It would be possible to toggle the `float`/`rangeFloat` properties based on the distance between the handles.
+  [See an example below.](#automatically-toggle-rangefloat)
 </Note>
+
+
+
+## Always show the floats
+
+We can set the floats to always be visible by modifying the css slightly. This can either
+be done in an external css file or inline in the Svelte component.
+
+<Demo name="Always Shown Floats" client:visible panel="css">
+  <Always client:visible />
+  <Code slot="svelte" code={cleanImport(AlwaysRaw)} lang="svelte" />
+  <Code slot="css" lang="css" code={`/* styling in an external css file */
+#always .rangeFloat {
+  opacity: 1;
+  translate: -50% 0%;
+}`} lang="css" />
+</Demo>
 
 
 ## Focus on load
@@ -96,3 +122,20 @@ It's possible to focus the slider on load with a little bit of javascript.
   <Info>(refresh the page to see the focus effect in action)</Info>
   <Code slot="svelte" code={cleanImport(FocusRaw)} lang="svelte" />
 </Demo>
+
+
+## Automatically toggle `rangeFloat`
+
+Here we demonstrate a simple example of how to toggle the `rangeFloat` and `float` properties 
+based on the distance between the handles.
+
+<Demo name="Toggle rangeFloat and float" client:visible>
+  <ToggleRangeFloat client:visible />
+  <Code slot="svelte" code={cleanImport(ToggleRangeFloatRaw)} lang="svelte" />
+</Demo>
+
+<Note type="info">
+  This simple example is using the `values` property to toggle the `rangeFloat` and `float` properties.
+  But it would be possible to use the `on:change` event, and calculate the pixel-distance between the handles,
+  if that was a better approach for your use case.
+</Note>

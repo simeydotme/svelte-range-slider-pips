@@ -27,7 +27,7 @@
   // and for each valid value, we will create a css rule to show the pip
   $: style = `
     <style>
-      ${validValues.map((v) => `#testSlider .pip[data-val="${v}"] { display: block; }`).join("")}
+      ${validValues.map((v) => `#testSlider .rsPip[data-val="${v}"] { display: block; }`).join("")}
     </style>  
   `;
 </script>

@@ -61,9 +61,30 @@ configure it to your liking. There's a link to an example for each option.
   will not push each other along, they will block each other.
 </Option>
 
+<Option propName="rangeGapMin" propType="Number" defaultValue="0" link="range-gaps" new={true}>
+  Sets the minimum allowed distance between handles in a range slider. When `pushy` is true, moving a handle past this limit will push the other handle.
+  <Info>Only works when `range` is true</Info>
+</Option>
+
+<Option propName="rangeGapMax" propType="Number" defaultValue="null" link="range-gaps" new={true}>
+  Sets the maximum allowed distance between handles in a range slider. When `pushy` is true, moving a handle past this limit will pull the other handle.
+  <Info>Only works when `range` is true</Info>
+</Option>
+
+<Option propName="draggy" propType="Boolean" defaultValue="false" link="range#draggy-ranges" new={true}>
+  Enables dragging of the range area between handles.
+  Setting the `rangeGapMin` and `rangeGapMax` to the same value (with `draggy` & `pushy` on) would simulate a fixed range.
+  <Info>Only works when `range` is true</Info>
+</Option>
+
 <Option propName="float" propType="Boolean" defaultValue="false" link="float">
   Set true to add a floating label above focussed handles. This is good for displaying the
   current value of the Slider while interacting with it.
+</Option>
+
+<Option propName="rangeFloat" propType="Boolean" defaultValue="false" link="float#floats-on-the-range" new={true}>
+  When true, shows the range values between the handles (e.g., "20 - 80"). Respects existing `prefix` and `suffix` properties.
+  <Info>Only works when `range` is true</Info>
 </Option>
 
 <Option propName="vertical" propType="Boolean" defaultValue="false" link="vertical">
@@ -131,6 +152,15 @@ configure it to your liking. There's a link to an example for each option.
   Give the Slider a unique ID for use in styling
 </Option>
 
+<Option propName="class" propType="String" defaultValue="''" link="styling#custom-classes" new={true}>
+  Add custom CSS classes to the slider element. Useful for custom styling or framework integration.
+</Option>
+
+<Option propName="style" propType="String" defaultValue="''" link="styling#custom-styles" new={true}>
+  Pass CSS variables or styling directly to the slider.
+  <Info>Works alongside the existing `class` prop</Info>
+</Option>
+
 <Option propName="ariaLabels" propType="Array" defaultValue="[]" link="./a11y#aria-labels">
   An array of strings to use for the `aria-label` attribute on the handles.  
   <Info>The array should be the same length as the `values` array.</Info>
@@ -139,16 +169,31 @@ configure it to your liking. There's a link to an example for each option.
 <Option propName="formatter" propType="Function" defaultValue="(v,i,p) => v" link="formatter">
   A function to format the value of the Slider. Should return a String value.
   <Info>function arguments are: `v(value), i(handle index), p(percent)`</Info>
+  <Info type="warning">All formatters use <a href="https://svelte.dev/docs/svelte/@html" target="_blank">`@html` to render</a> so be careful with what you return</Info>
 </Option>
 
 <Option propName="handleFormatter" propType="Function" defaultValue="formatter()" link="formatter#multiple-formatters">
   A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property.
   <Info>function arguments are: `v(value), i(handle index), p(percent)`</Info>
+  <Info type="warning">All formatters use <a href="https://svelte.dev/docs/svelte/@html" target="_blank">`@html` to render</a> so be careful with what you return</Info>
+</Option>
+
+<Option propName="rangeFormatter" propType="Function" defaultValue="(v1,v2) => `${v1} - ${v2}`" link="formatter#formatting-the-rangefloat" new={true}>
+  A function to format the range float display. Takes two values and returns a string.
+  <Info>Only works when `range` is true and `rangeFloat` is true</Info>
+  <Info type="warning">All formatters use <a href="https://svelte.dev/docs/svelte/@html" target="_blank">`@html` to render</a> so be careful with what you return</Info>
+</Option>
+
+<Option propName="spring" propType="Boolean" defaultValue="true" link="examples#disable-spring" new={true}>
+  Controls handle animations. When false, disables all animations on the slider handles for instant updates.
 </Option>
 
 <Option propName="springValues" propType="Object" defaultValue="{ stiffness: 0.15, damping: 0.4 }" link="easing">
   Svelte spring physics object to change the behaviour of the handle when moving.
-  <Info>Set to both to 1 for basically no spring effect</Info>
+</Option>
+
+<Option propName="precision" propType="Number" defaultValue="2" link="precision" new={true}>
+  The number of decimal places to display for the Slider values.
 </Option>
 
 <Option propName="slider" propType="Element" defaultValue="undefined">
@@ -156,3 +201,4 @@ configure it to your liking. There's a link to an example for each option.
   e.g. `bind:slider={ref}`
   <Info>Useful for doing any kind of manipulation at mount time</Info>
 </Option>
+

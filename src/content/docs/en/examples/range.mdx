@@ -8,6 +8,7 @@ import { cleanImport } from '~lib/cleanImport.ts';
 
 import Demo from '~components/Reusable/Demo.svelte';
 import Note from '~components/Reusable/Note.astro';
+import Info from '~components/Reusable/Info.astro';
 
 import Range from '~demos/examples/range/Range.svelte';
 import RangeRaw from '~demos/examples/range/Range.svelte?raw';
@@ -18,8 +19,8 @@ import RangeMinMaxRaw from '~demos/examples/range/RangeMinMax.svelte?raw';
 import Pushy from '~demos/examples/range/Pushy.svelte';
 import PushyRaw from '~demos/examples/range/Pushy.svelte?raw';
 
-import PushyGap from '~demos/examples/range/PushyGap.svelte';
-import PushyGapRaw from '~demos/examples/range/PushyGap.svelte?raw';
+import Draggy from '~demos/examples/range/Draggy.svelte';
+import DraggyRaw from '~demos/examples/range/Draggy.svelte?raw';
 
 import InRangeCss from '~demos/examples/range/InRangeCss.svelte';
 import InRangeCssRaw from '~demos/examples/range/InRangeCss.svelte?raw';
@@ -76,26 +77,25 @@ But by applying the `pushy` property to the Slider, it will allow each handle to
   <Code slot="svelte" code={cleanImport(PushyRaw)} lang="svelte" />
 </Demo>
 
+<Info>This can be [combined with the `rangeGapMin` property](./range-gaps#pushy-range-handles) to 
+set a minimum between the handles and prevent the handles overlapping.</Info>
 
 
 
 
 
-## Pushy (with gap)
+## Draggy Ranges
 
-Although it's not an official feature (yet?), it's possible to set a gap between the handles when
-the `pushy` property is set to `true`. This is done by updating the values of the slider when the
-user drags the handles.
+As of version `4.0.0`, it is now possible to select the range between handles and
+drag to move the entire range either direction.
 
-<Demo name="Pushy with min-gap" client:visible>
-  <PushyGap client:visible />
+<Demo name="Draggy vs. Regular" client:visible>
+  <Draggy client:visible />
+  <Code slot="svelte" code={cleanImport(DraggyRaw)} lang="svelte" />
 </Demo>
 
-<Demo name="Pushy with min-gap" client:visible>
-  <Code slot="svelte" code={cleanImport(PushyGapRaw)} lang="svelte" />
-</Demo>
-
-
+<Info>This can be [combined with the `rangeGapMin` and `rangeGapMax` properties](./range-gaps#draggy-range-handles) to 
+set a minimum or maximum distance between the handles and prevent _'squashing'_ at the slider limits.</Info>
 
 
 
@@ -103,7 +103,7 @@ user drags the handles.
 ## Styling Range
 
 Something to notice is that when a `pip` falls inside of the `range`, it is given a special
-css class so it can be differentiated as in-range. Here I am using the `pip-in-range` class to
+css class so it can be differentiated as in-range. Here I am using the `rsInRange` class to
 style the pip differently when it is in-range.
 
 <Demo name="In-Range css style" client:visible>
@@ -111,7 +111,7 @@ style the pip differently when it is in-range.
   <Code slot="svelte" code={cleanImport(InRangeCssRaw)} lang="svelte" />
   <div slot="css">
   ```css
-  .rangePips :is(.in-range, .selected) {
+  .rangePips :is(.rsInRange, .rsSelected) {
     background: #f00;
     width: 2px;
   }

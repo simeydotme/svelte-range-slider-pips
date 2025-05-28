@@ -3,11 +3,20 @@ title: 'Styling'
 description: 'How to style your Range Slider'
 ---
 
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
 import Info from "~components/Reusable/Info.astro";
 import Note from "~components/Reusable/Note.astro";
 import Demo from '~components/Reusable/Demo.svelte';
 import Variables from "~demos/styling/Variables.svelte";
 import Sizing from "~demos/styling/Sizing.svelte";
+
+import DarkModeManual from "~demos/styling/DarkModeManual.svelte";
+import DarkModeManualRaw from "~demos/styling/DarkModeManual.svelte?raw";
+import DarkModeAuto from "~demos/styling/DarkModeAuto.svelte";
+import DarkModeAutoRaw from "~demos/styling/DarkModeAuto.svelte?raw";
 
 
 ## Colors
@@ -15,44 +24,123 @@ The Range Slider comes out of the box with a set style, and it's
 colored using CSS variables. You can override these variables to
 change the color of the Slider.
 
-Here's the default values, with a little tool to help you roll your
-own color setup.
+### Base Theme Variables
+
+The component uses a comprehensive set of CSS variables for theming, wrapped in `@layer base` to prevent conflicts with CSS frameworks like Tailwind:
 
 ```css
-/* Slider Ranges, Handles and Floats colors */
+@layer base {
+  :global(.rangeSlider) {
+    /* Light theme base colors */
+    --slider-accent: #4a40d4;
+    --slider-accent-100: #838de7;
+    --slider-base: #99a2a2;
+    --slider-base-100: #aebecf;
+    --slider-base-200: #b9c2c2;
+    --slider-bg: #d7dada;
+    --slider-fg: #3f3e4f;
 
-:root {
-  --range-slider:           #d7dada; /* slider main background color */
-  --range-handle-inactive:  #99a2a2; /* inactive handle color */
-  --range-handle:           #838de7; /* non-focussed handle color */
-  --range-handle-focus:     #4a40d4; /* focussed handle color */
-  --range-handle-border:    var(--range-handle); /* handle border color */
-  --range-range-inactive:   var(--range-handle-inactive); /* inactive range bar background color */
-  --range-range:            var(--range-handle-focus); /* active range background color */
-  --range-limit:            #b9c2c2; /* limit range background color */
-  --range-float-inactive:   var(--range-handle-inactive); /* inactive floating label background color */
-  --range-float:            var(--range-handle-focus); /* floating label background color */
-  --range-float-text:       white; /* text color on floating label */
+    /* Dark theme base colors */
+    --slider-dark-accent: #6070fc;
+    --slider-dark-accent-100: #7a7fab;
+    --slider-dark-base: #82809f;
+    --slider-dark-base-100: #595970;
+    --slider-dark-base-200: #454454;
+    --slider-dark-bg: #3f3e4f;
+    --slider-dark-fg: #d7dada;
 
+    /* Component-specific colors with fallbacks */
+    --slider: var(--range-slider, var(--slider-bg));
+    --handle-inactive: var(--range-handle-inactive, var(--slider-base));
+    --handle: var(--range-handle, var(--slider-accent-100));
+    --handle-focus: var(--range-handle-focus, var(--slider-accent));
+    --handle-border: var(--range-handle-border, var(--handle));
+    --range-inactive: var(--range-range-inactive, var(--handle-inactive));
+    --range: var(--range-range, var(--handle-focus));
+    --range-limit: var(--range-range-limit, var(--slider-base-200));
+    --range-hover: var(--range-range-hover, var(--handle-border));
+    --range-press: var(--range-range-press, var(--handle-border));
+    --float-inactive: var(--range-float-inactive, var(--handle-inactive));
+    --float: var(--range-float, var(--handle-focus));
+    --float-text: var(--range-float-text, white);
+  }
 }
 ```
 
-```css
-/* Slider Pips and Labels colors */
+So to make it super-easy to override colors for specific parts of the slider,
+you can use the 'component-specific' variables from above.
 
-:root {
-  --range-pip:                   lightslategray; /* color of the base pips */
-  --range-pip-text:              var(--range-pip); /* color of the base labels */
-  --range-pip-active:            darkslategrey; /* active pips (when handle is on a slider-stop) */
-  --range-pip-active-text:       var(--range-pip-active); /* active labels (when handle is on a slider-stop) */
-  --range-pip-hover:             darkslategrey; /* when a slider-stop is hovered */
-  --range-pip-hover-text:        var(--range-pip-hover); /* when a slider-stop is hovered */
-  --range-pip-in-range:          var(--range-pip-active); /* pips inside the range */
-  --range-pip-in-range-text:     var(--range-pip-active-text); /* labels inside the range */
-  --range-pip-out-of-limit:      #aebecf; /* pip color outside of limit */
-  --range-pip-out-of-limit-text: var(--range-pip-out-of-limit); /* text color on pip outside of limit */
+For example, if I want to change the range background color. I would override the
+`--range-range` variable. Because the element uses `--range`, which in turn looks for `--range-range`.
+If `--range-range` is not set, it will fall back to `--handle-focus` color (see above).
+
+```css
+.rangeSlider {
+  --range-range: #000;
+}
+@media (prefers-color-scheme: dark) {
+  .rangeSlider {
+    --range-range: #FFF;
+  }
 }
 ```
+
+But if I wanted to modify the accent color only, I would change the `--slider-accent`, and/or `--slider-dark-accent` variables.
+
+```css
+.rangeSlider {
+  --slider-accent: #000;
+  --slider-dark-accent: #FFF;
+}
+```
+
+### Dark Mode Support
+
+The slider supports dark mode in two ways. Either by adding the `.dark` class to the slider element, 
+or by the user to set `prefers-color-scheme: dark` in their browser settings.
+
+```css
+
+/* this css is extracted from the slider component for reference */
+
+:global(.rangeSlider.dark) {
+  --slider-accent: var(--slider-dark-accent);
+  --slider-accent-100: var(--slider-dark-accent-100);
+  --slider-base: var(--slider-dark-base);
+  --slider-base-100: var(--slider-dark-base-100);
+  --slider-base-200: var(--slider-dark-base-200);
+  --slider-bg: var(--slider-dark-bg);
+  --slider-fg: var(--slider-dark-fg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(.rangeSlider) {
+    --slider-accent: var(--slider-dark-accent);
+    --slider-accent-100: var(--slider-dark-accent-100);
+    --slider-base: var(--slider-dark-base);
+    --slider-base-100: var(--slider-dark-base-100);
+    --slider-base-200: var(--slider-dark-base-200);
+    --slider-bg: var(--slider-dark-bg);
+    --slider-fg: var(--slider-dark-fg);
+  }
+}
+```
+
+1. **Manual Dark Mode**: Add the `.dark` class to the slider element:
+
+<Demo name="Dark Mode Support" client:visible dark={true}>
+  <DarkModeManual client:visible />
+  <Code slot="svelte" lang="svelte" code={cleanImport(DarkModeManualRaw)} />
+</Demo>
+
+2. **Automatic Dark Mode**: The slider will automatically switch to dark mode based on system preferences:
+
+<Demo name="Dark Mode Support" client:visible>
+  <DarkModeAuto client:visible />
+  <Code slot="svelte" lang="svelte" code={cleanImport(DarkModeAutoRaw)} />
+</Demo>
+
+
 
 ### Test the color variables
 
@@ -100,38 +188,78 @@ the css structure to style the Slider in different ways.</Note>
 ```css
 /* main slider element */
 .rangeSlider {}                /* the main slider background track */
-.rangeSlider.vertical {}       /* if slider is vertical */
-.rangeSlider.focus {}          /* if slider is focussed */
-.rangeSlider.range {}          /* if slider is a range */
-.rangeSlider.min {}            /* if slider is a min-range */
-.rangeSlider.max {}            /* if slider is a max-range */
-.rangeSlider.pips {}           /* if slider has visible pips */
-.rangeSlider.pip-labels {}     /* if slider has labels for pips */
-.rangeSlider.hoverable {}      /* if slider can trigger hover effects */
+.rangeSlider.rsVertical {}     /* if slider is vertical */
+.rangeSlider.rsFocus {}        /* if slider is focussed */
+.rangeSlider.rsRange {}        /* if slider is a range */
+.rangeSlider.rsMin {}          /* if slider is a min-range */
+.rangeSlider.rsMax {}          /* if slider is a max-range */
+.rangeSlider.rsPips {}         /* if slider has visible pips */
+.rangeSlider.rsPipLabels {}    /* if slider has labels for pips */
+.rangeSlider.rsHoverable {}    /* if slider can trigger hover effects */
+
 /* slider handles */
 .rangeSlider > .rangeHandle {}                 /* positioned wrapper for the handle/float */
-.rangeSlider > .rangeHandle.active {}          /* if a handle is active in any way */
-.rangeSlider > .rangeHandle.press {}           /* if a handle is being pressed down */
+.rangeSlider > .rangeHandle.rsActive {}        /* if a handle is active in any way */
+.rangeSlider > .rangeHandle.rsPress {}         /* if a handle is being pressed down */
 .rangeSlider > .rangeHandle > .rangeNub {}     /* the actual nub rendered as a handle */
 .rangeSlider > .rangeHandle > .rangeFloat {}   /* the floating value above the handle */
+
 /* slider range */
 .rangeSlider > .rangeBar {}                    /* the range between the two handles */
+.rangeSlider > .rangeBar > .rangeFloat {}      /* the floating value above the range */
+
 /* slider limits */
 .rangeSlider > .rangeLimit {}                  /* the limited area that can be selected */
+
 /* slider pips */
-.rangeSlider > .rangePips {}                      /* the container element for the pips */
-.rangeSlider > .rangePips.focus {}                /* if slider is focussed */
-.rangeSlider > .rangePips.vertical {}             /* if slider is vertical */
-.rangeSlider > .rangePips.hoverable {}            /* if the pips allow hover effect */
-.rangeSlider > .rangePips > .pip {}               /* an individual pip */
-.rangeSlider > .rangePips > .pip.first {}         /* the first pip on the slider */
-.rangeSlider > .rangePips > .pip.last {}          /* the last pip on the slider */
-.rangeSlider > .rangePips > .pip[data-val="0"] {} /* the pip with the value of 0 */
-.rangeSlider > .rangePips > .pip.selected {}      /* if a pip is currently selected */
-.rangeSlider > .rangePips > .pip.in-range {}      /* if a pip is between the min and max */
-.rangeSlider > .rangePips > .pip.out-of-limit {}  /* if a pip is outside of the limit */
-.rangeSlider > .rangePips > .pip > .pipVal {}     /* the label for the pip */
+.rangeSlider > .rangePips {}                        /* the container element for the pips */
+.rangeSlider > .rangePips.rsFocus {}                /* if slider is focussed */
+.rangeSlider > .rangePips.rsVertical {}             /* if slider is vertical */
+.rangeSlider > .rangePips.rsHoverable {}            /* if the pips allow hover effect */
+.rangeSlider > .rangePips > .rsPip {}               /* an individual pip */
+.rangeSlider > .rangePips > .rsPip--first {}        /* the first pip on the slider */
+.rangeSlider > .rangePips > .rsPip--last {}         /* the last pip on the slider */
+.rangeSlider > .rangePips > .rsPip[data-val="0"] {} /* the pip with the value of 0 */
+.rangeSlider > .rangePips > .rsPip.rsSelected {}    /* if a pip is currently selected */
+.rangeSlider > .rangePips > .rsPip.rsInRange {}     /* if a pip is between the min and max */
+.rangeSlider > .rangePips > .rsPip.rsOutOfLimit {}  /* if a pip is outside of the limit */
+.rangeSlider > .rangePips > .rsPip > .rsPipVal {}   /* the label for the pip */
 ```
 
 <Info>Additionally, if you supply and custom html to the `formatter()` function,
 this could also be styled with css.</Info>
+
+## New Properties in v4
+
+### Style Prop
+The new `style` prop allows you to directly pass CSS variables to the slider:
+
+```svelte
+<RangeSlider
+  style="
+    --slider-accent: #0ea5e9;
+    --slider-bg: #e2e8f0;
+  "
+/>
+```
+
+### Class Prop
+The new `class` prop allows you to add custom CSS classes to the slider:
+
+```svelte
+<RangeSlider class="my-custom-slider" />
+```
+
+
+<Note title="CSS Class Name Changes" type="info">
+In v4, almost all CSS class names have been prefixed with `rs` to prevent conflicts with other frameworks.
+For example, `.active` is now `.rsActive`, `.pip` is now `.rsPip`, etc. See the [structure section](#structure)
+for the complete list of updated class names.
+</Note>
+
+<Note title="CSS Positioning Changes" type="info">
+In v4, handles and range bars now use CSS `translate` instead of `left`/`right` positioning.
+The component uses CSS custom properties internally to control positions:
+- Handles use `--handle-pos`
+- Range uses `--range-start`, `--range-end` and `--range-size`
+</Note>

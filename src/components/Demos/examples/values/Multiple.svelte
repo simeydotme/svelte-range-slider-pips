@@ -5,8 +5,10 @@
 </script>
 
 <RangeSlider bind:values />
-<!-- hide --><pre class="astro-code"><!-- endhide -->[{values}]
+<!-- hide --><pre class="astro-code"><!-- endhide -->
+[{values}]
 <!-- hide --></pre><!-- endhide -->
 
-<RangeSlider bind:values={crazy} /><!-- hide --><pre class="astro-code"><!-- endhide -->[{crazy}]
+<RangeSlider bind:values={crazy} /><!-- hide --><pre class="astro-code"><!-- endhide -->
+[{crazy}]
 <!-- hide -->but why?</pre><!-- endhide -->

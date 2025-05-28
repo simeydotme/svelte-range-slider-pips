@@ -13,6 +13,9 @@ import Info from '~components/Reusable/Info.astro';
 import PipStepsDefault from '~demos/examples/pips/PipStepsDefault.svelte';
 import PipStepsDefaultRaw from '~demos/examples/pips/PipStepsDefault.svelte?raw';
 
+import PipStepsSmallSteps from '~demos/examples/pips/PipStepsSmallSteps.svelte';
+import PipStepsSmallStepsRaw from '~demos/examples/pips/PipStepsSmallSteps.svelte?raw';
+
 import PipStepsExplicit from '~demos/examples/pips/PipStepsExplicit.svelte';
 import PipStepsExplicitRaw from '~demos/examples/pips/PipStepsExplicit.svelte?raw';
 
@@ -27,9 +30,9 @@ It is not always desirable to show every selectable value as a `pip` on the Slid
 this option works much in the same way as `step`, but it only affects the rendering of the pips
 and not which values can be selected.
 
-<Note type="" title="Default Value">
-  By default, if not explicitly set, the `pipstep` has two possible options based on the
-  total range of values (`max - min`);
+<Note title="Default Value">
+  By default, if not explicitly set, the `pipstep` has two possible outcomes based on the
+  total range of values ( `max - min` );
 
   - if `< 100`; then `pipstep` is set to `1` 
   - if `>= 100`; then `pipstep` is set to `⅟₂₀` 
@@ -54,6 +57,26 @@ Here's some examples of the default `pipstep` in action.
 </Demo>
 <Info>Note how the first Slider in this example has pips every 5 values, 
 but the values in-between are still selectable.</Info>
+
+
+### `pipstep` default with a small `step` value
+When the `step` value is a small decimal, the `pipstep` will be default set in a
+way that will prevent more than 1000 pips from being rendered. The number of pips
+you see will vary depending on the `max` and `step` values.
+
+<Demo name="Pipstep with small steps" client:visible>
+  <PipStepsSmallSteps client:visible />
+  <Code slot="svelte" code={cleanImport(PipStepsSmallStepsRaw)} lang="svelte" />
+</Demo>
+
+As you can see, although this is working to prevent too many pips from being rendered,
+it is not a good experience for the user to see such a large number of pips, anyway.
+
+<Note title="Performance" type="warning">
+  Because of the random nature of the `pipstep` default when using decimal `step` values,
+  it is strongly recommended to set the `pipstep` explicitly, as below.
+</Note>
+
 
 
 

@@ -24,6 +24,14 @@ import BoundClampedRaw from '~demos/examples/minmax/BoundClamped.svelte?raw';
 The `min` and `max` props are used to set the minimum and maximum values of the Slider. 
 The default values are `0` and `100` respectively.
 
+<Note type="alert">
+  The `min` property must be set to a lower value than the `max` property.   
+  If not, then the slider will default to `min: 0` and `max: 100`.
+
+  To change the values so that `min` and `max` are in the opposite order, [you can use the `reversed` property](./reversed).
+</Note>
+
+
 ## Basic Example
 
 `min` and `max` can be set to any number and all handles will be constrained to these.
@@ -58,7 +66,3 @@ Also demonstrated here is that if a Slider's `value` is outside of the `min` and
   <BoundClamped client:visible />
   <Code slot="svelte" code={cleanImport(BoundClampedRaw)} lang="svelte" />
 </Demo>
-
-<Note type="alert">
-  The `min` property should be set to a lower value than the `max` property.
-</Note>

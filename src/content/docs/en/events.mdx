@@ -3,7 +3,7 @@ title: 'Events'
 description: 'List of events available for the RangeSlider'
 ---
 import Event from '~components/Reusable/Event.astro'
-import Info from '~components/Reusable/Info.astro'
+import Note from '~components/Reusable/Note.astro'
 import { Code } from 'astro/components';
 
 
@@ -16,10 +16,10 @@ There's a few events which trigger at different times during the lifecycle of th
   <Code slot="example" code="<RangeSlider on:start={(e) => { console.log(e.detail) }} />" lang="svelte" />
   
   Event fired when the user begins interaction with the slider. This event fires as soon
-  as the user mouse/touch down on the slider handle.
+  as the user mouse/touch down on the slider handle or range area (when using `draggy`).
 
   <Code slot="detail" code="// e.detail
-    activeHandle: Integer; 
+    activeHandle: Integer; // -1 when dragging range area
     value: Float; 
     values: Array;" lang="typescript" />
 
@@ -29,19 +29,19 @@ There's a few events which trigger at different times during the lifecycle of th
 
   <Code slot="example" code="<RangeSlider on:change={(e) => { console.log(e.detail) }} />" lang="svelte" />
   
-  Every time the value of the slider changes (either on a click, or by dragging the handle),
+  Every time the value of the slider changes (either on a click, by dragging the handle, or dragging the range area),
   this event will fire with the corresponding values. This event contains the `startValue`
   which is the value of the slider before the user started interacting, and the `previousValue`
   which is immediately previous value.  
   
   `previousValue` will be the same as `startValue` on the
   first change event, and using `previousValue` is useful for calculating which direction the
-  user is dragging the handle.
+  user is dragging the handle or range area.
 
   <Code slot="detail" code="// e.detail
-    activeHandle: Integer; 
-    startValue: Float; 
-    previousValue: Float;
+    activeHandle: Integer; // -1 when dragging range area
+    startValue: Float | Array; // Array when dragging range area
+    previousValue: Float | Array; // Array when dragging range area
     value: Float; 
     values: Array;" lang="typescript" />
 
@@ -56,10 +56,15 @@ There's a few events which trigger at different times during the lifecycle of th
   slider when the user first started interacting.
 
   <Code slot="detail" code="// e.detail
-    activeHandle: Integer; 
-    startValue: Float; 
+    activeHandle: Integer; // -1 when dragging range area
+    startValue: Float | Array; // Array when dragging range area
     value: Float; 
     values: Array;" lang="typescript" />
 
 </Event>
+
+<Note>
+  **When using the `draggy` property** with range sliders, the `activeHandle` will be `-1` to indicate that the range area is being dragged.
+  In this case, `startValue` and `previousValue` will be arrays containing the initial and previous positions of both handles.
+</Note>
 

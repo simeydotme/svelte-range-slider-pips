@@ -33,6 +33,14 @@ more noticeable.
 
 
 
+## Disable Spring
+
+By default, the spring is enabled. To disable it, set the `spring` property to `false`.
+This will disable animations and make the handles move instantly to the new position.
+
+<Demo name="Disable Spring" client:visible>
+  <Code slot="svelte" code="<RangeSlider spring={false} />" lang="svelte" />
+</Demo>
 
 
 
@@ -49,5 +57,5 @@ animation.
 </Demo>
 
 <Demo name="Customised Spring Easing" client:visible>
-  <Code slot="svelte" code="<RangeSlider springValues={{ stiffness: 0.15, damping: 0.4 }} />" lang="svelte" />
+  <Code slot="svelte" code="<RangeSlider spring={true} springValues={{ stiffness: 0.15, damping: 0.4 }} />" lang="svelte" />
 </Demo>

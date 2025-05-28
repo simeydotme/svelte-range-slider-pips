@@ -4,6 +4,6 @@
   let values = [0];
 </script>
 
-<RangeSlider bind:values={minmax} range pushy />
+<RangeSlider bind:values={minmax} range pushy rangeGapMin={5} />
 <RangeSlider min={ minmax[0] } max={ minmax[1] } bind:values pips first="label" last="label" />
 <code data-values title="The output slider values">{minmax} | {values}</code>

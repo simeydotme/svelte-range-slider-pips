@@ -7,9 +7,10 @@ interface Props {
   propType: propType | propType[];
   defaultValue: string;
   link?: string;
+  new?: boolean;
 }
 
-const { propName, propType, defaultValue, link } = Astro.props;
+const { propName, propType, defaultValue, link, new: isNew } = Astro.props;
 const propTypeString = Array.isArray(propType) ? propType.join(" | ") : propType;
 const isRender = propName && propType && defaultValue;
 
@@ -27,6 +28,7 @@ if ( !link?.match(/^\.?\//) ) {
       <h2 title="The prop name"><a href={`#${propName}`}>{propName}</a></h2>
       <code title="The type that the prop expects">{propTypeString}</code>
       <code title="The default value for this prop (if not provided)">{defaultValue}</code>
+      {isNew && <span class="sliderProp__new" title="New in v4.0.0">New</span>}
     </header>
 
     <div class="sliderProp__content">
@@ -51,7 +53,6 @@ if ( !link?.match(/^\.?\//) ) {
     padding: .5rem;
     border: 1px solid transparent;
     transition: background 0.2s ease-in-out;
-    overflow: hidden;
   }
 
   .sliderProp + .sliderProp {
@@ -88,12 +89,28 @@ if ( !link?.match(/^\.?\//) ) {
   }
 
   .sliderProp__header {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     padding-block: .25rem .75rem;
     padding-inline: .25rem 0;
     border-bottom: 1px solid hsla(var(--color-gray-90));
+  }
+
+  .sliderProp__new {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: hsla(var(--color-purple), .5);
+    color: white;
+    padding: .1rem .3rem;
+    border-radius: .3rem;
+    margin-right: 1rem;
+    font-size: 0.675em;
+    translate: -100% -100%;
+    rotate: -12deg;
+    z-index: 1;
   }
 
   .sliderProp__header h2 {

@@ -20,21 +20,21 @@
   // let values15 = [10];
 
   const table = [
-    { step: 1, pipstep: 1, value: 1, min: -10, max: 10 },
-    { step: 2, pipstep: 1, value: 1, min: -10, max: 10 },
-    { step: 1, pipstep: 2, value: 1, min: -10, max: 10 },
-    { step: 2, pipstep: 2, value: 1, min: -10, max: 10 },
-    { step: 2.5, pipstep: 2, value: 1, min: -10, max: 10 },
-    { step: 2, pipstep: 2.5, value: 1, min: -10, max: 10 },
-    { step: 2.5, pipstep: 2.5, value: 1, min: -10, max: 10 },
-    { step: 3, pipstep: 2, value: 1, min: -10, max: 10 },
-    { step: 2, pipstep: 3, value: 1, min: -10, max: 10 },
-    { step: 3, pipstep: 3, value: 1, min: -10, max: 10 },
-    { step: 5, pipstep: 0.5, value: 1, min: -10, max: 10 },
-    { step: 0.5, pipstep: 5, value: 1, min: -10, max: 10 },
-    { step: 0.5, pipstep: 0.5, value: 1, min: -1, max: 1 },
-    { step: 3, pipstep: 5, value: 1, min: -10, max: 10 },
-    { step: 5, pipstep: 3, value: 1, min: -10, max: 10 },
+    { step: 1, pipstep: 1, value: 10, min: 0, max: 20 },
+    { step: 2, pipstep: 1, value: 10, min: 0, max: 20 },
+    { step: 1, pipstep: 2, value: 10, min: 0, max: 20 },
+    { step: 2, pipstep: 2, value: 10, min: 0, max: 20 },
+    { step: 2.5, pipstep: 2, value: 10, min: 0, max: 20 },
+    { step: 2, pipstep: 2.5, value: 10, min: 0, max: 20 },
+    { step: 2.5, pipstep: 2.5, value: 10, min: 0, max: 20 },
+    { step: 3, pipstep: 2, value: 10, min: 0, max: 20 },
+    { step: 2, pipstep: 3, value: 10, min: 0, max: 20 },
+    { step: 3, pipstep: 3, value: 10, min: 0, max: 20 },
+    { step: 5, pipstep: 0.5, value: 10, min: 0, max: 20 },
+    { step: 0.5, pipstep: 5, value: 10, min: 0, max: 20 },
+    { step: 0.5, pipstep: 0.5, value: 1, min: 0, max: 2 },
+    { step: 3, pipstep: 5, value: 10, min: 0, max: 20 },
+    { step: 5, pipstep: 3, value: 10, min: 0, max: 20 },
   ]
 
 </script>

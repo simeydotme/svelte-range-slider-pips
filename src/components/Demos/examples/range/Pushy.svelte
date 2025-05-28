@@ -9,6 +9,7 @@
   <span hide>Not Pushy</span>
   <RangeSlider range pips bind:values />
 </div>
+<strong><em>Try pushing one handle into the other handle.</em></strong>
 
 <style hide>
   [data-grid] {

@@ -26,7 +26,7 @@
   let clrPipOutOfLimitText = "#aebecf";
 
   $: variablesStyle = `<style>
-  :root {
+  .variables {
     --range-slider:            ${hexToHSLString(clrSlider)};
     --range-handle-inactive:   ${hexToHSLString(clrHandleInactive)};
     --range-handle:            ${hexToHSLString(clrHandle)};

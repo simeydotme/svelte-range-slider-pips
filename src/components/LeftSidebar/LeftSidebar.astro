@@ -42,9 +42,10 @@ const sidebar = SIDEBAR[langCode];
                         {link.children.map((grandchild) => {
                           const gurl = Astro.site?.pathname + grandchild.link;
                           const ariaGrandchildCurrent = currentPageMatch === gurl.split("#")[0] ? "page" : gurl.endsWith(currentPageMatch) ? "page" : false;
+                          const titleText = grandchild.new ? "New in v4.0.0" : "";
                           return (
-                            <li class="nav-link nav-sublink">
-                              <a href={gurl} aria-current={ariaGrandchildCurrent}>
+                            <li class="nav-link nav-sublink" title={titleText}>
+                              <a href={gurl} aria-current={ariaGrandchildCurrent} data-new={grandchild.new}>
                                 {grandchild.text}
                               </a>
                             </li>
@@ -155,6 +156,14 @@ const sidebar = SIDEBAR[langCode];
   .nav-sublink a[aria-current="page"] {
     border-left: 2px solid var(--theme-accent);
     background-color: transparent;
+  }
+
+  .nav-sublink a[data-new] {
+    color: hsla(var(--color-purple), 1);
+    &::after {
+      content: "★";
+      font-size: 0.75em;
+    }
   }
 
   @media (min-width: 50em) {

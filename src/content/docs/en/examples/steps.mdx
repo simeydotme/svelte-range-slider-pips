@@ -16,6 +16,10 @@ import StepsRaw from '~demos/examples/steps/Steps.svelte?raw';
 import Clamp from '~demos/examples/steps/Clamp.svelte';
 import ClampRaw from '~demos/examples/steps/Clamp.svelte?raw';
 
+import LargeStepCount from '~demos/examples/steps/LargeStepCount.svelte';
+import LargeStepCountRaw from '~demos/examples/steps/LargeStepCount.svelte?raw';
+
+
 
 
 
@@ -58,12 +62,13 @@ are always valid.
 <Note type="info">
   In this example above; the `values` that are put in to the Slider are not
   correct according to the `step` value. Therefore, the `values` are clamped.
-</Note>
+
   You can see that as the Slider initialises, the `values` change from `[-2,10]` to
   `[1,8]` as those are the closest values possible.
+</Note>
 
+<Note type="warning">
   Additionally, there is always a `last` pip that is selectable, which is aligned to
   the `max` value. In this case, the `max` value is `24`, so the last pip is `24`, even
   though it is not a multiple of `7`.
-
-
+</Note>

@@ -2,4 +2,4 @@
   import RangeSlider from 'svelte-range-slider-pips';
 </script>
 
-<RangeSlider />
+<RangeSlider id="useless-slider" />

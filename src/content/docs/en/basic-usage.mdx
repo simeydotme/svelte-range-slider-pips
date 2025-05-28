@@ -11,12 +11,21 @@ import Note from '~components/Reusable/Note.astro';
 
 import Useless from '~demos/basic/useless.svelte';
 import UselessRaw from '~demos/basic/useless.svelte?raw';
+import UselessRawVue from '~demos/basic/useless.vue?raw';
+import UselessRawReact from '~demos/basic/useless.jsx?raw';
+import UselessRawHtml from '~demos/basic/useless.html?raw';
 
 import BasicBinding from '~demos/basic/binding.svelte';
 import BasicBindingRaw from '~demos/basic/binding.svelte?raw';
+import BasicBindingRawVue from '~demos/basic/binding.vue?raw';
+import BasicBindingRawReact from '~demos/basic/binding.jsx?raw';
+import BasicBindingRawHtml from '~demos/basic/binding.html?raw';
 
 import TypicalUsage from '~demos/basic/typical.svelte';
 import TypicalUsageRaw from '~demos/basic/typical.svelte?raw';
+import TypicalUsageRawVue from '~demos/basic/typical.vue?raw';
+import TypicalUsageRawReact from '~demos/basic/typical.jsx?raw';
+import TypicalUsageRawHtml from '~demos/basic/typical.html?raw';
 
 
 ## Minimal Configuration
@@ -24,8 +33,11 @@ import TypicalUsageRaw from '~demos/basic/typical.svelte?raw';
 This will render a Slider with a single handle.
 
 <Demo name="Default (useless) Slider" client:visible>
-  <RangeSlider min={0} max={100} values={[10]} client:visible />
-  <Code slot="svelte" code={UselessRaw} lang="svelte" />
+  <Useless client:visible />
+  <Code slot="svelte" lang="svelte" code={UselessRaw} />
+  <Code slot="vue" lang="vue" code={UselessRawVue} />
+  <Code slot="react" lang="jsx" code={UselessRawReact} />
+  <Code slot="vanilla" lang="html" code={UselessRawHtml} />
 </Demo>
 
 But this is kind of useless! Unless you just want a pretty UI toy to play with! <Icon name="twemoji:face-with-tears-of-joy" />
@@ -35,13 +47,18 @@ Because once rendered to the page, there's no feedback upon interaction.
 
 ## Binding the values
 
-Typically we would want to be able to use the values of the Slider in our application. This
+Typically we would want to be able to use the `value` of the Slider in our application. This
 could either be to change another part of the interface in a Rich Internet Application, or to
-send the values to a server as part of a Form.
+send the value to a server as part of a Form.
+
+So here we will bind the `value` prop to a `value` variable and bind the `<input>` element to the same variable.
 
 <Demo name="Basic Binding to an <input>" client:visible>
   <BasicBinding client:visible />
-  <Code code={BasicBindingRaw} lang="svelte" slot="svelte" />
+  <Code slot="svelte" lang="svelte" code={BasicBindingRaw} />
+  <Code slot="vanilla" lang="html" code={BasicBindingRawHtml} />
+  <Code slot="vue" lang="vue" code={BasicBindingRawVue} />
+  <Code slot="react" lang="jsx" code={BasicBindingRawReact} />
 </Demo>
 
 
@@ -53,12 +70,15 @@ from a range of values. Using the special feature of `pips` to render
 beside the Slider to hint at the progress. It's also common to show a `float` value
 above the handle to help the user see the exact value they are selecting.
 
-Again; we are binding to a `values[]` variable so that the Slider's value can be
-used in our application.
+Here; we are binding the `values[]` prop to a `values` variable so that the Slider's value can be
+used elsewhere in our application.
 
-<Demo name="A typically styled Range Slider with pips" client:visible>
+<Demo name="A typical Range Slider with pips" client:visible>
   <TypicalUsage client:visible />
-  <Code code={TypicalUsageRaw} lang="svelte" slot="svelte" />
+  <Code slot="svelte" lang="svelte" code={TypicalUsageRaw} />
+  <Code slot="vue" lang="vue" code={TypicalUsageRawVue} />
+  <Code slot="react" lang="jsx" code={TypicalUsageRawReact} />
+  <Code slot="vanilla" lang="html" code={TypicalUsageRawHtml} />
 </Demo>
 
 <Note type="info" title="Clicky Labels">

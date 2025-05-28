@@ -6,7 +6,7 @@
 <div data-grid>
   <RangeSlider vertical={true} float bind:values />
   <RangeSlider vertical range pips float bind:values />
-  <RangeSlider vertical range pips all="label" bind:values />
+  <RangeSlider vertical range pips rangeFloat all="label" bind:values />
 </div>
 
 <style hide>

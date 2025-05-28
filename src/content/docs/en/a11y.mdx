@@ -28,15 +28,16 @@ best it can be for people with impairments, I thank you so much!
 
 
 <Demo name="Keyboard Support Tester" client:visible>
-  <RangeSlider id="a11y-slider" values={[-10,10]} range min={-20} max={20} pips all="label" pipstep={5} client:visible />
+  <RangeSlider id="a11y-slider" values={[-10,10]} range min={-50} max={50} pips all="label" pipstep={10} client:visible />
 </Demo>
 
 The RangeSlider supports the following keyboard shortcuts.  
 _(use the slider above to test them out)_
 
 - <kbd title="Tab key">Tab ⭲</kbd> Move focus to next handle
-- <kbd title="Left arrow">Left ←</kbd> Decrease value by `1`
-- <kbd title="Right arrow">Right →</kbd> Increase value by `1`
+- <kbd title="Shift">Shift</kbd><kbd title="Tab key">Tab ⭲</kbd> Move focus to previous handle
+- <kbd title="Left arrow">Left ←</kbd> Decrease value by `1` step
+- <kbd title="Right arrow">Right →</kbd> Increase value by `1` step
 - <kbd title="Ctrl">Ctrl</kbd><kbd title="Left arrow">Left ←</kbd> Decrease value by 1%
 - <kbd title="Ctrl">Ctrl</kbd><kbd title="Right arrow">Right →</kbd> Increase value by 1%
 - <kbd title="Shift">Shift</kbd><kbd title="Left arrow">Left ←</kbd> Decrease value by 10%
@@ -62,8 +63,8 @@ eg; `ariaLabels={['Volume']}`
 ### `ariaLabels` example
 
 <Demo name="Aria Label Example" client:visible>
-  <RangeSlider ariaLabels={['Volume']} client:visible />
-  <Code slot="svelte" code={'<RangeSlider ariaLabels={["Volume"]} />'} lang="svelte" />
+  <RangeSlider ariaLabels={['Volume']} client:visible first="label" last="label" pips formatter={v => v === 0 ? 'Mute' : v} pipstep={10} />
+  <Code slot="svelte" code={'<RangeSlider ariaLabels={["Volume"]} formatter={v => v === 0 ? `Mute` : v />'} lang="svelte" />
 </Demo>
 
 <Note type="info">
