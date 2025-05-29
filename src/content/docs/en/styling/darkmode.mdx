@@ -4,7 +4,6 @@ description: 'Set up Dark Mode for your Range Slider'
 ---
 
 import { Code } from 'astro/components';
-import RangeSlider from 'svelte-range-slider-pips';
 import { cleanImport } from '~lib/cleanImport.ts';
 
 import Info from "~components/Reusable/Info.astro";
@@ -21,8 +20,6 @@ import DarkModeToggle from "~demos/styling/DarkModeToggle.svelte";
 import DarkModeToggleRaw from "~demos/styling/DarkModeToggle.svelte?raw";
 import DarkModeToggleCss from "~demos/styling/DarkModeToggle.css?raw";
 
-
-### Dark Mode Support
 
 The slider now supports dark mode by adding the `darkmode` prop to the component.
 
@@ -70,7 +67,7 @@ The slider now supports dark mode by adding the `darkmode` prop to the component
  */
 ```
 
-#### Explicit Dark Mode 
+## Explicit Dark Mode 
 ***Set the `darkmode` prop to `force`***  
 This will force the slider to use the dark color scheme, regardless of system settings.
 
@@ -79,7 +76,7 @@ This will force the slider to use the dark color scheme, regardless of system se
   <Code slot="svelte" lang="svelte" code={cleanImport(DarkModeManualRaw)} />
 </Demo>
 
-#### Automatic Dark Mode 
+## Automatic Dark Mode 
 ***Set the `darkmode` prop to `auto`***   
 This will make the slider automatically switch to dark mode based on system preferences.
 
@@ -88,7 +85,7 @@ This will make the slider automatically switch to dark mode based on system pref
   <Code slot="svelte" lang="svelte" code={cleanImport(DarkModeAutoRaw)} />
 </Demo>
 
-#### Website Toggled Dark Mode 
+## Toggled Dark Mode 
 ***Set the `darkmode` prop to `auto`, and add some custom css for the application***   
 If you're using a site-controlled darkmode toggle, you may also need to add the darkmode
 css to your stylesheet. This will make the slider automatically switch to dark mode based on your websites settings.

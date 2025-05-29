@@ -1,7 +1,9 @@
 <script>
   import RangeSlider from 'svelte-range-slider-pips';
-  import css from './Daisy.css';
-
+  import css from './Daisy.css?inline';
+  /* hide */
+  const renderCss = `<style>${css}</style>`;
+  /* endhide */
   let values = [ 20, 80 ];
   // use this class to change the position of the floats at certain values
   $: rangeFlip = values[1] - values[0] <= 20;
@@ -18,3 +20,7 @@
   <RangeSlider pips float pushy range="min" bind:values={rangeValues} step={5} />
   <RangeSlider pips float pushy range="max" bind:values={rangeValues} step={5} />
 </div>
+
+<!-- hide -->
+{@html renderCss}
+<!-- endhide -->

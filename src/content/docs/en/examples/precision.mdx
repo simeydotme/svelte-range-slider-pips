@@ -1,0 +1,71 @@
+---
+title: 'Precision'
+description: 'Control the level of precision for the slider'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+import Demo from '~components/Reusable/Demo.svelte';
+import Info from '~components/Reusable/Info.astro'
+import Note from '~components/Reusable/Note.astro'
+
+import DefaultPrecision from '~demos/examples/precision/DefaultPrecision.svelte';
+import DefaultPrecisionRaw from '~demos/examples/precision/DefaultPrecision.svelte?raw';
+import DefaultPrecisionMismatch from '~demos/examples/precision/DefaultPrecisionMismatch.svelte';
+import DefaultPrecisionMismatchRaw from '~demos/examples/precision/DefaultPrecisionMismatch.svelte?raw';
+import PrecisionSetting from '~demos/examples/precision/PrecisionSetting.svelte';
+import PrecisionSettingRaw from '~demos/examples/precision/PrecisionSetting.svelte?raw';
+
+
+By default `<RangeSlider />` will use a precision of 2 decimal places. This controls
+the values and the display of pips/floats. 
+
+It is necessary to control the precision due to the nature of floating point artihmetic 
+in javascript. Without a precision check, values on the slider would end up with rounding errors
+in certain scenarios (specifically sliders with non-integer steps).
+
+
+## Default Precision
+
+Here you can see the default precision of 2 decimal places.
+
+<Demo name="Default Precision" client:visible>
+  <DefaultPrecision client:visible />
+  <Code slot="svelte" code={cleanImport(DefaultPrecisionRaw)} lang="svelte" />
+</Demo>
+
+### `step` has too much precision
+
+It's possible to have steps of more than 2 decimal places, but here you can see that even though the 
+slider is set to a step of 0.005, the values are rounded to 2 decimal places by default.
+
+<Info>The slider accepts the `value` prop as `0.555`, but as soon as it is interacted with, it will be rounded to `0.56`.</Info>
+
+<Demo name="Precision Mismatch" client:visible>
+  <DefaultPrecisionMismatch client:visible />
+  <Code slot="svelte" code={cleanImport(DefaultPrecisionMismatchRaw)} lang="svelte" />
+</Demo>
+
+<Note type="warning" title="Keyboard Interactions">
+  Even though the **slider seems to work properly** with mouse/touch. The keyboard interactions will
+  not work as expected. Because the 'next' value (0.65 -> 0.655 for example) is not a valid `step` when
+  the `precision` is set to 2 decimal places.
+</Note>
+
+## Changing the precision
+
+So when you have a `step` with more than 2 decimal places, you can set the `precision` to the number of decimal places you want to use.
+
+<Demo name="Precision Setting" client:visible>
+  <PrecisionSetting client:visible />
+  <Code slot="svelte" code={cleanImport(PrecisionSettingRaw)} lang="svelte" />
+</Demo>
+
+<Note type="ok" title="Video Player Control">
+  Setting the `precision` is something you may need if trying to use the **slider
+  for a video player control**. Binding to the `currentTime`, as it is a highly precise value.
+  [See the issue ticket about this](https://github.com/simeydotme/svelte-range-slider-pips/issues/165)
+</Note>
+
+
+

@@ -1,7 +1,9 @@
 <script>
   import RangeSlider from "svelte-range-slider-pips";
-  import css from './MonthPicker.css';
-
+  import css from './MonthPicker.css?inline';
+  /* hide */
+  const renderCss = `<style>${css}</style>`;
+  /* endhide */
   let values = [2, 9];
   let dateFormat = new Intl.DateTimeFormat("en", { month: "short" });
 
@@ -25,3 +27,8 @@
   pushy
   draggy
 />
+
+
+<!-- hide -->
+{@html renderCss}
+<!-- endhide -->

@@ -1,8 +1,10 @@
 <script>
 
   import RangeSlider from 'svelte-range-slider-pips';
-  import css from './PriceGradient.css';
-  
+  import css from './PriceGradient.css?inline';
+  /* hide */
+  const renderCss = `<style>${css}</style>`;
+  /* endhide */
   let slider;
   let timer;
   let values = [ 2333, 7878 ];
@@ -53,3 +55,6 @@
   on:stop={stop} 
 />
 
+<!-- hide -->
+{@html renderCss}
+<!-- endhide -->

@@ -1,6 +1,11 @@
 <script>
   import RangeSlider from 'svelte-range-slider-pips';
-  import './OutOfLimitsCss.css';
+  import css from './OutOfLimitsCss.css?inline';
+
+  /* hide */
+  const renderCss = `<style>${css}</style>`;
+  /* endhide */
+
   let values = [40,60];
 </script>
 
@@ -8,3 +13,8 @@
 
 
 <code data-values title="The output slider values">{values}</code>
+
+
+<!-- hide -->
+{@html renderCss}
+<!-- endhide -->

@@ -97,6 +97,10 @@ drag to move the entire range either direction.
 <Info>This can be [combined with the `rangeGapMin` and `rangeGapMax` properties](./range-gaps#draggy-range-handles) to 
 set a minimum or maximum distance between the handles and prevent _'squashing'_ at the slider limits.</Info>
 
+<Note type="alert" title="Draggy events">
+  **When using the `draggy` property** with range sliders, the `activeHandle` will be `-1` to indicate that the range area is being dragged.
+  In this case, `startValue` and `previousValue` will be arrays containing the initial and previous positions of both handles.
+</Note>
 
 
 

@@ -119,6 +119,7 @@ export const SIDEBAR: Sidebar = {
           { text: 'Formatter', link: `${REPOPATH}/en/examples/formatter` },
           { text: 'Disabled', link: `${REPOPATH}/en/examples/disabled` },
           { text: 'Easing', link: `${REPOPATH}/en/examples/easing` },
+          { text: 'Precision', link: `${REPOPATH}/en/examples/precision` },
         ]
       },
       { text: 'Styling', link: `${REPOPATH}/en/styling`, 

@@ -1,15 +1,29 @@
 <script>
   import RangeSlider from 'svelte-range-slider-pips';
   let values = [30,70];
+
+  const echo = (e) => {
+    // view your console to see the difference in event 
+    // details when dragging the range area
+    console.log(e.detail);
+  }
 </script>
 
-<div data-grid>
-  <span hide>Draggy</span>
-  <RangeSlider range draggy pips bind:values />
-  <span hide>Not Draggy</span>
-  <RangeSlider range pips bind:values />
+<!-- hide -->
+ <div data-grid>
+<!-- endhide -->
+
+
+<span hide>Draggy</span>
+
+<RangeSlider range draggy pips bind:values on:change={echo} />
+<span hide>Not Draggy</span>
+<RangeSlider range pips bind:values on:change={echo} />
+
+<!-- hide -->
 </div>
 <strong><em>Try dragging the range between handles.</em></strong>
+<!-- endhide -->
 
 <style hide>
   [data-grid] {
