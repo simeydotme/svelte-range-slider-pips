@@ -32,7 +32,7 @@ const sidebar = SIDEBAR[langCode];
                     </li>
                   );
                 } else {
-                  const ariaChildCurrent = currentPageMatch === url.split("#")[0] ? "page" : url.endsWith(currentPageMatch) ? "page" : false;
+                  const ariaChildCurrent = currentPageMatch === url.split("#")[0] || url.endsWith(currentPageMatch) ? "page" : false;
                   return (
                     <li class="nav-link">
                       <a href={url} aria-current={ariaChildCurrent}>
@@ -41,7 +41,7 @@ const sidebar = SIDEBAR[langCode];
                       <ul>
                         {link.children.map((grandchild) => {
                           const gurl = Astro.site?.pathname + grandchild.link;
-                          const ariaGrandchildCurrent = currentPageMatch === gurl.split("#")[0] ? "page" : gurl.endsWith(currentPageMatch) ? "page" : false;
+                          const ariaGrandchildCurrent = currentPageMatch === gurl.split("#")[0] || gurl.endsWith(currentPageMatch) ? "page" : false;
                           const titleText = grandchild.new ? "New in v4.0.0" : "";
                           return (
                             <li class="nav-link nav-sublink" title={titleText}>
@@ -72,10 +72,23 @@ const sidebar = SIDEBAR[langCode];
     }
   }
   const focusSubLink = () => {
-    const currentPage = window.location.pathname;
-    const url = (currentPage.endsWith("/") ? currentPage.slice(0, -1) : currentPage) + window.location.hash;
-    document.querySelectorAll(`.nav-sublink a`)?.forEach((el) => el.removeAttribute("aria-current"));
-    document.querySelector(`.nav-sublink a[href="${url}"]`)?.setAttribute("aria-current", "page");
+    const currentPath = window.location.pathname;
+    const urlPath = (currentPath.endsWith("/") ? currentPath.slice(0, -1) : currentPath);
+    const urlHash = window.location.hash;
+    document.querySelectorAll(`.nav-sublink a`)?.forEach((el) => {
+      const linkUrl = new URL(el.href);
+      const linkPath = linkUrl.pathname;
+      const linkHash = linkUrl.hash;
+      el.removeAttribute("aria-current");
+      if (linkHash) {
+        el.setAttribute("aria-current", urlPath === linkPath && linkHash === urlHash ? "page" : false);
+      } else {
+        el.setAttribute("aria-current", urlPath === linkPath ? "page" : false);
+      }
+    });
+    // const selectedSubLink = document.querySelector(`.nav-sublink a[href="${url + window.location.hash}"]`) ?? document.querySelector(`.nav-sublink a[href*="${url}"]`);
+    // console.log('x',url,window.location.hash,selectedSubLink);
+    // selectedSubLink?.setAttribute("aria-current", "page");
   };
   window.addEventListener("hashchange", focusSubLink);
   window.addEventListener("DOMContentLoaded", scrollToCurrentLink);

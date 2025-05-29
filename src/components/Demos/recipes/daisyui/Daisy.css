@@ -3,10 +3,11 @@
  */
 .daisy-ui .rangeSlider {
   font-size: 18px;
+  
   --handleBg: var(--range-inactive);
 }
 
-.daisy-ui .rangeSlider.focus { 
+.daisy-ui .rangeSlider.rsFocus { 
   --handleBg: var(--range); 
 }
 
@@ -14,20 +15,19 @@
  * Track / Bar
  */
 .daisy-ui .rangeSlider .rangeBar {
-  height: 1.4em;
-  top: .25em;
-  translate:  0 -50%;
+  height: 26px;
+  top: -0.5em;
 }
 
-.daisy-ui .rangeSlider.range .rangeBar {
+.daisy-ui .rangeSlider.rsRange .rangeBar {
   border-radius: 0;
 }
 
-.daisy-ui .rangeSlider.range.min .rangeBar {
+.daisy-ui .rangeSlider.rsRange.rsMin .rangeBar {
   border-radius: 100px 0 0 100px;
 }
 
-.daisy-ui .rangeSlider.range.max .rangeBar {
+.daisy-ui .rangeSlider.rsRange.rsMax .rangeBar {
   border-radius: 0 100px 100px 0;
 }
 
@@ -35,60 +35,63 @@
  * Handles / Floats
  */
 .daisy-ui .rangeSlider .rangeNub,
-.daisy-ui .rangeSlider.focus .rangeNub {
-  background: white;
+.daisy-ui .rangeSlider.rsFocus .rangeNub,
+.daisy-ui .rangeSlider .rangeHandle.rsActive .rangeNub {
+  background-color: white;
   border: 3px solid var(--handleBg);
 }
 
 .daisy-ui .rangeSlider .rangeFloat {
+  font-size: 14px;
+  line-height: 1.8em;
+  height: 1.8em;
+  min-width: 2.4em;
+  padding: 0;
   border-radius: 2em;
-  min-width: 2em;
+  transform: translateY(-5px);
 }
 
-.daisy-ui .rangeSlider.range .rangeFloat {
-  left: 0;
-  transform: translateX(100%);
+.daisy-ui .rangeSlider.rsRange .rangeFloat {
+  height: 26px;
+  top: -1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* float position on the first handle (or min-range slider) */
-.daisy-ui .rangeSlider.range.min .rangeFloat,
-.daisy-ui .rangeSlider.range.min:hover .rangeFloat,
-.daisy-ui .rangeSlider.range:not(.min):not(.max) .rangeHandle:nth-child(2) .rangeFloat,
-.daisy-ui .rangeSlider.range:not(.min):not(.max) .rangeHandle:nth-child(2):hover .rangeFloat {
-  left: auto;
-  right: 0;
-  transform: translateX(-1.5em);
+.daisy-ui .rangeSlider.rsRange.rsMin .rangeFloat,
+.daisy-ui .rangeSlider.rsRange.rsMin:hover .rangeFloat,
+.daisy-ui .rangeSlider.rsRange:not(.rsMin):not(.rsMax) .rangeHandle:nth-child(2) .rangeFloat,
+.daisy-ui .rangeSlider.rsRange:not(.rsMin):not(.rsMax) .rangeHandle:nth-child(2):hover .rangeFloat {
+  transform: translateX(-100%);
   background: transparent;
 }
 
 /* float position on the second handle (or max-range slider) */
-.daisy-ui .rangeSlider.range.max .rangeFloat,
-.daisy-ui .rangeSlider.range.max:hover .rangeFloat,
-.daisy-ui .rangeSlider.range:not(.min):not(.max) .rangeHandle:nth-child(1) .rangeFloat,
-.daisy-ui .rangeSlider.range:not(.min):not(.max) .rangeHandle:nth-child(1):hover .rangeFloat {
-  left: 0;
-  transform: translateX(1.5em);
+.daisy-ui .rangeSlider.rsRange.rsMax .rangeFloat,
+.daisy-ui .rangeSlider.rsRange.rsMax:hover .rangeFloat,
+.daisy-ui .rangeSlider.rsRange:not(.rsMin):not(.rsMax) .rangeHandle:nth-child(1) .rangeFloat,
+.daisy-ui .rangeSlider.rsRange:not(.rsMin):not(.rsMax) .rangeHandle:nth-child(1):hover .rangeFloat {
+  transform: translateX(100%);
   background: transparent;
 }
 
 /* flip the float position on the first handle when range is < 20 */
-.daisy-ui.minFlip .rangeSlider.range.min .rangeFloat,
-.daisy-ui.minFlip .rangeSlider.range.min:hover .rangeFloat,
-.daisy-ui.rangeFlip .rangeSlider.range:not(.min):not(.max) .rangeHandle:nth-child(2) .rangeFloat,
-.daisy-ui.rangeFlip .rangeSlider.range:not(.min):not(.max) .rangeHandle:nth-child(2):hover .rangeFloat {
-  left: 0;
-  transform: translateX(1.75em);
+.daisy-ui.minFlip .rangeSlider.rsRange.rsMin .rangeFloat,
+.daisy-ui.minFlip .rangeSlider.rsRange.rsMin:hover .rangeFloat,
+.daisy-ui.rangeFlip .rangeSlider.rsRange:not(.rsMin):not(.rsMax) .rangeHandle:nth-child(2) .rangeFloat,
+.daisy-ui.rangeFlip .rangeSlider.rsRange:not(.rsMin):not(.rsMax) .rangeHandle:nth-child(2):hover .rangeFloat {
+  transform: translateX(100%);
   background: var(--handleBg);
 }
 
 /* flip the float position on the second handle when range is > 80 */
-.daisy-ui.maxFlip .rangeSlider.range.max .rangeFloat,
-.daisy-ui.maxFlip .rangeSlider.range.max:hover .rangeFloat,
-.daisy-ui.rangeFlip .rangeSlider.range:not(.min):not(.max) .rangeHandle:nth-child(1) .rangeFloat,
-.daisy-ui.rangeFlip .rangeSlider.range:not(.min):not(.max) .rangeHandle:nth-child(1):hover .rangeFloat {
-  left: auto;
-  right: 0;
-  transform: translateX(-1.75em);
+.daisy-ui.maxFlip .rangeSlider.rsRange.rsMax .rangeFloat,
+.daisy-ui.maxFlip .rangeSlider.rsRange.rsMax:hover .rangeFloat,
+.daisy-ui.rangeFlip .rangeSlider.rsRange:not(.rsMin):not(.rsMax) .rangeHandle:nth-child(1) .rangeFloat,
+.daisy-ui.rangeFlip .rangeSlider.rsRange:not(.rsMin):not(.rsMax) .rangeHandle:nth-child(1):hover .rangeFloat {
+  transform: translateX(-100%);
   background: var(--handleBg);
 }
 
@@ -99,20 +102,20 @@
   z-index: 1;
 }
 
-.daisy-ui .rangeSlider .pip {
+.daisy-ui .rangeSlider .rsPip {
   border-radius: 3px;
   background: var(--slider);
   translate: -1px -5px;
 }
 
-.daisy-ui .rangeSlider .pip.selected,
-.daisy-ui .rangeSlider .pip.in-range {
+.daisy-ui .rangeSlider .rsPip.rsSelected,
+.daisy-ui .rangeSlider .rsPip.rsInRange {
   width: 3px;
   background: var(--handleBg);
   translate: -1px -1px;
 }
 
-.daisy-ui .rangeSlider .pip.in-range {
+.daisy-ui .rangeSlider .rsPip.rsInRange {
   width: 1px;
   height: 4px;
   background: hsla(0, 0%, 100%, 0.75);

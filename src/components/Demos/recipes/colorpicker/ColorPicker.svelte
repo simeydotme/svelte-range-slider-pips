@@ -12,7 +12,7 @@
     --saturation: ${color.s[0]}%;
     --lightness: ${color.l[0]}%;
     --color: hsl( var(--hue), var(--saturation), var(--lightness) );
-    --range-handle-focus: hsla( var(--hue), 60%, 70%, 1 );
+    --picker-color: hsla( var(--hue), 60%, 70%, 1 );
   `;
 
 </script>

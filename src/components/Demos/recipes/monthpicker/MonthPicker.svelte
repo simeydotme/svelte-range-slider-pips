@@ -1,9 +1,6 @@
 <script>
   import RangeSlider from "svelte-range-slider-pips";
-  import css from './MonthPicker.css?inline';
-  /* hide */
-  const renderCss = `<style>${css}</style>`;
-  /* endhide */
+  import css from './MonthPicker.css';
 
   let values = [2, 9];
   let dateFormat = new Intl.DateTimeFormat("en", { month: "short" });
@@ -12,35 +9,10 @@
     return dateFormat.format(new Date(new Date().getFullYear(), v, 1));
   };
 
-  /**
-   * maintain a distance of 1 between the handles when
-   * the user is dragging the handle
-   */
-  const slide = ({ detail }) => {
-    if (detail.activeHandle === 0 && values[1] < detail.value + 1) {
-      values[1] = detail.value + 1;
-    }
-    if (detail.activeHandle === 1 && values[0] > detail.value - 1) {
-      values[0] = detail.value - 1;
-    }
-  };
-
-  /**
-   * enforce the gap between the handles when the user
-   * stops dragging the handle
-   */
-  const stop = ({ detail }) => {
-    if (detail.activeHandle === 0 && detail.value >= 10) {
-      values[0] = 10;
-    }
-    if (detail.activeHandle === 1 && detail.value <= 0) {
-      values[1] = 1;
-    }
-  };
 </script>
 
 <RangeSlider
-  id="label"
+  id="month-picker"
   bind:values
   float
   pips
@@ -49,11 +21,7 @@
   range
   max={11}
   {formatter}
-  on:change={slide}
-  on:stop={stop}
+  rangeGapMin={1}
+  pushy
+  draggy
 />
-
-
-<!-- hide -->
-{@html renderCss}
-<!-- endhide -->

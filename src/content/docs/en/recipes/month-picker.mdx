@@ -19,12 +19,13 @@ import MonthPickerCss from '~demos/recipes/monthpicker/MonthPicker.css?raw';
 Here's an example of a nice looking month picker slider with labels inside the handles.
 There's two key parts to this example;
 - Set the `formatter` function to format the values as a month name
-- Use the `css` to move the `.rangeFloat` label on top of the `.rangeHandle`
+- Use the `rangeGapMin` option so we cannot select the same month twice
+- Use the `css grid` to move the `.rangeFloat` label on top of the `.rangeHandle`
 
 Of course, the normal options to enable `floats` and the `range` are required.
 
 
-<Demo name="Price Range" panel="css" client:visible>
+<Demo name="Month Range Picker" panel="css" client:visible>
   <MonthPicker client:visible />
 </Demo>
 

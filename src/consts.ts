@@ -124,9 +124,9 @@ export const SIDEBAR: Sidebar = {
       { text: 'Styling', link: `${REPOPATH}/en/styling`, 
         children: [
           { text: 'Color Variables', link: `${REPOPATH}/en/styling#colors` },
-          { text: 'Dark Mode', link: `${REPOPATH}/en/styling/#dark-mode-support`, new: true },
           { text: 'Size', link: `${REPOPATH}/en/styling#size` },
           { text: 'CSS Structure', link: `${REPOPATH}/en/styling#structure` },
+          { text: 'Dark Mode', link: `${REPOPATH}/en/styling/darkmode`, new: true },
           { text: 'Pips & Steps', link: `${REPOPATH}/en/styling/pips` },
         ]
       },

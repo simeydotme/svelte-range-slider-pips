@@ -1,15 +1,13 @@
 <script>
 
   import RangeSlider from 'svelte-range-slider-pips';
-  import css from './PriceGradient.css?inline';
-  /* hide */
-  const renderCss = `<style>${css}</style>`;
-  /* endhide */
+  import css from './PriceGradient.css';
   
   let slider;
   let timer;
   let values = [ 2333, 7878 ];
 
+  /** set the format of the floating labels */
   const currency = new Intl.NumberFormat( "en", { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
   const formatter = (value) => currency.format(value);
 
@@ -17,6 +15,10 @@
     slider.classList.remove( "up", "down" );
   }
 
+  /** 
+   * when the slider handle moves, check if it's increasing or decreasing and
+   * add the appropriate class to the slider (we use css to animate the floating labels)
+  */
   const slide = (e) => {
     const delta = -(e.detail.previousValue - e.detail.value);
     if ( delta > 0 ) {
@@ -27,6 +29,7 @@
       slider.classList.remove( "up" );
     }
     clearTimeout( timer );
+    // end the animation when movement stops
     timer = setTimeout( stop, 66 );
   }
 
@@ -50,6 +53,3 @@
   on:stop={stop} 
 />
 
-<!-- hide -->
-{@html renderCss}
-<!-- endhide -->

@@ -1,39 +1,41 @@
+/** border and frame for the color ui */
 .color {
   padding: 1em;
   background-color: var(--color);
   transition: all 0.5s ease;
 }
 
+/** color picker slider */
 .color-ui .rangeSlider.rangeSlider {
   margin-block: 2em;
-  font-family: var(--font-mono);
+  /* replace the default accent colors with the color from JS */
+  --slider-accent: var(--picker-color);
+  --slider-accent-100: var(--picker-color);
 }
 
+/** always show the floating values, and place them over the handles */
 .color-ui .rangeSlider.rangeSlider .rangeFloat,
-.color-ui .rangeSlider.rangeSlider.focus .rangeFloat,
+.color-ui .rangeSlider.rangeSlider.rsFocus .rangeFloat,
 .color-ui .rangeSlider.rangeSlider:hover .rangeFloat {
   opacity: 1;
-  top: -.25em;
-  translate: 0% 100%;
+  translate: -50% 100%;
   border-radius: 1em;
-  padding: .25em .75em;
+  padding: .5em .75em;
   pointer-events: all;
 }
 
-/**
- * Simple Styling
- */
+
+/** Simple Styling for the outer UI */
 .color-ui {
   border-radius: 0.5rem;
   border: 2px solid var(--color);
   color: var(--color);
   transition: all 0.5s ease;
   user-select: none;
+  font-family: var(--font-mono);
 }
 
-/**
- * Advanced Styling for the Demo
- */
+/** Advanced css to invert the text color and add a vibrant shadow */
 .color-ui {
   color: hsla(var(--hue), calc( var(--saturation) / 2),calc( (var(--lightness ) - 50%) * -1 + 100% ), 1);
   text-shadow: 0 1px 1px hsla(var(--hue), calc( var(--saturation) / 2),calc( var(--lightness ) - 50% ), 1);
