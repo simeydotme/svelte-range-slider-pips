@@ -52,7 +52,7 @@
 
   // track the number of pips we're actually going to render
   let pipCount = 0;
-  const limitPipCount = 1000;
+  const limitPipCount = 500;
   // track the final pipstep we're going to use
   let finalPipStep = 1;
 

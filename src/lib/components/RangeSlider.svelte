@@ -72,6 +72,9 @@
   // prepare dispatched events
   const dispatch = createEventDispatcher();
 
+  // loading
+  let isMounted = false;
+
   // state management
   let valueLength = 0;
   let focus = false;
@@ -282,10 +285,14 @@
         rafId = updateSliderSize(entries[0].target as HTMLDivElement);
       }) as ResizeObserver;
       resizeObserver.observe(slider);
+      setTimeout(() => {
+        isMounted = true;
+      }, 16);
     }
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
       resizeObserver?.disconnect?.();
+      isMounted = false;
     };
   });
 
@@ -794,8 +801,8 @@
       on:blur={sliderBlurHandle}
       on:focus={sliderFocusHandle}
       on:keydown={sliderKeydown}
-      style:z-index={zindex}
       style:--handle-pos={$springPositions[index]}
+      style="z-index: {zindex}; {isMounted ? '' : 'opacity: 0;'}"
       aria-label={ariaLabels[index]}
       aria-valuemin={range === true && index === 1 ? values[0] : min}
       aria-valuemax={range === true && index === 0 ? values[1] : max}
@@ -831,6 +838,7 @@
       style:--range-start={rangeStartPercent($springPositions)}
       style:--range-end={rangeEndPercent($springPositions)}
       style:--range-size={rangeEndPercent($springPositions) - rangeStartPercent($springPositions)}
+      style={isMounted ? '' : 'opacity: 0;'}
     >
       {#if rangeFloat}
         <span class="rangeFloat">
@@ -1263,5 +1271,10 @@
 
   :global(.rangeSlider.rsDisabled .rangeNub) {
     background-color: var(--handle-inactive);
+  }
+
+  :global(.rangeSlider .rangeBar),
+  :global(.rangeSlider .rangeHandle) {
+    transition: opacity 0.2s ease;
   }
 </style>

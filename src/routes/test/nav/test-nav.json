@@ -80,6 +80,10 @@
         "path": "/test/range-slider/pips/pipsteps"
       },
       {
+        "name": "pipsteps-large",
+        "path": "/test/range-slider/pips/pipsteps-large"
+      },
+      {
         "name": "steps",
         "path": "/test/range-slider/pips/steps"
       }

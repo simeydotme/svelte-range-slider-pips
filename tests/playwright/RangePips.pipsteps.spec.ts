@@ -231,9 +231,9 @@ test.describe('Pipstep Property Tests', () => {
     const pips = slider.locator('.rsPip');
     const pipValues = slider.locator('.rsPipVal');
 
-    // normally we would expect 1,001 pips (100/0.1 + 1)
-    // and because the pipCount is <= 1000, the pipstep is respected and we see 1001 pips
-    await expect(pips).toHaveCount(1001);
+    // normally we would expect 501 pips (100/0.1 + 1)
+    // and because the pipCount is <= 500, the pipstep is respected and we see 501 pips
+    await expect(pips).toHaveCount(501);
     await expect(pipValues).toContainText([
       '0',
       '0.1',
@@ -279,28 +279,28 @@ test.describe('Pipstep Property Tests', () => {
       '30.8',
       '30.9',
       '31',
-      '90',
-      '90.1',
-      '90.2',
-      '90.3',
-      '90.4',
-      '90.5',
-      '90.6',
-      '90.7',
-      '90.8',
-      '90.9',
-      '91',
-      '99',
-      '99.1',
-      '99.2',
-      '99.3',
-      '99.4',
-      '99.5',
-      '99.6',
-      '99.7',
-      '99.8',
-      '99.9',
-      '100'
+      '40',
+      '40.1',
+      '40.2',
+      '40.3',
+      '40.4',
+      '40.5',
+      '40.6',
+      '40.7',
+      '40.8',
+      '40.9',
+      '41',
+      '49',
+      '49.1',
+      '49.2',
+      '49.3',
+      '49.4',
+      '49.5',
+      '49.6',
+      '49.7',
+      '49.8',
+      '49.9',
+      '50'
     ]);
   });
 
@@ -313,21 +313,21 @@ test.describe('Pipstep Property Tests', () => {
     // but because of the 1000 pip limit, there's a check to make sure
     // we don't show more than 1000 pips (pipCount > 1000),
     // which will recursively divide the pipstep by 2 until it gets below 1000.
-    // so we end up with 626 pips. ( 10000 -> 5000 -> 2500 -> 1250 -> 625 ) + 1
-    await expect(pips).toHaveCount(626);
+    // so we end up with 626 pips. ( 10000 -> 5000 -> 2500 -> 1250 -> 625 -> 313 ) + 1
+    await expect(pips).toHaveCount(314);
     await expect(pipValues).toContainText(['0', '100']);
     // check first pip has the correct value and index
     await expect(pipValues.nth(0)).toHaveText('0');
     await expect(pips.nth(0)).toHaveAttribute('data-index', '0');
     // check third pip has the correct value and index
-    await expect(pipValues.nth(2)).toHaveText('0.32');
+    await expect(pipValues.nth(2)).toHaveText('0.64');
     await expect(pips.nth(2)).toHaveAttribute('data-index', '2');
     // check last pip has the correct value and index
-    await expect(pipValues.nth(625)).toHaveText('100');
-    await expect(pips.nth(625)).toHaveAttribute('data-index', '625');
+    await expect(pipValues.nth(313)).toHaveText('100');
+    await expect(pips.nth(313)).toHaveAttribute('data-index', '313');
     // check second-last pip has the correct value and index
-    await expect(pipValues.nth(624)).toHaveText('99.84');
-    await expect(pips.nth(624)).toHaveAttribute('data-index', '624');
+    await expect(pipValues.nth(312)).toHaveText('99.84');
+    await expect(pips.nth(312)).toHaveAttribute('data-index', '312');
   });
 
   test('pipstep=0.0001 should reduce number of pips due to 1000 pip limit', async ({ page }) => {
@@ -336,25 +336,25 @@ test.describe('Pipstep Property Tests', () => {
     const pipValues = slider.locator('.rsPipVal');
 
     // normally we would expect 1,000,001 pips (100/0.0001 + 1)
-    // but because of the 1000 pip limit, there's a check to make sure
-    // we don't show more than 1000 pips (pipCount > 1000),
-    // which will recursively divide the pipstep by 2 until it gets below 1000.
-    // so we end up with 978 pips. ( 1000000 -> 500000 -> 250000 -> 125000 -> 62500 -> 31250 -> 15625 -> 7813 -> 3907 -> 1954 -> 977 ) + 1
-    await expect(pips).toHaveCount(978);
+    // but because of the 500 pip limit, there's a check to make sure
+    // we don't show more than 500 pips (pipCount > 500),
+    // which will recursively divide the pipstep by 2 until it gets below 500.
+    // so we end up with 978 pips. ( 1000000 -> 500000 -> 250000 -> 125000 -> 62500 -> 31250 -> 15625 -> 7813 -> 3907 -> 1954 -> 977 -> 489 ) + 1
+    await expect(pips).toHaveCount(490);
     await expect(pipValues).toContainText(['0', '100']);
     // check first pip has the correct value and index
     await expect(pipValues.nth(0)).toHaveText('0');
     await expect(pips.nth(0)).toHaveAttribute('data-index', '0');
     // check third pip has the correct value and index
     // the values are rounded to 2 decimal places
-    await expect(pipValues.nth(3)).toHaveText('0.31');
+    await expect(pipValues.nth(3)).toHaveText('0.61');
     await expect(pips.nth(3)).toHaveAttribute('data-index', '3');
     // check last pip has the correct value and index
-    await expect(pipValues.nth(977)).toHaveText('100');
-    await expect(pips.nth(977)).toHaveAttribute('data-index', '977');
+    await expect(pipValues.nth(489)).toHaveText('100');
+    await expect(pips.nth(489)).toHaveAttribute('data-index', '489');
     // check second-last pip has the correct value and index
-    await expect(pipValues.nth(976)).toHaveText('99.94');
-    await expect(pips.nth(976)).toHaveAttribute('data-index', '976');
+    await expect(pipValues.nth(488)).toHaveText('99.94');
+    await expect(pips.nth(488)).toHaveAttribute('data-index', '488');
   });
 
   test('pipstep=2 with custom min/max should show every other step', async ({ page }) => {
@@ -584,9 +584,9 @@ test.describe('Pipstep Property Tests', () => {
     const pips = slider.locator('.rsPip');
     const pipValues = slider.locator('.rsPipVal');
 
-    // Should show pips at 0, 10, 20, ..., 9990, 10000
-    await expect(pips).toHaveCount(1001);
-    await expect(pipValues).toContainText(['0', '10000']);
+    // Should show pips at 0, 40, 80, ..., 9960, 10000
+    await expect(pips).toHaveCount(251);
+    await expect(pipValues).toContainText(['0', '80', '160', '9920', '9960', '10000']);
   });
 
   test('dynamic pipstep control should update pips correctly', async ({ page }) => {

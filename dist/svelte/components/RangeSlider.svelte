@@ -54,6 +54,7 @@ export let darkmode = false;
 export let springValues = { stiffness: 0.15, damping: 0.4 };
 export let spring = true;
 const dispatch = createEventDispatcher();
+let isMounted = false;
 let valueLength = 0;
 let focus = false;
 let handleActivated = false;
@@ -200,10 +201,14 @@ onMount(() => {
       rafId = updateSliderSize(entries[0].target);
     });
     resizeObserver.observe(slider);
+    setTimeout(() => {
+      isMounted = true;
+    }, 16);
   }
   return () => {
     if (rafId) cancelAnimationFrame(rafId);
     resizeObserver?.disconnect?.();
+    isMounted = false;
   };
 });
 function targetIsHandle(el) {
@@ -538,8 +543,8 @@ function ariaLabelFormatter(value2, index) {
       on:blur={sliderBlurHandle}
       on:focus={sliderFocusHandle}
       on:keydown={sliderKeydown}
-      style:z-index={zindex}
       style:--handle-pos={$springPositions[index]}
+      style="z-index: {zindex}; {isMounted ? '' : 'opacity: 0;'}"
       aria-label={ariaLabels[index]}
       aria-valuemin={range === true && index === 1 ? values[0] : min}
       aria-valuemax={range === true && index === 0 ? values[1] : max}
@@ -575,6 +580,7 @@ function ariaLabelFormatter(value2, index) {
       style:--range-start={rangeStartPercent($springPositions)}
       style:--range-end={rangeEndPercent($springPositions)}
       style:--range-size={rangeEndPercent($springPositions) - rangeStartPercent($springPositions)}
+      style={isMounted ? '' : 'opacity: 0;'}
     >
       {#if rangeFloat}
         <span class="rangeFloat">
@@ -1007,5 +1013,10 @@ function ariaLabelFormatter(value2, index) {
 
   :global(.rangeSlider.rsDisabled .rangeNub) {
     background-color: var(--handle-inactive);
+  }
+
+  :global(.rangeSlider .rangeBar),
+  :global(.rangeSlider .rangeHandle) {
+    transition: opacity 0.2s ease;
   }
 </style>

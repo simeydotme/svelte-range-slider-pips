@@ -34,7 +34,7 @@ let clientStart = null;
 $: stepMax = vertical ? 50 : 100;
 $: tooManySteps = (max - min) / step >= stepMax;
 let pipCount = 0;
-const limitPipCount = 1e3;
+const limitPipCount = 500;
 let finalPipStep = 1;
 $: {
   finalPipStep = pipstep ?? (tooManySteps ? (max - min) / (stepMax / 5) : 1);

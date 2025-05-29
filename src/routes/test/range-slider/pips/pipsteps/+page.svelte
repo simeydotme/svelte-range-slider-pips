@@ -33,7 +33,7 @@
   <RangeSlider id="pipstep-7-3" pips all="label" pipstep={7.3} step={2} float />
 
   <h5>pipstep=0.1 (should reduce due to stepMax limit)</h5>
-  <RangeSlider id="pipstep-0-1" pips all="label" pipstep={0.1} />
+  <RangeSlider id="pipstep-0-1" pips all="label" pipstep={0.1} max={50} />
 
   <h5>pipstep=0.01 (should reduce due to 1000 pip limit)</h5>
   <RangeSlider id="pipstep-0-01" pips all="label" pipstep={0.01} />
