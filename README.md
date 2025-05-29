@@ -65,6 +65,10 @@ npm install svelte-range-slider-pips --save-dev  # if you prefer npm
 
 ## Usage
 
+### Upgrading from v3 -> v4
+
+> **Note:** Please read the [upgrade guide](./docs/upgrade.md) for details, as there's some changes which might break your styling/ui.
+
 ### In a svelte 4/5 project
 
 Assuming you have a Svelte app up and running;
