@@ -38,7 +38,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "svelte": "^4.2.7",
-    "svelte-range-slider-pips": "^4.0.0-beta.5",
+    "svelte-range-slider-pips": "^4.0.0",
     "typescript": "^5.0.0"
   },
   "devDependencies": {
