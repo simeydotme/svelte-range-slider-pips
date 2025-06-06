@@ -8,45 +8,45 @@ import Info from '~components/Reusable/Info.astro'
 Below you'll find a list of options (props) that you can pass to the component to
 configure it to your liking. There's a link to an example for each option.
 
-<Option propName="value" propType="Number" defaultValue="50" link="values">  
+<Option propName="value" propType="Number" defaultValue="50" link="examples/values">  
   A default value to apply to the Slider. 
   <Info>A Slider with `range` property must use `values` instead</Info>
 </Option>
 
-<Option propName="values" propType="Array" defaultValue="[50]" link="values">
+<Option propName="values" propType="Array" defaultValue="[50]" link="examples/values">
   Array of values to apply on the Slider. If multiple values are provided, multiple handles will be rendered.  
   <Info>A Slider with `range` property set can only have two values max</Info>
 </Option>
 
-<Option propName="min" propType="Number" defaultValue="0" link="min-max">
+<Option propName="min" propType="Number" defaultValue="0" link="examples/min-max">
   Minimum value for the Slider  
   should be set to lower than `max` property
 </Option>
 
-<Option propName="max" propType="Number" defaultValue="100" link="min-max">
+<Option propName="max" propType="Number" defaultValue="100" link="examples/min-max">
   Maximum value for the Slider  
   should be set to higher than `min` property
 </Option>
 
-<Option propName="step" propType="Number" defaultValue="1" link="steps">
+<Option propName="step" propType="Number" defaultValue="1" link="examples/steps">
   Every `nth` **value to allow handle to stop at**. For example if the `step` is 
   `5`, then the handle will only stop at `5`, `10`, `15`, `20`, etc.  
   <Info>should be a positive value</Info>
 </Option>
 
-<Option propName="pips" propType="Boolean" defaultValue="false" link="pips">
+<Option propName="pips" propType="Boolean" defaultValue="false" link="examples/pips">
   Whether to show pips/notches on the Slider. The pips will be rendered at the
   `pipstep` value. Pips can be styled as necessary but by default sit below the
   Slider (Horizontal) like a gauge.
 </Option>
 
-<Option propName="pipstep" propType="Number" defaultValue="1" link="pip-steps">
+<Option propName="pipstep" propType="Number" defaultValue="1" link="examples/pip-steps">
   Every `nth` **step to show a pip for**. This has multiple defaults depending on
   `min`, `max` and `step` properties. A sensible default is chosen, but can be overridden.
   <Info>should be a positive value</Info>
 </Option>
 
-<Option propName="range" propType={["Boolean","String"]} defaultValue="false" link="range">
+<Option propName="range" propType={["Boolean","String"]} defaultValue="false" link="examples/range">
   Whether to style as a range picker. Possible values are: 
   - `false` no range styling
   - `true` styles like a range with a `min` and `max`
@@ -56,63 +56,63 @@ configure it to your liking. There's a link to an example for each option.
   <Info>A Slider with `range=min/max` or `range=true` only have one or two values respectively.</Info>
 </Option>
 
-<Option propName="pushy" propType="Boolean" defaultValue="false" link="range#pushy-range-handles">
+<Option propName="pushy" propType="Boolean" defaultValue="false" link="examples/range#pushy-range-handles">
   If `range` is `true`, then this decides if one handle will push the other along. By default, the handles 
   will not push each other along, they will block each other.
 </Option>
 
-<Option propName="rangeGapMin" propType="Number" defaultValue="0" link="range-gaps" new={true}>
+<Option propName="rangeGapMin" propType="Number" defaultValue="0" link="examples/range-gaps" new={true}>
   Sets the minimum allowed distance between handles in a range slider. When `pushy` is true, moving a handle past this limit will push the other handle.
   <Info>Only works when `range` is true</Info>
 </Option>
 
-<Option propName="rangeGapMax" propType="Number" defaultValue="null" link="range-gaps" new={true}>
+<Option propName="rangeGapMax" propType="Number" defaultValue="null" link="examples/range-gaps" new={true}>
   Sets the maximum allowed distance between handles in a range slider. When `pushy` is true, moving a handle past this limit will pull the other handle.
   <Info>Only works when `range` is true</Info>
 </Option>
 
-<Option propName="draggy" propType="Boolean" defaultValue="false" link="range#draggy-ranges" new={true}>
+<Option propName="draggy" propType="Boolean" defaultValue="false" link="examples/range#draggy-ranges" new={true}>
   Enables dragging of the range area between handles.
   Setting the `rangeGapMin` and `rangeGapMax` to the same value (with `draggy` & `pushy` on) would simulate a fixed range.
   <Info>Only works when `range` is true</Info>
 </Option>
 
-<Option propName="float" propType="Boolean" defaultValue="false" link="float">
+<Option propName="float" propType="Boolean" defaultValue="false" link="examples/float">
   Set true to add a floating label above focussed handles. This is good for displaying the
   current value of the Slider while interacting with it.
 </Option>
 
-<Option propName="rangeFloat" propType="Boolean" defaultValue="false" link="float#floats-on-the-range" new={true}>
+<Option propName="rangeFloat" propType="Boolean" defaultValue="false" link="examples/float#floats-on-the-range" new={true}>
   When true, shows the range values between the handles (e.g., "20 - 80"). Respects existing `prefix` and `suffix` properties.
   <Info>Only works when `range` is true</Info>
 </Option>
 
-<Option propName="vertical" propType="Boolean" defaultValue="false" link="vertical">
+<Option propName="vertical" propType="Boolean" defaultValue="false" link="examples/vertical">
   Make the Slider render vertically (lower value on bottom)
 </Option>
 
-<Option propName="first" propType={["Boolean","String"]} defaultValue="false" link="pips#control-the-display">
+<Option propName="first" propType={["Boolean","String"]} defaultValue="false" link="examples/pips#control-the-display">
   Whether to show a pip or label **for the first value on Slider**. Possible values are:  
   - `false` the first value in the Slider will not have a pip or label
   - `pip` a pip (only) will be shown for the first value
   - `label` label (and pip) is shown on the first value
 </Option>
 
-<Option propName="last" propType={["Boolean","String"]} defaultValue="false" link="pips#control-the-display">
+<Option propName="last" propType={["Boolean","String"]} defaultValue="false" link="examples/pips#control-the-display">
   Whether to show a pip or label **for the last value on Slider**. Possible values are:  
   - `false` the last value in the Slider will not have a pip or label
   - `pip` a pip (only) will be shown for the last value
   - `label` label (and pip) is shown on the last value
 </Option>
 
-<Option propName="rest" propType={["Boolean","String"]} defaultValue="false" link="pips#control-the-display">
+<Option propName="rest" propType={["Boolean","String"]} defaultValue="false" link="examples/pips#control-the-display">
   Whether to show a pip or label **for all values except first & last**. Possible values are:  
   - `false` the middle values in the Slider will not have a pip or label
   - `pip` a pip (only) will be shown for the middle values
   - `label` label (and pip) is shown on the middle values
 </Option>
 
-<Option propName="all" propType={["Boolean","String"]} defaultValue="false" link="pips#control-the-display">
+<Option propName="all" propType={["Boolean","String"]} defaultValue="false" link="examples/pips#control-the-display">
   Whether to show a pip or label **for every value**.  Possible values are:  
   - `false` all values in the Slider will not have a pip or label
   - `pip` a pip (only) will be shown for all values
@@ -121,34 +121,34 @@ configure it to your liking. There's a link to an example for each option.
   <Info>The same as combining `first`, `last` and `rest`.</Info>
 </Option>
 
-<Option propName="limits" propType={["Null","Array"]} defaultValue="null" link="limits">
+<Option propName="limits" propType={["Null","Array"]} defaultValue="null" link="examples/limits">
   An array of values to limit the Slider handles to.
   <Info>This should be two values (min/max) to limit the handles to</Info>
 </Option>
 
-<Option propName="prefix" propType="String" defaultValue="''" link="prefix-suffix#simple--prefix">
+<Option propName="prefix" propType="String" defaultValue="''" link="examples/prefix-suffix#simple--prefix">
   A simple string to prepend to all displayed values
   <Info>For more complex prefixes, use the `formatter` property</Info>
 </Option>
 
-<Option propName="suffix" propType="String" defaultValue="''" link="prefix-suffix#simple--suffix">
+<Option propName="suffix" propType="String" defaultValue="''" link="examples/prefix-suffix#simple--suffix">
   A simple string to append to all displayed values
   <Info>For more complex suffixes, use the `formatter` property</Info>
 </Option>
 
-<Option propName="reversed" propType="Boolean" defaultValue="false" link="reversed">
+<Option propName="reversed" propType="Boolean" defaultValue="false" link="examples/reversed">
   Reverse the orientation of min/max
 </Option>
 
-<Option propName="hoverable" propType="Boolean" defaultValue="true" link="float#float-without-hover">
+<Option propName="hoverable" propType="Boolean" defaultValue="true" link="examples/float#float-without-hover">
   Whether hover styles are enabled for both handles and pips/values
 </Option>
 
-<Option propName="disabled" propType="Boolean" defaultValue="false" link="disabled">
+<Option propName="disabled" propType="Boolean" defaultValue="false" link="examples/disabled">
   Determine if the Slider is disabled, or enabled
 </Option>
 
-<Option propName="id" propType="String" defaultValue="''" link="range#styling-range">
+<Option propName="id" propType="String" defaultValue="''" link="examples/range#styling-range">
   Give the Slider a unique ID for use in styling
 </Option>
 
@@ -168,38 +168,38 @@ configure it to your liking. There's a link to an example for each option.
   - `'auto'` system preference
 </Option>
 
-<Option propName="ariaLabels" propType="Array" defaultValue="[]" link="./a11y#aria-labels">
+<Option propName="ariaLabels" propType="Array" defaultValue="[]" link="a11y#aria-labels">
   An array of strings to use for the `aria-label` attribute on the handles.  
   <Info>The array should be the same length as the `values` array.</Info>
 </Option>
 
-<Option propName="formatter" propType="Function" defaultValue="(v,i,p) => v" link="formatter">
+<Option propName="formatter" propType="Function" defaultValue="(v,i,p) => v" link="examples/formatter">
   A function to format the value of the Slider. Should return a String value.
   <Info>function arguments are: `v(value), i(handle index), p(percent)`</Info>
   <Info type="warning">All formatters use <a href="https://svelte.dev/docs/svelte/@html" target="_blank">`@html` to render</a> so be careful with what you return</Info>
 </Option>
 
-<Option propName="handleFormatter" propType="Function" defaultValue="formatter()" link="formatter#multiple-formatters">
+<Option propName="handleFormatter" propType="Function" defaultValue="formatter()" link="examples/formatter#multiple-formatters">
   A function to re-format values on the handle/float before they are displayed. Defaults to the same function given to the `formatter` property.
   <Info>function arguments are: `v(value), i(handle index), p(percent)`</Info>
   <Info type="warning">All formatters use <a href="https://svelte.dev/docs/svelte/@html" target="_blank">`@html` to render</a> so be careful with what you return</Info>
 </Option>
 
-<Option propName="rangeFormatter" propType="Function" defaultValue="(v1,v2) => `${v1} - ${v2}`" link="formatter#formatting-the-rangefloat" new={true}>
+<Option propName="rangeFormatter" propType="Function" defaultValue="(v1,v2) => `${v1} - ${v2}`" link="examples/formatter#formatting-the-rangefloat" new={true}>
   A function to format the range float display. Takes two values and returns a string.
   <Info>Only works when `range` is true and `rangeFloat` is true</Info>
   <Info type="warning">All formatters use <a href="https://svelte.dev/docs/svelte/@html" target="_blank">`@html` to render</a> so be careful with what you return</Info>
 </Option>
 
-<Option propName="spring" propType="Boolean" defaultValue="true" link="easing#disable-spring" new={true}>
+<Option propName="spring" propType="Boolean" defaultValue="true" link="examples/easing#disable-spring" new={true}>
   Controls handle animations. When false, disables all animations on the slider handles for instant updates.
 </Option>
 
-<Option propName="springValues" propType="Object" defaultValue="{ stiffness: 0.15, damping: 0.4 }" link="easing">
+<Option propName="springValues" propType="Object" defaultValue="{ stiffness: 0.15, damping: 0.4 }" link="examples/easing">
   Svelte spring physics object to change the behaviour of the handle when moving.
 </Option>
 
-<Option propName="precision" propType="Number" defaultValue="2" link="precision" new={true}>
+<Option propName="precision" propType="Number" defaultValue="2" link="examples/precision" new={true}>
   The number of decimal places to display for the Slider values.
 </Option>
 

@@ -8,6 +8,7 @@ import { cleanImport } from '~lib/cleanImport.ts';
 
 import Demo from '~components/Reusable/Demo.svelte';
 import Note from '~components/Reusable/Note.astro';
+import Info from '~components/Reusable/Info.astro';
 
 import Pips from '~demos/examples/pips/Pips.svelte';
 import PipsRaw from '~demos/examples/pips/Pips.svelte?raw';
@@ -32,7 +33,7 @@ the Slider by default to mark regular intervals along the Slider's length.
 </Demo>
 
 <Note title="Pip Spread / Placement" type="info">
-  The pips are placed according to the `step` & `pipStep` algorithm. [Read more](./steps-combined)
+  The pips are placed according to [the `step` & `pipStep` algorithm](/svelte-range-slider-pips/en/examples/steps-combined).
 </Note>
 
 
@@ -43,7 +44,7 @@ the Slider by default to mark regular intervals along the Slider's length.
 Pip display is controlled by the properties; `all`, `first`, `last` and `rest`. 
 These properties can be set to `true` or `false` to control the display of the pips.
 
-This is also true for `labels`. [See more here](./pip-labels)
+<Info>This is also true for `labels`. [See more about `labels` here](/svelte-range-slider-pips/en/examples/pip-labels)</Info>
 
 <Demo name="Controlling the Display" client:visible>
   <PipDisplay client:visible />

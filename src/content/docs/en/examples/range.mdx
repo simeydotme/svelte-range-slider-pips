@@ -110,12 +110,14 @@ Something to notice is that when a `pip` falls inside of the `range`, it is give
 css class so it can be differentiated as in-range. Here I am using the `rsInRange` class to
 style the pip differently when it is in-range.
 
+<Info>Here I'm using the `id` prop to give the Slider a unique identifier styling.</Info>
+
 <Demo name="In-Range css style" client:visible>
   <InRangeCss client:visible />
   <Code slot="svelte" code={cleanImport(InRangeCssRaw)} lang="svelte" />
   <div slot="css">
   ```css
-  .rangePips :is(.rsInRange, .rsSelected) {
+  #sliderInRange .rangePips :is(.rsInRange, .rsSelected) {
     background: #f00;
     width: 2px;
   }
