@@ -858,10 +858,10 @@ test.describe('Step Property Tests', () => {
 
     // normally we would expect 10,001 pips (100/0.01 + 1)
     // but because of the stepMax limit, the step is divided by 5 (2000),
-    // however, there's a check to make sure we don't show more than 1000 pips (pipCount > 1000),
-    // which will recursively divide the pipstep by 2 until it gets below 1000.
-    // so we end up with 501 pips.
-    await expect(pips).toHaveCount(501);
+    // however, there's a check to make sure we don't show more than 500 pips (pipCount > 500),
+    // which will recursively divide the pipstep by 2 until it gets below 500.
+    // so we end up with 251 pips.
+    await expect(pips).toHaveCount(251);
     await expect(pipValues).toContainText(['0', '100']);
   });
 
@@ -882,10 +882,10 @@ test.describe('Step Property Tests', () => {
 
     // Normally we would expect 1,000,001 pips (100/0.0001 + 1)
     // but because of the stepMax limit, the step is divided by 5 (200000),
-    // however, there's a check to make sure we don't show more than 1000 pips (pipCount > 1000),
-    // which will recursively divide the pipstep by 2 until it gets below 1000.
-    // so we end up with 783 pips. ( 200000 -> 100000 -> 50000 -> 25000 -> 12500 -> 6250 -> 3125 -> 1563 -> 782 ) + 1
-    await expect(pips).toHaveCount(783);
+    // however, there's a check to make sure we don't show more than 500 pips (pipCount > 500),
+    // which will recursively divide the pipstep by 2 until it gets below 500.
+    // so we end up with 392 pips. ( 200000 -> 100000 -> 50000 -> 25000 -> 12500 -> 6250 -> 3125 -> 1563 -> 782 -> 391 ) + 1
+    await expect(pips).toHaveCount(392);
     await expect(pipValues).toContainText(['0', '100']);
   });
 

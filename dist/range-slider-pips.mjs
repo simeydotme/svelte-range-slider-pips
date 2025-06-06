@@ -3,7 +3,7 @@
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * Project home: https://simeydotme.github.io/svelte-range-slider-pips/
  * © 2025 Simon Goellner <simey.me@gmail.com> ~ MPL-2.0 License
- * Published: 6/6/2025
+ * Published: 7/6/2025
  */
 /** @returns {void} */
 function noop() {}
