@@ -1,0 +1,32 @@
+---
+title: 'Itty.sh Strength Slider'
+description: 'An example of how to style the slider to look like the Itty.sh strength slider'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import Itty from '~demos/recipes/itty-sh/Itty.svelte';
+import IttyRaw from '~demos/recipes/itty-sh/Itty.svelte?raw';
+import IttyCss from '~demos/recipes/itty-sh/Itty.css?raw';
+
+
+[Kevin](https://github.com/kwhitley/), a friend over at [Itty.sh](https://itty.dev), was one of the first adopters of Range Slider Pips
+[in a real-world opensource application; Itty.sh](https://itty.sh).
+
+So I thought it would be nice to create an example of how it's possible to style and extend
+the slider to work for his use-case! 
+
+
+<Demo name="Itty.sh" client:visible>
+  <Itty client:visible />
+</Demo>
+
+<Demo panel="svelte" client:visible>
+  <Code slot="svelte" code={cleanImport(IttyRaw)} lang="svelte" />
+  <Code slot="css" code={IttyCss} lang="css" />
+</Demo>
+

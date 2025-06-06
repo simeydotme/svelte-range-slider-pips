@@ -1,0 +1,31 @@
+---
+title: 'Safe / Error Zones'
+description: 'Styling the slider to show safe / error zones'
+---
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+
+import ColorZones from '~demos/recipes/color-zones/ColorZones.svelte';
+import ColorZonesRaw from '~demos/recipes/color-zones/ColorZones.svelte?raw';
+import ColorZonesCss from '~demos/recipes/color-zones/ColorZones.css?raw';
+
+There may be scenarios where you want to show a part of the Range Slider to be
+either safe, unsafe or perhaps both! 
+
+You could imagine creating extra `<div/>` elements which color a certain portion
+of the range to highlight a certain area. But this is essentially a 'style', and so
+the correct way to do this should be using `stylesheets` (aka; CSS).
+
+
+<Demo name="Safe Zone" panel="css" client:visible>
+  <ColorZones client:visible />
+</Demo>
+
+<Demo panel="css" client:visible>
+  <Code slot="svelte" code={cleanImport(ColorZonesRaw)} lang="svelte" />
+  <Code slot="css" code={ColorZonesCss} lang="css" />
+</Demo>
+

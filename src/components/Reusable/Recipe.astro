@@ -8,11 +8,12 @@ interface Props {
 }
 
 const { name, link, image, span } = Astro.props
+const linkBase = '/svelte-range-slider-pips/en/recipes/';
 
 ---
 
 <li class="recipe" style=`grid-column: span ${span ?? 1};`>
-  <a href={link}>
+  <a href={`${linkBase}${link}`}>
     {image &&
       <img src=`/svelte-range-slider-pips/recipes/${image}` alt={name} />
     }

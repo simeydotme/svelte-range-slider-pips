@@ -1,0 +1,45 @@
+
+
+.itty-slider {
+  /* set the default color of the slider accents */
+  --slider-accent: rgb(48, 115, 221);
+  --handle-inactive: var(--slider-accent);
+}
+
+#itty-slider {
+  /* get the color based on the security level from Javascript */
+  --slider-accent: var(--safety-color);
+}
+
+.itty-slider.rangeSlider .rangeFloat {
+  /* make the slider float label always visible */
+  opacity: 1;
+  scale: 1;
+  translate: -50% 0% 0.01px;
+}
+
+.itty-slider .rsPip svg {
+  /* set the default color of the icons */
+  fill: var(--slider-base);
+}
+
+#itty-slider .rsPip.rsSelected:not(.rsPip--first) svg {
+  /* set the color of the icons when selected for the security slider */
+  fill: var(--slider-accent);
+}
+
+#itty-slider .rsPip.rsSelected.rsPip--first svg,
+#itty-slider-time .rsPip.rsSelected svg {
+  /* set the stroke color of the icons when selected */
+  stroke: var(--handle-inactive);
+}
+
+#itty-slider-time {
+  margin-top: 6rem;
+}
+
+#itty-slider-time small {
+  opacity: 0.75;
+  font-size: 0.75rem;
+  font-style: italic;
+}

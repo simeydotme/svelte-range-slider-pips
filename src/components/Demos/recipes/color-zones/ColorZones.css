@@ -1,0 +1,101 @@
+@import url('https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css');
+
+.color-zones {
+
+  /* what is considered the 'safe' and 'unsafe' areas */
+  --unsafe-pct: 20%;
+  --safe-pct: 80%;
+
+  /* colors to use for the zones */
+  --safe-color: #13a75d;
+  --safe-color-fade: #5ecb95;
+  --unsafe-color: #a91a32;
+  --unsafe-color-fade: #d5535388;
+
+  position: relative;
+
+}
+
+.color-zones .rangeSlider {
+  /* we set a background gradient on the slider which has
+  two zones, one for safe and one for unsafe at either end */
+  background-image: 
+    linear-gradient( to right, transparent calc(var(--safe-pct) - 20px), var(--safe-color-fade) var(--safe-pct) 100% ),
+    linear-gradient( to right, transparent var(--unsafe-pct), var(--slider-bg) var(--unsafe-pct) 100% ),
+    repeating-linear-gradient(290deg, var(--unsafe-color-fade) calc(100% - 10px), var(--unsafe-color-fade) calc(100% - 5.5px), var(--unsafe-color) calc(100% - 5px), var(--unsafe-color) 100%);
+}
+
+/* when the slider is in the 'unsafe' zone, we change the accent colors to unsafe values */
+.color-zones .unsafe {
+  --slider-accent: var(--unsafe-color);
+  --slider-accent-fade: var(--unsafe-color-fade);
+  --handle-inactive: var(--unsafe-color-fade);
+  --handle-border: var(--unsafe-color-fade);
+}
+
+/* when the slider is in the 'safe' zone, we change the accent colors to safe values */
+.color-zones .safe {
+  --slider-accent: var(--safe-color);
+  --slider-accent-fade: var(--safe-color-fade);
+  --handle-inactive: var(--safe-color-fade);
+  --handle-border: var(--safe-color-fade);
+}
+
+.color-zones .rangeHandle {
+  width: 0.5em;
+  height: 0.5em;
+}
+
+/* we add a white shadow to the handle to make it stand out */
+.color-zones .rangeNub {
+  width: 200%;
+  height: 200%;
+  border-radius: 50%;
+  transform: translateX(-25%) translateY(-25%);
+  background: transparent!important;
+
+  /* this is to show an arrow icon instead of the normal circular nub */
+  &:before {
+    font-family: "tabler-icons";
+    content: "\f6cf";
+    color: var(--slider-accent);
+    font-size: 2em;
+    width: 1.5em;
+    height: 1em;
+    position: absolute;
+    top: 0.5em;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+
+/* switch to a skull icon when the slider is in the unsafe zone */
+.color-zones .unsafe .rangeNub:before {
+  content: '\f292';
+  top: 0.66em;
+}
+
+/* move the range float down a little bit */
+.color-zones .rangeSlider .rangeHandle.rsActive .rangeFloat, 
+.color-zones .rangeSlider.rsHoverable .rangeHandle:hover .rangeFloat, 
+.color-zones .rangeSlider.rsHoverable .rangeBar:hover .rangeFloat, 
+.color-zones .rangeSlider.rsFocus .rangeBar .rangeFloat {
+  translate: -50% 25% 0.01px;
+  border-radius: 10em;
+}
+
+.color-zones p {
+  position: absolute;
+  bottom: -2em;
+  left: 0;
+  right: 0;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.color-zones.safe p {
+  color: var(--safe-color);
+}
+.color-zones.unsafe p {
+  color: var(--unsafe-color);
+}
