@@ -7,20 +7,28 @@ import { Code } from 'astro/components';
 import { Icon } from 'astro-icon'
 import RecipeList from '~/components/Reusable/RecipeList.astro';
 import Recipe from '~/components/Reusable/Recipe.astro';
-
+import Note from '~/components/Reusable/Note.astro';
 
 Here are a bunch of pre-made recipes to help give you some ideas on what you 
-can do with Svelte Range Slider Pips. I'll provide some code snippets, and
-demos with the code and css needed to make it work.
+can do with Svelte Range Slider Pips. 
 
+I've provided some code snippets, and demos with the code and css needed to make
+them work.
+
+<Note title="Version 4" type="info">
+  These recipes are all updated to work with the latest version of Svelte Range
+  Slider Pips (`4.0.0`). If you're using an older version of the library, you can
+  [find the recipes here](https://github.com/simeydotme/svelte-range-slider-pips/tree/3b44a9be7bfbc7ac37a970a82a2b3b1fadc3d302/src/components/Demos/recipes).
+</Note>
 
 <RecipeList>
   <Recipe name="Label inside Handle" link="month-picker" image="month-picker.png" />
   <Recipe name="Color Picker UI" link="color-picker" image="color-ui.png" />
-  <Recipe name="Price Range" link="price-range" span={2} image="price-gradient.png" />
-  <Recipe name="Color Zones" link="color-zones" span={2} image="color-zones.png" />
+  <Recipe name="Price Range" link="price-range" image="price-gradient.png" />
+  <Recipe name="Color Zones" link="color-zones" image="color-zones.png" />
   <Recipe name="Daisy UI" link="daisy-ui" image="daisy-ui.png" />
-  <Recipe name="Itty.sh" link="itty-sh" image="itty-sh.png" />
+  <Recipe name="Cute Bubbles" link="cute-bubbles" image="cute-bubbles.png" />
+  <Recipe name="Itty.sh" link="itty-sh" span={2} image="itty-sh.png" />
 </RecipeList>
 
 #### More to come...

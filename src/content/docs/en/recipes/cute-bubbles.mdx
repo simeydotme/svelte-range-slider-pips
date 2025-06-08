@@ -1,0 +1,32 @@
+---
+title: 'Cute Bubble Sliders'
+description: 'A style recipe based off one of my most popular CodePens'
+---
+
+import { Code } from 'astro/components';
+import { Icon } from 'astro-icon'
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Info from '~components/Reusable/Info.astro';
+
+import CuteBubbles from '~demos/recipes/cute-bubbles/CuteBubbles.svelte';
+import CuteBubblesRaw from '~demos/recipes/cute-bubbles/CuteBubbles.svelte?raw';
+import CuteBubblesCss from '~demos/recipes/cute-bubbles/CuteBubbles.css?raw';
+
+Here's a recipe with the style taken directly [from one of my most popular CodePens](https://codepen.io/simeydotme/pen/mJLPPq).
+
+Most of the work is using the `CSS` variables to control the colors. With a little
+bit of `CSS` to control the `rangeNub`, `rsPip`, and `rangeFloat` position.
+
+<Demo name="Cute Bubble Sliders" client:visible>
+  <CuteBubbles client:visible />
+</Demo>
+
+Check out the `CSS` tab, below, for the full `CSS` code.
+
+<Demo name="Cute Bubble Sliders" client:visible>
+  <Code slot="svelte" code={cleanImport(CuteBubblesRaw)} lang="svelte" />
+  <Code slot="css" code={CuteBubblesCss} lang="css" />
+</Demo>

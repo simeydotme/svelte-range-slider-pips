@@ -137,8 +137,9 @@ export const SIDEBAR: Sidebar = {
           { text: 'DaisyUi', link: `${REPOPATH}/en/recipes/daisy-ui` },
           { text: 'Color Picker', link: `${REPOPATH}/en/recipes/color-picker` },
           { text: 'Price Gradient', link: `${REPOPATH}/en/recipes/price-range` },
-          { text: 'Safe / Error Zones', link: `${REPOPATH}/en/recipes/color-zones` },
-          { text: 'Itty.sh', link: `${REPOPATH}/en/recipes/itty-sh` },
+          { text: 'Safe / Error Zones', link: `${REPOPATH}/en/recipes/color-zones`, new: true },
+          { text: 'Itty.sh', link: `${REPOPATH}/en/recipes/itty-sh`, new: true },
+          { text: 'Cute Bubbles', link: `${REPOPATH}/en/recipes/cute-bubbles`, new: true },
         ]
       }
     ]
