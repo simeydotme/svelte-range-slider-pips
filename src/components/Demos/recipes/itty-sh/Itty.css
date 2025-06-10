@@ -13,13 +13,12 @@
   /* make the slider float label always visible */
   opacity: 1;
   scale: 1;
-  translate: -50% 0% 0.01px;
 }
 
 .itty-slider.rangeSlider .rangeFloat,
 .itty-slider.rangeSlider .rangeHandle:hover .rangeFloat,
 .itty-slider.rangeSlider .rangeHandle.rsActive .rangeFloat {
-  /* make the long label always inside the container by shifting it based on handle position */
+  /* keep the float inside the container by shifting it based on handle position */
   translate: calc((var(--handle-pos) * -0.6% - 20%)) 0% 0.01px;
 }
 

@@ -1,0 +1,14 @@
+#auto-position .rangeFloat {
+  
+  --float-x: calc((var(--handle-pos) * -0.6% - 20%)); /* offset the float horizontally */
+  --float-y: -20%; /* offset the float vertically */
+  
+  /* keep the float inside the container by shifting it 
+     based on handle's position */
+  translate: var(--float-x) var(--float-y) 0.01px;
+}
+
+.container {
+  overflow: hidden;
+  padding-inline: 1em;
+}

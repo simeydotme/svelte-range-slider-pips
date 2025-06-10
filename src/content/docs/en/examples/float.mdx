@@ -27,6 +27,11 @@ import FocusRaw from '~demos/examples/float/Focus.svelte?raw';
 
 import ToggleRangeFloat from '~demos/examples/float/ToggleRangeFloat.svelte';
 import ToggleRangeFloatRaw from '~demos/examples/float/ToggleRangeFloat.svelte?raw';
+import ToggleRangeFloatCss from '~demos/examples/float/ToggleRangeFloat.css?raw';
+
+import AutoPosition from '~demos/examples/float/AutoPosition.svelte';
+import AutoPositionRaw from '~demos/examples/float/AutoPosition.svelte?raw';
+import AutoPositionCss from '~demos/examples/float/AutoPosition.css?raw';
 
 
 
@@ -132,10 +137,29 @@ based on the distance between the handles.
 <Demo name="Toggle rangeFloat and float" client:visible>
   <ToggleRangeFloat client:visible />
   <Code slot="svelte" code={cleanImport(ToggleRangeFloatRaw)} lang="svelte" />
+  <Code slot="css" lang="css" code={ToggleRangeFloatCss} />
 </Demo>
 
-<Note type="info">
-  This simple example is using the `values` property to toggle the `rangeFloat` and `float` properties.
-  But it would be possible to use the `on:change` event, and calculate the pixel-distance between the handles,
-  if that was a better approach for your use case.
+This simple example is using the `values` property to toggle the `rangeFloat` and `float` properties.
+But it would be possible to use the `on:change` event, and calculate the pixel-distance between the handles,
+if that was a better approach for your use case.
+
+
+## Keep Float inside container
+
+If your slider has **very long float labels**—and is positioned close to the edge 
+of the browser or its parent container—you may find the floats extend past the
+boundaries and look terrible.
+
+One way to **keep floats inside is by using a simple css `calc()` to re-position the
+floats *based on the handle's position***.
+
+<Demo name="Float auto-position" panel="css" client:visible>
+  <AutoPosition client:visible />
+  <Code slot="svelte" code={cleanImport(AutoPositionRaw)} lang="svelte" />
+  <Code slot="css" lang="css" code={AutoPositionCss} />
+</Demo>
+
+<Note type="info" title="Realistic example">
+  Also see the [Itty.sh recipe](/svelte-range-slider-pips/en/recipes/itty-sh) for a more realistic example of this.
 </Note>
