@@ -7,8 +7,3 @@
      based on handle's position */
   translate: var(--float-x) var(--float-y) 0.01px;
 }
-
-.container {
-  overflow: hidden;
-  padding-inline: 1em;
-}

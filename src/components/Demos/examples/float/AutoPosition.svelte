@@ -35,7 +35,12 @@
 <!-- endhide -->
 
 <style>
-  :global(.container .rangeFloat) {
+  .container {
+    overflow: hidden;
+    padding-inline: 1em;
+  }
+
+  :global(.container .rangeSlider .rangeFloat) {
     opacity: 1;
     translate: -50% -20% 0.01px;
   }
