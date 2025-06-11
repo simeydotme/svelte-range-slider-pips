@@ -124,6 +124,9 @@
   all="label"
 />
 
+
+<code data-values title="The output slider values">{securityValue}, {timeValue}</code>
+
 <!-- hide -->
 {@html renderCss}
 <!-- endhide -->

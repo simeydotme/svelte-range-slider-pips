@@ -28,6 +28,7 @@
   draggy
 />
 
+<code data-values title="The output slider values">{values}</code>
 
 <!-- hide -->
 {@html renderCss}

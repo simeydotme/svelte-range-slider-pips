@@ -25,7 +25,7 @@ import DraggyRaw from '~demos/examples/range/Draggy.svelte?raw';
 import InRangeCss from '~demos/examples/range/InRangeCss.svelte';
 import InRangeCssRaw from '~demos/examples/range/InRangeCss.svelte?raw';
 
-
+import MultiRange from '~demos/recipes/multi-range/MultiRange.svelte';
 
 
 
@@ -123,4 +123,17 @@ style the pip differently when it is in-range.
   }
   ```
   </div>
+</Demo>
+
+
+## Multiple Ranges
+
+Unfortunately due to the immense complexity, multiple ranges are not currently supported as
+a prop on the slider. However, it's possible to fake multiple ranges by applying a gradient to the
+`rangeBar` element, and setting the range values on the `style` prop.
+
+This is demonstrated in the [Multi-Range recipe](/svelte-range-slider-pips/en/recipes/multi-range).
+
+<Demo name="Multi-Range" client:visible>
+  <MultiRange client:visible isToggle={false} />
 </Demo>

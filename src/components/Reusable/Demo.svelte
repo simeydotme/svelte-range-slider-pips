@@ -162,12 +162,14 @@
   {/if}
 
   {#if $$slots.default}
-    <form class="slider-container {dark === true ? 'dark' : dark === 'auto' ? 'auto-dark' : ''}">
-      <fieldset>
-        <legend>{ displayName || 'Range Slider Demo' }</legend>
-        <slot></slot>
-      </fieldset>
-    </form>
+    <div class="demo-wrapper {dark === true ? 'dark theme-dark' : dark === 'auto' ? 'auto-dark' : ''}">
+      <form class="slider-container">
+        <fieldset>
+          <legend>{ displayName || 'Range Slider Demo' }</legend>
+          <slot></slot>
+        </fieldset>
+      </form>
+    </div>
   {/if}
 
 </section>
@@ -220,13 +222,13 @@
     padding: .25rem .5rem;
   }
 
-  .slider-container.dark {
-    --bg: hsla( var(--color-gray-20), 1);
-    --fg: hsla( var(--color-gray-80), 1);
+  .theme-dark .slider-container {
+    --bg: var(--dark);
+    --fg: var(--light);
   }
 
   @media (prefers-color-scheme: dark) {
-  .slider-container.auto-dark {
+    .auto-dark .slider-container {
       --bg: hsla( var(--color-gray-20), 1);
       --fg: hsla( var(--color-gray-80), 1);
     }

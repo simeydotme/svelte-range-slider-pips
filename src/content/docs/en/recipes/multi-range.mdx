@@ -1,0 +1,41 @@
+---
+title: Multi-Ranges
+description: Demonstrating a way to add multiple ranges to a slider.
+---
+
+import { Code } from 'astro/components';
+import { Icon } from 'astro-icon'
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Info from '~components/Reusable/Info.astro';
+
+import MultiRange from '~demos/recipes/multi-range/MultiRange.svelte';
+import MultiRangeRaw from '~demos/recipes/multi-range/MultiRange.svelte?raw';
+import MultiRangeCss from '~demos/recipes/multi-range/MultiRange.css?raw';
+
+
+
+While it's not actually an `option` in the `<RangeSlider />` component, you can 
+visually (and functionally) achieve multi-ranges by applying a gradient to the
+`rangeBar` element, and setting the range values on the `style` prop.
+
+Technically speaking, the below slider is not a `range` but simply a slider with
+4 handles.
+
+<Demo name="Multi-Range" panel="svelte" client:visible dark="auto">
+  <MultiRange client:visible />
+</Demo>
+
+There's a couple of caveats to note for this approach, though;
+1) Cannot use `draggy` as it's not a `range`, so the usability could be less than ideal.
+2) The `rangeFloat` prop is also not going to work because it's not a `range`.
+3) The `values` is a flat array, so you'll need to extract the values manually.
+
+<Info>Check out the code (svelte & css) below to see how this is possible.</Info>
+
+<Demo panel="svelte" client:visible>
+  <Code slot="svelte" code={cleanImport(MultiRangeRaw)} lang="svelte" />
+  <Code slot="css" code={MultiRangeCss} lang="css" />
+</Demo>

@@ -140,6 +140,7 @@ export const SIDEBAR: Sidebar = {
           { text: 'Safe / Error Zones', link: `${REPOPATH}/en/recipes/color-zones`, new: true },
           { text: 'Itty.sh', link: `${REPOPATH}/en/recipes/itty-sh`, new: true },
           { text: 'Cute Bubbles', link: `${REPOPATH}/en/recipes/cute-bubbles`, new: true },
+          { text: 'Multi-Range', link: `${REPOPATH}/en/recipes/multi-range`, new: true },
         ]
       }
     ]

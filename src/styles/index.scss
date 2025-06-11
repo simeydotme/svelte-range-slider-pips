@@ -125,8 +125,13 @@ p {
 }
 
 p,
-.content ul {
+.content ul,
+.content ol {
   color: var(--theme-text-light);
+}
+
+.content :is(ul, ol) li {
+  margin-inline-start: 1em;
 }
 
 small,
@@ -140,6 +145,10 @@ a {
   text-underline-offset: 0.08em;
   align-items: center;
   gap: 0.5rem;
+}
+
+article > section :is(ul, ol) {
+  margin-top: 0.5em;
 }
 
 article > section :is(ul, ol) > * + * {
@@ -195,9 +204,14 @@ strong {
 
 .content hr {
   margin-block: 2rem;
-  background: var(--theme-text-light);
+  background: var(--theme-text);
   border: none;
   height: 1px;
+  opacity: 0.25;
+}
+
+.content pre + hr {
+  margin-block-start: 4rem;
 }
 
 kbd {

@@ -67,17 +67,26 @@ The slider now supports dark mode by adding the `darkmode` prop to the component
  */
 ```
 
+
+---
+
+
 ## Explicit Dark Mode 
 ***Set the `darkmode` prop to `force`***  
+
 This will force the slider to use the dark color scheme, regardless of system settings.
 
-<Demo name="Dark Mode Forced" client:visible dark={true}>
-  <DarkModeManual client:visible />
+This can be useful if you control the darkmode of your website with a sitewide setting/store,
+you could imagine the prop being set to `force` when the setting/store is `true`.
+
+<Demo name="Dark Mode Forced" client:visible >
+  <DarkModeManual client:only />
   <Code slot="svelte" lang="svelte" code={cleanImport(DarkModeManualRaw)} />
 </Demo>
 
 ## Automatic Dark Mode 
 ***Set the `darkmode` prop to `auto`***   
+
 This will make the slider automatically switch to dark mode based on system preferences.
 
 <Demo name="Browser Dark Mode" client:visible dark="auto">
@@ -87,6 +96,7 @@ This will make the slider automatically switch to dark mode based on system pref
 
 ## Toggled Dark Mode 
 ***Set the `darkmode` prop to `auto`, and add some custom css for the application***   
+
 If you're using a site-controlled darkmode toggle, you may also need to add the darkmode
 css to your stylesheet. This will make the slider automatically switch to dark mode based on your websites settings.
 

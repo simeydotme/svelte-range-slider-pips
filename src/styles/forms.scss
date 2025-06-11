@@ -15,9 +15,6 @@
   --b: hsla(var(--h), var(--s), 100%, 1);
   --svg: var(--fg);
 
-  // --theme-code-inline-bg: hsla(var(--color-base-simey-dark), 90%, 1);
-  // --theme-code-inline-text:hsla(var(--color-base-simey-dark), 30%, 1);
-
 }
 
 :root.theme-dark form {
@@ -30,8 +27,6 @@
   
   --tint: hsl(260, 85%, 60%);
   --tint2: hsl(300, 85%, 60%);
-  
-  // --theme-code-inline-bg: hsla(var(--color-gray-30), 1);
 
 }
 
@@ -278,10 +273,10 @@ form {
     display: inline-flex;
     align-items: center;
     gap: 0.5em;
-    background: hsl(var(--h), var(--s), 90%);
+    background: hsl(var(--h), var(--s), 85%);
     text-transform: uppercase;
     width: auto;
-    padding-inline: 2em;
+    padding: 0.7em 1.6em 0.8em;
     box-shadow: inset 0 0 0 1px transparent;
     transition: all 0.3s ease;
 
