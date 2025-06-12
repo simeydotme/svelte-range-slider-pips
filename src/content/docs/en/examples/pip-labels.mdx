@@ -12,6 +12,9 @@ import Note from '~components/Reusable/Note.astro';
 import PipLabels from '~demos/examples/pips/PipLabels.svelte';
 import PipLabelsRaw from '~demos/examples/pips/PipLabels.svelte?raw';
 
+import OddOnly from '~demos/examples/labels/OddOnly.svelte';
+import OddOnlyRaw from '~demos/examples/labels/OddOnly.svelte?raw';
+import OddOnlyCss from '~demos/examples/labels/OddOnly.css?raw';
 
 
 
@@ -61,4 +64,61 @@ The labels are displayed using the `all`, `first` `last` and `rest` props.
   <Code slot="svelte" lang="svelte" code='<RangeSlider pips rest="label" />' />
 </Demo>
 
+
+
+
+## Only *n*th Labels
+
+There could be scenarios where you need to show all the pips (`step=1`) but you only want to
+display labels for odd steps, for example. 
+
+There's two ways to achieve this, 
+- either [with `css` styling](#with-css), 
+- or [with the `formatter` function](#with-formatter).
+
+### With CSS
+
+This is the preferred method, as it's more flexible and easier to maintain. The
+value remains in the markup, but it's not visible.
+
+<Demo name="Only Odd Labels" panel="css" client:visible>
+  <OddOnly client:visible />
+  <Code slot="svelte" lang="svelte" code={cleanImport(OddOnlyRaw)} />
+  <Code slot="css" lang="css" code={cleanImport(OddOnlyCss)} />
+</Demo>
+
+### With Formatter
+
+Using a formatter will remove the value altogether from the markup.
+
+<Demo name="Only Even Labels" client:visible>
+  <RangeSlider pips all="label" max={20} formatter={(v) => {
+    return v % 2 === 0 ? v : ' ';
+  }} client:visible />
+  <Code slot="svelte" lang="svelte" code={`<RangeSlider pips all="label" max={20} 
+  formatter={(v) => {
+    return v % 2 === 0 ? v : ' ';
+  }} 
+/>
+  `} />
+</Demo>
+
+
+
+
+
+## Custom / Formatted Labels
+
+Generally, if you want to display a custom label, you'll want to use the `formatter` function,
+this allows you to **display any string for the labels**. [Check out the `formatter` examples for more info](/svelte-range-slider-pips/en/examples/formatter).
+
+<Demo name="Labels as Months" client:visible>
+  <RangeSlider pips all="label" max={11} formatter={(v) => new Date(2024, v).toLocaleString('en', { month: 'short' })} client:visible />
+  <Code slot="svelte" lang="svelte" code={`<RangeSlider pips all="label" max={11} 
+  formatter={(v) => {
+    return new Date(2025, v).toLocaleString("en", { month: "short" });
+  }}
+/>
+  `} />
+</Demo>
 

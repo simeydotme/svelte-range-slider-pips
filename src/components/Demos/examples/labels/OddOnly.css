@@ -1,0 +1,3 @@
+#odd-only .rsPip:nth-child(odd) .rsPipVal {
+  display: none;
+}

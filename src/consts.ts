@@ -116,7 +116,7 @@ export const SIDEBAR: Sidebar = {
           { text: 'Reversed', link: `${REPOPATH}/en/examples/reversed` },
           { text: 'Limits', link: `${REPOPATH}/en/examples/limits` },
           { text: 'Prefix & Suffix', link: `${REPOPATH}/en/examples/prefix-suffix` },
-          { text: 'Formatter', link: `${REPOPATH}/en/examples/formatter` },
+          { text: 'Formatters', link: `${REPOPATH}/en/examples/formatter` },
           { text: 'Disabled', link: `${REPOPATH}/en/examples/disabled` },
           { text: 'Easing', link: `${REPOPATH}/en/examples/easing` },
           { text: 'Precision', link: `${REPOPATH}/en/examples/precision` },
