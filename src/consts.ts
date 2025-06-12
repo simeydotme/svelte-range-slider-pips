@@ -8,7 +8,7 @@ export const SITE = {
 
 export const OPEN_GRAPH = {
   image: {
-    src: `https://github.com/simeydotme/${REPOPATH}/blob/main/test/public/range-slider.png`,
+    src: `https://github.com/simeydotme/svelte-range-slider-pips/raw/main/public/svelte-range-slider-features.png`,
     alt:
       'Preview of the Range Slider with a few different features demonstrated'
   },
