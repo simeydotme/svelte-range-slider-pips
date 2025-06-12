@@ -141,6 +141,7 @@ export const SIDEBAR: Sidebar = {
           { text: 'Itty.sh', link: `${REPOPATH}/en/recipes/itty-sh`, new: true },
           { text: 'Cute Bubbles', link: `${REPOPATH}/en/recipes/cute-bubbles`, new: true },
           { text: 'Multi-Range', link: `${REPOPATH}/en/recipes/multi-range`, new: true },
+          { text: 'Positive/Negative', link: `${REPOPATH}/en/recipes/positive-negative`, new: true },
         ]
       }
     ]

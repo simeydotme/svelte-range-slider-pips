@@ -1,0 +1,37 @@
+---
+title: Positive/Negative Range
+description: How to show a range from the center of the slider.
+---
+
+import { Code } from 'astro/components';
+import { Icon } from 'astro-icon'
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Info from '~components/Reusable/Info.astro';
+
+import PosNegRange from '~demos/recipes/positive-negative/PosNegRange.svelte';
+import PosNegRangeRaw from '~demos/recipes/positive-negative/PosNegRange.svelte?raw';
+import PosNegRangeCss from '~demos/recipes/positive-negative/PosNegRange.css?raw';
+
+
+
+Here's an interesting example of a slider where the range begins at the
+center of the slider, instead of the 'min' or 'max' value.
+
+Essentially this is a non-range slider, with a single handle, but we are just
+creating a pseudo element with CSS to show the range of the slider!
+
+<Demo name="Positive/Negative Range" panel="svelte" client:visible >
+  <PosNegRange animate client:visible />
+</Demo>
+
+This demo is based on a [question from the Github Discussions forum](https://github.com/simeydotme/svelte-range-slider-pips/discussions/134)
+
+<Info>Check out the code (svelte & css) below to see how this is possible.</Info>
+
+<Demo panel="svelte" client:visible>
+  <Code slot="svelte" code={cleanImport(PosNegRangeRaw)} lang="svelte" />
+  <Code slot="css" code={PosNegRangeCss} lang="css" />
+</Demo>

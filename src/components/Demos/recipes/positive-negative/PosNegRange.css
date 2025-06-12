@@ -1,0 +1,56 @@
+#pos-neg {
+
+  /* set the colors for the positive and negative ranges */
+
+  --text-color: white;
+  
+  &.positive {
+    --slider-accent: rgb(20, 216, 122);
+    --text-color: rgb(8, 73, 40);
+  }
+
+  &.negative {
+    --slider-accent: rgb(226, 36, 77);
+    --text-color: rgb(249, 188, 202);
+  }
+
+  /* create a pseudo element to show the positive / negative range */
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: var(--left);
+    right: var(--right);
+    height: 100%;
+    background-color: var(--slider-accent);
+    border-radius: inherit;
+    transition: background-color 0.3s ease-out;
+  }
+
+  /* style the handle/float a little */
+
+  .rangeHandle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .rangeNub {
+    background: color-mix(in hsl, var(--slider-accent) 15%, white);
+    border: 5px solid var(--slider-accent);
+  }
+
+  .rangeFloat {
+    opacity: 0.8;
+    translate: -50% -50% 0.01px;
+    background: var(--slider-accent);
+    color: var(--text-color);
+    font-weight: 600;
+    transition: all 0.2s ease-out;
+  }
+
+  &.rsFocus .rangeFloat {
+    opacity: 1;
+  }
+
+}

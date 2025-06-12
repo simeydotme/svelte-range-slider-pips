@@ -40,8 +40,13 @@ const linkBase = '/svelte-range-slider-pips/en/recipes/';
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 1em;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+    transition: all 0.2s ease-out;
+  }
+
+  .recipe:hover a {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    translate: 0 -5px;
   }
 
   .recipe img {
