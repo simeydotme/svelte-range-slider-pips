@@ -44,3 +44,21 @@
     0 4px 4px 1px hsla(var(--hue), calc( var(--saturation) / 2), max( calc( var(--lightness ) - 10% ), 30% ), .5),
     0 8px 10px 5px hsla(var(--hue), calc( var(--saturation) / 2), max( calc( var(--lightness ) - 10% ), 30% ), .5);
 }
+
+.color-ui #h.rangeSlider {
+  --s: var(--saturation);
+  --l: var(--lightness);
+  background-image: linear-gradient(to right, hsl(0, var(--s), var(--l)), hsl(60, var(--s), var(--l)), hsl(120, var(--s), var(--l)), hsl(180, var(--s), var(--l)), hsl(240, var(--s), var(--l)), hsl(300, var(--s), var(--l)), hsl(360, var(--s), var(--l)));
+}
+
+.color-ui #s.rangeSlider {
+  --h: var(--hue);
+  --l: var(--lightness);
+  background-image: linear-gradient(to right, hsl(var(--h), 0%, var(--l)), hsl(var(--h), 100%, var(--l)));
+}
+
+.color-ui #l.rangeSlider {
+  --h: var(--hue);
+  --s: var(--saturation);
+  background-image: linear-gradient(to right, hsl(var(--h), var(--s), 0%), hsl(var(--h), var(--s), 50%), hsl(var(--h), var(--s), 100%));
+}
