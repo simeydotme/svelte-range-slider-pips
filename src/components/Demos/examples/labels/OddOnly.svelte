@@ -1,6 +1,6 @@
 <script hide>
   import RangeSlider from 'svelte-range-slider-pips';
-  import css from './OddOnly.css';
+  import css from './OddOnly.css?inline';
 
   const renderCss = `<style>${css}</style>`;
 </script>
