@@ -53,7 +53,7 @@
 
 <video 
   bind:this={videoElement}
-  src="/carminandes-2.mp4" 
+  src="/svelte-range-slider-pips/carminandes-2.mp4" 
   controls 
   bind:currentTime 
   bind:duration
