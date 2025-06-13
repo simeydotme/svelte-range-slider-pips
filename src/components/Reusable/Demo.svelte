@@ -9,6 +9,7 @@
   export let label: string = 'Example Svelte Range Slider demonstration';
   export let panel: Panel = 'svelte';
   export let dark: boolean | string = false;
+  export let toggleable: boolean = false;
 
   let displayName: string = '';
   
@@ -20,7 +21,7 @@
     name = safeId( name );
   }
   
-  type Panel = 'svelte' | 'css' | 'vanilla' | 'vue' | 'react';
+  type Panel = 'svelte' | 'css' | 'vanilla' | 'vue' | 'react' | 'none';
   const panels: Panel[] = ['svelte', 'css', 'vanilla', 'vue', 'react'];
   const defaultPanel: number = panels.indexOf( panel );
   const iconMap: Record<Panel, string> = {
@@ -29,6 +30,7 @@
     vanilla: 'javascript',
     vue: 'vuejs',
     react: 'react',
+    none: ''
   };
 
   let tablist: HTMLDivElement;
@@ -47,7 +49,11 @@
   };
 
   const handleClick = (index: number) => {
-    selected = index;
+    if ( toggleable ) {
+      selected = selected === index ? -1 : index;
+    } else {
+      selected = index;
+    }
     hasInteracted = true;
   };
 
@@ -66,7 +72,7 @@
       <div class="tab-list" role="tablist" aria-label={label} bind:this={tablist}>
 
         {#each panels as panel, index}
-          {#if $$slots[panel]}
+          {#if panel !== 'none' && $$slots[panel]}
             <button
               id="{name}-{panel}-tab"
               role="tab"
@@ -275,7 +281,6 @@
 
   } 
 
-
   .tabs [role="tab"] {
     background: transparent;
     color: inherit;
@@ -289,8 +294,6 @@
     opacity: .75;
   }
 
-  .tabs [role="tab"]:focus,
-  .tabs [role="tab"]:active ,
   .tabs [role="tab"][aria-selected="true"] {
     filter: none;
     opacity: 1;

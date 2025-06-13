@@ -136,6 +136,11 @@ form {
       opacity: 0.33;
       font-style: italic;
     }
+
+    &[readonly] {
+      background: hsl(var(--h), var(--s), 90%);
+    }
+
   }
 
   textarea {

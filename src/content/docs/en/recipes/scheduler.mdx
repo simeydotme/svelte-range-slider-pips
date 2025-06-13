@@ -1,0 +1,177 @@
+---
+title: 'Scheduler'
+description: 'Creating a rudamentary scheduler visualizer'
+---
+
+import { Code } from 'astro/components';
+import { Icon } from 'astro-icon'
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import Basic from '~demos/recipes/scheduler/Basic.svelte';
+import BasicRaw from '~demos/recipes/scheduler/Basic.svelte?raw';
+import BasicCssRaw from '~demos/recipes/scheduler/Basic.css?raw';
+
+import Handle from '~demos/recipes/scheduler/Handle.svelte';
+import HandleRaw from '~demos/recipes/scheduler/Handle.svelte?raw';
+import HandleBasicRaw from '~demos/recipes/scheduler/HandleBasic.css?raw';
+
+import Ranges from '~demos/recipes/scheduler/Ranges.svelte';
+import RangesRaw from '~demos/recipes/scheduler/Ranges.svelte?raw';
+import RangesCssRaw from '~demos/recipes/scheduler/Ranges.css?raw';
+
+import Overlaps from '~demos/recipes/scheduler/Overlaps.svelte';
+import OverlapsRaw from '~demos/recipes/scheduler/Overlaps.svelte?raw';
+
+import BindingAndFloats from '~demos/recipes/scheduler/BindingAndFloats.svelte';
+import BindingAndFloatsRaw from '~demos/recipes/scheduler/BindingAndFloats.svelte?raw';
+import BindingAndFloatsCssRaw from '~demos/recipes/scheduler/BindingAndFloats.css?raw';
+
+import JazzedUp from '~demos/recipes/scheduler/JazzedUp.svelte';
+import JazzedUpRaw from '~demos/recipes/scheduler/JazzedUp.svelte?raw';
+import JazzedUpCssRaw from '~demos/recipes/scheduler/JazzedUp.css?raw';
+
+import FinalResult from '~demos/recipes/scheduler/FinalResult.svelte';
+import FinalResultRaw from '~demos/recipes/scheduler/FinalResult.svelte?raw';
+import FinalResultCssRaw from '~demos/recipes/scheduler/FinalResult.css?raw';
+
+Let's create a **very complicated sprinkler-system scheduler**!
+
+This recipe/demo is ***to show you just how far you are able to go with the slider***,
+customising both internal styles/functionality, and also wrapping some other styles/bindings
+around it to extend the usability to your needs!
+
+## Let's go!
+
+First we are going to set up a basic slider with pips and steps across the (24hr) day.
+We want to be able to select in a 15-minute (quarter hour) interval step.
+
+<Note title="Code Panels">
+  The code panels are hidden by default for this recipe, but you can toggle them
+  to see the code for each step.
+
+  If you're not interested in following along piece-by-piece, then you can just
+  
+  
+  [skip to the final result at the bottom](#final-result).
+</Note>
+
+
+
+
+### Basic pips
+
+We are going to style it almost like a ruler, showing the pips at 15-minute intervals.
+We put a pip at every 0.25 (15-minute) interval, and then use css to hide the labels
+which are not on the hour.
+
+<Demo name="Pips Styling" client:visible toggleable panel="none">
+  <Basic client:visible />
+  <Code lang="svelte" slot="svelte" code={cleanImport(BasicRaw)} />
+  <Code lang="css" slot="css" code={cleanImport(BasicCssRaw)} />
+</Demo>
+
+
+
+
+### Basic handles
+
+Now we have the pips styled as we want, let's now work on the handles. We are going
+to be using some SVG icons, applied with CSS.
+
+<Demo name="Handle Styling" client:visible toggleable panel="none">
+  <Handle client:visible />
+  <Code lang="svelte" slot="svelte" code={cleanImport(HandleRaw)} />
+  <Code lang="css" slot="css" code={cleanImport(HandleBasicRaw)} />
+</Demo>
+
+
+
+
+### Ranges
+
+Now we need to get a bit more complex. Let's add a couple of ranges, with the
+concept borrowed from the [Multi-Range recipe](/svelte-range-slider-pips/en/recipes/multi-range).
+
+<Demo name="Ranges" client:visible toggleable panel="none">
+  <Ranges client:visible />
+  <Code lang="svelte" slot="svelte" code={cleanImport(RangesRaw)} />
+  <Code lang="css" slot="css" code={cleanImport(RangesCssRaw)} />
+</Demo>
+
+
+
+
+### Prevent Overlaps
+
+So now the styling is pretty good, and we can add multiple ranges,
+we need to make sure that two ranges don't overlap.
+
+Here there's a bit of code in the `on:change` handler to make sure there's
+a minimum distance between the handles in the same range, and a minimum distance
+between each range pair.
+
+<Demo name="Prevent Overlaps" client:visible toggleable panel="none">
+  <Overlaps client:visible />
+  <Code lang="svelte" slot="svelte" code={cleanImport(OverlapsRaw)} />
+</Demo>
+
+
+
+
+
+### Binding and Floats
+
+The next step is to bind the slider to a list of range-pair inputs, and also
+we want to show the selected time for each range. As for floats, we are going to
+use the `handleFormatter` prop to show the time in a more readable format.
+
+<Demo name="Binding and Floats" client:visible toggleable panel="none">
+  <BindingAndFloats client:visible />
+  <Code lang="svelte" slot="svelte" code={cleanImport(BindingAndFloatsRaw)} />
+  <Code lang="css" slot="css" code={cleanImport(BindingAndFloatsCssRaw)} />
+</Demo>
+
+
+
+
+
+### Jazz it up
+
+So that's kind of working as we want, now!
+
+Let's add a bit more styling around the slider by putting in a fancy sunrise/sunset
+visualisation on the range! We wrap the slider in a container, and add in a sunrise/sunset
+element using some JS to set the sunrise/sunset times as css variables.
+
+<Demo name="Jazzed Up" client:visible toggleable panel="none">
+  <JazzedUp client:visible />
+  <Code lang="svelte" slot="svelte" code={cleanImport(JazzedUpRaw)} />
+  <Code lang="css" slot="css" code={cleanImport(JazzedUpCssRaw)} />
+</Demo>
+
+
+
+
+
+## Final Result
+
+Now that we have the styling pretty much completed. I want to get rid of the inputs
+and the range adding button. Let's add a bit of Svelte code to display `+` buttons
+and `x` buttons to add and remove ranges.
+
+<Demo name="Final Result" client:visible toggleable panel="none">
+  <FinalResult client:visible />
+</Demo>
+
+So the code is obviously... "a lot" ... and I don't expect you do use all of it,
+the example is probably not useful for 99.999% of people. But **I hope there's some
+information, or techniques in there that may be useful** to you!
+
+<Demo name="Final Result Code" client:visible toggleable panel="svelte">
+  <Code lang="svelte" slot="svelte" code={cleanImport(FinalResultRaw)} />
+  <Code lang="css" slot="css" code={cleanImport(BasicCssRaw + '\n\n' + HandleBasicRaw + '\n\n' + RangesCssRaw + '\n\n' + BindingAndFloatsCssRaw + '\n\n' + JazzedUpCssRaw + '\n\n' + FinalResultCssRaw)} />
+</Demo>

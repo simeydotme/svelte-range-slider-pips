@@ -1,0 +1,39 @@
+.ranges.rangeSlider {
+  
+  --slider-accent: rgba(114, 255, 168, 0.75);
+  
+  /* create a start/end icon for the range handles */
+  /* we have to do it like this because svg cannot use var() */
+  --icon-start: url('data:image/svg+xml,%3Csvg%20%20xmlns=%22http://www.w3.org/2000/svg%22%20%20width=%2224%22%20%20height=%2224%22%20%20viewBox=%220%200%2024%2024%22%20%20fill=%22%230cb44c%22%20%20class=%22icon%20icon-tabler%20icons-tabler-filled%20icon-tabler-arrow-badge-up%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22/%3E%3Cpath%20d=%22M11.375%206.22l-5%204a1%201%200%200%200%20-.375%20.78v6l.006%20.112a1%201%200%200%200%201.619%20.669l4.375%20-3.501l4.375%203.5a1%201%200%200%200%201.625%20-.78v-6a1%201%200%200%200%20-.375%20-.78l-5%20-4a1%201%200%200%200%20-1.25%200z%22%20/%3E%3C/svg%3E');
+  --icon-end: url('data:image/svg+xml,%3Csvg%20%20xmlns=%22http://www.w3.org/2000/svg%22%20%20width=%2224%22%20%20height=%2224%22%20%20viewBox=%220%200%2024%2024%22%20%20fill=%22%23b40c2b%22%20%20class=%22icon%20icon-tabler%20icons-tabler-filled%20icon-tabler-arrow-badge-up%22%3E%3Cpath%20stroke=%22none%22%20d=%22M0%200h24v24H0z%22%20fill=%22none%22/%3E%3Cpath%20d=%22M11.375%206.22l-5%204a1%201%200%200%200%20-.375%20.78v6l.006%20.112a1%201%200%200%200%201.619%20.669l4.375%20-3.501l4.375%203.5a1%201%200%200%200%201.625%20-.78v-6a1%201%200%200%200%20-.375%20-.78l-5%20-4a1%201%200%200%200%20-1.25%200z%22%20/%3E%3C/svg%3E');
+
+
+  & .rangePips {
+
+    /* set the pip active color and text color */
+    --pip-active: color-mix(in srgb, var(--slider-accent) 50%, black);
+    --pip-active-text: #333;
+
+  }
+
+  /* set the start/end icon for the range handles */
+  & .rangeHandle {
+    & .rangeNub {
+      background: var(--icon-start);
+    }
+    & .rangeFloat {
+      color: #0cb44c;
+    }
+  }
+
+  /* set the end icon for every other handle */
+  & .rangeHandle:nth-child(2n+2) {
+    & .rangeNub {
+      background: var(--icon-end);
+    }
+    & .rangeFloat {
+      color: #b40c2b;
+    }
+  }
+
+}

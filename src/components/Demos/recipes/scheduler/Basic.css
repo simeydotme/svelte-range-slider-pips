@@ -1,0 +1,44 @@
+.scheduler.rangeSlider {
+  height: 40px;
+  border-radius: 0;
+}
+
+.scheduler.rangeSlider .rangePips {
+
+  --pip-active: black;
+
+  top: 0;
+  bottom: auto;
+
+  & > .rsPip {
+    height: 10px;
+    top: 0;
+  }
+
+  & .rsPipVal {
+    display: none;
+    top: -2em;
+    font-size: 12px;
+    font-family: monospace;
+  }
+
+  & > :nth-child(2n+1) {
+    height: 20px;
+    --pip: #999;
+  }
+
+  & > :nth-child(4n+1) {
+    height: 40px;
+    --pip: #888;
+    & > .rsPipVal {
+      display: block;
+    }
+  }
+
+}
+
+.scheduler.rangeSlider .rangeHandle {
+  top: auto;
+  bottom: 0;
+  transform: translateX(-50%);
+}

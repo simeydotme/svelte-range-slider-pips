@@ -1,0 +1,81 @@
+:root {
+  --day-color: #e8c247;
+  --sunrise-color: #e87747;
+  --sunset-color: #5d639d;
+  --night-color: #0f1772;
+}
+
+.jazzed.rangeSlider {
+
+  width: 100%;
+  margin: 5rem 0 2rem!important;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 0;
+    right: 0;
+    height: 1em;
+    translate: 0px -100% 0.01px;
+    background-image: 
+      linear-gradient(
+        to right, 
+        var(--night-color),
+        var(--sunset-color) calc(var(--sunrise) - 2px), 
+        var(--sunrise-color) calc(var(--sunrise) + 2px), 
+        var(--day-color),
+        var(--day-color),
+        var(--sunrise-color) calc(var(--sunset) - 2px), 
+        var(--sunset-color) calc(var(--sunset) + 2px),
+        var(--night-color)
+      );
+    opacity: 0.5;
+    mask-image: linear-gradient(to right, transparent, black 10px calc(100% - 10px), transparent);
+  }
+
+  .rangePips .rsPip {
+    --pip-text: rgba(0, 0, 0, 0.5);
+  }
+
+  .rangePips .rsPipVal {
+    top: -25px;
+    text-shadow: 0 1px 0px rgba(255, 255, 255, 0.5);
+  }
+
+  .rangePips .rsPip.rsSelected {
+    color: var(--pip-active-text);
+    font-weight: 600;
+  }
+
+}
+
+.slider-wrapper {
+  
+  position: relative;
+
+  .sunrise, .sunset {
+    color: color-mix(in srgb, var(--sunrise-color) 85%, black);
+    font-size: 12px;
+    position: absolute;
+    top: -2.5em;
+    left: var(--sunrise);
+    translate: -50% -100%;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      height: 0.75em;
+      background-color: currentColor;
+      translate: -50% 75% 0.01px;
+    }
+  }
+
+  .sunset {
+    color: color-mix(in srgb, var(--sunset-color) 85%, black);
+    left: var(--sunset);
+  }
+}

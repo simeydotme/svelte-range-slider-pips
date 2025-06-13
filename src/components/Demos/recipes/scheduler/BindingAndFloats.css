@@ -1,0 +1,19 @@
+
+.bindings.rangeSlider {
+
+  & .rangeFloat {
+
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--bg);
+    padding: 0.2em;
+
+    opacity: 1;
+    top: auto;
+    bottom: 0;
+
+    translate: -50% 75% 0.01px!important;
+
+  }
+
+}

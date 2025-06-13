@@ -142,6 +142,7 @@ export const SIDEBAR: Sidebar = {
           { text: 'Cute Bubbles', link: `${REPOPATH}/en/recipes/cute-bubbles`, new: true },
           { text: 'Multi-Range', link: `${REPOPATH}/en/recipes/multi-range`, new: true },
           { text: 'Positive/Negative', link: `${REPOPATH}/en/recipes/positive-negative`, new: true },
+          { text: 'Scheduler', link: `${REPOPATH}/en/recipes/scheduler`, new: true },
         ]
       }
     ]
