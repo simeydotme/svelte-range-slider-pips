@@ -53,12 +53,13 @@
 
 <video 
   bind:this={videoElement}
-  src="/svelte-range-slider-pips/carminandes-2.mp4" 
+  src="https://res.cloudinary.com/simey/video/upload/v1749837864/hxpk2grhbvec0hcitnua.mp4" 
   controls 
   bind:currentTime 
   bind:duration
   on:seeked={updateBufferStyle}
   on:play={updateBufferStyle}
+  on:progress={updateBufferStyle}
 />
 
 <code data-values title="The video properties">currentTime: {currentTime} / duration: {duration}</code>
