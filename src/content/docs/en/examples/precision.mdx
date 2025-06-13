@@ -27,7 +27,7 @@ in certain scenarios (specifically sliders with non-integer steps).
 
 ## Default Precision
 
-Here you can see the default precision of 2 decimal places.
+Here you can see the default `precision` of 2 decimal places.
 
 <Demo name="Default Precision" client:visible>
   <DefaultPrecision client:visible />
@@ -37,7 +37,7 @@ Here you can see the default precision of 2 decimal places.
 ### `step` has too much precision
 
 It's possible to have steps of more than 2 decimal places, but here you can see that even though the 
-slider is set to a step of 0.005, the values are rounded to 2 decimal places by default.
+slider is set to a `step` of `0.005`, the values are rounded to 2 decimal places by default.
 
 <Info>The slider accepts the `value` prop as `0.555`, but as soon as it is interacted with, it will be rounded to `0.56`.</Info>
 
@@ -54,18 +54,44 @@ slider is set to a step of 0.005, the values are rounded to 2 decimal places by 
 
 ## Changing the precision
 
-So when you have a `step` with more than 2 decimal places, you can set the `precision` to the number of decimal places you want to use.
+So when you have a `step` with more than 2 decimal places, you should set 
+the `precision` to the number of decimal places you want to use.
 
-<Demo name="Precision Setting" client:visible>
+<Code lang="svelte" code={`<RangeSlider step={0.0001} precision={4} />`} />
+
+
+
+
+## Video 😬
+
+<Note type="info" title="Video Player Control">
+  If using the slider as a **video player control**, you'll likely need to adjust the `precision` setting. 
+  
+  
+  This is because video `currentTime` values require high precision _(I think it's around 6 decimal places, but
+  I've found it's possible to use 4 decimal places of precision)_.
+  [See the issue ticket about this](https://github.com/simeydotme/svelte-range-slider-pips/issues/165)
+</Note>
+
+<Demo name="Video precision setting" client:visible>
   <PrecisionSetting client:visible />
+</Demo>
+
+<Demo name="Video precision setting" client:visible>
   <Code slot="svelte" code={cleanImport(PrecisionSettingRaw)} lang="svelte" />
 </Demo>
 
-<Note type="ok" title="Video Player Control">
-  Setting the `precision` is something you may need if trying to use the **slider
-  for a video player control**. Binding to the `currentTime`, as it is a highly precise value.
-  [See the issue ticket about this](https://github.com/simeydotme/svelte-range-slider-pips/issues/165)
+
+<Note type="warning" title="Not Cool">
+  In reality, it's a **pretty terrible idea to use this `<RangeSlider />` as a video player control**.
+  There's a bunch of accessibility concerns (seeking with keyboard, for example), and the amount of
+  updates happening as the video plays is probably a performance concern.
+  
+  However, for some reason, people have been doing it, so this demo is just to help in that case.
 </Note>
+
+
+
 
 
 

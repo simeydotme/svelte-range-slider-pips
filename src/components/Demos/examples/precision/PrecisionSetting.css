@@ -1,0 +1,9 @@
+video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.66em;
+}
+
+#seek-slider.rangeSlider {
+  --handle-inactive: var(--slider-accent);
+}
