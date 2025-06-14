@@ -1,0 +1,54 @@
+---
+title: 'Liquid Glass Slider'
+description: 'Jumping on that trend since Apple debuted their Inaccessible UI 2025'
+---
+
+import { Code } from 'astro/components';
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import LiquidGlass from '~demos/recipes/liquid-glass/LiquidGlass.svelte';
+import LiquidGlassRaw from '~demos/recipes/liquid-glass/LiquidGlass.svelte?raw';
+import LiquidGlassCss from '~demos/recipes/liquid-glass/LiquidGlass.css?raw';
+
+Well, it's 2025 and Apple have seemingly decided to abandon usable UI in favor
+of a Windows Vista-esque design language but without the opaque inner panels 😲. 
+
+So I better get on the bandwagon and make a liquid glass slider!!! 😰
+
+<Demo name="Liquid Glass" client:visible>
+  <LiquidGlass client:visible />
+</Demo>
+
+Jokes aside, this is a fun demo of the slider component! 
+
+Technically-speaking, there
+is no 'liquid' effect here, because cross-browsers don't support the `backdrop-filter`,
+`filter`, and `mask` properties simultaneously, they bug-out. <small>_(Also most of the liquid effects you
+see are just a fractal noise displacement, not a real polar-coordinate liquid effect. I believe 
+a real effect is only possible with `canvas` or `webgl` and even then I think the background has to
+be simulated and not real-time)_.</small>
+
+I've used some creative `backdrop-filter: blur(n)` and
+`mask` properties to get a sort-of 'liquid' effect around the edges. By adding a psuedo-element
+with a different blur-value--and masking it more than the handle--we then get two layers of blur
+that work independently which gives the illusion of a liquid effect.
+
+Adding on some creative `transforms` and `transitions` enhances the liquidey feeling.
+
+<Note type="warning" title="Performance Warning">
+  ⚠ ___DO NOT USE IN CUSTOMER-FACING PRODUCTION APPS___
+
+  This is going to be **really bad** performance. It will probably 
+  melt phone CPUs and drain batteries.
+
+  <p><small>_Also, it's kind of completely unusable on very-bright, or very-dark backgrounds._</small></p>
+</Note>
+
+<Demo panel="svelte" client:visible>
+  <Code slot="svelte" code={cleanImport(LiquidGlassRaw)} lang="svelte" />
+  <Code slot="css" code={LiquidGlassCss} lang="css" />
+</Demo>

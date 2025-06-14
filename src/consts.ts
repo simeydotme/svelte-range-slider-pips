@@ -143,6 +143,7 @@ export const SIDEBAR: Sidebar = {
           { text: 'Multi-Range', link: `${REPOPATH}/en/recipes/multi-range`, new: true },
           { text: 'Positive/Negative', link: `${REPOPATH}/en/recipes/positive-negative`, new: true },
           { text: 'Scheduler', link: `${REPOPATH}/en/recipes/scheduler`, new: true },
+          { text: 'Liquid Glass', link: `${REPOPATH}/en/recipes/liquid-glass`, new: true },
         ]
       }
     ]

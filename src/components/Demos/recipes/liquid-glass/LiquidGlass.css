@@ -1,0 +1,194 @@
+@property --handle-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: white;
+}
+@property --handle-color-2 {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: white;
+}
+
+
+.slider-container {
+  --bg-0: rgb(71, 57, 101);
+  --bg-1: url(/svelte-range-slider-pips/bgs/pexels-photo-9636386.webp) center center / 150%;
+  --bg-2: url(/svelte-range-slider-pips/bgs/pexels-photo-983200.webp) 75% -125% / 250%;
+  --bg-3: url(/svelte-range-slider-pips/bgs/pexels-photo-31427459.webp) center center / cover;
+  --bg-4: url(/svelte-range-slider-pips/bgs/pexels-photo-1704119.webp) center center / cover;
+  --bg-5: url(/svelte-range-slider-pips/bgs/pexels-photo-5417837.webp) center center / cover;
+  --bg-image: var(--bg-0);
+  background: var(--bg-image);
+}
+
+#liquid-glass-slider {
+
+  --slider: #ccc;
+  --slider-base: white;
+  --slider-accent: rgb(32, 230, 131);
+  --range: color-mix(in hsl, var(--slider-accent) 75%, white);
+
+  --ease-out: linear(0, 0.002 0.5%, 0.008 1.1%, 0.017 1.6%, 0.031 2.2%, 0.049 2.8%, 0.07 3.4%, 0.098 4.1%, 0.129 4.8%, 0.184 5.9%, 0.257 7.2%, 0.551 12.1%, 0.671 14.2%, 0.735 15.4%, 0.789 16.5%, 0.839 17.6%, 0.881 18.6%, 0.923 19.7%, 0.957 20.7%, 0.99 21.8%, 1.019 22.9%, 1.043 24%, 1.063 25.1%, 1.08 26.2%, 1.094 27.4%, 1.107 29%, 1.114 30.7%, 1.116 32.5%, 1.112 34.5%, 1.105 36.1%, 1.095 37.9%, 1.041 45.8%, 1.018 49.9%, 1.008 52.1%, 1 54.4%, 0.994 56.7%, 0.99 59.1%, 0.987 62.3%, 0.987 65.9%, 0.999 84.9%, 1);
+  --ease-in: linear(0, -0.001 4.2%, -0.006 8.1%, -0.014 12%, -0.027 15.9%, -0.041 19.5%, -0.059 23.4%, -0.124 35.9%, -0.146 40.4%, -0.164 45%, -0.174 49%, -0.177 51.5%, -0.177 53.8%, -0.174 56%, -0.168 58.2%, -0.16 60.3%, -0.148 62.3%, -0.134 64.3%, -0.116 66.2%, -0.09 68.6%, -0.057 71%, -0.02 73.3%, 0.024 75.6%, 0.072 77.8%, 0.127 80%, 0.189 82.2%, 0.255 84.3%, 0.405 88.4%, 0.58 92.4%, 0.775 96.2%, 1);
+  
+  --base-brightness: 1;
+  --base-contrast: 1;
+
+  margin-block: 5rem;
+
+  & .rangeHandle {
+
+    --handle-color: var(--slider-base);
+    --handle-color-2: color-mix(in hsl, var(--handle-color) 75%, black);
+
+    background: linear-gradient(to bottom, var(--handle-color), var(--handle-color-2));
+    width: 1.75em;
+    height: 1.25em;
+    border-radius: 2em;
+    top: 50%;
+    outline: none;
+
+    transition: 
+      box-shadow 0.33s var(--ease-in), 
+      --handle-color 0.33s var(--ease-in), 
+      --handle-color-2 0.33s var(--ease-in),
+      --inset-color 0.33s var(--ease-in);
+
+    --shadow-opacity: 0.08;
+    --inset-color: rgba(0, 0, 0, 0);
+
+    box-shadow: 
+      inset 0 0 0 1px var(--inset-color),
+      rgba(0, 0, 0, var(--shadow-opacity)) 0px 1px 2px, 
+      rgba(0, 0, 0, var(--shadow-opacity)) 0px 2px 4px, 
+      rgba(0, 0, 0, var(--shadow-opacity)) 0px 4px 8px, 
+      rgba(0, 0, 0, var(--shadow-opacity)) 0px 8px 16px, 
+      rgba(0, 0, 0, var(--shadow-opacity)) 0px 16px 32px, 
+      rgba(0, 0, 0, var(--shadow-opacity)) 0px 32px 64px;
+
+    &.rsActive {
+
+      transition: 
+        box-shadow 0.75s var(--ease-out), 
+        --handle-color 0.75s var(--ease-out), 
+        --handle-color-2 0.75s var(--ease-out),
+        --inset-color 0.75s var(--ease-out);
+
+      --shadow-opacity: 0;
+      --handle-color: var(--slider-accent);
+      --inset-color: color-mix(in hsl, var(--handle-color) 50%, black);
+
+      box-shadow: 
+        inset 0 0 0 1px var(--inset-color),
+        rgba(0, 0, 0, var(--shadow-opacity)) 0px 1px 2px, 
+        rgba(0, 0, 0, var(--shadow-opacity)) 0px 2px 4px, 
+        rgba(0, 0, 0, var(--shadow-opacity)) 0px 4px 8px, 
+        rgba(0, 0, 0, var(--shadow-opacity)) 0px 8px 16px, 
+        rgba(0, 0, 0, var(--shadow-opacity)) 0px 16px 32px, 
+        rgba(0, 0, 0, var(--shadow-opacity)) 0px 32px 64px;
+    }
+
+    & .rangeNub,
+    &::before,
+    &::after {
+
+      content: '';
+      position: absolute;
+      width: 4.4em;
+      height: 3em;
+      opacity: 0;
+      scale: 0.25 1;
+      transform: scaleY(0.33);
+      top: 50%;
+      left: 50%;
+      border-radius: 12em;
+      translate: -50% -50%;
+      transition: all 0.33s var(--ease-in);
+      will-change: opacity, scale, box-shadow, backdrop-filter, translate, transform;
+
+      box-shadow: 
+        inset 1px 0.5px 0 1px rgba(255, 255, 255, 0.1), 
+        inset -0.5px -1px 0 1px rgba(255, 255, 255, 0.1), 
+        inset 3px 5px 4px -2px rgba(255, 255, 255, 0.15);
+        
+      background: none;
+      mask-image: radial-gradient(ellipse, transparent 50%, black 75%);
+      backdrop-filter: 
+        blur(4px) 
+        brightness(calc(var(--base-brightness) * 1.25)) 
+        contrast(calc(var(--base-contrast) * 1.5)) 
+        blur(5px) 
+        brightness(calc(var(--base-brightness) * 1.5)) 
+        contrast(calc(var(--base-contrast) * 1.75)) 
+        saturate(0.75) 
+        blur(10px);
+    }
+
+    &.rsActive .rangeNub,
+    &.rsActive::before,
+    &.rsActive::after {
+      opacity: 1;
+      scale: 1;
+      transform: scaleY(1);
+      transition: 
+        all 0.75s var(--ease-out), 
+        transform 0.7s var(--ease-out) 0.05s;
+    }
+
+    &::before {
+      box-shadow: none;
+      mask-image: radial-gradient(ellipse, transparent 25%, black 50% );
+      backdrop-filter: 
+        brightness(calc(var(--base-brightness) * 1.33)) 
+        contrast(calc(var(--base-contrast) * 1.33)) 
+        blur(3px) 
+        brightness(calc(var(--base-brightness) * 1.33)) 
+        contrast(calc(var(--base-contrast) * 1.66)) 
+        saturate(0.75) 
+        blur(4px);
+    }
+
+    &::after {
+      mask: none;
+      backdrop-filter: none;
+      background: linear-gradient(to bottom, transparent 20%, rgba(255, 255, 255, 0.18) 45% , rgba(255, 255, 255, 0.05) 66%, transparent);
+      z-index: 3;
+
+      --shadow-opacity: 0.05;
+
+      box-shadow: 
+        rgba(0, 0, 0, var(--shadow-opacity)) 0px 1px 2px, 
+        rgba(0, 0, 0, var(--shadow-opacity)) 0px 2px 4px, 
+        rgba(0, 0, 0, var(--shadow-opacity)) 0px 4px 8px, 
+        rgba(0, 0, 0, var(--shadow-opacity)) 0px 8px 16px, 
+        rgba(0, 0, 0, var(--shadow-opacity)) 0px 16px 32px, 
+        rgba(0, 0, 0, var(--shadow-opacity)) 0px 32px 64px;
+
+    }
+
+  }
+
+}
+
+#liquid-glass-slider.up .rangeHandle,
+#liquid-glass-slider.down .rangeHandle {
+  & .rangeNub,
+  &::before,
+  &::after {
+    scale: 1.2 0.925;
+    translate: -60% -50% 0;
+  }
+}
+
+#liquid-glass-slider.down .rangeHandle {
+  & .rangeNub,
+  &::before,
+  &::after {
+    translate: -40% -50% 0;
+  }
+}
+
+#liquid-glass-slider.rsDark {
+  --base-brightness: 0.85;
+  --base-contrast: 1.05;
+}
