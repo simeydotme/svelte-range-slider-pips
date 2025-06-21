@@ -156,6 +156,10 @@
         "path": "",
         "children": [
           {
+            "name": "minmax",
+            "path": "/test/range-slider/values/binding/minmax"
+          },
+          {
             "name": "multiple",
             "path": "/test/range-slider/values/binding/multiple"
           },

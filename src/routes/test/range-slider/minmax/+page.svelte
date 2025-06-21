@@ -1,5 +1,15 @@
 <script lang="ts">
   import RangeSlider from '$lib/components/RangeSlider.svelte';
+
+  // Dynamic min/max state for testing
+  let dynamicMin = 0;
+  let dynamicMax = 100;
+  let dynamicValues = [25, 75];
+
+  // Toggle state for min/max changes
+  let toggleMin = 0;
+  let toggleMax = 100;
+  let toggleValues = [30, 70];
 </script>
 
 <div class="slider-list">
@@ -112,4 +122,82 @@
 
   <h3>Infinite values</h3>
   <RangeSlider id="invalid-infinite" pips first="label" last="label" min={-Infinity} max={Infinity} />
+
+  <h2>Dynamic Min/Max Tests</h2>
+  <h3>Dynamic min/max with bound inputs</h3>
+  <RangeSlider
+    id="dynamic-minmax"
+    pips
+    all="label"
+    float
+    bind:min={dynamicMin}
+    bind:max={dynamicMax}
+    bind:values={dynamicValues}
+  />
+  <div class="controls">
+    <label>
+      Min: <input type="number" bind:value={dynamicMin} step="any" />
+    </label>
+    <label>
+      Max: <input type="number" bind:value={dynamicMax} step="any" />
+    </label>
+    <p>Current values: {dynamicValues}</p>
+  </div>
+
+  <h3>Dynamic min/max with toggle buttons</h3>
+  <RangeSlider
+    id="toggle-minmax"
+    pips
+    all="label"
+    float
+    bind:min={toggleMin}
+    bind:max={toggleMax}
+    bind:values={toggleValues}
+  />
+  <div class="controls">
+    <button id="btn_toggle_min_positive" on:click={() => (toggleMin = 20)}>Set Min to 20</button>
+    <button id="btn_toggle_min_negative" on:click={() => (toggleMin = -50)}>Set Min to -50</button>
+    <button id="btn_toggle_min_decimal" on:click={() => (toggleMin = 10.5)}>Set Min to 10.5</button>
+    <button id="btn_toggle_min_zero" on:click={() => (toggleMin = 0)}>Set Min to 0</button>
+    <button id="btn_toggle_max_small" on:click={() => (toggleMax = 50)}>Set Max to 50</button>
+    <button id="btn_toggle_max_negative" on:click={() => (toggleMax = -20)}>Set Max to -20</button>
+    <button id="btn_toggle_max_decimal" on:click={() => (toggleMax = 75.5)}>Set Max to 75.5</button>
+    <button id="btn_toggle_max_large" on:click={() => (toggleMax = 1000)}>Set Max to 1000</button>
+    <button
+      id="btn_toggle_both_positive"
+      on:click={() => {
+        toggleMin = 20;
+        toggleMax = 80;
+      }}>Set Range 20-80</button
+    >
+    <button
+      id="btn_toggle_both_negative"
+      on:click={() => {
+        toggleMin = -80;
+        toggleMax = -20;
+      }}>Set Range -80 to -20</button
+    >
+    <button
+      id="btn_toggle_both_cross_zero"
+      on:click={() => {
+        toggleMin = -50;
+        toggleMax = 50;
+      }}>Set Range -50 to 50</button
+    >
+    <button
+      id="btn_toggle_both_decimal"
+      on:click={() => {
+        toggleMin = 10.5;
+        toggleMax = 90.5;
+      }}>Set Range 10.5 to 90.5</button
+    >
+    <p>Current values: {toggleValues}</p>
+  </div>
 </div>
+
+<style>
+  .controls {
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+  }
+</style>

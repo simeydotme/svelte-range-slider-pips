@@ -106,7 +106,17 @@
 
   <h2>Dynamic Gap Tests</h2>
   <h3>Dynamic gaps - gap constraints can be updated at runtime</h3>
-  <RangeSlider id="dynamic-gaps" range values={dynamicValues} rangeGapMin={dynamicGapMin} rangeGapMax={dynamicGapMax} />
+  <RangeSlider
+    id="dynamic-gaps"
+    range
+    bind:values={dynamicValues}
+    bind:rangeGapMin={dynamicGapMin}
+    bind:rangeGapMax={dynamicGapMax}
+    on:change={handleChange}
+    on:start={handleStart}
+    on:stop={handleStop}
+  />
+  {dynamicValues} / min: {dynamicGapMin} / max: {dynamicGapMax}
   <div class="controls">
     <button id="btn_increase_min" on:click={() => (dynamicGapMin += 5)}>Increase Min Gap</button>
     <button id="btn_decrease_min" on:click={() => (dynamicGapMin -= 5)}>Decrease Min Gap</button>

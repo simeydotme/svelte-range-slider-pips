@@ -1,9 +1,9 @@
 /**
- * svelte-range-slider-pips ~ 4.0.1
+ * svelte-range-slider-pips ~ 4.0.2
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * Project home: https://simeydotme.github.io/svelte-range-slider-pips/
  * © 2025 Simon Goellner <simey.me@gmail.com> ~ MPL-2.0 License
- * Published: 7/6/2025
+ * Published: 21/6/2025
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -2910,9 +2910,9 @@
 	function get_else_ctx(ctx) {
 		const child_ctx = ctx.slice();
 
-		const constants_0 = /*reversed*/ child_ctx[15]
-		? [/*values*/ child_ctx[2][1], /*values*/ child_ctx[2][0]]
-		: [/*values*/ child_ctx[2][0], /*values*/ child_ctx[2][1]];
+		const constants_0 = /*reversed*/ child_ctx[16]
+		? [/*values*/ child_ctx[3][1], /*values*/ child_ctx[3][0]]
+		: [/*values*/ child_ctx[3][0], /*values*/ child_ctx[3][1]];
 
 		child_ctx[31] = constants_0[0];
 		child_ctx[92] = constants_0[1];
@@ -2921,37 +2921,35 @@
 
 	function get_each_context(ctx, list, i) {
 		const child_ctx = ctx.slice();
-		child_ctx[6] = list[i];
-		child_ctx[96] = i;
+		child_ctx[8] = list[i];
+		child_ctx[95] = i;
 
-		const constants_0 = `${/*focus*/ child_ctx[34] && /*activeHandle*/ child_ctx[37] === /*index*/ child_ctx[96]
+		const constants_0 = `${/*focus*/ child_ctx[34] && /*activeHandle*/ child_ctx[37] === /*index*/ child_ctx[95]
 	? 3
 	: ''}`;
 
 		child_ctx[93] = constants_0;
-		const constants_1 = `calc((${/*sliderSize*/ child_ctx[38]}px * ${/*$springPositions*/ child_ctx[42][/*index*/ child_ctx[96]] / 100}))`;
-		child_ctx[94] = constants_1;
 		return child_ctx;
 	}
 
 	function get_if_ctx(ctx) {
 		const child_ctx = ctx.slice();
-		const constants_0 = valueAsPercent(/*value*/ child_ctx[6], /*min*/ child_ctx[0], /*max*/ child_ctx[1], /*precision*/ child_ctx[8]);
-		child_ctx[97] = constants_0;
-		const constants_1 = /*handleFormatter*/ child_ctx[4](/*value*/ child_ctx[6], /*index*/ child_ctx[96], /*percent*/ child_ctx[97]);
-		child_ctx[98] = constants_1;
+		const constants_0 = valueAsPercent(/*value*/ child_ctx[8], /*min*/ child_ctx[1], /*max*/ child_ctx[2], /*precision*/ child_ctx[9]);
+		child_ctx[96] = constants_0;
+		const constants_1 = /*handleFormatter*/ child_ctx[5](/*value*/ child_ctx[8], /*index*/ child_ctx[95], /*percent*/ child_ctx[96]);
+		child_ctx[97] = constants_1;
 		return child_ctx;
 	}
 
-	// (765:6) {#if float}
+	// (775:6) {#if float}
 	function create_if_block_9(ctx) {
 		let span;
 		let if_block0_anchor;
 		let html_tag;
-		let raw_value = /*formattedValue*/ ctx[98] + "";
+		let raw_value = /*formattedValue*/ ctx[97] + "";
 		let html_anchor;
-		let if_block0 = /*prefix*/ ctx[24] && create_if_block_11(ctx);
-		let if_block1 = /*suffix*/ ctx[25] && create_if_block_10(ctx);
+		let if_block0 = /*prefix*/ ctx[25] && create_if_block_11(ctx);
+		let if_block1 = /*suffix*/ ctx[26] && create_if_block_10(ctx);
 
 		return {
 			c() {
@@ -2973,7 +2971,7 @@
 				if (if_block1) if_block1.m(span, null);
 			},
 			p(ctx, dirty) {
-				if (/*prefix*/ ctx[24]) {
+				if (/*prefix*/ ctx[25]) {
 					if (if_block0) {
 						if_block0.p(ctx, dirty);
 					} else {
@@ -2986,9 +2984,9 @@
 					if_block0 = null;
 				}
 
-				if (dirty[0] & /*handleFormatter, values, min, max, precision*/ 279 && raw_value !== (raw_value = /*formattedValue*/ ctx[98] + "")) html_tag.p(raw_value);
+				if (dirty[0] & /*handleFormatter, values, min, max, precision*/ 558 && raw_value !== (raw_value = /*formattedValue*/ ctx[97] + "")) html_tag.p(raw_value);
 
-				if (/*suffix*/ ctx[25]) {
+				if (/*suffix*/ ctx[26]) {
 					if (if_block1) {
 						if_block1.p(ctx, dirty);
 					} else {
@@ -3012,7 +3010,7 @@
 		};
 	}
 
-	// (769:10) {#if prefix}
+	// (779:10) {#if prefix}
 	function create_if_block_11(ctx) {
 		let span;
 		let t;
@@ -3020,7 +3018,7 @@
 		return {
 			c() {
 				span = element("span");
-				t = text(/*prefix*/ ctx[24]);
+				t = text(/*prefix*/ ctx[25]);
 				attr(span, "class", "rangeFloatPrefix");
 			},
 			m(target, anchor) {
@@ -3028,7 +3026,7 @@
 				append(span, t);
 			},
 			p(ctx, dirty) {
-				if (dirty[0] & /*prefix*/ 16777216) set_data(t, /*prefix*/ ctx[24]);
+				if (dirty[0] & /*prefix*/ 33554432) set_data(t, /*prefix*/ ctx[25]);
 			},
 			d(detaching) {
 				if (detaching) {
@@ -3038,7 +3036,7 @@
 		};
 	}
 
-	// (769:95) {#if suffix}
+	// (779:95) {#if suffix}
 	function create_if_block_10(ctx) {
 		let span;
 		let t;
@@ -3046,7 +3044,7 @@
 		return {
 			c() {
 				span = element("span");
-				t = text(/*suffix*/ ctx[25]);
+				t = text(/*suffix*/ ctx[26]);
 				attr(span, "class", "rangeFloatSuffix");
 			},
 			m(target, anchor) {
@@ -3054,7 +3052,7 @@
 				append(span, t);
 			},
 			p(ctx, dirty) {
-				if (dirty[0] & /*suffix*/ 33554432) set_data(t, /*suffix*/ ctx[25]);
+				if (dirty[0] & /*suffix*/ 67108864) set_data(t, /*suffix*/ ctx[26]);
 			},
 			d(detaching) {
 				if (detaching) {
@@ -3064,7 +3062,7 @@
 		};
 	}
 
-	// (741:2) {#each values as value, index}
+	// (752:2) {#each values as value, index}
 	function create_each_block(ctx) {
 		let span1;
 		let span0;
@@ -3079,7 +3077,7 @@
 		let span1_tabindex_value;
 		let mounted;
 		let dispose;
-		let if_block = /*float*/ ctx[13] && create_if_block_9(get_if_ctx(ctx));
+		let if_block = /*float*/ ctx[14] && create_if_block_9(get_if_ctx(ctx));
 
 		return {
 			c() {
@@ -3090,26 +3088,26 @@
 				attr(span0, "class", "rangeNub");
 				attr(span1, "role", "slider");
 				attr(span1, "class", "rangeHandle");
-				attr(span1, "data-handle", /*index*/ ctx[96]);
+				attr(span1, "data-handle", /*index*/ ctx[95]);
 				attr(span1, "style", span1_style_value = "z-index: " + /*zindex*/ ctx[93] + "; " + (/*isMounted*/ ctx[33] ? '' : 'opacity: 0;'));
-				attr(span1, "aria-label", span1_aria_label_value = /*ariaLabels*/ ctx[5][/*index*/ ctx[96]]);
+				attr(span1, "aria-label", span1_aria_label_value = /*ariaLabels*/ ctx[7][/*index*/ ctx[95]]);
 
-				attr(span1, "aria-valuemin", span1_aria_valuemin_value = /*range*/ ctx[9] === true && /*index*/ ctx[96] === 1
-				? /*values*/ ctx[2][0]
-				: /*min*/ ctx[0]);
+				attr(span1, "aria-valuemin", span1_aria_valuemin_value = /*range*/ ctx[10] === true && /*index*/ ctx[95] === 1
+				? /*values*/ ctx[3][0]
+				: /*min*/ ctx[1]);
 
-				attr(span1, "aria-valuemax", span1_aria_valuemax_value = /*range*/ ctx[9] === true && /*index*/ ctx[96] === 0
-				? /*values*/ ctx[2][1]
-				: /*max*/ ctx[1]);
+				attr(span1, "aria-valuemax", span1_aria_valuemax_value = /*range*/ ctx[10] === true && /*index*/ ctx[95] === 0
+				? /*values*/ ctx[3][1]
+				: /*max*/ ctx[2]);
 
-				attr(span1, "aria-valuenow", span1_aria_valuenow_value = /*value*/ ctx[6]);
-				attr(span1, "aria-valuetext", span1_aria_valuetext_value = /*ariaLabelFormatter*/ ctx[56](/*value*/ ctx[6], /*index*/ ctx[96]));
-				attr(span1, "aria-orientation", span1_aria_orientation_value = /*vertical*/ ctx[12] ? 'vertical' : 'horizontal');
-				attr(span1, "aria-disabled", /*disabled*/ ctx[17]);
-				attr(span1, "tabindex", span1_tabindex_value = /*disabled*/ ctx[17] ? -1 : 0);
-				toggle_class(span1, "rsActive", /*focus*/ ctx[34] && /*activeHandle*/ ctx[37] === /*index*/ ctx[96]);
-				toggle_class(span1, "rsPress", /*handlePressed*/ ctx[35] && /*activeHandle*/ ctx[37] === /*index*/ ctx[96]);
-				set_style(span1, "--handle-pos", /*$springPositions*/ ctx[42][/*index*/ ctx[96]]);
+				attr(span1, "aria-valuenow", span1_aria_valuenow_value = /*value*/ ctx[8]);
+				attr(span1, "aria-valuetext", span1_aria_valuetext_value = /*ariaLabelFormatter*/ ctx[56](/*value*/ ctx[8], /*index*/ ctx[95]));
+				attr(span1, "aria-orientation", span1_aria_orientation_value = /*vertical*/ ctx[13] ? 'vertical' : 'horizontal');
+				attr(span1, "aria-disabled", /*disabled*/ ctx[18]);
+				attr(span1, "tabindex", span1_tabindex_value = /*disabled*/ ctx[18] ? -1 : 0);
+				toggle_class(span1, "rsActive", /*focus*/ ctx[34] && /*activeHandle*/ ctx[37] === /*index*/ ctx[95]);
+				toggle_class(span1, "rsPress", /*handlePressed*/ ctx[35] && /*activeHandle*/ ctx[37] === /*index*/ ctx[95]);
+				set_style(span1, "--handle-pos", /*$springPositions*/ ctx[42][/*index*/ ctx[95]]);
 			},
 			m(target, anchor) {
 				insert(target, span1, anchor);
@@ -3128,7 +3126,7 @@
 				}
 			},
 			p(ctx, dirty) {
-				if (/*float*/ ctx[13]) {
+				if (/*float*/ ctx[14]) {
 					if (if_block) {
 						if_block.p(get_if_ctx(ctx), dirty);
 					} else {
@@ -3145,54 +3143,54 @@
 					attr(span1, "style", span1_style_value);
 				}
 
-				if (dirty[0] & /*ariaLabels*/ 32 && span1_aria_label_value !== (span1_aria_label_value = /*ariaLabels*/ ctx[5][/*index*/ ctx[96]])) {
+				if (dirty[0] & /*ariaLabels*/ 128 && span1_aria_label_value !== (span1_aria_label_value = /*ariaLabels*/ ctx[7][/*index*/ ctx[95]])) {
 					attr(span1, "aria-label", span1_aria_label_value);
 				}
 
-				if (dirty[0] & /*range, values, min*/ 517 && span1_aria_valuemin_value !== (span1_aria_valuemin_value = /*range*/ ctx[9] === true && /*index*/ ctx[96] === 1
-				? /*values*/ ctx[2][0]
-				: /*min*/ ctx[0])) {
+				if (dirty[0] & /*range, values, min*/ 1034 && span1_aria_valuemin_value !== (span1_aria_valuemin_value = /*range*/ ctx[10] === true && /*index*/ ctx[95] === 1
+				? /*values*/ ctx[3][0]
+				: /*min*/ ctx[1])) {
 					attr(span1, "aria-valuemin", span1_aria_valuemin_value);
 				}
 
-				if (dirty[0] & /*range, values, max*/ 518 && span1_aria_valuemax_value !== (span1_aria_valuemax_value = /*range*/ ctx[9] === true && /*index*/ ctx[96] === 0
-				? /*values*/ ctx[2][1]
-				: /*max*/ ctx[1])) {
+				if (dirty[0] & /*range, values, max*/ 1036 && span1_aria_valuemax_value !== (span1_aria_valuemax_value = /*range*/ ctx[10] === true && /*index*/ ctx[95] === 0
+				? /*values*/ ctx[3][1]
+				: /*max*/ ctx[2])) {
 					attr(span1, "aria-valuemax", span1_aria_valuemax_value);
 				}
 
-				if (dirty[0] & /*values*/ 4 && span1_aria_valuenow_value !== (span1_aria_valuenow_value = /*value*/ ctx[6])) {
+				if (dirty[0] & /*values*/ 8 && span1_aria_valuenow_value !== (span1_aria_valuenow_value = /*value*/ ctx[8])) {
 					attr(span1, "aria-valuenow", span1_aria_valuenow_value);
 				}
 
-				if (dirty[0] & /*values*/ 4 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = /*ariaLabelFormatter*/ ctx[56](/*value*/ ctx[6], /*index*/ ctx[96]))) {
+				if (dirty[0] & /*values*/ 8 && span1_aria_valuetext_value !== (span1_aria_valuetext_value = /*ariaLabelFormatter*/ ctx[56](/*value*/ ctx[8], /*index*/ ctx[95]))) {
 					attr(span1, "aria-valuetext", span1_aria_valuetext_value);
 				}
 
-				if (dirty[0] & /*vertical*/ 4096 && span1_aria_orientation_value !== (span1_aria_orientation_value = /*vertical*/ ctx[12] ? 'vertical' : 'horizontal')) {
+				if (dirty[0] & /*vertical*/ 8192 && span1_aria_orientation_value !== (span1_aria_orientation_value = /*vertical*/ ctx[13] ? 'vertical' : 'horizontal')) {
 					attr(span1, "aria-orientation", span1_aria_orientation_value);
 				}
 
-				if (dirty[0] & /*disabled*/ 131072) {
-					attr(span1, "aria-disabled", /*disabled*/ ctx[17]);
+				if (dirty[0] & /*disabled*/ 262144) {
+					attr(span1, "aria-disabled", /*disabled*/ ctx[18]);
 				}
 
-				if (dirty[0] & /*disabled*/ 131072 && span1_tabindex_value !== (span1_tabindex_value = /*disabled*/ ctx[17] ? -1 : 0)) {
+				if (dirty[0] & /*disabled*/ 262144 && span1_tabindex_value !== (span1_tabindex_value = /*disabled*/ ctx[18] ? -1 : 0)) {
 					attr(span1, "tabindex", span1_tabindex_value);
 				}
 
 				if (dirty[1] & /*focus, activeHandle*/ 72) {
-					toggle_class(span1, "rsActive", /*focus*/ ctx[34] && /*activeHandle*/ ctx[37] === /*index*/ ctx[96]);
+					toggle_class(span1, "rsActive", /*focus*/ ctx[34] && /*activeHandle*/ ctx[37] === /*index*/ ctx[95]);
 				}
 
 				if (dirty[1] & /*handlePressed, activeHandle*/ 80) {
-					toggle_class(span1, "rsPress", /*handlePressed*/ ctx[35] && /*activeHandle*/ ctx[37] === /*index*/ ctx[96]);
+					toggle_class(span1, "rsPress", /*handlePressed*/ ctx[35] && /*activeHandle*/ ctx[37] === /*index*/ ctx[95]);
 				}
 
 				const style_changed = dirty[1] & /*focus, activeHandle, isMounted*/ 76;
 
 				if (dirty[1] & /*$springPositions, focus, activeHandle, isMounted*/ 2124 || style_changed) {
-					set_style(span1, "--handle-pos", /*$springPositions*/ ctx[42][/*index*/ ctx[96]]);
+					set_style(span1, "--handle-pos", /*$springPositions*/ ctx[42][/*index*/ ctx[95]]);
 				}
 			},
 			d(detaching) {
@@ -3207,7 +3205,7 @@
 		};
 	}
 
-	// (776:2) {#if limits}
+	// (786:2) {#if limits}
 	function create_if_block_8(ctx) {
 		let span;
 		let span_style_value;
@@ -3216,13 +3214,13 @@
 			c() {
 				span = element("span");
 				attr(span, "class", "rangeLimit");
-				attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[40] + ": " + valueAsPercent(/*limits*/ ctx[18][0], /*min*/ ctx[0], /*max*/ ctx[1], /*precision*/ ctx[8]) + "%; " + /*orientationEnd*/ ctx[39] + ": " + (100 - valueAsPercent(/*limits*/ ctx[18][1], /*min*/ ctx[0], /*max*/ ctx[1], /*precision*/ ctx[8])) + "%;"));
+				attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[40] + ": " + valueAsPercent(/*limits*/ ctx[19][0], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[9]) + "%; " + /*orientationEnd*/ ctx[39] + ": " + (100 - valueAsPercent(/*limits*/ ctx[19][1], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[9])) + "%;"));
 			},
 			m(target, anchor) {
 				insert(target, span, anchor);
 			},
 			p(ctx, dirty) {
-				if (dirty[0] & /*limits, min, max, precision*/ 262403 | dirty[1] & /*orientationStart, orientationEnd*/ 768 && span_style_value !== (span_style_value = "" + (/*orientationStart*/ ctx[40] + ": " + valueAsPercent(/*limits*/ ctx[18][0], /*min*/ ctx[0], /*max*/ ctx[1], /*precision*/ ctx[8]) + "%; " + /*orientationEnd*/ ctx[39] + ": " + (100 - valueAsPercent(/*limits*/ ctx[18][1], /*min*/ ctx[0], /*max*/ ctx[1], /*precision*/ ctx[8])) + "%;"))) {
+				if (dirty[0] & /*limits, min, max, precision*/ 524806 | dirty[1] & /*orientationStart, orientationEnd*/ 768 && span_style_value !== (span_style_value = "" + (/*orientationStart*/ ctx[40] + ": " + valueAsPercent(/*limits*/ ctx[19][0], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[9]) + "%; " + /*orientationEnd*/ ctx[39] + ": " + (100 - valueAsPercent(/*limits*/ ctx[19][1], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[9])) + "%;"))) {
 					attr(span, "style", span_style_value);
 				}
 			},
@@ -3234,11 +3232,11 @@
 		};
 	}
 
-	// (783:2) {#if hasRange}
+	// (793:2) {#if hasRange}
 	function create_if_block_1(ctx) {
 		let span;
 		let span_style_value;
-		let if_block = /*rangeFloat*/ ctx[14] && create_if_block_2(ctx);
+		let if_block = /*rangeFloat*/ ctx[15] && create_if_block_2(ctx);
 
 		return {
 			c() {
@@ -3256,7 +3254,7 @@
 				if (if_block) if_block.m(span, null);
 			},
 			p(ctx, dirty) {
-				if (/*rangeFloat*/ ctx[14]) {
+				if (/*rangeFloat*/ ctx[15]) {
 					if (if_block) {
 						if_block.p(ctx, dirty);
 					} else {
@@ -3301,12 +3299,12 @@
 		};
 	}
 
-	// (792:6) {#if rangeFloat}
+	// (802:6) {#if rangeFloat}
 	function create_if_block_2(ctx) {
 		let span;
 
 		function select_block_type(ctx, dirty) {
-			if (/*rangeFormatter*/ ctx[26]) return create_if_block_3;
+			if (/*rangeFormatter*/ ctx[6]) return create_if_block_3;
 			return create_else_block;
 		}
 
@@ -3351,7 +3349,7 @@
 		};
 	}
 
-	// (801:10) {:else}
+	// (811:10) {:else}
 	function create_else_block(ctx) {
 		let if_block0_anchor;
 		let html_tag;
@@ -3369,10 +3367,10 @@
 		let raw1_value = /*second*/ ctx[92] + "";
 		let html_anchor_1;
 		let if_block3_anchor;
-		let if_block0 = /*prefix*/ ctx[24] && create_if_block_7(ctx);
-		let if_block1 = /*suffix*/ ctx[25] && create_if_block_6(ctx);
-		let if_block2 = /*prefix*/ ctx[24] && create_if_block_5(ctx);
-		let if_block3 = /*suffix*/ ctx[25] && create_if_block_4(ctx);
+		let if_block0 = /*prefix*/ ctx[25] && create_if_block_7(ctx);
+		let if_block1 = /*suffix*/ ctx[26] && create_if_block_6(ctx);
+		let if_block2 = /*prefix*/ ctx[25] && create_if_block_5(ctx);
+		let if_block3 = /*suffix*/ ctx[26] && create_if_block_4(ctx);
 
 		return {
 			c() {
@@ -3414,7 +3412,7 @@
 				insert(target, if_block3_anchor, anchor);
 			},
 			p(ctx, dirty) {
-				if (/*prefix*/ ctx[24]) {
+				if (/*prefix*/ ctx[25]) {
 					if (if_block0) {
 						if_block0.p(ctx, dirty);
 					} else {
@@ -3427,9 +3425,9 @@
 					if_block0 = null;
 				}
 
-				if (dirty[0] & /*reversed, values*/ 32772 && raw0_value !== (raw0_value = /*first*/ ctx[31] + "")) html_tag.p(raw0_value);
+				if (dirty[0] & /*reversed, values*/ 65544 && raw0_value !== (raw0_value = /*first*/ ctx[31] + "")) html_tag.p(raw0_value);
 
-				if (/*suffix*/ ctx[25]) {
+				if (/*suffix*/ ctx[26]) {
 					if (if_block1) {
 						if_block1.p(ctx, dirty);
 					} else {
@@ -3442,7 +3440,7 @@
 					if_block1 = null;
 				}
 
-				if (/*prefix*/ ctx[24]) {
+				if (/*prefix*/ ctx[25]) {
 					if (if_block2) {
 						if_block2.p(ctx, dirty);
 					} else {
@@ -3455,9 +3453,9 @@
 					if_block2 = null;
 				}
 
-				if (dirty[0] & /*reversed, values*/ 32772 && raw1_value !== (raw1_value = /*second*/ ctx[92] + "")) html_tag_1.p(raw1_value);
+				if (dirty[0] & /*reversed, values*/ 65544 && raw1_value !== (raw1_value = /*second*/ ctx[92] + "")) html_tag_1.p(raw1_value);
 
-				if (/*suffix*/ ctx[25]) {
+				if (/*suffix*/ ctx[26]) {
 					if (if_block3) {
 						if_block3.p(ctx, dirty);
 					} else {
@@ -3494,10 +3492,10 @@
 		};
 	}
 
-	// (794:10) {#if rangeFormatter}
+	// (804:10) {#if rangeFormatter}
 	function create_if_block_3(ctx) {
 		let html_tag;
-		let raw_value = /*rangeFormatter*/ ctx[26](/*values*/ ctx[2][0], /*values*/ ctx[2][1], valueAsPercent(/*values*/ ctx[2][0], /*min*/ ctx[0], /*max*/ ctx[1], /*precision*/ ctx[8]), valueAsPercent(/*values*/ ctx[2][1], /*min*/ ctx[0], /*max*/ ctx[1], /*precision*/ ctx[8])) + "";
+		let raw_value = /*rangeFormatter*/ ctx[6](/*values*/ ctx[3][0], /*values*/ ctx[3][1], valueAsPercent(/*values*/ ctx[3][0], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[9]), valueAsPercent(/*values*/ ctx[3][1], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[9])) + "";
 		let html_anchor;
 
 		return {
@@ -3511,7 +3509,7 @@
 				insert(target, html_anchor, anchor);
 			},
 			p(ctx, dirty) {
-				if (dirty[0] & /*rangeFormatter, values, min, max, precision*/ 67109127 && raw_value !== (raw_value = /*rangeFormatter*/ ctx[26](/*values*/ ctx[2][0], /*values*/ ctx[2][1], valueAsPercent(/*values*/ ctx[2][0], /*min*/ ctx[0], /*max*/ ctx[1], /*precision*/ ctx[8]), valueAsPercent(/*values*/ ctx[2][1], /*min*/ ctx[0], /*max*/ ctx[1], /*precision*/ ctx[8])) + "")) html_tag.p(raw_value);
+				if (dirty[0] & /*rangeFormatter, values, min, max, precision*/ 590 && raw_value !== (raw_value = /*rangeFormatter*/ ctx[6](/*values*/ ctx[3][0], /*values*/ ctx[3][1], valueAsPercent(/*values*/ ctx[3][0], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[9]), valueAsPercent(/*values*/ ctx[3][1], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[9])) + "")) html_tag.p(raw_value);
 			},
 			d(detaching) {
 				if (detaching) {
@@ -3522,7 +3520,7 @@
 		};
 	}
 
-	// (803:12) {#if prefix}
+	// (813:12) {#if prefix}
 	function create_if_block_7(ctx) {
 		let span;
 		let t;
@@ -3530,7 +3528,7 @@
 		return {
 			c() {
 				span = element("span");
-				t = text(/*prefix*/ ctx[24]);
+				t = text(/*prefix*/ ctx[25]);
 				attr(span, "class", "rangeFloatPrefix");
 			},
 			m(target, anchor) {
@@ -3538,7 +3536,7 @@
 				append(span, t);
 			},
 			p(ctx, dirty) {
-				if (dirty[0] & /*prefix*/ 16777216) set_data(t, /*prefix*/ ctx[24]);
+				if (dirty[0] & /*prefix*/ 33554432) set_data(t, /*prefix*/ ctx[25]);
 			},
 			d(detaching) {
 				if (detaching) {
@@ -3548,7 +3546,7 @@
 		};
 	}
 
-	// (803:88) {#if suffix}
+	// (813:88) {#if suffix}
 	function create_if_block_6(ctx) {
 		let span;
 		let t;
@@ -3556,7 +3554,7 @@
 		return {
 			c() {
 				span = element("span");
-				t = text(/*suffix*/ ctx[25]);
+				t = text(/*suffix*/ ctx[26]);
 				attr(span, "class", "rangeFloatSuffix");
 			},
 			m(target, anchor) {
@@ -3564,7 +3562,7 @@
 				append(span, t);
 			},
 			p(ctx, dirty) {
-				if (dirty[0] & /*suffix*/ 33554432) set_data(t, /*suffix*/ ctx[25]);
+				if (dirty[0] & /*suffix*/ 67108864) set_data(t, /*suffix*/ ctx[26]);
 			},
 			d(detaching) {
 				if (detaching) {
@@ -3574,7 +3572,7 @@
 		};
 	}
 
-	// (807:12) {#if prefix}
+	// (817:12) {#if prefix}
 	function create_if_block_5(ctx) {
 		let span;
 		let t;
@@ -3582,7 +3580,7 @@
 		return {
 			c() {
 				span = element("span");
-				t = text(/*prefix*/ ctx[24]);
+				t = text(/*prefix*/ ctx[25]);
 				attr(span, "class", "rangeFloatPrefix");
 			},
 			m(target, anchor) {
@@ -3590,7 +3588,7 @@
 				append(span, t);
 			},
 			p(ctx, dirty) {
-				if (dirty[0] & /*prefix*/ 16777216) set_data(t, /*prefix*/ ctx[24]);
+				if (dirty[0] & /*prefix*/ 33554432) set_data(t, /*prefix*/ ctx[25]);
 			},
 			d(detaching) {
 				if (detaching) {
@@ -3600,7 +3598,7 @@
 		};
 	}
 
-	// (807:89) {#if suffix}
+	// (817:89) {#if suffix}
 	function create_if_block_4(ctx) {
 		let span;
 		let t;
@@ -3608,7 +3606,7 @@
 		return {
 			c() {
 				span = element("span");
-				t = text(/*suffix*/ ctx[25]);
+				t = text(/*suffix*/ ctx[26]);
 				attr(span, "class", "rangeFloatSuffix");
 			},
 			m(target, anchor) {
@@ -3616,7 +3614,7 @@
 				append(span, t);
 			},
 			p(ctx, dirty) {
-				if (dirty[0] & /*suffix*/ 33554432) set_data(t, /*suffix*/ ctx[25]);
+				if (dirty[0] & /*suffix*/ 67108864) set_data(t, /*suffix*/ ctx[26]);
 			},
 			d(detaching) {
 				if (detaching) {
@@ -3626,33 +3624,33 @@
 		};
 	}
 
-	// (815:2) {#if pips}
+	// (825:2) {#if pips}
 	function create_if_block(ctx) {
 		let rangepips;
 		let current;
 
 		rangepips = new RangePips({
 				props: {
-					values: /*values*/ ctx[2],
-					min: /*min*/ ctx[0],
-					max: /*max*/ ctx[1],
-					step: /*step*/ ctx[11],
-					range: /*range*/ ctx[9],
-					vertical: /*vertical*/ ctx[12],
-					reversed: /*reversed*/ ctx[15],
+					values: /*values*/ ctx[3],
+					min: /*min*/ ctx[1],
+					max: /*max*/ ctx[2],
+					step: /*step*/ ctx[12],
+					range: /*range*/ ctx[10],
+					vertical: /*vertical*/ ctx[13],
+					reversed: /*reversed*/ ctx[16],
 					orientationStart: /*orientationStart*/ ctx[40],
-					hoverable: /*hoverable*/ ctx[16],
-					disabled: /*disabled*/ ctx[17],
-					limits: /*limits*/ ctx[18],
-					all: /*all*/ ctx[21],
+					hoverable: /*hoverable*/ ctx[17],
+					disabled: /*disabled*/ ctx[18],
+					limits: /*limits*/ ctx[19],
+					all: /*all*/ ctx[22],
 					first: /*first*/ ctx[31],
-					last: /*last*/ ctx[22],
-					rest: /*rest*/ ctx[23],
-					pipstep: /*pipstep*/ ctx[20],
-					prefix: /*prefix*/ ctx[24],
-					suffix: /*suffix*/ ctx[25],
-					formatter: /*formatter*/ ctx[3],
-					precision: /*precision*/ ctx[8],
+					last: /*last*/ ctx[23],
+					rest: /*rest*/ ctx[24],
+					pipstep: /*pipstep*/ ctx[21],
+					prefix: /*prefix*/ ctx[25],
+					suffix: /*suffix*/ ctx[26],
+					formatter: /*formatter*/ ctx[4],
+					precision: /*precision*/ ctx[9],
 					focus: /*focus*/ ctx[34],
 					moveHandle: /*moveHandle*/ ctx[43]
 				}
@@ -3668,26 +3666,26 @@
 			},
 			p(ctx, dirty) {
 				const rangepips_changes = {};
-				if (dirty[0] & /*values*/ 4) rangepips_changes.values = /*values*/ ctx[2];
-				if (dirty[0] & /*min*/ 1) rangepips_changes.min = /*min*/ ctx[0];
-				if (dirty[0] & /*max*/ 2) rangepips_changes.max = /*max*/ ctx[1];
-				if (dirty[0] & /*step*/ 2048) rangepips_changes.step = /*step*/ ctx[11];
-				if (dirty[0] & /*range*/ 512) rangepips_changes.range = /*range*/ ctx[9];
-				if (dirty[0] & /*vertical*/ 4096) rangepips_changes.vertical = /*vertical*/ ctx[12];
-				if (dirty[0] & /*reversed*/ 32768) rangepips_changes.reversed = /*reversed*/ ctx[15];
+				if (dirty[0] & /*values*/ 8) rangepips_changes.values = /*values*/ ctx[3];
+				if (dirty[0] & /*min*/ 2) rangepips_changes.min = /*min*/ ctx[1];
+				if (dirty[0] & /*max*/ 4) rangepips_changes.max = /*max*/ ctx[2];
+				if (dirty[0] & /*step*/ 4096) rangepips_changes.step = /*step*/ ctx[12];
+				if (dirty[0] & /*range*/ 1024) rangepips_changes.range = /*range*/ ctx[10];
+				if (dirty[0] & /*vertical*/ 8192) rangepips_changes.vertical = /*vertical*/ ctx[13];
+				if (dirty[0] & /*reversed*/ 65536) rangepips_changes.reversed = /*reversed*/ ctx[16];
 				if (dirty[1] & /*orientationStart*/ 512) rangepips_changes.orientationStart = /*orientationStart*/ ctx[40];
-				if (dirty[0] & /*hoverable*/ 65536) rangepips_changes.hoverable = /*hoverable*/ ctx[16];
-				if (dirty[0] & /*disabled*/ 131072) rangepips_changes.disabled = /*disabled*/ ctx[17];
-				if (dirty[0] & /*limits*/ 262144) rangepips_changes.limits = /*limits*/ ctx[18];
-				if (dirty[0] & /*all*/ 2097152) rangepips_changes.all = /*all*/ ctx[21];
+				if (dirty[0] & /*hoverable*/ 131072) rangepips_changes.hoverable = /*hoverable*/ ctx[17];
+				if (dirty[0] & /*disabled*/ 262144) rangepips_changes.disabled = /*disabled*/ ctx[18];
+				if (dirty[0] & /*limits*/ 524288) rangepips_changes.limits = /*limits*/ ctx[19];
+				if (dirty[0] & /*all*/ 4194304) rangepips_changes.all = /*all*/ ctx[22];
 				if (dirty[1] & /*first*/ 1) rangepips_changes.first = /*first*/ ctx[31];
-				if (dirty[0] & /*last*/ 4194304) rangepips_changes.last = /*last*/ ctx[22];
-				if (dirty[0] & /*rest*/ 8388608) rangepips_changes.rest = /*rest*/ ctx[23];
-				if (dirty[0] & /*pipstep*/ 1048576) rangepips_changes.pipstep = /*pipstep*/ ctx[20];
-				if (dirty[0] & /*prefix*/ 16777216) rangepips_changes.prefix = /*prefix*/ ctx[24];
-				if (dirty[0] & /*suffix*/ 33554432) rangepips_changes.suffix = /*suffix*/ ctx[25];
-				if (dirty[0] & /*formatter*/ 8) rangepips_changes.formatter = /*formatter*/ ctx[3];
-				if (dirty[0] & /*precision*/ 256) rangepips_changes.precision = /*precision*/ ctx[8];
+				if (dirty[0] & /*last*/ 8388608) rangepips_changes.last = /*last*/ ctx[23];
+				if (dirty[0] & /*rest*/ 16777216) rangepips_changes.rest = /*rest*/ ctx[24];
+				if (dirty[0] & /*pipstep*/ 2097152) rangepips_changes.pipstep = /*pipstep*/ ctx[21];
+				if (dirty[0] & /*prefix*/ 33554432) rangepips_changes.prefix = /*prefix*/ ctx[25];
+				if (dirty[0] & /*suffix*/ 67108864) rangepips_changes.suffix = /*suffix*/ ctx[26];
+				if (dirty[0] & /*formatter*/ 16) rangepips_changes.formatter = /*formatter*/ ctx[4];
+				if (dirty[0] & /*precision*/ 512) rangepips_changes.precision = /*precision*/ ctx[9];
 				if (dirty[1] & /*focus*/ 8) rangepips_changes.focus = /*focus*/ ctx[34];
 				rangepips.$set(rangepips_changes);
 			},
@@ -3715,16 +3713,16 @@
 		let current;
 		let mounted;
 		let dispose;
-		let each_value = ensure_array_like(/*values*/ ctx[2]);
+		let each_value = ensure_array_like(/*values*/ ctx[3]);
 		let each_blocks = [];
 
 		for (let i = 0; i < each_value.length; i += 1) {
 			each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
 		}
 
-		let if_block0 = /*limits*/ ctx[18] && create_if_block_8(ctx);
+		let if_block0 = /*limits*/ ctx[19] && create_if_block_8(ctx);
 		let if_block1 = /*hasRange*/ ctx[41] && create_if_block_1(ctx);
-		let if_block2 = /*pips*/ ctx[19] && create_if_block(ctx);
+		let if_block2 = /*pips*/ ctx[20] && create_if_block(ctx);
 
 		return {
 			c() {
@@ -3747,16 +3745,16 @@
 				toggle_class(div, "rsDark", /*darkmode*/ ctx[30] === 'force');
 				toggle_class(div, "rsAutoDark", /*darkmode*/ ctx[30] === 'auto');
 				toggle_class(div, "rsRange", /*hasRange*/ ctx[41]);
-				toggle_class(div, "rsDrag", /*hasRange*/ ctx[41] && /*draggy*/ ctx[10]);
-				toggle_class(div, "rsMin", /*hasRange*/ ctx[41] && /*range*/ ctx[9] === 'min');
-				toggle_class(div, "rsMax", /*hasRange*/ ctx[41] && /*range*/ ctx[9] === 'max');
-				toggle_class(div, "rsDisabled", /*disabled*/ ctx[17]);
-				toggle_class(div, "rsHoverable", /*hoverable*/ ctx[16]);
-				toggle_class(div, "rsVertical", /*vertical*/ ctx[12]);
-				toggle_class(div, "rsReversed", /*reversed*/ ctx[15]);
+				toggle_class(div, "rsDrag", /*hasRange*/ ctx[41] && /*draggy*/ ctx[11]);
+				toggle_class(div, "rsMin", /*hasRange*/ ctx[41] && /*range*/ ctx[10] === 'min');
+				toggle_class(div, "rsMax", /*hasRange*/ ctx[41] && /*range*/ ctx[10] === 'max');
+				toggle_class(div, "rsDisabled", /*disabled*/ ctx[18]);
+				toggle_class(div, "rsHoverable", /*hoverable*/ ctx[17]);
+				toggle_class(div, "rsVertical", /*vertical*/ ctx[13]);
+				toggle_class(div, "rsReversed", /*reversed*/ ctx[16]);
 				toggle_class(div, "rsFocus", /*focus*/ ctx[34]);
-				toggle_class(div, "rsPips", /*pips*/ ctx[19]);
-				toggle_class(div, "rsPipLabels", /*all*/ ctx[21] === 'label' || /*first*/ ctx[31] === 'label' || /*last*/ ctx[22] === 'label' || /*rest*/ ctx[23] === 'label');
+				toggle_class(div, "rsPips", /*pips*/ ctx[20]);
+				toggle_class(div, "rsPipLabels", /*all*/ ctx[22] === 'label' || /*first*/ ctx[31] === 'label' || /*last*/ ctx[23] === 'label' || /*rest*/ ctx[24] === 'label');
 				set_style(div, "--slider-length", /*sliderSize*/ ctx[38]);
 			},
 			m(target, anchor) {
@@ -3796,8 +3794,8 @@
 				}
 			},
 			p(ctx, dirty) {
-				if (dirty[0] & /*ariaLabels, range, values, min, max, vertical, disabled, suffix, handleFormatter, precision, prefix, float*/ 50475831 | dirty[1] & /*focus, activeHandle, isMounted, ariaLabelFormatter, handlePressed, $springPositions, sliderBlurHandle, sliderFocusHandle, sliderKeydown*/ 33785948) {
-					each_value = ensure_array_like(/*values*/ ctx[2]);
+				if (dirty[0] & /*ariaLabels, range, values, min, max, vertical, disabled, suffix, handleFormatter, precision, prefix, float*/ 100951726 | dirty[1] & /*focus, activeHandle, isMounted, ariaLabelFormatter, handlePressed, $springPositions, sliderBlurHandle, sliderFocusHandle, sliderKeydown*/ 33785948) {
+					each_value = ensure_array_like(/*values*/ ctx[3]);
 					let i;
 
 					for (i = 0; i < each_value.length; i += 1) {
@@ -3819,7 +3817,7 @@
 					each_blocks.length = each_value.length;
 				}
 
-				if (/*limits*/ ctx[18]) {
+				if (/*limits*/ ctx[19]) {
 					if (if_block0) {
 						if_block0.p(ctx, dirty);
 					} else {
@@ -3845,11 +3843,11 @@
 					if_block1 = null;
 				}
 
-				if (/*pips*/ ctx[19]) {
+				if (/*pips*/ ctx[20]) {
 					if (if_block2) {
 						if_block2.p(ctx, dirty);
 
-						if (dirty[0] & /*pips*/ 524288) {
+						if (dirty[0] & /*pips*/ 1048576) {
 							transition_in(if_block2, 1);
 						}
 					} else {
@@ -3892,44 +3890,44 @@
 					toggle_class(div, "rsRange", /*hasRange*/ ctx[41]);
 				}
 
-				if (!current || dirty[0] & /*classes, draggy*/ 268436480 | dirty[1] & /*hasRange*/ 1024) {
-					toggle_class(div, "rsDrag", /*hasRange*/ ctx[41] && /*draggy*/ ctx[10]);
+				if (!current || dirty[0] & /*classes, draggy*/ 268437504 | dirty[1] & /*hasRange*/ 1024) {
+					toggle_class(div, "rsDrag", /*hasRange*/ ctx[41] && /*draggy*/ ctx[11]);
 				}
 
-				if (!current || dirty[0] & /*classes, range*/ 268435968 | dirty[1] & /*hasRange*/ 1024) {
-					toggle_class(div, "rsMin", /*hasRange*/ ctx[41] && /*range*/ ctx[9] === 'min');
+				if (!current || dirty[0] & /*classes, range*/ 268436480 | dirty[1] & /*hasRange*/ 1024) {
+					toggle_class(div, "rsMin", /*hasRange*/ ctx[41] && /*range*/ ctx[10] === 'min');
 				}
 
-				if (!current || dirty[0] & /*classes, range*/ 268435968 | dirty[1] & /*hasRange*/ 1024) {
-					toggle_class(div, "rsMax", /*hasRange*/ ctx[41] && /*range*/ ctx[9] === 'max');
+				if (!current || dirty[0] & /*classes, range*/ 268436480 | dirty[1] & /*hasRange*/ 1024) {
+					toggle_class(div, "rsMax", /*hasRange*/ ctx[41] && /*range*/ ctx[10] === 'max');
 				}
 
-				if (!current || dirty[0] & /*classes, disabled*/ 268566528) {
-					toggle_class(div, "rsDisabled", /*disabled*/ ctx[17]);
+				if (!current || dirty[0] & /*classes, disabled*/ 268697600) {
+					toggle_class(div, "rsDisabled", /*disabled*/ ctx[18]);
 				}
 
-				if (!current || dirty[0] & /*classes, hoverable*/ 268500992) {
-					toggle_class(div, "rsHoverable", /*hoverable*/ ctx[16]);
+				if (!current || dirty[0] & /*classes, hoverable*/ 268566528) {
+					toggle_class(div, "rsHoverable", /*hoverable*/ ctx[17]);
 				}
 
-				if (!current || dirty[0] & /*classes, vertical*/ 268439552) {
-					toggle_class(div, "rsVertical", /*vertical*/ ctx[12]);
+				if (!current || dirty[0] & /*classes, vertical*/ 268443648) {
+					toggle_class(div, "rsVertical", /*vertical*/ ctx[13]);
 				}
 
-				if (!current || dirty[0] & /*classes, reversed*/ 268468224) {
-					toggle_class(div, "rsReversed", /*reversed*/ ctx[15]);
+				if (!current || dirty[0] & /*classes, reversed*/ 268500992) {
+					toggle_class(div, "rsReversed", /*reversed*/ ctx[16]);
 				}
 
 				if (!current || dirty[0] & /*classes*/ 268435456 | dirty[1] & /*focus*/ 8) {
 					toggle_class(div, "rsFocus", /*focus*/ ctx[34]);
 				}
 
-				if (!current || dirty[0] & /*classes, pips*/ 268959744) {
-					toggle_class(div, "rsPips", /*pips*/ ctx[19]);
+				if (!current || dirty[0] & /*classes, pips*/ 269484032) {
+					toggle_class(div, "rsPips", /*pips*/ ctx[20]);
 				}
 
-				if (!current || dirty[0] & /*classes, all, last, rest*/ 283115520 | dirty[1] & /*first*/ 1) {
-					toggle_class(div, "rsPipLabels", /*all*/ ctx[21] === 'label' || /*first*/ ctx[31] === 'label' || /*last*/ ctx[22] === 'label' || /*rest*/ ctx[23] === 'label');
+				if (!current || dirty[0] & /*classes, all, last, rest*/ 297795584 | dirty[1] & /*first*/ 1) {
+					toggle_class(div, "rsPipLabels", /*all*/ ctx[22] === 'label' || /*first*/ ctx[31] === 'label' || /*last*/ ctx[23] === 'label' || /*rest*/ ctx[24] === 'label');
 				}
 
 				const style_changed = dirty[0] & /*style*/ 536870912;
@@ -4042,65 +4040,65 @@
 
 			// sync values with value
 			if (values[0] !== value) {
-				$$invalidate(2, values[0] = value, values);
+				$$invalidate(3, values[0] = value, values);
 			}
 		};
 
-		// check that "value" is a number, or set it as the average
+		// check that "value" is a number, or set it as the first value in the values array
 		const updateValue = () => {
 			checkValueIsNumber();
 
 			// sync value with values
 			if (value !== values[0]) {
-				$$invalidate(6, value = values[0]);
+				$$invalidate(8, value = values[0]);
 			}
 		};
 
 		const checkMinMax = () => {
 			if (!isFiniteNumber(min)) {
-				$$invalidate(0, min = 0);
+				$$invalidate(1, min = 0);
 				console.error("'min' prop must be a valid finite number");
 			}
 
 			if (!isFiniteNumber(max)) {
-				$$invalidate(1, max = 100);
+				$$invalidate(2, max = 100);
 				console.error("'max' prop must be a valid finite number");
 			}
 
 			if (min >= max) {
-				$$invalidate(0, min = 0);
-				$$invalidate(1, max = 100);
+				$$invalidate(1, min = 0);
+				$$invalidate(2, max = 100);
 				console.error("'min' prop should be less than 'max'");
 			}
 
-			$$invalidate(0, min = coerceFloat(min, precision));
-			$$invalidate(1, max = coerceFloat(max, precision));
+			$$invalidate(1, min = coerceFloat(min, precision));
+			$$invalidate(2, max = coerceFloat(max, precision));
 		};
 
 		const checkValueIsNumber = () => {
 			if (typeof value !== 'number') {
-				$$invalidate(6, value = (max + min) / 2);
+				$$invalidate(8, value = (max + min) / 2);
 				console.error("'value' prop should be a Number");
 			}
 		};
 
 		const checkValuesIsArray = () => {
 			if (!Array.isArray(values)) {
-				$$invalidate(2, values = [value]);
+				$$invalidate(3, values = [value]);
 				console.error("'values' prop should be an Array");
 			}
 		};
 
 		const checkAriaLabels = () => {
 			if (values.length > 1 && !Array.isArray(ariaLabels)) {
-				$$invalidate(5, ariaLabels = []);
+				$$invalidate(7, ariaLabels = []);
 				console.warn(`'ariaLabels' prop should be an Array`);
 			}
 		};
 
 		const checkValuesAgainstRangeGaps = () => {
 			// first, align the values to the step
-			$$invalidate(2, values = values.map(v => constrainAndAlignValue(v, min, max, step, precision, limits)));
+			$$invalidate(3, values = values.map(v => constrainAndAlignValue(v, min, max, step, precision, limits)));
 
 			// rangeGaps should be positive
 			if (rangeGapMin < 0) $$invalidate(57, rangeGapMin = 0);
@@ -4115,7 +4113,7 @@
 				const gapMax = constrainAndAlignValue(values[0] + rangeGapMax, min, max, step, precision, limits);
 
 				if (values[1] > gapMax) {
-					$$invalidate(2, values[1] = gapMax, values);
+					$$invalidate(3, values[1] = gapMax, values);
 				}
 			}
 
@@ -4123,7 +4121,7 @@
 				const gapMin = constrainAndAlignValue(values[0] + rangeGapMin, min, max, step, precision, limits);
 
 				if (values[1] < gapMin) {
-					$$invalidate(2, values[1] = gapMin, values);
+					$$invalidate(3, values[1] = gapMin, values);
 				}
 			}
 		};
@@ -4131,12 +4129,17 @@
 		const checkFormatters = () => {
 			if (formatter === null || formatter === undefined) {
 				console.error('formatter must be a function');
-				$$invalidate(3, formatter = (v, i, p) => v);
+				$$invalidate(4, formatter = (v, i, p) => v);
 			}
 
 			if (handleFormatter === null || handleFormatter === undefined) {
 				console.error('handleFormatter must be a function');
-				$$invalidate(4, handleFormatter = formatter);
+				$$invalidate(5, handleFormatter = formatter);
+			}
+
+			if (rangeFormatter === undefined) {
+				console.error('rangeFormatter must be a function, or null');
+				$$invalidate(6, rangeFormatter = null);
 			}
 		};
 
@@ -4332,13 +4335,13 @@
 				if (index === 0) {
 					if (value > values[1] - rangeGapMin) {
 						if (pushy && value <= (limits?.[1] ?? max) - rangeGapMin) {
-							$$invalidate(2, values[1] = value + rangeGapMin, values);
+							$$invalidate(3, values[1] = value + rangeGapMin, values);
 						} else {
 							value = values[1] - rangeGapMin;
 						}
 					} else if (value < values[1] - rangeGapMax) {
 						if (pushy) {
-							$$invalidate(2, values[1] = value + rangeGapMax, values);
+							$$invalidate(3, values[1] = value + rangeGapMax, values);
 						} else {
 							value = values[1] - rangeGapMax;
 						}
@@ -4346,13 +4349,13 @@
 				} else if (index === 1) {
 					if (value < values[0] + rangeGapMin) {
 						if (pushy && value >= (limits?.[0] ?? min) + rangeGapMin) {
-							$$invalidate(2, values[0] = value - rangeGapMin, values);
+							$$invalidate(3, values[0] = value - rangeGapMin, values);
 						} else {
 							value = values[0] + rangeGapMin;
 						}
 					} else if (value > values[0] + rangeGapMax) {
 						if (pushy) {
-							$$invalidate(2, values[0] = value - rangeGapMax, values);
+							$$invalidate(3, values[0] = value - rangeGapMax, values);
 						} else {
 							value = values[0] + rangeGapMax;
 						}
@@ -4362,7 +4365,7 @@
 
 			// if the value has changed, update it
 			if (values[index] !== value) {
-				$$invalidate(2, values[index] = constrainAndAlignValue(value, min, max, step, precision, limits), values);
+				$$invalidate(3, values[index] = constrainAndAlignValue(value, min, max, step, precision, limits), values);
 			}
 
 			if (fireEvent) {
@@ -4694,42 +4697,42 @@
 		function div_binding($$value) {
 			binding_callbacks[$$value ? 'unshift' : 'push'](() => {
 				slider = $$value;
-				$$invalidate(7, slider);
+				$$invalidate(0, slider);
 			});
 		}
 
 		$$self.$$set = $$props => {
-			if ('slider' in $$props) $$invalidate(7, slider = $$props.slider);
-			if ('precision' in $$props) $$invalidate(8, precision = $$props.precision);
-			if ('range' in $$props) $$invalidate(9, range = $$props.range);
+			if ('slider' in $$props) $$invalidate(0, slider = $$props.slider);
+			if ('precision' in $$props) $$invalidate(9, precision = $$props.precision);
+			if ('range' in $$props) $$invalidate(10, range = $$props.range);
 			if ('pushy' in $$props) $$invalidate(59, pushy = $$props.pushy);
-			if ('draggy' in $$props) $$invalidate(10, draggy = $$props.draggy);
-			if ('min' in $$props) $$invalidate(0, min = $$props.min);
-			if ('max' in $$props) $$invalidate(1, max = $$props.max);
-			if ('step' in $$props) $$invalidate(11, step = $$props.step);
-			if ('values' in $$props) $$invalidate(2, values = $$props.values);
-			if ('value' in $$props) $$invalidate(6, value = $$props.value);
-			if ('vertical' in $$props) $$invalidate(12, vertical = $$props.vertical);
-			if ('float' in $$props) $$invalidate(13, float = $$props.float);
-			if ('rangeFloat' in $$props) $$invalidate(14, rangeFloat = $$props.rangeFloat);
-			if ('reversed' in $$props) $$invalidate(15, reversed = $$props.reversed);
-			if ('hoverable' in $$props) $$invalidate(16, hoverable = $$props.hoverable);
-			if ('disabled' in $$props) $$invalidate(17, disabled = $$props.disabled);
-			if ('limits' in $$props) $$invalidate(18, limits = $$props.limits);
+			if ('draggy' in $$props) $$invalidate(11, draggy = $$props.draggy);
+			if ('min' in $$props) $$invalidate(1, min = $$props.min);
+			if ('max' in $$props) $$invalidate(2, max = $$props.max);
+			if ('step' in $$props) $$invalidate(12, step = $$props.step);
+			if ('values' in $$props) $$invalidate(3, values = $$props.values);
+			if ('value' in $$props) $$invalidate(8, value = $$props.value);
+			if ('vertical' in $$props) $$invalidate(13, vertical = $$props.vertical);
+			if ('float' in $$props) $$invalidate(14, float = $$props.float);
+			if ('rangeFloat' in $$props) $$invalidate(15, rangeFloat = $$props.rangeFloat);
+			if ('reversed' in $$props) $$invalidate(16, reversed = $$props.reversed);
+			if ('hoverable' in $$props) $$invalidate(17, hoverable = $$props.hoverable);
+			if ('disabled' in $$props) $$invalidate(18, disabled = $$props.disabled);
+			if ('limits' in $$props) $$invalidate(19, limits = $$props.limits);
 			if ('rangeGapMin' in $$props) $$invalidate(57, rangeGapMin = $$props.rangeGapMin);
 			if ('rangeGapMax' in $$props) $$invalidate(58, rangeGapMax = $$props.rangeGapMax);
-			if ('pips' in $$props) $$invalidate(19, pips = $$props.pips);
-			if ('pipstep' in $$props) $$invalidate(20, pipstep = $$props.pipstep);
-			if ('all' in $$props) $$invalidate(21, all = $$props.all);
+			if ('pips' in $$props) $$invalidate(20, pips = $$props.pips);
+			if ('pipstep' in $$props) $$invalidate(21, pipstep = $$props.pipstep);
+			if ('all' in $$props) $$invalidate(22, all = $$props.all);
 			if ('first' in $$props) $$invalidate(31, first = $$props.first);
-			if ('last' in $$props) $$invalidate(22, last = $$props.last);
-			if ('rest' in $$props) $$invalidate(23, rest = $$props.rest);
-			if ('prefix' in $$props) $$invalidate(24, prefix = $$props.prefix);
-			if ('suffix' in $$props) $$invalidate(25, suffix = $$props.suffix);
-			if ('formatter' in $$props) $$invalidate(3, formatter = $$props.formatter);
-			if ('handleFormatter' in $$props) $$invalidate(4, handleFormatter = $$props.handleFormatter);
-			if ('rangeFormatter' in $$props) $$invalidate(26, rangeFormatter = $$props.rangeFormatter);
-			if ('ariaLabels' in $$props) $$invalidate(5, ariaLabels = $$props.ariaLabels);
+			if ('last' in $$props) $$invalidate(23, last = $$props.last);
+			if ('rest' in $$props) $$invalidate(24, rest = $$props.rest);
+			if ('prefix' in $$props) $$invalidate(25, prefix = $$props.prefix);
+			if ('suffix' in $$props) $$invalidate(26, suffix = $$props.suffix);
+			if ('formatter' in $$props) $$invalidate(4, formatter = $$props.formatter);
+			if ('handleFormatter' in $$props) $$invalidate(5, handleFormatter = $$props.handleFormatter);
+			if ('rangeFormatter' in $$props) $$invalidate(6, rangeFormatter = $$props.rangeFormatter);
+			if ('ariaLabels' in $$props) $$invalidate(7, ariaLabels = $$props.ariaLabels);
 			if ('id' in $$props) $$invalidate(27, id = $$props.id);
 			if ('class' in $$props) $$invalidate(28, classes = $$props.class);
 			if ('style' in $$props) $$invalidate(29, style = $$props.style);
@@ -4739,19 +4742,22 @@
 		};
 
 		$$self.$$.update = () => {
-			if ($$self.$$.dirty[0] & /*value*/ 64) {
+			if ($$self.$$.dirty[0] & /*value*/ 256) {
 				// keep value and values in sync with each other
 				(updateValues());
 			}
 
-			if ($$self.$$.dirty[0] & /*values, min, max, step, precision, limits*/ 264455 | $$self.$$.dirty[1] & /*springValues, springPositions, spring*/ 1610612738 | $$self.$$.dirty[2] & /*valueLength*/ 1) {
+			if ($$self.$$.dirty[0] & /*values, min, max, step, precision, limits, slider*/ 528911 | $$self.$$.dirty[1] & /*springValues, springPositions, spring*/ 1610612738 | $$self.$$.dirty[2] & /*valueLength*/ 1) {
 				{
-					// trim the range so it remains as a min/max (only 2 handles)
-					// and also align the handles to the steps
-					const trimmedAlignedValues = trimRange(values.map(v => constrainAndAlignValue(v, min, max, step, precision, limits)));
+					// if a range, then trim so it remains as a min/max (only 2 handles)
+					const trimmedValues = trimRange(values);
 
+					// and also align the handles to the steps/limits
+					const trimmedAlignedValues = trimmedValues.map(v => constrainAndAlignValue(v, min, max, step, precision, limits));
+
+					// update the values if they needed to be fixed
 					if (!(values.length === trimmedAlignedValues.length) || !values.every((element, index) => coerceFloat(element, precision) === trimmedAlignedValues[index])) {
-						$$invalidate(2, values = trimmedAlignedValues);
+						$$invalidate(3, values = trimmedAlignedValues);
 					}
 
 					// check if the valueLength (length of values[]) has changed,
@@ -4764,9 +4770,11 @@
 					} else {
 						// update the value of the spring function for animated handles
 						// whenever the values has updated
-						requestAnimationFrame(() => {
-							springPositions.set(values.map(v => valueAsPercent(v, min, max)), { hard: !spring$1 });
-						});
+						if (slider) {
+							requestAnimationFrame(() => {
+								springPositions.set(values.map(v => valueAsPercent(v, min, max)), { hard: !spring$1 });
+							});
+						}
 					}
 
 					// set the valueLength for the next check
@@ -4774,35 +4782,47 @@
 				}
 			}
 
-			if ($$self.$$.dirty[0] & /*values*/ 4) {
+			if ($$self.$$.dirty[0] & /*values*/ 8) {
 				(updateValue());
 			}
 
-			if ($$self.$$.dirty[0] & /*ariaLabels*/ 32) {
+			if ($$self.$$.dirty[0] & /*ariaLabels*/ 128) {
 				(checkAriaLabels());
 			}
 
-			if ($$self.$$.dirty[0] & /*min*/ 1) {
+			if ($$self.$$.dirty[0] & /*min*/ 2) {
 				(checkMinMax());
 			}
 
-			if ($$self.$$.dirty[0] & /*max*/ 2) {
+			if ($$self.$$.dirty[0] & /*max*/ 4) {
 				(checkMinMax());
 			}
 
-			if ($$self.$$.dirty[0] & /*formatter*/ 8) {
+			if ($$self.$$.dirty[1] & /*rangeGapMin*/ 67108864) {
+				(checkValuesAgainstRangeGaps());
+			}
+
+			if ($$self.$$.dirty[1] & /*rangeGapMax*/ 134217728) {
+				(checkValuesAgainstRangeGaps());
+			}
+
+			if ($$self.$$.dirty[0] & /*formatter*/ 16) {
 				(checkFormatters());
 			}
 
-			if ($$self.$$.dirty[0] & /*handleFormatter*/ 16) {
+			if ($$self.$$.dirty[0] & /*handleFormatter*/ 32) {
 				(checkFormatters());
 			}
 
-			if ($$self.$$.dirty[0] & /*range, values*/ 516) {
+			if ($$self.$$.dirty[0] & /*rangeFormatter*/ 64) {
+				(checkFormatters());
+			}
+
+			if ($$self.$$.dirty[0] & /*range, values*/ 1032) {
 				$$invalidate(41, hasRange = range === true && values.length === 2 || (range === 'min' || range === 'max') && values.length === 1);
 			}
 
-			if ($$self.$$.dirty[0] & /*vertical, reversed*/ 36864) {
+			if ($$self.$$.dirty[0] & /*vertical, reversed*/ 73728) {
 				/**
 	 * the orientation of the handles/pips based on the
 	 * input values of vertical and reversed
@@ -4812,7 +4832,7 @@
 				: reversed ? 'right' : 'left');
 			}
 
-			if ($$self.$$.dirty[0] & /*vertical, reversed*/ 36864) {
+			if ($$self.$$.dirty[0] & /*vertical, reversed*/ 73728) {
 				$$invalidate(39, orientationEnd = vertical
 				? reversed ? 'bottom' : 'top'
 				: reversed ? 'left' : 'right');
@@ -4820,14 +4840,15 @@
 		};
 
 		return [
+			slider,
 			min,
 			max,
 			values,
 			formatter,
 			handleFormatter,
+			rangeFormatter,
 			ariaLabels,
 			value,
-			slider,
 			precision,
 			range,
 			draggy,
@@ -4846,7 +4867,6 @@
 			rest,
 			prefix,
 			suffix,
-			rangeFormatter,
 			id,
 			classes,
 			style,
@@ -4898,37 +4918,37 @@
 				create_fragment,
 				safe_not_equal,
 				{
-					slider: 7,
-					precision: 8,
-					range: 9,
+					slider: 0,
+					precision: 9,
+					range: 10,
 					pushy: 59,
-					draggy: 10,
-					min: 0,
-					max: 1,
-					step: 11,
-					values: 2,
-					value: 6,
-					vertical: 12,
-					float: 13,
-					rangeFloat: 14,
-					reversed: 15,
-					hoverable: 16,
-					disabled: 17,
-					limits: 18,
+					draggy: 11,
+					min: 1,
+					max: 2,
+					step: 12,
+					values: 3,
+					value: 8,
+					vertical: 13,
+					float: 14,
+					rangeFloat: 15,
+					reversed: 16,
+					hoverable: 17,
+					disabled: 18,
+					limits: 19,
 					rangeGapMin: 57,
 					rangeGapMax: 58,
-					pips: 19,
-					pipstep: 20,
-					all: 21,
+					pips: 20,
+					pipstep: 21,
+					all: 22,
 					first: 31,
-					last: 22,
-					rest: 23,
-					prefix: 24,
-					suffix: 25,
-					formatter: 3,
-					handleFormatter: 4,
-					rangeFormatter: 26,
-					ariaLabels: 5,
+					last: 23,
+					rest: 24,
+					prefix: 25,
+					suffix: 26,
+					formatter: 4,
+					handleFormatter: 5,
+					rangeFormatter: 6,
+					ariaLabels: 7,
 					id: 27,
 					class: 28,
 					style: 29,
@@ -4942,7 +4962,7 @@
 		}
 
 		get slider() {
-			return this.$$.ctx[7];
+			return this.$$.ctx[0];
 		}
 
 		set slider(slider) {
@@ -4951,7 +4971,7 @@
 		}
 
 		get precision() {
-			return this.$$.ctx[8];
+			return this.$$.ctx[9];
 		}
 
 		set precision(precision) {
@@ -4960,7 +4980,7 @@
 		}
 
 		get range() {
-			return this.$$.ctx[9];
+			return this.$$.ctx[10];
 		}
 
 		set range(range) {
@@ -4978,7 +4998,7 @@
 		}
 
 		get draggy() {
-			return this.$$.ctx[10];
+			return this.$$.ctx[11];
 		}
 
 		set draggy(draggy) {
@@ -4987,7 +5007,7 @@
 		}
 
 		get min() {
-			return this.$$.ctx[0];
+			return this.$$.ctx[1];
 		}
 
 		set min(min) {
@@ -4996,7 +5016,7 @@
 		}
 
 		get max() {
-			return this.$$.ctx[1];
+			return this.$$.ctx[2];
 		}
 
 		set max(max) {
@@ -5005,7 +5025,7 @@
 		}
 
 		get step() {
-			return this.$$.ctx[11];
+			return this.$$.ctx[12];
 		}
 
 		set step(step) {
@@ -5014,7 +5034,7 @@
 		}
 
 		get values() {
-			return this.$$.ctx[2];
+			return this.$$.ctx[3];
 		}
 
 		set values(values) {
@@ -5023,7 +5043,7 @@
 		}
 
 		get value() {
-			return this.$$.ctx[6];
+			return this.$$.ctx[8];
 		}
 
 		set value(value) {
@@ -5032,7 +5052,7 @@
 		}
 
 		get vertical() {
-			return this.$$.ctx[12];
+			return this.$$.ctx[13];
 		}
 
 		set vertical(vertical) {
@@ -5041,7 +5061,7 @@
 		}
 
 		get float() {
-			return this.$$.ctx[13];
+			return this.$$.ctx[14];
 		}
 
 		set float(float) {
@@ -5050,7 +5070,7 @@
 		}
 
 		get rangeFloat() {
-			return this.$$.ctx[14];
+			return this.$$.ctx[15];
 		}
 
 		set rangeFloat(rangeFloat) {
@@ -5059,7 +5079,7 @@
 		}
 
 		get reversed() {
-			return this.$$.ctx[15];
+			return this.$$.ctx[16];
 		}
 
 		set reversed(reversed) {
@@ -5068,7 +5088,7 @@
 		}
 
 		get hoverable() {
-			return this.$$.ctx[16];
+			return this.$$.ctx[17];
 		}
 
 		set hoverable(hoverable) {
@@ -5077,7 +5097,7 @@
 		}
 
 		get disabled() {
-			return this.$$.ctx[17];
+			return this.$$.ctx[18];
 		}
 
 		set disabled(disabled) {
@@ -5086,7 +5106,7 @@
 		}
 
 		get limits() {
-			return this.$$.ctx[18];
+			return this.$$.ctx[19];
 		}
 
 		set limits(limits) {
@@ -5113,7 +5133,7 @@
 		}
 
 		get pips() {
-			return this.$$.ctx[19];
+			return this.$$.ctx[20];
 		}
 
 		set pips(pips) {
@@ -5122,7 +5142,7 @@
 		}
 
 		get pipstep() {
-			return this.$$.ctx[20];
+			return this.$$.ctx[21];
 		}
 
 		set pipstep(pipstep) {
@@ -5131,7 +5151,7 @@
 		}
 
 		get all() {
-			return this.$$.ctx[21];
+			return this.$$.ctx[22];
 		}
 
 		set all(all) {
@@ -5149,7 +5169,7 @@
 		}
 
 		get last() {
-			return this.$$.ctx[22];
+			return this.$$.ctx[23];
 		}
 
 		set last(last) {
@@ -5158,7 +5178,7 @@
 		}
 
 		get rest() {
-			return this.$$.ctx[23];
+			return this.$$.ctx[24];
 		}
 
 		set rest(rest) {
@@ -5167,7 +5187,7 @@
 		}
 
 		get prefix() {
-			return this.$$.ctx[24];
+			return this.$$.ctx[25];
 		}
 
 		set prefix(prefix) {
@@ -5176,7 +5196,7 @@
 		}
 
 		get suffix() {
-			return this.$$.ctx[25];
+			return this.$$.ctx[26];
 		}
 
 		set suffix(suffix) {
@@ -5185,7 +5205,7 @@
 		}
 
 		get formatter() {
-			return this.$$.ctx[3];
+			return this.$$.ctx[4];
 		}
 
 		set formatter(formatter) {
@@ -5194,7 +5214,7 @@
 		}
 
 		get handleFormatter() {
-			return this.$$.ctx[4];
+			return this.$$.ctx[5];
 		}
 
 		set handleFormatter(handleFormatter) {
@@ -5203,7 +5223,7 @@
 		}
 
 		get rangeFormatter() {
-			return this.$$.ctx[26];
+			return this.$$.ctx[6];
 		}
 
 		set rangeFormatter(rangeFormatter) {
@@ -5212,7 +5232,7 @@
 		}
 
 		get ariaLabels() {
-			return this.$$.ctx[5];
+			return this.$$.ctx[7];
 		}
 
 		set ariaLabels(ariaLabels) {

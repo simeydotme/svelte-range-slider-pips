@@ -410,6 +410,230 @@ test.describe('Range Gap Tests', () => {
     });
   });
 
+  test.describe('Dynamic Gap Tests', () => {
+    test('should update handle values when rangeGapMin is increased beyond current gap', async ({ page }) => {
+      const slider = page.locator('#dynamic-gaps');
+      const handles = slider.locator('.rangeHandle');
+      const handle1 = handles.first();
+      const handle2 = handles.nth(1);
+      const increaseMinButton = page.locator('#btn_increase_min');
+
+      await slider.scrollIntoViewIfNeeded();
+
+      // Verify initial state: values [40, 60] with gap 20, constraints min: 10, max: 30
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '60');
+
+      // Increase minimum gap from 10 to 15 - should NOT change values since 20 > 15
+      await increaseMinButton.click();
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '60');
+
+      // Increase minimum gap to 25 - should force second handle to move
+      await increaseMinButton.click(); // 15 -> 20
+      await increaseMinButton.click(); // 20 -> 25
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '65');
+    });
+
+    test('should update handle values when rangeGapMin is decreased', async ({ page }) => {
+      const slider = page.locator('#dynamic-gaps');
+      const handles = slider.locator('.rangeHandle');
+      const handle1 = handles.first();
+      const handle2 = handles.nth(1);
+      const decreaseMinButton = page.locator('#btn_decrease_min');
+
+      await slider.scrollIntoViewIfNeeded();
+
+      // Verify initial state: values [40, 60] with gap 20, constraints min: 10, max: 30
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '60');
+
+      // Decrease minimum gap from 10 to 5 - should NOT change values since 20 > 5
+      await decreaseMinButton.click();
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '60');
+
+      // Now we can move handles closer together
+      await dragHandleTo(page, slider, handle1, 0.45);
+      await dragHandleTo(page, slider, handle2, 0.5);
+      await expect(handle1).toHaveAttribute('aria-valuenow', '45');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '50');
+    });
+
+    test('should update handle values when rangeGapMax is decreased below current gap', async ({ page }) => {
+      const slider = page.locator('#dynamic-gaps');
+      const handles = slider.locator('.rangeHandle');
+      const handle1 = handles.first();
+      const handle2 = handles.nth(1);
+      const decreaseMaxButton = page.locator('#btn_decrease_max');
+
+      await slider.scrollIntoViewIfNeeded();
+
+      // Verify initial state: values [40, 60] with gap 20, constraints min: 10, max: 30
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '60');
+
+      // Decrease maximum gap from 30 to 25 - should NOT change values since 20 < 25
+      await decreaseMaxButton.click();
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '60');
+
+      // Decrease maximum gap to 15 - should force second handle to move
+      await decreaseMaxButton.click(); // 25 -> 20
+      await decreaseMaxButton.click(); // 20 -> 15
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '55');
+    });
+
+    test('should update handle values when rangeGapMax is increased', async ({ page }) => {
+      const slider = page.locator('#dynamic-gaps');
+      const handles = slider.locator('.rangeHandle');
+      const handle1 = handles.first();
+      const handle2 = handles.nth(1);
+      const increaseMaxButton = page.locator('#btn_increase_max');
+
+      await slider.scrollIntoViewIfNeeded();
+
+      // Verify initial state: values [40, 60] with gap 20, constraints min: 10, max: 30
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '60');
+
+      // try dragging handles apart but it will fail because the gap is too small
+      await dragHandleTo(page, slider, handle1, 0.3);
+      await expect(handle1).toHaveAttribute('aria-valuenow', '30');
+      await dragHandleTo(page, slider, handle2, 0.7);
+      await expect(handle2).toHaveAttribute('aria-valuenow', '60');
+
+      // try dragging handles apart but it will fail because the gap is too small
+      await dragHandleTo(page, slider, handle1, 0.1);
+      await expect(handle1).toHaveAttribute('aria-valuenow', '30');
+
+      // Increase maximum gap from 30 to 50 - should NOT change values since 20 < 35
+      await increaseMaxButton.click();
+      await increaseMaxButton.click();
+      await increaseMaxButton.click();
+      await increaseMaxButton.click();
+
+      await expect(handle1).toHaveAttribute('aria-valuenow', '30');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '60');
+
+      // Now we can move handles further apart, but constrained by the gap
+      await dragHandleTo(page, slider, handle1, 0.2);
+      await expect(handle1).toHaveAttribute('aria-valuenow', '20');
+      await dragHandleTo(page, slider, handle2, 1);
+      await expect(handle2).toHaveAttribute('aria-valuenow', '70');
+    });
+
+    test('should handle both min and max gap changes simultaneously', async ({ page }) => {
+      const slider = page.locator('#dynamic-gaps');
+      const handles = slider.locator('.rangeHandle');
+      const handle1 = handles.first();
+      const handle2 = handles.nth(1);
+      const increaseMinButton = page.locator('#btn_increase_min');
+      const decreaseMaxButton = page.locator('#btn_decrease_max');
+
+      await slider.scrollIntoViewIfNeeded();
+
+      // Verify initial state: values [40, 60] with gap 20, constraints min: 10, max: 30
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '60');
+
+      // Increase minimum gap to 25 and decrease maximum gap to 15
+      for (let i = 0; i < 3; i++) {
+        await increaseMinButton.click(); // min: 10 -> 25
+      }
+      for (let i = 0; i < 3; i++) {
+        await decreaseMaxButton.click(); // max: 30 -> 15, min -> 15
+      }
+
+      // Verify handles are adjusted to fit within the new constraints
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '55');
+    });
+
+    test('should handle edge case when gap constraints become invalid', async ({ page }) => {
+      const slider = page.locator('#dynamic-gaps');
+      const handles = slider.locator('.rangeHandle');
+      const handle1 = handles.first();
+      const handle2 = handles.nth(1);
+      const increaseMinButton = page.locator('#btn_increase_min');
+      const decreaseMaxButton = page.locator('#btn_decrease_max');
+
+      await slider.scrollIntoViewIfNeeded();
+
+      // Verify initial state: values [40, 60] with gap 20, constraints min: 10, max: 30
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '60');
+
+      // Make min gap larger than max gap
+      for (let i = 0; i < 5; i++) {
+        await increaseMinButton.click(); // min: 10 -> 35
+      }
+      for (let i = 0; i < 5; i++) {
+        await decreaseMaxButton.click(); // max: 30 -> 5
+      }
+
+      // Verify handles are adjusted to a valid state (min gap = max gap)
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '45');
+    });
+
+    test("should maintain handle positions when gap changes don't affect current values", async ({ page }) => {
+      const slider = page.locator('#dynamic-gaps');
+      const handles = slider.locator('.rangeHandle');
+      const handle1 = handles.first();
+      const handle2 = handles.nth(1);
+      const increaseMaxButton = page.locator('#btn_increase_max');
+
+      await slider.scrollIntoViewIfNeeded();
+
+      // Verify initial state: values [40, 60] with gap 20, constraints min: 10, max: 30
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '60');
+
+      // Increase maximum gap - should not affect current values since 20 < 35
+      await increaseMaxButton.click();
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '60');
+    });
+
+    test('should NOT emit change events when handles are adjusted due to gap changes', async ({ page }) => {
+      const slider = page.locator('#dynamic-gaps');
+      const handles = slider.locator('.rangeHandle');
+      const handle1 = handles.first();
+      const handle2 = handles.nth(1);
+      const increaseMinButton = page.locator('#btn_increase_min');
+
+      await slider.scrollIntoViewIfNeeded();
+
+      // Verify initial state: values [40, 60] with gap 20, constraints min: 10, max: 30
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '60');
+
+      // Listen for change events
+      const changeEvents: string[] = [];
+      page.on('console', (message) => {
+        if (message.text().includes('Change event:')) {
+          changeEvents.push(message.text());
+        }
+      });
+
+      // Increase minimum gap to 25 to trigger handle adjustment
+      for (let i = 0; i < 3; i++) {
+        await increaseMinButton.click(); // min: 10 -> 25
+      }
+      await page.waitForTimeout(200);
+
+      // Verify NO change event was emitted when gap constraints changed
+      expect(changeEvents.length).toBe(0);
+
+      // Verify handles were adjusted correctly
+      await expect(handle1).toHaveAttribute('aria-valuenow', '40');
+      await expect(handle2).toHaveAttribute('aria-valuenow', '65');
+    });
+  });
+
   test.describe('Performance Tests', () => {
     test('should handle gap values without performance issues', async ({ page }) => {
       const slider = page.locator('#large-gap-values');

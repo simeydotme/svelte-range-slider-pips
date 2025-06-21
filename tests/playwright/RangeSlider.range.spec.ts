@@ -305,4 +305,159 @@ test.describe('Range Tests', () => {
       });
     });
   });
+
+  test.describe('range toggle functionality', () => {
+    test('should toggle between single and range mode when range prop changes', async ({ page }) => {
+      await page.goto('/test/range-slider/range');
+      await page.waitForLoadState('networkidle');
+
+      const slider = page.locator('#toggle-range-test');
+      const range = slider.locator('.rangeBar');
+      const handles = slider.locator('.rangeHandle');
+      const toggleButton = page.locator('#btn_toggle_range');
+
+      // Initial state: range=false, should show 3 handles, no range bar
+      await expect(range).not.toBeAttached();
+      await expect(handles).toHaveCount(3);
+      await expect(slider).not.toHaveClass(/\brsRange\b/);
+
+      // Click button to toggle to range=true
+      await toggleButton.click();
+      await page.waitForTimeout(100); // Wait for DOM update
+
+      // After toggle: range=true, should show 2 handles, with range bar
+      // values array is destructively changed from [15, 45, 75] to [15, 45]
+      await expect(range).toBeAttached();
+      await expect(handles).toHaveCount(2);
+      await expect(slider).toHaveClass(/\brsRange\b/);
+
+      // Click button again to toggle back to range=false
+      await toggleButton.click();
+      await page.waitForTimeout(100); // Wait for DOM update
+
+      // Back to initial state: range=false, should show 2 handles, no range bar
+      // values array is restored to [15, 45] because the third handle was lost when range=true
+      await expect(range).not.toBeAttached();
+      await expect(handles).toHaveCount(2);
+      await expect(slider).not.toHaveClass(/\brsRange\b/);
+    });
+
+    test('should maintain handle positions when toggling range mode', async ({ page }) => {
+      await page.goto('/test/range-slider/range');
+      await page.waitForLoadState('networkidle');
+
+      const slider = page.locator('#toggle-range-test');
+      const handles = slider.locator('.rangeHandle');
+      const toggleButton = page.locator('#btn_toggle_range');
+
+      // Initial state: check first two handle positions
+      await expect(handles.nth(0)).toHaveCSS('translate', '150px'); // 15% of 1000px
+      await expect(handles.nth(1)).toHaveCSS('translate', '450px'); // 45% of 1000px
+
+      // Toggle to range mode
+      await toggleButton.click();
+      await page.waitForTimeout(100);
+
+      // Verify first two handles maintain their positions in range mode
+      // Third handle is removed from the array when range=true
+      await expect(handles.nth(0)).toHaveCSS('translate', '150px');
+      await expect(handles.nth(1)).toHaveCSS('translate', '450px');
+
+      // Toggle back to non-range mode
+      await toggleButton.click();
+      await page.waitForTimeout(100);
+
+      // Verify that the first two handles are still in the same position
+      // there is no third handle because it was lost when range=true
+      await expect(handles).toHaveCount(2);
+      await expect(handles.nth(0)).toHaveCSS('translate', '150px');
+      await expect(handles.nth(1)).toHaveCSS('translate', '450px');
+    });
+
+    test('should toggle between single and range="min" mode with correct handle positions and classes', async ({
+      page
+    }) => {
+      await page.goto('/test/range-slider/range');
+      await page.waitForLoadState('networkidle');
+
+      const slider = page.locator('#toggle-range-min-test');
+      const range = slider.locator('.rangeBar');
+      const handles = slider.locator('.rangeHandle');
+      const toggleButton = page.locator('#btn_toggle_range_min');
+
+      // Initial state: range=false, should show 3 handles, no range bar
+      await expect(range).not.toBeAttached();
+      await expect(handles).toHaveCount(3);
+      await expect(slider).not.toHaveClass(/\brsRange\b/);
+      await expect(slider).not.toHaveClass(/\brsMin\b/);
+      await expect(handles.nth(0)).toHaveCSS('translate', '300px'); // 30% of 1000px
+
+      // Click button to toggle to range="min"
+      await toggleButton.click();
+      await page.waitForTimeout(100);
+
+      // After toggle: range="min", should show 1 handle, with range bar from min to handle
+      // values array is destructively changed from [30, 60, 80] to [30]
+      await expect(range).toBeAttached();
+      await expect(handles).toHaveCount(1);
+      await expect(slider).toHaveClass(/\brsRange\b/);
+      await expect(slider).toHaveClass(/\brsMin\b/);
+      await expect(handles.nth(0)).toHaveCSS('translate', '300px'); // First handle maintains position
+
+      // Click button again to toggle back to range=false
+      await toggleButton.click();
+      await page.waitForTimeout(100);
+
+      // Back to initial state: range=false, but now there's only one handle
+      // because the second and third handles were lost when range=min
+      await expect(range).not.toBeAttached();
+      await expect(handles).toHaveCount(1);
+      await expect(slider).not.toHaveClass(/\brsRange\b/);
+      await expect(slider).not.toHaveClass(/\brsMin\b/);
+      await expect(handles.nth(0)).toHaveCSS('translate', '300px'); // First handle still maintains position
+    });
+
+    test('should toggle between single and range="max" mode with correct handle positions and classes', async ({
+      page
+    }) => {
+      await page.goto('/test/range-slider/range');
+      await page.waitForLoadState('networkidle');
+
+      const slider = page.locator('#toggle-range-max-test');
+      const range = slider.locator('.rangeBar');
+      const handles = slider.locator('.rangeHandle');
+      const toggleButton = page.locator('#btn_toggle_range_max');
+
+      // Initial state: range=false, should show 3 handles, no range bar
+      await expect(range).not.toBeAttached();
+      await expect(handles).toHaveCount(3);
+      await expect(slider).not.toHaveClass(/\brsRange\b/);
+      await expect(slider).not.toHaveClass(/\brsMax\b/);
+      await expect(handles.nth(0)).toHaveCSS('translate', '200px'); // 20% of 1000px
+
+      // Click button to toggle to range="max"
+      await toggleButton.click();
+      await page.waitForTimeout(100);
+
+      // After toggle: range="max", should show 1 handle, with range bar from handle to max
+      // values array is destructively changed from [20, 50, 70] to [20]
+      await expect(range).toBeAttached();
+      await expect(handles).toHaveCount(1);
+      await expect(slider).toHaveClass(/\brsRange\b/);
+      await expect(slider).toHaveClass(/\brsMax\b/);
+      await expect(handles.nth(0)).toHaveCSS('translate', '200px'); // First handle maintains position
+
+      // Click button again to toggle back to range=false
+      await toggleButton.click();
+      await page.waitForTimeout(100);
+
+      // Back to initial state: range=false, but now there's only one handle
+      // because the second and third handles were lost when range=max
+      await expect(range).not.toBeAttached();
+      await expect(handles).toHaveCount(1);
+      await expect(slider).not.toHaveClass(/\brsRange\b/);
+      await expect(slider).not.toHaveClass(/\brsMax\b/);
+      await expect(handles.nth(0)).toHaveCSS('translate', '200px'); // First handle still maintains position
+    });
+  });
 });

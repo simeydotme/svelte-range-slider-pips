@@ -69,7 +69,7 @@ npm install svelte-range-slider-pips --save-dev  # if you prefer npm
 
 > **Note:** Please read the [upgrade guide](./docs/upgrade.md) for details, as there's some changes which might break your styling/ui.
 
-### In a svelte 4/5 project
+### In a svelte 4 project
 
 Assuming you have a Svelte app up and running;
 
@@ -89,6 +89,15 @@ Assuming you have a Svelte app up and running;
     <img height="16" src="./public/icons/svelte-svgrepo-com.png" alt="Svelte Icon"> <em>or <a href="./tests/svelte5/src/routes/+page.svelte">Svelte 5</em></a>
   </li>
 </ul>
+
+---
+
+### In a svelte 5 project
+
+Svelte 5 works almost exactly the same as Svelte 4.
+
+⚠ **Note:** Runes Mode -- specifically `$state()` -- has some issues when binding with an `<input />` element.
+My suggestion would be to use legacy mode if you can (not runes), or [read this issue for a workaround.](https://github.com/simeydotme/svelte-range-slider-pips/issues/174)
 
 ---
 

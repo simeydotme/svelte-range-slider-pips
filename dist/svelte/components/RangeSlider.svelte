@@ -144,6 +144,10 @@ const checkFormatters = () => {
     console.error("handleFormatter must be a function");
     handleFormatter = formatter;
   }
+  if (rangeFormatter === void 0) {
+    console.error("rangeFormatter must be a function, or null");
+    rangeFormatter = null;
+  }
 };
 checkMinMax();
 checkValueIsNumber();
@@ -155,13 +159,15 @@ $: values, updateValue();
 $: ariaLabels, checkAriaLabels();
 $: min, checkMinMax();
 $: max, checkMinMax();
+$: rangeGapMin, checkValuesAgainstRangeGaps();
+$: rangeGapMax, checkValuesAgainstRangeGaps();
 $: formatter, checkFormatters();
 $: handleFormatter, checkFormatters();
+$: rangeFormatter, checkFormatters();
 $: hasRange = range === true && values.length === 2 || (range === "min" || range === "max") && values.length === 1;
 $: {
-  const trimmedAlignedValues = trimRange(
-    values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
-  );
+  const trimmedValues = trimRange(values);
+  const trimmedAlignedValues = trimmedValues.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
   if (!(values.length === trimmedAlignedValues.length) || !values.every((element, index) => coerceFloat(element, precision) === trimmedAlignedValues[index])) {
     values = trimmedAlignedValues;
   }
@@ -171,12 +177,14 @@ $: {
       springValues
     );
   } else {
-    requestAnimationFrame(() => {
-      springPositions.set(
-        values.map((v) => valueAsPercent(v, min, max)),
-        { hard: !spring }
-      );
-    });
+    if (slider) {
+      requestAnimationFrame(() => {
+        springPositions.set(
+          values.map((v) => valueAsPercent(v, min, max)),
+          { hard: !spring }
+        );
+      });
+    }
   }
   valueLength = values.length;
 }
@@ -533,7 +541,6 @@ function ariaLabelFormatter(value2, index) {
 >
   {#each values as value, index}
     {@const zindex = `${focus && activeHandle === index ? 3 : ''}`}
-    {@const translate = `calc((${sliderSize}px * ${$springPositions[index] / 100}))`}
     <span
       role="slider"
       class="rangeHandle"

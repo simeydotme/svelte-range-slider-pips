@@ -104,7 +104,7 @@
     }
   };
 
-  // check that "value" is a number, or set it as the average
+  // check that "value" is a number, or set it as the first value in the values array
   const updateValue = () => {
     checkValueIsNumber();
     // sync value with values
@@ -184,6 +184,10 @@
       console.error('handleFormatter must be a function');
       handleFormatter = formatter;
     }
+    if (rangeFormatter === undefined) {
+      console.error('rangeFormatter must be a function, or null');
+      rangeFormatter = null;
+    }
   };
 
   // fixup the value/values at render
@@ -199,17 +203,20 @@
   $: ariaLabels, checkAriaLabels();
   $: min, checkMinMax();
   $: max, checkMinMax();
+  $: rangeGapMin, checkValuesAgainstRangeGaps();
+  $: rangeGapMax, checkValuesAgainstRangeGaps();
   $: formatter, checkFormatters();
   $: handleFormatter, checkFormatters();
+  $: rangeFormatter, checkFormatters();
   $: hasRange =
     (range === true && values.length === 2) || ((range === 'min' || range === 'max') && values.length === 1);
 
   $: {
-    // trim the range so it remains as a min/max (only 2 handles)
-    // and also align the handles to the steps
-    const trimmedAlignedValues = trimRange(
-      values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits))
-    );
+    // if a range, then trim so it remains as a min/max (only 2 handles)
+    const trimmedValues = trimRange(values);
+    // and also align the handles to the steps/limits
+    const trimmedAlignedValues = trimmedValues.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
+    // update the values if they needed to be fixed
     if (
       !(values.length === trimmedAlignedValues.length) ||
       !values.every((element, index) => coerceFloat(element, precision) === trimmedAlignedValues[index])
@@ -230,12 +237,14 @@
     } else {
       // update the value of the spring function for animated handles
       // whenever the values has updated
-      requestAnimationFrame(() => {
-        springPositions.set(
-          values.map((v) => valueAsPercent(v, min, max)),
-          { hard: !spring }
-        );
-      });
+      if (slider) {
+        requestAnimationFrame(() => {
+          springPositions.set(
+            values.map((v) => valueAsPercent(v, min, max)),
+            { hard: !spring }
+          );
+        });
+      }
     }
     // set the valueLength for the next check
     valueLength = values.length;
@@ -791,7 +800,6 @@
 >
   {#each values as value, index}
     {@const zindex = `${focus && activeHandle === index ? 3 : ''}`}
-    {@const translate = `calc((${sliderSize}px * ${$springPositions[index] / 100}))`}
     <span
       role="slider"
       class="rangeHandle"
