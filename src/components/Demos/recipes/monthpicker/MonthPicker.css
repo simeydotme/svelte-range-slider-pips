@@ -4,11 +4,11 @@
     text-transform: uppercase;
   }
 
-  #month-picker.rangeSlider.focus .rangeBar {
+  #month-picker.rangeSlider.rsFocus .rangeBar {
     background: linear-gradient(to left, var(--handle) 20%, var(--handle-focus));
   }
 
-  #month-picker.rangeSlider.focus:has([data-handle="1"].active) .rangeBar {
+  #month-picker.rangeSlider.rsFocus:has([data-handle="1"].rsActive) .rangeBar {
     background: linear-gradient(to right, var(--handle) 20%, var(--handle-focus));
   }
 
