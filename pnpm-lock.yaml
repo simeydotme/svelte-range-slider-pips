@@ -72,8 +72,8 @@ dependencies:
     specifier: ^4.2.7
     version: 4.2.7
   svelte-range-slider-pips:
-    specifier: ^4.0.0
-    version: 4.0.0(svelte@4.2.7)
+    specifier: ^4.0.4
+    version: 4.0.4(svelte@4.2.7)
   typescript:
     specifier: ^5.0.0
     version: 5.0.2
@@ -5106,8 +5106,8 @@ packages:
       svelte: 4.2.7
     dev: false
 
-  /svelte-range-slider-pips@4.0.0(svelte@4.2.7):
-    resolution: {integrity: sha512-RxkSRQvu94ufhT5OldRSoKmRRA7El3fDtJ7v5qWb0kZyoyqTHN9Vq44wJ5uo/q18heSgPN6/2kJjGvSWfuyHow==}
+  /svelte-range-slider-pips@4.0.4(svelte@4.2.7):
+    resolution: {integrity: sha512-PTJ9P0Nkc+H3LpXN5yoHftdbioyzD2BOr1X3dTnuMJ/46XgP8VcZ0Nytaj9WURBY0FNipOmMIwTmTihGaW5mfg==}
     peerDependencies:
       svelte: ^4.2.7 || ^5.0.0
     dependencies:
