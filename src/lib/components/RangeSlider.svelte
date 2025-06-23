@@ -213,13 +213,13 @@
 
   $: {
     // if a range, then trim so it remains as a min/max (only 2 handles)
-    const trimmedValues = trimRange(values);
+    const trimmedValues = trimRange(values, range);
     // and also align the handles to the steps/limits
     const trimmedAlignedValues = trimmedValues.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
     // update the values if they needed to be fixed
     if (
       !(values.length === trimmedAlignedValues.length) ||
-      !values.every((element, index) => coerceFloat(element, precision) === trimmedAlignedValues[index])
+      !values.every((item, i) => coerceFloat(item, precision) === trimmedAlignedValues[i])
     ) {
       values = trimmedAlignedValues;
     }
@@ -324,9 +324,10 @@
    * do not want more than one handle for a min/max range, and we do
    * not want more than two handles for a true range.
    * @param {array} values the input values for the rangeSlider
+   * @param {boolean | 'min' | 'max'} range the range property of the rangeSlider
    * @return {array} the range array for creating a rangeSlider
    **/
-  function trimRange(values: number[]) {
+  function trimRange(values: number[], range: boolean | 'min' | 'max') {
     if (range === 'min' || range === 'max') {
       return values.slice(0, 1);
     } else if (range) {

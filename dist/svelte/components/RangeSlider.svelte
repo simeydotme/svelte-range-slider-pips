@@ -166,9 +166,9 @@ $: handleFormatter, checkFormatters();
 $: rangeFormatter, checkFormatters();
 $: hasRange = range === true && values.length === 2 || (range === "min" || range === "max") && values.length === 1;
 $: {
-  const trimmedValues = trimRange(values);
+  const trimmedValues = trimRange(values, range);
   const trimmedAlignedValues = trimmedValues.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
-  if (!(values.length === trimmedAlignedValues.length) || !values.every((element, index) => coerceFloat(element, precision) === trimmedAlignedValues[index])) {
+  if (!(values.length === trimmedAlignedValues.length) || !values.every((item, i) => coerceFloat(item, precision) === trimmedAlignedValues[i])) {
     values = trimmedAlignedValues;
   }
   if (valueLength !== values.length) {
@@ -226,10 +226,10 @@ function targetIsHandle(el) {
   const isChild = Array.prototype.some.call(handles, (e) => e.contains(el));
   return isHandle || isChild;
 }
-function trimRange(values2) {
-  if (range === "min" || range === "max") {
+function trimRange(values2, range2) {
+  if (range2 === "min" || range2 === "max") {
     return values2.slice(0, 1);
-  } else if (range) {
+  } else if (range2) {
     return values2.slice(0, 2);
   } else {
     return values2;
