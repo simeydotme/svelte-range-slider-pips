@@ -1,0 +1,179 @@
+
+@property --color0 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+@property --color1 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #c484ff;
+}
+@property --color2 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #c484ff;
+}
+@property --color3 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #c484ff;
+}
+@property --color4 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: transparent;
+}
+  
+#rangeTemp.rangeSlider {
+
+  font-size: 1.5em;
+  height: 1em;
+  margin-inline: 2em;
+  
+  /* neutral colors */
+  --color1: #c484ff;
+  --color2: blueviolet;
+  --color3: #c484ff;
+
+  /* colors for hot temp */
+  --hot0: transparent;
+  --hot1: #ffa377;
+  --hot2: #f33d71;
+  --hot3: #f33d71;
+  --hot4: #e31f2f;
+
+  /* colors for cold temp */
+  --cold0: #2838e3;
+  --cold1: #3974fa;
+  --cold2: #3974fa;
+  --cold3: #9bd7fc;
+  --cold4: transparent;
+
+  /* apply the colors to the slider variables */
+  --handle: var(--color2);
+  --range-handle: var(--handle);
+  --range-handle-focus: var(--handle);
+  --range-handle-inactive: var(--handle);
+  
+  /* create a pseudo-range gradient using a gradient of the colors */
+  background-image: 
+    linear-gradient(
+      to right, 
+      var(--color0), 
+      var(--color1), 
+      var(--color2) var(--split) , 
+      var(--color3),					
+      var(--color4)
+    );
+
+  background-position: left center;
+  
+  /* make sure the colors transition smoothly */
+  transition: 
+    --color0 0.5s ease, 
+    --color1 0.5s ease, 
+    --color2 0.5s ease, 
+    --color3 0.5s ease, 
+    --color4 0.5s ease;
+  
+  & .rangeHandle {
+    /* increase handle size and add a shadow */
+    font-size: 1.5em;
+    border-radius: 100%;
+    box-shadow: 
+      0 0 20px 3px hsl(0deg 0% 100% / 0.5), 
+      0 0 40px 3px hsl(0deg 0% 100% / 0.5);
+  }
+
+  & .rangeFloat {
+    /* remove float background, add a shadow */
+    font-size: 0.625em;
+    font-weight: 600;
+    opacity: 1;
+    background: none;
+    height: 100%;
+    bottom: 0;
+    padding: 0 0.5em;
+    translate: -50% 0% 0.01px;
+    text-shadow: 
+      0 0 10px var(--handle), 
+      0 0 10px var(--handle), 
+      0 0 5px var(--handle), 
+      0 0 2px var(--handle), 
+      0 0 2px black, 
+      0 0 1px var(--handle);
+  }
+}
+
+#rangeTemp.rangehot { 
+  /* set the colors for the hot temp when the value is above the base value */
+  --color0: var(--hot0);
+  --color1: var(--hot1);
+  --color2: var(--hot2);
+  --color3: var(--hot3);
+  --color4: var(--hot4);
+}
+
+#rangeTemp.rangecold {
+  /* set the colors for the cold temp when the value is below the base value */
+  --color0: var(--cold0);
+  --color1: var(--cold1);
+  --color2: var(--cold2);
+  --color3: var(--cold3);
+  --color4: var(--cold4);
+}
+
+#rangeTemp.rangeSlider {
+  /* skew the slider to give it a more funky look */
+  transform: skewY(-2deg);
+  & .rangeHandle {
+    transform: translateY(-50%) translateX(-50%) skewY(2deg);
+  }
+}
+
+#rangeTemp .rsPipVal,
+#rangeTemp .rangeFloat {
+  /* align the text to the center of the handle */
+  display: inline-flex;
+  align-items: center;
+  line-height: 1ch;
+  font-variant-numeric: tabular-nums;
+  text-box-trim: trim-both;
+}
+
+#rangeTemp .rsPip {
+  /* hide pips, 'unskew' the min/max temp icons */
+  background: none;
+  transform: translate3d(0, 0, 0.001px) skewY(2deg);
+}
+
+/* position the min/max temp icons and give them a color */
+
+#rangeTemp .rsPip--first .rsPipVal,
+#rangeTemp .rsPip--last .rsPipVal {
+  top: -1.5em;
+  translate: -70% 0;
+  color: var(--cold2);
+}
+
+#rangeTemp .rsPip--last .rsPipVal {
+  translate: 70% 0;
+  color: var(--hot2);
+}
+
+/* fix svg icons */
+#rangeTemp svg,
+.tempSwitch svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  height: 1em;
+}
+
+/* make the switch button bigger */
+.tempSwitch {
+  font-size: 1.2em;
+}

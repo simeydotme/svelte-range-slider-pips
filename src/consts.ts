@@ -144,6 +144,7 @@ export const SIDEBAR: Sidebar = {
           { text: 'Positive/Negative', link: `${REPOPATH}/en/recipes/positive-negative`, new: true },
           { text: 'Scheduler', link: `${REPOPATH}/en/recipes/scheduler`, new: true },
           { text: 'Liquid Glass', link: `${REPOPATH}/en/recipes/liquid-glass`, new: true },
+          { text: 'Temperature', link: `${REPOPATH}/en/recipes/temperature`, new: true },
         ]
       }
     ]

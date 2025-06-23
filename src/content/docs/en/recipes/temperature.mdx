@@ -1,0 +1,33 @@
+---
+title: 'Temperature Slider'
+description: 'An interesting temperature slider with changing colors'
+---
+import { Code } from 'astro/components';
+import { Icon } from 'astro-icon'
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import TemperatureSlider from '~demos/recipes/temperature/TemperatureSlider.svelte';
+import TemperatureSliderRaw from '~demos/recipes/temperature/TemperatureSlider.svelte?raw';
+import TemperatureSliderCss from '~demos/recipes/temperature/TemperatureSlider.css?raw';
+
+
+
+Let's create a modern-looking, fun temperature slider with 
+the ability to switch between Celsius and Fahrenheit!
+
+<Demo name="Temperature Slider" client:visible>
+  <TemperatureSlider client:visible />
+</Demo>
+
+<Note type="ok">
+  Check out the svelte/css code below to see how it's done.
+</Note>
+
+<Demo name="Demo of the Slider Styles" client:visible>
+  <Code slot="svelte" code={cleanImport(TemperatureSliderRaw)} lang="svelte" />
+  <Code slot="css" code={TemperatureSliderCss} lang="css" />
+</Demo>
