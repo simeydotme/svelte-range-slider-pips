@@ -1,5 +1,5 @@
 /**
- * svelte-range-slider-pips ~ 4.0.3
+ * svelte-range-slider-pips ~ 4.0.4
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * Project home: https://simeydotme.github.io/svelte-range-slider-pips/
  * © 2025 Simon Goellner <simey.me@gmail.com> ~ MPL-2.0 License
@@ -1482,16 +1482,6 @@
 	    if (value <= (limits?.[0] ?? min) || value >= (limits?.[1] ?? max)) {
 	        return (value = clampValue(value, limits?.[0] ?? min, limits?.[1] ?? max));
 	    }
-	    // escape early if the value is at/beyond the known limits
-	    // if (limits?.[0] && value <= limits[0]) {
-	    //   return limits?.[0];
-	    // } else if (limits?.[1] && value >= limits[1]) {
-	    //   return limits?.[1];
-	    // } else if (max && value >= max) {
-	    //   return max;
-	    // } else if (min && value <= min) {
-	    //   return min;
-	    // }
 	    // find the middle-point between steps
 	    // and see if the value is closer to the
 	    // next step, or previous step

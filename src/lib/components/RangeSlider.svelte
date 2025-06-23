@@ -132,7 +132,7 @@
   };
 
   const checkValueIsNumber = () => {
-    if (typeof value !== 'number') {
+    if (!isFiniteNumber(value)) {
       value = (max + min) / 2;
       console.error("'value' prop should be a Number");
     }
@@ -142,6 +142,9 @@
     if (!Array.isArray(values)) {
       values = [value];
       console.error("'values' prop should be an Array");
+    } else if (values.some((v) => !isFiniteNumber(v))) {
+      values = values.map((v) => (isFiniteNumber(v) ? v : (max + min) / 2));
+      console.error("'values' prop should be an Array of Numbers");
     }
   };
 
@@ -211,44 +214,61 @@
   $: hasRange =
     (range === true && values.length === 2) || ((range === 'min' || range === 'max') && values.length === 1);
 
-  $: {
+  $: ((uValues, uValue) => {
     // if a range, then trim so it remains as a min/max (only 2 handles)
-    const trimmedValues = trimRange(values, range);
+    const trimmedValues = trimRange(uValues, range);
     // and also align the handles to the steps/limits
     const trimmedAlignedValues = trimmedValues.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
     // update the values if they needed to be fixed
     if (
-      !(values.length === trimmedAlignedValues.length) ||
-      !values.every((item, i) => coerceFloat(item, precision) === trimmedAlignedValues[i])
+      !(uValues.length === trimmedAlignedValues.length) ||
+      !uValues.every((item, i) => coerceFloat(item, precision) === trimmedAlignedValues[i])
     ) {
-      values = trimmedAlignedValues;
+      uValues = trimmedAlignedValues;
     }
 
-    // check if the valueLength (length of values[]) has changed,
-    // because if so we need to re-seed the spring function with the
-    // new values array.
-    if (valueLength !== values.length) {
-      // set the initial spring values when the slider initialises,
-      // or when values array length has changed
-      springPositions = springStore(
-        values.map((v) => valueAsPercent(v, min, max)),
-        springValues
-      );
-    } else {
-      // update the value of the spring function for animated handles
-      // whenever the values has updated
-      if (slider) {
-        requestAnimationFrame(() => {
-          springPositions.set(
-            values.map((v) => valueAsPercent(v, min, max)),
-            { hard: !spring }
-          );
-        });
-      }
+    // When the values array length changes, we must recreate the spring function
+    // because the spring store is bound to a specific array length. Attempting to
+    // update a spring with a different array size would cause errors or unexpected
+    // behavior. For existing arrays, we update the spring values for smooth animations.
+    if (valueLength !== uValues.length) {
+      // create spring if there's no spring yet, or length changed
+      createSpring(uValues);
+    } else if (slider) {
+      // only update the spring values if the slider is mounted
+      updateSpring(uValues);
     }
+
+    // update the external values
+    values = uValues;
+
     // set the valueLength for the next check
-    valueLength = values.length;
-  }
+    valueLength = uValues.length;
+  })(values, value);
+
+  /**
+   * create a spring function to animate the handles
+   * @param values the values to animate
+   */
+  const createSpring = (values: number[]) => {
+    springPositions = springStore(
+      values.map((v) => valueAsPercent(v, min, max)),
+      springValues
+    );
+  };
+
+  /**
+   * update the spring function to animate the handles
+   * @param values the values to animate
+   */
+  const updateSpring = (values: number[]) => {
+    requestAnimationFrame(() => {
+      springPositions.set(
+        values.map((v) => valueAsPercent(v, min, max)),
+        { hard: !spring }
+      );
+    });
+  };
 
   /**
    * the orientation of the handles/pips based on the
@@ -792,15 +812,15 @@
   class:rsFocus={focus}
   class:rsPips={pips}
   class:rsPipLabels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
-  style:--slider-length={sliderSize}
-  {style}
+  style={`--slider-length: ${sliderSize};${style ?? ''}`}
   on:mousedown={sliderInteractStart}
   on:mouseup={sliderInteractEnd}
   on:touchstart|preventDefault={sliderInteractStart}
   on:touchend|preventDefault={sliderInteractEnd}
 >
   {#each values as value, index}
-    {@const zindex = `${focus && activeHandle === index ? 3 : ''}`}
+    {@const zindex = focus && activeHandle === index ? `z-index: 3; ` : ``}
+    {@const mountOpacity = isMounted ? `` : `opacity: 0; `}
     <span
       role="slider"
       class="rangeHandle"
@@ -810,8 +830,7 @@
       on:blur={sliderBlurHandle}
       on:focus={sliderFocusHandle}
       on:keydown={sliderKeydown}
-      style:--handle-pos={$springPositions[index]}
-      style="z-index: {zindex}; {isMounted ? '' : 'opacity: 0;'}"
+      style={`--handle-pos: ${$springPositions[index]};${zindex}${mountOpacity}`}
       aria-label={ariaLabels[index]}
       aria-valuemin={range === true && index === 1 ? values[0] : min}
       aria-valuemax={range === true && index === 0 ? values[1] : max}
@@ -841,13 +860,14 @@
     ></span>
   {/if}
   {#if hasRange}
+    {@const rangeStart = rangeStartPercent($springPositions)}
+    {@const rangeEnd = rangeEndPercent($springPositions)}
+    {@const rangeSize = rangeEnd - rangeStart}
+    {@const mountOpacity = isMounted ? `` : `opacity: 0; `}
     <span
       class="rangeBar"
       class:rsPress={rangePressed}
-      style:--range-start={rangeStartPercent($springPositions)}
-      style:--range-end={rangeEndPercent($springPositions)}
-      style:--range-size={rangeEndPercent($springPositions) - rangeStartPercent($springPositions)}
-      style={isMounted ? '' : 'opacity: 0;'}
+      style={`--range-start:${rangeStart};--range-end:${rangeEnd};--range-size:${rangeSize};${mountOpacity};`}
     >
       {#if rangeFloat}
         <span class="rangeFloat">

@@ -77,16 +77,6 @@ export const constrainAndAlignValue = function (value, min, max, step, precision
     if (value <= (limits?.[0] ?? min) || value >= (limits?.[1] ?? max)) {
         return (value = clampValue(value, limits?.[0] ?? min, limits?.[1] ?? max));
     }
-    // escape early if the value is at/beyond the known limits
-    // if (limits?.[0] && value <= limits[0]) {
-    //   return limits?.[0];
-    // } else if (limits?.[1] && value >= limits[1]) {
-    //   return limits?.[1];
-    // } else if (max && value >= max) {
-    //   return max;
-    // } else if (min && value <= min) {
-    //   return min;
-    // }
     // find the middle-point between steps
     // and see if the value is closer to the
     // next step, or previous step
