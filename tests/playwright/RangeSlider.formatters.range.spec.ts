@@ -337,6 +337,8 @@ test.describe('Formatter Tests', () => {
 
     test('should handle heavy range formatter without performance issues', async ({ page }) => {
       const slider = page.locator('#heavy-formatter');
+      const handle = slider.locator('.rangeHandle').first();
+      const handleFloat = handle.locator('.rangeFloat');
       const rangeBar = slider.locator('.rangeBar');
       const rangeFloat = rangeBar.locator('.rangeFloat');
 
@@ -345,6 +347,9 @@ test.describe('Formatter Tests', () => {
       await expect(rangeFloat).toBeVisible();
       // The heavy formatter should still complete within a reasonable time
       await expect(rangeFloat).toContainText('-');
+      // shouldnt have a handle float
+      await handle.hover();
+      await expect(handleFloat).not.toBeVisible();
     });
 
     test('should handle rapid handle movements with range formatters', async ({ page }) => {

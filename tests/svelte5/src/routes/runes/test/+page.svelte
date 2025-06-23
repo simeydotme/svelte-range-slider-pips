@@ -1,11 +1,11 @@
 <script>
 	import RangeSlider from 'svelte-range-slider-pips';
-	let value = 40;
-	let max = 60;
-	let min = 10;
-	let values = [20, 30];
-	let limits = false;
-	let range = false;
+	let value = $state(40);
+	let max = $state(60);
+	let min = $state(10);
+	let values = $state([20, 30]);
+	let limits = $state(null);
+	let range = $state(false);
 </script>
 
 <RangeSlider
@@ -31,12 +31,12 @@
 
 <button
 	onclick={() => {
-		if (limits) {
-			limits = false;
+		if (!!limits) {
+			limits = null;
 		} else {
 			limits = [25, 35];
 		}
-	}}>Set limits to {limits ? 'false' : '[25, 35]'}</button
+	}}>Set limits to {limits ? 'null' : '[25, 35]'}</button
 >
 
 <button

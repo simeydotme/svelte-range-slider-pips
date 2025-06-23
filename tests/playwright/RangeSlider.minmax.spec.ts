@@ -384,7 +384,7 @@ test.describe('Min/Max Tests', () => {
 
         await slider.scrollIntoViewIfNeeded();
 
-        await dragHandleTo(page, slider, handle, -2);
+        await dragHandleTo(page, slider, handle, -0.1);
         await expect(handle).toHaveAttribute('aria-valuenow', '20');
         await expect(handle).toHaveCSS('translate', '0px');
       });
@@ -395,7 +395,7 @@ test.describe('Min/Max Tests', () => {
 
         await slider.scrollIntoViewIfNeeded();
 
-        await dragHandleTo(page, slider, handle, 1.2);
+        await dragHandleTo(page, slider, handle, 1.1);
         await expect(handle).toHaveAttribute('aria-valuenow', '80');
         await expect(handle).toHaveCSS('translate', '1000px');
       });
@@ -407,12 +407,12 @@ test.describe('Min/Max Tests', () => {
         await slider.scrollIntoViewIfNeeded();
 
         // Drag to min
-        await dragHandleTo(page, slider, handle, -1.2);
+        await dragHandleTo(page, slider, handle, -0.1);
         await expect(handle).toHaveAttribute('aria-valuenow', '-80');
         await expect(handle).toHaveCSS('translate', '0px');
 
         // Drag to max
-        await dragHandleTo(page, slider, handle, 1.2);
+        await dragHandleTo(page, slider, handle, 1.1);
         await expect(handle).toHaveAttribute('aria-valuenow', '-20');
         await expect(handle).toHaveCSS('translate', '1000px');
       });
@@ -754,12 +754,16 @@ test.describe('Min/Max Tests', () => {
       await page.waitForTimeout(100);
 
       // Try to drag first handle below min
-      await dragHandleTo(page, slider, handles.nth(0), -0.5);
+      await dragHandleTo(page, slider, handles.nth(0), -0.1);
       await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '20'); // Should be clamped to min
 
       // Try to drag second handle above max
-      await dragHandleTo(page, slider, handles.nth(1), 1.5);
+      await dragHandleTo(page, slider, handles.nth(1), 1.1);
       await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '80'); // Should be clamped to max
+
+      // Drag second handle to far left
+      await dragHandleTo(page, slider, handles.nth(1), 0);
+      await expect(handles.nth(1)).toHaveAttribute('aria-valuenow', '20'); // Should be clamped to max
 
       // Try to drag first handle above second handle (should be allowed in non-range mode)
       await dragHandleTo(page, slider, handles.nth(0), 0.8);

@@ -100,7 +100,7 @@ const checkMinMax = () => {
   max = coerceFloat(max, precision);
 };
 const checkValueIsNumber = () => {
-  if (typeof value !== "number") {
+  if (!isFiniteNumber(value)) {
     value = (max + min) / 2;
     console.error("'value' prop should be a Number");
   }
@@ -109,6 +109,9 @@ const checkValuesIsArray = () => {
   if (!Array.isArray(values)) {
     values = [value];
     console.error("'values' prop should be an Array");
+  } else if (values.some((v) => !isFiniteNumber(v))) {
+    values = values.map((v) => isFiniteNumber(v) ? v : (max + min) / 2);
+    console.error("'values' prop should be an Array of Numbers");
   }
 };
 const checkAriaLabels = () => {
@@ -165,29 +168,34 @@ $: formatter, checkFormatters();
 $: handleFormatter, checkFormatters();
 $: rangeFormatter, checkFormatters();
 $: hasRange = range === true && values.length === 2 || (range === "min" || range === "max") && values.length === 1;
-$: {
-  const trimmedValues = trimRange(values, range);
+$: ((uValues, uValue) => {
+  const trimmedValues = trimRange(uValues, range);
   const trimmedAlignedValues = trimmedValues.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
-  if (!(values.length === trimmedAlignedValues.length) || !values.every((item, i) => coerceFloat(item, precision) === trimmedAlignedValues[i])) {
-    values = trimmedAlignedValues;
+  if (!(uValues.length === trimmedAlignedValues.length) || !uValues.every((item, i) => coerceFloat(item, precision) === trimmedAlignedValues[i])) {
+    uValues = trimmedAlignedValues;
   }
-  if (valueLength !== values.length) {
-    springPositions = springStore(
-      values.map((v) => valueAsPercent(v, min, max)),
-      springValues
+  if (valueLength !== uValues.length) {
+    createSpring(uValues);
+  } else if (slider) {
+    updateSpring(uValues);
+  }
+  values = uValues;
+  valueLength = uValues.length;
+})(values, value);
+const createSpring = (values2) => {
+  springPositions = springStore(
+    values2.map((v) => valueAsPercent(v, min, max)),
+    springValues
+  );
+};
+const updateSpring = (values2) => {
+  requestAnimationFrame(() => {
+    springPositions.set(
+      values2.map((v) => valueAsPercent(v, min, max)),
+      { hard: !spring }
     );
-  } else {
-    if (slider) {
-      requestAnimationFrame(() => {
-        springPositions.set(
-          values.map((v) => valueAsPercent(v, min, max)),
-          { hard: !spring }
-        );
-      });
-    }
-  }
-  valueLength = values.length;
-}
+  });
+};
 $: orientationStart = vertical ? reversed ? "top" : "bottom" : reversed ? "right" : "left";
 $: orientationEnd = vertical ? reversed ? "bottom" : "top" : reversed ? "left" : "right";
 function updateSliderSize(slider2) {
@@ -532,15 +540,15 @@ function ariaLabelFormatter(value2, index) {
   class:rsFocus={focus}
   class:rsPips={pips}
   class:rsPipLabels={all === 'label' || first === 'label' || last === 'label' || rest === 'label'}
-  style:--slider-length={sliderSize}
-  {style}
+  style={`--slider-length: ${sliderSize};${style ?? ''}`}
   on:mousedown={sliderInteractStart}
   on:mouseup={sliderInteractEnd}
   on:touchstart|preventDefault={sliderInteractStart}
   on:touchend|preventDefault={sliderInteractEnd}
 >
   {#each values as value, index}
-    {@const zindex = `${focus && activeHandle === index ? 3 : ''}`}
+    {@const zindex = focus && activeHandle === index ? `z-index: 3; ` : ``}
+    {@const mountOpacity = isMounted ? `` : `opacity: 0; `}
     <span
       role="slider"
       class="rangeHandle"
@@ -550,8 +558,7 @@ function ariaLabelFormatter(value2, index) {
       on:blur={sliderBlurHandle}
       on:focus={sliderFocusHandle}
       on:keydown={sliderKeydown}
-      style:--handle-pos={$springPositions[index]}
-      style="z-index: {zindex}; {isMounted ? '' : 'opacity: 0;'}"
+      style={`--handle-pos: ${$springPositions[index]};${zindex}${mountOpacity}`}
       aria-label={ariaLabels[index]}
       aria-valuemin={range === true && index === 1 ? values[0] : min}
       aria-valuemax={range === true && index === 0 ? values[1] : max}
@@ -581,13 +588,14 @@ function ariaLabelFormatter(value2, index) {
     ></span>
   {/if}
   {#if hasRange}
+    {@const rangeStart = rangeStartPercent($springPositions)}
+    {@const rangeEnd = rangeEndPercent($springPositions)}
+    {@const rangeSize = rangeEnd - rangeStart}
+    {@const mountOpacity = isMounted ? `` : `opacity: 0; `}
     <span
       class="rangeBar"
       class:rsPress={rangePressed}
-      style:--range-start={rangeStartPercent($springPositions)}
-      style:--range-end={rangeEndPercent($springPositions)}
-      style:--range-size={rangeEndPercent($springPositions) - rangeStartPercent($springPositions)}
-      style={isMounted ? '' : 'opacity: 0;'}
+      style={`--range-start:${rangeStart};--range-end:${rangeEnd};--range-size:${rangeSize};${mountOpacity};`}
     >
       {#if rangeFloat}
         <span class="rangeFloat">

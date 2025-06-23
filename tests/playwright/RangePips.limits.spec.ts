@@ -157,7 +157,7 @@ test.describe('Range and Limits Tests', () => {
       }
     }
 
-    // Move min handle to 40
+    // Move min handle to 20
     await dragHandleTo(page, slider, handles.nth(0), 0.2);
     await expect(handles.nth(0)).toHaveAttribute('aria-valuenow', '20');
     await dragHandleTo(page, slider, handles.nth(1), 1);

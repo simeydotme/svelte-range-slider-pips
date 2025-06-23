@@ -168,14 +168,14 @@ test.describe('Range Tests', () => {
       await expect(handles.nth(1)).toHaveCSS('translate', '500px');
 
       // Try to drag range in a way that would violate minimum gap
-      await dragHandleTo(page, slider, range, 1.2);
+      await dragHandleTo(page, slider, range, 1.1);
 
       // Handles should maintain minimum gap
       await expect(handles.nth(0)).toHaveCSS('translate', '900px');
       await expect(handles.nth(1)).toHaveCSS('translate', '1000px');
 
       // Try to drag range in a way that would violate maximum gap
-      await dragHandleTo(page, slider, range, -0.2);
+      await dragHandleTo(page, slider, range, -0.1);
 
       // Handles should maintain maximum gap
       await expect(handles.nth(0)).toHaveCSS('translate', '0px');

@@ -350,7 +350,7 @@ test.describe('Handle Formatter Tests', () => {
       await expect(float).toBeVisible();
       // The heavy formatter should still complete within a reasonable time
       await expect(float).toContainText('.');
-      await dragHandleTo(page, slider, handle, 20);
+      await dragHandleTo(page, slider, handle, 1);
       await expect(float).toContainText('.');
     });
 
@@ -385,6 +385,7 @@ test.describe('Handle Formatter Tests', () => {
   test.describe('Formatter Inheritance Tests', () => {
     test('handleFormatter inherits from formatter when not specified', async ({ page }) => {
       await page.goto('/test/range-slider/formatters/handle');
+      await page.waitForLoadState('networkidle');
 
       // Get the formatter inheritance test slider
       const slider = page.locator('#formatter-inheritance');
@@ -416,6 +417,8 @@ test.describe('Handle Formatter Tests', () => {
       });
 
       await page.goto('/test/range-slider/formatters/handle');
+      await page.waitForLoadState('networkidle');
+
       const slider = page.locator('#null-handle-formatter');
       const handle = slider.locator('.rangeHandle');
       const float = handle.locator('.rangeFloat');
