@@ -36,11 +36,12 @@ and a unique `[data-val]` attribute.
 
 ### Circles
 
-Here's an example of a pip that is rendered as a circle. We are setting every
-pip to be visible by passing `pipstep={1}` to the component. And after we have
-rendered every pip as a small dot, we make every 5th pip a bigger dot.
+Getting a bit fancy, here. We use the `.rsSelected+*` sibling selector in CSS to
+style the `n+1`, `n+2` and `n+3` pips as smaller circles, and then using the
+`:has(+ .rsSelected)` method to do the same for previous siblings at `n-1`, `n-2` and `n-3`
+of the `.rsSelected` pip!
 
-<Demo name="Cute circular pips" client:visible>
+<Demo name="Fancy Circular Pips" client:visible>
   <Circles client:visible />
   <Code slot="svelte" code={cleanImport(CirclesRaw)} lang="svelte" />
   <Code slot="css" code={CirclesCss} lang="css" />
