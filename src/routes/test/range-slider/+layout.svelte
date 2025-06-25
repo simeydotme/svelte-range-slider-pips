@@ -8,8 +8,8 @@
 </script>
 
 <div
-  class="panel"
-  class:active={$isNavVisible}
+  style="display: none;"
+  class="panel {$isNavVisible ? 'active' : ''}"
   use:clickOutside={{ enabled: $isNavVisible }}
   on:clickOutside={() => ($isNavVisible = false)}
 >
@@ -55,6 +55,7 @@
   .panel {
     --navbg: rgb(210 214 221 / 0.5);
 
+    display: block !important;
     position: fixed;
     top: 0;
     bottom: 0;

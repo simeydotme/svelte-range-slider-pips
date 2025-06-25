@@ -167,6 +167,7 @@ $: rangeGapMax, checkValuesAgainstRangeGaps();
 $: formatter, checkFormatters();
 $: handleFormatter, checkFormatters();
 $: rangeFormatter, checkFormatters();
+$: springValues, updateSpringValues();
 $: hasRange = range === true && values.length === 2 || (range === "min" || range === "max") && values.length === 1;
 $: ((uValues, uValue) => {
   const trimmedValues = trimRange(uValues, range);
@@ -195,6 +196,12 @@ const updateSpring = (values2) => {
       { hard: !spring }
     );
   });
+};
+const updateSpringValues = () => {
+  if (springPositions) {
+    springPositions.stiffness = springValues.stiffness ?? 0.15;
+    springPositions.damping = springValues.damping ?? 0.4;
+  }
 };
 $: orientationStart = vertical ? reversed ? "top" : "bottom" : reversed ? "right" : "left";
 $: orientationEnd = vertical ? reversed ? "bottom" : "top" : reversed ? "left" : "right";

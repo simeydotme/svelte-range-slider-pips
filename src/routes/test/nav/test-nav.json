@@ -120,6 +120,24 @@
     ]
   },
   {
+    "name": "spring",
+    "path": "/test/range-slider/spring",
+    "children": [
+      {
+        "name": "configurations",
+        "path": "/test/range-slider/spring/configurations"
+      },
+      {
+        "name": "dynamic",
+        "path": "/test/range-slider/spring/dynamic"
+      },
+      {
+        "name": "edge-cases",
+        "path": "/test/range-slider/spring/edge-cases"
+      }
+    ]
+  },
+  {
     "name": "states",
     "path": "",
     "children": [
