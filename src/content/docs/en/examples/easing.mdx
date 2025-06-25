@@ -6,6 +6,7 @@ import { Code } from 'astro/components';
 import RangeSlider from 'svelte-range-slider-pips';
 import { cleanImport } from '~lib/cleanImport.ts';
 import Demo from '~components/Reusable/Demo.svelte';
+import Info from '~components/Reusable/Info.astro';
 
 import DefaultEasing from '~demos/examples/easing/DefaultEasing.svelte';
 import DefaultEasingRaw from '~demos/examples/easing/DefaultEasing.svelte?raw';
@@ -14,6 +15,7 @@ import DisabledEasing from '~demos/examples/easing/DisabledEasing.svelte';
 import DisabledEasingRaw from '~demos/examples/easing/DisabledEasing.svelte?raw';
 
 import VariableEasing from '~demos/examples/easing/VariableEasing.svelte';
+import Suggestions from '~demos/examples/easing/Suggestions.svelte';
 
 
 
@@ -62,4 +64,18 @@ animation.
 
 <Demo name="Customised Spring Easing" client:visible>
   <Code slot="svelte" code="<RangeSlider spring={true} springValues={{ stiffness: 0.15, damping: 0.4 }} />" lang="svelte" />
+</Demo>
+
+
+
+## Springs for suggestions
+
+Here's a bunch of spring configs which you can use to test the spring easing.
+If you like the way one feels, you can copy the settings in to your own
+project!
+
+<Info>I'm sure you'll agree the default setting I chose is pretty darn good!</Info>
+
+<Demo name="Springs for suggestions" client:visible>
+  <Suggestions client:visible />
 </Demo>
