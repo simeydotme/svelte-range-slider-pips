@@ -9,6 +9,7 @@
   let clrHandleBorder = "#838de7";
   let clrRangeInactive = "#99a2a2";
   let clrRange = "#4a40d4";
+  let clrRangeHover = "#838de7";
   let clrLimit = "#b9c2c2";
   let clrFloatInactive = "#99a2a2";
   let clrFloat = "#4a40d4";
@@ -26,48 +27,58 @@
   let clrPipOutOfLimitText = "#aebecf";
 
   $: variablesStyle = `<style>
-  .variables {
-    --range-slider:            ${hexToHSLString(clrSlider)};
-    --range-handle-inactive:   ${hexToHSLString(clrHandleInactive)};
-    --range-handle:            ${hexToHSLString(clrHandle)};
-    --range-handle-focus:      ${hexToHSLString(clrHandleFocus)};
-    --range-handle-border:     ${hexToHSLString(clrHandleBorder)};
-    --range-range-inactive:    ${hexToHSLString(clrRangeInactive)};
-    --range-range:             ${hexToHSLString(clrRange)};
-    --range-range-limit:       ${hexToHSLString(clrLimit)};
-    --range-float-inactive:    ${hexToHSLString(clrFloatInactive)};
-    --range-float:             ${hexToHSLString(clrFloat)};
-    --range-float-text:        ${hexToHSLString(clrFloatText)};
+  .variablesSlider {
+    --range-slider:                ${hexToHSLString(clrSlider)};
+    
+    --range-handle-inactive:       ${hexToHSLString(clrHandleInactive)};
+    --range-handle:                ${hexToHSLString(clrHandle)};
+    --range-handle-focus:          ${hexToHSLString(clrHandleFocus)};
+    --range-handle-border:         ${hexToHSLString(clrHandleBorder)};
+    
+    --range-range-inactive:        ${hexToHSLString(clrRangeInactive)};
+    --range-range:                 ${hexToHSLString(clrRange)};
+    --range-range-hover:           ${hexToHSLString(clrRangeHover)};
+    --range-range-limit:           ${hexToHSLString(clrLimit)};
+    
+    --range-float-inactive:        ${hexToHSLString(clrFloatInactive)};
+    --range-float:                 ${hexToHSLString(clrFloat)};
+    --range-float-text:            ${hexToHSLString(clrFloatText)};
 
-    --range-pip:               ${hexToHSLString(clrPip)};
-    --range-pip-text:          ${hexToHSLString(clrPipText)};
-    --range-pip-active:        ${hexToHSLString(clrPipActive)};
-    --range-pip-active-text:   ${hexToHSLString(clrPipActiveText)};
-    --range-pip-hover:         ${hexToHSLString(clrPipHover)};
-    --range-pip-hover-text:    ${hexToHSLString(clrPipHoverText)};
-    --range-pip-in-range:      ${hexToHSLString(clrPipInRange)};
-    --range-pip-in-range-text: ${hexToHSLString(clrPipInRangeText)};
+    --range-pip:                   ${hexToHSLString(clrPip)};
+    --range-pip-text:              ${hexToHSLString(clrPipText)};
+    --range-pip-active:            ${hexToHSLString(clrPipActive)};
+    --range-pip-active-text:       ${hexToHSLString(clrPipActiveText)};
+    --range-pip-hover:             ${hexToHSLString(clrPipHover)};
+    --range-pip-hover-text:        ${hexToHSLString(clrPipHoverText)};
+    --range-pip-in-range:          ${hexToHSLString(clrPipInRange)};
+    --range-pip-in-range-text:     ${hexToHSLString(clrPipInRangeText)};
     --range-pip-out-of-limit:      ${hexToHSLString(clrPipOutOfLimit)};
     --range-pip-out-of-limit-text: ${hexToHSLString(clrPipOutOfLimitText)};
   }
 </style>`;
 </script>
 
-<div class="variables">
-  <RangeSlider
-    min={0}
-    max={100}
-    values={[60]}
-    step={10}
-    pipstep={2}
-    range="min"
-    limits={[20,80]}
-    pips
-    first={false}
-    rest="label"
-    last="label"
-    float
-  />
+<RangeSlider
+  class="variablesSlider"
+  min={0}
+  max={100}
+  values={[40,60]}
+  step={5}
+  pipstep={4}
+  range
+  rangeGapMin={10}
+  pushy
+  limits={[20,80]}
+  pips
+  first="label"
+  rest="label"
+  last="label"
+  float
+  rangeFloat
+  draggy
+/>
+
+<div hide>
 
   <div class="inputs">
     <span>Slider Range</span>
@@ -81,6 +92,7 @@
       title="--range-range-inactive"
     />
     <input type="color" name="clrRange" id="clrRange" bind:value={clrRange} title="--range-range" />
+    <input type="color" name="clrRangeHover" id="clrRangeHover" bind:value={clrRangeHover} title="--range-range-hover" />
   </div>
 
   <div class="inputs">
@@ -190,7 +202,11 @@
   <pre class="output-css"><code>{variablesStyle.replace(/\s\*{}/, "")}</code></pre>
 </div>
 
-<style>
+<style hide>
+  :global(.variablesSlider) {
+    margin-bottom: 5em!important;
+  }
+
   .inputs {
     text-align: left;
     display: flex;

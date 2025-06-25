@@ -1,31 +1,25 @@
 <script>
 
   import RangeSlider from 'svelte-range-slider-pips';
-  let values = [50];
-  let springEnabled = true;
-  let springStiffness = [0.15];
-  let springDamping = [0.4];
+  let value = 50;
+  let springStiffness = 0.15;
+  let springDamping = 0.4;
 
-  const updateValues = (e) => {
-    values = [Math.round(Math.random() * 100)];
-  }
+  const jump = () => value > 50 ? value = 5 : value = 95;
 
 </script>
 
-  <RangeSlider {values} spring={springEnabled} springValues={{ stiffness: springStiffness, damping: springDamping }} />
+<RangeSlider {value} springValues={{ stiffness: springStiffness, damping: springDamping }} />
 
 <div data-grid>
+
+  <pre>springValues={`{{ stiffness: ${springStiffness}, damping: ${springDamping} }}`}</pre>
   
-  <label for="springEnabled"><input id="springEnabled" type="checkbox" bind:checked={springEnabled} /> Enable Spring?</label>
-  
+  <RangeSlider id='stiffness' class='modifier' bind:value={springStiffness} min={0.01} max={1} step={0.01} on:stop={jump} float />
   <label for='stiffness'>Stiffness</label>
-  <RangeSlider id='stiffness' bind:values={springStiffness} min={0.01} max={1} step={0.01} on:stop={updateValues} float />
   
+  <RangeSlider id='damping' class='modifier' bind:value={springDamping} min={0.01} max={1} step={0.01} on:stop={jump} float />
   <label for='damping'>Damping</label>
-  <RangeSlider id='damping' bind:values={springDamping} min={0.01} max={1} step={0.01} on:stop={updateValues} float />
-  
-  <pre>
-    spring={`{${springEnabled}}`} springValues={`{{ stiffness: ${springStiffness}, damping: ${springDamping} }}`}</pre>
 
 </div>
 
@@ -36,7 +30,7 @@
   [data-grid] {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
+    grid-gap: 20px;
     text-align: center;
   }
   [data-grid] [for='springEnabled'] {
@@ -51,11 +45,16 @@
     grid-column: 2;
   }
   [data-grid] [for='stiffness'], [for='damping'] {
-    grid-row: 2;
+    grid-row: 3;
     justify-self: center;
+    margin: 0;
   }
   [data-grid] :global(.rangeSlider) {
-    margin: 0 0 2em!important;
+    margin: 2em 0 0!important;
+  }
+  [data-grid] :global(.modifier .rangeFloat) {
+    opacity: 1;
+    translate: -50% 0;;
   }
   pre {
     grid-column: 1 / -1

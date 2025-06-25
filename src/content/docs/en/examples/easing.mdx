@@ -10,6 +10,9 @@ import Demo from '~components/Reusable/Demo.svelte';
 import DefaultEasing from '~demos/examples/easing/DefaultEasing.svelte';
 import DefaultEasingRaw from '~demos/examples/easing/DefaultEasing.svelte?raw';
 
+import DisabledEasing from '~demos/examples/easing/DisabledEasing.svelte';
+import DisabledEasingRaw from '~demos/examples/easing/DisabledEasing.svelte?raw';
+
 import VariableEasing from '~demos/examples/easing/VariableEasing.svelte';
 
 
@@ -39,7 +42,8 @@ By default, the spring is enabled. To disable it, set the `spring` property to `
 This will disable animations and make the handles move instantly to the new position.
 
 <Demo name="Disable Spring" client:visible>
-  <Code slot="svelte" code="<RangeSlider spring={false} />" lang="svelte" />
+  <DisabledEasing client:visible />
+  <Code slot="svelte" code={cleanImport(DisabledEasingRaw)} lang="svelte" />
 </Demo>
 
 

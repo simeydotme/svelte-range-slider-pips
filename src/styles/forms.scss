@@ -245,23 +245,39 @@ form {
     }
   }
 
-
   input[type="color"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     max-width: 4em;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 2.5em;
-    padding: 5px;
+    padding: 3px;
     border-radius: 10em;
   }
-
-  input[type="color"]::-moz-color-swatch,
+  
   input[type="color"]::-webkit-color-swatch {
-    border: inherit;
+    border: none;
     border-radius: inherit;
     display: block;
+  }
+  
+  input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+    border-radius: inherit;
+  }
+  
+  input[type="color"]::-moz-color-swatch {
+    border: none;
+    border-radius: inherit;
+    display: block;
+  }
+  
+  input[type="color"]::-moz-color-swatch-wrapper {
+    padding: 0;
+    border-radius: inherit;
   }
 
   .buttons {

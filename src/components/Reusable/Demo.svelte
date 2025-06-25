@@ -210,6 +210,7 @@
 
   .slider-container :global( legend ) {
     margin-left: -1rem;
+    text-align: left;
   }
 
   .slider-container :global( .rangeSlider ) {

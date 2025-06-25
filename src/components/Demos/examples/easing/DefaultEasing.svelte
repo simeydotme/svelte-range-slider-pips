@@ -1,13 +1,13 @@
 <script>
   import RangeSlider from 'svelte-range-slider-pips';
-  let values = [50];
-  let jump = () => values[0] > 50 ? values[0] = 5 : values[0] = 95;
+  let value = 50;
+  const jump = () => value > 50 ? value = 5 : value = 95;
 </script>
 
-<RangeSlider bind:values />
+<RangeSlider bind:value />
 
 <button type="button" on:click={jump}>
   Animate
 </button>
 
-<code data-values title="The output slider values">{values}</code>
+<code data-values title="The output slider values">{value}</code>
