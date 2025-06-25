@@ -11,7 +11,7 @@
     { name: 'Slow', config: { stiffness: 0.1, damping: 0.65 }, values: [...defaultValues] },
     { name: 'Sluggish', config: { stiffness: 0.3, damping: 0.9 }, values: [...defaultValues] },
     { name: 'Rubber', config: { stiffness: 0.2, damping: 0.15 }, values: [...defaultValues] },
-    { name: 'Elastic', config: { stiffness: 0.7, damping: 0.25 }, values: [...defaultValues] },
+    { name: 'Elastic', config: { stiffness: 0.72, damping: 0.28 }, values: [...defaultValues] },
     { name: 'Bouncy', config: { stiffness: 0.3, damping: 0.08 }, values: [...defaultValues] },
   ];
 
@@ -44,7 +44,7 @@
         />
       </header>
       
-      <code data-code>stiffness: {c.config.stiffness}, damping: {c.config.damping}</code>
+      <code data-code>{`springValues={{ stiffness: ${c.config.stiffness}, damping: ${c.config.damping} }}`}</code>
     {/each}
 
   </section>
