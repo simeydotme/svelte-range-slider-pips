@@ -28,10 +28,12 @@ truly make the RangeSlider your own.
 
 ## Pips
 
-The pips are rendered in a container `<div>` with the class `.rangePips`. 
+The pips are rendered in a container `<div>` with the class `.rangePips`, which can
+be moved around using relative CSS positioning.
 
-Each individual pip is rendered as `<span>` with the class `.pip` 
-and a unique `[data-val]` attribute.
+Each individual pip is rendered as `<span>` inside of the container, with the class `.rsPip` 
+and a unique `[data-val]` and `[data-index]` attribute. Therefore styling
+the pips is super easy no matter what you are trying to do!
 
 
 ### Circles
