@@ -145,6 +145,7 @@ export const SIDEBAR: Sidebar = {
           { text: 'Scheduler', link: `${REPOPATH}/en/recipes/scheduler`, new: true },
           { text: 'Liquid Glass', link: `${REPOPATH}/en/recipes/liquid-glass`, new: true },
           { text: 'Temperature', link: `${REPOPATH}/en/recipes/temperature`, new: true },
+          { text: 'Label Colors', link: `${REPOPATH}/en/recipes/label-colors`, new: true },
         ]
       }
     ]

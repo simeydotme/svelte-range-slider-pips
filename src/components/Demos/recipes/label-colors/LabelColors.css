@@ -1,0 +1,58 @@
+
+
+/* remove the default list styling */
+.labels {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* set the labels in a grid */
+[data-grid] {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0;
+}
+
+/* each label has a subgrid to show the name and color picker */
+[data-subgrid] {
+  display: grid;
+  grid-column: span 2;
+  grid-template-columns: subgrid;
+  gap: 0.5rem;
+}
+
+/* each label has a tint color based on the hue from the labels object */
+.label {
+  --tint: hsl(var(--hue), 65%, 60%);
+  --tint2: hsl(calc(var(--hue) + 22), 65%, 60%);
+  /* position relative so the popover stays within this grid cell on mobile */
+  position: relative;
+}
+
+/* style the input field */
+.label-name {
+  font-weight: 500;
+  color: var(--tint);
+  padding: 0.5em 1em;
+  width: 100%;
+}
+
+/* style the color picker button */
+.label-color {
+  padding: 0.5em;
+  width: max-content;
+  color: var(--tint);
+  /* hide */
+  &:hover {
+    opacity: 1;
+  }
+  /* endhide */
+}
+
+/* make the button the positioned ancestor for the popover (on desktop) */
+@media (min-width: 768px) {
+  .label-color {
+    position: relative;
+  }
+}

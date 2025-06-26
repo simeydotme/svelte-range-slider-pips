@@ -1,0 +1,57 @@
+---
+title: 'UI Label Colors'
+description: 'Imagining an issue tracker with colored labels'
+image:
+  src: '/svelte-range-slider-pips/recipes/ui-label-colors.png'
+  alt: 'Label Colors recipe'
+---
+import { Code } from 'astro/components';
+import { Icon } from 'astro-icon'
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+import Info from '~components/Reusable/Info.astro';
+
+import LabelColors from '~demos/recipes/label-colors/LabelColors.svelte';
+import LabelColorsRaw from '~demos/recipes/label-colors/LabelColors.svelte?raw';
+import LabelColorSliderRaw from '~demos/recipes/label-colors/LabelColorSlider.svelte?raw';
+import LabelColorsCss from '~demos/recipes/label-colors/LabelColors.css?raw';
+import LabelColorSliderCss from '~demos/recipes/label-colors/LabelColorSlider.css?raw';
+
+Let's create a simple label color UI for an issue tracker.
+
+The labels are styled with a tint color based on the hue, and the color picker
+is a simple `<RangeSlider />` with a float label to show the hue value.
+
+<Info>All of this is [achievable in any JS framework](http://localhost:3000/svelte-range-slider-pips/en/getting-started) (or vanilla), but I'm **demonstrating it
+with Svelte here as it's the simplest** framework to work with.</Info>
+
+<Demo name="UI Label Colors" client:visible>
+  <LabelColors client:visible />
+</Demo>
+
+### `LabelColors.svelte`
+The general UI layout for this recipe. We show a grid of labels with
+`<input>` fields for the label name and a `<button>` to open the color picker.
+
+Both the `<input>` and `<RangeSlider />` are bound to the same **hue** variable,
+and the `<RangeSlider />` simply allows a `min` and `max` of the **hue** property (`0-360`).
+
+<Demo name="UI Label Colors" client:visible>
+  <Code slot="svelte" code={cleanImport(LabelColorsRaw)} lang="svelte" />
+  <Code slot="css" code={cleanImport(LabelColorsCss)} lang="css" />
+</Demo>
+
+### `LabelColorSlider.svelte`
+This is a simple sub-component which displays a nice little popover
+with a `<RangeSlider />` inside.
+<Demo name="UI Label Colors" client:visible>
+  <Code slot="svelte" code={cleanImport(LabelColorSliderRaw)} lang="svelte" />
+  <Code slot="css" code={cleanImport(LabelColorSliderCss)} lang="css" />
+</Demo>
+
+
+
+

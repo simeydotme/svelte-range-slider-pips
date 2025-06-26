@@ -1,0 +1,155 @@
+
+/* setup the popover container for the slider */
+.label-slider-container {
+  opacity: 0;
+  display: none;
+  transition: all 0.25s ease-in allow-discrete;
+}
+
+@starting-style {
+  .label-slider-container {
+    opacity: 0;
+  }
+}
+
+.label-slider-container.isOpen {
+  opacity: 1;
+  display: block;
+  transition: all 0.25s ease-out allow-discrete;
+}
+
+/* position and style the popover container */
+.label-slider-container {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  translate: 0 100%;
+  z-index: 1;
+  width: 350px;
+  height: 36px;
+  background: white;
+  place-content: center;
+  border-radius: 14px;
+  box-shadow: 
+    rgba(50, 50, 93, 0.2) 0px 2px 40px -2px,
+    rgba(50, 50, 93, 0.25) 0px 8px 27px -5px, 
+    rgba(0, 0, 0, 0.3) 0px 4px 16px -8px;
+
+  /* add a triangle to the top of the popover (mobile) */
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    transform: translateY(-50%) translateX(-50%) rotate(45deg);
+    width: 0.75rem;
+    height: 0.75rem;
+    background: white;
+    border-radius: 3px;
+    box-shadow: none;
+  }
+}
+
+/* style the popover container for desktop 
+  (move to the right of button) */
+@media (min-width: 768px) {
+  .label-slider-container {
+    top: 0;
+    bottom: auto;
+    left: calc(100% + 1em);
+    translate: 0 0;
+    border-radius: 8px 14px 14px 8px;
+    /* position the triangle to the left of the popover for desktop */
+    &:before {
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%) translateX(-50%) rotate(45deg);
+    }
+  }
+}
+
+/* style the range slider */
+.label-slider-container .label-slider.rangeSlider {
+
+  /* set the colors for the slider */
+  --slider-base: white;
+  --slider-fg: white;
+  --range-float-text: var(--hue);
+  --range-float: white;
+  --range-float-inactive: white;
+
+  margin: 0 auto;
+  width: 330px;
+  height: 18px;
+  border-radius: 7px;
+
+  /* use a 'longer' hue gradient for the slider to show the rainbow */
+  background: linear-gradient(
+    to right in oklch longer hue,
+    hsl(0, 65%, 60%),
+    hsl(320, 65%, 60%)
+  );
+
+  /* move the pips container inside of the slider */
+  & .rangePips {
+    position: relative;
+    height: 100%;
+    top: 0;
+    left: -1px;
+  }
+
+  /* make each pip half the height of the slider */
+  & .rsPip {
+    height: 50%;
+    top: 25%;
+  }
+
+  /* hide the nub (the little circle that moves) */
+  & .rangeNub {
+    opacity: 0;
+  }
+
+  /* change the handle to be a vertical line */
+  & .rangeHandle {
+    height: 100%;
+    background: rgba(255, 255, 255, 0.726);
+    width: 1px;
+    top: 50%;
+    &:before {
+      /* remove the hover effect */
+      content: none;
+    }
+  }
+
+  /* style the float label, and make sure it's always visible */
+  & .rangeFloat {
+    font-size: 1rem;
+    padding: 0.1em 0.25em 0.2em;
+    bottom: auto;
+    top: 120%;
+    border-radius: 0.5em;
+    box-shadow: 
+      rgba(50, 50, 93, 0.25) 0px -4px 25px -3px, 
+      rgba(0, 0, 0, 0.3) 0px 2px 16px -4px;
+    display: flex;
+    align-items: center;
+    opacity: 1;
+    translate: -50% 0;
+    pointer-events: all;
+
+    /* add a triangle to the top of the float label */
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%) rotate(45deg);
+      width: 0.75rem;
+      height: 0.75rem;
+      background: white;
+      border-radius: 3px;
+      box-shadow: none;
+      mask-image: linear-gradient(to top left, transparent 50%, black 50%);
+    }
+  }
+}
