@@ -85,11 +85,11 @@ const updateValue = () => {
 const checkMinMax = () => {
   if (!isFiniteNumber(min)) {
     min = 0;
-    console.error("'min' prop must be a valid finite number");
+    console.error("'min' prop must be a valid finite Number");
   }
   if (!isFiniteNumber(max)) {
     max = 100;
-    console.error("'max' prop must be a valid finite number");
+    console.error("'max' prop must be a valid finite Number");
   }
   if (min >= max) {
     min = 0;
@@ -112,6 +112,12 @@ const checkValuesIsArray = () => {
   } else if (values.some((v) => !isFiniteNumber(v))) {
     values = values.map((v) => isFiniteNumber(v) ? v : (max + min) / 2);
     console.error("'values' prop should be an Array of Numbers");
+  }
+};
+const checkStep = () => {
+  if (!isFiniteNumber(step) || step <= 0) {
+    step = 1;
+    console.error("'step' prop must be a positive Number");
   }
 };
 const checkAriaLabels = () => {
@@ -155,6 +161,7 @@ const checkFormatters = () => {
 checkMinMax();
 checkValueIsNumber();
 checkValuesIsArray();
+checkStep();
 checkValuesAgainstRangeGaps();
 checkFormatters();
 $: value, updateValues();
@@ -162,6 +169,7 @@ $: values, updateValue();
 $: ariaLabels, checkAriaLabels();
 $: min, checkMinMax();
 $: max, checkMinMax();
+$: step, checkStep();
 $: rangeGapMin, checkValuesAgainstRangeGaps();
 $: rangeGapMax, checkValuesAgainstRangeGaps();
 $: formatter, checkFormatters();
@@ -605,16 +613,18 @@ function ariaLabelFormatter(value2, index) {
       style={`--range-start:${rangeStart};--range-end:${rangeEnd};--range-size:${rangeSize};${mountOpacity};`}
     >
       {#if rangeFloat}
+        {@const rangeMin = range === 'min' ? min : values[0]}
+        {@const rangeMax = range === 'max' ? max : range === 'min' ? values[0] : values[1]}
+        {@const [first, second] = reversed ? [rangeMax, rangeMin] : [rangeMin, rangeMax]}
         <span class="rangeFloat">
           {#if rangeFormatter}
             {@html rangeFormatter(
-              values[0],
-              values[1],
-              valueAsPercent(values[0], min, max, precision),
-              valueAsPercent(values[1], min, max, precision)
+              first,
+              second,
+              valueAsPercent(first, min, max, precision),
+              valueAsPercent(second, min, max, precision)
             )}
           {:else}
-            {@const [first, second] = reversed ? [values[1], values[0]] : [values[0], values[1]]}
             {#if prefix}<span class="rangeFloatPrefix">{prefix}</span>{/if}{@html first}{#if suffix}<span
                 class="rangeFloatSuffix">{suffix}</span
               >{/if}
@@ -672,13 +682,15 @@ function ariaLabelFormatter(value2, index) {
 
   @layer base {
     :global(.rangeSlider) {
-      --slider-accent: #4a40d4;
-      --slider-accent-100: #838de7;
-      --slider-base: #99a2a2;
-      --slider-base-100: #b9c2c2;
-      --slider-bg: #d7dada;
-      --slider-fg: #3f3e4f;
+      /* light mode (default) */
+      --slider-light-accent: #4a40d4;
+      --slider-light-accent-100: #838de7;
+      --slider-light-base: #99a2a2;
+      --slider-light-base-100: #b9c2c2;
+      --slider-light-bg: #d7dada;
+      --slider-light-fg: #3f3e4f;
 
+      /* dark mode */
       --slider-dark-accent: #6070fc;
       --slider-dark-accent-100: #7a7fab;
       --slider-dark-base: #82809f;
@@ -686,6 +698,15 @@ function ariaLabelFormatter(value2, index) {
       --slider-dark-bg: #3f3e4f;
       --slider-dark-fg: #d7dada;
 
+      /* set the variables to light mode by default */
+      --slider-accent: var(--slider-light-accent);
+      --slider-accent-100: var(--slider-light-accent-100);
+      --slider-base: var(--slider-light-base);
+      --slider-base-100: var(--slider-light-base-100);
+      --slider-bg: var(--slider-light-bg);
+      --slider-fg: var(--slider-light-fg);
+
+      /* apply theme variables to all the component's parts */
       --slider: var(--range-slider, var(--slider-bg));
       --handle-inactive: var(--range-handle-inactive, var(--slider-base));
       --handle: var(--range-handle, var(--slider-accent-100));
@@ -701,6 +722,7 @@ function ariaLabelFormatter(value2, index) {
       --float-text: var(--range-float-text, white);
     }
 
+    /* set the variables to dark mode (forced) */
     :global(.rangeSlider.rsDark) {
       --slider-accent: var(--slider-dark-accent);
       --slider-accent-100: var(--slider-dark-accent-100);
@@ -710,6 +732,7 @@ function ariaLabelFormatter(value2, index) {
       --slider-fg: var(--slider-dark-fg);
     }
 
+    /* set the variables to dark mode (user-preference) */
     @media (prefers-color-scheme: dark) {
       :global(.rangeSlider.rsAutoDark) {
         --slider-accent: var(--slider-dark-accent);

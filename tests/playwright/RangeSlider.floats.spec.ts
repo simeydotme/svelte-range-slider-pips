@@ -508,17 +508,17 @@ test.describe('Float Tests', () => {
       const slider = page.locator('#range-max-float-formatted');
       const float = slider.locator('.rangeHandle .rangeFloat');
       const rangeFloat = slider.locator('.rangeBar .rangeFloat');
-      
+
       await expect(rangeFloat).toContainText('$70% - $100%');
       await expect(float).toContainText('$70%');
     });
-    
+
     test('should use custom formatters for max range', async ({ page }) => {
       const slider = page.locator('#range-max-float-custom');
       const handle = slider.locator('.rangeHandle');
       const float = handle.locator('.rangeFloat');
       const rangeFloat = slider.locator('.rangeBar .rangeFloat');
-      
+
       await expect(float).toContainText('$70.00');
       await expect(rangeFloat).toContainText('From: $70.00 to $100.00');
     });
