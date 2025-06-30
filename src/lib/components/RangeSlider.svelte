@@ -948,13 +948,16 @@
 
   @layer base {
     :global(.rangeSlider) {
-      --slider-accent: #4a40d4;
-      --slider-accent-100: #838de7;
-      --slider-base: #99a2a2;
-      --slider-base-100: #b9c2c2;
-      --slider-bg: #d7dada;
-      --slider-fg: #3f3e4f;
 
+      /* light mode (default) */
+      --slider-light-accent: #4a40d4;
+      --slider-light-accent-100: #838de7;
+      --slider-light-base: #99a2a2;
+      --slider-light-base-100: #b9c2c2;
+      --slider-light-bg: #d7dada;
+      --slider-light-fg: #3f3e4f;
+
+      /* dark mode */
       --slider-dark-accent: #6070fc;
       --slider-dark-accent-100: #7a7fab;
       --slider-dark-base: #82809f;
@@ -962,6 +965,15 @@
       --slider-dark-bg: #3f3e4f;
       --slider-dark-fg: #d7dada;
 
+      /* set the variables to light mode by default */
+      --slider-accent: var(--slider-light-accent);
+      --slider-accent-100: var(--slider-light-accent-100);
+      --slider-base: var(--slider-light-base);
+      --slider-base-100: var(--slider-light-base-100);
+      --slider-bg: var(--slider-light-bg);
+      --slider-fg: var(--slider-light-fg);
+
+      /* apply theme variables to all the component's parts */
       --slider: var(--range-slider, var(--slider-bg));
       --handle-inactive: var(--range-handle-inactive, var(--slider-base));
       --handle: var(--range-handle, var(--slider-accent-100));
@@ -977,6 +989,7 @@
       --float-text: var(--range-float-text, white);
     }
 
+    /* set the variables to dark mode (forced) */
     :global(.rangeSlider.rsDark) {
       --slider-accent: var(--slider-dark-accent);
       --slider-accent-100: var(--slider-dark-accent-100);
@@ -986,6 +999,7 @@
       --slider-fg: var(--slider-dark-fg);
     }
 
+    /* set the variables to dark mode (user-preference) */
     @media (prefers-color-scheme: dark) {
       :global(.rangeSlider.rsAutoDark) {
         --slider-accent: var(--slider-dark-accent);
