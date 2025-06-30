@@ -84,6 +84,32 @@
     ariaLabels={['First handle', 'Second handle']}
   />
 
+  <h5>Range="min" Float Tests</h5>
+  <RangeSlider id="range-min-float" range="min" value={30} float />
+  <RangeSlider id="range-min-float-range" range="min" value={30} float rangeFloat />
+  <RangeSlider id="range-min-no-float" range="min" value={30} />
+  <RangeSlider id="range-min-float-formatted" range="min" value={30} float rangeFloat prefix="$" suffix="%" />
+  <RangeSlider id="range-min-float-formatted-reversed" range="min" value={30} float rangeFloat prefix="$" suffix="%" reversed />
+  <RangeSlider id="range-min-float-custom" range="min" value={30} float rangeFloat {handleFormatter} {rangeFormatter} />
+  <RangeSlider id="range-min-float-custom-reversed" range="min" value={30} float rangeFloat {handleFormatter} {rangeFormatter} reversed />
+
+  <h5>Range="max" Float Tests</h5>
+  <RangeSlider id="range-max-float" range="max" value={70} float />
+  <RangeSlider id="range-max-float-range" range="max" value={70} float rangeFloat />
+  <RangeSlider id="range-max-no-float" range="max" value={70} />
+  <RangeSlider id="range-max-float-formatted" range="max" value={70} float rangeFloat prefix="$" suffix="%" />
+  <RangeSlider id="range-max-float-formatted-reversed" range="max" value={70} float rangeFloat prefix="$" suffix="%" reversed />
+  <RangeSlider id="range-max-float-custom" range="max" value={70} float rangeFloat {handleFormatter} {rangeFormatter} />
+  <RangeSlider id="range-max-float-custom-reversed" range="max" value={70} float rangeFloat {handleFormatter} {rangeFormatter} reversed />
+
+  <h5>Range="min" and Range="max" Edge Cases</h5>
+  <RangeSlider id="range-min-edge" range="min" value={10} float min={0} max={20} />
+  <RangeSlider id="range-max-edge" range="max" value={90} float min={80} max={100} />
+  <RangeSlider id="range-min-negative" range="min" value={-30} float min={-50} max={0} />
+  <RangeSlider id="range-max-negative" range="max" value={-10} float min={-50} max={0} />
+  <RangeSlider id="range-min-decimal" range="min" value={10.25} float step={0.25} />
+  <RangeSlider id="range-max-decimal" range="max" value={20.75} float step={0.25} />
+
   <h5>Dynamic Toggle Tests</h5>
   <div class="toggle-container">
     <RangeSlider id="dynamic-float" range {values} {float} {rangeFloat} {vertical} {reversed} />

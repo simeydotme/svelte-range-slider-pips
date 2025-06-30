@@ -413,4 +413,282 @@ test.describe('Float Tests', () => {
       await expect(float).toBeVisible();
     });
   });
+
+  test.describe('Range="min" Float Tests', () => {
+    test('should show/hide float based on prop for min range', async ({ page }) => {
+      const withFloat = page.locator('#range-min-float .rangeFloat');
+      const withoutFloat = page.locator('#range-min-no-float .rangeFloat');
+
+      await expect(withFloat).toBeVisible();
+      await expect(withoutFloat).not.toBeVisible();
+    });
+
+    test('should show/hide rangeFloat based on prop for min range', async ({ page }) => {
+      const withRangeFloat = page.locator('#range-min-float-range .rangeBar .rangeFloat');
+      const withoutRangeFloat = page.locator('#range-min-no-float .rangeBar .rangeFloat');
+
+      await expect(withRangeFloat).toBeVisible();
+      await expect(withoutRangeFloat).not.toBeVisible();
+    });
+
+    test('float should update when min handle moves', async ({ page }) => {
+      const slider = page.locator('#range-min-float');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+
+      await dragHandleTo(page, slider, handle, 0.5);
+      await expect(float).toContainText('50');
+    });
+
+    test('rangeFloat should update when min handle moves', async ({ page }) => {
+      const slider = page.locator('#range-min-float-range');
+      const handle = slider.locator('.rangeHandle');
+      const rangeFloat = slider.locator('.rangeBar .rangeFloat');
+
+      await dragHandleTo(page, slider, handle, 0.6);
+      await expect(rangeFloat).toContainText('0 - 60');
+    });
+
+    test('should respect prefix and suffix for min range', async ({ page }) => {
+      const slider = page.locator('#range-min-float-formatted');
+      const float = slider.locator('.rangeHandle .rangeFloat');
+      const rangeFloat = slider.locator('.rangeBar .rangeFloat');
+
+      await expect(float).toContainText('$30%');
+      await expect(rangeFloat).toContainText('$0% - $30%');
+    });
+
+    test('should use custom formatters for min range', async ({ page }) => {
+      const slider = page.locator('#range-min-float-custom');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+      const rangeFloat = slider.locator('.rangeBar .rangeFloat');
+
+      await expect(float).toContainText('$30.00');
+      await expect(rangeFloat).toContainText('From: $0.00 to $30.00');
+    });
+  });
+
+  test.describe('Range="max" Float Tests', () => {
+    test('should show/hide float based on prop for max range', async ({ page }) => {
+      const withFloat = page.locator('#range-max-float .rangeFloat');
+      const withoutFloat = page.locator('#range-max-no-float .rangeFloat');
+
+      await expect(withFloat).toBeVisible();
+      await expect(withoutFloat).not.toBeVisible();
+    });
+
+    test('should show/hide rangeFloat based on prop for max range', async ({ page }) => {
+      const withRangeFloat = page.locator('#range-max-float-range .rangeBar .rangeFloat');
+      const withoutRangeFloat = page.locator('#range-max-no-float .rangeBar .rangeFloat');
+
+      await expect(withRangeFloat).toBeVisible();
+      await expect(withoutRangeFloat).not.toBeVisible();
+    });
+
+    test('float should update when max handle moves', async ({ page }) => {
+      const slider = page.locator('#range-max-float');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+
+      await dragHandleTo(page, slider, handle, 0.8);
+      await expect(float).toContainText('80');
+    });
+
+    test('rangeFloat should update when max handle moves', async ({ page }) => {
+      const slider = page.locator('#range-max-float');
+      const handle = slider.locator('.rangeHandle');
+      const rangeFloat = handle.locator('.rangeFloat');
+
+      await dragHandleTo(page, slider, handle, 0.9);
+      await expect(rangeFloat).toContainText('90');
+    });
+
+    test('should respect prefix and suffix for max range', async ({ page }) => {
+      const slider = page.locator('#range-max-float-formatted');
+      const float = slider.locator('.rangeHandle .rangeFloat');
+      const rangeFloat = slider.locator('.rangeBar .rangeFloat');
+      
+      await expect(rangeFloat).toContainText('$70% - $100%');
+      await expect(float).toContainText('$70%');
+    });
+    
+    test('should use custom formatters for max range', async ({ page }) => {
+      const slider = page.locator('#range-max-float-custom');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+      const rangeFloat = slider.locator('.rangeBar .rangeFloat');
+      
+      await expect(float).toContainText('$70.00');
+      await expect(rangeFloat).toContainText('From: $70.00 to $100.00');
+    });
+  });
+
+  test.describe('Range="min" and Range="max" Edge Cases', () => {
+    test('should handle edge values for min range', async ({ page }) => {
+      const slider = page.locator('#range-min-edge');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+
+      await expect(float).toContainText('10');
+
+      // Move to minimum
+      await dragHandleTo(page, slider, handle, 0);
+      await expect(float).toContainText('0');
+
+      // Move to maximum
+      await dragHandleTo(page, slider, handle, 1);
+      await expect(float).toContainText('20');
+    });
+
+    test('should handle edge values for max range', async ({ page }) => {
+      const slider = page.locator('#range-max-edge');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+
+      await expect(float).toContainText('90');
+
+      // Move to minimum
+      await dragHandleTo(page, slider, handle, 0);
+      await expect(float).toContainText('80');
+
+      // Move to maximum
+      await dragHandleTo(page, slider, handle, 1);
+      await expect(float).toContainText('100');
+    });
+
+    test('should handle negative numbers for min range', async ({ page }) => {
+      const slider = page.locator('#range-min-negative');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+
+      await expect(float).toContainText('-30');
+
+      // Move to minimum
+      await dragHandleTo(page, slider, handle, 0);
+      await expect(float).toContainText('-50');
+
+      // Move to maximum
+      await dragHandleTo(page, slider, handle, 1);
+      await expect(float).toContainText('0');
+    });
+
+    test('should handle negative numbers for max range', async ({ page }) => {
+      const slider = page.locator('#range-max-negative');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+
+      await expect(float).toContainText('-10');
+
+      // Move to minimum
+      await dragHandleTo(page, slider, handle, 0);
+      await expect(float).toContainText('-50');
+
+      // Move to maximum
+      await dragHandleTo(page, slider, handle, 1);
+      await expect(float).toContainText('0');
+    });
+
+    test('should handle decimal numbers for min range', async ({ page }) => {
+      const slider = page.locator('#range-min-decimal');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+
+      await expect(float).toContainText('10.25');
+
+      // Move to a new decimal value
+      await dragHandleTo(page, slider, handle, 0.5);
+      await expect(float).toContainText('50');
+    });
+
+    test('should handle decimal numbers for max range', async ({ page }) => {
+      const slider = page.locator('#range-max-decimal');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+
+      await expect(float).toContainText('20.75');
+
+      // Move to a new decimal value
+      await dragHandleTo(page, slider, handle, 0.75);
+      await expect(float).toContainText('75');
+    });
+
+    test('should position float correctly for min range', async ({ page }) => {
+      const slider = page.locator('#range-min-edge');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+
+      await handle.hover();
+      const floatBox = await float.boundingBox();
+      const handleBox = await handle.boundingBox();
+
+      // Float should be positioned above the handle
+      expect(floatBox!.y).toBeLessThan(handleBox!.y);
+    });
+
+    test('should position float correctly for max range', async ({ page }) => {
+      const slider = page.locator('#range-max-edge');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+
+      await handle.hover();
+      const floatBox = await float.boundingBox();
+      const handleBox = await handle.boundingBox();
+
+      // Float should be positioned above the handle
+      expect(floatBox!.y).toBeLessThan(handleBox!.y);
+    });
+
+    test('should handle keyboard navigation for min range', async ({ page }) => {
+      const slider = page.locator('#range-min-edge');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+
+      await handle.focus();
+      await expect(float).toBeVisible();
+
+      // Move with arrow keys
+      await page.keyboard.press('ArrowRight');
+      await expect(handle).toHaveAttribute('aria-valuenow', '11');
+      await expect(float).toContainText('11');
+    });
+
+    test('should handle keyboard navigation for max range', async ({ page }) => {
+      const slider = page.locator('#range-max-edge');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+
+      await handle.focus();
+      await expect(float).toBeVisible();
+
+      // Move with arrow keys
+      await page.keyboard.press('ArrowLeft');
+      await expect(handle).toHaveAttribute('aria-valuenow', '89');
+      await expect(float).toContainText('89');
+    });
+
+    test('should handle focus states for min range', async ({ page }) => {
+      const slider = page.locator('#range-min-edge');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+
+      await expect(float).toHaveCSS('opacity', '0');
+      await handle.focus();
+      await expect(float).toHaveCSS('opacity', '1');
+      await expect(slider).toHaveClass(/\brsFocus\b/);
+      await expect(handle).toHaveClass(/\brsActive\b/);
+    });
+
+    test('should handle focus states for max range', async ({ page }) => {
+      const slider = page.locator('#range-max-edge');
+      const handle = slider.locator('.rangeHandle');
+      const float = handle.locator('.rangeFloat');
+
+      await expect(float).toHaveCSS('opacity', '0');
+      await handle.focus();
+      await expect(float).toHaveCSS('opacity', '1');
+      await expect(slider).toHaveClass(/\brsFocus\b/);
+      await expect(handle).toHaveClass(/\brsActive\b/);
+    });
+  });
 });

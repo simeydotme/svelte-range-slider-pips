@@ -881,16 +881,18 @@
       style={`--range-start:${rangeStart};--range-end:${rangeEnd};--range-size:${rangeSize};${mountOpacity};`}
     >
       {#if rangeFloat}
+        {@const rangeMin = range === 'min' ? min : values[0]}
+        {@const rangeMax = range === 'max' ? max : range === 'min' ? values[0] : values[1]}
+        {@const [first, second] = reversed ? [rangeMax, rangeMin] : [rangeMin, rangeMax]}
         <span class="rangeFloat">
           {#if rangeFormatter}
             {@html rangeFormatter(
-              values[0],
-              values[1],
-              valueAsPercent(values[0], min, max, precision),
-              valueAsPercent(values[1], min, max, precision)
+              first,
+              second,
+              valueAsPercent(first, min, max, precision),
+              valueAsPercent(second, min, max, precision)
             )}
           {:else}
-            {@const [first, second] = reversed ? [values[1], values[0]] : [values[0], values[1]]}
             {#if prefix}<span class="rangeFloatPrefix">{prefix}</span>{/if}{@html first}{#if suffix}<span
                 class="rangeFloatSuffix">{suffix}</span
               >{/if}
