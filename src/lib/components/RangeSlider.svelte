@@ -962,6 +962,7 @@
       /* light mode (default) */
       --slider-light-accent: #4a40d4;
       --slider-light-accent-100: #838de7;
+      --slider-light-accent-text: #ffffff;
       --slider-light-base: #99a2a2;
       --slider-light-base-100: #b9c2c2;
       --slider-light-bg: #d7dada;
@@ -970,6 +971,7 @@
       /* dark mode */
       --slider-dark-accent: #6070fc;
       --slider-dark-accent-100: #7a7fab;
+      --slider-dark-accent-text: #ffffff;
       --slider-dark-base: #82809f;
       --slider-dark-base-100: #595868;
       --slider-dark-bg: #3f3e4f;
@@ -978,6 +980,7 @@
       /* set the variables to light mode by default */
       --slider-accent: var(--slider-light-accent);
       --slider-accent-100: var(--slider-light-accent-100);
+      --slider-accent-text: var(--slider-light-accent-text);
       --slider-base: var(--slider-light-base);
       --slider-base-100: var(--slider-light-base-100);
       --slider-bg: var(--slider-light-bg);
@@ -996,13 +999,14 @@
       --range-press: var(--range-range-press, var(--handle-border));
       --float-inactive: var(--range-float-inactive, var(--handle-inactive));
       --float: var(--range-float, var(--handle-focus));
-      --float-text: var(--range-float-text, white);
+      --float-text: var(--range-float-text, var(--slider-accent-text));
     }
 
     /* set the variables to dark mode (forced) */
     :global(.rangeSlider.rsDark) {
       --slider-accent: var(--slider-dark-accent);
       --slider-accent-100: var(--slider-dark-accent-100);
+      --slider-accent-text: var(--slider-dark-accent-text);
       --slider-base: var(--slider-dark-base);
       --slider-base-100: var(--slider-dark-base-100);
       --slider-bg: var(--slider-dark-bg);
@@ -1014,6 +1018,7 @@
       :global(.rangeSlider.rsAutoDark) {
         --slider-accent: var(--slider-dark-accent);
         --slider-accent-100: var(--slider-dark-accent-100);
+        --slider-accent-text: var(--slider-dark-accent-text);
         --slider-base: var(--slider-dark-base);
         --slider-base-100: var(--slider-dark-base-100);
         --slider-bg: var(--slider-dark-bg);
