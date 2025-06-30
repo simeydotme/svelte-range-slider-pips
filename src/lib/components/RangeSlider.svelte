@@ -116,11 +116,11 @@
   const checkMinMax = () => {
     if (!isFiniteNumber(min)) {
       min = 0;
-      console.error("'min' prop must be a valid finite number");
+      console.error("'min' prop must be a valid finite Number");
     }
     if (!isFiniteNumber(max)) {
       max = 100;
-      console.error("'max' prop must be a valid finite number");
+      console.error("'max' prop must be a valid finite Number");
     }
     if (min >= max) {
       min = 0;
@@ -145,6 +145,13 @@
     } else if (values.some((v) => !isFiniteNumber(v))) {
       values = values.map((v) => (isFiniteNumber(v) ? v : (max + min) / 2));
       console.error("'values' prop should be an Array of Numbers");
+    }
+  };
+
+  const checkStep = () => {
+    if (!isFiniteNumber(step) || step <= 0) {
+      step = 1;
+      console.error("'step' prop must be a positive Number");
     }
   };
 
@@ -197,6 +204,7 @@
   checkMinMax();
   checkValueIsNumber();
   checkValuesIsArray();
+  checkStep();
   checkValuesAgainstRangeGaps();
   checkFormatters();
 
@@ -206,6 +214,7 @@
   $: ariaLabels, checkAriaLabels();
   $: min, checkMinMax();
   $: max, checkMinMax();
+  $: step, checkStep();
   $: rangeGapMin, checkValuesAgainstRangeGaps();
   $: rangeGapMax, checkValuesAgainstRangeGaps();
   $: formatter, checkFormatters();
@@ -950,7 +959,6 @@
 
   @layer base {
     :global(.rangeSlider) {
-
       /* light mode (default) */
       --slider-light-accent: #4a40d4;
       --slider-light-accent-100: #838de7;
