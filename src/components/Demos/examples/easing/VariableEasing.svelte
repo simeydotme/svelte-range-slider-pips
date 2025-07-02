@@ -33,11 +33,6 @@
     grid-gap: 20px;
     text-align: center;
   }
-  [data-grid] [for='springEnabled'] {
-    grid-row: 1;
-    grid-column: 1 / -1;
-    justify-self: center;
-  }
   [data-grid] [for='stiffness'] {
     grid-column: 1;
   }

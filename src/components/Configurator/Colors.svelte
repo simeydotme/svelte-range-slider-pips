@@ -19,7 +19,6 @@
   import { colorsStore, lightThemeColors, darkThemeColors, presets, selectedPresetStore, colorsPartsStore, overrideOutput } from "./colorsStore";
   import { settingsStore } from "./configStore";
 
-  export let configStore;
   export let configProps;
 
   let sliderEl;
