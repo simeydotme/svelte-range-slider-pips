@@ -125,6 +125,11 @@ form {
     box-shadow: 0 3px 2px -3px var(--bor);
     transition: border 0.3s ease-in, outline 0.6s ease-in, box-shadow 0.6s ease-in;
 
+    &:hover {
+      border-color: var(--bor);
+      transition: border 0.15s ease-out;
+    }
+
     &:focus {
       border-color: var(--tint);
       outline-color: var(--tint2);
@@ -139,6 +144,11 @@ form {
 
     &[readonly] {
       background: hsl(var(--h), var(--s), 90%);
+    }
+
+    &[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
 
   }
@@ -171,15 +181,22 @@ form {
     width: calc(1em + 8px);
     height: calc(1em + 8px);
     border: none;
-    outline: none;
+    outline: 1px solid transparent;
     appearance: none;
     border-radius: 100%;
+    
+    &:hover {
+      outline-color: var(--bor);
+      transition: all 0.15s ease-out;
+    }
 
     &,
     &:after {
       flex: 0 0 auto;
       transition: all 0.6s ease-in;
     }
+
+    &:active,
     &:focus,
     &:focus:after {
       transition: all 0.3s ease-out;

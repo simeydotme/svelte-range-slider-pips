@@ -1,0 +1,47 @@
+
+.handle-ring {
+  
+  --offset-inline: var(--handle-offset, 0em);
+  --offset-block: var(--handle-offset-block, 0em);
+  --rotate: var(--handle-rotate, 0deg);
+
+  &.rangeSlider {
+
+    * { 
+      box-sizing: border-box; 
+    }
+
+    .rangeHandle {
+      height: calc(1.66 * var(--handle-size, 1em));
+      width: auto;
+      aspect-ratio: 1/1;
+      top: 50%;
+      .rangeNub {
+        background-color: var(--slider);
+        border: 2px solid var(--handle-inactive);
+        border-radius: 50%!important;
+        transform: translateY(calc(var(--offset-block)))!important;
+      }
+      &.rsActive .rangeNub {
+        background-color: color-mix(in srgb, var(--slider) 20%, white);
+        border-color: var(--handle-focus);
+      }
+    }    
+    
+    /* left-ring on range */
+    &.rsRange .rangeHandle:nth-of-type(1) .rangeNub,
+    &.rsRange.rsMax .rangeHandle:nth-of-type(1) .rangeNub {
+      transform: translateX(var(--offset-inline)) translateY(var(--offset-block))!important;
+    }
+
+    /* right-ring on range */
+    &.rsRange .rangeHandle:nth-of-type(2) .rangeNub,
+    &.rsRange.rsMin .rangeHandle:nth-of-type(1) .rangeNub {
+      transform: translateX(calc(var(--offset-inline) * -1)) translateY(calc(var(--offset-block)))!important;
+    }
+  }
+
+  &.rsDark .rangeHandle.rsActive .rangeNub {
+    background-color: color-mix(in srgb, var(--slider) 50%, black);
+  }
+}

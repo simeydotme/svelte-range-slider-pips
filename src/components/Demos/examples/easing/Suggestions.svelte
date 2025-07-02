@@ -1,19 +1,11 @@
 <script>
   import RangeSlider from 'svelte-range-slider-pips';
+  import { easingTypes } from '~components/Configurator/options';
 
   const defaultValues = [25, 75];
 
   // Different spring configurations to test
-  const configurations = [
-    { name: 'Default', config: { stiffness: 0.15, damping: 0.4 }, values: [...defaultValues] },
-    { name: 'Fast', config: { stiffness: 0.66, damping: 0.5 }, values: [...defaultValues] },
-    { name: 'Sharp', config: { stiffness: 0.4, damping: 0.4 }, values: [...defaultValues] },
-    { name: 'Slow', config: { stiffness: 0.1, damping: 0.65 }, values: [...defaultValues] },
-    { name: 'Sluggish', config: { stiffness: 0.3, damping: 0.9 }, values: [...defaultValues] },
-    { name: 'Rubber', config: { stiffness: 0.2, damping: 0.15 }, values: [...defaultValues] },
-    { name: 'Elastic', config: { stiffness: 0.72, damping: 0.28 }, values: [...defaultValues] },
-    { name: 'Bouncy', config: { stiffness: 0.3, damping: 0.08 }, values: [...defaultValues] },
-  ];
+  const configurations = easingTypes.map(easing => ({...easing, values: [...defaultValues]}));
 
   function jumpToRandom( which = 0 ) {
     configurations[which].values = [Math.random() * 100, Math.random() * 100].sort((a, b) => a - b);

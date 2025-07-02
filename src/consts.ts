@@ -124,11 +124,12 @@ export const SIDEBAR: Sidebar = {
       },
       { text: 'Styling', link: `${REPOPATH}/en/styling`, 
         children: [
-          { text: 'Color Variables', link: `${REPOPATH}/en/styling#colors` },
           { text: 'Size', link: `${REPOPATH}/en/styling#size` },
+          { text: 'Color Variables', link: `${REPOPATH}/en/styling#colors` },
           { text: 'CSS Structure', link: `${REPOPATH}/en/styling#structure` },
           { text: 'Dark Mode', link: `${REPOPATH}/en/styling/darkmode`, new: true },
           { text: 'Pips & Steps', link: `${REPOPATH}/en/styling/pips` },
+          { text: 'Configurator', link: `${REPOPATH}/en/styling/configurator`, new: true },
         ]
       },
       { text: 'Recipes', link: `${REPOPATH}/en/recipes`, 

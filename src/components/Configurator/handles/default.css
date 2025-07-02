@@ -1,0 +1,35 @@
+
+.handle-default {
+  
+  --offset-inline: var(--handle-offset, 0em);
+  --offset-block: var(--handle-offset-block, 0em);
+  --rotate: var(--handle-rotate, 0deg);
+
+  &.rangeSlider {
+    .rangeHandle {
+      height: calc(1.4 * var(--handle-size, 1em));
+      width: auto;
+      aspect-ratio: 1/1;
+      top: 50%;
+      .rangeNub {
+        transform: translateY(calc(var(--offset-block))) rotate(var(--rotate))!important;
+      }
+    }
+
+    /* left-rectangle on range */
+    &.rsRange .rangeHandle:nth-of-type(1) .rangeNub,
+    &.rsRange.rsReversed .rangeHandle:nth-of-type(2) .rangeNub,
+    &.rsRange.rsMax .rangeHandle:nth-of-type(1) .rangeNub {
+      transform: rotate(calc(var(--rotate))) translateX(var(--offset-inline)) translateY(var(--offset-block)) rotate(-135deg)!important;
+    }
+
+    /* right-rectangle on range */
+    &.rsRange .rangeHandle:nth-of-type(2) .rangeNub,
+    &.rsRange.rsReversed .rangeHandle:nth-of-type(1) .rangeNub,
+    &.rsRange.rsMin .rangeHandle:nth-of-type(1) .rangeNub {
+      transform: rotate(calc(var(--rotate) * -1)) translateX(calc(var(--offset-inline) * -1)) translateY(var(--offset-block)) rotate(45deg)!important;
+    }
+
+  }
+
+}

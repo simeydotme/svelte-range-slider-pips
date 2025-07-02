@@ -25,7 +25,7 @@ const { type = 'info' } = Astro.props;
     margin: 1rem -.5rem 0;
   }
 
-  .note + .note {
+  .note :global(+ .note) {
     margin-top: 0;
   }
 
@@ -39,5 +39,9 @@ const { type = 'info' } = Astro.props;
 
   .note[data-type="warning"] [astro-icon] {
     color: hsla(var(--color-base-red), 40%, 1);
+  }
+
+  .theme-dark .note[data-type="warning"] [astro-icon] {
+    color: hsla(var(--color-base-red), 70%, 1);
   }
 </style>

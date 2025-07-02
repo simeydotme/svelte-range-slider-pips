@@ -52,7 +52,7 @@ const editUrl = `${EDIT_URL}/${currentFile}?plain=1`
           minmax(var(--gutter), 1fr) 
           minmax(0, var(--max-width))
           minmax(var(--gutter), 1fr);
-        overflow-x: hidden;
+        /* overflow-x: hidden; */
       }
 
       .grid-sidebar {
@@ -100,6 +100,10 @@ const editUrl = `${EDIT_URL}/${currentFile}?plain=1`
           position: sticky;
           grid-column: 1;
         }
+
+        .layout.no-sidebar #grid-main {
+          padding-right: 1rem;
+        }
       }
 
       @media (min-width: 72em) {
@@ -108,6 +112,15 @@ const editUrl = `${EDIT_URL}/${currentFile}?plain=1`
           padding-left: 0;
           padding-right: 0;
           margin: 0 auto;
+        }
+
+        .layout.no-sidebar {
+          --max-width: 65em;
+          grid-template-columns: 20rem minmax(0, var(--max-width));
+        }
+
+        .layout.no-sidebar #grid-main {
+          padding-right: 2rem;
         }
 
         #grid-right {
@@ -149,12 +162,12 @@ const editUrl = `${EDIT_URL}/${currentFile}?plain=1`
       }
     </style>
 
-    <script defer src="https://app.tinyanalytics.io/pixel/WfB8WE5R7TXci4xA"></script>
+    <!-- <script defer src="https://app.tinyanalytics.io/pixel/WfB8WE5R7TXci4xA"></script> -->
   </head>
 
   <body>
     <Header currentPage={currentPage} />
-    <main class="layout">
+    <main class="layout" class:list={!data.sidebar ? 'no-sidebar' : ''}>
       <aside id="grid-left" class="grid-sidebar" title="Site Navigation">
         <LeftSidebar currentPage={currentPage} />
       </aside>
@@ -163,9 +176,11 @@ const editUrl = `${EDIT_URL}/${currentFile}?plain=1`
           <slot />
         </PageContent>
       </div>
-      <aside id="grid-right" class="grid-sidebar" title="Table of Contents">
-        <RightSidebar headings={headings} editUrl={editUrl} />
-      </aside>
+      {data.sidebar &&
+        <aside id="grid-right" class="grid-sidebar" title="Table of Contents">
+          <RightSidebar headings={headings} editUrl={editUrl} />
+        </aside>
+      }
     </main>
     <Footer path={currentFile} />
   </body>

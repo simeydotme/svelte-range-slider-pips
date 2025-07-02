@@ -9,10 +9,46 @@ import Demo from '~components/Reusable/Demo.svelte';
 import Variables from "~demos/styling/Variables.svelte";
 import Sizing from "~demos/styling/Sizing.svelte";
 
+
+
+## Size
+
+Because the Range Slider uses `em` units for the 
+range, handles, floats and pips, you can easily change the size
+of the Slider by changing the `font-size` of the base `.rangeSlider` element.
+
+```css
+.rangeSlider {
+  font-size: 1rem; /* default size */
+}
+```
+
+### Test the font size
+
+<Demo name="Changing the Font Size" client:visible>
+  <Sizing client:visible />
+</Demo>
+
+<Note title="Distinct Sizes" type="info">
+  Setting the font-size on the base element will scale every part of the
+  slider uniformly. But if you want to have different sizes for different
+  parts of the slider, you can adjust the sizes of each part independently
+  using [the css structure](#structure) as a reference.
+</Note>
+
+
+
 ## Colors
 The Range Slider comes out of the box with a set style, and it's
 colored using CSS variables. You can override these variables to
 change the color of the Slider.
+
+
+<Note title="Configurator" type="ok">
+  If you want to, you can also use the [Configurator tool](#styling/configurator) to edit the functionality, aesthetics, theme and colors!
+</Note>
+
+
 
 ### Base Theme Variables
 
@@ -25,17 +61,14 @@ The component uses a comprehensive set of CSS variables for theming, wrapped in 
     --slider-accent: #4a40d4;
     --slider-accent-100: #838de7;
     --slider-base: #99a2a2;
-    --slider-base-100: #aebecf;
-    --slider-base-200: #b9c2c2;
+    --slider-base-100: #b9c2c2;
     --slider-bg: #d7dada;
     --slider-fg: #3f3e4f;
 
-    /* Dark theme base colors */
     --slider-dark-accent: #6070fc;
     --slider-dark-accent-100: #7a7fab;
     --slider-dark-base: #82809f;
-    --slider-dark-base-100: #595970;
-    --slider-dark-base-200: #454454;
+    --slider-dark-base-100: #595868;
     --slider-dark-bg: #3f3e4f;
     --slider-dark-fg: #d7dada;
 
@@ -47,7 +80,7 @@ The component uses a comprehensive set of CSS variables for theming, wrapped in 
     --handle-border: var(--range-handle-border, var(--handle));
     --range-inactive: var(--range-range-inactive, var(--handle-inactive));
     --range: var(--range-range, var(--handle-focus));
-    --range-limit: var(--range-range-limit, var(--slider-base-200));
+    --range-limit: var(--range-range-limit, var(--slider-base-100));
     --range-hover: var(--range-range-hover, var(--handle-border));
     --range-press: var(--range-range-press, var(--handle-border));
     --float-inactive: var(--range-float-inactive, var(--handle-inactive));
@@ -91,33 +124,6 @@ But if I wanted to modify the accent color only, I would change the `--slider-ac
 <Demo name="Color Variables for the Slider" client:visible>
   <Variables client:visible />
 </Demo>
-
-
-
-## Size
-
-Because the Range Slider uses `em` units for the 
-range, handles, floats and pips, you can easily change the size
-of the Slider by changing the `font-size` of the base `.rangeSlider` element.
-
-```css
-.rangeSlider {
-  font-size: 1rem; /* default size */
-}
-```
-
-### Test the font size
-
-<Demo name="Changing the Font Size" client:visible>
-  <Sizing client:visible />
-</Demo>
-
-<Note title="Distinct Sizes" type="info">
-  Setting the font-size on the base element will scale every part of the
-  slider uniformly. But if you want to have different sizes for different
-  parts of the slider, you can adjust the sizes of each part independently
-  using [the css structure](#structure) as a reference.
-</Note>
 
 
 

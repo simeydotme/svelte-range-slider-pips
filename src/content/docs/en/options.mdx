@@ -4,18 +4,23 @@ description: 'List of options (props) available for the RangeSlider'
 ---
 import Option from '~components/Reusable/Option.astro'
 import Info from '~components/Reusable/Info.astro'
+import Note from '~components/Reusable/Note.astro'
 
 Below you'll find a list of options (props) that you can pass to the component to
 configure it to your liking. There's a link to an example for each option.
 
+<Note title="Configurator" type="ok">
+  If you want to, you can also use the [Configurator tool](#styling/configurator) to edit the functionality, aesthetics, theme and colors!
+</Note>
+
 <Option propName="value" propType="Number" defaultValue="50" link="examples/values">  
   A default value to apply to the Slider. 
-  <Info>A Slider with `range` property must use `values` instead</Info>
+  <Info type="warning">A Slider with `range` property, or multiple handles, must use `values` instead</Info>
 </Option>
 
 <Option propName="values" propType="Array" defaultValue="[50]" link="examples/values">
   Array of values to apply on the Slider. If multiple values are provided, multiple handles will be rendered.  
-  <Info>A Slider with `range` property set can only have two values max</Info>
+  <Info type="warning">A Slider with `range` property set can only have two values max</Info>
 </Option>
 
 <Option propName="min" propType="Number" defaultValue="0" link="examples/min-max">
@@ -53,7 +58,8 @@ configure it to your liking. There's a link to an example for each option.
   - `min` styles like a range going from `min` to `value`
   - `max` styles like a range going from `value` to `max`
 
-  <Info>A Slider with `range=min/max` or `range=true` only have one or two values respectively.</Info>
+  <Info>A Slider with `range=min/max` can only have one value.</Info>
+  <Info>A Slider with `range=true` must have two values.</Info>
 </Option>
 
 <Option propName="pushy" propType="Boolean" defaultValue="false" link="examples/range#pushy-range-handles">
@@ -64,11 +70,13 @@ configure it to your liking. There's a link to an example for each option.
 <Option propName="rangeGapMin" propType="Number" defaultValue="0" link="examples/range-gaps" new={true}>
   Sets the minimum allowed distance between handles in a range slider. When `pushy` is true, moving a handle past this limit will push the other handle.
   <Info>Only works when `range` is true</Info>
+  <Info type="warning">Must be less than `rangeGapMax`</Info>
 </Option>
 
-<Option propName="rangeGapMax" propType="Number" defaultValue="null" link="examples/range-gaps" new={true}>
+<Option propName="rangeGapMax" propType="Number" defaultValue="Infinity" link="examples/range-gaps" new={true}>
   Sets the maximum allowed distance between handles in a range slider. When `pushy` is true, moving a handle past this limit will pull the other handle.
   <Info>Only works when `range` is true</Info>
+  <Info type="warning">Must be greater than `rangeGapMin`</Info>
 </Option>
 
 <Option propName="draggy" propType="Boolean" defaultValue="false" link="examples/range#draggy-ranges" new={true}>
@@ -123,7 +131,7 @@ configure it to your liking. There's a link to an example for each option.
 
 <Option propName="limits" propType={["Null","Array"]} defaultValue="null" link="examples/limits">
   An array of values to limit the Slider handles to.
-  <Info>This should be two values (min/max) to limit the handles to</Info>
+  <Info>This should be two values `[min,max]` to limit the handles to</Info>
 </Option>
 
 <Option propName="prefix" propType="String" defaultValue="''" link="examples/prefix-suffix#simple--prefix">
@@ -138,6 +146,7 @@ configure it to your liking. There's a link to an example for each option.
 
 <Option propName="reversed" propType="Boolean" defaultValue="false" link="examples/reversed">
   Reverse the orientation of min/max
+  <Info>Will also reverse the values in the `float` formatters</Info>
 </Option>
 
 <Option propName="hoverable" propType="Boolean" defaultValue="true" link="examples/float#float-without-hover">

@@ -35,6 +35,10 @@ const { title, headings, editUrl } = Astro.props
     flex-direction: column;
   }
 
+  :global(.layout.no-sidebar) .content {
+    max-width: none;
+  }
+
   .content > section {
     margin-bottom: 4rem;
   }

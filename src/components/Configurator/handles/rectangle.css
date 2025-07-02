@@ -1,0 +1,50 @@
+
+.handle-rectangle {
+  
+  --offset-inline: var(--handle-offset, 0em);
+  --offset-block: var(--handle-offset-block, 0em);
+  --rotate: var(--handle-rotate, 0deg);
+
+  --radius: 4px;
+  --offset: 3px;
+
+  &.rangeSlider {
+
+    * { 
+      box-sizing: border-box; 
+    }
+    
+    .rangeHandle {
+      width: calc(1.4 * var(--handle-size, 1em));
+      height: auto;
+      aspect-ratio: 1/1.5;
+      top: 50%;
+      .rangeNub {
+        background-color: var(--slider);
+        border: 2px solid var(--handle-inactive);
+        transform: translateY(calc(var(--offset-block))) rotate(var(--rotate))!important;
+        border-radius: var(--radius)!important;
+      }
+      &.rsActive .rangeNub {
+        background-color: color-mix(in srgb, var(--slider) 20%, white);
+        border: 2px solid var(--handle-focus);
+      }
+    }
+
+    /* left-rectangle on range */
+    &.rsRange .rangeHandle:nth-of-type(1) .rangeNub,
+    &.rsRange.rsMax .rangeHandle:nth-of-type(1) .rangeNub {
+      transform: rotate(calc(0deg + var(--rotate))) translateY(var(--offset-inline)) translateX(var(--offset-block))!important;
+    }
+
+    /* right-rectangle on range */
+    &.rsRange .rangeHandle:nth-of-type(2) .rangeNub,
+    &.rsRange.rsMin .rangeHandle:nth-of-type(1) .rangeNub {
+      transform: rotate(calc(-0deg - var(--rotate))) translateY(var(--offset-inline)) translateX(calc(var(--offset-block) * -1))!important;
+    }
+  }
+
+  &.rsDark .rangeHandle.rsActive .rangeNub {
+    background-color: color-mix(in srgb, var(--slider) 50%, black);
+  }
+}

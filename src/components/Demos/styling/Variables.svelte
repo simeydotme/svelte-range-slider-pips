@@ -27,7 +27,7 @@
   let clrPipOutOfLimitText = "#aebecf";
 
   $: variablesStyle = `<style>
-  .variablesSlider {
+  #mySlider {
     --range-slider:                ${hexToHSLString(clrSlider)};
     
     --range-handle-inactive:       ${hexToHSLString(clrHandleInactive)};
@@ -59,7 +59,7 @@
 </script>
 
 <RangeSlider
-  class="variablesSlider"
+  id="mySlider"
   min={0}
   max={100}
   values={[40,60]}
@@ -80,7 +80,7 @@
 
 <div hide>
 
-  <div class="inputs">
+  <div class="inputs" style="margin-top: 5rem;">
     <span>Slider Range</span>
     <input type="color" name="clrSlider" id="clrSlider" bind:value={clrSlider} title="--range-slider" />
     <input type="color" name="clrLimit" id="clrLimit" bind:value={clrLimit} title="--range-limit" />

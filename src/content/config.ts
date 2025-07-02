@@ -13,7 +13,8 @@ const docs = defineCollection({
         alt: z.string()
       })
       .optional(),
-    ogLocale: z.string().optional()
+    ogLocale: z.string().optional(),
+    sidebar: z.boolean().default(true)
   })
 })
 

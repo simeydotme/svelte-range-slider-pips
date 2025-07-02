@@ -1,0 +1,62 @@
+
+.pips-style {
+  &.rangeSlider {
+    .rangePips {
+      height: max(100%, 6px);
+      top: 100%;
+      transform: translateY(var(--pips-offset, 0%));
+
+      .rsPip {
+        height: calc(var(--pips-height, 0.5em));
+        top: 0;
+      }
+
+      .rsPipVal {
+        font-size: var(--pip-val-size);
+        top: auto!important;
+        bottom: 0;
+        transform: translateX(-50%) translateY(var(--pip-val-offset, 0%));
+      }
+
+      .rsPip.rsSelected .rsPipVal {
+        transform: translateX(-50%) translateY(var(--pip-val-offset, 0%));
+      }
+
+      .rsPip.rsSelected {
+        height: calc(var(--pip-selected-height, 0.5em));
+        transform: translateY(calc(var(--pip-selected-offset, 0%)));
+      }
+
+      .rsPip.rsInRange {
+        height: calc(var(--pip-inrange-height, 0.5em));
+        transform: translateY(calc(var(--pip-inrange-offset, 0%)));
+      }
+    }
+  }
+
+  &.pips-top.rangeSlider {
+    .rangePips {
+      top: auto;
+      bottom: 100%;
+      transform: translateY(calc( 0% - var(--pips-offset, 0%)));
+
+      .rsPip {
+        top: auto;
+        bottom: 0;
+      }
+
+      .rsPipVal {
+        top: 0!important;
+        bottom: auto;
+        transform: translateX(-50%) translateY(calc(var(--pip-val-offset, 0%) * -1));
+      }
+      .rsPip.rsSelected .rsPipVal {
+        transform: translateX(-50%) translateY(calc(var(--pip-val-offset, 0%) * -1));
+      }
+    }
+
+    .rsPipVal {
+      top: auto!important;
+    }
+  }
+}

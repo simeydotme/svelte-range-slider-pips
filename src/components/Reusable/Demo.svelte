@@ -10,6 +10,7 @@
   export let panel: Panel = 'svelte';
   export let dark: boolean | string = false;
   export let toggleable: boolean = false;
+  export let leftAlign: boolean = false;
 
   let displayName: string = '';
   
@@ -169,7 +170,7 @@
 
   {#if $$slots.default}
     <div class="demo-wrapper {dark === true ? 'dark theme-dark' : dark === 'auto' ? 'auto-dark' : ''}">
-      <form class="slider-container">
+      <form class="slider-container" class:leftAlign>
         <fieldset>
           <legend>{ displayName || 'Range Slider Demo' }</legend>
           <slot></slot>
@@ -194,6 +195,10 @@
     margin-inline: -1rem;
     border-radius: 0;
     position: relative;
+
+    &.leftAlign {
+      text-align: left;
+    }
   }
 
   @media (min-width: 37.75em) {
@@ -213,12 +218,18 @@
     text-align: left;
   }
 
-  .slider-container :global( .rangeSlider ) {
-    margin: 3rem 2rem;
+  :global( .slider-container .rangeSlider ) {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
   }
 
-  .slider-container :global( .rangeSlider.pips ) {
-    margin: 3rem 2rem 4.5rem;
+  :global( .slider-container .rangeSlider.pips ) {
+    margin-top: 3rem;
+    margin-bottom: 4.5rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
   }
 
   .slider-container :global( code[data-values] ) {

@@ -1,0 +1,43 @@
+
+.float-style {
+  &.rangeSlider {
+
+    .rangeFloat {
+      font-size: var(--float-size, 0.9em);
+      padding: var(--float-padding, 0.5em) calc(var(--float-padding, 0.5em) * 1.2);
+      border-radius: calc(var(--float-padding, 0.5em) * 2 * var(--float-radius, 0.6));
+      translate: -50% calc(var(--float-offset, 0%) - 1em) 0.01px;
+      transform: translateX(calc(var(--float-offset-inline, 0em)));
+    }
+
+    & .rangeHandle.rsActive .rangeFloat, 
+    &.rsHoverable .rangeHandle:hover .rangeFloat {
+      translate: -50% var(--float-offset, 0%) 0.01px;
+      transform: translateX(calc(var(--float-offset-inline, 0em)));
+    }
+
+    &.rsRange .rangeHandle:nth-of-type(1) .rangeFloat, 
+    &.rsRange .rangeHandle:nth-of-type(1).rsActive .rangeFloat, 
+    &.rsRange.rsHoverable .rangeHandle:nth-of-type(1):hover .rangeFloat {
+      transform: translateX(calc(var(--float-offset-inline, 0em)));
+    }
+
+    &.rsRange .rangeHandle:nth-of-type(2) .rangeFloat, 
+    &.rsRange .rangeHandle:nth-of-type(2).rsActive .rangeFloat, 
+    &.rsRange.rsHoverable .rangeHandle:nth-of-type(2):hover .rangeFloat {
+      transform: translateX(calc(var(--float-offset-inline, 0em) * -1));
+    }
+
+    .rangeBar .rangeFloat {
+      translate: -50% calc(var(--range-float-offset, 0%) - 1em) 0.01px;
+      transform: none;
+    }
+    
+    &.rsHoverable .rangeBar:hover .rangeFloat, 
+    &.rsFocus .rangeBar .rangeFloat {
+        translate: -50% var(--range-float-offset, 0%) 0.01px;
+        transform: none;
+    }
+
+  }
+}
