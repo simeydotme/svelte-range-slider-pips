@@ -85,23 +85,19 @@
     $configStore;
     configProps;
     
-    // Clear existing timeout
     if (debounceTimeout) {
       clearTimeout(debounceTimeout);
     }
     
-    // Set new timeout for 500ms
     debounceTimeout = setTimeout(() => {
       generateCodeOutputs();
-    }, 500);
+    }, 1500);
   }
 
-  // Initial generation on mount
   onMount(() => {
     generateCodeOutputs();
   });
 
-  // Cleanup timeout on component destruction
   onMount(() => {
     return () => {
       if (debounceTimeout) {
