@@ -26,7 +26,15 @@
         background-color: color-mix(in srgb, var(--slider) 20%, white);
         border-color: var(--handle-focus);
       }
-    }    
+    }
+
+    &.rsVertical .rangeHandle {
+      left: 50%;
+      top: auto;
+      .rangeNub {
+        transform: translateX(calc(var(--offset-block))) rotate(var(--rotate))!important;
+      }
+    }
     
     /* left-ring on range */
     &.rsRange .rangeHandle:nth-of-type(1) .rangeNub,
@@ -38,6 +46,18 @@
     &.rsRange .rangeHandle:nth-of-type(2) .rangeNub,
     &.rsRange.rsMin .rangeHandle:nth-of-type(1) .rangeNub {
       transform: translateX(calc(var(--offset-inline) * -1)) translateY(calc(var(--offset-block)))!important;
+    }
+    
+    /* left-ring on range (vertical) */
+    &.rsVertical.rsRange .rangeHandle:nth-of-type(1) .rangeNub,
+    &.rsVertical.rsRange.rsMax .rangeHandle:nth-of-type(1) .rangeNub {
+      transform: translateY(var(--offset-inline)) translateX(var(--offset-block))!important;
+    }
+
+    /* right-ring on range (vertical) */
+    &.rsVertical.rsRange .rangeHandle:nth-of-type(2) .rangeNub,
+    &.rsVertical.rsRange.rsMin .rangeHandle:nth-of-type(1) .rangeNub {
+      transform: translateY(calc(var(--offset-inline) * -1)) translateX(calc(var(--offset-block)))!important;
     }
   }
 

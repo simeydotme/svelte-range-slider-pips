@@ -11,14 +11,12 @@
 
     &.rsVertical {
       height: auto;
-      width: var(--range-width, 0.5em);
+      width: var(--track-width, 0.5em);
+      border-radius: calc((var(--track-width, 0.5em) / 2) * var(--track-radius, 1));
+      box-shadow: 0 var(--track-padding, 0) 0 0 var(--slider), 0 calc(var(--track-padding, 0) * -1) 0 0 var(--slider);
     }
 
-    .rangeHandle {
-      top: 50%;
-    }
-
-    .rangeLimit {
+    &:not(.rsVertical) .rangeLimit {
       top: 50%;
       transform: translateY(-50%);
       height: 100%;
@@ -26,7 +24,6 @@
 
     &.rsVertical .rangeLimit {
       width: 100%;
-      height: auto;
     }
     
     .rangeBar {
@@ -39,7 +36,7 @@
     
     &.rsVertical .rangeBar {
       height: calc(var(--slider-length) * (var(--range-size) / 100 * 1px));
-      width: var(--range-width);
+      width: var(--range-width, 0.5em);
       transform: translateX(-50%);
       left: 50%;
       top: auto;
@@ -51,9 +48,15 @@
     }
   }
 
-  &.rangeSlider,
-  &.rangeSlider.rsPips,
-  &.rangeSlider.rsPipLabels {
+  &.rangeSlider:not(.rsVertical),
+  &.rangeSlider:not(.rsVertical).rsPips,
+  &.rangeSlider:not(.rsVertical).rsPipLabels {
     margin-inline: calc(var(--track-padding, 0));
+  }
+
+  &.rangeSlider.rsVertical,
+  &.rangeSlider.rsVertical.rsPips,
+  &.rangeSlider.rsVertical.rsPipLabels {
+    margin-block: calc(var(--track-padding, 0));
   }
 }

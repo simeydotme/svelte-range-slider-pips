@@ -1,3 +1,6 @@
+.configurator {
+  --slider-height: 80px;
+}
 
 .configurator .configurator-title {
   font-size: 1.5rem;
@@ -51,7 +54,7 @@
 }
 
 [config-list] li {
-  margin: 0;
+  margin: 0!important;
   display: flex;
   align-items: center;
   gap: .5rem;
@@ -59,10 +62,6 @@
 
 [config-grid].block li {
   min-width: 210px;
-}
-
-[config-list] li:not(:has(p)) {
-  max-width: min-content;
 }
 
 [config-list] li.full {
@@ -77,6 +76,7 @@
 [config-list] label {
   margin: 0;
   user-select: none;
+  white-space: nowrap;
 }
 
 [config-list] input[type='color'] {
@@ -107,11 +107,15 @@
 [config-list] select {
   padding: .5rem;
 }
+[config-list] select {
+  padding-inline-end: 2.25rem;
+}
 
 [config-list] input[type='number'] {
-  max-width: 10ch;
+  min-width: 10ch;
+  max-width: 12ch;
   &.larger {
-    max-width: 16ch;
+    max-width: 14ch;
   }
 }
 
@@ -120,7 +124,6 @@
 }
 
 .configurator-range-slider {
-  --slider-height: 80px;
   position: sticky;
   display: grid;
   align-content: center;
@@ -152,21 +155,31 @@
   bottom: calc(var(--theme-navbar-height) + 10px );
 }
 
+.vertical .configurator-range-slider {
+  min-width: var(--slider-height);
+  right: 0;
+  left: auto;
+  width: calc(var(--slider-height) * 3);
+  margin-left: auto;
+  height: 320px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+
+  .rangeSlider.rsVertical.rsPipLabels {
+    margin-right: 0;
+  }
+}
+
 @media (min-width: 50em) {
   .configurator-range-slider {
     bottom: calc(var(--slider-height) + 20px );
   }
   .configurator-range-slider.bottom {
-    bottom: calc( 10px );
+    bottom: 10px;
   }
 }
 
-/* .slider-container .configurator-range-slider .rangeSlider,
-.slider-container .configurator-range-slider .rangeSlider.rsPips,
-.slider-container .configurator-range-slider .rangeSlider.rsPipLabels {
-  margin-block: 0;
-  margin-inline: 0;
-} */
 .configurator-range-slider .rangeSlider.rangeSlider  {
   margin-block: 0;
 }
@@ -272,7 +285,10 @@
     }
   }
   .rangeFloat {
-    padding: 0.5em;
+    padding: 0 0.25em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 1em;
     min-width: 2.5em;
     top: 50%;

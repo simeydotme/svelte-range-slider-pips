@@ -74,7 +74,6 @@
 
   $: {
     if ( $configStore.range !== true ) {
-      handles = 1;
       $configStore.draggy = false;
       $configStore.pushy = false;
       $configStore.rangeGapMin = null;
@@ -94,7 +93,7 @@
   });
 </script>
 
-<section class="configurator">
+<section class="configurator"  class:vertical={$configStore.vertical}>
   <Demo name=" " leftAlign>
     <h2 class="configurator-title" id="basic-functional-setup">Basic Functional Setup</h2>
 
@@ -159,7 +158,7 @@
             max={$configStore.max}
             step={$configStore.step}
             placeholder="0"
-            style="min-width: 100px;"
+            class="larger"
           />
           <label for="min">Min</label>
         </li>
@@ -172,7 +171,7 @@
             min={$configStore.min}
             step={$configStore.step}
             placeholder="100"
-            style="min-width: 100px;"
+            class="larger"
           />
           <label for="max">Max</label>
         </li>

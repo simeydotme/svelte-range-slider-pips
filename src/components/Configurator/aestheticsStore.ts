@@ -32,7 +32,7 @@ export const defaultAesthetics = {
   pipInRangeOffset: 0,
   pipInRangeHeight: 0.5,
   pipValSize: 1,
-  pipValOffset: 100
+  pipValOffset: 0
 }
 
 export const aestheticsStore = createPersistedStore('svelte-range-slider-aesthetics', defaultAesthetics);
@@ -71,5 +71,5 @@ export const pipsStyle = derived(aestheticsStore, store => `
   --pip-inrange-offset: ${store.pipInRangeOffset}%;
   --pip-inrange-height: ${store.pipInRangeHeight}em;
   --pip-val-size: ${store.pipValSize}em;
-  --pip-val-offset: ${store.pipValOffset}%;
+  --pip-val-offset: ${store.pipValOffset}em;
 `);

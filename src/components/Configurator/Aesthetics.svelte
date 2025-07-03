@@ -37,6 +37,7 @@
   };
 
   $: isRangeSlider = !!$configStore.range;
+  $: isVertical = $configStore.vertical;
   $: hasPips = [$configStore.first, $configStore.rest, $configStore.last].some((v) => v !== "false" && v !== false);
   $: hasPipLabels = [$configStore.first, $configStore.rest, $configStore.last].some((v) => v === "label");
 
@@ -314,8 +315,8 @@
       <ul config-list>
         <li title="The position of the selected pip">
           <select id="pipPosition" bind:value={$aestheticsStore.pipPosition}>
-            <option value="bottom">Bottom</option>
-            <option value="top">Top</option>
+            <option value="bottom">{ isVertical ? "Right" : "Bottom" }</option>
+            <option value="top">{ isVertical ? "Left" : "Top" }</option>
           </select>
         </li>
         <li title="The vertical offset of the pips list ( in % )">
@@ -439,12 +440,15 @@
               key="pipValOffset"
               name="pip label offset"
               label="Offset"
-              min={-200}
-              max={400}
-              step={5}
+              min={-6}
+              max={6}
+              step={0.1}
               pipstep={10}
-              suffix="%"
             />
+          </li>
+          <li>
+            <Info>Pip Label positioning is quite complicated, 
+              so you may want to use the generated code and adjust things manually.</Info>
           </li>
         </ul>
       {/if}

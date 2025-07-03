@@ -1,4 +1,3 @@
-
 .pips-style {
   &.rangeSlider {
     .rangePips {
@@ -13,13 +12,9 @@
 
       .rsPipVal {
         font-size: var(--pip-val-size);
-        top: auto!important;
-        bottom: 0;
-        transform: translateX(-50%) translateY(var(--pip-val-offset, 0%));
-      }
-
-      .rsPip.rsSelected .rsPipVal {
-        transform: translateX(-50%) translateY(var(--pip-val-offset, 0%));
+        top: calc(var(--pips-height, 0.5em) + .33em);
+        bottom: auto;
+        transform: translateX(-50%) translateY(var(--pip-val-offset, 0em));
       }
 
       .rsPip.rsSelected {
@@ -27,9 +22,19 @@
         transform: translateY(calc(var(--pip-selected-offset, 0%)));
       }
 
+      .rsPip.rsSelected .rsPipVal {
+        top: calc(var(--pip-selected-height, 0.5em) + .33em);
+        transform: translateX(-50%) translateY(var(--pip-val-offset, 0em));
+      }
+
       .rsPip.rsInRange {
         height: calc(var(--pip-inrange-height, 0.5em));
         transform: translateY(calc(var(--pip-inrange-offset, 0%)));
+      }
+
+      .rsPip.rsInRange .rsPipVal {
+        top: calc(var(--pip-inrange-height, 0.5em) + .33em);
+        transform: translateX(-50%) translateY(var(--pip-val-offset, 0em));
       }
     }
   }
@@ -46,17 +51,115 @@
       }
 
       .rsPipVal {
-        top: 0!important;
-        bottom: auto;
-        transform: translateX(-50%) translateY(calc(var(--pip-val-offset, 0%) * -1));
+        bottom: calc(var(--pips-height, 0.5em) + .33em);
+        top: auto;
+        transform: translateX(-50%) translateY(calc(var(--pip-val-offset, 0em) * -1));
       }
       .rsPip.rsSelected .rsPipVal {
-        transform: translateX(-50%) translateY(calc(var(--pip-val-offset, 0%) * -1));
+        top: auto;
+        bottom: calc(var(--pip-selected-height, 0.5em) + .33em);
+        transform: translateX(-50%) translateY(calc(var(--pip-val-offset, 0em) * -1));
+      }
+      .rsPip.rsInRange .rsPipVal {
+        top: auto;
+        bottom: calc(var(--pip-inrange-height, 0.5em) + .33em);
+        transform: translateX(-50%) translateY(calc(var(--pip-val-offset, 0em) * -1));
+      }
+    }
+  }
+  
+  &.rangeSlider.rsVertical {
+    .rangePips {
+      width: max(100%, 6px);
+      height: auto;
+      left: 100%;
+      top: 0;
+      bottom: 0;
+      transform: translateX(var(--pips-offset, 0%));
+
+      .rsPip {
+        width: calc(var(--pips-height, 0.5em));
+        height: 1px;
+        left: 0;
+        top: auto;
+      }
+
+      .rsPipVal {
+        bottom: auto;
+        top: 50%!important;
+        left: calc(var(--pips-height, 0.5em) + .33em);
+        right: auto;
+        transform: translateY(-50%) translateX(var(--pip-val-offset, 0em));
+      }
+
+      .rsPip.rsSelected {
+        width: calc(var(--pip-selected-height, 0.5em));
+        transform: translateX(calc(var(--pip-selected-offset, 0%)));
+      }
+
+      .rsPip.rsSelected .rsPipVal {
+        left: calc(var(--pip-selected-height, 0.5em) + .33em);
+        transform: translateY(-50%) translateX(var(--pip-val-offset, 0em));
+      }
+
+      .rsPip.rsInRange {
+        width: calc(var(--pip-inrange-height, 0.5em));
+        transform: translateX(calc(var(--pip-inrange-offset, 0%)));
+      }
+
+      .rsPip.rsInRange .rsPipVal {
+        left: calc(var(--pip-inrange-height, 0.5em) + .33em);
+        transform: translateY(-50%) translateX(var(--pip-val-offset, 0em));
+      }
+    }
+  }
+
+  &.pips-top.rangeSlider.rsVertical {
+    .rangePips {
+      left: auto;
+      right: 100%;
+      top: 0;
+      bottom: 0;
+      transform: translateX(calc(0% - var(--pips-offset, 0%)));
+
+      .rsPip {
+        left: auto;
+        right: 0;
+      }
+
+      .rsPipVal {
+        right: calc((var(--pips-height, 0.5em) + .33em))!important;
+        left: auto!important;
+        transform: translateY(-50%) translateX(calc(var(--pip-val-offset, 0em) * -1));
+      }
+
+      .rsPip.rsSelected {
+        width: calc(var(--pip-selected-height, 0.5em));
+        transform: translateX(calc(var(--pip-selected-offset, 0%) * -1));
+      }
+
+      .rsPip.rsSelected .rsPipVal {
+        bottom: auto;
+        top: 50%;
+        right: calc(var(--pip-selected-height, 0.5em) + .33em);
+        transform: translateY(-50%) translateX(calc(var(--pip-val-offset, 0em) * -1));
+      }
+
+      .rsPip.rsInRange {
+        width: calc(var(--pip-inrange-height, 0.5em));
+        transform: translateX(calc(var(--pip-inrange-offset, 0%) * -1));
+      }
+
+      .rsPip.rsInRange .rsPipVal {
+        bottom: auto;
+        top: 50%;
+        right: calc(var(--pip-inrange-height, 0.5em) + .33em);
+        transform: translateY(-50%) translateX(calc(var(--pip-val-offset, 0em) * -1));
       }
     }
 
     .rsPipVal {
-      top: auto!important;
+      left: auto!important;
     }
   }
 }
