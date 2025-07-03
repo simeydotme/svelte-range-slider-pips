@@ -159,10 +159,10 @@
 
   <h2>Formatter Context Tests</h2>
   <h3>Reversed mode - tests percentage calculation in reversed orientation</h3>
-  <RangeSlider id="reversed-mode" pips all="label" reversed formatter={percentFormatter} />
+  <RangeSlider id="reversed-mode" value={75} pips all="label" reversed formatter={percentFormatter} />
 
   <h3>Vertical mode - tests formatting in vertical orientation</h3>
-  <RangeSlider id="vertical-mode" pips all="label" vertical formatter={percentFormatter} />
+  <RangeSlider id="vertical-mode" value={75} pips all="label" vertical formatter={percentFormatter} />
 
   <h3>Custom range - tests formatting with non-standard min/max values</h3>
   <RangeSlider id="custom-range" pips all="label" min={-100} max={200} formatter={percentFormatter} />

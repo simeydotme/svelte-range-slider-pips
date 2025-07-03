@@ -20,22 +20,44 @@ test.describe('Formatter Tests', () => {
 
     test('should use custom range formatter with number formatter', async ({ page }) => {
       const slider = page.locator('#number-range-formatter');
-      const rangeBar = slider.locator('.rangeBar');
-      const rangeFloat = rangeBar.locator('.rangeFloat');
+      const sliderMin = page.locator('#number-range-formatter-min');
+      const sliderMax = page.locator('#number-range-formatter-max');
+      const rangeFloat = slider.locator('.rangeBar .rangeFloat');
+      const rangeFloatMin = sliderMin.locator('.rangeBar .rangeFloat');
+      const rangeFloatMax = sliderMax.locator('.rangeBar .rangeFloat');
 
       await slider.scrollIntoViewIfNeeded();
       await slider.locator('.rangeBar');
       await expect(rangeFloat).toContainText('25.00 - 75.00');
+
+      await sliderMin.scrollIntoViewIfNeeded();
+      await sliderMin.locator('.rangeBar');
+      await expect(rangeFloatMin).toContainText('0.00 - 50.00');
+
+      await sliderMax.scrollIntoViewIfNeeded();
+      await sliderMax.locator('.rangeBar');
+      await expect(rangeFloatMax).toContainText('50.00 - 100.00');
     });
 
     test('should use currency range formatter', async ({ page }) => {
       const slider = page.locator('#currency-range-formatter');
-      const rangeBar = slider.locator('.rangeBar');
-      const rangeFloat = rangeBar.locator('.rangeFloat');
+      const sliderMin = page.locator('#currency-range-formatter-min');
+      const sliderMax = page.locator('#currency-range-formatter-max');
+      const rangeFloat = slider.locator('.rangeBar .rangeFloat');
+      const rangeFloatMin = sliderMin.locator('.rangeBar .rangeFloat');
+      const rangeFloatMax = sliderMax.locator('.rangeBar .rangeFloat');
 
       await slider.scrollIntoViewIfNeeded();
       await slider.locator('.rangeBar');
       await expect(rangeFloat).toContainText('$25.00 - $75.00');
+
+      await sliderMin.scrollIntoViewIfNeeded();
+      await sliderMin.locator('.rangeBar');
+      await expect(rangeFloatMin).toContainText('$0.00 - $50.00');
+
+      await sliderMax.scrollIntoViewIfNeeded();
+      await sliderMax.locator('.rangeBar');
+      await expect(rangeFloatMax).toContainText('$50.00 - $100.00');
     });
 
     test('should use percent range formatter', async ({ page }) => {
@@ -165,15 +187,23 @@ test.describe('Formatter Tests', () => {
   test.describe('Formatter Context Tests', () => {
     test('should calculate percentages correctly in reversed mode', async ({ page }) => {
       const slider = page.locator('#reversed-mode');
-      const rangeBar = slider.locator('.rangeBar');
-      const rangeFloat = rangeBar.locator('.rangeFloat');
+      const sliderMin = page.locator('#reversed-mode-min');
+      const sliderMax = page.locator('#reversed-mode-max');
+      const rangeFloat = slider.locator('.rangeBar .rangeFloat');
+      const rangeFloatMin = sliderMin.locator('.rangeBar .rangeFloat');
+      const rangeFloatMax = sliderMax.locator('.rangeBar .rangeFloat');
 
       await slider.scrollIntoViewIfNeeded();
       await slider.locator('.rangeBar');
-      // the values[] array is not actually reversed, only the display is.
-      // so the formatter is still in the same order. THe user can manually reverse
-      // the formatter if they desire
-      await expect(rangeFloat).toContainText('25.0% - 75.0%');
+      await expect(rangeFloat).toContainText('75.0% - 25.0%');
+
+      await sliderMin.scrollIntoViewIfNeeded();
+      await sliderMin.locator('.rangeBar');
+      await expect(rangeFloatMin).toContainText('50.0% - 0.0%');
+
+      await sliderMax.scrollIntoViewIfNeeded();
+      await sliderMax.locator('.rangeBar');
+      await expect(rangeFloatMax).toContainText('100.0% - 50.0%');
     });
 
     test('should format values correctly in vertical mode', async ({ page }) => {

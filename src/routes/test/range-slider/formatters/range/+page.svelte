@@ -95,11 +95,43 @@
     rangeFormatter={numberRangeFormatter}
     rangeFloat
   />
+  <RangeSlider
+    id="number-range-formatter-min"
+    range="min"
+    values={[50]}
+    handleFormatter={numberFormatter}
+    rangeFormatter={numberRangeFormatter}
+    rangeFloat
+  />
+  <RangeSlider
+    id="number-range-formatter-max"
+    range="max"
+    value={50}
+    handleFormatter={numberFormatter}
+    rangeFormatter={numberRangeFormatter}
+    rangeFloat
+  />
   <h6>Currency range formatter - displays values with $ prefix and 2 decimal places</h6>
   <RangeSlider
     id="currency-range-formatter"
     range
     {values}
+    handleFormatter={currencyFormatter}
+    rangeFormatter={currencyRangeFormatter}
+    rangeFloat
+  />
+  <RangeSlider
+    id="currency-range-formatter-min"
+    range="min"
+    values={[50]}
+    handleFormatter={currencyFormatter}
+    rangeFormatter={currencyRangeFormatter}
+    rangeFloat
+  />
+  <RangeSlider
+    id="currency-range-formatter-max"
+    range="max"
+    value={50}
     handleFormatter={currencyFormatter}
     rangeFormatter={currencyRangeFormatter}
     rangeFloat
@@ -271,7 +303,25 @@
   <RangeSlider
     id="reversed-mode"
     range
-    {values}
+    values={[25, 75]}
+    reversed
+    handleFormatter={percentFormatter}
+    rangeFormatter={percentRangeFormatter}
+    rangeFloat
+  />
+  <RangeSlider
+    id="reversed-mode-min"
+    range="min"
+    values={[50]}
+    reversed
+    handleFormatter={percentFormatter}
+    rangeFormatter={percentRangeFormatter}
+    rangeFloat
+  />
+  <RangeSlider
+    id="reversed-mode-max"
+    range="max"
+    value={50}
     reversed
     handleFormatter={percentFormatter}
     rangeFormatter={percentRangeFormatter}

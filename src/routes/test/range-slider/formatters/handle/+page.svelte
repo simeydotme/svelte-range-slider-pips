@@ -185,9 +185,9 @@
 
   <h2>Formatter Context Tests</h2>
   <h3>Reversed mode - tests percentage calculation in reversed orientation</h3>
-  <RangeSlider id="reversed-mode" {value} reversed handleFormatter={percentFormatter} float />
+  <RangeSlider id="reversed-mode" value={75} reversed handleFormatter={percentFormatter} float />
   <h3>Vertical mode - tests formatting in vertical orientation</h3>
-  <RangeSlider id="vertical-mode" {value} vertical handleFormatter={percentFormatter} float />
+  <RangeSlider id="vertical-mode" value={75} vertical handleFormatter={percentFormatter} float />
   <h3>Custom range - tests formatting with non-standard min/max values</h3>
   <RangeSlider id="custom-range" {value} min={-100} max={200} handleFormatter={percentFormatter} float />
   <h3>Step values - tests formatting with non-unit step values</h3>

@@ -198,7 +198,7 @@ test.describe('Handle Formatter Tests', () => {
 
       await slider.scrollIntoViewIfNeeded();
       await handle.hover();
-      await expect(float).toContainText('50.0%');
+      await expect(float).toContainText('75.0%');
     });
 
     test('should format values correctly in vertical mode', async ({ page }) => {
@@ -208,7 +208,7 @@ test.describe('Handle Formatter Tests', () => {
 
       await slider.scrollIntoViewIfNeeded();
       await handle.hover();
-      await expect(float).toContainText('50.0%');
+      await expect(float).toContainText('75.0%');
     });
 
     test('should handle different min/max ranges correctly', async ({ page }) => {
