@@ -1,0 +1,38 @@
+---
+title: 'Hotel Range'
+description: 'A slider to choose a price range for hotels and show the number of hotels for each price in the range, plus the total number of hotels.'
+image:
+  src: '/svelte-range-slider-pips/recipes/hotel-range.png'
+  alt: 'Hotel Range recipe'
+---
+import { Code } from 'astro/components';
+import { Icon } from 'astro-icon'
+import RangeSlider from 'svelte-range-slider-pips';
+import { cleanImport } from '~lib/cleanImport.ts';
+
+import Demo from '~components/Reusable/Demo.svelte';
+import Note from '~components/Reusable/Note.astro';
+
+import HotelRange from '~demos/recipes/hotel-range/HotelRange.svelte';
+import HotelRangeRaw from '~demos/recipes/hotel-range/HotelRange.svelte?raw';
+import HotelRangeCss from '~demos/recipes/hotel-range/HotelRange.css?raw';
+import HotelRangeJs from '~demos/recipes/hotel-range/HotelRange.ts?raw';
+
+Here is a plausible use case, showing a slider to choose a price range for hotels and
+showing the number of hotels for each price in the range, plus the total number of hotels.
+
+<Demo name="Hotel Range" panel="svelte" client:load>
+  <HotelRange client:only="svelte" />
+</Demo>
+
+First of all we are bucketing the hotels into price ranges (e.g. $0-$10, $10-$20, etc.), and
+then we are creating a `<RangeSlider>` with a `step` that matches the bucket size.
+
+We are using the `formatter()` prop to add a special label for each pip that sets a `--h` custom property
+to match the number of hotels in each bucket. Then CSS is applied to style the height of the label to match the number of hotels.
+
+<Demo name="Hotel Range" panel="svelte" client:load>
+  <Code slot="svelte" code={cleanImport(HotelRangeRaw)} lang="svelte" />
+  <Code slot="css" code={HotelRangeCss} lang="css" />
+  <Code slot="typescript" code={HotelRangeJs} lang="ts" />
+</Demo>

@@ -147,6 +147,7 @@ export const SIDEBAR: Sidebar = {
           { text: 'Liquid Glass', link: `${REPOPATH}/en/recipes/liquid-glass`, new: true },
           { text: 'Temperature', link: `${REPOPATH}/en/recipes/temperature`, new: true },
           { text: 'Label Colors', link: `${REPOPATH}/en/recipes/label-colors`, new: true },
+          { text: 'Hotel Range', link: `${REPOPATH}/en/recipes/hotel-range`, new: true },
         ]
       }
     ]

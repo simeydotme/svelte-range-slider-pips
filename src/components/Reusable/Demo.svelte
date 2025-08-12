@@ -22,13 +22,14 @@
     name = safeId( name );
   }
   
-  type Panel = 'svelte' | 'css' | 'vanilla' | 'vue' | 'react' | 'none';
-  const panels: Panel[] = ['svelte', 'css', 'vanilla', 'vue', 'react'];
+  type Panel = 'svelte' | 'css' | 'vanilla'| 'typescript' | 'vue' | 'react' | 'none';
+  const panels: Panel[] = ['svelte', 'css', 'vanilla', 'typescript', 'vue', 'react'];
   const defaultPanel: number = panels.indexOf( panel );
   const iconMap: Record<Panel, string> = {
     svelte: 'svelte',
     css: 'css3',
     vanilla: 'javascript',
+    typescript: 'typescript',
     vue: 'vuejs',
     react: 'react',
     none: ''
@@ -66,7 +67,7 @@
 
 <section class="slider-demo {name}">
 
-  {#if $$slots.svelte || $$slots.css || $$slots.vanilla || $$slots.vue || $$slots.react }
+  {#if $$slots.svelte || $$slots.css || $$slots.vanilla || $$slots.typescript || $$slots.vue || $$slots.react }
     
     <div class="tabs">
 
@@ -133,6 +134,19 @@
             hidden="{expanded !== 'vanilla'}"
           >
             <slot name="vanilla" />
+          </div>
+        {/if}
+
+        {#if $$slots.typescript}
+          <div
+            id="{name}-typescript-panel"
+            role="tabpanel"
+            aria-labelledby="typescript-tab"
+            aria-hidden="{expanded !== 'typescript'}"
+            tabindex="{expanded === 'typescript' ? 0 : -1}"
+            hidden="{expanded !== 'typescript'}"
+          >
+            <slot name="typescript" />
           </div>
         {/if}
 

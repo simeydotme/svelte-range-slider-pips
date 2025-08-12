@@ -1,0 +1,175 @@
+.container {
+  container-type: inline-size;
+  p {
+    margin-top: 1em;
+  }
+}
+
+#hotel-range {
+
+  --h: 0;
+  --max-h: 120px;
+  --shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+  --range-slider: hsl(269, 10%, 80%);
+  --range-pip: hsl(269, 10%, 80%);
+  --range-pip-active: hsl(269, 60%, 58%);
+  --range-pip-in-range: var(--range-pip-active);
+  --range-range: var(--range-pip-active);
+  --range-range-inactive: hsl(269, 10%, 55%);
+  --range-handle-focus: var(--range-pip-active);
+  --range-handle: var(--range-pip);
+
+  margin-top: calc(var(--max-h) + 20px);
+  font-size: 14px;
+
+  &.rangeSlider,
+  & .rangeBar {
+    height: 6px;
+  }
+
+  & .rangePips {
+    top: auto;
+    bottom: 100%;
+  }
+
+  & .rsPip {
+
+    width: 1px;
+    height: 0;
+    bottom: 0;
+    top: auto;
+
+    @container (min-width: 400px) {
+      width: 3px;
+      translate: -1.5px 0;
+    }
+    @container (min-width: 600px) {
+      width: 4px;
+      translate: -2px 0;
+    }
+  }
+
+  & .rsPip:hover {
+    z-index: 99;
+  }
+
+  & .rsPipVal {
+    top: 0;
+    width: 100%;
+    background-color: inherit;
+  }
+
+  & .rangeNub {
+    border-radius: 100%;
+    box-shadow: inset 0 0 0 4px white, var(--shadow);
+  }
+
+  & .rangeFloat {
+    bottom: auto;
+    top: 26px;
+    box-shadow: var(--shadow);
+  }
+
+  & .rangeBar .rangeFloat {
+    top: -26px;
+  }
+
+  & .hotel-range-label {
+    display: block;
+    height: calc(min((var(--h) * 2px) + min(var(--h) * 4px, 4px), var(--max-h)));
+    background-color: inherit;
+    background-image: linear-gradient(0deg, hsla(0, 0%, 100%, 0.5), transparent 30%, hsla(0, 0%, 0%, 0.4) 80px);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 8px 8px 0 0;
+    width: 100%;
+  }
+
+  & .hotel-range-label-number {
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+    font-weight: 600;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    translate: -25% -120%;
+    text-shadow: 
+      0 1px 1px rgba(255, 255, 255, 1), 
+      0 0 2px rgba(255, 255, 255, 1), 
+      0 1px 4px rgba(255, 255, 255, 1);
+    background: var(--range-pip);
+    border-radius: 5px;
+    padding-inline: 0.5em;
+    box-shadow: var(--shadow);
+  }
+
+  & .hotel-range-label:hover .hotel-range-label-number {
+    opacity: 1;
+  }
+
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1em;
+  margin-top: 1em;
+  margin-inline: auto;
+  max-width: 520px;
+  
+  @container (min-width: 500px) {
+    grid-template-columns: 1fr 24px 1fr;
+  }
+
+  & .field {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    flex: 1;
+    margin: 0!important;
+
+    & input {
+      grid-row: 2;
+      grid-column: 1;
+      appearance: textfield;
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        appearance: none;
+        margin: 0;
+      }
+    }
+
+    &:after {
+      content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 320 512'%3E%3Cpath fill='lightSlateGrey' d='M136 24c0-13.3 10.7-24 24-24s24 10.7 24 24v40h56c17.7 0 32 14.3 32 32s-14.3 32-32 32H125.1c-24.9 0-45.1 20.2-45.1 45.1c0 22.5 16.5 41.5 38.7 44.7l91.6 13.1c53.8 7.7 93.7 53.7 93.7 108c0 60.3-48.9 109.1-109.1 109.1H184v40c0 13.3-10.7 24-24 24s-24-10.7-24-24v-40H64c-17.7 0-32-14.3-32-32s14.3-32 32-32h130.9c24.9 0 45.1-20.2 45.1-45.1c0-22.5-16.5-41.5-38.7-44.7l-91.6-13.1c-53.8-7.6-93.7-53.7-93.7-108C16 112.9 64.9 64 125.1 64H136z'/%3E%3C/svg%3E");
+      grid-row: 2;
+      grid-column: 1;
+      justify-self: flex-end;
+      align-self: center;
+      text-align: center;
+      width: 2.2em;
+      height: 1.6em;
+      line-height: 2em;
+      border-left: 1px solid hsl(222, 20%, 75%);
+    }
+  }
+
+  & hr {
+    width: 100%;
+    height: 1px;
+    background: hsl(222, 20%, 75%);
+    border: none;
+    justify-self: center;
+    align-self: end;
+    margin: 0 0 21px;
+    display: none;
+    opacity: 1;
+    @container (min-width: 500px) {
+      display: block;
+    }
+  }
+
+  & input {
+    width: 100%;
+  }
+}
