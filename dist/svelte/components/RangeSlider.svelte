@@ -337,7 +337,7 @@ function moveHandle(index, value2, fireEvent = true) {
 function fireChangeEvent(values2) {
   const hasChanged = previousValues.some((prev, index) => {
     return prev !== values2[index];
-  });
+  }) || previousValues.length !== values2.length;
   if (hasChanged) {
     eChange();
     previousValues = [...values2];
@@ -392,20 +392,24 @@ function sliderKeydown(event) {
       case "PageUp":
       case "ArrowRight":
       case "ArrowUp":
+        setStartAndPreviousValues();
         moveHandle(handle, values[handle] + jump);
         prevent = true;
         break;
       case "PageDown":
       case "ArrowLeft":
       case "ArrowDown":
+        setStartAndPreviousValues();
         moveHandle(handle, values[handle] - jump);
         prevent = true;
         break;
       case "Home":
+        setStartAndPreviousValues();
         moveHandle(handle, min);
         prevent = true;
         break;
       case "End":
+        setStartAndPreviousValues();
         moveHandle(handle, max);
         prevent = true;
         break;
@@ -415,6 +419,10 @@ function sliderKeydown(event) {
       event.stopPropagation();
     }
   }
+}
+function setStartAndPreviousValues() {
+  startValues = values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
+  previousValues = [...startValues];
 }
 function sliderInteractStart(event) {
   if (!disabled) {
@@ -436,8 +444,7 @@ function sliderInteractStart(event) {
         handleInteract(clientPos);
       }
     }
-    startValues = values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
-    previousValues = [...startValues];
+    setStartAndPreviousValues();
     eStart();
   }
 }
@@ -519,7 +526,7 @@ function eStop() {
 function eChange() {
   if (disabled) return;
   const startValue = rangeActivated ? startValues : startValues[activeHandle];
-  const previousValue = typeof previousValues === "undefined" ? startValue : rangeActivated ? previousValues : previousValues[activeHandle];
+  const previousValue = previousValues.length === 0 ? startValue : rangeActivated ? previousValues : previousValues[activeHandle];
   dispatch("change", {
     activeHandle,
     startValue,

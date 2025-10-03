@@ -30,6 +30,10 @@
     ]
   },
   {
+    "name": "keyboard",
+    "path": "/test/range-slider/keyboard"
+  },
+  {
     "name": "limits",
     "path": "/test/range-slider/limits"
   },
@@ -121,7 +125,7 @@
   },
   {
     "name": "spring",
-    "path": "/test/range-slider/spring",
+    "path": "",
     "children": [
       {
         "name": "configurations",
@@ -130,10 +134,6 @@
       {
         "name": "dynamic",
         "path": "/test/range-slider/spring/dynamic"
-      },
-      {
-        "name": "edge-cases",
-        "path": "/test/range-slider/spring/edge-cases"
       }
     ]
   },

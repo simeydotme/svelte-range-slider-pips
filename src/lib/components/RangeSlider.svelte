@@ -518,9 +518,10 @@
    */
   function fireChangeEvent(values: number[]) {
     // Check if any value has changed by comparing each element
-    const hasChanged = previousValues.some((prev, index) => {
-      return prev !== values[index];
-    });
+    const hasChanged =
+      previousValues.some((prev, index) => {
+        return prev !== values[index];
+      }) || previousValues.length !== values.length;
 
     if (hasChanged) {
       eChange();
@@ -609,20 +610,24 @@
         case 'PageUp':
         case 'ArrowRight':
         case 'ArrowUp':
+          setStartAndPreviousValues();
           moveHandle(handle, values[handle] + jump);
           prevent = true;
           break;
         case 'PageDown':
         case 'ArrowLeft':
         case 'ArrowDown':
+          setStartAndPreviousValues();
           moveHandle(handle, values[handle] - jump);
           prevent = true;
           break;
         case 'Home':
+          setStartAndPreviousValues();
           moveHandle(handle, min);
           prevent = true;
           break;
         case 'End':
+          setStartAndPreviousValues();
           moveHandle(handle, max);
           prevent = true;
           break;
@@ -632,6 +637,14 @@
         event.stopPropagation();
       }
     }
+  }
+
+  /**
+   * set the start and previous values to the current values when the user interacts with the slider
+   */
+  function setStartAndPreviousValues() {
+    startValues = values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
+    previousValues = [...startValues];
   }
 
   /**
@@ -663,9 +676,7 @@
           handleInteract(clientPos);
         }
       }
-      // fire the start event
-      startValues = values.map((v) => constrainAndAlignValue(v, min, max, step, precision, limits));
-      previousValues = [...startValues];
+      setStartAndPreviousValues();
       eStart();
     }
   }
@@ -791,11 +802,7 @@
     if (disabled) return;
     const startValue = rangeActivated ? startValues : startValues[activeHandle];
     const previousValue =
-      typeof previousValues === 'undefined'
-        ? startValue
-        : rangeActivated
-          ? previousValues
-          : previousValues[activeHandle];
+      previousValues.length === 0 ? startValue : rangeActivated ? previousValues : previousValues[activeHandle];
     dispatch('change', {
       activeHandle,
       startValue,

@@ -1,22 +1,15 @@
 <script lang="ts">
   import RangeSlider from '$lib/components/RangeSlider.svelte';
-  import { onMount } from 'svelte';
 
   // Test state
   let events: { type: string; detail: any }[] = [];
   let lastEvent: { type: string; detail: any } | null = null;
-  let testValue = 50;
-  let testValues = [25, 75];
-  let testRange = false;
-  let testDraggy = false;
 
   // Single handle test state
-  let singleHandleValue = 50;
+  let value = 50;
+  let reversed = false;
+  let disabled = false;
 
-  // Multi-handle test state
-  let multiHandleValues = [10, 30, 50, 70, 90];
-
-  // Event handlers
   function handleStart(event: CustomEvent) {
     events.push({ type: 'start', detail: event.detail });
     events = [...events];
@@ -34,95 +27,39 @@
 
   $: lastEvent = events[events.length - 1];
 
-  // Test scenarios
-  function clearTestScenario() {
+  function clearEvents() {
     events = [];
     lastEvent = null;
   }
 
-  // Helper to format event details for display
   function formatEventDetail(detail: any) {
     return JSON.stringify(detail, null, 2);
   }
 </script>
 
 <div class="container">
-  <h1>Range Slider Event Tests</h1>
+  <h1>Keyboard Interaction Tests</h1>
 
   <div class="controls">
+    <button on:click={clearEvents}>Clear Event History</button>
     <label>
-      <input type="checkbox" bind:checked={testRange} />
-      Enable Range Mode
+      <input type="checkbox" bind:checked={reversed} />
+      Reversed
     </label>
     <label>
-      <input type="checkbox" bind:checked={testDraggy} disabled={!testRange} />
-      Enable Draggable Range
+      <input type="checkbox" bind:checked={disabled} />
+      Disabled
     </label>
   </div>
 
-  <div class="test-scenarios">
-    <h2>Test Scenarios</h2>
-
-    <button on:click={() => clearTestScenario()}> Clear Event History </button>
-  </div>
-
   <div class="slider-section">
-    <h2>Single Handle Slider</h2>
+    <h2>Single Handle Slider (Keyboard Focusable)</h2>
     <div class="slider-container">
       <RangeSlider
-        id="single-handle-slider"
-        bind:value={singleHandleValue}
-        pips={true}
-        all="label"
-        on:start={handleStart}
-        on:stop={handleStop}
-        on:change={handleChange}
-      />
-    </div>
-  </div>
-
-  <div class="slider-section">
-    <h2>Range Slider</h2>
-    <div class="slider-container">
-      <RangeSlider
-        id="range-slider"
-        bind:value={testValue}
-        bind:values={testValues}
-        range={testRange}
-        draggy={testDraggy}
-        pips={true}
-        all="label"
-        on:start={handleStart}
-        on:stop={handleStop}
-        on:change={handleChange}
-      />
-    </div>
-  </div>
-
-  <div class="slider-section">
-    <h2>Disabled Slider</h2>
-    <div class="slider-container">
-      <RangeSlider
-        id="disabled-slider"
-        values={[25, 75]}
-        range={true}
-        draggy={true}
-        disabled={true}
-        pips={true}
-        all="label"
-        on:start={handleStart}
-        on:stop={handleStop}
-        on:change={handleChange}
-      />
-    </div>
-  </div>
-
-  <div class="slider-section">
-    <h2>Multi-Handle Slider</h2>
-    <div class="slider-container">
-      <RangeSlider
-        id="multi-handle-slider"
-        bind:values={multiHandleValues}
+        id="keyboard-slider"
+        bind:value
+        {reversed}
+        {disabled}
         pips={true}
         all="label"
         on:start={handleStart}
@@ -170,15 +107,6 @@
     margin: 2rem 0;
     display: flex;
     gap: 1rem;
-  }
-
-  .test-scenarios {
-    margin: 4rem 0;
-  }
-
-  .test-scenarios button {
-    padding: 0.5rem 1rem;
-    margin-right: 1rem;
   }
 
   .slider-section {
