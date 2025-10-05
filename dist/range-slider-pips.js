@@ -1993,8 +1993,8 @@
 		let html_tag;
 		let raw_value = /*formatter*/ ctx[16](/*val*/ ctx[37], /*i*/ ctx[39], valueAsPercent(/*val*/ ctx[37], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[17])) + "";
 		let t1;
-		let if_block0 = create_if_block_8$1(ctx);
-		let if_block1 = create_if_block_7$1(ctx);
+		let if_block0 = /*prefix*/ ctx[14] && create_if_block_8$1(ctx);
+		let if_block1 = /*suffix*/ ctx[15] && create_if_block_7$1(ctx);
 
 		return {
 			c() {
@@ -2016,7 +2016,7 @@
 				if (if_block1) if_block1.m(span, null);
 			},
 			p(ctx, dirty) {
-				{
+				if (/*prefix*/ ctx[14]) {
 					if (if_block0) {
 						if_block0.p(ctx, dirty);
 					} else {
@@ -2024,11 +2024,14 @@
 						if_block0.c();
 						if_block0.m(span, t0);
 					}
+				} else if (if_block0) {
+					if_block0.d(1);
+					if_block0 = null;
 				}
 
 				if (dirty[0] & /*formatter, min, max, finalPipStep, step, precision*/ 2293774 && raw_value !== (raw_value = /*formatter*/ ctx[16](/*val*/ ctx[37], /*i*/ ctx[39], valueAsPercent(/*val*/ ctx[37], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[17])) + "")) html_tag.p(raw_value);
 
-				{
+				if (/*suffix*/ ctx[15]) {
 					if (if_block1) {
 						if_block1.p(ctx, dirty);
 					} else {
@@ -2036,6 +2039,9 @@
 						if_block1.c();
 						if_block1.m(span, null);
 					}
+				} else if (if_block1) {
+					if_block1.d(1);
+					if_block1 = null;
 				}
 			},
 			d(detaching) {
@@ -2049,7 +2055,7 @@
 		};
 	}
 
-	// (137:14) {#if true || prefix}
+	// (137:14) {#if prefix}
 	function create_if_block_8$1(ctx) {
 		let span;
 		let t;
@@ -2075,7 +2081,7 @@
 		};
 	}
 
-	// (139:14) {#if true || suffix}
+	// (139:14) {#if suffix}
 	function create_if_block_7$1(ctx) {
 		let span;
 		let t;
@@ -4561,7 +4567,7 @@
 
 					// for touch devices we want the handle to instantly
 					// move to the position touched for more responsive feeling
-					if (event.type === 'touchstart' && !target.matches('.rsPipVal')) {
+					if (event.type === 'touchstart' && !target.closest('.rsPipVal')) {
 						handleInteract(clientPos);
 					}
 				}
@@ -4634,7 +4640,7 @@
 
 						// don't trigger interact if the target is a handle (no need) or
 						// if the target is a label (we want to move to that value from rangePips)
-						if (!targetIsHandle(target) && !target.matches('.rsPipVal')) {
+						if (!targetIsHandle(target) && !target.closest('.rsPipVal')) {
 							handleInteract(normalisedClient(event));
 						}
 					}

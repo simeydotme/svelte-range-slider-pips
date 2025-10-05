@@ -169,6 +169,54 @@ test.describe('Pip Formatter Tests', () => {
       await expect(pips.nth(10)).toHaveText('50');
     });
 
+    test('should move handle when clicking on prefix or suffix in pip label', async ({ page }) => {
+      const slider = page.locator('#dynamic-formatter');
+      const handle = slider.locator('.rangeHandle');
+      const prefixButton = page.locator('#btn_prefix');
+      const suffixButton = page.locator('#btn_suffix');
+
+      // Add prefix and suffix
+      await prefixButton.click();
+      await suffixButton.click();
+
+      // Get pip at value 70 (index 14)
+      const targetPip = slider.locator('.rsPip').filter({ has: page.locator('[data-val="70"]') });
+      const targetPipLabel = targetPip.locator('.rsPipVal');
+
+      // Verify the label has prefix and suffix
+      await expect(targetPipLabel).toHaveText('Value: 70 units');
+
+      // Get the prefix span specifically
+      const prefixSpan = targetPipLabel.locator('.rsPipValPrefix');
+      await expect(prefixSpan).toHaveText('Value: ');
+
+      // Get the suffix span specifically
+      const suffixSpan = targetPipLabel.locator('.rsPipValSuffix');
+      await expect(suffixSpan).toHaveText(' units');
+
+      // Click on the prefix span
+      await prefixSpan.click();
+
+      // Wait a moment for the handle to move
+      await page.waitForTimeout(100);
+
+      // Check that handle moved to value 70
+      await expect(handle).toHaveAttribute('aria-valuenow', '70');
+
+      // Reset handle position by moving to value 30
+      const resetPip = slider.locator('.rsPip').filter({ has: page.locator('[data-val="30"]') });
+      await resetPip.click();
+      await page.waitForTimeout(100);
+      await expect(handle).toHaveAttribute('aria-valuenow', '30');
+
+      // Now click on the suffix span of value 70 pip
+      await suffixSpan.click();
+      await page.waitForTimeout(100);
+
+      // Check that handle moved to value 70 again
+      await expect(handle).toHaveAttribute('aria-valuenow', '70');
+    });
+
     test('should handle formatter enable/disable toggle', async ({ page }) => {
       const slider = page.locator('#formatter-toggle');
       const pips = slider.locator('.rsPipVal');

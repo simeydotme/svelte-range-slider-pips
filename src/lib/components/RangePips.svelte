@@ -159,9 +159,9 @@
         >
           {#if all === 'label' || rest === 'label'}
             <span class="rsPipVal">
-              {#if true || prefix}<span class="rsPipValPrefix">{prefix}</span>{/if}
+              {#if prefix}<span class="rsPipValPrefix">{prefix}</span>{/if}
               {@html formatter(val, i, valueAsPercent(val, min, max, precision))}
-              {#if true || suffix}<span class="rsPipValSuffix">{suffix}</span>{/if}
+              {#if suffix}<span class="rsPipValSuffix">{suffix}</span>{/if}
             </span>
           {/if}
         </span>
