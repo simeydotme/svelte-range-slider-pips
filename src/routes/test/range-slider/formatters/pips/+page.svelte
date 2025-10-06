@@ -105,6 +105,7 @@
       pips
       all="label"
       formatter={formatters[currentFormatter].fn}
+      step={10}
       prefix={currentPrefix}
       suffix={currentSuffix}
     />
