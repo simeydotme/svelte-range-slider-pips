@@ -1,9 +1,9 @@
 /**
- * svelte-range-slider-pips ~ 4.0.8
+ * svelte-range-slider-pips ~ 4.1.0
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * Project home: https://simeydotme.github.io/svelte-range-slider-pips/
  * © 2025 Simon Goellner <simey.me@gmail.com> ~ MPL-2.0 License
- * Published: 3/10/2025
+ * Published: 6/10/2025
  */
 /** @returns {void} */
 function noop() {}
@@ -1987,8 +1987,8 @@ function create_if_block_6$1(ctx) {
 	let html_tag;
 	let raw_value = /*formatter*/ ctx[16](/*val*/ ctx[37], /*i*/ ctx[39], valueAsPercent(/*val*/ ctx[37], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[17])) + "";
 	let t1;
-	let if_block0 = create_if_block_8$1(ctx);
-	let if_block1 = create_if_block_7$1(ctx);
+	let if_block0 = /*prefix*/ ctx[14] && create_if_block_8$1(ctx);
+	let if_block1 = /*suffix*/ ctx[15] && create_if_block_7$1(ctx);
 
 	return {
 		c() {
@@ -2010,7 +2010,7 @@ function create_if_block_6$1(ctx) {
 			if (if_block1) if_block1.m(span, null);
 		},
 		p(ctx, dirty) {
-			{
+			if (/*prefix*/ ctx[14]) {
 				if (if_block0) {
 					if_block0.p(ctx, dirty);
 				} else {
@@ -2018,11 +2018,14 @@ function create_if_block_6$1(ctx) {
 					if_block0.c();
 					if_block0.m(span, t0);
 				}
+			} else if (if_block0) {
+				if_block0.d(1);
+				if_block0 = null;
 			}
 
 			if (dirty[0] & /*formatter, min, max, finalPipStep, step, precision*/ 2293774 && raw_value !== (raw_value = /*formatter*/ ctx[16](/*val*/ ctx[37], /*i*/ ctx[39], valueAsPercent(/*val*/ ctx[37], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[17])) + "")) html_tag.p(raw_value);
 
-			{
+			if (/*suffix*/ ctx[15]) {
 				if (if_block1) {
 					if_block1.p(ctx, dirty);
 				} else {
@@ -2030,6 +2033,9 @@ function create_if_block_6$1(ctx) {
 					if_block1.c();
 					if_block1.m(span, null);
 				}
+			} else if (if_block1) {
+				if_block1.d(1);
+				if_block1 = null;
 			}
 		},
 		d(detaching) {
@@ -2043,7 +2049,7 @@ function create_if_block_6$1(ctx) {
 	};
 }
 
-// (137:14) {#if true || prefix}
+// (137:14) {#if prefix}
 function create_if_block_8$1(ctx) {
 	let span;
 	let t;
@@ -2069,7 +2075,7 @@ function create_if_block_8$1(ctx) {
 	};
 }
 
-// (139:14) {#if true || suffix}
+// (139:14) {#if suffix}
 function create_if_block_7$1(ctx) {
 	let span;
 	let t;
@@ -4555,7 +4561,7 @@ function instance($$self, $$props, $$invalidate) {
 
 				// for touch devices we want the handle to instantly
 				// move to the position touched for more responsive feeling
-				if (event.type === 'touchstart' && !target.matches('.rsPipVal')) {
+				if (event.type === 'touchstart' && !target.closest('.rsPipVal')) {
 					handleInteract(clientPos);
 				}
 			}
@@ -4628,7 +4634,7 @@ function instance($$self, $$props, $$invalidate) {
 
 					// don't trigger interact if the target is a handle (no need) or
 					// if the target is a label (we want to move to that value from rangePips)
-					if (!targetIsHandle(target) && !target.matches('.rsPipVal')) {
+					if (!targetIsHandle(target) && !target.closest('.rsPipVal')) {
 						handleInteract(normalisedClient(event));
 					}
 				}

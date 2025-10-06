@@ -672,7 +672,7 @@
         activeHandle = getClosestHandle(clientPos);
         // for touch devices we want the handle to instantly
         // move to the position touched for more responsive feeling
-        if (event.type === 'touchstart' && !target.matches('.rsPipVal')) {
+        if (event.type === 'touchstart' && !target.closest('.rsPipVal')) {
           handleInteract(clientPos);
         }
       }
@@ -740,7 +740,7 @@
           focus = true;
           // don't trigger interact if the target is a handle (no need) or
           // if the target is a label (we want to move to that value from rangePips)
-          if (!targetIsHandle(target) && !target.matches('.rsPipVal')) {
+          if (!targetIsHandle(target) && !target.closest('.rsPipVal')) {
             handleInteract(normalisedClient(event));
           }
         }

@@ -440,7 +440,7 @@ function sliderInteractStart(event) {
       handleActivated = true;
       handlePressed = true;
       activeHandle = getClosestHandle(clientPos);
-      if (event.type === "touchstart" && !target.matches(".rsPipVal")) {
+      if (event.type === "touchstart" && !target.closest(".rsPipVal")) {
         handleInteract(clientPos);
       }
     }
@@ -477,7 +477,7 @@ function bodyMouseUp(event) {
     if (handleActivated) {
       if (slider && (target === slider || slider.contains(target))) {
         focus = true;
-        if (!targetIsHandle(target) && !target.matches(".rsPipVal")) {
+        if (!targetIsHandle(target) && !target.closest(".rsPipVal")) {
           handleInteract(normalisedClient(event));
         }
       }
