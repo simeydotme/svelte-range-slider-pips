@@ -169,4 +169,20 @@
 
   <h3>Step values - tests formatting with non-unit step values</h3>
   <RangeSlider id="step-values" pips all="label" step={5} formatter={percentFormatter} />
+
+  <h2>Prefix and Suffix Tests</h2>
+  <h3>Slider with prefix set on creation</h3>
+  <RangeSlider id="prefix-initial" pips all="label" prefix="$" />
+
+  <h3>Slider with suffix set on creation</h3>
+  <RangeSlider id="suffix-initial" pips all="label" suffix="%" />
+
+  <h3>Slider with both prefix and suffix set on creation</h3>
+  <RangeSlider id="prefix-suffix-initial" pips all="label" prefix="Value: " suffix=" units" />
+
+  <h3>Slider with prefix set to empty string on creation</h3>
+  <RangeSlider id="prefix-empty" pips all="label" prefix="" />
+
+  <h3>Slider with suffix set to empty string on creation</h3>
+  <RangeSlider id="suffix-empty" pips all="label" suffix="" />
 </div>

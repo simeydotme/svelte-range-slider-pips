@@ -405,4 +405,241 @@ test.describe('Pip Formatter Tests', () => {
       await expect(pips.last()).toHaveText('100.0%');
     });
   });
+
+  test.describe('Prefix and Suffix Span Element Tests', () => {
+    test('should not render prefix/suffix spans when not provided', async ({ page }) => {
+      const slider = page.locator('#dynamic-formatter');
+      const pips = slider.locator('.rsPipVal');
+      
+      // Initially no prefix/suffix
+      await expect(pips.first().locator('.rsPipValPrefix')).toHaveCount(0);
+      await expect(pips.first().locator('.rsPipValSuffix')).toHaveCount(0);
+    });
+
+    test('should render prefix spans when prefix is set on slider creation', async ({ page }) => {
+      const slider = page.locator('#prefix-initial');
+      const prefixSpans = slider.locator('.rsPipValPrefix');
+      const pips = slider.locator('.rsPipVal');
+      
+      // Check that prefix spans are rendered
+      const pipCount = await pips.count();
+      await expect(prefixSpans).toHaveCount(pipCount);
+      await expect(prefixSpans.first()).toHaveText('$');
+      
+      // Verify the full text includes prefix
+      await expect(pips.first()).toHaveText('$0');
+      await expect(pips.nth(10)).toHaveText('$50');
+    });
+
+    test('should render suffix spans when suffix is set on slider creation', async ({ page }) => {
+      const slider = page.locator('#suffix-initial');
+      const suffixSpans = slider.locator('.rsPipValSuffix');
+      const pips = slider.locator('.rsPipVal');
+      
+      // Check that suffix spans are rendered
+      const pipCount = await pips.count();
+      await expect(suffixSpans).toHaveCount(pipCount);
+      await expect(suffixSpans.first()).toHaveText('%');
+      
+      // Verify the full text includes suffix
+      await expect(pips.first()).toHaveText('0%');
+      await expect(pips.nth(10)).toHaveText('50%');
+    });
+
+    test('should render both prefix and suffix spans when both are set on slider creation', async ({ page }) => {
+      const slider = page.locator('#prefix-suffix-initial');
+      const prefixSpans = slider.locator('.rsPipValPrefix');
+      const suffixSpans = slider.locator('.rsPipValSuffix');
+      const pips = slider.locator('.rsPipVal');
+      
+      // Check that both spans are rendered
+      const pipCount = await pips.count();
+      await expect(prefixSpans).toHaveCount(pipCount);
+      await expect(suffixSpans).toHaveCount(pipCount);
+      await expect(prefixSpans.first()).toHaveText('Value: ');
+      await expect(suffixSpans.first()).toHaveText(' units');
+      
+      // Verify the full text includes both
+      await expect(pips.first()).toHaveText('Value: 0 units');
+      await expect(pips.nth(10)).toHaveText('Value: 50 units');
+    });
+
+    test('should not render prefix spans when prefix is empty string', async ({ page }) => {
+      const slider = page.locator('#prefix-empty');
+      const prefixSpans = slider.locator('.rsPipValPrefix');
+      
+      // No prefix spans should be rendered for empty string
+      await expect(prefixSpans).toHaveCount(0);
+    });
+
+    test('should not render suffix spans when suffix is empty string', async ({ page }) => {
+      const slider = page.locator('#suffix-empty');
+      const suffixSpans = slider.locator('.rsPipValSuffix');
+      
+      // No suffix spans should be rendered for empty string
+      await expect(suffixSpans).toHaveCount(0);
+    });
+
+    test('should render prefix span when prefix is provided', async ({ page }) => {
+      const slider = page.locator('#dynamic-formatter');
+      const prefixButton = page.locator('#btn_prefix');
+      
+      // Add prefix
+      await prefixButton.click();
+      
+      // Check that prefix spans are rendered
+      const prefixSpans = slider.locator('.rsPipValPrefix');
+      await expect(prefixSpans).not.toHaveCount(0);
+      await expect(prefixSpans.first()).toHaveText('Value: ');
+      
+      // Verify all pip labels have prefix spans
+      const pipCount = await slider.locator('.rsPipVal').count();
+      await expect(prefixSpans).toHaveCount(pipCount);
+    });
+
+    test('should render suffix span when suffix is provided', async ({ page }) => {
+      const slider = page.locator('#dynamic-formatter');
+      const suffixButton = page.locator('#btn_suffix');
+      
+      // Add suffix
+      await suffixButton.click();
+      
+      // Check that suffix spans are rendered
+      const suffixSpans = slider.locator('.rsPipValSuffix');
+      await expect(suffixSpans).not.toHaveCount(0);
+      await expect(suffixSpans.first()).toHaveText(' units');
+      
+      // Verify all pip labels have suffix spans
+      const pipCount = await slider.locator('.rsPipVal').count();
+      await expect(suffixSpans).toHaveCount(pipCount);
+    });
+
+    test('should render both prefix and suffix spans when both are provided', async ({ page }) => {
+      const slider = page.locator('#dynamic-formatter');
+      const prefixButton = page.locator('#btn_prefix');
+      const suffixButton = page.locator('#btn_suffix');
+      
+      // Add both prefix and suffix
+      await prefixButton.click();
+      await suffixButton.click();
+      
+      // Check that both spans are rendered
+      const prefixSpans = slider.locator('.rsPipValPrefix');
+      const suffixSpans = slider.locator('.rsPipValSuffix');
+      const pipCount = await slider.locator('.rsPipVal').count();
+      
+      await expect(prefixSpans).toHaveCount(pipCount);
+      await expect(suffixSpans).toHaveCount(pipCount);
+      await expect(prefixSpans.first()).toHaveText('Value: ');
+      await expect(suffixSpans.first()).toHaveText(' units');
+    });
+
+    test('should remove prefix spans when prefix is set to empty', async ({ page }) => {
+      const slider = page.locator('#dynamic-formatter');
+      const prefixButton = page.locator('#btn_prefix');
+      
+      // Add prefix
+      await prefixButton.click();
+      await expect(slider.locator('.rsPipValPrefix')).not.toHaveCount(0);
+      
+      // Remove prefix
+      await prefixButton.click();
+      await expect(slider.locator('.rsPipValPrefix')).toHaveCount(0);
+    });
+
+    test('should remove suffix spans when suffix is set to empty', async ({ page }) => {
+      const slider = page.locator('#dynamic-formatter');
+      const suffixButton = page.locator('#btn_suffix');
+      
+      // Add suffix
+      await suffixButton.click();
+      await expect(slider.locator('.rsPipValSuffix')).not.toHaveCount(0);
+      
+      // Remove suffix
+      await suffixButton.click();
+      await expect(slider.locator('.rsPipValSuffix')).toHaveCount(0);
+    });
+
+    test('should dynamically add/remove prefix during runtime', async ({ page }) => {
+      const slider = page.locator('#dynamic-formatter');
+      const prefixButton = page.locator('#btn_prefix');
+      const pips = slider.locator('.rsPipVal');
+      
+      // Initially no prefix
+      await expect(pips.nth(10)).toHaveText('50');
+      await expect(slider.locator('.rsPipValPrefix')).toHaveCount(0);
+      
+      // Add prefix
+      await prefixButton.click();
+      await expect(pips.nth(10)).toHaveText('Value: 50');
+      await expect(slider.locator('.rsPipValPrefix').first()).toHaveText('Value: ');
+      
+      // Remove prefix
+      await prefixButton.click();
+      await expect(pips.nth(10)).toHaveText('50');
+      await expect(slider.locator('.rsPipValPrefix')).toHaveCount(0);
+      
+      // Add again
+      await prefixButton.click();
+      await expect(pips.nth(10)).toHaveText('Value: 50');
+      await expect(slider.locator('.rsPipValPrefix').first()).toHaveText('Value: ');
+    });
+
+    test('should dynamically add/remove suffix during runtime', async ({ page }) => {
+      const slider = page.locator('#dynamic-formatter');
+      const suffixButton = page.locator('#btn_suffix');
+      const pips = slider.locator('.rsPipVal');
+      
+      // Initially no suffix
+      await expect(pips.nth(10)).toHaveText('50');
+      await expect(slider.locator('.rsPipValSuffix')).toHaveCount(0);
+      
+      // Add suffix
+      await suffixButton.click();
+      await expect(pips.nth(10)).toHaveText('50 units');
+      await expect(slider.locator('.rsPipValSuffix').first()).toHaveText(' units');
+      
+      // Remove suffix
+      await suffixButton.click();
+      await expect(pips.nth(10)).toHaveText('50');
+      await expect(slider.locator('.rsPipValSuffix')).toHaveCount(0);
+      
+      // Add again
+      await suffixButton.click();
+      await expect(pips.nth(10)).toHaveText('50 units');
+      await expect(slider.locator('.rsPipValSuffix').first()).toHaveText(' units');
+    });
+
+    test('should toggle both prefix and suffix independently', async ({ page }) => {
+      const slider = page.locator('#dynamic-formatter');
+      const prefixButton = page.locator('#btn_prefix');
+      const suffixButton = page.locator('#btn_suffix');
+      const pips = slider.locator('.rsPipVal');
+      
+      // Add both
+      await prefixButton.click();
+      await suffixButton.click();
+      await expect(pips.nth(10)).toHaveText('Value: 50 units');
+      await expect(slider.locator('.rsPipValPrefix')).not.toHaveCount(0);
+      await expect(slider.locator('.rsPipValSuffix')).not.toHaveCount(0);
+      
+      // Remove prefix only
+      await prefixButton.click();
+      await expect(pips.nth(10)).toHaveText('50 units');
+      await expect(slider.locator('.rsPipValPrefix')).toHaveCount(0);
+      await expect(slider.locator('.rsPipValSuffix')).not.toHaveCount(0);
+      
+      // Add prefix back
+      await prefixButton.click();
+      await expect(pips.nth(10)).toHaveText('Value: 50 units');
+      await expect(slider.locator('.rsPipValPrefix')).not.toHaveCount(0);
+      await expect(slider.locator('.rsPipValSuffix')).not.toHaveCount(0);
+      
+      // Remove suffix only
+      await suffixButton.click();
+      await expect(pips.nth(10)).toHaveText('Value: 50');
+      await expect(slider.locator('.rsPipValPrefix')).not.toHaveCount(0);
+      await expect(slider.locator('.rsPipValSuffix')).toHaveCount(0);
+    });
+  });
 });
