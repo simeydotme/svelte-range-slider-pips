@@ -1,13 +1,11 @@
 ---
-
 interface Props {
   name: string;
   description: string;
   link: string;
 }
 
-const { name, link, description } = Astro.props
-
+const { name, link, description } = Astro.props;
 ---
 
 <li class="example">
@@ -17,8 +15,6 @@ const { name, link, description } = Astro.props
     <slot />
   </a>
 </li>
-
-
 
 <style>
   .example {
@@ -32,7 +28,7 @@ const { name, link, description } = Astro.props
     align-items: flex-start;
     text-decoration: none;
     width: 100%;
-    height: 100%; 
+    height: 100%;
     padding: 1rem;
     border-radius: 1em;
     transition: all 0.2s ease-out;

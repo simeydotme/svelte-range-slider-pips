@@ -1,4 +1,4 @@
-import { codeToHtml } from "shiki3";
+import { codeToHtml } from 'shiki3';
 
 export const orientationTypes = [
   {
@@ -9,30 +9,30 @@ export const orientationTypes = [
     label: 'Vertical',
     value: 'vertical',
   },
-]
+];
 
 export const rangeTypes = [
   {
     label: 'Slider',
     value: false,
-    tooltip: 'A slider with one or more handles'
+    tooltip: 'A slider with one or more handles',
   },
   {
     label: 'Range Slider',
     value: true,
-    tooltip: 'A slider with two handles and a filled range between them'
+    tooltip: 'A slider with two handles and a filled range between them',
   },
   {
     label: 'Min Slider',
     value: 'min',
-    tooltip: 'A slider with one handle and a range between the minimum value and the handle'
+    tooltip: 'A slider with one handle and a range between the minimum value and the handle',
   },
   {
     label: 'Max Slider',
     value: 'max',
-    tooltip: 'A slider with one handle and a range between the handle and the maximum value'
+    tooltip: 'A slider with one handle and a range between the handle and the maximum value',
   },
-]
+];
 
 export const easingTypes = [
   { name: 'Default', config: { stiffness: 0.15, damping: 0.4 } },
@@ -49,7 +49,7 @@ export const darkmodeTypes = [
   { label: 'False', value: false },
   { label: 'Auto', value: 'auto' },
   { label: 'Force', value: 'force' },
-]
+];
 
 export const handleTypes = [
   { label: 'Default', value: 'default', tooltip: 'The default handle style' },

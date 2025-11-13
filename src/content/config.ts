@@ -1,5 +1,5 @@
-import { defineCollection, z } from 'astro:content'
-import { SITE } from '../consts'
+import { defineCollection, z } from 'astro:content';
+import { SITE } from '../consts';
 
 const docs = defineCollection({
   schema: z.object({
@@ -10,12 +10,12 @@ const docs = defineCollection({
     image: z
       .object({
         src: z.string(),
-        alt: z.string()
+        alt: z.string(),
       })
       .optional(),
     ogLocale: z.string().optional(),
-    sidebar: z.boolean().default(true)
-  })
-})
+    sidebar: z.boolean().default(true),
+  }),
+});
 
-export const collections = { docs }
+export const collections = { docs };

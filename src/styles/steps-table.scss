@@ -1,15 +1,15 @@
-
 .slider-table {
-
   overflow-x: auto;
   padding-bottom: 2em;
   scrollbar-width: thin;
-  scrollbar-color: hsla( var(--color-base-code-block), 70%, 1) hsla( var(--color-base-code-block), 90%, 1);
+  scrollbar-color: hsla(var(--color-base-code-block), 70%, 1)
+    hsla(var(--color-base-code-block), 90%, 1);
   margin-block-start: 1em;
-  
-  td, th {
+
+  td,
+  th {
     text-align: center;
-    padding-top: .25rem;
+    padding-top: 0.25rem;
   }
 
   td:nth-child(1),
@@ -18,7 +18,7 @@
     font-size: 1.25em;
     font-family: var(--font-body);
     font-weight: 700;
-    padding: .25rem 0 0;
+    padding: 0.25rem 0 0;
   }
   thead code {
     white-space: nowrap;
@@ -41,19 +41,18 @@
     position: absolute;
     inset: 0 0 0.5rem 0;
     z-index: -1;
-    background: hsla( var(--color-base-code-block), 80%, 1);
+    background: hsla(var(--color-base-code-block), 80%, 1);
   }
 
-  thead  th {
+  thead th {
     position: relative;
     padding-block-end: 1rem;
     padding-block-start: 0.4rem;
   }
   thead tr > th:first-child:after {
-    border-radius: 2em 0 0 2em ;
+    border-radius: 2em 0 0 2em;
   }
   thead tr > th:last-child:after {
     border-radius: 0 2em 2em 0;
   }
-
 }

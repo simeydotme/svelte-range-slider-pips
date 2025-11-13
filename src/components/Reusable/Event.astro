@@ -1,44 +1,45 @@
 ---
-import { Icon } from 'astro-icon'
+import { Icon } from 'astro-icon';
 
 interface Props {
   propName: string;
-  propType: "Function";
+  propType: 'Function';
 }
 
-const { propName, propType } = Astro.props
-const isRender = propName && propType
+const { propName, propType } = Astro.props;
+const isRender = propName && propType;
 ---
 
-{isRender &&
+{
+  isRender && (
+    <section class="sliderProp" id={propName}>
+      <header class="sliderProp__header">
+        <h2 title="The prop name">
+          <a href={`#${propName}`}>{propName}</a>
+        </h2>
+        <code title="The type that the prop expects">{propType}</code>
+      </header>
 
-  <section class="sliderProp" id={propName}>
-    <header class="sliderProp__header">
-      <h2 title="The prop name"><a href={`#${propName}`}>{propName}</a></h2>
-      <code title="The type that the prop expects">{propType}</code>
-    </header>
+      <div class="sliderProp__example">
+        <slot name="example" />
+      </div>
 
-    <div class="sliderProp__example">
-      <slot name="example" />
-    </div>
+      <div class="sliderProp__content">
+        <slot />
+      </div>
 
-    <div class="sliderProp__content">
-      <slot />
-    </div>
-
-    <div class="sliderProp__detail">
-      <slot name="detail" />
-    </div>
-  </section>  
-
+      <div class="sliderProp__detail">
+        <slot name="detail" />
+      </div>
+    </section>
+  )
 }
 
 <style>
-
   .sliderProp {
     display: flex;
     flex-direction: column;
-    padding: .5rem;
+    padding: 0.5rem;
     border: 1px solid transparent;
     transition: background 0.2s ease-in-out;
     overflow: hidden;
@@ -49,7 +50,7 @@ const isRender = propName && propType
   }
 
   .sliderProp:nth-of-type(even) {
-    background: hsla(var(--color-gray-90), .5);
+    background: hsla(var(--color-gray-90), 0.5);
   }
 
   .sliderProp:nth-of-type(even) :global(code) {
@@ -59,9 +60,9 @@ const isRender = propName && propType
   .sliderProp:target,
   .sliderProp:focus-within,
   .sliderProp:hover {
-    border-color: hsla(var(--color-purple), .5);
+    border-color: hsla(var(--color-purple), 0.5);
     border-radius: 5px;
-    padding-inline: .5rem;
+    padding-inline: 0.5rem;
   }
 
   .sliderProp:target,
@@ -70,19 +71,19 @@ const isRender = propName && propType
   }
 
   .sliderProp:target {
-    animation: pulsate-fwd 1s cubic-bezier(0.770, 0.000, 0.175, 1.000) both;
+    animation: pulsate-fwd 1s cubic-bezier(0.77, 0, 0.175, 1) both;
   }
 
   .sliderProp:hover {
-    border-color: hsla(var(--color-gray-50), .5);
+    border-color: hsla(var(--color-gray-50), 0.5);
   }
 
   .sliderProp__header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-block: .25rem .75rem;
-    padding-inline: .25rem 0;
+    padding-block: 0.25rem 0.75rem;
+    padding-inline: 0.25rem 0;
     border-bottom: 1px solid hsla(var(--color-gray-90));
   }
 
@@ -110,7 +111,7 @@ const isRender = propName && propType
   }
 
   .sliderProp__content {
-    padding: .5rem;
+    padding: 0.5rem;
     transition: all 0.2s ease-in-out;
   }
 
@@ -121,62 +122,58 @@ const isRender = propName && propType
   .sliderProp__link {
     display: inline-block;
     margin-left: auto;
-    padding: .25rem .5rem;
-    border-radius: .25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
     text-decoration: none;
   }
 
-  .sliderProp__example :global( pre ),
-  .sliderProp__detail :global( pre ) {
+  .sliderProp__example :global(pre),
+  .sliderProp__detail :global(pre) {
     border: none;
     border-radius: 0.5em;
     margin-block: 0.5em;
   }
 
-  .sliderProp__detail :global( pre ) {
+  .sliderProp__detail :global(pre) {
     margin-block-end: 0;
   }
 
-  .sliderProp__example :global( pre code ),
-  .sliderProp__detail :global( pre code ) {
-    background: transparent!important;
+  .sliderProp__example :global(pre code),
+  .sliderProp__detail :global(pre code) {
+    background: transparent !important;
   }
 
-
-
-/**
+  /**
  * ----------------------------------------
  * animation pulsate-fwd
  * ----------------------------------------
  */
-@-webkit-keyframes pulsate-fwd {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+  @-webkit-keyframes pulsate-fwd {
+    0% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+    100% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
   }
-  50% {
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1);
+  @keyframes pulsate-fwd {
+    0% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+    100% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
   }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
-@keyframes pulsate-fwd {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  50% {
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1);
-  }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
-
-
 </style>

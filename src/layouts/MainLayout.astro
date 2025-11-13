@@ -1,30 +1,29 @@
 ---
-import type { MarkdownHeading } from 'astro'
-import type { CollectionEntry } from 'astro:content'
-import HeadCommon from '~components/HeadCommon.astro'
-import HeadSEO from '~components/HeadSEO.astro'
-import Header from '~components/Header/Header.astro'
-import PageContent from '~components/PageContent/PageContent.astro'
-import LeftSidebar from '~components/LeftSidebar/LeftSidebar.astro'
-import RightSidebar from '~components/RightSidebar/RightSidebar.astro'
-import Footer from '~components/Footer/Footer.astro'
+import type { MarkdownHeading } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import HeadCommon from '~components/HeadCommon.astro';
+import HeadSEO from '~components/HeadSEO.astro';
+import Header from '~components/Header/Header.astro';
+import PageContent from '~components/PageContent/PageContent.astro';
+import LeftSidebar from '~components/LeftSidebar/LeftSidebar.astro';
+import RightSidebar from '~components/RightSidebar/RightSidebar.astro';
+import Footer from '~components/Footer/Footer.astro';
 // import 'iconify-icon';
-import { EDIT_URL, SITE, REPOPATH } from '../consts'
+import { EDIT_URL, SITE, REPOPATH } from '../consts';
 
 type Props = CollectionEntry<'docs'>['data'] & {
-  headings: MarkdownHeading[]
-}
+  headings: MarkdownHeading[];
+};
 
-const { headings, ...data } = Astro.props
-const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const { headings, ...data } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const currentPage = Astro.url.pathname.replace(REPOPATH, '');
-const currentFile = `src/content/docs/${currentPage.replace(/^\/+/, '').replace(/\/$/, '')}.mdx`
-const editUrl = `${EDIT_URL}/${currentFile}?plain=1`
+const currentFile = `src/content/docs/${currentPage.replace(/^\/+/, '').replace(/\/$/, '')}.mdx`;
+const editUrl = `${EDIT_URL}/${currentFile}?plain=1`;
 ---
 
 <html dir={data.dir} lang={data.lang} class="initial">
   <head>
-
     <HeadCommon />
     <HeadSEO {...data} canonicalUrl={canonicalURL} />
 
@@ -38,7 +37,7 @@ const editUrl = `${EDIT_URL}/${currentFile}?plain=1`
         --gutter: 0.5rem;
         --doc-padding: 2rem;
       }
-      
+
       @media (max-width: 49.999rem) {
         body {
           padding-bottom: var(--theme-navbar-height);
@@ -49,7 +48,7 @@ const editUrl = `${EDIT_URL}/${currentFile}?plain=1`
         display: grid;
         grid-auto-flow: column;
         grid-template-columns:
-          minmax(var(--gutter), 1fr) 
+          minmax(var(--gutter), 1fr)
           minmax(0, var(--max-width))
           minmax(var(--gutter), 1fr);
         /* overflow-x: hidden; */
@@ -71,7 +70,7 @@ const editUrl = `${EDIT_URL}/${currentFile}?plain=1`
       }
 
       #grid-main {
-        padding: 1rem var(--gutter) var(--doc-padding) ;
+        padding: 1rem var(--gutter) var(--doc-padding);
         grid-column: 2;
         display: flex;
         flex-direction: column;
@@ -142,13 +141,31 @@ const editUrl = `${EDIT_URL}/${currentFile}?plain=1`
       .mobile-sidebar-toggle #grid-left {
         display: block;
         bottom: 2rem;
-        animation: menuSlideIn .5s linear(
-          0, 0.005, 0.02 2.3%, 0.082 5.1%, 0.462 16.8%, 0.557, 0.638, 0.707,
-          0.767 30.1%, 0.818, 0.861 37.4%, 0.9 41.9%, 0.931 46.8%, 0.954 52.3%,
-          0.972 58.6%, 0.984 65.6%, 0.992 74.2%, 0.997 85%, 0.999
-        ) 0s 1 both;
+        animation: menuSlideIn 0.5s
+          linear(
+            0,
+            0.005,
+            0.02 2.3%,
+            0.082 5.1%,
+            0.462 16.8%,
+            0.557,
+            0.638,
+            0.707,
+            0.767 30.1%,
+            0.818,
+            0.861 37.4%,
+            0.9 41.9%,
+            0.931 46.8%,
+            0.954 52.3%,
+            0.972 58.6%,
+            0.984 65.6%,
+            0.992 74.2%,
+            0.997 85%,
+            0.999
+          )
+          0s 1 both;
       }
-    
+
       @keyframes menuSlideIn {
         from {
           opacity: 0;
@@ -176,10 +193,12 @@ const editUrl = `${EDIT_URL}/${currentFile}?plain=1`
           <slot />
         </PageContent>
       </div>
-      {data.sidebar &&
-        <aside id="grid-right" class="grid-sidebar" title="Table of Contents">
-          <RightSidebar headings={headings} editUrl={editUrl} />
-        </aside>
+      {
+        data.sidebar && (
+          <aside id="grid-right" class="grid-sidebar" title="Table of Contents">
+            <RightSidebar headings={headings} editUrl={editUrl} />
+          </aside>
+        )
       }
     </main>
     <Footer path={currentFile} />

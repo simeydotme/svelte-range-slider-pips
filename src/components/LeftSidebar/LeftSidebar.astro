@@ -1,13 +1,15 @@
 ---
-import { getLanguageFromURL } from "../../languages";
-import { SIDEBAR } from "../../consts";
+import { getLanguageFromURL } from '../../languages';
+import { SIDEBAR } from '../../consts';
 
 type Props = {
   currentPage: string;
 };
 
 const { currentPage } = Astro.props;
-const currentPageMatch = currentPage.endsWith("/") ? currentPage.slice(1, -1) : currentPage.slice(1);
+const currentPageMatch = currentPage.endsWith('/')
+  ? currentPage.slice(1, -1)
+  : currentPage.slice(1);
 const langCode = getLanguageFromURL(currentPage);
 const sidebar = SIDEBAR[langCode];
 ---
@@ -23,7 +25,7 @@ const sidebar = SIDEBAR[langCode];
               {links.map((link) => {
                 const url = Astro.site?.pathname + link.link;
                 if (!link.children || link.children.length === 0) {
-                  const ariaCurrent = url.endsWith(currentPageMatch) ? "page" : false;
+                  const ariaCurrent = url.endsWith(currentPageMatch) ? 'page' : false;
                   return (
                     <li class="nav-link">
                       <a href={url} aria-current={ariaCurrent}>
@@ -32,7 +34,10 @@ const sidebar = SIDEBAR[langCode];
                     </li>
                   );
                 } else {
-                  const ariaChildCurrent = currentPageMatch === url.split("#")[0] || url.endsWith(currentPageMatch) ? "page" : false;
+                  const ariaChildCurrent =
+                    currentPageMatch === url.split('#')[0] || url.endsWith(currentPageMatch)
+                      ? 'page'
+                      : false;
                   return (
                     <li class="nav-link">
                       <a href={url} aria-current={ariaChildCurrent}>
@@ -41,11 +46,19 @@ const sidebar = SIDEBAR[langCode];
                       <ul>
                         {link.children.map((grandchild) => {
                           const gurl = Astro.site?.pathname + grandchild.link;
-                          const ariaGrandchildCurrent = currentPageMatch === gurl.split("#")[0] || gurl.endsWith(currentPageMatch) ? "page" : false;
-                          const titleText = grandchild.new ? "New in v4.0.0" : "";
+                          const ariaGrandchildCurrent =
+                            currentPageMatch === gurl.split('#')[0] ||
+                            gurl.endsWith(currentPageMatch)
+                              ? 'page'
+                              : false;
+                          const titleText = grandchild.new ? 'New in v4.0.0' : '';
                           return (
                             <li class="nav-link nav-sublink" title={titleText}>
-                              <a href={gurl} aria-current={ariaGrandchildCurrent} data-new={grandchild.new}>
+                              <a
+                                href={gurl}
+                                aria-current={ariaGrandchildCurrent}
+                                data-new={grandchild.new}
+                              >
                                 {grandchild.text}
                               </a>
                             </li>
@@ -68,30 +81,33 @@ const sidebar = SIDEBAR[langCode];
   const scrollToCurrentLink = () => {
     var target = document.querySelector('[aria-current="page"]');
     if (target && target.offsetTop > window.innerHeight - 100) {
-      document.querySelector(".nav-groups").scrollTop = target.offsetTop;
+      document.querySelector('.nav-groups').scrollTop = target.offsetTop;
     }
-  }
+  };
   const focusSubLink = () => {
     const currentPath = window.location.pathname;
-    const urlPath = (currentPath.endsWith("/") ? currentPath.slice(0, -1) : currentPath);
+    const urlPath = currentPath.endsWith('/') ? currentPath.slice(0, -1) : currentPath;
     const urlHash = window.location.hash;
     document.querySelectorAll(`.nav-sublink a`)?.forEach((el) => {
       const linkUrl = new URL(el.href);
       const linkPath = linkUrl.pathname;
       const linkHash = linkUrl.hash;
-      el.removeAttribute("aria-current");
+      el.removeAttribute('aria-current');
       if (linkHash) {
-        el.setAttribute("aria-current", urlPath === linkPath && linkHash === urlHash ? "page" : false);
+        el.setAttribute(
+          'aria-current',
+          urlPath === linkPath && linkHash === urlHash ? 'page' : false
+        );
       } else {
-        el.setAttribute("aria-current", urlPath === linkPath ? "page" : false);
+        el.setAttribute('aria-current', urlPath === linkPath ? 'page' : false);
       }
     });
     // const selectedSubLink = document.querySelector(`.nav-sublink a[href="${url + window.location.hash}"]`) ?? document.querySelector(`.nav-sublink a[href*="${url}"]`);
     // console.log('x',url,window.location.hash,selectedSubLink);
     // selectedSubLink?.setAttribute("aria-current", "page");
   };
-  window.addEventListener("hashchange", focusSubLink);
-  window.addEventListener("DOMContentLoaded", scrollToCurrentLink);
+  window.addEventListener('hashchange', focusSubLink);
+  window.addEventListener('DOMContentLoaded', scrollToCurrentLink);
   focusSubLink();
   scrollToCurrentLink();
 </script>
@@ -159,14 +175,14 @@ const sidebar = SIDEBAR[langCode];
     border-left: 2px solid hsla(var(--color-gray-70), 1);
   }
 
-  .nav-link a[aria-current="page"],
-  .nav-link:not(.nav-sublink):has(a[aria-current="page"]) > a {
+  .nav-link a[aria-current='page'],
+  .nav-link:not(.nav-sublink):has(a[aria-current='page']) > a {
     color: var(--theme-text-accent);
     background-color: var(--theme-bg-accent);
     font-weight: 600;
   }
 
-  .nav-sublink a[aria-current="page"] {
+  .nav-sublink a[aria-current='page'] {
     border-left: 2px solid var(--theme-accent);
     background-color: transparent;
   }
@@ -174,7 +190,7 @@ const sidebar = SIDEBAR[langCode];
   .nav-sublink a[data-new] {
     color: hsla(var(--color-purple), 1);
     &::after {
-      content: "★";
+      content: '★';
       font-size: 0.75em;
     }
   }
@@ -188,11 +204,11 @@ const sidebar = SIDEBAR[langCode];
 </style>
 
 <style is:global>
-  :root.theme-dark a[aria-current="page"] {
+  :root.theme-dark a[aria-current='page'] {
     --theme-bg-accent: hsla(var(--color-base-simey), 70%, 0.25);
   }
-  :root.theme-dark .nav-link a[aria-current="page"],
-  :root.theme-dark .nav-link:not(.nav-sublink):has(a[aria-current="page"]) > a {
+  :root.theme-dark .nav-link a[aria-current='page'],
+  :root.theme-dark .nav-link:not(.nav-sublink):has(a[aria-current='page']) > a {
     color: hsla(var(--color-base-white), 100%, 1);
   }
 </style>

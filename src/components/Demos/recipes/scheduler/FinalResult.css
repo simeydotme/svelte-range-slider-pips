@@ -1,5 +1,4 @@
 .slider-wrapper {
-
   & .slider-actions {
     position: absolute;
     top: 50%;
@@ -22,7 +21,7 @@
     transition: all 0.2s ease-out;
 
     &:hover {
-      opacity: 1!important;
+      opacity: 1 !important;
     }
   }
 
@@ -30,5 +29,4 @@
   &:hover .slider-actions button {
     opacity: 0.5;
   }
-
 }

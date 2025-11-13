@@ -1,7 +1,6 @@
 @import url('https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css');
 
 .color-zones {
-
   /* what is considered the 'safe' and 'unsafe' areas */
   --unsafe-pct: 20%;
   --safe-pct: 80%;
@@ -13,16 +12,29 @@
   --unsafe-color-fade: #d5535388;
 
   position: relative;
-
 }
 
 .color-zones .rangeSlider {
   /* we set a background gradient on the slider which has
   two zones, one for safe and one for unsafe at either end */
-  background-image: 
-    linear-gradient( to right, transparent calc(var(--safe-pct) - 20px), var(--safe-color-fade) var(--safe-pct) 100% ),
-    linear-gradient( to right, transparent var(--unsafe-pct), var(--slider-bg) var(--unsafe-pct) 100% ),
-    repeating-linear-gradient(290deg, var(--unsafe-color-fade) calc(100% - 10px), var(--unsafe-color-fade) calc(100% - 5.5px), var(--unsafe-color) calc(100% - 5px), var(--unsafe-color) 100%);
+  background-image:
+    linear-gradient(
+      to right,
+      transparent calc(var(--safe-pct) - 20px),
+      var(--safe-color-fade) var(--safe-pct) 100%
+    ),
+    linear-gradient(
+      to right,
+      transparent var(--unsafe-pct),
+      var(--slider-bg) var(--unsafe-pct) 100%
+    ),
+    repeating-linear-gradient(
+      290deg,
+      var(--unsafe-color-fade) calc(100% - 10px),
+      var(--unsafe-color-fade) calc(100% - 5.5px),
+      var(--unsafe-color) calc(100% - 5px),
+      var(--unsafe-color) 100%
+    );
 }
 
 /* when the slider is in the 'unsafe' zone, we change the accent colors to unsafe values */
@@ -52,12 +64,12 @@
   height: 200%;
   border-radius: 50%;
   transform: translateX(-25%) translateY(-25%);
-  background: transparent!important;
+  background: transparent !important;
 
   /* this is to show an arrow icon instead of the normal circular nub */
   &:before {
-    font-family: "tabler-icons";
-    content: "\f6cf";
+    font-family: 'tabler-icons';
+    content: '\f6cf';
     color: var(--slider-accent);
     font-size: 2em;
     width: 1.5em;
@@ -76,9 +88,9 @@
 }
 
 /* move the range float down a little bit */
-.color-zones .rangeSlider .rangeHandle.rsActive .rangeFloat, 
-.color-zones .rangeSlider.rsHoverable .rangeHandle:hover .rangeFloat, 
-.color-zones .rangeSlider.rsHoverable .rangeBar:hover .rangeFloat, 
+.color-zones .rangeSlider .rangeHandle.rsActive .rangeFloat,
+.color-zones .rangeSlider.rsHoverable .rangeHandle:hover .rangeFloat,
+.color-zones .rangeSlider.rsHoverable .rangeBar:hover .rangeFloat,
 .color-zones .rangeSlider.rsFocus .rangeBar .rangeFloat {
   translate: -50% 25% 0.01px;
   border-radius: 10em;

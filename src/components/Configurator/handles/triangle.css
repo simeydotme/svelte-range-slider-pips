@@ -1,10 +1,8 @@
-
 .handle-triangle {
-  
   --offset-inline: var(--handle-offset, 0em);
   --offset-block: var(--handle-offset-block, 0em);
   --rotate: var(--handle-rotate, 0deg);
-  
+
   --handle-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12 2.25c-1.418 0-2.462.91-3.417 2.257c-.948 1.338-1.953 3.318-3.24 5.853l-.39.768c-1.065 2.098-1.904 3.75-2.344 5.076c-.448 1.348-.55 2.552.121 3.623c.67 1.066 1.801 1.511 3.22 1.719c1.398.204 3.272.204 5.656.204h.788c2.384 0 4.258 0 5.656-.204c1.419-.208 2.55-.653 3.22-1.72c.671-1.07.569-2.274.12-3.622c-.44-1.325-1.278-2.978-2.343-5.076l-.39 -.768c-1.287-2.535-2.292-4.515-3.24-5.853C14.462 3.159 13.418 2.25 12 2.25'/%3E%3C/svg%3E");
 
   &.rangeSlider {
@@ -53,7 +51,8 @@
     &.rsRange.rsReversed .rangeHandle:nth-of-type(2) .rangeNub,
     &.rsRange.rsMax .rangeHandle:nth-of-type(1) .rangeNub,
     &.rsRange.rsMin.rsReversed .rangeHandle:nth-of-type(1) .rangeNub {
-      transform: rotate(calc(90deg + var(--rotate))) translateY(var(--offset-inline)) translateX(var(--offset-block))!important;
+      transform: rotate(calc(90deg + var(--rotate))) translateY(var(--offset-inline))
+        translateX(var(--offset-block)) !important;
     }
 
     /* right-arrow on range */
@@ -61,7 +60,8 @@
     &.rsRange.rsReversed .rangeHandle:nth-of-type(1) .rangeNub,
     &.rsRange.rsMin .rangeHandle:nth-of-type(1) .rangeNub,
     &.rsRange.rsMax.rsReversed .rangeHandle:nth-of-type(2) .rangeNub {
-      transform: rotate(calc(-90deg - var(--rotate))) translateY(var(--offset-inline)) translateX(calc(var(--offset-block) * -1))!important;
+      transform: rotate(calc(-90deg - var(--rotate))) translateY(var(--offset-inline))
+        translateX(calc(var(--offset-block) * -1)) !important;
     }
 
     /* left-arrow on range (vertical) */
@@ -69,7 +69,8 @@
     &.rsVertical.rsRange.rsReversed .rangeHandle:nth-of-type(2) .rangeNub,
     &.rsVertical.rsRange.rsMax .rangeHandle:nth-of-type(1) .rangeNub,
     &.rsVertical.rsRange.rsMin.rsReversed .rangeHandle:nth-of-type(1) .rangeNub {
-      transform: rotate(calc(0deg - var(--rotate))) translateY(var(--offset-inline)) translateX(var(--offset-block))!important;
+      transform: rotate(calc(0deg - var(--rotate))) translateY(var(--offset-inline))
+        translateX(var(--offset-block)) !important;
     }
 
     /* right-arrow on range (vertical) */
@@ -77,7 +78,8 @@
     &.rsVertical.rsRange.rsReversed .rangeHandle:nth-of-type(1) .rangeNub,
     &.rsVertical.rsRange.rsMin .rangeHandle:nth-of-type(1) .rangeNub,
     &.rsVertical.rsRange.rsMax.rsReversed .rangeHandle:nth-of-type(2) .rangeNub {
-      transform: rotate(calc(180deg + var(--rotate))) translateY(var(--offset-inline)) translateX(calc(var(--offset-block) * -1))!important;
+      transform: rotate(calc(180deg + var(--rotate))) translateY(var(--offset-inline))
+        translateX(calc(var(--offset-block) * -1)) !important;
     }
 
     /* hover-effect bubble */
@@ -89,7 +91,7 @@
     &.rsHoverable:not(.rsDisabled) .rangeHandle:hover::before {
       box-shadow: none;
     }
-    &.rsHoverable:not(.rsDisabled) .rangeHandle.rsPress::before, 
+    &.rsHoverable:not(.rsDisabled) .rangeHandle.rsPress::before,
     &.rsHoverable:not(.rsDisabled) .rangeHandle.rsPress:hover::before {
       box-shadow: 0 0 0 6px var(--handle-border);
     }

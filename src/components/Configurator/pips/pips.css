@@ -12,7 +12,7 @@
 
       .rsPipVal {
         font-size: var(--pip-val-size);
-        top: calc(var(--pips-height, 0.5em) + .33em);
+        top: calc(var(--pips-height, 0.5em) + 0.33em);
         bottom: auto;
         transform: translateX(-50%) translateY(var(--pip-val-offset, 0em));
       }
@@ -23,7 +23,7 @@
       }
 
       .rsPip.rsSelected .rsPipVal {
-        top: calc(var(--pip-selected-height, 0.5em) + .33em);
+        top: calc(var(--pip-selected-height, 0.5em) + 0.33em);
         transform: translateX(-50%) translateY(var(--pip-val-offset, 0em));
       }
 
@@ -33,7 +33,7 @@
       }
 
       .rsPip.rsInRange .rsPipVal {
-        top: calc(var(--pip-inrange-height, 0.5em) + .33em);
+        top: calc(var(--pip-inrange-height, 0.5em) + 0.33em);
         transform: translateX(-50%) translateY(var(--pip-val-offset, 0em));
       }
     }
@@ -43,7 +43,7 @@
     .rangePips {
       top: auto;
       bottom: 100%;
-      transform: translateY(calc( 0% - var(--pips-offset, 0%)));
+      transform: translateY(calc(0% - var(--pips-offset, 0%)));
 
       .rsPip {
         top: auto;
@@ -51,23 +51,23 @@
       }
 
       .rsPipVal {
-        bottom: calc(var(--pips-height, 0.5em) + .33em);
+        bottom: calc(var(--pips-height, 0.5em) + 0.33em);
         top: auto;
         transform: translateX(-50%) translateY(calc(var(--pip-val-offset, 0em) * -1));
       }
       .rsPip.rsSelected .rsPipVal {
         top: auto;
-        bottom: calc(var(--pip-selected-height, 0.5em) + .33em);
+        bottom: calc(var(--pip-selected-height, 0.5em) + 0.33em);
         transform: translateX(-50%) translateY(calc(var(--pip-val-offset, 0em) * -1));
       }
       .rsPip.rsInRange .rsPipVal {
         top: auto;
-        bottom: calc(var(--pip-inrange-height, 0.5em) + .33em);
+        bottom: calc(var(--pip-inrange-height, 0.5em) + 0.33em);
         transform: translateX(-50%) translateY(calc(var(--pip-val-offset, 0em) * -1));
       }
     }
   }
-  
+
   &.rangeSlider.rsVertical {
     .rangePips {
       width: max(100%, 6px);
@@ -86,8 +86,8 @@
 
       .rsPipVal {
         bottom: auto;
-        top: 50%!important;
-        left: calc(var(--pips-height, 0.5em) + .33em);
+        top: 50% !important;
+        left: calc(var(--pips-height, 0.5em) + 0.33em);
         right: auto;
         transform: translateY(-50%) translateX(var(--pip-val-offset, 0em));
       }
@@ -98,7 +98,7 @@
       }
 
       .rsPip.rsSelected .rsPipVal {
-        left: calc(var(--pip-selected-height, 0.5em) + .33em);
+        left: calc(var(--pip-selected-height, 0.5em) + 0.33em);
         transform: translateY(-50%) translateX(var(--pip-val-offset, 0em));
       }
 
@@ -108,7 +108,7 @@
       }
 
       .rsPip.rsInRange .rsPipVal {
-        left: calc(var(--pip-inrange-height, 0.5em) + .33em);
+        left: calc(var(--pip-inrange-height, 0.5em) + 0.33em);
         transform: translateY(-50%) translateX(var(--pip-val-offset, 0em));
       }
     }
@@ -128,8 +128,8 @@
       }
 
       .rsPipVal {
-        right: calc((var(--pips-height, 0.5em) + .33em))!important;
-        left: auto!important;
+        right: calc((var(--pips-height, 0.5em) + 0.33em)) !important;
+        left: auto !important;
         transform: translateY(-50%) translateX(calc(var(--pip-val-offset, 0em) * -1));
       }
 
@@ -141,7 +141,7 @@
       .rsPip.rsSelected .rsPipVal {
         bottom: auto;
         top: 50%;
-        right: calc(var(--pip-selected-height, 0.5em) + .33em);
+        right: calc(var(--pip-selected-height, 0.5em) + 0.33em);
         transform: translateY(-50%) translateX(calc(var(--pip-val-offset, 0em) * -1));
       }
 
@@ -153,13 +153,13 @@
       .rsPip.rsInRange .rsPipVal {
         bottom: auto;
         top: 50%;
-        right: calc(var(--pip-inrange-height, 0.5em) + .33em);
+        right: calc(var(--pip-inrange-height, 0.5em) + 0.33em);
         transform: translateY(-50%) translateX(calc(var(--pip-val-offset, 0em) * -1));
       }
     }
 
     .rsPipVal {
-      left: auto!important;
+      left: auto !important;
     }
   }
 }

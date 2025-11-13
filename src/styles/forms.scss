@@ -1,5 +1,4 @@
 :root form {
-
   --h: 222;
   --s: 20%;
   --light: hsl(var(--h), var(--s), 95%);
@@ -14,24 +13,20 @@
   --labels: hsl(var(--h), var(--s), 40%);
   --b: hsla(var(--h), var(--s), 100%, 1);
   --svg: var(--fg);
-
 }
 
 :root.theme-dark form {
-
   --bor: hsl(var(--h), var(--s), 35%);
   --bg: var(--dark);
   --fg: var(--light);
   --labels: hsl(var(--h), var(--s), 65%);
   --b: hsla(var(--h), var(--s), 12%, 1);
-  
+
   --tint: hsl(260, 85%, 60%);
   --tint2: hsl(300, 85%, 60%);
-
 }
 
 form {
-
   background-color: var(--bg);
   color: var(--fg);
   padding: var(--pads);
@@ -39,7 +34,7 @@ form {
 
   fieldset {
     border: 1px solid var(--bor);
-    border-radius: calc( 10px - var(--pads));
+    border-radius: calc(10px - var(--pads));
     padding: var(--pads);
     margin-block: 0;
   }
@@ -51,7 +46,7 @@ form {
     padding: 0 2em;
     transform: translateX(-1em);
   }
-    
+
   svg {
     fill: currentColor;
     height: 1.5em;
@@ -68,18 +63,18 @@ form {
     input + label {
       display: inline-block;
       margin-block: 0;
-      padding: 0.5em  1em;
+      padding: 0.5em 1em;
       margin-inline-end: 2em;
     }
   }
 
-  @media screen and ( min-width: 600px ) {
+  @media screen and (min-width: 600px) {
     .group {
       grid-template-columns: repeat(2, auto 1fr);
     }
   }
 
-  @media screen and ( min-width: 1200px ) {
+  @media screen and (min-width: 1200px) {
     .group {
       grid-template-columns: repeat(4, auto 1fr);
     }
@@ -118,12 +113,15 @@ form {
     background: var(--b);
     padding: 0.875em;
     border-radius: 8px;
-    width: max( 33%, 120px );
+    width: max(33%, 120px);
     border: 1px solid transparent;
     outline: 1px solid transparent;
     accent-color: var(--tint2);
     box-shadow: 0 3px 2px -3px var(--bor);
-    transition: border 0.3s ease-in, outline 0.6s ease-in, box-shadow 0.6s ease-in;
+    transition:
+      border 0.3s ease-in,
+      outline 0.6s ease-in,
+      box-shadow 0.6s ease-in;
 
     &:hover {
       border-color: var(--bor);
@@ -133,7 +131,9 @@ form {
     &:focus {
       border-color: var(--tint);
       outline-color: var(--tint2);
-      transition: border 0.6s ease-out, outline 0.3s ease-out,
+      transition:
+        border 0.6s ease-out,
+        outline 0.3s ease-out,
         box-shadow 0.3s ease-out;
     }
 
@@ -150,7 +150,6 @@ form {
       opacity: 0.5;
       cursor: not-allowed;
     }
-
   }
 
   textarea {
@@ -172,8 +171,8 @@ form {
     }
   }
 
-  input[type="radio"],
-  input[type="checkbox"] {
+  input[type='radio'],
+  input[type='checkbox'] {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -184,7 +183,7 @@ form {
     outline: 1px solid transparent;
     appearance: none;
     border-radius: 100%;
-    
+
     &:hover {
       outline-color: var(--bor);
       transition: all 0.15s ease-out;
@@ -203,7 +202,7 @@ form {
     }
 
     &:after {
-      content: "";
+      content: '';
       width: 1em;
       height: 1em;
       background: transparent;
@@ -240,7 +239,7 @@ form {
     }
   }
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     border-radius: 5px;
 
     &:after,
@@ -262,7 +261,7 @@ form {
     }
   }
 
-  input[type="color"] {
+  input[type='color'] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -274,25 +273,25 @@ form {
     padding: 3px;
     border-radius: 10em;
   }
-  
-  input[type="color"]::-webkit-color-swatch {
+
+  input[type='color']::-webkit-color-swatch {
     border: none;
     border-radius: inherit;
     display: block;
   }
-  
-  input[type="color"]::-webkit-color-swatch-wrapper {
+
+  input[type='color']::-webkit-color-swatch-wrapper {
     padding: 0;
     border-radius: inherit;
   }
-  
-  input[type="color"]::-moz-color-swatch {
+
+  input[type='color']::-moz-color-swatch {
     border: none;
     border-radius: inherit;
     display: block;
   }
-  
-  input[type="color"]::-moz-color-swatch-wrapper {
+
+  input[type='color']::-moz-color-swatch-wrapper {
     padding: 0;
     border-radius: inherit;
   }
@@ -327,13 +326,12 @@ form {
       box-shadow: inset 0 0 0 1px var(--fg);
     }
 
-    &[type="submit"] {
+    &[type='submit'] {
       --svg: var(--bg);
       background: var(--fg);
       color: var(--bg);
       font-weight: 600;
     }
-    
   }
 
   svg {
@@ -341,5 +339,4 @@ form {
     height: 1.5em;
     width: auto;
   }
-
 }

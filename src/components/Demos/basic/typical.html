@@ -5,15 +5,15 @@
 <script defer>
   let values = [10, 50];
   const slider = new RangeSlider({
-    target: document.querySelector("#typical-slider"),
+    target: document.querySelector('#typical-slider'),
     props: {
       values: values,
       pips: true,
       float: true,
       range: true,
       first: 'label',
-      last: 'label'
-    }
+      last: 'label',
+    },
   });
 
   slider.$on('change', (e) => {

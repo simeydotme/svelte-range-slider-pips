@@ -1,85 +1,83 @@
 ---
-import { Icon } from 'astro-icon'
-type propType = "info" | "alert" | "warning" | "ok";
+import { Icon } from 'astro-icon';
+type propType = 'info' | 'alert' | 'warning' | 'ok';
 
 interface Props {
   title: string | undefined;
   type: propType | undefined;
 }
 
-const { title, type } = Astro.props
-let icon = "fluent:chat-bubbles-question-24-regular"
+const { title, type } = Astro.props;
+let icon = 'fluent:chat-bubbles-question-24-regular';
 switch (type) {
-  case "info":
-    icon = "fluent:notepad-24-regular";
+  case 'info':
+    icon = 'fluent:notepad-24-regular';
     break;
-  case "alert":
-    icon = "fluent:alert-on-24-regular";
+  case 'alert':
+    icon = 'fluent:alert-on-24-regular';
     break;
-  case "warning":
-    icon = "fluent:chat-warning-24-regular";
+  case 'warning':
+    icon = 'fluent:chat-warning-24-regular';
     break;
-  case "ok":
-    icon = "fluent:star-emphasis-24-regular";
+  case 'ok':
+    icon = 'fluent:star-emphasis-24-regular';
     break;
 }
 ---
 
-<aside class=`note note--${ type }` aria-label={ title }>
-  <p class="note__title">{ title }</p>
-  { icon && <Icon class="note__icon" name={ icon }></Icon> }
-  <slot></slot>
+<aside class=`note note--${ type }` aria-label={title}>
+  <p class="note__title">{title}</p>
+  {icon && <Icon class="note__icon" name={icon} />}
+  <slot />
 </aside>
 
 <style>
-
   .note {
-    
-    --note-color: hsla( var(--color-simey), 0.15 );
+    --note-color: hsla(var(--color-simey), 0.15);
 
-    font-size: .925rem;
+    font-size: 0.925rem;
     padding: 1rem 3.2rem 1rem 1rem;
     border-radius: 1rem;
     position: relative;
-    
+
     background-color: var(--note-color);
   }
 
   .note :global(p) {
     line-height: 1.33;
   }
-  
+
   .note :global(p) {
-    margin-block-end: .5rem;
+    margin-block-end: 0.5rem;
   }
-  
+
   .note :global(p:last-child) {
     margin-block-end: 0;
   }
 
   .note :global(ul, ol) {
     line-height: 1.1;
-    margin-block: .75em;
+    margin-block: 0.75em;
   }
 
   .note :global(ul li, ol li) {
-    margin-block: .5em;
+    margin-block: 0.5em;
   }
 
   .note--info {
-    --note-color: hsla( var(--color-blue), 0.15 );
+    --note-color: hsla(var(--color-blue), 0.15);
   }
 
   .note--alert {
-    --note-color: hsla( var(--color-yellow), 0.2 );
+    --note-color: hsla(var(--color-yellow), 0.2);
   }
 
   .note--warning {
-    --note-color: hsla( var(--color-red), 0.15 );
+    --note-color: hsla(var(--color-red), 0.15);
   }
 
   .note--ok {
-    --note-color: hsla( var(--color-simey-dark), 0.3 );
+    --note-color: hsla(var(--color-simey-dark), 0.3);
   }
 
   .note__title {
@@ -99,7 +97,7 @@ switch (type) {
   }
 
   .note__title:not(:empty) {
-    margin-block: 0 .5rem;
+    margin-block: 0 0.5rem;
   }
 
   .note__icon {
@@ -107,10 +105,9 @@ switch (type) {
     position: absolute;
     font-size: 2.2rem;
     opacity: 0.75;
-    top: .5rem;
-    right: .5rem;
-    filter: brightness(.5) contrast(2);
+    top: 0.5rem;
+    right: 0.5rem;
+    filter: brightness(0.5) contrast(2);
     rotate: 5deg;
   }
-
 </style>

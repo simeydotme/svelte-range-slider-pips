@@ -14,15 +14,15 @@ export function skewedNormalRandom(mean: number, stdDev: number, skewness: numbe
   // Generate random values, ensuring they're not too close to 0
   const u = Math.max(1e-10, Math.random());
   const v = Math.random(); // Can safely go up to (but not including) 1
-  
+
   // Box-Muller transform
   const z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-  
-  // Apply skewness 
+
+  // Apply skewness
   // - positive skewness means longer tail to the right
   // - negative skewness means longer tail to the left
   const skewedZ = z + (skewness * (z * z - 1)) / 6;
-  
+
   return mean + skewedZ * stdDev;
 }
 
@@ -51,18 +51,18 @@ interface SkewedNormalOptions {
  * @returns A value from the skewed normal distribution.
  */
 export function sampleSkewedNormal(options: SkewedNormalOptions): number {
-  const { min, max, mean, stdDev = mean/2, skewness = 0, maxAttempts = 50 } = options;
-  
+  const { min, max, mean, stdDev = mean / 2, skewness = 0, maxAttempts = 50 } = options;
+
   let value: number;
   let attempts: number = 0;
-  
+
   // try to sample a price between min and maxPrice, along the skewed normal distribution
   do {
     value = Math.round(skewedNormalRandom(mean, stdDev, skewness));
     attempts++;
     if (value >= min && value <= max) break;
   } while (attempts < maxAttempts);
-  
+
   // Fallback if we can't find a price along the skewed normal distribution
   if (attempts >= maxAttempts) {
     value = Math.floor(Math.random() * (max - min)) + min;

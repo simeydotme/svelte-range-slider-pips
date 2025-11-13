@@ -1,5 +1,4 @@
 #cute-sliders .rangeSlider {
-
   /* start by declaring all the Colors we want to use */
 
   --color-base-light: #b5c0c9;
@@ -36,7 +35,8 @@
 
   /* when the slider is hovered or focused, apply the base colors */
 
-  &:hover, &.rsFocus {
+  &:hover,
+  &.rsFocus {
     --color-1-light: var(--color-1);
     --color-2-light: var(--color-2);
     --color-3-light: var(--color-3);
@@ -45,10 +45,15 @@
 
   /* the vertical slider will use different base colors */
 
-  &.rsVertical:nth-child(1) { --slider-base: var(--color-2-light); }
-  &.rsVertical:nth-child(2) { --slider-base: var(--color-3-light); }
-  &.rsVertical:nth-child(3) { --slider-base: var(--color-4-light); }
-
+  &.rsVertical:nth-child(1) {
+    --slider-base: var(--color-2-light);
+  }
+  &.rsVertical:nth-child(2) {
+    --slider-base: var(--color-3-light);
+  }
+  &.rsVertical:nth-child(3) {
+    --slider-base: var(--color-4-light);
+  }
 
   /* set a max width / height so the pips have a set spacing */
 
@@ -132,32 +137,38 @@
   }
 
   & .rangeBar {
-    transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    transition:
+      background-color 0.2s ease-in-out,
+      opacity 0.2s ease-in-out;
   }
-
 }
 
 /* dark theme colors */
 
 .theme-dark #cute-sliders .rangeSlider {
-
   --slider-bg: var(--color-base-dark);
   --slider-base: var(--color-1-dark);
 
-  &:hover, &.rsFocus {
+  &:hover,
+  &.rsFocus {
     --color-1-dark: var(--color-1);
     --color-2-dark: var(--color-2);
     --color-3-dark: var(--color-3);
     --color-4-dark: var(--color-4);
   }
 
-  &.rsVertical:nth-child(1) { --slider-base: var(--color-2-dark); }
-  &.rsVertical:nth-child(2) { --slider-base: var(--color-3-dark); }
-  &.rsVertical:nth-child(3) { --slider-base: var(--color-4-dark); }
+  &.rsVertical:nth-child(1) {
+    --slider-base: var(--color-2-dark);
+  }
+  &.rsVertical:nth-child(2) {
+    --slider-base: var(--color-3-dark);
+  }
+  &.rsVertical:nth-child(3) {
+    --slider-base: var(--color-4-dark);
+  }
 
   & .rangeFloat {
     color: color-mix(in hsl, var(--slider-base) 40%, var(--bg));
     text-shadow: none;
   }
-
 }

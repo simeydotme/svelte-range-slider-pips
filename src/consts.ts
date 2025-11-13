@@ -3,39 +3,42 @@ export const REPOPATH = 'svelte-range-slider-pips';
 export const SITE = {
   title: 'Range Slider Pips',
   description: 'Documentation mini-site for using the Range Slider Pips component',
-  defaultLanguage: 'en'
-} as const
+  defaultLanguage: 'en',
+} as const;
 
 export const OPEN_GRAPH = {
   image: {
     src: `https://github.com/simeydotme/svelte-range-slider-pips/raw/main/public/svelte-range-slider-features.png`,
-    alt:
-      'Preview of the Range Slider with a few different features demonstrated'
+    alt: 'Preview of the Range Slider with a few different features demonstrated',
   },
-  twitter: 'simeydotme'
-}
+  twitter: 'simeydotme',
+};
 
 export const KNOWN_LANGUAGES = {
   // Deutsch: 'de',
-  English: 'en'
-} as const
-export const KNOWN_LANGUAGE_CODES = Object.values(KNOWN_LANGUAGES)
+  English: 'en',
+} as const;
+export const KNOWN_LANGUAGE_CODES = Object.values(KNOWN_LANGUAGES);
 
-export const EDIT_URL = `https://github.com/simeydotme/${REPOPATH}/blob/astro-pages`
-export const COMMUNITY_INVITE_URL = `https://github.com/simeydotme/${REPOPATH}/discussions`
+export const EDIT_URL = `https://github.com/simeydotme/${REPOPATH}/blob/astro-pages`;
+export const COMMUNITY_INVITE_URL = `https://github.com/simeydotme/${REPOPATH}/discussions`;
 
 // See "Algolia" section of the README for more information.
 export const ALGOLIA = {
   indexName: 'XXXXXXXXXX',
   appId: 'XXXXXXXXXX',
-  apiKey: 'XXXXXXXXXX'
-}
+  apiKey: 'XXXXXXXXXX',
+};
 
 export type Sidebar = Record<
   (typeof KNOWN_LANGUAGE_CODES)[number],
-  Record<string, { text: string; link: string, children?: SubLinks[] }[]>
->
-interface SubLinks { text: string; link: string, new?: boolean }
+  Record<string, { text: string; link: string; children?: SubLinks[] }[]>
+>;
+interface SubLinks {
+  text: string;
+  link: string;
+  new?: boolean;
+}
 
 export const SIDEBAR: Sidebar = {
   // "de": {
@@ -43,14 +46,16 @@ export const SIDEBAR: Sidebar = {
   //     { text: "Einführung", link: 'de/einführung' },
   //   ]
   // },
-  "en": {
+  en: {
     '': [
       { text: 'Introduction', link: `${REPOPATH}/en/introduction` },
       { text: 'Accessibility', link: `${REPOPATH}/en/a11y` },
       { text: 'Getting Started', link: `${REPOPATH}/en/getting-started` },
       { text: 'Upgrade to 4.0.0', link: `${REPOPATH}/en/upgrade` },
       { text: 'Basic Usage', link: `${REPOPATH}/en/basic-usage` },
-      { text: 'Options', link: `${REPOPATH}/en/options`, 
+      {
+        text: 'Options',
+        link: `${REPOPATH}/en/options`,
         children: [
           { text: 'value', link: `${REPOPATH}/en/options#value` },
           { text: 'values', link: `${REPOPATH}/en/options#values` },
@@ -89,16 +94,20 @@ export const SIDEBAR: Sidebar = {
           { text: 'springValues', link: `${REPOPATH}/en/options#springValues` },
           { text: 'precision', link: `${REPOPATH}/en/options#precision`, new: true },
           { text: 'slider', link: `${REPOPATH}/en/options#slider` },
-        ]
+        ],
       },
-      { text: 'Events', link: `${REPOPATH}/en/events`, 
+      {
+        text: 'Events',
+        link: `${REPOPATH}/en/events`,
         children: [
           { text: 'start', link: `${REPOPATH}/en/events#start` },
           { text: 'change', link: `${REPOPATH}/en/events#change` },
           { text: 'stop', link: `${REPOPATH}/en/events#stop` },
-        ]
+        ],
       },
-      { text: 'Examples', link: `${REPOPATH}/en/examples`, 
+      {
+        text: 'Examples',
+        link: `${REPOPATH}/en/examples`,
         children: [
           { text: 'Values & Binding', link: `${REPOPATH}/en/examples/values` },
           { text: 'Min & Max', link: `${REPOPATH}/en/examples/min-max` },
@@ -120,9 +129,11 @@ export const SIDEBAR: Sidebar = {
           { text: 'Disabled', link: `${REPOPATH}/en/examples/disabled` },
           { text: 'Easing', link: `${REPOPATH}/en/examples/easing` },
           { text: 'Precision', link: `${REPOPATH}/en/examples/precision` },
-        ]
+        ],
       },
-      { text: 'Styling', link: `${REPOPATH}/en/styling`, 
+      {
+        text: 'Styling',
+        link: `${REPOPATH}/en/styling`,
         children: [
           { text: 'Size', link: `${REPOPATH}/en/styling#size` },
           { text: 'Color Variables', link: `${REPOPATH}/en/styling#colors` },
@@ -130,9 +141,11 @@ export const SIDEBAR: Sidebar = {
           { text: 'Dark Mode', link: `${REPOPATH}/en/styling/darkmode`, new: true },
           { text: 'Pips & Steps', link: `${REPOPATH}/en/styling/pips` },
           { text: 'Configurator', link: `${REPOPATH}/en/styling/configurator`, new: true },
-        ]
+        ],
       },
-      { text: 'Recipes', link: `${REPOPATH}/en/recipes`, 
+      {
+        text: 'Recipes',
+        link: `${REPOPATH}/en/recipes`,
         children: [
           { text: 'Label Inside Handle', link: `${REPOPATH}/en/recipes/month-picker` },
           { text: 'DaisyUi', link: `${REPOPATH}/en/recipes/daisy-ui` },
@@ -142,14 +155,18 @@ export const SIDEBAR: Sidebar = {
           { text: 'Itty.sh', link: `${REPOPATH}/en/recipes/itty-sh`, new: true },
           { text: 'Cute Bubbles', link: `${REPOPATH}/en/recipes/cute-bubbles`, new: true },
           { text: 'Multi-Range', link: `${REPOPATH}/en/recipes/multi-range`, new: true },
-          { text: 'Positive/Negative', link: `${REPOPATH}/en/recipes/positive-negative`, new: true },
+          {
+            text: 'Positive/Negative',
+            link: `${REPOPATH}/en/recipes/positive-negative`,
+            new: true,
+          },
           { text: 'Scheduler', link: `${REPOPATH}/en/recipes/scheduler`, new: true },
           { text: 'Liquid Glass', link: `${REPOPATH}/en/recipes/liquid-glass`, new: true },
           { text: 'Temperature', link: `${REPOPATH}/en/recipes/temperature`, new: true },
           { text: 'Label Colors', link: `${REPOPATH}/en/recipes/label-colors`, new: true },
           { text: 'Hotel Range', link: `${REPOPATH}/en/recipes/hotel-range`, new: true },
-        ]
-      }
-    ]
-  }
-}
+        ],
+      },
+    ],
+  },
+};

@@ -1,53 +1,53 @@
-  /* general RangeSlider styling */
-  #month-picker.rangeSlider {
-    font-size: 12px;
-    text-transform: uppercase;
-  }
+/* general RangeSlider styling */
+#month-picker.rangeSlider {
+  font-size: 12px;
+  text-transform: uppercase;
+}
 
-  #month-picker.rangeSlider.rsFocus .rangeBar {
-    background: linear-gradient(to left, var(--handle) 20%, var(--handle-focus));
-  }
+#month-picker.rangeSlider.rsFocus .rangeBar {
+  background: linear-gradient(to left, var(--handle) 20%, var(--handle-focus));
+}
 
-  #month-picker.rangeSlider.rsFocus:has([data-handle="1"].rsActive) .rangeBar {
-    background: linear-gradient(to right, var(--handle) 20%, var(--handle-focus));
-  }
+#month-picker.rangeSlider.rsFocus:has([data-handle='1'].rsActive) .rangeBar {
+  background: linear-gradient(to right, var(--handle) 20%, var(--handle-focus));
+}
 
-  /* Move the floating label on top of the handle */
-  
-  #month-picker.rangeSlider .rangeHandle {
-    width: 34px;
-    height: 34px;
-    background: none;
-    display: grid;
-    grid-template: 1fr / 1fr;
-    align-items: center;
-  }
+/* Move the floating label on top of the handle */
 
-  #month-picker.rangeSlider .rangeFloat {
-    opacity: 1;
-    background: transparent;
-    translate: none;
-    grid-area: 1 / 1;
-    position: static;
-  }
+#month-picker.rangeSlider .rangeHandle {
+  width: 34px;
+  height: 34px;
+  background: none;
+  display: grid;
+  grid-template: 1fr / 1fr;
+  align-items: center;
+}
 
-  /* Make the handles look like Squircles */
+#month-picker.rangeSlider .rangeFloat {
+  opacity: 1;
+  background: transparent;
+  translate: none;
+  grid-area: 1 / 1;
+  position: static;
+}
 
-  #month-picker.rangeSlider .rangeHandle .rangeNub {
-    border-radius: 0;
-    transform: translate(0, 0);
-    mask-image: url("data:image/svg+xml;utf8, %3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E %3Cpath d=' M 100,0 C 22.460000000000008,0 0,22.460000000000008 0,100  0,177.54 22.460000000000008,200 100,200  177.54,200 200,177.54 200,100  200,22.460000000000008 177.54,0 100,0 ' style='fill: black;'%3E%3C/path%3E %3C/svg%3E");
-    mask-size: cover;
-    grid-area: 1 / 1;
-  }
+/* Make the handles look like Squircles */
 
-  /* Hide the pips, and values when selected */
-  
-  #month-picker.rangeSlider .rsPip {
-    background: transparent;
-  }
+#month-picker.rangeSlider .rangeHandle .rangeNub {
+  border-radius: 0;
+  transform: translate(0, 0);
+  mask-image: url("data:image/svg+xml;utf8, %3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E %3Cpath d=' M 100,0 C 22.460000000000008,0 0,22.460000000000008 0,100  0,177.54 22.460000000000008,200 100,200  177.54,200 200,177.54 200,100  200,22.460000000000008 177.54,0 100,0 ' style='fill: black;'%3E%3C/path%3E %3C/svg%3E");
+  mask-size: cover;
+  grid-area: 1 / 1;
+}
 
-  #month-picker.rangeSlider .rsPip.rsSelected .rsPipVal {
-    opacity: 0;
-    transition: all 0.25s ease;
-  }
+/* Hide the pips, and values when selected */
+
+#month-picker.rangeSlider .rsPip {
+  background: transparent;
+}
+
+#month-picker.rangeSlider .rsPip.rsSelected .rsPipVal {
+  opacity: 0;
+  transition: all 0.25s ease;
+}

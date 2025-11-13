@@ -3,9 +3,9 @@ import mdx from '@astrojs/mdx';
 // import preact from '@astrojs/preact';
 // import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
-import expressiveCode from "astro-expressive-code";
+import expressiveCode from 'astro-expressive-code';
 
-import svelte from "@astrojs/svelte";
+import svelte from '@astrojs/svelte';
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,8 +16,8 @@ export default defineConfig({
   vite: {
     server: {
       watch: {
-        usePolling: true
-      }
-    }
-  }
+        usePolling: true,
+      },
+    },
+  },
 });

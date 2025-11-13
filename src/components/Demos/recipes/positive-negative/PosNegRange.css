@@ -1,9 +1,8 @@
 #pos-neg {
-
   /* set the colors for the positive and negative ranges */
 
   --text-color: white;
-  
+
   &.positive {
     --slider-accent: rgb(20, 216, 122);
     --text-color: rgb(8, 73, 40);
@@ -52,5 +51,4 @@
   &.rsFocus .rangeFloat {
     opacity: 1;
   }
-
 }

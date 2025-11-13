@@ -1,4 +1,3 @@
-
 /* setup the popover container for the slider */
 .label-slider-container {
   opacity: 0;
@@ -30,9 +29,9 @@
   background: white;
   place-content: center;
   border-radius: 14px;
-  box-shadow: 
+  box-shadow:
     rgba(50, 50, 93, 0.2) 0px 2px 40px -2px,
-    rgba(50, 50, 93, 0.25) 0px 8px 27px -5px, 
+    rgba(50, 50, 93, 0.25) 0px 8px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 4px 16px -8px;
 
   /* add a triangle to the top of the popover (mobile) */
@@ -70,7 +69,6 @@
 
 /* style the range slider */
 .label-slider-container .label-slider.rangeSlider {
-
   /* set the colors for the slider */
   --slider-base: white;
   --slider-fg: white;
@@ -84,11 +82,7 @@
   border-radius: 7px;
 
   /* use a 'longer' hue gradient for the slider to show the rainbow */
-  background: linear-gradient(
-    to right in oklch longer hue,
-    hsl(0, 65%, 60%),
-    hsl(320, 65%, 60%)
-  );
+  background: linear-gradient(to right in oklch longer hue, hsl(0, 65%, 60%), hsl(320, 65%, 60%));
 
   /* move the pips container inside of the slider */
   & .rangePips {
@@ -128,8 +122,8 @@
     bottom: auto;
     top: 120%;
     border-radius: 0.5em;
-    box-shadow: 
-      rgba(50, 50, 93, 0.25) 0px -4px 25px -3px, 
+    box-shadow:
+      rgba(50, 50, 93, 0.25) 0px -4px 25px -3px,
       rgba(0, 0, 0, 0.3) 0px 2px 16px -4px;
     display: flex;
     align-items: center;

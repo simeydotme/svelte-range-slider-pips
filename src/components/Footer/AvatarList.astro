@@ -1,79 +1,74 @@
 ---
 // fetch all commits for just this page's path
 type Props = {
-  path: string
-}
-const { path } = Astro.props
-const resolvedPath = `${path}`
-const url = `https://api.github.com/repos/simeydotme/svelte-range-slider-pips/commits?path=${resolvedPath}`
-const commitsURL = `https://github.com/simeydotme/svelte-range-slider-pips/commits/astro-pages/${resolvedPath}`
+  path: string;
+};
+const { path } = Astro.props;
+const resolvedPath = `${path}`;
+const url = `https://api.github.com/repos/simeydotme/svelte-range-slider-pips/commits?path=${resolvedPath}`;
+const commitsURL = `https://github.com/simeydotme/svelte-range-slider-pips/commits/astro-pages/${resolvedPath}`;
 type Commit = {
   author: {
-    id: string
-    login: string
-  }
-}
+    id: string;
+    login: string;
+  };
+};
 
 async function getCommits(url: string) {
   try {
-    const token = import.meta.env.GITHUB_TOKEN ?? 'hello'
+    const token = import.meta.env.GITHUB_TOKEN ?? 'hello';
     if (!token) {
-      throw new Error(
-        'Cannot find "GITHUB_TOKEN" used for escaping rate-limiting.'
-      )
+      throw new Error('Cannot find "GITHUB_TOKEN" used for escaping rate-limiting.');
     }
 
-    const auth = `Basic ${Buffer.from(token, 'binary').toString('base64')}`
+    const auth = `Basic ${Buffer.from(token, 'binary').toString('base64')}`;
 
     const res = await fetch(url, {
       method: 'GET',
       headers: {
         Authorization: auth,
-        'User-Agent': 'astro-docs/1.0'
-      }
-    })
+        'User-Agent': 'astro-docs/1.0',
+      },
+    });
 
-    const data = await res.json()
+    const data = await res.json();
 
     if (!res.ok) {
       throw new Error(
         `Request to fetch commits failed. Reason: ${res.statusText}
        Message: ${data.message}`
-      )
+      );
     }
 
-    return data as Commit[]
+    return data as Commit[];
   } catch (e) {
     console.warn(`[error]  /src/components/AvatarList.astro 
-    ${(e as any)?.message ?? e}`)
-    return [] as Commit[]
+    ${(e as any)?.message ?? e}`);
+    return [] as Commit[];
   }
 }
 
 function removeDups(arr: Commit[]) {
-  const map = new Map<string, Commit['author']>()
+  const map = new Map<string, Commit['author']>();
 
   for (let item of arr) {
-    const author = item.author
+    const author = item.author;
     // Deduplicate based on author.id
-    map.set(author.id, { login: author.login, id: author.id })
+    map.set(author.id, { login: author.login, id: author.id });
   }
 
-  return [...map.values()]
+  return [...map.values()];
 }
 
-const data = await getCommits(url)
-const unique = removeDups(data)
-const recentContributors = unique.slice(0, 3) // only show avatars for the 3 most recent contributors
-const additionalContributors = unique.length - recentContributors.length // list the rest of them as # of extra contributors
+const data = await getCommits(url);
+const unique = removeDups(data);
+const recentContributors = unique.slice(0, 3); // only show avatars for the 3 most recent contributors
+const additionalContributors = unique.length - recentContributors.length; // list the rest of them as # of extra contributors
 ---
 
 <!-- Thanks to @5t3ph for https://smolcss.dev/#smol-avatar-list! -->
 <div class="contributors">
-  <ul
-    class="avatar-list"
-    style={`--avatar-count: ${recentContributors.length}`}
-  >
+  <ul class="avatar-list" style={`--avatar-count: ${recentContributors.length}`}>
     {
       recentContributors.map((item) => (
         <li>
@@ -93,9 +88,7 @@ const additionalContributors = unique.length - recentContributors.length // list
   {
     additionalContributors > 0 && (
       <span>
-        <a
-          href={commitsURL}
-        >{`and ${additionalContributors} additional contributor${
+        <a href={commitsURL}>{`and ${additionalContributors} additional contributor${
           additionalContributors > 1 ? 's' : ''
         }.`}</a>
       </span>
@@ -114,10 +107,7 @@ const additionalContributors = unique.length - recentContributors.length // list
     /* Default to displaying most of the avatar to
   enable easier access on touch devices, ensuring
   the WCAG touch target size is met or exceeded */
-    grid-template-columns: repeat(
-      var(--avatar-count),
-      max(44px, calc(var(--avatar-size) / 1.15))
-    );
+    grid-template-columns: repeat(var(--avatar-count), max(44px, calc(var(--avatar-size) / 1.15)));
     /* `padding` matches added visual dimensions of
   the `box-shadow` to help create a more accurate
   computed component size */
@@ -129,10 +119,7 @@ const additionalContributors = unique.length - recentContributors.length // list
     .avatar-list {
       /* We create 1 extra cell to enable the computed 
     width to match the final visual width */
-      grid-template-columns: repeat(
-        calc(var(--avatar-count) + 1),
-        calc(var(--avatar-size) / 1.75)
-      );
+      grid-template-columns: repeat(calc(var(--avatar-count) + 1), calc(var(--avatar-size) / 1.75));
     }
   }
 
@@ -147,7 +134,9 @@ const additionalContributors = unique.length - recentContributors.length // list
   .avatar-list a:focus {
     outline: 2px solid transparent;
     /* Double-layer trick to work for dark and light backgrounds */
-    box-shadow: 0 0 0 0.08em var(--theme-accent), 0 0 0 0.12em hsl(0, 0%, 100%);
+    box-shadow:
+      0 0 0 0.08em var(--theme-accent),
+      0 0 0 0.12em hsl(0, 0%, 100%);
   }
 
   .avatar-list li {
@@ -165,7 +154,9 @@ const additionalContributors = unique.length - recentContributors.length // list
     height: 100%;
     object-fit: cover;
     background-color: #fff;
-    box-shadow: 0 0 0 0.05em #fff, 0 0 0 0.08em rgba(0, 0, 0, 0.15);
+    box-shadow:
+      0 0 0 0.05em #fff,
+      0 0 0 0.08em rgba(0, 0, 0, 0.15);
   }
 
   .contributors {

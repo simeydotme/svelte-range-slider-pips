@@ -7,7 +7,7 @@ export default function UselessSlider() {
 
   useEffect(() => {
     sliderRef.current = new RangeSlider({
-      target: nodeRef.current
+      target: nodeRef.current,
     });
 
     return () => {
@@ -18,5 +18,5 @@ export default function UselessSlider() {
     };
   }, []);
 
-  return <div id='useless-slider' ref={nodeRef}></div>;
-} 
+  return <div id="useless-slider" ref={nodeRef}></div>;
+}

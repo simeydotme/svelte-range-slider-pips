@@ -20,10 +20,9 @@
   opacity: 1;
   translate: -50% 100%;
   border-radius: 1em;
-  padding: .5em .75em;
+  padding: 0.5em 0.75em;
   pointer-events: all;
 }
-
 
 /** Simple Styling for the outer UI */
 .color-ui {
@@ -37,28 +36,55 @@
 
 /** Advanced css to invert the text color and add a vibrant shadow */
 .color-ui {
-  color: hsla(var(--hue), calc( var(--saturation) / 2),calc( (var(--lightness ) - 50%) * -1 + 100% ), 1);
-  text-shadow: 0 1px 1px hsla(var(--hue), calc( var(--saturation) / 2),calc( var(--lightness ) - 50% ), 1);
-  box-shadow: 
-    0 1px 1px 2px hsla(var(--hue), calc( var(--saturation) / 2), max( calc( var(--lightness ) - 10% ), 30% ), 1),
-    0 4px 4px 1px hsla(var(--hue), calc( var(--saturation) / 2), max( calc( var(--lightness ) - 10% ), 30% ), .5),
-    0 8px 10px 5px hsla(var(--hue), calc( var(--saturation) / 2), max( calc( var(--lightness ) - 10% ), 30% ), .5);
+  color: hsla(
+    var(--hue),
+    calc(var(--saturation) / 2),
+    calc((var(--lightness) - 50%) * -1 + 100%),
+    1
+  );
+  text-shadow: 0 1px 1px
+    hsla(var(--hue), calc(var(--saturation) / 2), calc(var(--lightness) - 50%), 1);
+  box-shadow:
+    0 1px 1px 2px
+      hsla(var(--hue), calc(var(--saturation) / 2), max(calc(var(--lightness) - 10%), 30%), 1),
+    0 4px 4px 1px
+      hsla(var(--hue), calc(var(--saturation) / 2), max(calc(var(--lightness) - 10%), 30%), 0.5),
+    0 8px 10px 5px
+      hsla(var(--hue), calc(var(--saturation) / 2), max(calc(var(--lightness) - 10%), 30%), 0.5);
 }
 
 .color-ui #h.rangeSlider {
   --s: var(--saturation);
   --l: var(--lightness);
-  background-image: linear-gradient(to right, hsl(0, var(--s), var(--l)), hsl(60, var(--s), var(--l)), hsl(120, var(--s), var(--l)), hsl(180, var(--s), var(--l)), hsl(240, var(--s), var(--l)), hsl(300, var(--s), var(--l)), hsl(360, var(--s), var(--l)));
+  background-image: linear-gradient(
+    to right,
+    hsl(0, var(--s), var(--l)),
+    hsl(60, var(--s), var(--l)),
+    hsl(120, var(--s), var(--l)),
+    hsl(180, var(--s), var(--l)),
+    hsl(240, var(--s), var(--l)),
+    hsl(300, var(--s), var(--l)),
+    hsl(360, var(--s), var(--l))
+  );
 }
 
 .color-ui #s.rangeSlider {
   --h: var(--hue);
   --l: var(--lightness);
-  background-image: linear-gradient(to right, hsl(var(--h), 0%, var(--l)), hsl(var(--h), 100%, var(--l)));
+  background-image: linear-gradient(
+    to right,
+    hsl(var(--h), 0%, var(--l)),
+    hsl(var(--h), 100%, var(--l))
+  );
 }
 
 .color-ui #l.rangeSlider {
   --h: var(--hue);
   --s: var(--saturation);
-  background-image: linear-gradient(to right, hsl(var(--h), var(--s), 0%), hsl(var(--h), var(--s), 50%), hsl(var(--h), var(--s), 100%));
+  background-image: linear-gradient(
+    to right,
+    hsl(var(--h), var(--s), 0%),
+    hsl(var(--h), var(--s), 50%),
+    hsl(var(--h), var(--s), 100%)
+  );
 }

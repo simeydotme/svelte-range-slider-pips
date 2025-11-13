@@ -1,4 +1,4 @@
-import { codeToHtml } from "shiki3";
+import { codeToHtml } from 'shiki3';
 import handleDefaultCss from '~/components/Configurator/handles/default.css?inline';
 import handleRingCss from '~/components/Configurator/handles/ring.css?inline';
 import handleRectangleCss from '~/components/Configurator/handles/rectangle.css?inline';
@@ -14,21 +14,24 @@ const handleStyles = {
   triangle: handleTriangleCss,
 };
 
-export const outputCode = async ( code: string, lang = 'svelte', theme = 'github-dark' ) => {
-  code = code.trim().replaceAll('*{}','').replaceAll('<!--script-->', '<script>').replaceAll('<!--/script-->', '</script>');
+export const outputCode = async (code: string, lang = 'svelte', theme = 'github-dark') => {
+  code = code
+    .trim()
+    .replaceAll('*{}', '')
+    .replaceAll('<!--script-->', '<script>')
+    .replaceAll('<!--/script-->', '</script>');
   const outputCode = await codeToHtml(code, { lang, theme });
   const outputSource = code;
-  return new Promise((resolve) => resolve({ outputCode, outputSource }) );
-}
+  return new Promise((resolve) => resolve({ outputCode, outputSource }));
+};
 
-export const generatedCss = async ( 
-  handleType: keyof typeof handleStyles, 
-  lightThemeColors: string, 
-  darkThemeColors: string, 
-  overrideStyle: string, 
-  inlineStyles: string,
+export const generatedCss = async (
+  handleType: keyof typeof handleStyles,
+  lightThemeColors: string,
+  darkThemeColors: string,
+  overrideStyle: string,
+  inlineStyles: string
 ) => {
-  
   const code = `
   #mySlider {
 
@@ -51,13 +54,12 @@ export const generatedCss = async (
     ${floatCss}
     ${pipsCss}
     `;
-    
-    return await outputCode(code, 'css', 'github-dark');
-  };
 
+  return await outputCode(code, 'css', 'github-dark');
+};
 
-  export const generatedSvelte = async (props: string, handleType: string, pipPosition: string) => {
-    const code = `
+export const generatedSvelte = async (props: string, handleType: string, pipPosition: string) => {
+  const code = `
 <script>
   import RangeSlider from 'svelte-range-slider-pips';
 </script>
@@ -70,12 +72,12 @@ export const generatedCss = async (
   
 <!-- check the CSS tab for generated styles -->
   `;
-  
+
   return await outputCode(code, 'svelte', 'github-dark');
 };
 
-  export const generatedVue = async (props: string, handleType: string, pipPosition: string) => {
-    const code = `
+export const generatedVue = async (props: string, handleType: string, pipPosition: string) => {
+  const code = `
 <script setup>
   import { ref, onMounted, onUnmounted } from 'vue';
   import RangeSlider from 'svelte-range-slider-pips';
@@ -109,8 +111,7 @@ export const generatedCss = async (
   `;
 
   return await outputCode(code, 'vue', 'github-dark');
-
-}
+};
 
 export const generatedReact = async (props: string, handleType: string, pipPosition: string) => {
   const code = `
@@ -146,7 +147,7 @@ export default function TypicalUsage() {
   `;
 
   return await outputCode(code, 'jsx', 'github-dark');
-}
+};
 
 export const generatedVanilla = async (props: string, handleType: string, pipPosition: string) => {
   const code = `
@@ -169,4 +170,4 @@ export const generatedVanilla = async (props: string, handleType: string, pipPos
   `;
 
   return await outputCode(code, 'html', 'github-dark');
-}
+};

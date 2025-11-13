@@ -24,15 +24,15 @@
 }
 
 /* styles for the pips directly after the selected pip */
-#circles .rangePips .rsPip.rsSelected+* {
+#circles .rangePips .rsPip.rsSelected + * {
   transform: translate3d(calc(-50% + 2px), 4px, 0.1px) scale(0.6);
 }
 
-#circles .rangePips .rsPip.rsSelected+*+* {
+#circles .rangePips .rsPip.rsSelected + * + * {
   transform: translate3d(calc(-50% + 2px), 2px, 0.1px) scale(0.4);
 }
 
-#circles .rangePips .rsPip.rsSelected+*+*+* {
+#circles .rangePips .rsPip.rsSelected + * + * + * {
   transform: translate3d(calc(-50% + 1px), 1px, 0.1px) scale(0.2);
 }
 

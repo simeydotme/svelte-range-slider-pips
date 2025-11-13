@@ -22,3 +22,6 @@ yarn.lock
 
 # macOS-specific files
 .DS_Store
+
+# MDX files (to preserve inline component formatting)
+*.mdx

@@ -1,4 +1,4 @@
-import { writable,derived, get } from 'svelte/store';
+import { writable, derived, get } from 'svelte/store';
 import { persisted } from 'svelte-persisted-store';
 import createPersistedStore from './persistedStore';
 
@@ -30,29 +30,27 @@ export const defaultConfig: Record<string, any> = {
   limitMin: null,
   limitMax: null,
   precision: 2,
-  darkmode: darkmodeTypes[0].value
+  darkmode: darkmodeTypes[0].value,
 };
 
 // Export config store
 export const configStore = createPersistedStore('svelte-range-slider-config', defaultConfig);
 
-
-
 // Default settings values
 const defaultSettings = {
   bgColor: '#f0f1f5',
-  bgColorDark: '#292f3d'
+  bgColorDark: '#292f3d',
 };
 
 // Create persisted store for settings
 const createSettingsStore = () => {
-  const internalStore = persisted('svelte-range-slider-settings', {...defaultSettings});
+  const internalStore = persisted('svelte-range-slider-settings', { ...defaultSettings });
   let resetSettingsConfirm = writable(false);
   let resetTimeout: NodeJS.Timeout;
   const resetSettings = () => {
     clearTimeout(resetTimeout);
-    if ( get(resetSettingsConfirm) ) {
-      internalStore.set({...defaultSettings});
+    if (get(resetSettingsConfirm)) {
+      internalStore.set({ ...defaultSettings });
       resetSettingsConfirm.set(false);
     } else {
       resetSettingsConfirm.set(true);
@@ -60,15 +58,15 @@ const createSettingsStore = () => {
         resetSettingsConfirm.set(false);
       }, 3000);
     }
-  }
+  };
   return {
     subscribe: internalStore.subscribe,
     set: internalStore.set,
     update: internalStore.update,
     reset: resetSettings,
-    isConfirmingReset: resetSettingsConfirm.subscribe
-  }
-}
+    isConfirmingReset: resetSettingsConfirm.subscribe,
+  };
+};
 
 // Export settings store
 export const settingsStore = createSettingsStore();
@@ -76,8 +74,12 @@ export const settingsStore = createSettingsStore();
 // the light/dark mode of the page
 export const themeStore = localStorage.getItem('theme');
 
-export const absoluteMin = derived(configStore, store => Math.max(store.min, store.limitMin ?? store.min));
-export const absoluteMax = derived(configStore, store => Math.min(store.max, store.limitMax ?? store.max));
+export const absoluteMin = derived(configStore, (store) =>
+  Math.max(store.min, store.limitMin ?? store.min)
+);
+export const absoluteMax = derived(configStore, (store) =>
+  Math.min(store.max, store.limitMax ?? store.max)
+);
 
 export const filterConfigProps = (configProps: Record<string, any>) => {
   return Object.fromEntries(
@@ -87,10 +89,13 @@ export const filterConfigProps = (configProps: Record<string, any>) => {
           return value !== 0;
         case 'rangeGapMax':
           return value !== Infinity;
-        case 'limits': 
+        case 'limits':
           return value !== null;
         case 'springValues':
-          return value.stiffness !== easingTypes[0].config.stiffness || value.damping !== easingTypes[0].config.damping;
+          return (
+            value.stiffness !== easingTypes[0].config.stiffness ||
+            value.damping !== easingTypes[0].config.damping
+          );
         default:
           return value !== defaultConfig[key];
       }
@@ -105,7 +110,8 @@ export const jsonifyProps = (filteredProps: Record<string, any>, indent = '') =>
     .replaceAll('}', ' }')
     .replaceAll(':', ': ')
     .replaceAll(/"(.*?)": /g, `${indent}$1: `);
-};1
+};
+1;
 
 export const htmlifyProps = (filteredProps: Record<string, any>, indent = '') => {
   return Object.entries(filteredProps)
@@ -132,7 +138,11 @@ export const outputObject = (configProps: Record<string, any>, indent = '') => {
   return jsonifyProps(filtered, indent);
 };
 
-export const outputProps = (configProps: Record<string, any>, type: 'json' | 'html' = 'html', indent = '') => {
+export const outputProps = (
+  configProps: Record<string, any>,
+  type: 'json' | 'html' = 'html',
+  indent = ''
+) => {
   const filtered = filterConfigProps(configProps);
   return type === 'json' ? jsonifyProps(filtered, indent) : htmlifyProps(filtered, indent);
 };

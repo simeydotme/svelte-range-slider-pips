@@ -12,8 +12,8 @@ export default function BasicBinding() {
       props: {
         min: 0,
         max: 100,
-        value: value
-      }
+        value: value,
+      },
     });
 
     sliderRef.current.$on('change', (e) => {
@@ -36,11 +36,7 @@ export default function BasicBinding() {
   return (
     <div>
       <div id="binding-slider" ref={nodeRef}></div>
-      <input 
-        type="number" 
-        value={value} 
-        onChange={(e) => setValue(e.target.valueAsNumber)} 
-      />
+      <input type="number" value={value} onChange={(e) => setValue(e.target.valueAsNumber)} />
     </div>
   );
-} 
+}

@@ -2,28 +2,28 @@
 
 /* Here we target specific pips and show them,
   which was the imaginary requirement of the slider design */
-  
-  #future .rsPip[data-val="75000"],
-  #future .rsPip[data-val="250000"],
-  #future .rsPip[data-val="750000"],
-  #future .rsPip[data-val="925000"] {
-    display: block;
-  }
-  
-  #future .rsPip[data-val="75000"] .rsPipVal,
-  #future .rsPip[data-val="925000"] .rsPipVal {
-    top: -2.25em;
-    transform: translateX(-20%);
-  }
-  
-  #future .rsPip[data-val="925000"] .rsPipVal {
-    transform: translateX(-80%);
-  }
+
+#future .rsPip[data-val='75000'],
+#future .rsPip[data-val='250000'],
+#future .rsPip[data-val='750000'],
+#future .rsPip[data-val='925000'] {
+  display: block;
+}
+
+#future .rsPip[data-val='75000'] .rsPipVal,
+#future .rsPip[data-val='925000'] .rsPipVal {
+  top: -2.25em;
+  transform: translateX(-20%);
+}
+
+#future .rsPip[data-val='925000'] .rsPipVal {
+  transform: translateX(-80%);
+}
 
 /* Range Slider / Bar customization */
 
 #future.rangeSlider {
-  font-family: "Mohave", sans-serif;
+  font-family: 'Mohave', sans-serif;
   font-weight: 300;
   font-style: italic;
   margin-inline: 100px;
@@ -52,7 +52,7 @@
 }
 
 #future .rsPip::before {
-  content: "";
+  content: '';
   position: absolute;
   background: black;
   height: 1em;
@@ -104,7 +104,12 @@
 }
 
 #future .rangeFloat {
-  background: linear-gradient(to right, rgb(240, 241, 245, 0.25), rgb(240, 241, 245, 1) 20% 80%, rgb(240, 241, 245, 0.25));
+  background: linear-gradient(
+    to right,
+    rgb(240, 241, 245, 0.25),
+    rgb(240, 241, 245, 1) 20% 80%,
+    rgb(240, 241, 245, 0.25)
+  );
   top: -1.5em;
   padding: 0.1em 1em;
   line-height: 1;

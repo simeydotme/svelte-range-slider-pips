@@ -14,8 +14,8 @@ export default function TypicalUsage() {
         pips: true,
         float: true,
         first: 'label',
-        last: 'label'
-      }
+        last: 'label',
+      },
     });
 
     sliderRef.current.$on('change', (e) => {
@@ -29,7 +29,5 @@ export default function TypicalUsage() {
     };
   }, [values]);
 
-  return (
-    <div ref={nodeRef}></div>
-  );
+  return <div ref={nodeRef}></div>;
 }

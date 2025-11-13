@@ -1,15 +1,15 @@
 ---
-import type { MarkdownHeading } from 'astro'
-import MoreMenu from '../RightSidebar/MoreMenu.astro'
-import TableOfContents from '../RightSidebar/TableOfContents.svelte'
+import type { MarkdownHeading } from 'astro';
+import MoreMenu from '../RightSidebar/MoreMenu.astro';
+import TableOfContents from '../RightSidebar/TableOfContents.svelte';
 
 type Props = {
-  title: string
-  headings: MarkdownHeading[]
-  editUrl: string
-}
+  title: string;
+  headings: MarkdownHeading[];
+  editUrl: string;
+};
 
-const { title, headings, editUrl } = Astro.props
+const { title, headings, editUrl } = Astro.props;
 ---
 
 <article id="article" class="content">

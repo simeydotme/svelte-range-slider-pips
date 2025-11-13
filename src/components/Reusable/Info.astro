@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon'
+import { Icon } from 'astro-icon';
 
 interface Props {
   type?: 'info' | 'warning';
@@ -9,20 +9,22 @@ const { type = 'info' } = Astro.props;
 ---
 
 <p class="note" data-type={type}>
-  {type === 'info' ? (
-    <Icon name="fluent:info-24-filled" />
-  ) : (
-    <Icon name="fluent:warning-24-filled" />
-  )}
+  {
+    type === 'info' ? (
+      <Icon name="fluent:info-24-filled" />
+    ) : (
+      <Icon name="fluent:warning-24-filled" />
+    )
+  }
   <slot />
 </p>
 
 <style>
   .note {
     font-style: italic;
-    font-size: .925rem;
-    padding: .25rem .5rem;
-    margin: 1rem -.5rem 0;
+    font-size: 0.925rem;
+    padding: 0.25rem 0.5rem;
+    margin: 1rem -0.5rem 0;
   }
 
   .note :global(+ .note) {
@@ -30,18 +32,18 @@ const { type = 'info' } = Astro.props;
   }
 
   [astro-icon] {
-    margin-right: .5em;
+    margin-right: 0.5em;
   }
 
-  .note[data-type="info"] [astro-icon] {
+  .note[data-type='info'] [astro-icon] {
     color: hsla(var(--color-base-simey-dark), 40%, 1);
   }
 
-  .note[data-type="warning"] [astro-icon] {
+  .note[data-type='warning'] [astro-icon] {
     color: hsla(var(--color-base-red), 40%, 1);
   }
 
-  .theme-dark .note[data-type="warning"] [astro-icon] {
+  .theme-dark .note[data-type='warning'] [astro-icon] {
     color: hsla(var(--color-base-red), 70%, 1);
   }
 </style>

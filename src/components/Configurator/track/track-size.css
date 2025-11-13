@@ -1,19 +1,20 @@
-
 .track-size {
-
   --range-padding-color: var(--range-inactive);
 
   &.rangeSlider {
-    
     height: var(--track-width, 0.5em);
     border-radius: calc((var(--track-width, 0.5em) / 2) * var(--track-radius, 1));
-    box-shadow: var(--track-padding, 0) 0 0 0 var(--slider), calc(var(--track-padding, 0) * -1) 0 0 0 var(--slider);
+    box-shadow:
+      var(--track-padding, 0) 0 0 0 var(--slider),
+      calc(var(--track-padding, 0) * -1) 0 0 0 var(--slider);
 
     &.rsVertical {
       height: auto;
       width: var(--track-width, 0.5em);
       border-radius: calc((var(--track-width, 0.5em) / 2) * var(--track-radius, 1));
-      box-shadow: 0 var(--track-padding, 0) 0 0 var(--slider), 0 calc(var(--track-padding, 0) * -1) 0 0 var(--slider);
+      box-shadow:
+        0 var(--track-padding, 0) 0 0 var(--slider),
+        0 calc(var(--track-padding, 0) * -1) 0 0 var(--slider);
     }
 
     &:not(.rsVertical) .rangeLimit {
@@ -25,22 +26,26 @@
     &.rsVertical .rangeLimit {
       width: 100%;
     }
-    
+
     .rangeBar {
       height: var(--range-width, 0.5em);
       border-radius: calc((var(--range-width, 0.5em) / 2) * var(--range-radius, 1));
       top: 50%;
       transform: translateY(-50%);
-      box-shadow: var(--range-padding, 0) 0 0 0 var(--range-padding-color), calc(var(--range-padding, 0) * -1) 0 0 0 var(--range-padding-color);
+      box-shadow:
+        var(--range-padding, 0) 0 0 0 var(--range-padding-color),
+        calc(var(--range-padding, 0) * -1) 0 0 0 var(--range-padding-color);
     }
-    
+
     &.rsVertical .rangeBar {
       height: calc(var(--slider-length) * (var(--range-size) / 100 * 1px));
       width: var(--range-width, 0.5em);
       transform: translateX(-50%);
       left: 50%;
       top: auto;
-      box-shadow:  0 var(--range-padding, 0) 0 0 var(--range-padding-color),  0 calc(var(--range-padding, 0) * -1) 0 0 var(--range-padding-color);
+      box-shadow:
+        0 var(--range-padding, 0) 0 0 var(--range-padding-color),
+        0 calc(var(--range-padding, 0) * -1) 0 0 var(--range-padding-color);
     }
 
     &.rsFocus {

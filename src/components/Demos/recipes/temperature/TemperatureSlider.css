@@ -1,36 +1,34 @@
-
 @property --color0 {
-  syntax: "<color>";
+  syntax: '<color>';
   inherits: false;
   initial-value: transparent;
 }
 @property --color1 {
-  syntax: "<color>";
+  syntax: '<color>';
   inherits: false;
   initial-value: #c484ff;
 }
 @property --color2 {
-  syntax: "<color>";
+  syntax: '<color>';
   inherits: false;
   initial-value: #c484ff;
 }
 @property --color3 {
-  syntax: "<color>";
+  syntax: '<color>';
   inherits: false;
   initial-value: #c484ff;
 }
 @property --color4 {
-  syntax: "<color>";
+  syntax: '<color>';
   inherits: false;
   initial-value: transparent;
 }
-  
-#rangeTemp.rangeSlider {
 
+#rangeTemp.rangeSlider {
   font-size: 1.5em;
   height: 1em;
   margin-inline: 2em;
-  
+
   /* neutral colors */
   --color1: #c484ff;
   --color2: blueviolet;
@@ -55,34 +53,33 @@
   --range-handle: var(--handle);
   --range-handle-focus: var(--handle);
   --range-handle-inactive: var(--handle);
-  
+
   /* create a pseudo-range gradient using a gradient of the colors */
-  background-image: 
-    linear-gradient(
-      to right, 
-      var(--color0), 
-      var(--color1), 
-      var(--color2) var(--split) , 
-      var(--color3),					
-      var(--color4)
-    );
+  background-image: linear-gradient(
+    to right,
+    var(--color0),
+    var(--color1),
+    var(--color2) var(--split),
+    var(--color3),
+    var(--color4)
+  );
 
   background-position: left center;
-  
+
   /* make sure the colors transition smoothly */
-  transition: 
-    --color0 0.5s ease, 
-    --color1 0.5s ease, 
-    --color2 0.5s ease, 
-    --color3 0.5s ease, 
+  transition:
+    --color0 0.5s ease,
+    --color1 0.5s ease,
+    --color2 0.5s ease,
+    --color3 0.5s ease,
     --color4 0.5s ease;
-  
+
   & .rangeHandle {
     /* increase handle size and add a shadow */
     font-size: 1.5em;
     border-radius: 100%;
-    box-shadow: 
-      0 0 20px 3px hsl(0deg 0% 100% / 0.5), 
+    box-shadow:
+      0 0 20px 3px hsl(0deg 0% 100% / 0.5),
       0 0 40px 3px hsl(0deg 0% 100% / 0.5);
   }
 
@@ -96,17 +93,17 @@
     bottom: 0;
     padding: 0 0.5em;
     translate: -50% 0% 0.01px;
-    text-shadow: 
-      0 0 10px var(--handle), 
-      0 0 10px var(--handle), 
-      0 0 5px var(--handle), 
-      0 0 2px var(--handle), 
-      0 0 2px black, 
+    text-shadow:
+      0 0 10px var(--handle),
+      0 0 10px var(--handle),
+      0 0 5px var(--handle),
+      0 0 2px var(--handle),
+      0 0 2px black,
       0 0 1px var(--handle);
   }
 }
 
-#rangeTemp.rangehot { 
+#rangeTemp.rangehot {
   /* set the colors for the hot temp when the value is above the base value */
   --color0: var(--hot0);
   --color1: var(--hot1);

@@ -5,7 +5,7 @@
 /* always show the floating label */
 #testSlider .rangeFloat {
   opacity: 1;
-} 
+}
 /* special styling for when the slider is invalid */
 .invalid #testSlider {
   --range-handle: hsl(352, 90%, 50%);

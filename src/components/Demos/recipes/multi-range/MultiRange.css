@@ -1,97 +1,93 @@
 #multi-range.rangeSlider {
-  
   --color1: rgb(230, 58, 115);
   --color2: rgb(51, 119, 228);
-  
+
   /* 
    * the gradient, with 2 color stops and transparent areas in between
    * the stops are defined in the javascript on the `style` prop
    */
-  
-  background-image: 
-    linear-gradient(
-      to right,
 
-      transparent   var(--r1),
-      var(--color1) var(--r1),
-      var(--color1) var(--r2),
-      transparent   var(--r2),
+  background-image: linear-gradient(
+    to right,
 
-      transparent   var(--r3),
-      var(--color2) var(--r3),
-      var(--color2) var(--r4),
-      transparent   var(--r4)
+    transparent var(--r1),
+    var(--color1) var(--r1),
+    var(--color1) var(--r2),
+    transparent var(--r2),
+    transparent var(--r3),
+    var(--color2) var(--r3),
+    var(--color2) var(--r4),
+    transparent var(--r4)
+  );
 
-    );
+  /* transition the stops of the gradient */
 
-    /* transition the stops of the gradient */
-    
-    transition: 
-      --r1 0.05s ease-out, 
-      --r2 0.05s ease-out, 
-      --r3 0.05s ease-out, 
-      --r4 0.05s ease-out;
-    
+  transition:
+    --r1 0.05s ease-out,
+    --r2 0.05s ease-out,
+    --r3 0.05s ease-out,
+    --r4 0.05s ease-out;
+}
+
+/* set the colors of the handles / nubs / floats */
+#multi-range.rangeSlider [data-handle='0'],
+#multi-range.rangeSlider [data-handle='1'] {
+  --handle-border: var(--color1);
+
+  & .rangeNub,
+  & .rangeFloat {
+    background-color: var(--color1);
   }
-  
-  /* set the colors of the handles / nubs / floats */
-  #multi-range.rangeSlider [data-handle="0"],
-  #multi-range.rangeSlider [data-handle="1"] {
-    --handle-border: var(--color1);
-    
-    & .rangeNub,
-    & .rangeFloat {
-      background-color: var(--color1);
-    }
-  }
-  
-  /* set the colors of the handles / nubs / floats */
-  #multi-range.rangeSlider [data-handle="2"],
-  #multi-range.rangeSlider [data-handle="3"] {
-    --handle-border: var(--color2);
-    
-    & .rangeNub,
-    & .rangeFloat {
-      background-color: var(--color2);
-    }
-  }
+}
 
-  /* fancy styling to show the floats for the range handles when hovered/active */
-  #multi-range.rangeSlider:has([data-handle="0"]:is(.rsActive,:hover)) [data-handle="1"] .rangeFloat,
-  #multi-range.rangeSlider:has([data-handle="1"]:is(.rsActive,:hover)) [data-handle="0"] .rangeFloat,
-  #multi-range.rangeSlider:has([data-handle="3"]:is(.rsActive,:hover)) [data-handle="2"] .rangeFloat,
-  #multi-range.rangeSlider:has([data-handle="2"]:is(.rsActive,:hover)) [data-handle="3"] .rangeFloat {
-    opacity: 1;
-    translate: -50% 0% 0.01px;
+/* set the colors of the handles / nubs / floats */
+#multi-range.rangeSlider [data-handle='2'],
+#multi-range.rangeSlider [data-handle='3'] {
+  --handle-border: var(--color2);
+
+  & .rangeNub,
+  & .rangeFloat {
+    background-color: var(--color2);
   }
+}
 
+/* fancy styling to show the floats for the range handles when hovered/active */
+#multi-range.rangeSlider:has([data-handle='0']:is(.rsActive, :hover)) [data-handle='1'] .rangeFloat,
+#multi-range.rangeSlider:has([data-handle='1']:is(.rsActive, :hover)) [data-handle='0'] .rangeFloat,
+#multi-range.rangeSlider:has([data-handle='3']:is(.rsActive, :hover)) [data-handle='2'] .rangeFloat,
+#multi-range.rangeSlider:has([data-handle='2']:is(.rsActive, :hover))
+  [data-handle='3']
+  .rangeFloat {
+  opacity: 1;
+  translate: -50% 0% 0.01px;
+}
 
-  /**
+/**
    * custom css properties so we can transition the background-image stops
    * 
    * we could also use a svelte-spring to animate the variables in the javascript,
    * but that would not really be possible in other frameworks, and this is simpler.
    */
-  @property --r1 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 0%;
-  }
-  
-  @property --r2 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 50%;
-  }
-  
-  @property --r3 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 50%;
-  }
-  
-  @property --r4 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 100%;
-  }
+@property --r1 {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
+@property --r2 {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+
+@property --r3 {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+
+@property --r4 {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 100%;
+}

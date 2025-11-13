@@ -1,19 +1,40 @@
 #PriceGradient {
-  
   /** colors for the handles and range */
   --color1: hsl(219, 73%, 65%);
   --color2: hsl(283, 100%, 69%);
   --colorMix: color-mix(in hsl, var(--color1), var(--color2));
-  
+
   /** linear springs for nice easing */
   --spring-duration: 1.5s;
   --spring-easing: linear(
-    0, 0.576 4%, 0.79, 0.964, 1.102, 1.205, 1.275 13.6%, 1.298, 1.313, 1.32, 1.32,
-    1.313 19.3%, 1.299 20.7%, 1.256 23.4%, 1.111 30.5%, 1.047 34.2%, 1.018, 0.996,
-    0.979, 0.968 42.9%, 0.961 46.1%, 0.962 49.7%, 0.994 63.9%, 1.004 72%,
-    1.005 79.2%, 1
+    0,
+    0.576 4%,
+    0.79,
+    0.964,
+    1.102,
+    1.205,
+    1.275 13.6%,
+    1.298,
+    1.313,
+    1.32,
+    1.32,
+    1.313 19.3%,
+    1.299 20.7%,
+    1.256 23.4%,
+    1.111 30.5%,
+    1.047 34.2%,
+    1.018,
+    0.996,
+    0.979,
+    0.968 42.9%,
+    0.961 46.1%,
+    0.962 49.7%,
+    0.994 63.9%,
+    1.004 72%,
+    1.005 79.2%,
+    1
   );
-  
+
   /** handle color and shadow */
   --color: var(--color1);
   --shadow-color: 0deg 0% 0%;
@@ -23,9 +44,8 @@
     0px 1.6px 1.7px -1.5px hsl(var(--shadow-color) / 0.08),
     0px 3.5px 3.6px -2.3px hsl(var(--shadow-color) / 0.08),
     0px 6.9px 7.2px -3px hsl(var(--shadow-color) / 0.07);
-  
+
   height: 14px;
-  
 }
 
 #PriceGradient .rangeBar {
@@ -34,7 +54,7 @@
 }
 
 /** change color for handle 2 */
-#PriceGradient .rangeHandle[data-handle="1"] {
+#PriceGradient .rangeHandle[data-handle='1'] {
   --color: var(--color2);
 }
 
@@ -42,7 +62,7 @@
 #PriceGradient .rangeHandle {
   width: 34px;
   height: 34px;
-  top: calc( 50% - 1px );
+  top: calc(50% - 1px);
   border-radius: 50%;
   background: white;
   border: 2px solid var(--color);
@@ -58,8 +78,8 @@
 
 /** floating values over the handles */
 #PriceGradient .rangeFloat {
-  border-radius: .5em;
-  padding: .3em .6em;
+  border-radius: 0.5em;
+  padding: 0.3em 0.6em;
   background: white;
   color: black;
   font-weight: bold;
@@ -74,8 +94,8 @@
 }
 
 /** show the floating values when the slider is focused or hovered */
-#PriceGradient.rsFocus .rangeHandle .rangeFloat, 
-#PriceGradient.rsHoverable .rangeHandle:hover .rangeFloat, 
+#PriceGradient.rsFocus .rangeHandle .rangeFloat,
+#PriceGradient.rsHoverable .rangeHandle:hover .rangeFloat,
 #PriceGradient.rsHoverable:hover .rangeFloat {
   opacity: 1;
   transform: translate(0%, -50%) rotateX(0deg);
@@ -108,9 +128,9 @@
   height: 2px;
   width: 2px;
   border-radius: 2px;
-  box-shadow: 
-    0 0 0px 1px transparent, 
-    0 0 5px transparent, 
+  box-shadow:
+    0 0 0px 1px transparent,
+    0 0 5px transparent,
     0 0 2px transparent;
   transition: all 0.2s ease-in-out;
 }
@@ -118,8 +138,8 @@
 /** highlight pips when active and in range */
 #PriceGradient.rsFocus .rsPip.rsInRange {
   background: white;
-  box-shadow: 
-    0 0 0px 1px var(--colorMix), 
-    0 0 5px var(--colorMix), 
+  box-shadow:
+    0 0 0px 1px var(--colorMix),
+    0 0 5px var(--colorMix),
     0 0 2px var(--colorMix);
 }

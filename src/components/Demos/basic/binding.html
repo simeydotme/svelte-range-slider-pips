@@ -6,15 +6,15 @@
 <script defer>
   let value = 10;
   const slider = new RangeSlider({
-    target: document.querySelector("#binding-slider"),
+    target: document.querySelector('#binding-slider'),
     props: {
       min: 0,
       max: 100,
-      value: value
-    }
+      value: value,
+    },
   });
 
-  const input = document.querySelector("#binding-input");
+  const input = document.querySelector('#binding-input');
 
   slider.$on('change', (e) => {
     value = e.detail.value;

@@ -1,6 +1,16 @@
 ---
-import { Icon } from 'astro-icon'
-type propType = "String" | "Number" | "Boolean" | "Object" | "Array" | "Function" | "Symbol" | "Node" | "Element" | "Element[]"
+import { Icon } from 'astro-icon';
+type propType =
+  | 'String'
+  | 'Number'
+  | 'Boolean'
+  | 'Object'
+  | 'Array'
+  | 'Function'
+  | 'Symbol'
+  | 'Node'
+  | 'Element'
+  | 'Element[]';
 
 interface Props {
   propName: string;
@@ -11,46 +21,51 @@ interface Props {
 }
 
 const { propName, propType, defaultValue, link, new: isNew } = Astro.props;
-const propTypeString = Array.isArray(propType) ? propType.join(" | ") : propType;
+const propTypeString = Array.isArray(propType) ? propType.join(' | ') : propType;
 const isRender = propName && propType && defaultValue;
 
 // fix up relative links due to pathing issues in vite/astro
 // let usableLink = link?.replace(/^\.?\//, "../");
 // if ( !link?.match(/^\.?\//) ) {
-  let usableLink = `/svelte-range-slider-pips/en/${link}`
+let usableLink = `/svelte-range-slider-pips/en/${link}`;
 // }
 ---
 
-{isRender &&
+{
+  isRender && (
+    <section class="sliderProp" id={propName}>
+      <header class="sliderProp__header">
+        <h2 title="The prop name">
+          <a href={`#${propName}`}>{propName}</a>
+        </h2>
+        <code title="The type that the prop expects">{propTypeString}</code>
+        <code title="The default value for this prop (if not provided)">{defaultValue}</code>
+        {isNew && (
+          <span class="sliderProp__new" title="New in v4.0.0">
+            New
+          </span>
+        )}
+      </header>
 
-  <section class="sliderProp" id={propName}>
-    <header class="sliderProp__header">
-      <h2 title="The prop name"><a href={`#${propName}`}>{propName}</a></h2>
-      <code title="The type that the prop expects">{propTypeString}</code>
-      <code title="The default value for this prop (if not provided)">{defaultValue}</code>
-      {isNew && <span class="sliderProp__new" title="New in v4.0.0">New</span>}
-    </header>
+      <div class="sliderProp__content">
+        <slot />
+      </div>
 
-    <div class="sliderProp__content">
-      <slot />
-    </div>
-
-    {link &&
-      <a class="sliderProp__link" href={usableLink}>
-        See Example<Icon name="fluent:ios-chevron-right-20-filled" /> 
-      </a>
-    }
-
-  </section>  
-
+      {link && (
+        <a class="sliderProp__link" href={usableLink}>
+          See Example
+          <Icon name="fluent:ios-chevron-right-20-filled" />
+        </a>
+      )}
+    </section>
+  )
 }
 
 <style>
-
   .sliderProp {
     display: flex;
     flex-direction: column;
-    padding: .5rem;
+    padding: 0.5rem;
     border: 1px solid transparent;
     transition: background 0.2s ease-in-out;
   }
@@ -60,7 +75,7 @@ const isRender = propName && propType && defaultValue;
   }
 
   .sliderProp:nth-of-type(even) {
-    background: hsla(var(--color-gray-90), .5);
+    background: hsla(var(--color-gray-90), 0.5);
   }
 
   .sliderProp:nth-of-type(even) :global(code) {
@@ -70,9 +85,9 @@ const isRender = propName && propType && defaultValue;
   .sliderProp:target,
   .sliderProp:focus-within,
   .sliderProp:hover {
-    border-color: hsla(var(--color-purple), .5);
+    border-color: hsla(var(--color-purple), 0.5);
     border-radius: 5px;
-    padding-inline: .5rem;
+    padding-inline: 0.5rem;
   }
 
   .sliderProp:target,
@@ -81,11 +96,11 @@ const isRender = propName && propType && defaultValue;
   }
 
   .sliderProp:target {
-    animation: pulsate-fwd 1s cubic-bezier(0.770, 0.000, 0.175, 1.000) both;
+    animation: pulsate-fwd 1s cubic-bezier(0.77, 0, 0.175, 1) both;
   }
 
   .sliderProp:hover {
-    border-color: hsla(var(--color-gray-50), .5);
+    border-color: hsla(var(--color-gray-50), 0.5);
   }
 
   .sliderProp__header {
@@ -93,8 +108,8 @@ const isRender = propName && propType && defaultValue;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-block: .25rem .75rem;
-    padding-inline: .25rem 0;
+    padding-block: 0.25rem 0.75rem;
+    padding-inline: 0.25rem 0;
     border-bottom: 1px solid hsla(var(--color-gray-90));
   }
 
@@ -102,10 +117,10 @@ const isRender = propName && propType && defaultValue;
     position: absolute;
     top: 0;
     left: 0;
-    background-color: hsla(var(--color-purple), .5);
+    background-color: hsla(var(--color-purple), 0.5);
     color: white;
-    padding: .1rem .3rem;
-    border-radius: .3rem;
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.3rem;
     margin-right: 1rem;
     font-size: 0.675em;
     translate: -100% -100%;
@@ -137,51 +152,49 @@ const isRender = propName && propType && defaultValue;
   }
 
   .sliderProp__content {
-    padding: .5rem;
+    padding: 0.5rem;
     transition: all 0.2s ease-in-out;
   }
 
   .sliderProp__link {
     display: inline-block;
     margin-left: auto;
-    padding: .25rem .5rem;
-    border-radius: .25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
     text-decoration: none;
   }
 
-/**
+  /**
  * ----------------------------------------
  * animation pulsate-fwd
  * ----------------------------------------
  */
-@-webkit-keyframes pulsate-fwd {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+  @-webkit-keyframes pulsate-fwd {
+    0% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+    100% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
   }
-  50% {
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1);
+  @keyframes pulsate-fwd {
+    0% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+    100% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
   }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
-@keyframes pulsate-fwd {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  50% {
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1);
-  }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
-
-
 </style>

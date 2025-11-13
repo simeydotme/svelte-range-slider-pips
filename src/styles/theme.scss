@@ -1,11 +1,12 @@
 :root {
-  --font-fallback: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-    sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  --font-fallback:
+    -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji;
   --font-body: system-ui, var(--font-fallback);
-  --font-mono: 'IBM Plex Mono', Consolas, 'Andale Mono WT', 'Andale Mono',
-    'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono',
-    'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco,
-    'Courier New', Courier, monospace;
+  --font-mono:
+    'IBM Plex Mono', Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console',
+    'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono',
+    'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace;
 
   /*
    * Variables with --color-base prefix define
@@ -18,20 +19,20 @@
    *
    */
 
-  --color-base-white:       0  , 0%;
-  --color-base-black:       240, 100%;
-  --color-base-gray:        215, 14%;
-  --color-base-blue:        212, 100%;
-  --color-base-blue-dark:   212, 72%;
-  --color-base-green:       158, 79%;
-  --color-base-orange:      22 , 100%;
-  --color-base-purple:      255, 85%;
-  --color-base-red:         351, 100%;
-  --color-base-yellow:      41 , 100%;
+  --color-base-white: 0, 0%;
+  --color-base-black: 240, 100%;
+  --color-base-gray: 215, 14%;
+  --color-base-blue: 212, 100%;
+  --color-base-blue-dark: 212, 72%;
+  --color-base-green: 158, 79%;
+  --color-base-orange: 22, 100%;
+  --color-base-purple: 255, 85%;
+  --color-base-red: 351, 100%;
+  --color-base-yellow: 41, 100%;
 
-  --color-base-simey:       244, 63%;
-  --color-base-simey-dark:  165, 92%;
-  
+  --color-base-simey: 244, 63%;
+  --color-base-simey-dark: 165, 92%;
+
   --color-base-code-block: 210, 12%;
 
   /*
@@ -62,15 +63,29 @@
   --color-red: var(--color-base-red), 54%;
   --color-yellow: var(--color-base-yellow), 59%;
 
-  --color-simey: var(--color-base-simey), 56%; 
+  --color-simey: var(--color-base-simey), 56%;
   --color-simey-dark: var(--color-base-simey-dark), 60%;
 
   --color-code-block: hsl(var(--color-base-code-block), 16%);
 
-
   // Easing functions
 
-  --ease-overshoot: linear(0, 0.477 6.5%, 0.83 13.4%, 1.071 20.9%, 1.151 24.9%, 1.208 29.2%, 1.246 35.5%, 1.25 39%, 1.243 42.7%, 1.211 49.7%, 1.088 67.6%, 1.038 76.9%, 1.008 87.4%, 1);
+  --ease-overshoot: linear(
+    0,
+    0.477 6.5%,
+    0.83 13.4%,
+    1.071 20.9%,
+    1.151 24.9%,
+    1.208 29.2%,
+    1.246 35.5%,
+    1.25 39%,
+    1.243 42.7%,
+    1.211 49.7%,
+    1.088 67.6%,
+    1.038 76.9%,
+    1.008 87.4%,
+    1
+  );
 }
 
 :root {
@@ -93,13 +108,13 @@
   --theme-code-inline-text: hsla(var(--color-base-simey-dark), 25%, 1);
   --theme-code-bg: hsla(217, 19%, 27%, 1);
   --theme-code-text: hsla(var(--color-gray-95), 1);
-  --theme-navbar-bg: hsla(var(--color-base-white), 100%, .7);
+  --theme-navbar-bg: hsla(var(--color-base-white), 100%, 0.7);
   --theme-navbar-height: 4rem;
   --theme-selection-color: hsla(var(--color-simey), 1);
   --theme-selection-bg: hsla(var(--color-simey-dark), var(--theme-accent-opacity));
 }
 
-@media ( min-width: 50rem ) {
+@media (min-width: 50rem) {
   :root {
     --theme-navbar-height: 6rem;
   }
@@ -108,7 +123,9 @@
 body {
   background: var(--theme-bg);
   color: var(--theme-text);
-  transition: background-color 0.2s ease, color 0.33s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.33s ease;
   will-change: color, background-color;
 }
 
@@ -133,7 +150,7 @@ body {
   --theme-code-inline-text: hsla(var(--color-base-simey), 85%, 1);
   --theme-code-bg: hsla(var(--color-gray-5), 1);
   --theme-code-text: hsla(var(--color-base-white), 100%, 1);
-  --theme-navbar-bg: hsla(215, 28%, 17%, .75);
+  --theme-navbar-bg: hsla(215, 28%, 17%, 0.75);
   --theme-selection-color: hsla(var(--color-base-white), 100%, 1);
   --theme-selection-bg: hsla(var(--color-simey), var(--theme-accent-opacity));
 

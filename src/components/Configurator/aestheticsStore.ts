@@ -1,10 +1,9 @@
-import { writable,derived, get } from 'svelte/store';
+import { writable, derived, get } from 'svelte/store';
 import createPersistedStore from './persistedStore';
 
 import { handleTypes } from './options';
 import { configStore } from './configStore';
 
-  
 export const defaultAesthetics = {
   trackSize: 0.5,
   trackRadius: 1,
@@ -32,28 +31,39 @@ export const defaultAesthetics = {
   pipInRangeOffset: 0,
   pipInRangeHeight: 0.5,
   pipValSize: 1,
-  pipValOffset: 0
-}
+  pipValOffset: 0,
+};
 
-export const aestheticsStore = createPersistedStore('svelte-range-slider-aesthetics', defaultAesthetics);
+export const aestheticsStore = createPersistedStore(
+  'svelte-range-slider-aesthetics',
+  defaultAesthetics
+);
 
-export const trackStyle = derived(aestheticsStore, store => `
+export const trackStyle = derived(
+  aestheticsStore,
+  (store) => `
   --track-width: ${store.trackSize}em;
   --track-radius: ${store.trackRadius};
   --track-padding: ${store.trackPadding}em;
   --range-width: ${store.rangeSize}em;
   --range-radius: ${store.rangeRadius};
   --range-padding: ${store.rangePadding}em;
-`);
+`
+);
 
-export const handleStyle = derived([aestheticsStore, configStore], ([store, configStore]) => `
+export const handleStyle = derived(
+  [aestheticsStore, configStore],
+  ([store, configStore]) => `
   --handle-offset: ${!!configStore.rangeType ? 0 : store.handleOffset}em;
   --handle-offset-block: ${store.handleOffsetBlock}em;
   --handle-rotate: ${store.handleRotate}deg;
   --handle-size: ${store.handleSize}em;
-`);
+`
+);
 
-export const floatStyle = derived(aestheticsStore, store => `
+export const floatStyle = derived(
+  aestheticsStore,
+  (store) => `
   --float-offset: ${store.floatOffset}%;
   --float-offset-inline: ${store.floatOffsetInline}em;
   --range-float-offset: ${store.rangeFloatOffset}%;
@@ -61,9 +71,12 @@ export const floatStyle = derived(aestheticsStore, store => `
   --float-size: ${store.floatSize}em;
   --float-padding: ${store.floatPadding}em;
   --float-radius: ${store.floatRadius};
-`);
+`
+);
 
-export const pipsStyle = derived(aestheticsStore, store => `
+export const pipsStyle = derived(
+  aestheticsStore,
+  (store) => `
   --pips-offset: ${store.pipsOffset}%;
   --pips-height: ${store.pipHeight}em;
   --pip-selected-offset: ${store.pipSelectedOffset}%;
@@ -72,4 +85,5 @@ export const pipsStyle = derived(aestheticsStore, store => `
   --pip-inrange-height: ${store.pipInRangeHeight}em;
   --pip-val-size: ${store.pipValSize}em;
   --pip-val-offset: ${store.pipValOffset}em;
-`);
+`
+);
