@@ -1,37 +1,39 @@
 ---
-title: 'DaisyUI-like Slider'
-description: 'A simple slider styled like DaisyUI'
+title: "DaisyUI-like Slider"
+description: "A simple slider styled like DaisyUI"
 image:
-  src: '/svelte-range-slider-pips/recipes/daisy-ui.png'
-  alt: 'DaisyUI-like Slider recipe'
+  src: "/svelte-range-slider-pips/recipes/daisy-ui.png"
+  alt: "DaisyUI-like Slider recipe"
 ---
-import { Code } from 'astro/components';
-import { Icon } from 'astro-icon'
-import RangeSlider from 'svelte-range-slider-pips';
-import { cleanImport } from '~lib/cleanImport.ts';
 
-import Demo from '~components/Reusable/Demo.svelte';
-import Note from '~components/Reusable/Note.astro';
+import { Code } from "astro/components";
+import { Icon } from "astro-icon";
+import RangeSlider from "svelte-range-slider-pips";
+import { cleanImport } from "~lib/cleanImport.ts";
 
-import Daisy from '~demos/recipes/daisyui/Daisy.svelte';
-import DaisyRaw from '~demos/recipes/daisyui/Daisy.svelte?raw';
-import DaisyCss from '~demos/recipes/daisyui/Daisy.css?raw';
+import Demo from "~components/Reusable/Demo.svelte";
+import Note from "~components/Reusable/Note.astro";
 
-
+import Daisy from "~demos/recipes/daisyui/Daisy.svelte";
+import DaisyRaw from "~demos/recipes/daisyui/Daisy.svelte?raw";
+import DaisyCss from "~demos/recipes/daisyui/Daisy.css?raw";
+import DaisyThemeNordCss from "~demos/recipes/daisyui/Daisy-theme-nord.css?raw";
 
 Here I am trying to recreate the slider design from [DaisyUI](https://daisyui.com/components/range/), but
-adding my own bit of flare on the **pips**, **labels**, **floats** and **colors**
+adding my own bit of flare on the **pips**, **labels** and **floats**. The colors are based on
+the theme variables that DaisyUI creates.
+
+<Note title="DaisyUI Theme" type="alert">
+  This recipe assumes that the DaisyUI library is already loaded. If you are not using DaisyUI, you will find the colors are broken. You could modify the `css` variables to use your own colors, though.
+</Note>
 
 <Demo name="Demo of the Slider Styles" panel="css" client:visible>
   <Daisy client:visible />
 </Demo>
 
 <Note title="Breakdown" type="info">
-  Most of the effort here is in the `CSS`, as you will find with many of the
-  recipes. 
-  
-  There's a small amount of `JS` used to decide when the `float` `label`
-  should flip to the other side of the handle. In this scenario it's around 20%.
+  Most of the effort here is in the `CSS`, as you will find with many of the recipes. There's a small amount of `JS`
+  used to decide when the `float` `label` should flip to the other side of the handle. In this scenario it's around 20%.
 </Note>
 
 <Demo panel="css" client:visible>

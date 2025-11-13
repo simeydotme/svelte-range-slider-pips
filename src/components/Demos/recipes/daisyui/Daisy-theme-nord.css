@@ -1,0 +1,41 @@
+/** 
+ * Simulating the daisyui theme colors which would be
+ * applied to the :root element in a daisyui project
+
+ * this theme is copied from the nord theme in daisyui
+ * https://daisyui.com/theme-generator/#theme=eJyFlOuOmzAQhV8FIVVqpc0I3-2-DQGzQUvsyCbabau-eyc2m7Cxpf70zHwczvHAn9b1Z9v-bJ0PY_vSDn7x4RCHk03VZX49rVg-HHLj2Ed7IF2HLf-2DKfvRgCh6lvTQdephsoOFCM_ngm6JxhQYxJBECCgtC4AtgO0AUNFBiQSFBQ3BTF4t1q33ilGgbP8YpQixYFouqcuYT734dcdEAaBLKPQieAIqgpQKBECWmclImpgtIiMey1pQAqSEGEayjVIXUdKNQaGZTFSI_th2I8rBVzyNC8xBnI7mnK-lBHADc06Vc7Z6xr65Q5wAZTma2Ui5_11ETagUPrv9c5u8vvkaKc-_TC8ZSn583QtNM3Jp5sKFa8YQ4yP2CToba0Vb9AJyrEKUMuNyc1NFXzvg5vd68M-Bq1lArRpNC6Pqc2XQgont61TFc6G4MMjtg5k8o_2b6_ISTFbKlCczitA-Rcq9ON8jbikix3WpEKCPe9b02yXEesdUPHUOvqP1LjX4_zb7p-1Z1Kv9rAj_q5sUr58pMJoL-vpNpROzs_RbqfRTv11QV9Tv0T70l6CnWyI-HW9bbW__wClqGOH
+ */
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --color-base-100: oklch(95.127% .007 260.731);
+    --color-base-200: oklch(93.299% .01 261.788);
+    --color-base-300: oklch(89.925% .016 262.749);
+    --color-base-content: oklch(32.437% .022 264.182);
+    --color-primary: oklch(59.435% .077 254.027);
+    --color-primary-content: oklch(11.887% .015 254.027);
+    --color-secondary: oklch(69.651% .059 248.687);
+    --color-secondary-content: oklch(13.93% .011 248.687);
+    --color-accent: oklch(77.464% .062 217.469);
+    --color-accent-content: oklch(15.492% .012 217.469);
+    --color-neutral: oklch(45.229% .035 264.131);
+    --color-neutral-content: oklch(89.925% .016 262.749);
+    --color-info: oklch(69.207% .062 332.664);
+    --color-info-content: oklch(13.841% .012 332.664);
+    --color-success: oklch(76.827% .074 131.063);
+    --color-success-content: oklch(15.365% .014 131.063);
+    --color-warning: oklch(85.486% .089 84.093);
+    --color-warning-content: oklch(17.097% .017 84.093);
+    --color-error: oklch(60.61% .12 15.341);
+    --color-error-content: oklch(12.122% .024 15.341);
+    --radius-selector: 1rem;
+    --radius-field: .25rem;
+    --radius-box: .5rem;
+    --size-selector: .25rem;
+    --size-field: .25rem;
+    --border: 1px;
+    --depth: 0;
+    --noise: 0;
+  }
+}

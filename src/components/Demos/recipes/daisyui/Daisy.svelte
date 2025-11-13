@@ -1,8 +1,9 @@
 <script>
   import RangeSlider from 'svelte-range-slider-pips';
+  import daisyCss from './Daisy-theme-nord.css?inline';
   import css from './Daisy.css?inline';
   /* hide */
-  const renderCss = `<style>${css}</style>`;
+  const renderCss = `<style>${daisyCss} ${css}</style>`;
   /* endhide */
   let values = [ 20, 80 ];
   // use this class to change the position of the floats at certain values
@@ -17,6 +18,7 @@
 <div class="daisy-ui" class:minFlip class:maxFlip class:rangeFlip>
   <RangeSlider pips float pushy bind:values  />
   <RangeSlider pips float pushy range bind:values />
+  <RangeSlider pips draggy pushy range rangeFloat bind:values rangeGapMin={10} />
   <RangeSlider pips float pushy range="min" bind:values={rangeValues} step={5} />
   <RangeSlider pips float pushy range="max" bind:values={rangeValues} step={5} />
 </div>
