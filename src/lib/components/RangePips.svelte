@@ -121,6 +121,8 @@
       style="{orientationStart}: 0%;"
       data-val={coerceFloat(min, precision)}
       data-index={0}
+      role="button"
+      tabindex="0"
       on:pointerdown={(e) => {
         labelDown(e);
       }}
@@ -150,6 +152,8 @@
           style="{orientationStart}: {valueAsPercent(val, min, max, precision)}%;"
           data-val={val}
           data-index={i}
+          role="button"
+          tabindex="0"
           on:pointerdown={(e) => {
             labelDown(e);
           }}
@@ -178,6 +182,8 @@
       style="{orientationStart}: 100%;"
       data-val={coerceFloat(max, precision)}
       data-index={pipCount}
+      role="button"
+      tabindex="0"
       on:pointerdown={(e) => {
         labelDown(e);
       }}
