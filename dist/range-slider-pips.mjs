@@ -3,7 +3,7 @@
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * Project home: https://simeydotme.github.io/svelte-range-slider-pips/
  * © 2026 Simon Goellner <simey.me@gmail.com> ~ MPL-2.0 License
- * Published: 1/3/2026
+ * Published: 10/3/2026
  */
 /** @returns {void} */
 function noop() {}
@@ -1646,8 +1646,7 @@ function create_if_block_9$1(ctx) {
 			attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[19] + ": 0%;"));
 			attr(span, "data-val", span_data_val_value = coerceFloat(/*min*/ ctx[1], /*precision*/ ctx[17]));
 			attr(span, "data-index", 0);
-			attr(span, "role", "button");
-			attr(span, "tabindex", "-1");
+			attr(span, "aria-hidden", "true");
 			toggle_class(span, "rsSelected", isSelected(/*min*/ ctx[1], /*values*/ ctx[4], /*precision*/ ctx[17]));
 			toggle_class(span, "rsInRange", isInRange(/*min*/ ctx[1], /*values*/ ctx[4], /*range*/ ctx[0]));
 			toggle_class(span, "rsOutOfLimit", isOutOfLimit(/*min*/ ctx[1], /*limits*/ ctx[9]));
@@ -1916,8 +1915,7 @@ function create_if_block_5$1(ctx) {
 			attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[19] + ": " + valueAsPercent(/*val*/ ctx[37], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[17]) + "%;"));
 			attr(span, "data-val", span_data_val_value = /*val*/ ctx[37]);
 			attr(span, "data-index", /*i*/ ctx[39]);
-			attr(span, "role", "button");
-			attr(span, "tabindex", "-1");
+			attr(span, "aria-hidden", "true");
 			toggle_class(span, "rsSelected", isSelected(/*val*/ ctx[37], /*values*/ ctx[4], /*precision*/ ctx[17]));
 			toggle_class(span, "rsInRange", isInRange(/*val*/ ctx[37], /*values*/ ctx[4], /*range*/ ctx[0]));
 			toggle_class(span, "rsOutOfLimit", isOutOfLimit(/*val*/ ctx[37], /*limits*/ ctx[9]));
@@ -2160,8 +2158,7 @@ function create_if_block$1(ctx) {
 			attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[19] + ": 100%;"));
 			attr(span, "data-val", span_data_val_value = coerceFloat(/*max*/ ctx[2], /*precision*/ ctx[17]));
 			attr(span, "data-index", /*pipCount*/ ctx[20]);
-			attr(span, "role", "button");
-			attr(span, "tabindex", "-1");
+			attr(span, "aria-hidden", "true");
 			toggle_class(span, "rsSelected", isSelected(/*max*/ ctx[2], /*values*/ ctx[4], /*precision*/ ctx[17]));
 			toggle_class(span, "rsInRange", isInRange(/*max*/ ctx[2], /*values*/ ctx[4], /*range*/ ctx[0]));
 			toggle_class(span, "rsOutOfLimit", isOutOfLimit(/*max*/ ctx[2], /*limits*/ ctx[9]));
