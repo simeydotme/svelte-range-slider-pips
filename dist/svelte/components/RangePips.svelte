@@ -75,6 +75,7 @@ function labelUp(pipValue, event) {
   class:rsFocus={focus}
 >
   {#if (all && first !== false) || first}
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
     <span
       class="rsPip rsPip--first"
       class:rsSelected={isSelected(min, values, precision)}
@@ -83,6 +84,7 @@ function labelUp(pipValue, event) {
       style="{orientationStart}: 0%;"
       data-val={coerceFloat(min, precision)}
       data-index={0}
+      aria-hidden="true"
       on:pointerdown={(e) => {
         labelDown(e);
       }}
@@ -104,6 +106,7 @@ function labelUp(pipValue, event) {
     {#each Array(pipCount) as _, i}
       {@const val = getValueFromIndex(i, min, max, finalPipStep, step, precision)}
       {#if val > min && val < max}
+        <!-- svelte-ignore a11y_no_static_element_interactions -->
         <span
           class="rsPip"
           class:rsSelected={isSelected(val, values, precision)}
@@ -112,6 +115,7 @@ function labelUp(pipValue, event) {
           style="{orientationStart}: {valueAsPercent(val, min, max, precision)}%;"
           data-val={val}
           data-index={i}
+          aria-hidden="true"
           on:pointerdown={(e) => {
             labelDown(e);
           }}
@@ -132,6 +136,7 @@ function labelUp(pipValue, event) {
   {/if}
 
   {#if (all && last !== false) || last}
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
     <span
       class="rsPip rsPip--last"
       class:rsSelected={isSelected(max, values, precision)}
@@ -140,6 +145,7 @@ function labelUp(pipValue, event) {
       style="{orientationStart}: 100%;"
       data-val={coerceFloat(max, precision)}
       data-index={pipCount}
+      aria-hidden="true"
       on:pointerdown={(e) => {
         labelDown(e);
       }}

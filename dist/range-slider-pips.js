@@ -2,8 +2,8 @@
  * svelte-range-slider-pips ~ 4.1.0
  * Multi-Thumb, Accessible, Beautiful Range Slider with Pips
  * Project home: https://simeydotme.github.io/svelte-range-slider-pips/
- * © 2025 Simon Goellner <simey.me@gmail.com> ~ MPL-2.0 License
- * Published: 6/10/2025
+ * © 2026 Simon Goellner <simey.me@gmail.com> ~ MPL-2.0 License
+ * Published: 10/3/2026
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -1652,6 +1652,7 @@
 				attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[19] + ": 0%;"));
 				attr(span, "data-val", span_data_val_value = coerceFloat(/*min*/ ctx[1], /*precision*/ ctx[17]));
 				attr(span, "data-index", 0);
+				attr(span, "aria-hidden", "true");
 				toggle_class(span, "rsSelected", isSelected(/*min*/ ctx[1], /*values*/ ctx[4], /*precision*/ ctx[17]));
 				toggle_class(span, "rsInRange", isInRange(/*min*/ ctx[1], /*values*/ ctx[4], /*range*/ ctx[0]));
 				toggle_class(span, "rsOutOfLimit", isOutOfLimit(/*min*/ ctx[1], /*limits*/ ctx[9]));
@@ -1715,7 +1716,7 @@
 		};
 	}
 
-	// (106:6) {#if all === 'label' || first === 'label'}
+	// (108:6) {#if all === 'label' || first === 'label'}
 	function create_if_block_10$1(ctx) {
 		let span;
 		let t0;
@@ -1784,7 +1785,7 @@
 		};
 	}
 
-	// (108:10) {#if prefix}
+	// (110:10) {#if prefix}
 	function create_if_block_12(ctx) {
 		let span;
 		let t;
@@ -1810,7 +1811,7 @@
 		};
 	}
 
-	// (110:10) {#if suffix}
+	// (112:10) {#if suffix}
 	function create_if_block_11$1(ctx) {
 		let span;
 		let t;
@@ -1836,7 +1837,7 @@
 		};
 	}
 
-	// (116:2) {#if (all && rest !== false) || rest}
+	// (118:2) {#if (all && rest !== false) || rest}
 	function create_if_block_4$1(ctx) {
 		let each_1_anchor;
 		let each_value = ensure_array_like(Array(/*pipCount*/ ctx[20]));
@@ -1897,7 +1898,7 @@
 		};
 	}
 
-	// (119:6) {#if val > min && val < max}
+	// (121:6) {#if val > min && val < max}
 	function create_if_block_5$1(ctx) {
 		let span;
 		let t;
@@ -1920,6 +1921,7 @@
 				attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[19] + ": " + valueAsPercent(/*val*/ ctx[37], /*min*/ ctx[1], /*max*/ ctx[2], /*precision*/ ctx[17]) + "%;"));
 				attr(span, "data-val", span_data_val_value = /*val*/ ctx[37]);
 				attr(span, "data-index", /*i*/ ctx[39]);
+				attr(span, "aria-hidden", "true");
 				toggle_class(span, "rsSelected", isSelected(/*val*/ ctx[37], /*values*/ ctx[4], /*precision*/ ctx[17]));
 				toggle_class(span, "rsInRange", isInRange(/*val*/ ctx[37], /*values*/ ctx[4], /*range*/ ctx[0]));
 				toggle_class(span, "rsOutOfLimit", isOutOfLimit(/*val*/ ctx[37], /*limits*/ ctx[9]));
@@ -1986,7 +1988,7 @@
 		};
 	}
 
-	// (135:10) {#if all === 'label' || rest === 'label'}
+	// (139:10) {#if all === 'label' || rest === 'label'}
 	function create_if_block_6$1(ctx) {
 		let span;
 		let t0;
@@ -2055,7 +2057,7 @@
 		};
 	}
 
-	// (137:14) {#if prefix}
+	// (141:14) {#if prefix}
 	function create_if_block_8$1(ctx) {
 		let span;
 		let t;
@@ -2081,7 +2083,7 @@
 		};
 	}
 
-	// (139:14) {#if suffix}
+	// (143:14) {#if suffix}
 	function create_if_block_7$1(ctx) {
 		let span;
 		let t;
@@ -2107,7 +2109,7 @@
 		};
 	}
 
-	// (117:4) {#each Array(pipCount) as _, i}
+	// (119:4) {#each Array(pipCount) as _, i}
 	function create_each_block$1(ctx) {
 		let if_block_anchor;
 		let if_block = /*val*/ ctx[37] > /*min*/ ctx[1] && /*val*/ ctx[37] < /*max*/ ctx[2] && create_if_block_5$1(ctx);
@@ -2145,7 +2147,7 @@
 		};
 	}
 
-	// (147:2) {#if (all && last !== false) || last}
+	// (151:2) {#if (all && last !== false) || last}
 	function create_if_block$1(ctx) {
 		let span;
 		let span_style_value;
@@ -2162,6 +2164,7 @@
 				attr(span, "style", span_style_value = "" + (/*orientationStart*/ ctx[19] + ": 100%;"));
 				attr(span, "data-val", span_data_val_value = coerceFloat(/*max*/ ctx[2], /*precision*/ ctx[17]));
 				attr(span, "data-index", /*pipCount*/ ctx[20]);
+				attr(span, "aria-hidden", "true");
 				toggle_class(span, "rsSelected", isSelected(/*max*/ ctx[2], /*values*/ ctx[4], /*precision*/ ctx[17]));
 				toggle_class(span, "rsInRange", isInRange(/*max*/ ctx[2], /*values*/ ctx[4], /*range*/ ctx[0]));
 				toggle_class(span, "rsOutOfLimit", isOutOfLimit(/*max*/ ctx[2], /*limits*/ ctx[9]));
@@ -2229,7 +2232,7 @@
 		};
 	}
 
-	// (163:6) {#if all === 'label' || last === 'label'}
+	// (169:6) {#if all === 'label' || last === 'label'}
 	function create_if_block_1$1(ctx) {
 		let span;
 		let t0;
@@ -2298,7 +2301,7 @@
 		};
 	}
 
-	// (165:10) {#if prefix}
+	// (171:10) {#if prefix}
 	function create_if_block_3$1(ctx) {
 		let span;
 		let t;
@@ -2324,7 +2327,7 @@
 		};
 	}
 
-	// (167:10) {#if suffix}
+	// (173:10) {#if suffix}
 	function create_if_block_2$1(ctx) {
 		let span;
 		let t;
